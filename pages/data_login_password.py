@@ -1,0 +1,5 @@
+login = 'm.andrey'
+password = '6281bde4'
+login_incorrect = 'm.andreyq'
+password_incorrect = '71de90dfq'
+url = 'https://test1.minervasoft.ru/login?from=%2F'
