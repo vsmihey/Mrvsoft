@@ -42,6 +42,18 @@ class FormPagesLocators:
     REPORT_BUTTON = (By.XPATH, "//a[@data-tip='Отчеты']")
     PEOPLE_BUTTON = (By.XPATH, "//a[@data-tip='Участники']")
     SETTINGS = (By.XPATH, "//a[@data-tip='Настройки']")
+    """add new person"""
+    PERSONS = (By.XPATH, "//a[2]//article[1]//pre[1]")
+    NEW_PERSON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
+    CHANGE_ADMIN = (By.XPATH, "//select[@class='m-ui-select__select']")
+    UPLOAD_FILE = (By.XPATH, "//input[@type='file']")
+    LAST_NAME = (By.XPATH, "//input[@data-type='surname']")
+    FIRST_NAME = (By.XPATH, "//input[@data-type='firstname']")
+    EMAIL = (By.XPATH, "//input[@data-type='email']")
+    LOGIN_NEW_PERSON = (By.XPATH, "//input[@data-type='login']")
+    SAVE_PERSON = (By.XPATH, "//p[text()='Сохранить пользователя']")
+
+
 
 
 

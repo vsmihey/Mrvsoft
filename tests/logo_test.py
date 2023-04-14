@@ -1,10 +1,9 @@
 import time
-from pages.data_login_password import *
+from selenium.common import TimeoutException
 from pages.form_page import FormPage
+from pages.data_login_password import *
 
-
-
-class TestLogo:
+class TestFormPage:
 
     def test_logo(self, driver):
         form_page = FormPage(driver, url)
@@ -22,28 +21,6 @@ class TestLogo:
         form_page.full_authorization(driver)
         form_page.logo_head()
         form_page.screenshot()
-        # form_page.hover(driver)
-        # time.sleep(5)
-        # form_page.screenshot()
 
-
-
-
-
-
-        # driver.refresh()
-        # self.login = 'm.andrey'
-        # self.password = '71de90df'
-        # form_page.authorization(self.login, self.password)
-        # form_page.logo_head()
-        # form_page.screenshot()
-
-
-
-
-
-
-
-
-
-
+        form_page.title_find(driver)
+        time.sleep(1)

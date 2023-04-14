@@ -1,5 +1,5 @@
 login = 'm.andrey'
-password = '6af06890'
+password = '8cc5a8b4'
 login_incorrect = 'm.andreyq'
 password_incorrect = '71de90dfq'
 url = 'https://test1.minervasoft.ru/login?from=%2F'

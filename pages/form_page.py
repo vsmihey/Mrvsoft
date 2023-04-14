@@ -1,4 +1,5 @@
 import datetime
+import os
 import time
 import pyautogui
 from selenium.webdriver import ActionChains, Keys
@@ -27,6 +28,24 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         time.sleep(1)
+
+    def input_in_my_project(self, driver):
+        """INPUT IN MY PROJECT"""
+        form_page = FormPage(driver, url)
+        form_page.open()
+        # form_page.authorization(self.login, self.password)
+        self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
+        self.element_is_visible(Locators.LOGIN).send_keys(login)
+        self.element_is_visible(Locators.PASSWORD).send_keys(password)
+        self.element_is_visible(Locators.INPUT_BUTTON).click()
+        # time.sleep(1)
+        self.element_is_visible(Locators.TEST_PROJECT).click()
+        time.sleep(1)
+        pyautogui.press('tab')
+        pyautogui.press('tab')
+        pyautogui.press('enter')
+        driver.refresh()
+
 
     def fill_fields(self, login, password):
         """FILL FIELDS PAGE OF AUTHORIZATION"""
@@ -115,11 +134,6 @@ class FormPage(BasePage):
         pyautogui.press('tab')
         pyautogui.press('enter')
         driver.refresh()
-        # self.element_is_visible(Locators.CONTENT).click()
-        # self.element_is_visible(Locators.CONTENT1).click()
-        # time.sleep(2)
-        # title = driver.execute_script("return document.title;")
-        # print(title)
 
     def title_find(self, driver):
         """TITLE"""
@@ -177,6 +191,21 @@ class FormPage(BasePage):
         time.sleep(0.5)
         self.assert_title(driver, name_project='selen', name_='Настройки')
 
-
-
+    def add_new_person(self, driver):
+        # driver.implicitly_wait(10)
+        self.element_is_visible(Locators.SETTINGS).click()
+        print("ok1")
+        self.element_is_visible(Locators.PERSONS).click()
+        print("ok2")
+        self.element_is_visible(Locators.NEW_PERSON).click()
+        print("ok3")
+        self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Администратор')
+        print("ok4")
         time.sleep(5)
+        self.element_is_visible(Locators.UPLOAD_FILE).click()
+        time.sleep(5)
+        path = ('C:\\Users\\User\\PycharmProjects\\Minervasoft\\animal.jpeg')
+        self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
+
+
+
