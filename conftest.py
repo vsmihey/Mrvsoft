@@ -8,11 +8,12 @@ from selenium.webdriver.chrome.options import Options
 def driver():
     # chrome_options = Options()
     # # chrome_options.add_argument("--headless")
-    # prefs = {"profile.default_content_setting_values.notifications": 2}
+    # prefs = {"profile.default_content_setting_values.notifications": 1}
     # chrome_options.add_experimental_option("prefs", prefs)
-    # chrome_options.add_experimental_option("detach", True)
+    # # chrome_options.add_experimental_option("detach", True)
     # driver = webdriver.Chrome(options=chrome_options)
     # driver.maximize_window()
+
     driver_service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=driver_service)
     driver.maximize_window()

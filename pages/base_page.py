@@ -24,3 +24,5 @@ class BasePage:
         # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
         name_screenshot = 'screenshot.png' + now_date + '.png'
         self.driver.save_screenshot('C:\\Users\\User\\PycharmProjects\\Minervasoft\\screen\\' + name_screenshot)
+    def implicitly_wait(self):
+        self.driver.implicitly_wait(10)
