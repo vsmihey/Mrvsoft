@@ -51,7 +51,7 @@ class TestFormPage:
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.authorization(login, password)
-        form_page.input_project(driver)
+        form_page.input_project()
         print("input project")
         form_page.all_title(driver)
 

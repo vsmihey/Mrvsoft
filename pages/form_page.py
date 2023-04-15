@@ -126,7 +126,7 @@ class FormPage(BasePage):
     #     hov = ActionChains(driver).move_to_element(element)
     #     hov.perform()
 
-    def input_project(self, driver):
+    def input_project(self):
         """INPUT IN SELEN PROJECT"""
         self.element_is_visible(Locators.TEST_PROJECT).click()
         time.sleep(1)
