@@ -32,7 +32,7 @@ class FormPagesLocators:
     CREATE_BUTTON = (By.CSS_SELECTOR, ".m-button.m-button--default")
     CREATE_ARTICLE = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[1]")
     CREATE_STEP_SCRIPT = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[3]")
-    CLOSE_PAGE_LIST = (By.XPATH, "(//*[name()='svg'])[28]")
+    CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
     CLOSE_PAGE_SCRIPT = (By.XPATH, "(//*[name()='svg'][@class='m-scenario-flow__close'])[1]")
     CLOSE_CREATE_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")
     SEARCH_PROJECT = (By.CSS_SELECTOR, ".m-dashboard-top__search")

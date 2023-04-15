@@ -2,6 +2,8 @@ import time
 
 import pytest
 from selenium.common import TimeoutException
+
+from pages import form_page
 from pages.form_page import FormPage
 from pages.data_login_password import *
 
@@ -48,8 +50,9 @@ class TestFormPage:
     def test_title(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
-        form_page.full_authorization(driver)
+        form_page.authorization(login, password)
         form_page.input_project(driver)
+        print("input project")
         form_page.all_title(driver)
 
     @pytest.mark.skip('restore password')
@@ -59,6 +62,7 @@ class TestFormPage:
         password = password_incorrect
         form_page.authorization(login, password)
         form_page.restore_correct()
+
     def test_add_new_person(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()

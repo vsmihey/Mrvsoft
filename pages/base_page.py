@@ -26,3 +26,7 @@ class BasePage:
         self.driver.save_screenshot('C:\\Users\\User\\PycharmProjects\\Minervasoft\\screen\\' + name_screenshot)
     def implicitly_wait(self):
         self.driver.implicitly_wait(10)
+
+    def remove_class(self):
+        self.driver.execute_script("document.querySelector('input[type='file']').removeAttribute('class');")
+

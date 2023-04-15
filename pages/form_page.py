@@ -2,6 +2,8 @@ import datetime
 import os
 import time
 import pyautogui
+import selenium
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
@@ -38,13 +40,12 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.LOGIN).send_keys(login)
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
-        # time.sleep(1)
         self.element_is_visible(Locators.TEST_PROJECT).click()
-        time.sleep(1)
-        pyautogui.press('tab')
-        pyautogui.press('tab')
-        pyautogui.press('enter')
-        driver.refresh()
+        # time.sleep(1)
+        # pyautogui.press('tab')
+        # pyautogui.press('tab')
+        # pyautogui.press('enter')
+        # driver.refresh()
 
 
     def fill_fields(self, login, password):
@@ -99,7 +100,6 @@ class FormPage(BasePage):
         print('Письмо с новым паролем отправлено на почту УСПЕШНО')
         print(f'Страница {check_page_author_value} УСПЕШНО')
 
-
     def screenshot(self):
         offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
         now_date = datetime.datetime.now(offset)
@@ -130,10 +130,10 @@ class FormPage(BasePage):
         """INPUT IN SELEN PROJECT"""
         self.element_is_visible(Locators.TEST_PROJECT).click()
         time.sleep(1)
-        pyautogui.press('tab')
-        pyautogui.press('tab')
-        pyautogui.press('enter')
-        driver.refresh()
+        # pyautogui.press('tab')
+        # pyautogui.press('tab')
+        # pyautogui.press('enter')
+        # driver.refresh()
 
     def title_find(self, driver):
         """TITLE"""
@@ -151,6 +151,7 @@ class FormPage(BasePage):
 
     def all_title(self, driver):
         # driver.implicitly_wait(10)
+        # time.sleep(1)
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.ALL_CONTENT).click()
         self.assert_title(driver, name_project='selen', name_='Весь контент')
@@ -164,7 +165,7 @@ class FormPage(BasePage):
         time.sleep(0.5)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.assert_title(driver, name_project='selen', name_='Добавить статью')
-        time.sleep(7)
+        time.sleep(5)
         self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
         # # time.sleep(5)
@@ -199,13 +200,29 @@ class FormPage(BasePage):
         print("ok2")
         self.element_is_visible(Locators.NEW_PERSON).click()
         print("ok3")
+        time.sleep(5)
+        # js = "document.querySelector('input[type='file']').removeAttribute('class');"
+        driver.execute_script("document.querySelector('input[type='file']').removeAttribute('class');")
+        time.sleep(1)
+
         self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Администратор')
         print("ok4")
-        time.sleep(5)
-        self.element_is_visible(Locators.UPLOAD_FILE).click()
-        time.sleep(5)
+
+        time.sleep(1)
         path = ('C:\\Users\\User\\PycharmProjects\\Minervasoft\\animal.jpeg')
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
+        time.sleep(1)
+        self.button_invisible_check(driver)
+
+
+
+    def button_invisible_check(self, driver):
+        try:
+            SAVE_PERSON = driver.find_element(By.XPATH, "//p[text()='Сохранить пользователя']")
+            SAVE_PERSON.click()
+        except ElementClickInterceptedException:
+            print("Кнопка 'Сохранить пользователя' не активна")
+
 
 
 
