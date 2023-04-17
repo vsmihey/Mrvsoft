@@ -49,11 +49,15 @@ class FormPagesLocators:
     NEW_PERSON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
     CHANGE_ADMIN = (By.XPATH, "//select[@class='m-ui-select__select']")
     UPLOAD_FILE = (By.XPATH, "//input[@type='file']")
+    UPLOAD_FILE_NAME = (By.XPATH, "//span[@class='m-upload__file-name']")
     LAST_NAME = (By.XPATH, "//input[@data-type='surname']")
     FIRST_NAME = (By.XPATH, "//input[@data-type='firstname']")
     EMAIL = (By.XPATH, "//input[@data-type='email']")
     LOGIN_NEW_PERSON = (By.XPATH, "//input[@data-type='login']")
     SAVE_PERSON = (By.XPATH, "//p[text()='Сохранить пользователя']")
+    CHECK_MUST_BE_ADD = (By.XPATH, "//div[text()='Должно быть заполнено']")
+    CHECK_LOGIN_IS_USED = (By.XPATH, "//div[text()='Данный логин уже используется']")
+    # CHECH_NEW_CREATED_USER = (By.XPATH, f"//span[text()={}]")
 
 
 

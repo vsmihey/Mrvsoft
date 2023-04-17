@@ -1,5 +1,6 @@
 import datetime
 import os
+import random
 import time
 import pyautogui
 import selenium
@@ -7,6 +8,8 @@ from selenium.common.exceptions import TimeoutException, ElementClickIntercepted
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
+
+from generator.generator import generated_person
 from pages.base_page import BasePage
 from locators.form_pages_locators import FormPagesLocators as Locators
 from pages.data_login_password import *
@@ -143,7 +146,7 @@ class FormPage(BasePage):
 
     def assert_title(self, driver, name_project='selen', name_='Контент 1'):
         """ASSERT"""
-        driver.implicitly_wait(10)
+        # driver.implicitly_wait(10)
         time.sleep(0.5)
         # title = driver.execute_script("return document.title;")
         title = driver.title
@@ -174,6 +177,7 @@ class FormPage(BasePage):
         self.assert_title(driver, name_project='selen', name_='Добавить статью')
         time.sleep(7)
         self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
+        # self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
         # # time.sleep(5)
         self.assert_title(driver, name_project='selen', name_='Добавить пошаговый сценарий')
@@ -200,22 +204,72 @@ class FormPage(BasePage):
         self.assert_title(driver, name_project='selen', name_='Настройки')
 
     def add_new_person(self, driver):
-        # driver.implicitly_wait(10)
+        driver.implicitly_wait(10)
+        person = generated_person()
+        last_name = person.last_name
+        first_name = person.first_name
+        email = person.email
+
         self.element_is_visible(Locators.SETTINGS).click()
-        print("ok1")
+        print("settings")
         self.element_is_visible(Locators.PERSONS).click()
-        print("ok2")
+        print("person")
         self.element_is_visible(Locators.NEW_PERSON).click()
-        print("ok3")
+        print("new person")
         self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Администратор')
-        print("ok4")
+        print("administrator")
         self.remove_class_script()
         path = (r'C:\Users\User\PycharmProjects\Minervasoft\animal.jpeg')
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
-        time.sleep(1)
+        text_name = self.element_is_visible(Locators.UPLOAD_FILE_NAME)
+        text_name_value = text_name.text
+        assert text_name_value == 'animal.jpeg'
+        print('file name is correct')
         self.button_invisible_check(driver)
+        self.element_is_visible(Locators.LAST_NAME).send_keys(last_name)
+        self.button_invisible_check(driver)
+        self.element_is_visible(Locators.FIRST_NAME).send_keys(first_name)
+        self.button_invisible_check(driver)
+        self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login)
+        self.button_invisible_check(driver)
+        self.element_is_visible(Locators.SAVE_PERSON).click()
+        check_text_must_be = self.element_is_visible(Locators.CHECK_MUST_BE_ADD)
+        check_text_must_be_value = check_text_must_be.text
+        assert check_text_must_be_value == 'Должно быть заполнено'
+        print(check_text_must_be_value)
+        self.element_is_visible(Locators.EMAIL).send_keys(email)
+        self.element_is_visible(Locators.SAVE_PERSON).click()
+        check_text_login_used = self.element_is_visible(Locators.CHECK_LOGIN_IS_USED)
+        check_text_login_used_value = check_text_login_used.text
+        assert check_text_login_used_value == 'Данный логин уже используется'
+        print(check_text_login_used_value)
+        value_random = str(random.randint(999,9999))
+        self.element_is_visible(Locators.LOGIN_NEW_PERSON).clear()
+        self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login+value_random)
+        # print(login+value_random)
+        self.element_is_visible(Locators.SAVE_PERSON).click()
+        """check result create new person name"""
+        name_check = last_name + ' ' + first_name
+        text_check_created_new_user_name = driver.find_element(By.XPATH, f"//span[text()='{name_check}']")
+        text_check_created_new_user_name_value = text_check_created_new_user_name.text
+        assert text_check_created_new_user_name_value == name_check
+        print(text_check_created_new_user_name_value)
+        """check result create new person login"""
+        text_check_created_new_user_login = driver.find_element(By.XPATH, f"//span[text()='{login+value_random} ']")
+        text_check_created_new_user_value = text_check_created_new_user_login.text
+        assert text_check_created_new_user_value == login+value_random
+        print(text_check_created_new_user_value)
+
+
+
+
+
+
+
+        time.sleep(2)
 
     def button_invisible_check(self, driver):
+
         try:
             save_person = driver.find_element(By.XPATH, "//p[text()='Сохранить пользователя']")
             save_person.click()
