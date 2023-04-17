@@ -68,6 +68,12 @@ class TestFormPage:
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.add_new_person(driver)
+    def test_add_new_role(self, driver):
+        form_page = FormPage(driver, url)
+        form_page.open()
+        form_page.input_in_my_project(driver)
+        form_page.add_new_role(driver)
+        time.sleep(1)
 
 
 

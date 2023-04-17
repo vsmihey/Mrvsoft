@@ -57,7 +57,22 @@ class FormPagesLocators:
     SAVE_PERSON = (By.XPATH, "//p[text()='Сохранить пользователя']")
     CHECK_MUST_BE_ADD = (By.XPATH, "//div[text()='Должно быть заполнено']")
     CHECK_LOGIN_IS_USED = (By.XPATH, "//div[text()='Данный логин уже используется']")
-    # CHECH_NEW_CREATED_USER = (By.XPATH, f"//span[text()={}]")
+    # CHECK_NEW_CREATED_USER = (By.XPATH, f"//span[text()={}]")
+    # CHECK_NEW_CREATED_USER = (By.XPATH, f"//span[text()={}]")
+    """add new role"""
+    ADD_NEW_ROLE_BUTTON = (By.XPATH, "//p[text()='добавить роль']")
+    ADD_NEW_ROLE = (By.XPATH, "//span[contains(text(),'добавить роль')]")
+    CREATE_ROLE = (By.XPATH, "//p[text()='Создать роль']")
+    INPUT_NAME_ROLE = (By.XPATH, "//input[@placeholder='Введите название роли']")
+    SWITCH_BOX = (By.XPATH, "//label[@class='m-switch-box']")  # 14 switch_boxes ('m-switch-box' mean: do not pushed
+    SWITCH_BOX_CHECKED = (By.CSS_SELECTOR, ".m-switch-box.m-switch-box--checked")  # 14 switch_boxes  checked
+    CHECK_NEW_ROLE = (By.XPATH, "//span[text()='Role 1']")  # check new  Role 1 in list new roles
+    EDIT_NEW_ROLE = (By.XPATH, "//div[@class='item-role__icon-edit']")
+    SAVE_CHANGES_ROLE = (By.XPATH, "//p[contains(text(),'Сохранить изменения')]")
+    DEACTIVATE_ROLE = (By.XPATH, "//p[contains(text(),'Деактивировать роль')]")
+    CHECK_WINDOWS_ALL_ROLES_TEXT = (By.XPATH, "//h1[contains(text(),'Все участники')]")
+    CHECK_LAST_ELEMENT = (By.XPATH, "//span[contains(text(),'Запретить получение уведомлений об изменении конте')]")
+
 
 
 

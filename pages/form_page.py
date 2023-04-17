@@ -147,7 +147,7 @@ class FormPage(BasePage):
     def assert_title(self, driver, name_project='selen', name_='Контент 1'):
         """ASSERT"""
         # driver.implicitly_wait(10)
-        time.sleep(0.5)
+        time.sleep(1)
         # title = driver.execute_script("return document.title;")
         title = driver.title
         # title = title.text
@@ -259,22 +259,65 @@ class FormPage(BasePage):
         text_check_created_new_user_value = text_check_created_new_user_login.text
         assert text_check_created_new_user_value == login+value_random
         print(text_check_created_new_user_value)
-
-
-
-
-
-
-
-        time.sleep(2)
+        """check result create new person mail"""
+        email_check = email
+        text_check_created_new_user_mail = driver.find_element(By.XPATH, f"//a[text()='{email_check}']")
+        text_check_created_new_mail_value = text_check_created_new_user_mail.text
+        assert text_check_created_new_mail_value == email_check
+        print(text_check_created_new_mail_value)
 
     def button_invisible_check(self, driver):
-
         try:
             save_person = driver.find_element(By.XPATH, "//p[text()='Сохранить пользователя']")
             save_person.click()
         except ElementClickInterceptedException:
             print("Кнопка 'Сохранить пользователя' не активна")
+
+    def button_invisible_role_check(self, driver):
+        try:
+            self.element_is_visible(Locators.CREATE_ROLE).click()
+        except ElementClickInterceptedException:
+            print("Кнопка 'Создать роль' не активна")
+
+    def add_new_role(self, driver):
+        driver.implicitly_wait(10)
+        self.element_is_visible(Locators.PEOPLE_BUTTON).click()
+        self.element_is_visible(Locators.ADD_NEW_ROLE).click()
+        person = generated_person()
+        first_name = person.first_name
+        self.button_invisible_role_check(driver)
+        self.element_is_visible(Locators.INPUT_NAME_ROLE).send_keys(first_name)
+        # push 13 check boxes
+        for x in range(1, 14):
+            self.element_is_visible(Locators.SWITCH_BOX).click()
+        # time.sleep(20)
+        #
+        # try:
+        #     last_checkbox_element = driver.find_element(By.XPATH, "//span[contains(text(),'Запретить получение уведомлений об изменении конте')]")
+        #     last_checkbox_element.click()
+        # except ElementClickInterceptedException:
+        #     print("Последний чекбокс НЕ активен")
+
+        self.element_is_visible(Locators.SWITCH_BOX).is_displayed()
+        self.element_is_visible(Locators.CREATE_ROLE).click()
+        """check result create new role"""
+        check_role = first_name
+        # print(check_role)
+        text_check_created_new_role = driver.find_element(By.XPATH, f"//span[text()='{check_role}']")
+        text_check_created_new_role_value = text_check_created_new_role.text
+        assert text_check_created_new_role_value == check_role
+        print(text_check_created_new_role_value)
+        self.element_is_visible(Locators.EDIT_NEW_ROLE).click()
+        self.element_is_clickable(Locators.DEACTIVATE_ROLE)
+        for x in range(1, 14):
+            self.element_is_visible(Locators.SWITCH_BOX_CHECKED).is_displayed()
+        self.element_is_visible(Locators.SWITCH_BOX).is_displayed()
+        self.element_is_visible(Locators.SAVE_CHANGES_ROLE).click()
+
+
+
+
+
 
 
 
