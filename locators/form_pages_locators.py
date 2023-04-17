@@ -8,7 +8,7 @@ class FormPagesLocators:
     LOGIN = (By.NAME, "username")
     PASSWORD = (By.NAME, "password")
     INPUT_BUTTON = (By.XPATH, "//button[@type='submit']")
-    TEST_PROJECT = (By.XPATH, "//article[text()='SE']")  # name project
+    TEST_PROJECT = (By.XPATH, "//article[@class='m-main-modal__main']//a[1]")  # first name project
     """restore forms"""
     RESTORE = (By.XPATH, "//span[text()='Восстановить доступ']")
     RESTORE_LOGIN = (By.NAME, "username")
@@ -27,6 +27,8 @@ class FormPagesLocators:
     CONTENT = (By.XPATH, "//a[@data-tip='Контент']")  # content of page
     ALL_CONTENT = (By.CLASS_NAME, "folder-list-item__total")
     CONTENT1 = (By.XPATH, "//div[@id='245']")
+    CONTENT1_NAME = (By.XPATH, "//p[contains(text(),'Контент 1')]")  # check name of content
+
     NAME_CONTENT = (By.XPATH, "//section[2]//article[1]//a[1]//section[1]")
     EDIT = (By.XPATH, "//body/div[@class='article-modal__portal']/div[@class='ReactModal__Overlay ReactModal__Overlay--after-open article-modal__overlay']/div[@role='dialog']/article[@class='article-modal']/div[@class='article-modal__main']/div[@class='scroller article-modal__scroller']/div[@class='scroller__wrap']/div[@class='scroller__body']/div[@class='scroller__content article-modal__scroller-content']/div[@class='article-modal__container']/header[@id='article-content-modal-header']/div[@class='article-modal__controls']/button[2]")
     CREATE_BUTTON = (By.CSS_SELECTOR, ".m-button.m-button--default")

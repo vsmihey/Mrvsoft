@@ -33,8 +33,8 @@ class FormPage(BasePage):
 
     def input_in_my_project(self, driver):
         """INPUT IN MY PROJECT"""
-        form_page = FormPage(driver, url)
-        form_page.open()
+        # form_page = FormPage(driver, url)
+        # form_page.open()
         # form_page.authorization(self.login, self.password)
         self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
         self.element_is_visible(Locators.LOGIN).send_keys(login)
@@ -137,6 +137,7 @@ class FormPage(BasePage):
 
     def title_find(self, driver):
         """TITLE"""
+        # driver.title()
         title = driver.execute_script("return document.title;")
         print(title)
 
@@ -144,7 +145,9 @@ class FormPage(BasePage):
         """ASSERT"""
         driver.implicitly_wait(10)
         time.sleep(0.5)
-        title = driver.execute_script("return document.title;")
+        # title = driver.execute_script("return document.title;")
+        title = driver.title
+        # title = title.text
         result = f'{name_} / {name_project} — Minervasoft'
         assert title == result
         print(result)
@@ -156,6 +159,10 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.ALL_CONTENT).click()
         self.assert_title(driver, name_project='selen', name_='Весь контент')
         self.element_is_visible(Locators.CONTENT1).click()
+        # time.sleep(5)
+        # text_name = self.element_is_visible(Locators.CONTENT1_NAME).click()
+        # text_name_value = text_name.text
+        # print(text_name_value)
         self.assert_title(driver, name_project='selen', name_='Контент 1')
         self.element_is_visible(Locators.NAME_CONTENT).click()
         self.assert_title(driver, name_project='selen', name_='Название 1')
@@ -165,7 +172,7 @@ class FormPage(BasePage):
         time.sleep(0.5)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.assert_title(driver, name_project='selen', name_='Добавить статью')
-        time.sleep(5)
+        time.sleep(7)
         self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
         # # time.sleep(5)
@@ -200,26 +207,18 @@ class FormPage(BasePage):
         print("ok2")
         self.element_is_visible(Locators.NEW_PERSON).click()
         print("ok3")
-        time.sleep(5)
-        # js = "document.querySelector('input[type='file']').removeAttribute('class');"
-        driver.execute_script("document.querySelector('input[type='file']').removeAttribute('class');")
-        time.sleep(1)
-
         self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Администратор')
         print("ok4")
-
-        time.sleep(1)
-        path = ('C:\\Users\\User\\PycharmProjects\\Minervasoft\\animal.jpeg')
+        self.remove_class_script()
+        path = (r'C:\Users\User\PycharmProjects\Minervasoft\animal.jpeg')
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
         time.sleep(1)
         self.button_invisible_check(driver)
 
-
-
     def button_invisible_check(self, driver):
         try:
-            SAVE_PERSON = driver.find_element(By.XPATH, "//p[text()='Сохранить пользователя']")
-            SAVE_PERSON.click()
+            save_person = driver.find_element(By.XPATH, "//p[text()='Сохранить пользователя']")
+            save_person.click()
         except ElementClickInterceptedException:
             print("Кнопка 'Сохранить пользователя' не активна")
 

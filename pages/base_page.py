@@ -11,7 +11,7 @@ class BasePage:
     def open(self):
         self.driver.get(self.url)
 
-    def element_is_visible(self, locator, timeout=5):
+    def element_is_visible(self, locator, timeout=10):
         return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     def elements_are_visible(self, locator, timeout=5):
@@ -27,6 +27,6 @@ class BasePage:
     def implicitly_wait(self):
         self.driver.implicitly_wait(10)
 
-    def remove_class(self):
-        self.driver.execute_script("document.querySelector('input[type='file']').removeAttribute('class');")
+    def remove_class_script(self):
+        self.driver.execute_script("""document.querySelector("input[type='file']").removeAttribute('class')""")
 
