@@ -27,7 +27,7 @@ class FormPage(BasePage):
         now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
         # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
 
-        name_screenshot = 'screenshot.png' + now_date + '.png'
+        name_screenshot = 'screenshot' + now_date + '.png'
         path = Path(pathlib.Path.cwd(), "screenshots", name_screenshot)
         path = str(path)
         self.driver.save_screenshot(path)
@@ -231,11 +231,10 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Администратор')
         print("administrator")
         self.remove_class_script()
-
+        """add avatar"""
         avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
         path = str(avatar)
-        print(path)
-
+        # sss = os.path.abspath("animal.jpeg")
         # path = (r'C:\Users\User\PycharmProjects\Minervasoft\animal.jpeg')
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
         time.sleep(3)
@@ -338,13 +337,15 @@ class FormPage(BasePage):
             print("Кнопка 'Создать папку' НЕ активна")
         self.element_is_visible(Locators.PARENT_FOLDERS_CHOICE).send_keys('Нет')
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(name_of_new_folder)
-        time.sleep(5)
-        # self.element_is_clickable(Locators.CREATE_FOLDER_BUTTON)
+        time.sleep(1)
+        radio_on_check = self.element_is_clickable(Locators.RADIOBUTTON_ACTIVE_CHECK).get_attribute("class")
+        assert radio_on_check == 'radio-wrapper__icon radio-wrapper__icon--checked'
+        print(radio_on_check)
+        time.sleep(3)
         # self.element_is_visible(Locators.CREATE_FOLDER_BUTTON)
 
     def create_new_article(self):
         pass
-
 
     def create_del_recovery_folder_content(self):
         self.element_is_visible(Locators.CONTENT).click()

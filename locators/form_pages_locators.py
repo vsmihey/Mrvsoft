@@ -81,9 +81,9 @@ class FormPagesLocators:
     PARENT_FOLDERS_CHOICE = (By.XPATH, "//select[@name='parentId']")
     CREATE_NAME_NEW_FOLDER = (By.XPATH, "//input[@placeholder='Введите название папки']")
     RADIOBUTTON_SORT_BY_DATE = (By.XPATH, "//span[contains(text(),'По дате')]")
-    RADIOBUTTON_SORT_BY_DATE_ACTIVE_CHECK = (By.XPATH, "//div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
+    RADIOBUTTON_NON_ACTIVE_CHECK = (By.XPATH, "(//div[@class='radio-wrapper__icon'])[1]")  # non activated
     RADIOBUTTON_SORT_BY_POPULAR = (By.XPATH, "//span[contains(text(),'По популярности')]")
-    RADIOBUTTON_SORT_BY_POPULAR_ACTIVE_CHECK = (By.XPATH, "//div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
+    RADIOBUTTON_ACTIVE_CHECK = (By.XPATH, "//div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")  # activated
     CHECK_CREATED_NEW_FOLDER = (By.XPATH, "//div[contains(text(),'{name of new folder}')]")
     DELETE_FOLDER_BUTTON = (By.XPATH, "//p[contains(text(),'Удалить папку')]")
     DELETE_FOLDER_CONFIRM_TEXT = (By.XPATH, "//h3[contains(text(),'Подтверждение действия')]")
