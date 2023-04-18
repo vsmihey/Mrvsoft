@@ -1,4 +1,7 @@
 import datetime
+import pathlib
+from pathlib import Path
+
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -20,15 +23,14 @@ class BasePage:
     def element_is_clickable(self, locator, timeout=2):
         return Wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
+    # def screenshot(self):
+    #     offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
+    #     now_date = datetime.datetime.now(offset)
+    #     now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
+    #     # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
+    #     name_screenshot = 'screenshot.png' + now_date + '.png'
+    #     self.driver.save_screenshot('C:\\Users\\User\\PycharmProjects\\Minervasoft\\screen\\' + name_screenshot)
 
-
-    def screenshot(self):
-        offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
-        now_date = datetime.datetime.now(offset)
-        now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
-        # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-        name_screenshot = 'screenshot.png' + now_date + '.png'
-        self.driver.save_screenshot('C:\\Users\\User\\PycharmProjects\\Minervasoft\\screen\\' + name_screenshot)
     def implicitly_wait(self):
         self.driver.implicitly_wait(10)
 

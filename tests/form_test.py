@@ -1,4 +1,5 @@
 import time
+import uuid
 
 import pytest
 from selenium.common import TimeoutException
@@ -74,6 +75,13 @@ class TestFormPage:
         form_page.input_in_my_project(driver)
         form_page.add_new_role(driver)
         time.sleep(1)
+    def test_create_del_recovery_folder(self, driver):
+        form_page = FormPage(driver, url)
+        form_page.open()
+        form_page.input_in_my_project(driver)
+        form_page.create_del_recovery_folder_content()
+
+
 
 
 

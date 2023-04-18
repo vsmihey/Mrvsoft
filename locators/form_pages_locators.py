@@ -57,8 +57,6 @@ class FormPagesLocators:
     SAVE_PERSON = (By.XPATH, "//p[text()='Сохранить пользователя']")
     CHECK_MUST_BE_ADD = (By.XPATH, "//div[text()='Должно быть заполнено']")
     CHECK_LOGIN_IS_USED = (By.XPATH, "//div[text()='Данный логин уже используется']")
-    # CHECK_NEW_CREATED_USER = (By.XPATH, f"//span[text()={}]")
-    # CHECK_NEW_CREATED_USER = (By.XPATH, f"//span[text()={}]")
     """add new role"""
     ADD_NEW_ROLE_BUTTON = (By.XPATH, "//p[text()='добавить роль']")
     ADD_NEW_ROLE = (By.XPATH, "//span[contains(text(),'добавить роль')]")
@@ -72,6 +70,30 @@ class FormPagesLocators:
     DEACTIVATE_ROLE = (By.XPATH, "//p[contains(text(),'Деактивировать роль')]")
     CHECK_WINDOWS_ALL_ROLES_TEXT = (By.XPATH, "//h1[contains(text(),'Все участники')]")
     CHECK_LAST_ELEMENT = (By.XPATH, "//span[contains(text(),'Запретить получение уведомлений об изменении конте')]")
+    """create delete recovery folder"""
+    TEXT_FOLDERS_CHECK = (By.XPATH, "//p[contains(text(),'Папки')]") #
+    TEXT_ALL_CONTENT_CHECK = (By.XPATH, "//h1[contains(text(),'Весь контент')]")
+    FOLDERS_CHANGE = (By.XPATH, "//button[@data-element='folders']")
+    TEXT_OPEN_FORM_CHECK = (By.XPATH, "//h3[contains(text(),'Управление структурой')]")
+    NEW_FOLDER = (By.XPATH, "//p[contains(text(),'Новая папка')]")
+    TEXT_NEW_FOLDER_CHECK = (By.XPATH, "//h3[contains(text(),'Новая папка')]")
+    CREATE_FOLDER_BUTTON = (By.XPATH, "//p[contains(text(),'Создать папку')]")
+    PARENT_FOLDERS_CHOICE = (By.XPATH, "//select[@name='parentId']")
+    CREATE_NAME_NEW_FOLDER = (By.XPATH, "//input[@placeholder='Введите название папки']")
+    RADIOBUTTON_SORT_BY_DATE = (By.XPATH, "//span[contains(text(),'По дате')]")
+    RADIOBUTTON_SORT_BY_DATE_ACTIVE_CHECK = (By.XPATH, "//div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
+    RADIOBUTTON_SORT_BY_POPULAR = (By.XPATH, "//span[contains(text(),'По популярности')]")
+    RADIOBUTTON_SORT_BY_POPULAR_ACTIVE_CHECK = (By.XPATH, "//div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
+    CHECK_CREATED_NEW_FOLDER = (By.XPATH, "//div[contains(text(),'{name of new folder}')]")
+    DELETE_FOLDER_BUTTON = (By.XPATH, "//p[contains(text(),'Удалить папку')]")
+    DELETE_FOLDER_CONFIRM_TEXT = (By.XPATH, "//h3[contains(text(),'Подтверждение действия')]")
+    CLOSE_WINDOW_STRUCTURE = (By.XPATH, "//div[@class='popup__close']")
+    SHOW_DELETED_FOLDERS = (By.XPATH, "//span[contains(text(),'показать')]")
+    LAST_DELETED_FOLDER = (By.XPATH, "//p[normalize-space()='{name of new folder}']")
+    RECOVERY_FOLDER_BUTTON = (By.XPATH, "//div[@class='action-button-group']")
+    RECOVERY_FOLDER_BUTTON_CONFIRM = (By.XPATH, "//p[contains(text(),'восстановить папку')]")
+    CHECK_TEXT_ALL_CONTENT_SORT_BY_POPULAR = (By.XPATH, "//span[contains(text(),'по популярности')]")
+
 
 
 

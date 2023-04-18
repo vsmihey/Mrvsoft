@@ -1,7 +1,11 @@
 import datetime
 import os
+import pathlib
 import random
 import time
+import uuid
+from pathlib import Path
+
 import pyautogui
 import selenium
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
@@ -16,6 +20,19 @@ from pages.data_login_password import *
 
 
 class FormPage(BasePage):
+
+    def screenshot(self):
+        offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
+        now_date = datetime.datetime.now(offset)
+        now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
+        # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
+
+        name_screenshot = 'screenshot.png' + now_date + '.png'
+        path = Path(pathlib.Path.cwd(), "screenshots", name_screenshot)
+        path = str(path)
+        self.driver.save_screenshot(path)
+        print(path)
+        # self.driver.save_screenshot('C:\\Users\\User\\PycharmProjects\\Minervasoft\\screen\\' + name_screenshot)
 
     def full_authorization(self, driver):
         """CORRECT DATA"""
@@ -94,6 +111,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.RESTORE_BUTTON).click()
         time.sleep(1)
         self.screenshot()
+
         # self.element_is_visible(Locators.RESTORE_BUTTON).click()
         self.element_is_visible(Locators.REMEMBER_PASSWD).click()
         time.sleep(1)
@@ -103,13 +121,7 @@ class FormPage(BasePage):
         print('Письмо с новым паролем отправлено на почту УСПЕШНО')
         print(f'Страница {check_page_author_value} УСПЕШНО')
 
-    def screenshot(self):
-        offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
-        now_date = datetime.datetime.now(offset)
-        now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
-        # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-        name_screenshot = 'screenshot.png' + now_date + '.png'
-        self.driver.save_screenshot('C:\\Users\\User\\PycharmProjects\\Minervasoft\\screen\\' + name_screenshot)
+
 
     def check_project_page(self):
         """CHECK PAGE BY WORDS"""
@@ -219,8 +231,15 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Администратор')
         print("administrator")
         self.remove_class_script()
-        path = (r'C:\Users\User\PycharmProjects\Minervasoft\animal.jpeg')
+
+        avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
+        path = str(avatar)
+        print(path)
+
+        # path = (r'C:\Users\User\PycharmProjects\Minervasoft\animal.jpeg')
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
+        time.sleep(3)
+
         text_name = self.element_is_visible(Locators.UPLOAD_FILE_NAME)
         text_name_value = text_name.text
         assert text_name_value == 'animal.jpeg'
@@ -290,14 +309,6 @@ class FormPage(BasePage):
         # push 13 check boxes
         for x in range(1, 14):
             self.element_is_visible(Locators.SWITCH_BOX).click()
-        # time.sleep(20)
-        #
-        # try:
-        #     last_checkbox_element = driver.find_element(By.XPATH, "//span[contains(text(),'Запретить получение уведомлений об изменении конте')]")
-        #     last_checkbox_element.click()
-        # except ElementClickInterceptedException:
-        #     print("Последний чекбокс НЕ активен")
-
         self.element_is_visible(Locators.SWITCH_BOX).is_displayed()
         self.element_is_visible(Locators.CREATE_ROLE).click()
         """check result create new role"""
@@ -313,6 +324,49 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.SWITCH_BOX_CHECKED).is_displayed()
         self.element_is_visible(Locators.SWITCH_BOX).is_displayed()
         self.element_is_visible(Locators.SAVE_CHANGES_ROLE).click()
+
+    def create_new_folder(self):
+        person = generated_person()
+        name_of_new_folder = person.first_name
+        self.element_is_visible(Locators.NEW_FOLDER).click()
+        text_new_folder_check = self.element_is_visible(Locators.TEXT_NEW_FOLDER_CHECK)
+        text_new_folder_check_value = text_new_folder_check.text
+        assert text_new_folder_check_value == 'Новая папка'
+        try:
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        except ElementClickInterceptedException:
+            print("Кнопка 'Создать папку' НЕ активна")
+        self.element_is_visible(Locators.PARENT_FOLDERS_CHOICE).send_keys('Нет')
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(name_of_new_folder)
+        time.sleep(5)
+        # self.element_is_clickable(Locators.CREATE_FOLDER_BUTTON)
+        # self.element_is_visible(Locators.CREATE_FOLDER_BUTTON)
+
+    def create_new_article(self):
+        pass
+
+
+    def create_del_recovery_folder_content(self):
+        self.element_is_visible(Locators.CONTENT).click()
+        """check open text"""
+        text_folder_check = self.element_is_visible(Locators.TEXT_FOLDERS_CHECK)
+        text_folder_check_value = text_folder_check.text
+        assert text_folder_check_value == "Папки"
+        print(text_folder_check_value)
+        text_all_content_check = self.element_is_visible(Locators.TEXT_ALL_CONTENT_CHECK)
+        text_all_content_check_value = text_all_content_check.text
+        assert text_all_content_check_value == "Весь контент"
+        print(text_all_content_check_value)
+        """reproduce steps"""
+        self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        text_open_form_check = self.element_is_visible(Locators.TEXT_OPEN_FORM_CHECK)
+        text_open_form_check_value = text_open_form_check.text
+        assert text_open_form_check_value == "Управление структурой"
+        print(text_open_form_check_value)
+        self.create_new_folder()
+
+
+
 
 
 
