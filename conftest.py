@@ -15,6 +15,7 @@ def driver():
     # # chrome_options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(options=chrome_options)
     driver.maximize_window()
+    # driver.minimize_window() # свернуть браузер
 
     # driver_service = Service(ChromeDriverManager().install())
     # driver = webdriver.Chrome(service=driver_service)

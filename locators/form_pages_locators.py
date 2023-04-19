@@ -26,14 +26,20 @@ class FormPagesLocators:
     """title"""
     CONTENT = (By.XPATH, "//a[@data-tip='Контент']")  # content of page
     ALL_CONTENT = (By.CLASS_NAME, "folder-list-item__total")
-    CONTENT1 = (By.XPATH, "//div[@id='245']")
-    CONTENT1_NAME = (By.XPATH, "//p[contains(text(),'Контент 1')]")  # check name of content
-
+    CONTENT1 = (By.XPATH, "(//a[@class='folder-list-item__head'])[2]")
+    # CONTENT1_NAME = (By.XPATH, "//p[contains(text(),'Контент 1')]")  # check name of content
     NAME_CONTENT = (By.XPATH, "//section[2]//article[1]//a[1]//section[1]")
     EDIT = (By.XPATH, "//body/div[@class='article-modal__portal']/div[@class='ReactModal__Overlay ReactModal__Overlay--after-open article-modal__overlay']/div[@role='dialog']/article[@class='article-modal']/div[@class='article-modal__main']/div[@class='scroller article-modal__scroller']/div[@class='scroller__wrap']/div[@class='scroller__body']/div[@class='scroller__content article-modal__scroller-content']/div[@class='article-modal__container']/header[@id='article-content-modal-header']/div[@class='article-modal__controls']/button[2]")
     CREATE_BUTTON = (By.CSS_SELECTOR, ".m-button.m-button--default")
+    """article"""
     CREATE_ARTICLE = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[1]")
+    NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    FOLDER_SAVE_ARTICLE = (By.XPATH, "//select[@class='m-ui-select__select']")
+    TYPOGRAPHY_ARTICLE = (By.XPATH, "//p[contains(text(),'опубликовать')]")
+    SUBMIT_ARTICLE = (By.XPATH, "//button[@type='submit']")
+    TEXTAREA_ARTICLE = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
     CREATE_STEP_SCRIPT = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[3]")
+    CLOSE_CREATED_ARTICLE = (By.XPATH, "//div[@class='article-modal__close article-modal__close--visible']")
     CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
     CLOSE_PAGE_SCRIPT = (By.XPATH, "(//*[name()='svg'][@class='m-scenario-flow__close'])[1]")
     CLOSE_CREATE_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")
@@ -84,15 +90,20 @@ class FormPagesLocators:
     RADIOBUTTON_NON_ACTIVE_CHECK = (By.XPATH, "(//div[@class='radio-wrapper__icon'])[1]")  # non activated
     RADIOBUTTON_SORT_BY_POPULAR = (By.XPATH, "//span[contains(text(),'По популярности')]")
     RADIOBUTTON_ACTIVE_CHECK = (By.XPATH, "//div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")  # activated
-    CHECK_CREATED_NEW_FOLDER = (By.XPATH, "//div[contains(text(),'{name of new folder}')]")
+    RADIOBUTTON_SEARCH = (By.CSS_SELECTOR, ".radio-wrapper__icon")
+    CHECK_CREATED_NEW_FOLDER = (By.XPATH, "//p[text()='{name_of_new_folder}']")
+    SECOND_FOLDER_IN_LIST = (By.XPATH, "(//div[@class='tree-item-content'])[2]")
+    FOLDER_FOR_DEL_BY_NAME = (By.XPATH, "//div[contains(text(),'Adam')]")
     DELETE_FOLDER_BUTTON = (By.XPATH, "//p[contains(text(),'Удалить папку')]")
-    DELETE_FOLDER_CONFIRM_TEXT = (By.XPATH, "//h3[contains(text(),'Подтверждение действия')]")
+    DELETE_FOLDER_CONFIRM_TEXT = (By.XPATH, "//h3[text()='Подтверждение действия']")
     CLOSE_WINDOW_STRUCTURE = (By.XPATH, "//div[@class='popup__close']")
     SHOW_DELETED_FOLDERS = (By.XPATH, "//span[contains(text(),'показать')]")
-    LAST_DELETED_FOLDER = (By.XPATH, "//p[normalize-space()='{name of new folder}']")
+    RECOVERY_FOLDER_BY_NAME = (By.XPATH, "//p[normalize-space()='Sherri153']")
     RECOVERY_FOLDER_BUTTON = (By.XPATH, "//div[@class='action-button-group']")
     RECOVERY_FOLDER_BUTTON_CONFIRM = (By.XPATH, "//p[contains(text(),'восстановить папку')]")
     CHECK_TEXT_ALL_CONTENT_SORT_BY_POPULAR = (By.XPATH, "//span[contains(text(),'по популярности')]")
+    CLOSE_EDIT_FOLDERS_WINDOW = (By.XPATH, "//div[@class='popup__close']")
+    MOVE_FROM_DEL_FOLDER = (By.XPATH, "//select[@class='m-ui-select__select']")
 
 
 

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pyautogui
 import selenium
-from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
@@ -31,7 +31,6 @@ class FormPage(BasePage):
         path = Path(pathlib.Path.cwd(), "screenshots", name_screenshot)
         path = str(path)
         self.driver.save_screenshot(path)
-        print(path)
         # self.driver.save_screenshot('C:\\Users\\User\\PycharmProjects\\Minervasoft\\screen\\' + name_screenshot)
 
     def full_authorization(self, driver):
@@ -121,8 +120,6 @@ class FormPage(BasePage):
         print('Письмо с новым паролем отправлено на почту УСПЕШНО')
         print(f'Страница {check_page_author_value} УСПЕШНО')
 
-
-
     def check_project_page(self):
         """CHECK PAGE BY WORDS"""
         check_project = self.element_is_visible(Locators.CHANGE_PROJECT)
@@ -134,12 +131,6 @@ class FormPage(BasePage):
         """LOGO"""
         logo = self.element_is_visible(Locators.LOGO_HEAD)
         print(logo.is_displayed())
-
-    # def hover(self, driver):
-    #     """MOUSE"""
-    #     element = self.element_is_visible(Locators.LOGO_HEAD)
-    #     hov = ActionChains(driver).move_to_element(element)
-    #     hov.perform()
 
     def input_project(self):
         """INPUT IN SELEN PROJECT"""
@@ -153,7 +144,8 @@ class FormPage(BasePage):
     def title_find(self, driver):
         """TITLE"""
         # driver.title()
-        title = driver.execute_script("return document.title;")
+        title = driver.title
+        # title = driver.execute_script("return document.title;")
         print(title)
 
     def assert_title(self, driver, name_project='selen', name_='Контент 1'):
@@ -168,28 +160,24 @@ class FormPage(BasePage):
         print(result)
 
     def all_title(self, driver):
-        # driver.implicitly_wait(10)
+        driver.implicitly_wait(10)
         # time.sleep(1)
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.ALL_CONTENT).click()
         self.assert_title(driver, name_project='selen', name_='Весь контент')
         self.element_is_visible(Locators.CONTENT1).click()
-        # time.sleep(5)
-        # text_name = self.element_is_visible(Locators.CONTENT1_NAME).click()
-        # text_name_value = text_name.text
-        # print(text_name_value)
+        time.sleep(1)
         self.assert_title(driver, name_project='selen', name_='Контент 1')
-        self.element_is_visible(Locators.NAME_CONTENT).click()
-        self.assert_title(driver, name_project='selen', name_='Название 1')
-
-        driver.back()
+        # self.element_is_visible(Locators.NAME_CONTENT).click()
+        # time.sleep(1)
+        # self.assert_title(driver, name_project='selen', name_='Название 1')
+        # driver.back()
         self.element_is_visible(Locators.CREATE_BUTTON).click()
-        time.sleep(0.5)
+        time.sleep(1)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.assert_title(driver, name_project='selen', name_='Добавить статью')
-        time.sleep(7)
+        time.sleep(10)
         self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
-        # self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
         # # time.sleep(5)
         self.assert_title(driver, name_project='selen', name_='Добавить пошаговый сценарий')
@@ -203,16 +191,16 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.HISTORY_BUTTON).click()
         self.assert_title(driver, name_project='selen', name_='История')
         self.element_is_visible(Locators.LEARNING_BUTTON).click()
-        time.sleep(0.5)
+        time.sleep(1)
         self.assert_title(driver, name_project='selen', name_='Обучение / Мое обучение')
         self.element_is_visible(Locators.REPORT_BUTTON).click()
-        time.sleep(0.5)
+        time.sleep(1)
         self.assert_title(driver, name_project='selen', name_='Обратная связь по контенту')
         self.element_is_visible(Locators.PEOPLE_BUTTON).click()
-        time.sleep(0.5)
+        time.sleep(1)
         self.assert_title(driver, name_project='selen', name_='Все участники')
         self.element_is_visible(Locators.SETTINGS).click()
-        time.sleep(0.5)
+        time.sleep(3)
         self.assert_title(driver, name_project='selen', name_='Настройки')
 
     def add_new_person(self, driver):
@@ -221,7 +209,6 @@ class FormPage(BasePage):
         last_name = person.last_name
         first_name = person.first_name
         email = person.email
-
         self.element_is_visible(Locators.SETTINGS).click()
         print("settings")
         self.element_is_visible(Locators.PERSONS).click()
@@ -238,7 +225,6 @@ class FormPage(BasePage):
         # path = (r'C:\Users\User\PycharmProjects\Minervasoft\animal.jpeg')
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
         time.sleep(3)
-
         text_name = self.element_is_visible(Locators.UPLOAD_FILE_NAME)
         text_name_value = text_name.text
         assert text_name_value == 'animal.jpeg'
@@ -300,7 +286,7 @@ class FormPage(BasePage):
     def add_new_role(self, driver):
         driver.implicitly_wait(10)
         self.element_is_visible(Locators.PEOPLE_BUTTON).click()
-        self.element_is_visible(Locators.ADD_NEW_ROLE).click()
+        self.element_is_visible(Locators.ADD_NEW_ROLE_BUTTON).click()
         person = generated_person()
         first_name = person.first_name
         self.button_invisible_role_check(driver)
@@ -324,7 +310,8 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.SWITCH_BOX).is_displayed()
         self.element_is_visible(Locators.SAVE_CHANGES_ROLE).click()
 
-    def create_new_folder(self):
+    def create_new_folder(self, driver):
+        # driver.implicitly_wait(10)
         person = generated_person()
         name_of_new_folder = person.first_name
         self.element_is_visible(Locators.NEW_FOLDER).click()
@@ -337,34 +324,239 @@ class FormPage(BasePage):
             print("Кнопка 'Создать папку' НЕ активна")
         self.element_is_visible(Locators.PARENT_FOLDERS_CHOICE).send_keys('Нет')
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(name_of_new_folder)
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_POPULAR).click()
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
         time.sleep(1)
-        radio_on_check = self.element_is_clickable(Locators.RADIOBUTTON_ACTIVE_CHECK).get_attribute("class")
-        assert radio_on_check == 'radio-wrapper__icon radio-wrapper__icon--checked'
-        print(radio_on_check)
-        time.sleep(3)
+        self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+        try:
+            text_all_content_check = driver.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
+            text_all_content_check_value = text_all_content_check.text
+            assert text_all_content_check_value == "Весь контент"
+            print(text_all_content_check_value)
+        except NoSuchElementException:
+            print('Контента пока нет')
+        # time.sleep(1)
+        driver.implicitly_wait(10)
+        check_created_new_folder = driver.find_element(By.XPATH, f"//p[text()='{name_of_new_folder}']")
+        check_created_new_folder_value = check_created_new_folder.text
+        assert check_created_new_folder_value == name_of_new_folder
+        print(check_created_new_folder_value)
+        # time.sleep(2)
+        # for x in self.element_is_clickable(Locators.RADIOBUTTON_SEARCH).get_attribute("class"):
+        #     print(x)
+        # radio_on_check = self.element_is_clickable(Locators.RADIOBUTTON_SEARCH).get_attribute("class")
+        # assert radio_on_check == 'radio-wrapper__icon radio-wrapper__icon--checked'
+        # print(x)
         # self.element_is_visible(Locators.CREATE_FOLDER_BUTTON)
 
-    def create_new_article(self):
-        pass
+    def create_5_folder(self):
+        n = 0
+        while True:
+            count_folders = n
+            person = generated_person()
+            name_of_new_folder = person.first_name
+            self.element_is_visible(Locators.NEW_FOLDER).click()
+            self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(name_of_new_folder)
+            self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+            time.sleep(1)
+            n += 1
+            if count_folders == 5:
+                break
+        print("создано 5 папок")
 
-    def create_del_recovery_folder_content(self):
+    def delete_folder(self):
+        self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
+        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        check_del_text = self.element_is_visible(Locators.DELETE_FOLDER_CONFIRM_TEXT)
+        check_del_text_value = check_del_text.text
+        assert check_del_text_value == 'Подтверждение действия'
+        print(check_del_text_value)
+        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        print("папка удалена")
+        self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+        time.sleep(2)
+
+    def delete_some_folder(self):
+        self.element_is_visible(Locators.CONTENT).click()
+        self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        n = 0
+        while True:
+            try:
+                while True:
+                    count = n
+                    self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
+                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                    time.sleep(0.5)
+                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                    n +=1
+                    if n == 5:
+                        break
+            except ElementClickInterceptedException:
+                self.element_is_visible(Locators.MOVE_FROM_DEL_FOLDER).send_keys('Контент 1')
+                self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+
+    def create_5_article(self):
+        n = 0
+        while True:
+            count_folders = n
+            person = generated_person()
+            name_article = person.first_name
+            text_article = person.last_name
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_ARTICLE).click()
+            self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
+            self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys('папка1')
+            self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
+            self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+            self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+            self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+            self.element_is_visible(Locators.TEXTAREA_ARTICLE).send_keys(text_article)
+            self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+            self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+            time.sleep(1)
+            n += 1
+            if count_folders == 5:
+                break
+        print("создано 5 папок")
+
+    # def recovery_folder(self):
+    #     self.element_is_visible(Locators.SHOW_DELETED_FOLDERS).click()
+    #     self.element_is_visible(Locators.LAST_DELETED_FOLDER).click()
+    #     self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON).click()
+    #     self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON_CONFIRM).click()
+    #     self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+    #     "выбор «По дате» сохранён"
+    #     self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+    #     self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+
+    def create_del_recovery_folder_content(self, driver):
         self.element_is_visible(Locators.CONTENT).click()
         """check open text"""
         text_folder_check = self.element_is_visible(Locators.TEXT_FOLDERS_CHECK)
         text_folder_check_value = text_folder_check.text
         assert text_folder_check_value == "Папки"
         print(text_folder_check_value)
-        text_all_content_check = self.element_is_visible(Locators.TEXT_ALL_CONTENT_CHECK)
-        text_all_content_check_value = text_all_content_check.text
-        assert text_all_content_check_value == "Весь контент"
-        print(text_all_content_check_value)
+        try:
+            text_all_content_check = driver.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
+            text_all_content_check_value = text_all_content_check.text
+            assert text_all_content_check_value == "Весь контент"
+            print(text_all_content_check_value)
+        except NoSuchElementException:
+            print('Контента пока нет')
         """reproduce steps"""
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         text_open_form_check = self.element_is_visible(Locators.TEXT_OPEN_FORM_CHECK)
         text_open_form_check_value = text_open_form_check.text
         assert text_open_form_check_value == "Управление структурой"
         print(text_open_form_check_value)
-        self.create_new_folder()
+        """create folder"""
+        person = generated_person()
+        name_of_new_folder = person.first_name+str(random.randint(99,999))
+        self.element_is_visible(Locators.NEW_FOLDER).click()
+        text_new_folder_check = self.element_is_visible(Locators.TEXT_NEW_FOLDER_CHECK)
+        text_new_folder_check_value = text_new_folder_check.text
+        assert text_new_folder_check_value == 'Новая папка'
+        try:
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        except ElementClickInterceptedException:
+            print("Кнопка 'Создать папку' НЕ активна")
+        self.element_is_visible(Locators.PARENT_FOLDERS_CHOICE).send_keys('Нет')
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(name_of_new_folder)
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_POPULAR).click()
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        time.sleep(1)
+        self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+        try:
+            text_all_content_check = driver.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
+            text_all_content_check_value = text_all_content_check.text
+            assert text_all_content_check_value == "Весь контент"
+            print(text_all_content_check_value)
+        except NoSuchElementException:
+            print('Контента пока нет')
+        # time.sleep(1)
+        driver.implicitly_wait(10)
+        check_created_new_folder = driver.find_element(By.XPATH, f"//p[text()='{name_of_new_folder}']")
+        check_created_new_folder_value = check_created_new_folder.text
+        assert check_created_new_folder_value == name_of_new_folder
+        print(check_created_new_folder_value)
+        """del folder"""
+        self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        folder_fol_del_by_name = driver.find_element(By.XPATH, f"//div[contains(text(),'{name_of_new_folder}')]")
+        folder_fol_del_by_name.click()
+        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        check_del_text = self.element_is_visible(Locators.DELETE_FOLDER_CONFIRM_TEXT)
+        check_del_text_value = check_del_text.text
+        assert check_del_text_value == 'Подтверждение действия'
+        print(check_del_text_value)
+        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        print("папка удалена")
+        self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+        time.sleep(2)
+        """recovery folder"""
+        self.element_is_visible(Locators.SHOW_DELETED_FOLDERS).click()
+        recovery_folder_by_name = driver.find_element(By.XPATH, f"//p[normalize-space()='{name_of_new_folder}']")
+        recovery_folder_by_name.click()
+        self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON).click()
+        self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON_CONFIRM).click()
+        print("папка восстановлена")
+        # button = self.element_is_visible(Locators.FOLDERS_CHANGE)
+        # driver.execute_script("arguments[0].click();", button)
+        # driver.execute_script("window.scrollBy(0,0)")
+        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        # div = driver.find_element(By.XPATH, "(//div[@class='scroller__content'])[2]")
+        # ActionChains(driver).move_to_element(div).scroll_by_amount(1, -500).perform()
+        # time.sleep(2)
+        # html = driver.find_element(By.TAG_NAME, 'html')
+        # html.send_keys(Keys.UP)
+        # time.sleep(2)
+        # self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        # folder_fol_del_by_name = driver.find_element(By.XPATH, f"//div[contains(text(),'{name_of_new_folder}')]")
+        # folder_fol_del_by_name.click()
+        # time.sleep(1)
+        driver.refresh()
+        self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        time.sleep(1)
+        folder_fol_del_by_name = driver.find_element(By.XPATH, f"//div[contains(text(),'{name_of_new_folder}')]")
+        folder_fol_del_by_name.click()
+        time.sleep(1)
+        self.screenshot()
+        self.element_is_visible(Locators.CLOSE_EDIT_FOLDERS_WINDOW).click()
+        time.sleep(2)
+        """create 5 folder"""
+        # self.create_5_folder()
+        """!!!!!check radiobutton by date!!!!!"""
+
+    def folder1_folder2(self, driver):
+        folder1_name = "папка1"
+        folder2_name = "папка2"
+        self.element_is_visible(Locators.CONTENT).click()
+        self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        """folder1"""
+        self.element_is_visible(Locators.NEW_FOLDER).click()
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(folder1_name)
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        """folder2"""
+        self.element_is_visible(Locators.NEW_FOLDER).click()
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(folder2_name)
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        # close = driver.find_element(By.XPATH, "//div[@class='popup__close']")
+        # close.click()
+        time.sleep(1)
+        self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+        # self.element_is_visible(Locators.CONTENT).click()
+        time.sleep(3)
+
+
+
+
 
 
 

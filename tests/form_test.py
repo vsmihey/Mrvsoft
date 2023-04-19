@@ -69,17 +69,33 @@ class TestFormPage:
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.add_new_person(driver)
+
     def test_add_new_role(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.add_new_role(driver)
         time.sleep(1)
-    def test_create_del_recovery_folder(self, driver):
+
+    def test_folder_create_del_recovery(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.input_in_my_project(driver)
-        form_page.create_del_recovery_folder_content()
+        form_page.create_del_recovery_folder_content(driver)
+
+    def test_folder1_folder2(self, driver):
+        form_page = FormPage(driver, url)
+        form_page.open()
+        form_page.input_in_my_project(driver)
+        form_page.folder1_folder2(driver)
+
+    def test_del_some_folders(self, driver):
+        form_page = FormPage(driver, url)
+        form_page.open()
+        form_page.input_in_my_project(driver)
+        form_page.delete_some_folder()
+
+
 
 
 
