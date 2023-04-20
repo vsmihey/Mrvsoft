@@ -39,7 +39,7 @@ class FormPagesLocators:
     SUBMIT_ARTICLE = (By.XPATH, "//button[@type='submit']")
     TEXTAREA_ARTICLE = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
     CREATE_STEP_SCRIPT = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[3]")
-    CLOSE_CREATED_ARTICLE = (By.XPATH, "//div[@class='article-modal__close article-modal__close--visible']")
+    CLOSE_CREATED_ARTICLE = (By.XPATH, "/html[1]/body[1]/div[5]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]")
     CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
     CLOSE_PAGE_SCRIPT = (By.XPATH, "(//*[name()='svg'][@class='m-scenario-flow__close'])[1]")
     CLOSE_CREATE_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")

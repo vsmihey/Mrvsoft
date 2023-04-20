@@ -26,7 +26,6 @@ class FormPage(BasePage):
         now_date = datetime.datetime.now(offset)
         now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
         # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-
         name_screenshot = 'screenshot' + now_date + '.png'
         path = Path(pathlib.Path.cwd(), "screenshots", name_screenshot)
         path = str(path)
@@ -52,9 +51,6 @@ class FormPage(BasePage):
 
     def input_in_my_project(self, driver):
         """INPUT IN MY PROJECT"""
-        # form_page = FormPage(driver, url)
-        # form_page.open()
-        # form_page.authorization(self.login, self.password)
         self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
         self.element_is_visible(Locators.LOGIN).send_keys(login)
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
@@ -65,7 +61,6 @@ class FormPage(BasePage):
         # pyautogui.press('tab')
         # pyautogui.press('enter')
         # driver.refresh()
-
 
     def fill_fields(self, login, password):
         """FILL FIELDS PAGE OF AUTHORIZATION"""
@@ -110,8 +105,6 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.RESTORE_BUTTON).click()
         time.sleep(1)
         self.screenshot()
-
-        # self.element_is_visible(Locators.RESTORE_BUTTON).click()
         self.element_is_visible(Locators.REMEMBER_PASSWD).click()
         time.sleep(1)
         check_page_author = self.element_is_visible(Locators.PAGE_AUTH)
@@ -168,10 +161,6 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CONTENT1).click()
         time.sleep(1)
         self.assert_title(driver, name_project='selen', name_='Контент 1')
-        # self.element_is_visible(Locators.NAME_CONTENT).click()
-        # time.sleep(1)
-        # self.assert_title(driver, name_project='selen', name_='Название 1')
-        # driver.back()
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
@@ -221,8 +210,6 @@ class FormPage(BasePage):
         """add avatar"""
         avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
         path = str(avatar)
-        # sss = os.path.abspath("animal.jpeg")
-        # path = (r'C:\Users\User\PycharmProjects\Minervasoft\animal.jpeg')
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
         time.sleep(3)
         text_name = self.element_is_visible(Locators.UPLOAD_FILE_NAME)
@@ -250,7 +237,6 @@ class FormPage(BasePage):
         value_random = str(random.randint(999,9999))
         self.element_is_visible(Locators.LOGIN_NEW_PERSON).clear()
         self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login+value_random)
-        # print(login+value_random)
         self.element_is_visible(Locators.SAVE_PERSON).click()
         """check result create new person name"""
         name_check = last_name + ' ' + first_name
@@ -284,9 +270,14 @@ class FormPage(BasePage):
             print("Кнопка 'Создать роль' не активна")
 
     def add_new_role(self, driver):
-        driver.implicitly_wait(10)
+        # driver.implicitly_wait(10)
         self.element_is_visible(Locators.PEOPLE_BUTTON).click()
-        self.element_is_visible(Locators.ADD_NEW_ROLE_BUTTON).click()
+        try:
+            add_new_role_button = driver.find_element(By.XPATH, "//p[text()='добавить роль']")
+            add_new_role_button.click()
+        except NoSuchElementException:
+            self.element_is_visible(Locators.ADD_NEW_ROLE).click()
+        driver.implicitly_wait(10)
         person = generated_person()
         first_name = person.first_name
         self.button_invisible_role_check(driver)
@@ -383,25 +374,29 @@ class FormPage(BasePage):
     def delete_some_folder(self):
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        try:
+            n = 0
+            while True:
+                try:
+                    while True:
+                        count = n
+                        self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
+                        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                        time.sleep(0.5)
+                        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                        n +=1
+                        if n == 50:
+                            break
+                except ElementClickInterceptedException:
+                    self.element_is_visible(Locators.MOVE_FROM_DEL_FOLDER).send_keys('Контент 1')
+                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        except TimeoutException:
+            print("папок для удаления больше нет")
+    def create_5_article(self, driver):
+        """ARTICLE"""
         n = 0
         while True:
-            try:
-                while True:
-                    count = n
-                    self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
-                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-                    time.sleep(0.5)
-                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-                    n +=1
-                    if n == 5:
-                        break
-            except ElementClickInterceptedException:
-                self.element_is_visible(Locators.MOVE_FROM_DEL_FOLDER).send_keys('Контент 1')
-                self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-
-    def create_5_article(self):
-        n = 0
-        while True:
+            driver.implicitly_wait(10)
             count_folders = n
             person = generated_person()
             name_article = person.first_name
@@ -410,18 +405,21 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.CREATE_ARTICLE).click()
             self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
             self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys('папка1')
+            print("указан путь статьи")
+            time.sleep(5)
             self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.TEXTAREA_ARTICLE).send_keys(text_article)
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+            time.sleep(1)
             self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
             time.sleep(1)
             n += 1
             if count_folders == 5:
                 break
-        print("создано 5 папок")
+        print("создано 5 статей")
 
     # def recovery_folder(self):
     #     self.element_is_visible(Locators.SHOW_DELETED_FOLDERS).click()
@@ -529,7 +527,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CLOSE_EDIT_FOLDERS_WINDOW).click()
         time.sleep(2)
         """create 5 folder"""
-        # self.create_5_folder()
+        self.create_5_folder()
         """!!!!!check radiobutton by date!!!!!"""
 
     def folder1_folder2(self, driver):
@@ -547,12 +545,11 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(folder2_name)
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
         self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
-        # close = driver.find_element(By.XPATH, "//div[@class='popup__close']")
-        # close.click()
-        time.sleep(1)
+        time.sleep(0.5)
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+        self.create_5_article(driver)
         # self.element_is_visible(Locators.CONTENT).click()
-        time.sleep(3)
+
 
 
 

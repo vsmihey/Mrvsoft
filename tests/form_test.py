@@ -15,21 +15,17 @@ class TestFormPage:
         form_page.open()
         form_page.logo_head()
         form_page.screenshot()
-
         self.login = login
         self.password = password_incorrect
         form_page.authorization(self.login, self.password)
         form_page.restore_incorrect()
         form_page.logo_head()
         form_page.screenshot()
-
         form_page.full_authorization(driver)
         form_page.logo_head()
         form_page.screenshot()
-
         form_page.title_find(driver)
         time.sleep(1)
-
 
     def test_form_1(self, driver):
         """tests incorrect data"""
@@ -89,6 +85,7 @@ class TestFormPage:
         form_page.input_in_my_project(driver)
         form_page.folder1_folder2(driver)
 
+    # @pytest.mark.skip('delete folders')
     def test_del_some_folders(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
