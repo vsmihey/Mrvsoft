@@ -6,7 +6,6 @@ import time
 import uuid
 from pathlib import Path
 
-import pyautogui
 import selenium
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException
 from selenium.webdriver import ActionChains, Keys
@@ -155,6 +154,7 @@ class FormPage(BasePage):
     def all_title(self, driver):
         driver.implicitly_wait(10)
         # time.sleep(1)
+        driver.get_screenshot_as_file("scr.png")
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.ALL_CONTENT).click()
         self.assert_title(driver, name_project='selen', name_='Весь контент')
