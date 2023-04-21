@@ -371,42 +371,51 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
         time.sleep(2)
 
-    def delete_some_folder(self):
+    def delete_some_folder(self, count_folders=3): # ставить на 1 папку больше
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
-        try:
-            n = 0
-            while True:
+        n = 0
+        while True:
+            try:
+                n += 1
+                if n == count_folders:
+                    break
                 try:
-                    while True:
-                        count = n
-                        self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
-                        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-                        time.sleep(0.5)
-                        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-                        n +=1
-                        if n == 50:
-                            break
+                    self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
+                    print("1")
+                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                    print("2")
+                    time.sleep(1)
+                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                    print("3")
+                    time.sleep(1)
                 except ElementClickInterceptedException:
                     self.element_is_visible(Locators.MOVE_FROM_DEL_FOLDER).send_keys('Контент 1')
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-        except TimeoutException:
-            print("папок для удаления больше нет")
+            except TimeoutException:
+                print('папок нет больше')
+
+
     def create_5_article(self, driver):
         """ARTICLE"""
         n = 0
+        x = 0
+        name_folder = 'папка1'
         while True:
             driver.implicitly_wait(10)
             count_folders = n
             person = generated_person()
             name_article = person.first_name
             text_article = person.last_name
+            time.sleep(1)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
             self.element_is_visible(Locators.CREATE_ARTICLE).click()
             self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
-            self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys('папка1')
-            print("указан путь статьи")
-            time.sleep(5)
+            self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys(name_folder)
+            if x < 1:
+                time.sleep(10)
+            else:
+                time.sleep(2)
             self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
@@ -414,12 +423,17 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.TEXTAREA_ARTICLE).send_keys(text_article)
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             time.sleep(1)
+            # dddd = self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE)
+            # # driver.execute_script("arguments[0].click();", dddd)
+            # ActionChains(driver).move_to_element(dddd).click().perform()
             self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
-            time.sleep(1)
             n += 1
-            if count_folders == 5:
-                break
-        print("создано 5 статей")
+            x += 1
+            if count_folders >= 4:
+                name_folder = "папка2"
+                if count_folders >= 9:
+                    break
+        print("создано по 5 статей")
 
     # def recovery_folder(self):
     #     self.element_is_visible(Locators.SHOW_DELETED_FOLDERS).click()
@@ -464,6 +478,8 @@ class FormPage(BasePage):
             print("Кнопка 'Создать папку' НЕ активна")
         self.element_is_visible(Locators.PARENT_FOLDERS_CHOICE).send_keys('Нет')
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(name_of_new_folder)
+        self.screenshot()
+        print("check radiobutton")
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_POPULAR).click()
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
@@ -543,12 +559,36 @@ class FormPage(BasePage):
         """folder2"""
         self.element_is_visible(Locators.NEW_FOLDER).click()
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(folder2_name)
-        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        # self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
         self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
         time.sleep(0.5)
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+        """create 5 articles"""
         self.create_5_article(driver)
-        # self.element_is_visible(Locators.CONTENT).click()
+
+    def check_folder1_folder2(self):
+        self.element_is_visible(Locators.CONTENT).click()
+        self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        self.element_is_visible(Locators.FOLDER1).click()
+        print('1')
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
+        self.element_is_visible(Locators.FOLDER2).click()
+        print('2')
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_POPULAR).click()
+        self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
+        print('3')
+        """check radiobutton"""
+        self.element_is_visible(Locators.FOLDER1).click()
+        time.sleep(1)
+        self.screenshot()
+        self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
+        self.element_is_visible(Locators.FOLDER2).click()
+        time.sleep(1)
+        self.screenshot()
+        self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+
+
 
 
 

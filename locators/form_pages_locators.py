@@ -8,7 +8,8 @@ class FormPagesLocators:
     LOGIN = (By.NAME, "username")
     PASSWORD = (By.NAME, "password")
     INPUT_BUTTON = (By.XPATH, "//button[@type='submit']")
-    TEST_PROJECT = (By.XPATH, "//article[@class='m-main-modal__main']//a[1]")  # first name project
+    """name project selen"""
+    TEST_PROJECT = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
     """restore forms"""
     RESTORE = (By.XPATH, "//span[text()='Восстановить доступ']")
     RESTORE_LOGIN = (By.NAME, "username")
@@ -39,7 +40,7 @@ class FormPagesLocators:
     SUBMIT_ARTICLE = (By.XPATH, "//button[@type='submit']")
     TEXTAREA_ARTICLE = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
     CREATE_STEP_SCRIPT = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[3]")
-    CLOSE_CREATED_ARTICLE = (By.XPATH, "/html[1]/body[1]/div[5]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]")
+    CLOSE_CREATED_ARTICLE = (By.XPATH, "//header[@id='article-content-modal-header']//span[@class='link-iconed__label-text'][normalize-space()='selen']")
     CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
     CLOSE_PAGE_SCRIPT = (By.XPATH, "(//*[name()='svg'][@class='m-scenario-flow__close'])[1]")
     CLOSE_CREATE_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")
@@ -104,6 +105,11 @@ class FormPagesLocators:
     CHECK_TEXT_ALL_CONTENT_SORT_BY_POPULAR = (By.XPATH, "//span[contains(text(),'по популярности')]")
     CLOSE_EDIT_FOLDERS_WINDOW = (By.XPATH, "//div[@class='popup__close']")
     MOVE_FROM_DEL_FOLDER = (By.XPATH, "//select[@class='m-ui-select__select']")
+    MOVE_FROM_DEL_FOLDER_TEXT = (By.XPATH, "//h4[contains(text(),'Папка для перемещения')]")
+    FOLDER1 = (By.XPATH, "//div[contains(text(),'папка1')]")
+    FOLDER2 = (By.XPATH, "//div[contains(text(),'папка2')]")
+    SAVE_CHANGES_FOLDER = (By.XPATH, "//p[contains(text(),'сохранить изменения')]")
+
 
 
 

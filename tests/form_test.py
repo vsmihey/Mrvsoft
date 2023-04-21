@@ -90,7 +90,14 @@ class TestFormPage:
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.input_in_my_project(driver)
-        form_page.delete_some_folder()
+        form_page.delete_some_folder(count_folders=17)
+
+    def test_check_folder1_folder2(self, driver):
+        form_page = FormPage(driver, url)
+        form_page.open()
+        form_page.input_in_my_project(driver)
+        form_page.check_folder1_folder2()
+
 
 
 
