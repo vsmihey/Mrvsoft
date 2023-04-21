@@ -1,17 +1,13 @@
 import datetime
-import os
 import pathlib
 import random
 import time
-import uuid
 from pathlib import Path
-
 import selenium
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
-
 from generator.generator import generated_person
 from pages.base_page import BasePage
 from locators.form_pages_locators import FormPagesLocators as Locators
@@ -29,7 +25,6 @@ class FormPage(BasePage):
         path = Path(pathlib.Path.cwd(), "screenshots", name_screenshot)
         path = str(path)
         self.driver.save_screenshot(path)
-        # self.driver.save_screenshot('C:\\Users\\User\\PycharmProjects\\Minervasoft\\screen\\' + name_screenshot)
 
     def full_authorization(self, driver):
         """CORRECT DATA"""
@@ -38,8 +33,6 @@ class FormPage(BasePage):
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.authorization(self.login, self.password)
-        # form_page.check_project_page()
-        # time.sleep(1)
 
     def authorization(self, login, password):
         self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
@@ -88,7 +81,6 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.RESTORE).click()
         self.element_is_visible(Locators.RESTORE_LOGIN).send_keys(login)
         self.element_is_visible(Locators.RESTORE_BUTTON).click()
-        # self.element_is_visible(Locators.REMEMBER_PASSWD)
 
     def check_restore_text(self):
         """CHECK TEXT INCORRECT LOGIN ON PAGE RESTORE"""
@@ -142,11 +134,8 @@ class FormPage(BasePage):
 
     def assert_title(self, driver, name_project='selen', name_='Контент 1'):
         """ASSERT"""
-        # driver.implicitly_wait(10)
         time.sleep(1)
-        # title = driver.execute_script("return document.title;")
         title = driver.title
-        # title = title.text
         result = f'{name_} / {name_project} — Minervasoft'
         assert title == result
         print(result)
@@ -270,7 +259,6 @@ class FormPage(BasePage):
             print("Кнопка 'Создать роль' не активна")
 
     def add_new_role(self, driver):
-        # driver.implicitly_wait(10)
         self.element_is_visible(Locators.PEOPLE_BUTTON).click()
         try:
             add_new_role_button = driver.find_element(By.XPATH, "//p[text()='добавить роль']")
@@ -392,7 +380,6 @@ class FormPage(BasePage):
         except TimeoutException:
             print('папок нет больше')
 
-
     def create_5_article(self, driver):
         """ARTICLE"""
         n = 0
@@ -431,16 +418,6 @@ class FormPage(BasePage):
                 if count_folders >= 9:
                     break
         print("создано по 5 статей")
-
-    # def recovery_folder(self):
-    #     self.element_is_visible(Locators.SHOW_DELETED_FOLDERS).click()
-    #     self.element_is_visible(Locators.LAST_DELETED_FOLDER).click()
-    #     self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON).click()
-    #     self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON_CONFIRM).click()
-    #     self.element_is_visible(Locators.FOLDERS_CHANGE).click()
-    #     "выбор «По дате» сохранён"
-    #     self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
-    #     self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
 
     def create_del_recovery_folder_content(self, driver):
         self.element_is_visible(Locators.CONTENT).click()

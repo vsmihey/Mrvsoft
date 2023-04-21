@@ -97,7 +97,7 @@ class TestFormPage:
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.input_in_my_project(driver)
-        form_page.delete_some_folder(count_folders=10)
+        form_page.delete_some_folder(count_folders=11)  # ставить на 1 папку больше
 
 
 
