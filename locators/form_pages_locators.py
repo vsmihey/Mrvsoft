@@ -109,6 +109,7 @@ class FormPagesLocators:
     FOLDER1 = (By.XPATH, "//div[contains(text(),'папка1')]")
     FOLDER2 = (By.XPATH, "//div[contains(text(),'папка2')]")
     SAVE_CHANGES_FOLDER = (By.XPATH, "//p[contains(text(),'сохранить изменения')]")
+    SORT_BY_ALL_CONTENT = (By.XPATH, "//button[@class='m-ui-button-text content-layout__sorted']")
 
 
 

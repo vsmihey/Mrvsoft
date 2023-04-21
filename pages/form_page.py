@@ -375,25 +375,22 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         n = 0
-        while True:
-            try:
+        try:
+            while True:
                 n += 1
                 if n == count_folders:
                     break
                 try:
                     self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
-                    print("1")
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-                    print("2")
                     time.sleep(1)
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-                    print("3")
                     time.sleep(1)
                 except ElementClickInterceptedException:
                     self.element_is_visible(Locators.MOVE_FROM_DEL_FOLDER).send_keys('Контент 1')
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-            except TimeoutException:
-                print('папок нет больше')
+        except TimeoutException:
+            print('папок нет больше')
 
 
     def create_5_article(self, driver):
@@ -566,27 +563,41 @@ class FormPage(BasePage):
         """create 5 articles"""
         self.create_5_article(driver)
 
-    def check_folder1_folder2(self):
+    def check_folder1_folder2(self, driver):
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         self.element_is_visible(Locators.FOLDER1).click()
         print('1')
+        time.sleep(1)
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
         self.element_is_visible(Locators.FOLDER2).click()
         print('2')
+        time.sleep(1)
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_POPULAR).click()
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
         print('3')
         """check radiobutton"""
         self.element_is_visible(Locators.FOLDER1).click()
-        time.sleep(1)
         self.screenshot()
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
         self.element_is_visible(Locators.FOLDER2).click()
-        time.sleep(1)
         self.screenshot()
-        self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+        self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
+        driver.back()
+        self.element_is_visible(Locators.ALL_CONTENT).click()
+        self.element_is_visible(Locators.SORT_BY_ALL_CONTENT).click()
+        self.element_is_visible(Locators.FOLDERS_CHANGE).click()
+        self.element_is_visible(Locators.FOLDER2).click()
+        self.screenshot()
+        self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
+        driver.back()
+        self.element_is_visible(Locators.ALL_CONTENT).click()
+        text_sort_by_all_content = driver.find_element(By.XPATH, "//span[contains(text(),'по популярности')]")
+        text_sort_by_all_content_value = text_sort_by_all_content.text
+        assert text_sort_by_all_content_value == 'по популярности'
+        print("сортировка по популярности сохранена")
+
 
 
 
