@@ -82,12 +82,13 @@ class TestFormPage:
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.folder1_folder2(driver)
-
-    def test_check_folder1_folder2(self, driver):
-        form_page = FormPage(driver, url)
-        form_page.open()
-        form_page.input_in_my_project(driver)
         form_page.check_folder1_folder2(driver)
+
+    # def test_check_folder1_folder2(self, driver):
+    #     form_page = FormPage(driver, url)
+    #     form_page.open()
+    #     form_page.input_in_my_project(driver)
+    #     form_page.check_folder1_folder2(driver)
 
     # @pytest.mark.skip('delete folders')
     def test_del_some_folders(self, driver):
