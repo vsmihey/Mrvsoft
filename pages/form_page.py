@@ -349,6 +349,7 @@ class FormPage(BasePage):
             if count_folders == 5:
                 break
         print("создано 5 папок")
+        self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
 
     def delete_folder(self):
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
@@ -373,6 +374,7 @@ class FormPage(BasePage):
                 if n == count_folders:
                     break
                 try:
+                    time.sleep(1)
                     self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
                     time.sleep(1)
@@ -494,7 +496,9 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.SHOW_DELETED_FOLDERS).click()
         recovery_folder_by_name = driver.find_element(By.XPATH, f"//p[normalize-space()='{name_of_new_folder}']")
         recovery_folder_by_name.click()
+        time.sleep(1)
         self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON).click()
+        time.sleep(1)
         self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON_CONFIRM).click()
         print("папка восстановлена")
         # button = self.element_is_visible(Locators.FOLDERS_CHANGE)
@@ -550,6 +554,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.FOLDER1).click()
         time.sleep(1)
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        time.sleep(1)
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
         self.element_is_visible(Locators.FOLDER2).click()
         time.sleep(1)

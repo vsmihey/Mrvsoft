@@ -76,6 +76,7 @@ class TestFormPage:
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.create_del_recovery_folder_content(driver)
+        form_page.delete_some_folder(count_folders=8)
 
     def test_folder1_folder2(self, driver):
         form_page = FormPage(driver, url)
@@ -83,6 +84,7 @@ class TestFormPage:
         form_page.input_in_my_project(driver)
         form_page.folder1_folder2(driver)
         form_page.check_folder1_folder2(driver)
+        form_page.delete_some_folder(count_folders=3)
 
     # def test_check_folder1_folder2(self, driver):
     #     form_page = FormPage(driver, url)
@@ -90,12 +92,12 @@ class TestFormPage:
     #     form_page.input_in_my_project(driver)
     #     form_page.check_folder1_folder2(driver)
 
-    # @pytest.mark.skip('delete folders')
+    @pytest.mark.skip('delete folders')
     def test_del_some_folders(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.input_in_my_project(driver)
-        form_page.delete_some_folder(count_folders=11)  # ставить на 1 папку больше
+        form_page.delete_some_folder(count_folders=10)  # ставить на 1 папку больше
 
     def test_favourites(self, driver):
         form_page = FormPage(driver, url)
