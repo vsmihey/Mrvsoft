@@ -1,12 +1,9 @@
 import time
-import uuid
-
 import pytest
 from selenium.common import TimeoutException
-
-from pages import form_page
 from pages.form_page import FormPage
 from pages.data_login_password import *
+
 
 class TestFormPage:
 
@@ -49,7 +46,7 @@ class TestFormPage:
         form_page.open()
         form_page.authorization(login, password)
         form_page.input_project()
-        driver.get_screenshot_as_file("scr.png")
+        # driver.get_screenshot_as_file("scr.png")
         print("input project")
         form_page.all_title(driver)
 
@@ -98,6 +95,15 @@ class TestFormPage:
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.delete_some_folder(count_folders=11)  # ставить на 1 папку больше
+
+    def test_favourites(self, driver):
+        form_page = FormPage(driver, url)
+        form_page.open()
+        form_page.input_in_my_project(driver)
+        form_page.favourites(driver)
+
+
+
 
 
 

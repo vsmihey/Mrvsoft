@@ -141,6 +141,7 @@ class FormPage(BasePage):
         print(result)
 
     def all_title(self, driver):
+        """CHECK ALL TITLE"""
         driver.implicitly_wait(10)
         # time.sleep(1)
         driver.get_screenshot_as_file("scr.png")
@@ -182,6 +183,7 @@ class FormPage(BasePage):
         self.assert_title(driver, name_project='selen', name_='Настройки')
 
     def add_new_person(self, driver):
+        """ADD NEW PERSON"""
         driver.implicitly_wait(10)
         person = generated_person()
         last_name = person.last_name
@@ -259,6 +261,7 @@ class FormPage(BasePage):
             print("Кнопка 'Создать роль' не активна")
 
     def add_new_role(self, driver):
+        """ADD NEW ROLE"""
         self.element_is_visible(Locators.PEOPLE_BUTTON).click()
         try:
             add_new_role_button = driver.find_element(By.XPATH, "//p[text()='добавить роль']")
@@ -290,6 +293,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.SAVE_CHANGES_ROLE).click()
 
     def create_new_folder(self, driver):
+        """CREATE NEW FOLDER"""
         # driver.implicitly_wait(10)
         person = generated_person()
         name_of_new_folder = person.first_name
@@ -544,16 +548,13 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         self.element_is_visible(Locators.FOLDER1).click()
-        print('1')
         time.sleep(1)
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
         self.element_is_visible(Locators.FOLDER2).click()
-        print('2')
         time.sleep(1)
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_POPULAR).click()
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
-        print('3')
         """check radiobutton"""
         self.element_is_visible(Locators.FOLDER1).click()
         self.screenshot()
@@ -574,6 +575,54 @@ class FormPage(BasePage):
         text_sort_by_all_content_value = text_sort_by_all_content.text
         assert text_sort_by_all_content_value == 'по популярности'
         print("сортировка по популярности сохранена")
+
+    def favourites(self, driver):
+        """FAVOURITES"""
+        "в избранном не должно быть папок"
+        driver.implicitly_wait(10)
+        person = generated_person()
+        first_name = person.first_name
+        self.element_is_visible(Locators.CONTENT).click()
+        self.element_is_visible(Locators.FAVOURITES).click()
+        check_text_structure = self.element_is_visible(Locators.CHECK_TEXT_STRUCTURE).text
+        check_text_structure_value = check_text_structure
+        assert check_text_structure_value == 'Управление структурой'
+        print("Управление структурой")
+        check_text_favourites = self.element_is_visible(Locators.CHECK_TEXT_FAVOURITES).text
+        check_text_favourites_value = check_text_favourites
+        assert check_text_favourites_value == 'избранное'
+        print("избранное")
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        text_new_folder_check = self.element_is_visible(Locators.TEXT_NEW_FOLDER_CHECK).text
+        text_new_folder_check_value = text_new_folder_check
+        assert text_new_folder_check_value == "Новая папка"
+        print("Новая папка")
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(first_name)
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        check_text_structure = self.element_is_visible(Locators.CHECK_TEXT_STRUCTURE).text
+        check_text_structure_value = check_text_structure
+        assert check_text_structure_value == 'Управление структурой'
+        print("Управление структурой")
+        time.sleep(1)
+        edit_new_folder = driver.find_element(By.XPATH, f"//div[text()='{first_name}']")
+        edit_new_folder.click()
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).clear()
+        edit_name = first_name+'777'
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(edit_name)
+        self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
+        time.sleep(1)
+        edit_new_folder = driver.find_element(By.XPATH, f"//div[text()='{first_name}']")
+        edit_new_folder.click()
+        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        time.sleep(1)
+        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        text_not_folders = self.element_is_visible(Locators.TEXT_NOT_FOLDERS)
+        text_not_folders_value = text_not_folders.text
+        assert text_not_folders_value == "У вас нет избранных папок. Создайте папку."
+        print("У вас нет избранных папок. Создайте папку.")
+
+
+
 
 
 

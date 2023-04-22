@@ -110,6 +110,17 @@ class FormPagesLocators:
     FOLDER2 = (By.XPATH, "//div[contains(text(),'папка2')]")
     SAVE_CHANGES_FOLDER = (By.XPATH, "//p[contains(text(),'сохранить изменения')]")
     SORT_BY_ALL_CONTENT = (By.XPATH, "//button[@class='m-ui-button-text content-layout__sorted']")
+    """favourites"""
+    FAVOURITES = (By.XPATH, "//button[@data-element='bookmarks']")
+    CHECK_TEXT_STRUCTURE = (By.XPATH, "//h3[contains(text(),'Управление структурой')]")
+    CHECK_TEXT_FAVOURITES = (By.XPATH, "//p[contains(text(),'избранное')]")
+    EDIT_NEW_FOLDER = (By.XPATH, "//div[text()='wwww']") # change wwww {}
+    TEXT_NOT_FOLDERS = (By.XPATH, "//span[text()='У вас нет избранных папок. Создайте папку.']")
+    CREATE_NEW_FOLDER = (By.XPATH, "//p[contains(text(),'Новая папка')]")
+
+
+
+
 
 
 
