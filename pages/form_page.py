@@ -702,6 +702,7 @@ class FormPage(BasePage):
         n = 0
         while True:
             try:
+                time.sleep(1)
                 x = self.element_is_visible(Locators.FOLDER1_FOR_DEL)
                 x.click()
                 time.sleep(1)
