@@ -12,6 +12,7 @@ from generator.generator import generated_person
 from pages.base_page import BasePage
 from locators.form_pages_locators import FormPagesLocators as Locators
 from pages.data_login_password import *
+from selenium.webdriver.common.alert import Alert
 
 
 class FormPage(BasePage):
@@ -48,6 +49,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         self.element_is_visible(Locators.TEST_PROJECT).click()
+        # Alert.accept(self)
         # time.sleep(1)
         # pyautogui.press('tab')
         # pyautogui.press('tab')
@@ -248,6 +250,7 @@ class FormPage(BasePage):
         print(text_check_created_new_mail_value)
 
     def button_invisible_check(self, driver):
+        """CHECK INVISIBLE BUTTON"""
         try:
             save_person = driver.find_element(By.XPATH, "//p[text()='Сохранить пользователя']")
             save_person.click()
@@ -335,6 +338,7 @@ class FormPage(BasePage):
         # self.element_is_visible(Locators.CREATE_FOLDER_BUTTON)
 
     def create_5_folder(self):
+        """CREATE 5 FOLDERS"""
         n = 0
         while True:
             count_folders = n
@@ -352,6 +356,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
 
     def delete_folder(self):
+        """DELETE FOLDER"""
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
@@ -365,6 +370,7 @@ class FormPage(BasePage):
         time.sleep(2)
 
     def delete_some_folder(self, count_folders=3): # ставить на 1 папку больше
+        """DELETE SOME FOLDERS"""
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         n = 0
@@ -426,6 +432,7 @@ class FormPage(BasePage):
         print("создано по 5 статей")
 
     def create_del_recovery_folder_content(self, driver):
+        """CREATE DELETE RECOVERY FOLDER"""
         self.element_is_visible(Locators.CONTENT).click()
         """check open text"""
         text_folder_check = self.element_is_visible(Locators.TEXT_FOLDERS_CHECK)
@@ -529,6 +536,7 @@ class FormPage(BasePage):
         """!!!!!check radiobutton by date!!!!!"""
 
     def folder1_folder2(self, driver):
+        """FOLDER 1 AND FOLDER 2"""
         folder1_name = "папка1"
         folder2_name = "папка2"
         self.element_is_visible(Locators.CONTENT).click()
@@ -549,6 +557,7 @@ class FormPage(BasePage):
         self.create_5_article(driver)
 
     def check_folder1_folder2(self, driver):
+        """CHECK FOLDER 1 AND FOLDER 2"""
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         self.element_is_visible(Locators.FOLDER1).click()
@@ -626,6 +635,90 @@ class FormPage(BasePage):
         text_not_folders_value = text_not_folders.text
         assert text_not_folders_value == "У вас нет избранных папок. Создайте папку."
         print("У вас нет избранных папок. Создайте папку.")
+
+    def add_favourites_to_folder(self, folder="папка1"):
+        self.element_is_visible(Locators.ADD_TO_FAVOURITES_ARTICLE).click()
+        self.element_is_visible(Locators.ADD_TO_FAVOURITES_ARTICLE).click()
+        self.element_is_visible(Locators.ADD_FAVOURITES_TO_FOLDER).send_keys(folder)
+        self.element_is_visible(Locators.ADD_BUTTON).click()
+        time.sleep(1)
+        self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+
+    def add_to_favourites(self, driver):
+        self.element_is_visible(Locators.CONTENT).click()
+        self.element_is_visible(Locators.FAVOURITES).click()
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        # time.sleep(1)
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("папка1")
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        self.element_is_visible(Locators.NEW_FOLDER).click()
+        time.sleep(1)
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("папка2")
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        time.sleep(1)
+        self.element_is_visible(Locators.NEW_FOLDER).click()
+        self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("папка3")
+        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+        """add to folder1"""
+        # self.element_is_visible(Locators.CONTENT).click()
+        self.element_is_visible(Locators.ARTICLE_FIRST1).click()
+        self.add_favourites_to_folder(folder="папка1")
+        self.element_is_visible(Locators.ARTICLE_FIRST2).click()
+        self.add_favourites_to_folder(folder="папка1")
+        """add to folder2"""
+        self.element_is_visible(Locators.ARTICLE_FIRST3).click()
+        self.add_favourites_to_folder(folder="папка2")
+        self.element_is_visible(Locators.ARTICLE_FIRST4).click()
+        self.add_favourites_to_folder(folder="папка2")
+        self.element_is_visible(Locators.ARTICLE_FIRST5).click()
+        self.add_favourites_to_folder(folder="папка2")
+        self.element_is_visible(Locators.ARTICLE_FIRST6).click()
+        self.add_favourites_to_folder(folder="папка2")
+        """add to folder3"""
+        self.element_is_visible(Locators.ARTICLE_FIRST7).click()
+        self.add_favourites_to_folder(folder="папка3")
+        self.element_is_visible(Locators.ARTICLE_FIRST8).click()
+        self.add_favourites_to_folder(folder="папка3")
+        self.element_is_visible(Locators.ARTICLE_FIRST9).click()
+        self.add_favourites_to_folder(folder="папка3")
+        """check count articles in folder 1"""
+        self.element_is_visible(Locators.CREATED_FOLDER1).click()
+        check_text_count_of_articles = self.element_is_visible(Locators.CHECK_TEXT_COUNT_OF_ARTICLES1)
+        check_text_count_of_articles_value = check_text_count_of_articles.text
+        assert check_text_count_of_articles_value == '2 документа'
+        """check count articles in folder 2"""
+        self.element_is_visible(Locators.CREATED_FOLDER2).click()
+        check_text_count_of_articles = self.element_is_visible(Locators.CHECK_TEXT_COUNT_OF_ARTICLES2)
+        check_text_count_of_articles_value = check_text_count_of_articles.text
+        assert check_text_count_of_articles_value == '4 документа'
+        """check count articles in folder 3"""
+        self.element_is_visible(Locators.CREATED_FOLDER3).click()
+        check_text_count_of_articles = self.element_is_visible(Locators.CHECK_TEXT_COUNT_OF_ARTICLES3)
+        check_text_count_of_articles_value = check_text_count_of_articles.text
+        assert check_text_count_of_articles_value == '3 документа'
+        """delete 3 folders"""
+        self.element_is_visible(Locators.FAVOURITES).click()
+        n = 0
+        while True:
+            try:
+                x = self.element_is_visible(Locators.FOLDER1_FOR_DEL)
+                x.click()
+                time.sleep(1)
+                self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                time.sleep(1)
+                self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                n += 1
+                if n >= 3:
+                    break
+            except TimeoutException:
+                self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+
+
+
+
+
+
 
 
 

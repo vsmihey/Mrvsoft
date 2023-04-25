@@ -1,6 +1,8 @@
 import time
 import pytest
 from selenium.common import TimeoutException
+
+from pages.favourites_page import FavouritesPage
 from pages.form_page import FormPage
 from pages.data_login_password import *
 
@@ -104,6 +106,14 @@ class TestFormPage:
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.favourites(driver)
+
+    def test_add_to_favourites(self, driver):
+        form_page = FormPage(driver, url)
+        form_page.open()
+        form_page.input_in_my_project(driver)
+        form_page.add_to_favourites(driver)
+
+
 
 
 

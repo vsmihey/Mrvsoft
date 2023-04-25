@@ -117,6 +117,31 @@ class FormPagesLocators:
     EDIT_NEW_FOLDER = (By.XPATH, "//div[text()='wwww']") # change wwww {}
     TEXT_NOT_FOLDERS = (By.XPATH, "//span[text()='У вас нет избранных папок. Создайте папку.']")
     CREATE_NEW_FOLDER = (By.XPATH, "//p[contains(text(),'Новая папка')]")
+    ARTICLE_FIRST1 = (By.XPATH, "(//section[@class='article-preview'])[1]") # первая статья в списке статей всех
+    ADD_TO_FAVOURITES_ARTICLE = (By.XPATH, "//*[name()='svg']/../button[@class='article-modal__controls-item article-modal__controls-item--bookmark icon-button']")
+    ADD_FAVOURITES_TO_FOLDER = (By.XPATH, "//select[@name='id']")
+    ADD_BUTTON = (By.XPATH, "//p[text()='Добавить']")
+    """number of articles"""
+    ARTICLE_FIRST2 = (By.XPATH, "(//section[@class='article-preview'])[2]") # folder 1
+    ARTICLE_FIRST3 = (By.XPATH, "(//section[@class='article-preview'])[3]") # folder 2
+    ARTICLE_FIRST4 = (By.XPATH, "(//section[@class='article-preview'])[4]") # folder 2
+    ARTICLE_FIRST5 = (By.XPATH, "(//section[@class='article-preview'])[5]") # folder 2
+    ARTICLE_FIRST6 = (By.XPATH, "(//section[@class='article-preview'])[6]") # folder 2
+    ARTICLE_FIRST7 = (By.XPATH, "(//section[@class='article-preview'])[7]") # folder 3
+    ARTICLE_FIRST8 = (By.XPATH, "(//section[@class='article-preview'])[8]") # folder 3
+    ARTICLE_FIRST9 = (By.XPATH, "(//section[@class='article-preview'])[9]") # folder 3
+    CREATED_FOLDER1 = (By.CSS_SELECTOR, "body > div:nth-child(2) > div:nth-child(2) > section:nth-child(3) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > aside:nth-child(1) > article:nth-child(3) > section:nth-child(2) > nav:nth-child(1) > div:nth-child(1)")
+    CREATED_FOLDER2 = (By.CSS_SELECTOR, "body > div:nth-child(2) > div:nth-child(2) > section:nth-child(3) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > aside:nth-child(1) > article:nth-child(3) > section:nth-child(2) > nav:nth-child(1) > div:nth-child(2)")
+    CREATED_FOLDER3 = (By.CSS_SELECTOR, "body > div:nth-child(2) > div:nth-child(2) > section:nth-child(3) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > aside:nth-child(1) > article:nth-child(3) > section:nth-child(2) > nav:nth-child(1) > div:nth-child(3)")
+    CHECK_TEXT_COUNT_OF_ARTICLES1 = (By.XPATH, "//span[contains(text(),'2 документа')]")
+    CHECK_TEXT_COUNT_OF_ARTICLES2 = (By.XPATH, "//span[contains(text(),'4 документа')]")
+    CHECK_TEXT_COUNT_OF_ARTICLES3 = (By.XPATH, "//span[contains(text(),'3 документа')]")
+    FOLDER1_FOR_DEL = (By.XPATH, "//li[@class='m-tree-item__wrapper']")
+
+
+
+
+
 
 
 
