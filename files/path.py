@@ -38,10 +38,6 @@ from pathlib import Path
 sss = os.path.abspath("animal.jpeg")
 print(sss)
 
-n = 0
-while True:
-    d = n
-    print("1")
-    n += 1
-    if d == 5:
-        break
+
+avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
+path = str(avatar)

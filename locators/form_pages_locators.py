@@ -137,6 +137,27 @@ class FormPagesLocators:
     CHECK_TEXT_COUNT_OF_ARTICLES2 = (By.XPATH, "//span[contains(text(),'4 документа')]")
     CHECK_TEXT_COUNT_OF_ARTICLES3 = (By.XPATH, "//span[contains(text(),'3 документа')]")
     FOLDER1_FOR_DEL = (By.XPATH, "//li[@class='m-tree-item__wrapper']")
+    """adding normal article"""
+    CHECK_RADIOBUTTON_DATA_OF_TYPOGRAPHY = (By.XPATH, "//div[@class='radio-wrapper__icon radio-wrapper__icon--checked']/../span[text()='Опубликовать сейчас']")
+    CHECK_RADIOBUTTON_DATA_OF_DELETE = (By.XPATH, "//div[@class='radio-wrapper__icon radio-wrapper__icon--checked']/../span[text()='Не удалять']")
+    # CREATE_BUTTON = (By.XPATH, "//p[contains(text(),'Создать')]")
+    TEXT_AREA_ARTICLE = (By.XPATH, "//div[@aria-label='false']")
+    TEXT_BOLD_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__bold_icon']")
+    UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
+    UPLOAD_MEDIA_INPUT = (By.XPATH, "//input[@type='file']")
+    UPLOAD_MEDIA1 = (By.XPATH, "//div[@class='m-file-view__name']")
+    INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")
+    CHECK_EMOJI = (By.XPATH, "//p[contains(text(),'😀')]")
+    EMOJI = (By.XPATH, "//span[@class='cke_button_icon cke_button__emojipanel_icon']")
+    CHECK_UPLOAD_MEDIA = (By.XPATH, "//img[@alt='animal1']")
+    SETTINGS_TYPOGRAPHY = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
+    NAVIGATION = (By.XPATH, "//p[contains(text(),'навигация')]")
+    SEARCH = (By.XPATH, "//p[contains(text(),'поиск')]")
+    ACCESS = (By.XPATH, "//p[contains(text(),'доступ')]")
+    VERSION = (By.XPATH, "//p[contains(text(),'версионность')]")
+    SEARCH_INPUT_REQUEST = (By.XPATH, "//input[@placeholder='Введите запрос']")
+    ADD_SEARCH_BUTTON= (By.XPATH, "//p[contains(text(),'Добавить')]")
+    FINISH_BUTTON= (By.XPATH, "//p[contains(text(),'Завершить')]")
 
 
 
