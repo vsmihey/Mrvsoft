@@ -265,6 +265,7 @@ class FormPage(BasePage):
 
     def add_new_role(self, driver):
         """ADD NEW ROLE"""
+        driver.implicitly_wait(10)
         self.element_is_visible(Locators.PEOPLE_BUTTON).click()
         try:
             add_new_role_button = driver.find_element(By.XPATH, "//p[text()='добавить роль']")
