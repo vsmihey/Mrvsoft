@@ -1,8 +1,6 @@
 import time
 import pytest
 from selenium.common import TimeoutException
-
-from pages.favourites_page import FavouritesPage
 from pages.form_page import FormPage
 from pages.data_login_password import *
 

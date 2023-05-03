@@ -157,7 +157,7 @@ class FormPage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.assert_title(driver, name_project='selen', name_='Добавить статью')
-        time.sleep(10)
+        time.sleep(15)
         self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
         # # time.sleep(5)
@@ -407,12 +407,14 @@ class FormPage(BasePage):
             time.sleep(1)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
             self.element_is_visible(Locators.CREATE_ARTICLE).click()
+            time.sleep(1)
             self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
+            time.sleep(1)
             self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys(name_folder)
             if x < 1:
                 time.sleep(10)
             else:
-                time.sleep(2)
+                time.sleep(1)
             self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
@@ -552,9 +554,10 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(folder2_name)
         # self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
         self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
-        time.sleep(0.5)
+        time.sleep(1)
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
         """create 5 articles"""
+        time.sleep(1)
         self.create_5_article(driver)
 
     def check_folder1_folder2(self, driver):
