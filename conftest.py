@@ -3,7 +3,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from pages.data_login_password import *
+# from pages.data_login_password import *
 
 @pytest.fixture(scope='session')
 def driver():
