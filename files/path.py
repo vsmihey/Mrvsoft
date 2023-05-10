@@ -1,5 +1,6 @@
 import os
 import pathlib
+import random
 import uuid
 from pathlib import Path
 
@@ -35,9 +36,17 @@ from pathlib import Path
 #
 # print(ddd)
 
-sss = os.path.abspath("animal.jpeg")
-print(sss)
+# sss = os.path.abspath("animal.jpeg")
+# print(sss)
 
 
-avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
+avatar = Path(pathlib.Path.cwd(), "media.jpeg")
 path = str(avatar)
+
+print(path)
+
+
+a="dfgg"+str(random.randint(99,999))
+d = random.randint(99, 999)
+print(a)
+print(type(d))

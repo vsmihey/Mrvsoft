@@ -1,8 +1,10 @@
 import time
 import pytest
 from selenium.common import TimeoutException
+from pages import base_page
 from pages.form_page import FormPage
 from pages.data_login_password import *
+from pages.article_page import ArticlePage
 
 
 class TestFormPage:
@@ -110,6 +112,24 @@ class TestFormPage:
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.add_to_favourites(driver)
+
+    def test_add_normal_article(self, driver):
+        article_page = ArticlePage(driver, url)
+        article_page.open()
+        article_page.input_in_my_project(driver)
+        article_page.add_normal_article(driver)
+
+    def test_fixing_article(self, driver):
+        article_page = ArticlePage(driver, url)
+        article_page.open()
+        article_page.input_in_my_project(driver)
+        article_page.fixing_article(driver)
+        time.sleep(1)
+
+
+
+
+
 
 
 
