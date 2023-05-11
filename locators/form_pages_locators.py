@@ -3,6 +3,11 @@ from selenium.webdriver.common.by import By
 
 
 class FormPagesLocators:
+    """CREATE PROJECT"""
+    ADD = (By.XPATH, "//div[@class='m-titled-group__aside-content']")
+    ADD_NAMES_PROJECT = (By.XPATH, "//input[@placeholder='Введите название проекта']")
+    ADD_DESCRIPTION_PROJECT = (By.XPATH, "//input[@placeholder='Введите описание проекта']")
+    ADD_PROJECT_BUTTON = (By.XPATH, "//button[@type='button']")
     TYPE_AUTHOR = (By.CSS_SELECTOR, '.m-ui-select__select')  # type author
     TYPE_AUTHOR_CHANGE = (By.XPATH, "//option[@type='EMBEDDED']")  # new type auth
     LOGIN = (By.NAME, "username")
@@ -153,6 +158,8 @@ class FormPagesLocators:
     TEXT_BG_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__bgcolor_icon']")
 
     UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
+    D = (By.XPATH, "//form[@enctype='multipart/form-data']")
+
     UPLOAD_MEDIA_INPUT = (By.XPATH, "//input[@type='file']")
     UPLOAD_MEDIA1 = (By.XPATH, "//div[@class='m-file-view__name']")
     INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")
@@ -195,6 +202,29 @@ class FormPagesLocators:
     SEARCH_OF_CONTENTS = (By.XPATH, "//input[@placeholder='Поиск контента']")
     FIND_OF_CONTENT = (By.XPATH, "//span[@class='m-ui-button-hint__highlight']")
     CHECK_TEXT_HELLO = (By.XPATH, "//p[normalize-space()='Hello']")
+    """ADD ARTICLE BY TEMPLATES"""
+    CREATE_BUTTON_ON_HEAD_PAGE = (By.XPATH, "//p[contains(text(),'Создать')]")
+    CREATE_TEMPLATES = (By.XPATH, "//div[contains(text(),'Шаблон')]")
+    CREATE_TEMPLATES_NEW = (By.XPATH, "//div[contains(text(),'Новый')]")
+    ADD_FIELD_BUTTON = (By.XPATH, "//button[contains(text(),'Добавить поле')]")
+    LIST_OF_FIELDS_1 = (By.XPATH, "//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[1]")
+    LIST_OF_FIELDS_2 = (By.XPATH, "//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[2]")
+    INPUT_NAME_OF_FIELD = (By.XPATH, "//input[@placeholder='Введите название поля']")
+    SAVE_TEMPLATES = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']//p[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text'][contains(text(),'сохранить')]")
+    CHECKBOX_VALUE = (By.XPATH, "//p[contains(text(),'Запретить изменение значения по умолчанию')]")
+    INPUT_VALUE = (By.XPATH, "//input[@placeholder='Не указано']")
+    INPUT_NAME_OF_TEMPLATES = (By.XPATH, "//input[@placeholder='Введите название шаблона']")
+    SAVE_CREATED_TEMPLATES = (By.XPATH, "//p[contains(text(),'сохранить')]")
+    SUBMIT_TEMPLATES = (By.XPATH, "//button[@type='submit']")
+    CHANGE_TEMPLATES_BUTTON = (By.XPATH, "//p[contains(text(),'Изменить шаблон')]")
+    check_text_name = (By.XPATH, "//div[@class='m-ui-text-input m-ui-input-wrapper-2']//div[@class='m-ui-typography m-ui-typography--14x14 m-ui-input-wrapper-2__label']")
+    check_name_input = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    EDIT_TEMPLATES = (By.XPATH, "//div[@aria-label='false']")
+    EDIT_TEMPLATES_ERRORS_CHECK = (By.XPATH, "//pre[@class='m-article-editor-templated__field-value form-input-wrapper__input']")
+    FOLDER_SAVE = (By.XPATH, "//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled']//select[@class='m-ui-select__select']")
+    TYPOGRAPHY_TEMPLATE = (By.XPATH, "//p[contains(text(),'опубликовать')]")
+    UTILITY_TEMPLATE = (By.XPATH, "//h3[contains(text(),'Полезность')]")
+
 
 
 

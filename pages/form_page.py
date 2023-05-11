@@ -48,7 +48,19 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.LOGIN).send_keys(login)
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
-        self.element_is_visible(Locators.TEST_PROJECT).click()
+        try:
+            self.element_is_visible(Locators.TEST_PROJECT).click()
+        except TimeoutException:
+            self.element_is_visible(Locators.ADD).click()
+            self.element_is_visible(Locators.ADD_NAMES_PROJECT).send_keys("selen")
+            self.element_is_visible(Locators.ADD_DESCRIPTION_PROJECT).send_keys("test_selenium")
+            self.element_is_visible(Locators.ADD_PROJECT_BUTTON).click()
+            self.element_is_visible(Locators.TEST_PROJECT).click()
+            self.element_is_visible(Locators.CONTENT).click()
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+
         # Alert.accept(self)
         # time.sleep(1)
         # pyautogui.press('tab')
@@ -233,6 +245,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.SAVE_PERSON).click()
         """check result create new person name"""
         name_check = last_name + ' ' + first_name
+        time.sleep(1)
         text_check_created_new_user_name = driver.find_element(By.XPATH, f"//span[text()='{name_check}']")
         text_check_created_new_user_name_value = text_check_created_new_user_name.text
         assert text_check_created_new_user_name_value == name_check

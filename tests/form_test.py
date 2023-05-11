@@ -126,6 +126,25 @@ class TestFormPage:
         article_page.fixing_article(driver)
         time.sleep(1)
 
+    def test_add_article_by_templates(self, driver):
+        article_page = ArticlePage(driver, url)
+        article_page.open()
+        article_page.input_in_my_project(driver)
+        time.sleep(3)
+        article_page.add_article_by_templates(driver)
+
+
+
+
+
+
+        # def test_test(self, driver):
+        #     # url ='https://test1.minervasoft.ru/content/space/59?popup=article-editor&chosenSpaceId=59&articleId=new&article-type=ARTICLE'
+        #     article_page = ArticlePage(driver, url)
+        #     article_page.open()
+        #     article_page.input_in_my_project(driver)
+        #     driver.get("https://test1.minervasoft.ru/content/space/59?popup=article-editor&chosenSpaceId=59&articleId=new&article-type=ARTICLE")
+        #     article_page.mytest(driver)
 
 
 

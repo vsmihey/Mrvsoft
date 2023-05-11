@@ -41,14 +41,15 @@ class BasePage:
     #     self.element_is_visible(Locators.INPUT_BUTTON).click()
     #     self.element_is_visible(Locators.TEST_PROJECT).click()
 
-
-    # def screenshot(self):
-    #     offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
-    #     now_date = datetime.datetime.now(offset)
-    #     now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
-    #     # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-    #     name_screenshot = 'screenshot.png' + now_date + '.png'
-    #     self.driver.save_screenshot('C:\\Users\\User\\PycharmProjects\\Minervasoft\\screen\\' + name_screenshot)
+    def screenshot(self):
+        offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
+        now_date = datetime.datetime.now(offset)
+        now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
+        # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
+        name_screenshot = 'screenshot' + now_date + '.png'
+        path = Path(pathlib.Path.cwd(), "screenshots", name_screenshot)
+        path = str(path)
+        self.driver.save_screenshot(path)
 
     def implicitly_wait(self):
         self.driver.implicitly_wait(10)
@@ -58,6 +59,10 @@ class BasePage:
 
     def go_to_element(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    # def element_is_visibility(self, element):
+    #     element = element.find_element_by_css_selector("input")
+    #     self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
 
 
 
