@@ -78,7 +78,7 @@ class TestFormPage:
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.create_del_recovery_folder_content(driver)
-        form_page.delete_some_folder(count_folders=8)
+        form_page.delete_some_folder(driver, count_folders=8)
 
     def test_folder1_folder2(self, driver):
         form_page = FormPage(driver, url)
@@ -86,7 +86,7 @@ class TestFormPage:
         form_page.input_in_my_project(driver)
         form_page.folder1_folder2(driver)
         form_page.check_folder1_folder2(driver)
-        form_page.delete_some_folder(count_folders=3)
+        form_page.delete_some_folder(driver, count_folders=3)
 
     # def test_check_folder1_folder2(self, driver):
     #     form_page = FormPage(driver, url)
@@ -94,12 +94,12 @@ class TestFormPage:
     #     form_page.input_in_my_project(driver)
     #     form_page.check_folder1_folder2(driver)
 
-    @pytest.mark.skip('delete folders')
+    # @pytest.mark.skip('delete folders')
     def test_del_some_folders(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.input_in_my_project(driver)
-        form_page.delete_some_folder(count_folders=10)  # ставить на 1 папку больше
+        form_page.delete_some_folder(driver, count_folders=15)  # ставить на 1 папку больше
 
     def test_favourites(self, driver):
         form_page = FormPage(driver, url)
@@ -133,18 +133,22 @@ class TestFormPage:
         time.sleep(3)
         article_page.add_article_by_templates(driver)
 
+    def test_check_fixing_templates(self):
+        pass
 
 
 
 
 
-        # def test_test(self, driver):
-        #     # url ='https://test1.minervasoft.ru/content/space/59?popup=article-editor&chosenSpaceId=59&articleId=new&article-type=ARTICLE'
-        #     article_page = ArticlePage(driver, url)
-        #     article_page.open()
-        #     article_page.input_in_my_project(driver)
-        #     driver.get("https://test1.minervasoft.ru/content/space/59?popup=article-editor&chosenSpaceId=59&articleId=new&article-type=ARTICLE")
-        #     article_page.mytest(driver)
+
+
+    # def test_t(self, driver):
+    #     # url ='https://test1.minervasoft.ru/content/space/59?popup=article-editor&chosenSpaceId=59&articleId=new&article-type=ARTICLE'
+    #     article_page = ArticlePage(driver, url)
+    #     article_page.open()
+    #     article_page.input_in_my_project(driver)
+    #     driver.get("https://test1.minervasoft.ru/news/space/57?popup=article-editor&chosenSpaceId=57&articleId=new&article-type=ARTICLE")
+    #     article_page.mytest(driver)
 
 
 
