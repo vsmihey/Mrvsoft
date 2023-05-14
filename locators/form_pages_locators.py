@@ -48,7 +48,6 @@ class FormPagesLocators:
     CLOSE_CREATED_ARTICLE = (By.XPATH, "//header[@id='article-content-modal-header']//span[@class='link-iconed__label-text'][normalize-space()='selen']")
     # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
     CLOSE_PAGE_LIST = (By.XPATH, "//*[name()='svg']//*[name()='path' and contains(@d,'M19.5327 1')]")
-
     CLOSE_PAGE_SCRIPT = (By.XPATH, "(//*[name()='svg'][@class='m-scenario-flow__close'])[1]")
     CLOSE_CREATE_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")
     SEARCH_PROJECT = (By.CSS_SELECTOR, ".m-dashboard-top__search")
@@ -99,12 +98,18 @@ class FormPagesLocators:
     RADIOBUTTON_SORT_BY_POPULAR = (By.XPATH, "//span[contains(text(),'По популярности')]")
     RADIOBUTTON_ACTIVE_CHECK = (By.XPATH, "//div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")  # activated
     RADIOBUTTON_SEARCH = (By.CSS_SELECTOR, ".radio-wrapper__icon")
+
+    CHECK_RADIOBUTTON_DATE = (By.XPATH, "//input[@value='DATE']/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
+    CHECK_RADIOBUTTON_POPULARITY = (By.XPATH, "//input[@value='POPULARITY']/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
     CHECK_CREATED_NEW_FOLDER = (By.XPATH, "//p[text()='{name_of_new_folder}']")
     SECOND_FOLDER_IN_LIST = (By.XPATH, "(//div[@class='tree-item-content'])[2]")
     FOLDER_FOR_DEL_BY_NAME = (By.XPATH, "//div[contains(text(),'Adam')]")
     DELETE_FOLDER_BUTTON = (By.XPATH, "//p[contains(text(),'Удалить папку')]")
     DELETE_FOLDER_CONFIRM_TEXT = (By.XPATH, "//h3[text()='Подтверждение действия']")
+
+
     CLOSE_WINDOW_STRUCTURE = (By.XPATH, "//div[@class='popup__close']")
+    # CLOSE_WINDOW_STRUCTURE = (By.XPATH, "//*[name()='svg']/../../div[@class='popup__close']")
     SHOW_DELETED_FOLDERS = (By.XPATH, "//span[contains(text(),'показать')]")
     RECOVERY_FOLDER_BY_NAME = (By.XPATH, "//p[normalize-space()='Sherri153']")
     RECOVERY_FOLDER_BUTTON = (By.XPATH, "//div[@class='action-button-group']")
@@ -156,10 +161,6 @@ class FormPagesLocators:
     TEXT_OTHER_COLOR_FORMAT = (By.XPATH, "//a[contains(text(),'другие цвета')]")
     TEXT_COLOR_RED_FORMAT = (By.XPATH, "//span[normalize-space()='dfdf']")
     TEXT_BG_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__bgcolor_icon']")
-
-    UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
-    D = (By.XPATH, "//form[@enctype='multipart/form-data']")
-
     UPLOAD_MEDIA_INPUT = (By.XPATH, "//input[@type='file']")
     UPLOAD_MEDIA1 = (By.XPATH, "//div[@class='m-file-view__name']")
     INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")
@@ -220,10 +221,28 @@ class FormPagesLocators:
     check_text_name = (By.XPATH, "//div[@class='m-ui-text-input m-ui-input-wrapper-2']//div[@class='m-ui-typography m-ui-typography--14x14 m-ui-input-wrapper-2__label']")
     check_name_input = (By.XPATH, "//input[@placeholder='Введите название контента']")
     EDIT_TEMPLATES = (By.XPATH, "//div[@aria-label='false']")
+    EDIT_TEMPLATES_1 = (By.XPATH, "//div[@class='cke_inner cke_reset']")
+    EDIT_TEMPLATES_2 = (By.XPATH, "//span[contains(text(),'Введите текст')]")
+    EDIT_TEMPLATES_3 = (By.XPATH, "//span[contains(text(),'Введите число')]")
+    EDIT_TEMPLATES_4 = (By.XPATH, "//span[contains(text(),'Введите ссылку')]")
+    EDIT_TEMPLATES_5 = (By.XPATH, "//span[contains(text(),'Введите Email-адрес')]")
     EDIT_TEMPLATES_ERRORS_CHECK = (By.XPATH, "//pre[@class='m-article-editor-templated__field-value form-input-wrapper__input']")
     FOLDER_SAVE = (By.XPATH, "//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled']//select[@class='m-ui-select__select']")
     TYPOGRAPHY_TEMPLATE = (By.XPATH, "//p[contains(text(),'опубликовать')]")
     UTILITY_TEMPLATE = (By.XPATH, "//h3[contains(text(),'Полезность')]")
+    """CHECK_FIXING_TEMPLATES"""
+    EDIT_ARTICLE = (By.XPATH, "//*[name()='svg']/../button[@class='article-modal__controls-item icon-button']")
+    ANSWER = (By.XPATH, "//input[@placeholder='Введите название ответа']")
+    ADD_ANSWER = (By.XPATH, "//p[contains(text(),'добавить')]")
+    SAVE_BUTTON = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']")
+
+
+
+
+
+    ddd = (By.XPATH, "//input[@type='file']")
+    UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
+    D = (By.XPATH, "//form[@enctype='multipart/form-data']")
 
 
 

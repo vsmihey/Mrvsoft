@@ -159,6 +159,7 @@ class FormPage(BasePage):
         driver.implicitly_wait(10)
         # time.sleep(1)
         driver.get_screenshot_as_file("scr.png")
+        driver.refresh()
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.ALL_CONTENT).click()
         self.assert_title(driver, name_project='selen', name_='Весь контент')
@@ -383,7 +384,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
         time.sleep(2)
 
-    def delete_some_folder(self, count_folders=3): # ставить на 1 папку больше
+    def delete_some_folder(self, driver, count_folders=3): # ставить на 1 папку больше
         """DELETE SOME FOLDERS"""
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
@@ -395,15 +396,22 @@ class FormPage(BasePage):
                     break
                 try:
                     time.sleep(1)
-                    self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
+                    second_folder_in_list = driver.find_element(By.XPATH, "(//div[@class='tree-item-content'])[2]")
+                    second_folder_in_list.click()
+                    # self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
                     time.sleep(1)
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
                     time.sleep(1)
-                except ElementClickInterceptedException:
+                except ElementClickInterceptedException:    # ElementClickInterceptedException
+                    self.element_is_visible(Locators.MOVE_FROM_DEL_FOLDER).send_keys('Контент 1')
+                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                except TimeoutException:
                     self.element_is_visible(Locators.MOVE_FROM_DEL_FOLDER).send_keys('Контент 1')
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
         except TimeoutException:
+            print('папок нет больше')
+        except NoSuchElementException:
             print('папок нет больше')
 
     def create_5_article(self, driver):
@@ -588,19 +596,34 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
         """check radiobutton"""
         self.element_is_visible(Locators.FOLDER1).click()
-        self.screenshot()
+        time.sleep(1)
+        self.element_is_visible(Locators.CHECK_RADIOBUTTON_DATE).is_selected()
+        # time.sleep(1)
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
         self.element_is_visible(Locators.FOLDER2).click()
-        self.screenshot()
+        time.sleep(1)
+        self.element_is_visible(Locators.CHECK_RADIOBUTTON_POPULARITY).is_selected()
+        # time.sleep(1)
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
+        time.sleep(1)
+        # self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
         driver.back()
+        # time.sleep(1)
         self.element_is_visible(Locators.ALL_CONTENT).click()
         self.element_is_visible(Locators.SORT_BY_ALL_CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         self.element_is_visible(Locators.FOLDER2).click()
-        self.screenshot()
+        time.sleep(1)
+        self.element_is_visible(Locators.CHECK_RADIOBUTTON_POPULARITY).is_selected()
+        self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
+        time.sleep(1)
+        self.element_is_visible(Locators.CHECK_RADIOBUTTON_DATE).is_selected()
+        time.sleep(1)
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
+        time.sleep(1)
+        # self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
         driver.back()
+        # time.sleep(1)
         self.element_is_visible(Locators.ALL_CONTENT).click()
         text_sort_by_all_content = driver.find_element(By.XPATH, "//span[contains(text(),'по популярности')]")
         text_sort_by_all_content_value = text_sort_by_all_content.text

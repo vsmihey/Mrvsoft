@@ -46,14 +46,16 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
-        time.sleep(5)
+        time.sleep(7)
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(first_name)
         self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text)
         time.sleep(1)
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(Keys.LEFT_CONTROL+'a')
         self.element_is_visible(Locators.TEXT_BOLD_FORMAT).click()
+        time.sleep(0.5)
         self.element_is_visible(Locators.TEXT_ITALIC_FORMAT).click()
+        time.sleep(0.5)
         self.element_is_visible(Locators.TEXT_UNDERLINE_FORMAT).click()
         """ !!!! ФОРМАТИРОВАНИЕ И ДОБАВЛЕНИЕ ФАЙЛОВ"""
         # time.sleep(1)
@@ -125,7 +127,8 @@ class ArticlePage(BasePage):
         """FIXING_ARTICLE"""
         person = generated_person()
         text_test = person.first_name+str(random.randint(99, 999))
-        text_fixing = 5*(person.last_name+str(random.randint(99, 999)))
+        # text_fixing = 5*(person.last_name+str(random.randint(99, 999)))
+        text_fixing = "как помыть крота"+str(random.randint(99, 999))
         self.element_is_visible(Locators.CONTENT).click()
         """create test article"""
         text_area = "Hello"
@@ -179,6 +182,7 @@ class ArticlePage(BasePage):
         print(check_number_1_of_list_value)
         self.element_is_visible(Locators.POPUP_CLOSE_SVG).click()
         self.element_is_visible(Locators.SEARCH_OF_CONTENTS).send_keys(text_fixing)
+        print(text_fixing)
         time.sleep(1)
         self.element_is_visible(Locators.FIND_OF_CONTENT).click()
         check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
@@ -193,8 +197,8 @@ class ArticlePage(BasePage):
     def add_article_by_templates(self, driver):
         driver.implicitly_wait(5)
         person = generated_person()
-        name = person.first_name + str(random.randint(999, 99999))
-        name_templates = person.last_name + str(random.randint(999, 99999))
+        name = "Templates" + str(random.randint(999, 99999))
+        name_content = "Content" + str(random.randint(999, 99999))
         self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
         self.element_is_visible(Locators.CREATE_TEMPLATES).click()
         self.element_is_visible(Locators.CREATE_TEMPLATES_NEW).click()
@@ -208,14 +212,21 @@ class ArticlePage(BasePage):
             list_of_fields = driver.find_element(By.XPATH, f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[{i}]")
             list_of_fields.click()
             # self.element_is_visible(Locators.LIST_OF_FIELDS_1).click()
-            self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys(str(random.randint(999, 99999)))
+            self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name"+str(random.randint(999, 99999)))
             self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+        list_of_fields = driver.find_element(By.XPATH, f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[6]")
+        list_of_fields.click()
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.ANSWER).send_keys("answer 1")
+        self.element_is_visible(Locators.ADD_ANSWER).click()
+        self.element_is_visible(Locators.SAVE_BUTTON).click()
         """step 5"""
         self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
         self.element_is_visible(Locators.LIST_OF_FIELDS_2).click()
-        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys(str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name"+str(random.randint(999, 99999)))
         self.element_is_visible(Locators.CHECKBOX_VALUE).click()
-        self.element_is_visible(Locators.INPUT_VALUE).send_keys(str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.INPUT_VALUE).send_keys("Name"+str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SAVE_TEMPLATES).click()
         """step 6"""
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name)
@@ -226,21 +237,45 @@ class ArticlePage(BasePage):
         # self.element_is_visible(Locators.CREATE_TEMPLATES).click()
         name_of_templates = driver.find_element(By.XPATH, f"//div[contains(text(),'{name}')]")
         name_of_templates.click()
-        self.element_is_visible(Locators.check_name_input).send_keys(name_templates)
-        print(name_templates)
+        self.element_is_visible(Locators.check_name_input).send_keys(name_content)
+        print(name_content)
         time.sleep(3)
         self.element_is_visible(Locators.FOLDER_SAVE).send_keys("Контент 1")
-        check_name_of_templates = driver.find_element(By.XPATH, "//div[@class='m-article-editor-templated__template-name']")
+        field_input = self.element_is_visible(Locators.EDIT_TEMPLATES)
+        field_input_1 = self.element_is_visible(Locators.EDIT_TEMPLATES_1)
+        field_input_2 = self.element_is_visible(Locators.EDIT_TEMPLATES_2)
+        field_input_3 = self.element_is_visible(Locators.EDIT_TEMPLATES_3)
+        field_input_4 = self.element_is_visible(Locators.EDIT_TEMPLATES_4)
+        field_input_5 = self.element_is_visible(Locators.EDIT_TEMPLATES_5)
+
+        actions = ActionChains(driver)
+        actions.click(field_input_1)
+        actions.send_keys("some text")
+        actions.click(field_input_2)
+        actions.click(field_input_2)
+        actions.send_keys("one more some text")
+        actions.click(field_input_3)
+        actions.click(field_input_3)
+        actions.send_keys("777")
+        actions.click(field_input_4)
+        actions.click(field_input_4)
+        actions.send_keys("https://www.something.com")
+        actions.click(field_input_5)
+        actions.click(field_input_5)
+        mail = person.email
+        actions.send_keys(mail)
+        actions.click(field_input)
+        actions.perform()
+        time.sleep(3)
+
+        check_name_of_templates = driver.find_element(By.XPATH, f"//div[text()='{name}']")
         check_name_of_templates.is_displayed()
+        # check_name_of_templates.click()
         self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
-        # x = str(random.randint(999, 99999))
-        # self.element_is_visible(Locators.EDIT_TEMPLATES).send_keys(x)
-        # print(x)
-        # time.sleep(3)
-        try:
-            self.element_is_visible(Locators.EDIT_TEMPLATES_ERRORS_CHECK).click()
-        except:
-            print("редактирование невозможно")
+        # try:
+        #     self.element_is_visible(Locators.EDIT_TEMPLATES_ERRORS_CHECK).click()
+        # except:
+        #     print("редактирование невозможно")
         time.sleep(0.5)
         self.screenshot()
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
@@ -252,16 +287,32 @@ class ArticlePage(BasePage):
         assert check_version_text_value == "версионность"
         print(check_version_text_value)
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys(2*str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.INPUT_REQUEST).send_keys("как помыть крота")
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        # self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name"+ str(random.randint(999, 99999)))
+        # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         check_utility_text = self.element_is_visible(Locators.UTILITY_TEMPLATE)
         check_utility_text_value = check_utility_text.text
         assert check_utility_text_value == "Полезность"
         print(check_utility_text_value)
-        check_name_of_templates_text = driver.find_element(By.XPATH, f"//header[@id='article-content-modal-header']//span[contains(text(),'{name_templates}')]")
+        check_name_of_templates_text = driver.find_element(By.XPATH, f"//header[@id='article-content-modal-header']//span[contains(text(),'{name_content}')]")
         check_name_of_templates_text_value = check_name_of_templates_text.text
-        assert check_name_of_templates_text_value == name_templates
+        assert check_name_of_templates_text_value == name_content
         print(check_name_of_templates_text_value)
+        """check_fixing_templates"""
+        self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+        self.element_is_visible(Locators.CHECK_TEXT_ALL_CONTENT_SORT_BY_POPULAR).click()
+        name_of_templates_in_list = driver.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+        name_of_templates_in_list.click()
+        self.element_is_visible(Locators.EDIT_ARTICLE).click()
+
+        time.sleep(5)
+
+    def check_fixing_templates(self):
+        pass
+
 
 
 
@@ -269,14 +320,16 @@ class ArticlePage(BasePage):
     # def mytest(self, driver):
     #     driver.implicitly_wait(10)
     #     self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("text_test")
+    #     time.sleep(3)
     #     self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
-    #     self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys("text_area")
+    #     # self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys("text_area")
     #     self.element_is_visible(Locators.UPLOAD_MEDIA).click()
-    #     element = self.element_is_visible(Locators.D)
-    #     driver.execute_script("arguments[0].style.visibility = 'visible';", element)
+    #     # element = self.element_is_visible(Locators.D)
+    #     # driver.execute_script("arguments[0].style.visibility = 'visible';", element)
+    #
     #     avatar = Path(pathlib.Path.cwd(), "media.jpeg")
     #     path = str(avatar)
-    #     self.element_is_visible(Locators.UPLOAD_MEDIA_INPUT).send_keys(path)
+    #     self.elements_is_present(Locators.ddd).send_keys(path)
     #     time.sleep(5)
 
 
