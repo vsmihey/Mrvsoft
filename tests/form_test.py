@@ -5,6 +5,7 @@ from pages import base_page
 from pages.form_page import FormPage
 from pages.data_login_password import *
 from pages.article_page import ArticlePage
+from pages.article_page import StepByScriptPage
 
 
 class TestFormPage:
@@ -46,8 +47,9 @@ class TestFormPage:
     def test_title(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
-        form_page.authorization(login, password)
-        form_page.input_project()
+        # form_page.authorization(login, password)
+        # form_page.input_project()
+        form_page.input_in_my_project(driver)
         # driver.get_screenshot_as_file("scr.png")
         print("input project")
         form_page.all_title(driver)
@@ -86,7 +88,7 @@ class TestFormPage:
         form_page.input_in_my_project(driver)
         form_page.folder1_folder2(driver)
         form_page.check_folder1_folder2(driver)
-        form_page.delete_some_folder(driver, count_folders=3)
+        form_page.delete_some_folder(driver, count_folders=5)
 
     # def test_check_folder1_folder2(self, driver):
     #     form_page = FormPage(driver, url)
@@ -130,11 +132,16 @@ class TestFormPage:
         article_page = ArticlePage(driver, url)
         article_page.open()
         article_page.input_in_my_project(driver)
-        time.sleep(3)
+        # time.sleep(3)
         article_page.add_article_by_templates(driver)
 
-    def test_check_fixing_templates(self):
-        pass
+
+class TestStepByScriptPage:
+
+
+    def test_Step_By_Script(self, driver):
+        article_page = ArticlePage(driver, url)
+        article_page.open()
 
 
 
@@ -143,12 +150,11 @@ class TestFormPage:
 
 
     # def test_t(self, driver):
-    #     # url ='https://test1.minervasoft.ru/content/space/59?popup=article-editor&chosenSpaceId=59&articleId=new&article-type=ARTICLE'
     #     article_page = ArticlePage(driver, url)
     #     article_page.open()
     #     article_page.input_in_my_project(driver)
-    #     driver.get("https://test1.minervasoft.ru/news/space/57?popup=article-editor&chosenSpaceId=57&articleId=new&article-type=ARTICLE")
-    #     article_page.mytest(driver)
+    #     driver.get("https://test1.minervasoft.ru/content/space/56/article/2029")
+    #     article_page.testirovka(driver)
 
 
 

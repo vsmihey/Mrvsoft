@@ -54,12 +54,28 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.ADD).click()
             self.element_is_visible(Locators.ADD_NAMES_PROJECT).send_keys("selen")
             self.element_is_visible(Locators.ADD_DESCRIPTION_PROJECT).send_keys("test_selenium")
-            self.element_is_visible(Locators.ADD_PROJECT_BUTTON).click()
+            self.element_is_visible(Locators.ADD_TEST_PROJECT).click()
             self.element_is_visible(Locators.TEST_PROJECT).click()
+            time.sleep(1)
             self.element_is_visible(Locators.CONTENT).click()
+            time.sleep(5)
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        except ElementClickInterceptedException:
+            self.element_is_visible(Locators.ADD).click()
+            self.element_is_visible(Locators.ADD_NAMES_PROJECT).send_keys("selen")
+            self.element_is_visible(Locators.ADD_DESCRIPTION_PROJECT).send_keys("test_selenium")
+
+            self.element_is_visible(Locators.ADD_TEST_PROJECT).click()
+
+            self.element_is_visible(Locators.TEST_PROJECT).click()
+            self.element_is_visible(Locators.CONTENT).click()
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+
 
         # Alert.accept(self)
         # time.sleep(1)
@@ -167,6 +183,8 @@ class FormPage(BasePage):
         time.sleep(1)
         self.assert_title(driver, name_project='selen', name_='Контент 1')
         self.element_is_visible(Locators.CREATE_BUTTON).click()
+
+        self.element_is_visible(Locators.CHOOSE_PROJECT).send_keys("selen")
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.assert_title(driver, name_project='selen', name_='Добавить статью')
@@ -178,7 +196,9 @@ class FormPage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.CLOSE_PAGE_SCRIPT).click()
         self.element_is_visible(Locators.CLOSE_CREATE_WINDOW).click()
-        self.element_is_visible(Locators.SEARCH_PROJECT).click()
+        time.sleep(1)
+        # self.element_is_visible(Locators.SEARCH_PROJECT).click()
+        self.element_is_visible(Locators.SEARCH_PROJECT_TEST1).click()
         self.element_is_visible(Locators.SEARCH_INPUT).send_keys('название 1')
         self.element_is_visible(Locators.SEARCH_INPUT).send_keys(Keys.RETURN)
         self.assert_title(driver, name_project='selen', name_='название 1')
@@ -426,7 +446,7 @@ class FormPage(BasePage):
             name_article = person.first_name
             text_article = person.last_name
             time.sleep(1)
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_BUTTON_1).click()
             self.element_is_visible(Locators.CREATE_ARTICLE).click()
             time.sleep(1)
             self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
@@ -446,6 +466,7 @@ class FormPage(BasePage):
             # dddd = self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE)
             # # driver.execute_script("arguments[0].click();", dddd)
             # ActionChains(driver).move_to_element(dddd).click().perform()
+            # self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
             n += 1
             x += 1
@@ -491,6 +512,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(name_of_new_folder)
         self.screenshot()
         print("check radiobutton")
+        self.element_is_visible(Locators.CHECK_RADIO_POPULAR).is_displayed()
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_POPULAR).click()
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
@@ -678,7 +700,7 @@ class FormPage(BasePage):
 
     def add_favourites_to_folder(self, folder="папка1"):
         self.element_is_visible(Locators.ADD_TO_FAVOURITES_ARTICLE).click()
-        self.element_is_visible(Locators.ADD_TO_FAVOURITES_ARTICLE).click()
+        # self.element_is_visible(Locators.ADD_TO_FAVOURITES_ARTICLE).click()
         self.element_is_visible(Locators.ADD_FAVOURITES_TO_FOLDER).send_keys(folder)
         self.element_is_visible(Locators.ADD_BUTTON).click()
         time.sleep(1)
@@ -687,13 +709,50 @@ class FormPage(BasePage):
     def add_to_favourites(self, driver):
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FAVOURITES).click()
-        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
-        # time.sleep(1)
+
+
+        try:
+            time.sleep(1)
+            create_folder_button = driver.find_element(By.XPATH, "//p[contains(text(),'Создать папку')]")
+            create_folder_button.click()
+            # self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        except NoSuchElementException:
+            """del all folder favourites"""
+            # self.element_is_visible(Locators.FAVOURITES).click()
+            # time.sleep(1)
+            n = 0
+            while True:
+                try:
+                    time.sleep(1)
+                    try:
+                        # self.element_is_visible(Locators.FOLDER1_FOR_DEL).click()
+                        folder1_for_del = driver.find_element(By.XPATH, "//div[@class='m-tree-item__draggable-content']")
+                        folder1_for_del.click()
+                    except NoSuchElementException:
+                        break
+                    time.sleep(1)
+                    # x.click()
+                    # time.sleep(1)
+                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                    time.sleep(1)
+                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+                    n += 1
+                    if n >= 3:
+                        break
+                except TimeoutException:
+                    self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+
+
+
+        time.sleep(1)
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("папка1")
         self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        time.sleep(1)
         self.element_is_visible(Locators.NEW_FOLDER).click()
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("папка2")
+        time.sleep(1)
         self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
         time.sleep(1)
         self.element_is_visible(Locators.NEW_FOLDER).click()
@@ -702,7 +761,9 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
         """add to folder1"""
         # self.element_is_visible(Locators.CONTENT).click()
+        time.sleep(0.5)
         self.element_is_visible(Locators.ARTICLE_FIRST1).click()
+        time.sleep(0.5)
         self.add_favourites_to_folder(folder="папка1")
         self.element_is_visible(Locators.ARTICLE_FIRST2).click()
         self.add_favourites_to_folder(folder="папка1")
@@ -723,7 +784,9 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.ARTICLE_FIRST9).click()
         self.add_favourites_to_folder(folder="папка3")
         """check count articles in folder 1"""
+        # time.sleep(2)
         self.element_is_visible(Locators.CREATED_FOLDER1).click()
+        # time.sleep(2)
         check_text_count_of_articles = self.element_is_visible(Locators.CHECK_TEXT_COUNT_OF_ARTICLES1)
         check_text_count_of_articles_value = check_text_count_of_articles.text
         assert check_text_count_of_articles_value == '2 документа'
@@ -739,13 +802,38 @@ class FormPage(BasePage):
         assert check_text_count_of_articles_value == '3 документа'
         """delete 3 folders"""
         self.element_is_visible(Locators.FAVOURITES).click()
+        time.sleep(1)
+        #
+        # n = 0
+        # while True:
+        #     try:
+        #         time.sleep(1)
+        #         self.element_is_visible(Locators.FOLDER1_FOR_DEL).click()
+        #         time.sleep(1)
+        #         # x.click()
+        #         # time.sleep(1)
+        #         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        #         time.sleep(1)
+        #         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        #         n += 1
+        #         if n >= 3:
+        #             break
+        #     except TimeoutException:
+        #         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+
         n = 0
         while True:
             try:
                 time.sleep(1)
-                x = self.element_is_visible(Locators.FOLDER1_FOR_DEL)
-                x.click()
+                try:
+                    # self.element_is_visible(Locators.FOLDER1_FOR_DEL).click()
+                    folder1_for_del = driver.find_element(By.XPATH, "//div[@class='m-tree-item__draggable-content']")
+                    folder1_for_del.click()
+                except NoSuchElementException:
+                    break
                 time.sleep(1)
+                # x.click()
+                # time.sleep(1)
                 self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
                 time.sleep(1)
                 self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
@@ -754,6 +842,21 @@ class FormPage(BasePage):
                     break
             except TimeoutException:
                 self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+
+
+
+
+
+
+
+        # li = self.elements_are_visible(Locators.FOLDER1_FOR_DEL)
+        # for n in li:
+        #     time.sleep(1)
+        #     n.click()
+        #     time.sleep(1)
+        #     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        #     time.sleep(1)
+        #     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
 
 
 

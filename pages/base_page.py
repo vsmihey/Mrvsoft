@@ -1,11 +1,18 @@
 import datetime
 import pathlib
+import time
 from pathlib import Path
+
+from selenium.common import TimeoutException, ElementClickInterceptedException
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
+from locators.form_pages_locators import *
+
+from pages.data_login_password import *
+
+
 # from locators.form_pages_locators import FormPagesLocators as Locators
 # from pages.data_login_password import *
-
 
 class BasePage:
     def __init__(self, driver, url):
@@ -34,13 +41,37 @@ class BasePage:
     def element_is_clickable(self, locator, timeout=2):
         return Wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
-    # def input_in_my_project(self, driver):
-    #     """INPUT IN MY PROJECT"""
-    #     self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
-    #     self.element_is_visible(Locators.LOGIN).send_keys(login)
-    #     self.element_is_visible(Locators.PASSWORD).send_keys(password)
-    #     self.element_is_visible(Locators.INPUT_BUTTON).click()
-    #     self.element_is_visible(Locators.TEST_PROJECT).click()
+    def input_in_my_project(self, driver):
+        """INPUT IN MY PROJECT"""
+        Locators = FormPagesLocators
+        self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
+        self.element_is_visible(Locators.LOGIN).send_keys(login)
+        self.element_is_visible(Locators.PASSWORD).send_keys(password)
+        self.element_is_visible(Locators.INPUT_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.TEST_PROJECT).click()
+        except TimeoutException:
+            self.element_is_visible(Locators.ADD).click()
+            self.element_is_visible(Locators.ADD_NAMES_PROJECT).send_keys("selen")
+            self.element_is_visible(Locators.ADD_DESCRIPTION_PROJECT).send_keys("test_selenium")
+            self.element_is_visible(Locators.ADD_PROJECT_BUTTON).click()
+            self.element_is_visible(Locators.TEST_PROJECT).click()
+            self.element_is_visible(Locators.CONTENT).click()
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        except ElementClickInterceptedException:
+            self.element_is_visible(Locators.ADD).click()
+            self.element_is_visible(Locators.ADD_NAMES_PROJECT).send_keys("selen")
+            self.element_is_visible(Locators.ADD_DESCRIPTION_PROJECT).send_keys("test_selenium")
+            self.element_is_visible(Locators.ADD_PROJECT_BUTTON).click()
+            self.element_is_visible(Locators.TEST_PROJECT).click()
+            self.element_is_visible(Locators.CONTENT).click()
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
+            self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
 
     def screenshot(self):
         offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
