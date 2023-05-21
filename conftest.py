@@ -4,8 +4,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 # from pages.data_login_password import *
-from selenium_stealth import stealth
-
 
 
 @pytest.fixture(scope='session')
