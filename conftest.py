@@ -33,7 +33,7 @@ def driver():
     # chrome_options.add_argument('--allow-insecure-localhost')
     # chrome_options.add_argument('--allow-running-insecure-content')
     chrome_options.add_argument('--disable-blink-features=AutomationControlled') # отключения режима автоматизации ПО
-    chrome_options.add_argument = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36'
+    # chrome_options.add_argument = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36'
 
     driver = webdriver.Chrome(options=chrome_options)
     driver.maximize_window()
