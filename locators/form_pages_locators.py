@@ -50,7 +50,8 @@ class FormPagesLocators:
     # CLOSE_CREATED_ARTICLE = (By.XPATH, "//header[@id='article-content-modal-header']//span[@class='link-iconed__label-text'][normalize-space()='selen']")
     CLOSE_CREATED_ARTICLE = (By.CSS_SELECTOR, ".article-modal__close")
     # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
-    CLOSE_PAGE_LIST = (By.XPATH, "//*[name()='svg']//*[name()='path' and contains(@d,'M19.5327 1')]")
+    # CLOSE_PAGE_LIST = (By.XPATH, "//*[name()='svg']//*[name()='path' and contains(@d,'M19.5327 1')]")
+    CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
     CLOSE_PAGE_SCRIPT = (By.XPATH, "(//*[name()='svg'][@class='m-scenario-flow__close'])[1]")
     CLOSE_CREATE_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")
     SEARCH_PROJECT = (By.CSS_SELECTOR, ".m-dashboard-top__search")
@@ -304,6 +305,7 @@ class FormPagesLocators:
     UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
     D = (By.XPATH, "//form[@enctype='multipart/form-data']")
     ADD_TEST_PROJECT = (By.XPATH, "//p[text()='добавить проект']")
+
 
 class StepByScriptLocators:
     pass

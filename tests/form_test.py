@@ -135,13 +135,11 @@ class TestFormPage:
         # time.sleep(3)
         article_page.add_article_by_templates(driver)
 
+    class TestStepByScriptPage:
 
-class TestStepByScriptPage:
-
-
-    def test_Step_By_Script(self, driver):
-        article_page = ArticlePage(driver, url)
-        article_page.open()
+        def test_step_by_script(self, driver):
+            article_page = ArticlePage(driver, url)
+            article_page.open()
 
 
 

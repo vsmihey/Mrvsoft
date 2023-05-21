@@ -188,7 +188,7 @@ class FormPage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.assert_title(driver, name_project='selen', name_='Добавить статью')
-        time.sleep(15)
+        time.sleep(10)
         self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
         # # time.sleep(5)

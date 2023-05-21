@@ -11,7 +11,7 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person
 from pages.base_page import BasePage
-from locators.form_pages_locators import FormPagesLocators as Locators
+from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators
 # from locators.form_pages_locators import FixingArticle as Locators
 from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
@@ -551,7 +551,9 @@ class ArticlePage(BasePage):
         assert check_fixing_content_text_value == 'В этой папке пока нет контента, но Вы можете это изменить.'
         print("нет закрепленного контента")
 
+
 class StepByScriptPage(BasePage):
+    Locators = StepByScriptLocators()
     pass
 
 
