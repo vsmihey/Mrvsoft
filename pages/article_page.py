@@ -327,6 +327,7 @@ class ArticlePage(BasePage):
         """fixing_all_fields"""
         select_field_for_fixing = self.element_is_visible(Locators.SELECT_FIELD_FOR_FIXING)
         for i in range(6):
+            time.sleep(0.5)
             select_field_for_fixing.click()
             select_field_for_fixing.send_keys(Keys.DOWN)
             select_field_for_fixing.send_keys(Keys.RETURN)
