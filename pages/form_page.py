@@ -76,14 +76,6 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
 
-
-        # Alert.accept(self)
-        # time.sleep(1)
-        # pyautogui.press('tab')
-        # pyautogui.press('tab')
-        # pyautogui.press('enter')
-        # driver.refresh()
-
     def fill_fields(self, login, password):
         """FILL FIELDS PAGE OF AUTHORIZATION"""
         self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
@@ -150,10 +142,6 @@ class FormPage(BasePage):
         """INPUT IN SELEN PROJECT"""
         self.element_is_visible(Locators.TEST_PROJECT).click()
         time.sleep(1)
-        # pyautogui.press('tab')
-        # pyautogui.press('tab')
-        # pyautogui.press('enter')
-        # driver.refresh()
 
     def title_find(self, driver):
         """TITLE"""
@@ -182,8 +170,10 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CONTENT1).click()
         time.sleep(1)
         self.assert_title(driver, name_project='selen', name_='Контент 1')
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
 
+
+        self.screenshot()
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CHOOSE_PROJECT).send_keys("selen")
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
