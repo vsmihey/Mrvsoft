@@ -143,6 +143,7 @@ class TestFormPage:
             article_page.open()
             article_page.input_in_my_project(driver)
             article_page.add_script(driver)
+        pass
 
 
 

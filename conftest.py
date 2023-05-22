@@ -30,7 +30,7 @@ def driver():
     # chrome_options.add_argument("disable-infobars")
     # chrome_options.add_argument("--disable-extensions")
     # chrome_options.add_argument("--disable-dev-shm-usage")
-    # chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--no-sandbox")
     # chrome_options.add_argument('--ignore-certificate-errors')
     # chrome_options.add_experimental_option("excludeSwitches", ["ignore-certificate-errors"])
     # chrome_options.add_argument('--allow-insecure-localhost')
@@ -40,12 +40,9 @@ def driver():
 
     driver = webdriver.Chrome(options=chrome_options)
     driver.maximize_window()
-
     # driver.get(url)
-
     # # chrome_options.add_experimental_option("detach", True)
     # driver.minimize_window() # свернуть браузер
-
     # driver_service = Service(ChromeDriverManager().install())
     # driver = webdriver.Chrome(service=driver_service)
     # driver.maximize_window()

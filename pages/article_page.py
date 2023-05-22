@@ -459,6 +459,7 @@ class ArticlePage(BasePage):
         name_of_content.click()
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         # self.element_is_visible(Locators.EDIT_ARTICLE).click()
+        time.sleep(1)
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         time.sleep(1)
         text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
@@ -554,6 +555,7 @@ class ArticlePage(BasePage):
 
 class StepByScriptPage(BasePage):
     Locators = StepByScriptLocators()
+
     def add_script(self):
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_BUTTON).click()
