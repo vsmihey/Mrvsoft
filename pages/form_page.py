@@ -170,9 +170,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CONTENT1).click()
         time.sleep(1)
         self.assert_title(driver, name_project='selen', name_='Контент 1')
-
-
-        self.screenshot()
+        # self.screenshot()
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CHOOSE_PROJECT).send_keys("selen")
         time.sleep(1)
