@@ -48,8 +48,6 @@ class TestFormPage:
     def test_title(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
-        # form_page.authorization(login, password)
-        # form_page.input_project()
         form_page.input_in_my_project(driver)
         # driver.get_screenshot_as_file("scr.png")
         print("input project")
@@ -136,6 +134,7 @@ class TestFormPage:
         # time.sleep(3)
         article_page.add_article_by_templates(driver)
 
+    @pytest.mark.skip('delete folders')
     class TestStepByScriptPage:
 
         def test_step_by_script(self, driver):
@@ -143,7 +142,7 @@ class TestFormPage:
             article_page.open()
             article_page.input_in_my_project(driver)
             article_page.add_script(driver)
-        pass
+
 
 
 
