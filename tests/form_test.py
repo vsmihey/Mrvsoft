@@ -6,6 +6,7 @@ from pages.form_page import FormPage
 from pages.data_login_password import *
 from pages.article_page import ArticlePage
 from pages.article_page import StepByScriptPage
+from pages.article_page import StepByScriptPage
 
 
 class TestFormPage:
@@ -14,16 +15,16 @@ class TestFormPage:
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.logo_head()
-        form_page.screenshot()
+        # form_page.screenshot()
         self.login = login
         self.password = password_incorrect
         form_page.authorization(self.login, self.password)
         form_page.restore_incorrect()
         form_page.logo_head()
-        form_page.screenshot()
+        # form_page.screenshot()
         form_page.full_authorization(driver)
         form_page.logo_head()
-        form_page.screenshot()
+        # form_page.screenshot()
         form_page.title_find(driver)
         time.sleep(1)
 
@@ -140,6 +141,9 @@ class TestFormPage:
         def test_step_by_script(self, driver):
             article_page = ArticlePage(driver, url)
             article_page.open()
+            article_page.input_in_my_project(driver)
+            article_page.add_script(driver)
+
 
 
 

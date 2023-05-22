@@ -554,7 +554,10 @@ class ArticlePage(BasePage):
 
 class StepByScriptPage(BasePage):
     Locators = StepByScriptLocators()
-    pass
+    def add_script(self):
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        pass
 
 
 

@@ -50,3 +50,11 @@ a="dfgg"+str(random.randint(99,999))
 d = random.randint(99, 999)
 print(a)
 print(type(d))
+
+
+from random import choice
+from string import ascii_uppercase
+
+# для цифр заменить ascii_uppercase на digits
+
+print(''.join(choice(ascii_uppercase) for i in range(256))+str(7))
