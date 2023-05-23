@@ -676,7 +676,7 @@ class FormPage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("777")
         self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
-        time.sleep(1)
+        time.sleep(2)
         edit_new_folder = driver.find_element(By.XPATH, f"//div[text()='{edit_name}']")
         edit_new_folder.click()
         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()

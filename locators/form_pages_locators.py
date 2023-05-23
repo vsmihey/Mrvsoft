@@ -308,7 +308,7 @@ class FormPagesLocators:
 
 
 class StepByScriptLocators:
-    pass
+    ADD_SCRIPT = (By.XPATH, "//div[text()='Пошаговый сценарий']]")
 
 
 

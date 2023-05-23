@@ -6,7 +6,8 @@ from pages.form_page import FormPage
 from pages.data_login_password import *
 from pages.article_page import ArticlePage
 from pages.article_page import StepByScriptPage
-from pages.article_page import StepByScriptPage
+
+
 
 
 class TestFormPage:
@@ -134,14 +135,14 @@ class TestFormPage:
         # time.sleep(3)
         article_page.add_article_by_templates(driver)
 
-    @pytest.mark.skip('delete folders')
+    # @pytest.mark.skip('delete folders')
     class TestStepByScriptPage:
 
         def test_step_by_script(self, driver):
-            article_page = ArticlePage(driver, url)
+            article_page = StepByScriptPage(driver, url)
             article_page.open()
             article_page.input_in_my_project(driver)
-            article_page.add_script(driver)
+            article_page.add_script()
 
 
 
