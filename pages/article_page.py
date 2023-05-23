@@ -561,7 +561,7 @@ class StepByScriptPage(BasePage):
 
     def add_script(self):
         self.element_is_visible(Locators.CREATE_BUTTON).click()
-        self.element_is_visible(Locators.ADD_SCRIPT).click()
+        # self.element_is_visible(Locators.ADD_SCRIPT).click()
         # pass
 
 

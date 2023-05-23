@@ -66,9 +66,7 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.ADD).click()
             self.element_is_visible(Locators.ADD_NAMES_PROJECT).send_keys("selen")
             self.element_is_visible(Locators.ADD_DESCRIPTION_PROJECT).send_keys("test_selenium")
-
             self.element_is_visible(Locators.ADD_TEST_PROJECT).click()
-
             self.element_is_visible(Locators.TEST_PROJECT).click()
             self.element_is_visible(Locators.CONTENT).click()
             time.sleep(2)
