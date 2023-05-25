@@ -361,6 +361,14 @@ class StepByScriptLocators:
     # LIST_DROPDOWN_FIRST_STEP1 = (By.CSS_SELECTOR, "option[label='Выберите шаг']")
     TEXT_CHECK_TYPOGRAPHY_WINDOW = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
 
+class CopyPastePageLocators:
+
+    START = (By.XPATH, "//b[contains(text(),'Пикабу́ (Pikabu)')]")
+    FINISH = (By.XPATH, "//a[normalize-space()='iOS']")
+    CHECK_LINK_CORRECT = (By.XPATH, "//a[@href='https://openai.com/']")
+    CHECK_TEXT_CORRECT = (By.XPATH, "//div/div/div/p/text()[1]")
+
+
 
 
 

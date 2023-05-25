@@ -5,12 +5,12 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 # from pages.data_login_password import *
 
-
+# scope='session'
 @pytest.fixture(scope='session')
 def driver():
     # driver_service = Service(ChromeDriverManager().install())
     chrome_options = Options()
-    chrome_options.add_argument("--headless") # запуск в скрытом режиме (без браузера)
+    # chrome_options.add_argument("--headless") # запуск в скрытом режиме (без браузера)
     # chrome_options.headless = True
     chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
     # prefs = {"profile.default_content_setting_values.notifications": 1}  # принять уведомление всплывающее
@@ -18,7 +18,6 @@ def driver():
 
     # chrome_options.add_argument('--allow-silent-push')
     chrome_options.add_argument('--disable-notifications')
-
     # chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
     # chrome_options.add_experimental_option('useAutomationExtension', False)
     # chrome_options.add_argument('--disable-gpu')

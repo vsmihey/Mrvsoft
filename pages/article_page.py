@@ -13,7 +13,7 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person
 from pages.base_page import BasePage
-from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators
+from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators
 # from locators.form_pages_locators import StepByScriptLocators as Locators
 # from locators.form_pages_locators import FixingArticle as Locators
 from pages.data_login_password import *
@@ -673,7 +673,6 @@ class StepByScriptPage(BasePage):
         actions.click()
         actions.perform()
         # self.element_is_visible(self.Locators.TEXT_BOLD_IN_TEXTAREA_EDITOR).click()
-
         time.sleep(1)
 
     def new_step(self, driver):
@@ -701,7 +700,8 @@ class StepByScriptPage(BasePage):
         time.sleep(1)
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
         self.add_text_in_textarea(driver)
-        time.sleep(1)
+        time.sleep(2)
+        self.screenshot()
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(text_name)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
         check_text_chose_transaction = self.element_is_visible(self.Locators.CHECK_TEXT_CHOSE_TRANSACTION).text
@@ -723,20 +723,61 @@ class StepByScriptPage(BasePage):
         text_end_script = self.element_is_clickable(self.Locators.TEXT_END_SCRIPT).text
         assert text_end_script == 'Завершение'
         """check blocks of field"""
-        check_text_begin = self.element_is_clickable(self.Locators.CHECK_TEXT_BEGIN).text
+        check_text_begin = self.element_is_visible(self.Locators.CHECK_TEXT_BEGIN).text
         assert check_text_begin == 'Начало'
-        check_text_step1 = self.element_is_clickable(self.Locators.CHECK_TEXT_STEP1).text
+        check_text_step1 = self.element_is_visible(self.Locators.CHECK_TEXT_STEP1).text
         assert check_text_step1 == 'Шаг 1'
-        check_text_step2 = self.element_is_clickable(self.Locators.CHECK_TEXT_STEP2).text
+        check_text_step2 = self.element_is_visible(self.Locators.CHECK_TEXT_STEP2).text
         assert check_text_step2 == 'Шаг 2'
         self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
         text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
         assert text_check_typography_window == 'Настройки публикации контента'
 
 
+class CopyPastePage(BasePage):
+    Locators = CopyPastePageLocators()
+
+    def open_new_table(self, driver):
+        person = generated_person()
+        text_name = person.first_name + str(random.randint(99, 999))
+        text_area = person.last_name + str(random.randint(99, 999))
+        example_text = "OpenAI is GPT-3 model is an impressive language model that has gained significant attention. " \
+                       " It has been trained on a massive amount of data and can generate human-like text in a wide range " \
+                       "of topics and styles. You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
+                       "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
+        # driver.execute_script("window.open('https://ru.wikipedia.org/wiki/Пикабу')")
+        # time.sleep(1)
+        # finish = self.element_is_visible(self.Locators.FINISH)
+        # start = self.element_is_visible(self.Locators.START)
+        # finish = self.element_is_visible(self.Locators.FINISH)
+        # actions = ActionChains(driver)
+        # actions.drag_and_drop(start, finish)
+        # actions.send_keys(Keys.CONTROL + "c")
+
+        # actions.send_keys(Keys.CONTROL + "t")
+        # actions.perform()
+        # time.sleep(2)
+        # body = driver.find_element(By.TAG_NAME, "body")
+        # body.send_keys(Keys.CONTROL + 't')
+        # driver.execute_script("window.open('https://ru.wikipedia.org/wiki/Пикабу')")
+        driver.switch_to.window(driver.window_handles[0])
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(text_name)
 
 
-        time.sleep(5)
+        self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+        self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(example_text)
+        check_link_correct = self.element_is_visible(self.Locators.CHECK_LINK_CORRECT).get_attribute("href")
+        print(check_link_correct)
+        assert check_link_correct == 'https://openai.com/'
+        # time.sleep(3)
+        # check_text_correct = self.element_is_visible(self.Locators.CHECK_TEXT_CORRECT)
+        # print(check_text_correct)
+        # assert check_text_correct == "OpenAI is GPT-3 model is an impressive language model that has gained significant attention"
+
+
+        time.sleep(3)
 
 
 
@@ -746,16 +787,23 @@ class StepByScriptPage(BasePage):
 
 
 
-        # data_n = ["Выберите шаг", "Сценарий завершён"]
-        # assert data_n in data
 
-        # """check new transaction"""
-        # data = []
-        # atr = self.elements_are_visible(self.Locators.GO_TO_STEP_ARROW)
-        # for n in atr:
-        #     n.get_attribute("title")
-        #     data.append(n)
-        # assert len(data) == 2
+
+
+
+
+
+
+    # data_n = ["Выберите шаг", "Сценарий завершён"]
+    #     # assert data_n in data
+    #
+    #     # """check new transaction"""
+    #     # data = []
+    #     # atr = self.elements_are_visible(self.Locators.GO_TO_STEP_ARROW)
+    #     # for n in atr:
+    #     #     n.get_attribute("title")
+    #     #     data.append(n)
+    #     # assert len(data) == 2
 
 
 

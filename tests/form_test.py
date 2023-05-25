@@ -4,7 +4,7 @@ from selenium.common import TimeoutException
 from pages import base_page
 from pages.form_page import FormPage
 from pages.data_login_password import *
-from pages.article_page import ArticlePage
+from pages.article_page import ArticlePage, CopyPastePage
 from pages.article_page import StepByScriptPage
 
 
@@ -148,6 +148,16 @@ class TestFormPage:
             article_page.add_new_step(driver)
             article_page.delete_all()
             article_page.new_step(driver)
+
+    class TestCopyPastePage:
+
+        def test_copy_paste(self, driver):
+            copy_paste_page = CopyPastePage(driver, url)
+            copy_paste_page.open()
+            copy_paste_page.input_in_my_project(driver)
+            copy_paste_page.open_new_table(driver)
+
+
 
 
 
