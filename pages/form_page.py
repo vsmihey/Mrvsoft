@@ -452,10 +452,6 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.TEXTAREA_ARTICLE).send_keys(text_article)
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             time.sleep(1)
-            # dddd = self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE)
-            # # driver.execute_script("arguments[0].click();", dddd)
-            # ActionChains(driver).move_to_element(dddd).click().perform()
-            # self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
             n += 1
             x += 1
@@ -543,20 +539,7 @@ class FormPage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON_CONFIRM).click()
         print("папка восстановлена")
-        # button = self.element_is_visible(Locators.FOLDERS_CHANGE)
-        # driver.execute_script("arguments[0].click();", button)
-        # driver.execute_script("window.scrollBy(0,0)")
-        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        # div = driver.find_element(By.XPATH, "(//div[@class='scroller__content'])[2]")
-        # ActionChains(driver).move_to_element(div).scroll_by_amount(1, -500).perform()
-        # time.sleep(2)
-        # html = driver.find_element(By.TAG_NAME, 'html')
-        # html.send_keys(Keys.UP)
-        # time.sleep(2)
-        # self.element_is_visible(Locators.FOLDERS_CHANGE).click()
-        # folder_fol_del_by_name = driver.find_element(By.XPATH, f"//div[contains(text(),'{name_of_new_folder}')]")
-        # folder_fol_del_by_name.click()
-        # time.sleep(1)
+
         driver.refresh()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         time.sleep(1)
@@ -698,8 +681,6 @@ class FormPage(BasePage):
     def add_to_favourites(self, driver):
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FAVOURITES).click()
-
-
         try:
             time.sleep(1)
             create_folder_button = driver.find_element(By.XPATH, "//p[contains(text(),'Создать папку')]")
@@ -731,8 +712,6 @@ class FormPage(BasePage):
                 except TimeoutException:
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
-
-
 
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("папка1")
@@ -792,23 +771,6 @@ class FormPage(BasePage):
         """delete 3 folders"""
         self.element_is_visible(Locators.FAVOURITES).click()
         time.sleep(1)
-        #
-        # n = 0
-        # while True:
-        #     try:
-        #         time.sleep(1)
-        #         self.element_is_visible(Locators.FOLDER1_FOR_DEL).click()
-        #         time.sleep(1)
-        #         # x.click()
-        #         # time.sleep(1)
-        #         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-        #         time.sleep(1)
-        #         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-        #         n += 1
-        #         if n >= 3:
-        #             break
-        #     except TimeoutException:
-        #         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
 
         n = 0
         while True:
@@ -832,20 +794,6 @@ class FormPage(BasePage):
             except TimeoutException:
                 self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
 
-
-
-
-
-
-
-        # li = self.elements_are_visible(Locators.FOLDER1_FOR_DEL)
-        # for n in li:
-        #     time.sleep(1)
-        #     n.click()
-        #     time.sleep(1)
-        #     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-        #     time.sleep(1)
-        #     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
 
 
 

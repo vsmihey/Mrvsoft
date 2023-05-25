@@ -737,7 +737,7 @@ class StepByScriptPage(BasePage):
 class CopyPastePage(BasePage):
     Locators = CopyPastePageLocators()
 
-    def open_new_table(self, driver):
+    def add_text_in_article(self, driver):
         person = generated_person()
         text_name = person.first_name + str(random.randint(99, 999))
         text_area = person.last_name + str(random.randint(99, 999))
@@ -760,21 +760,29 @@ class CopyPastePage(BasePage):
         # body = driver.find_element(By.TAG_NAME, "body")
         # body.send_keys(Keys.CONTROL + 't')
         # driver.execute_script("window.open('https://ru.wikipedia.org/wiki/Пикабу')")
-        driver.switch_to.window(driver.window_handles[0])
+        # driver.switch_to.window(driver.window_handles[0])
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(text_name)
-
-
-        self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+        self.element_is_visible(self.Locators.FOLDER_DROPDOWN).send_keys("Контент 1")
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(example_text)
         check_link_correct = self.element_is_visible(self.Locators.CHECK_LINK_CORRECT).get_attribute("href")
         print(check_link_correct)
         assert check_link_correct == 'https://openai.com/'
+
         # time.sleep(3)
         # check_text_correct = self.element_is_visible(self.Locators.CHECK_TEXT_CORRECT)
         # print(check_text_correct)
         # assert check_text_correct == "OpenAI is GPT-3 model is an impressive language model that has gained significant attention"
+        time.sleep(15)
+        self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
+        self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+        self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+        self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+        self.element_is_visible(Locators.TEXTAREA_ARTICLE).send_keys(text_area)
+        self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+        time.sleep(1)
+        self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
 
 
         time.sleep(3)

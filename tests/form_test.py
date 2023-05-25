@@ -155,7 +155,7 @@ class TestFormPage:
             copy_paste_page = CopyPastePage(driver, url)
             copy_paste_page.open()
             copy_paste_page.input_in_my_project(driver)
-            copy_paste_page.open_new_table(driver)
+            copy_paste_page.add_text_in_article(driver)
 
 
 
