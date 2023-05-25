@@ -49,6 +49,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         try:
+            time.sleep(0.5)
             self.element_is_visible(Locators.TEST_PROJECT).click()
         except TimeoutException:
             self.element_is_visible(Locators.ADD).click()
@@ -160,7 +161,7 @@ class FormPage(BasePage):
         """CHECK ALL TITLE"""
         driver.implicitly_wait(10)
         # time.sleep(1)
-        driver.get_screenshot_as_file("scr.png")
+        # driver.get_screenshot_as_file("scr.png")
         driver.refresh()
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.ALL_CONTENT).click()
@@ -174,7 +175,7 @@ class FormPage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.assert_title(driver, name_project='selen', name_='Добавить статью')
-        time.sleep(10)
+        time.sleep(11)
         # self.screenshot()
         self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
@@ -306,6 +307,7 @@ class FormPage(BasePage):
         """check result create new role"""
         check_role = first_name
         # print(check_role)
+        time.sleep(0.5)
         text_check_created_new_role = driver.find_element(By.XPATH, f"//span[text()='{check_role}']")
         text_check_created_new_role_value = text_check_created_new_role.text
         assert text_check_created_new_role_value == check_role

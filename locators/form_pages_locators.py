@@ -50,8 +50,8 @@ class FormPagesLocators:
     # CLOSE_CREATED_ARTICLE = (By.XPATH, "//header[@id='article-content-modal-header']//span[@class='link-iconed__label-text'][normalize-space()='selen']")
     CLOSE_CREATED_ARTICLE = (By.CSS_SELECTOR, ".article-modal__close")
     # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
+    # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[local-name()='svg']")
     CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[local-name()='svg']")
-    # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
     CLOSE_PAGE_SCRIPT = (By.XPATH, "(//*[name()='svg'][@class='m-scenario-flow__close'])[1]")
     CLOSE_CREATE_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")
     SEARCH_PROJECT = (By.CSS_SELECTOR, ".m-dashboard-top__search")
@@ -308,7 +308,61 @@ class FormPagesLocators:
 
 
 class StepByScriptLocators:
-    ADD_SCRIPT = (By.XPATH, "//div[text()='Пошаговый сценарий']]")
+    ADD_SCRIPT = (By.XPATH, "//div[text()='Пошаговый сценарий']")
+    ADD_STEP_BUTTON = (By.XPATH, "//p[text()='добавить шаг']")
+    """block scripts"""
+    CHECK_TEXT_BEGIN = (By.XPATH, "//p[text()='Начало']")
+    CHECK_TEXT_STEP1 = (By.XPATH, "//p[text()='Шаг 1']")
+    CHECK_TEXT_STEP2 = (By.XPATH, "//p[text()='Шаг 2']")
+    TEXT_END_SCRIPT = (By.XPATH, "//p[contains(text(),'Завершение')]")
+    PLUS_BUTTON_ADD_STEP = (By.XPATH, "//button[@data-tip='добавить шаг']")
+    BUTTON_SCRIPT_TYPOGRAPHY = (By.XPATH, "//p[text()='Опубликовать']")
+    # INPUT_NAME_PLACEHOLDER = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    INPUT_NAME_PLACEHOLDER = (By.XPATH, "//input[@class='m-ui-text-input__input']")
+    TARGET_FOLDER_NAME = (By.XPATH, "//div[text()='расположение контента']")
+    INPUT_NAME_STEP = (By.XPATH, "//div[@class='scenario-question__name m-ui-text-input m-ui-input-wrapper-2']//input[@placeholder='Введите название']")
+    INPUT_TARGET_FOLDER = (By.XPATH, "//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled']//select[@class='m-ui-select__select']")
+    EDIT_STEP_TEXT_CHECK = (By.XPATH, "//p[text()='Редактор шага']")
+    EDIT_NAME_TEXT_CHECK = (By.XPATH, "//div[text()='название']")
+    EDIT_CONTENT_TEXT_CHECK = (By.XPATH, "//section[text()='контент шага']")
+    ADD_TRANSITION = (By.XPATH, "//p[contains(text(),'добавить переход')]")
+    DELETE_STEP = (By.XPATH, "//p[contains(text(),'удалить шаг')]")
+    NEW_TRANSITION = (By.XPATH, "//div[3]/div[3]")
+    # INPUT_NAME_FIELDS = (By.XPATH, "//input[@class='m-ui-text-input__input']")
+    GO_TO_STEP_ARROW = (By.XPATH, "//button[@class='scenario-answer-button scenario-answer-button__go']")
+    DELETE_STEP_ICON = (By.XPATH, "//div[3]/div[2]/button[2]")
+    # NAME_TRANSACTION_FIELD = (By.XPATH, "//div[@class='scenario-answer__fields-wrapper']//input[@class='m-ui-text-input__input']")
+    NAME_TRANSACTION_FIELD = (By.XPATH, "//div[3]/div[3]//div[@class='scenario-answer__fields-wrapper']//input[@class='m-ui-text-input__input']")
+    TEXT_TRANSACTION_TO_STEP = (By.XPATH, "//div[3]/div[1]/div[2]/div/label/div[1]")
+    LIST_DROPDOWN = (By.XPATH, "//div[3]/div[3]//select/option/..")
+    TEXT_CHECK_SCRIPT_FINISH = (By.XPATH, "//div[3]/div[3]//select/option/../option[text()='Сценарий завершён']")
+    TEXT_CHECK_ADD_NEW_STEP = (By.XPATH, "//p[text()='Для начала добавьте первый шаг']")
+    TEXT_CHECK_NAME_NEW_STEP = (By.XPATH, "//div[@class='scenario-question__name m-ui-text-input m-ui-input-wrapper-2']//input[@placeholder='Введите название']")
+    TEXT_CHECK_INPUT_CONTENT_OF_STEP = (By.XPATH, "//div[@aria-label='false']")
+    TEXT_AREA = (By.XPATH, "//article/label/div/div/textarea")
+    """minimap"""
+    # MINIMAP = (By.CLASS_NAME, "react-flow__minimap m-scenario-flow__minimap")
+    MINIMAP = (By.CSS_SELECTOR, "svg[class='react-flow__minimap m-scenario-flow__minimap']")
+    PLUS = (By.XPATH, "//section[@class='m-scenario-flow__main']//button[1]")
+    MINUS = (By.XPATH, "//section[@class='m-scenario-flow__main']//button[2]")
+    FANCYBOX = (By.XPATH, "//section[@class='m-scenario-flow__main']//button[3]")
+    """alerts text"""
+    CHECK_ALERT_TEXT_CONTENT_STEP = (By.XPATH, "//div[text()='Не должно быть пустым']/../div[2]")
+    CHECK_ALERT_TEXT_NAME_STEP = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--14x14'][contains(text(),'Не должно быть пустым')]")
+    INPUT_NAME_FIRST_STEP = (By.XPATH, "//input[@name='articleName']")
+    BUTTON_PREVIEW = (By.CSS_SELECTOR, "button[data-tip='предпросмотр']")
+    """drop down step"""
+    CHECK_TEXT_CHOSE_TRANSACTION = (By.XPATH, "//div[text()='Необходимо выбрать шаг']")
+    LIST_DROPDOWN_FIRST_STEP = (By.XPATH, "//select[@name='id']")
+    CHECK_TEXT_PREVIEW = (By.XPATH, "//h3[text()='Предпросмотр']")
+    CLOSE_WINDOW_PREVIEW = (By.CSS_SELECTOR, "div[class='popup__close']")
+    # TEXT_BOLD_IN_TEXTAREA_EDITOR = (By.CSS_SELECTOR, "//span[@class='cke_button_icon cke_button__bold_icon']")
+    TEXT_BOLD_IN_TEXTAREA_EDITOR = (By.XPATH, "//span[text()='полужирный']")
+    # LIST_DROPDOWN_FIRST_STEP1 = (By.CSS_SELECTOR, "option[label='Выберите шаг']")
+    TEXT_CHECK_TYPOGRAPHY_WINDOW = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
+
+
+
 
 
 

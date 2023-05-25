@@ -135,7 +135,7 @@ class TestFormPage:
         # time.sleep(3)
         article_page.add_article_by_templates(driver)
 
-    @pytest.mark.skip('delete folders')
+    # @pytest.mark.skip('delete folders')
     class TestStepByScriptPage:
 
         def test_step_by_script(self, driver):
@@ -143,9 +143,11 @@ class TestFormPage:
             article_page.open()
             article_page.input_in_my_project(driver)
             article_page.add_script()
-
-
-
+            article_page.check_opened_added_script(driver)
+            article_page.check_len_name_content(driver)
+            article_page.add_new_step(driver)
+            article_page.delete_all()
+            article_page.new_step(driver)
 
 
 

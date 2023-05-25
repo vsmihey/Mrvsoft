@@ -2,6 +2,8 @@ import datetime
 import pathlib
 import random
 import time
+from random import choice
+from string import ascii_uppercase
 from pathlib import Path
 import selenium
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException, \
@@ -12,6 +14,7 @@ from selenium.webdriver.common.by import By
 from generator.generator import generated_person
 from pages.base_page import BasePage
 from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators
+# from locators.form_pages_locators import StepByScriptLocators as Locators
 # from locators.form_pages_locators import FixingArticle as Locators
 from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
@@ -26,6 +29,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         try:
+            time.sleep(0.5)
             self.element_is_visible(Locators.TEST_PROJECT).click()
         except TimeoutException:
             self.element_is_visible(Locators.ADD).click()
@@ -138,6 +142,7 @@ class ArticlePage(BasePage):
 
     def fixing_article(self, driver):
         """FIXING_ARTICLE"""
+        driver.implicitly_wait(10)
         person = generated_person()
         text_test = person.first_name+str(random.randint(99, 999))
         text_fixing = "как помыть крота"+str(random.randint(99, 999))
@@ -148,6 +153,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         time.sleep(5)
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(text_test)
+        time.sleep(1)
         self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_area)
         self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
@@ -179,7 +185,7 @@ class ArticlePage(BasePage):
         check_name_content_value = check_name_content.text
         assert check_name_content_value == "Контент 1"
         print(check_name_content_value)
-        driver.implicitly_wait(5)
+        time.sleep(1)
         check_name_article = driver.find_element(By.XPATH, f"//section[@class='m-content-fix-wizard__link']/./p[text()='{text_test}']")
         check_name_article_value = check_name_article.text
         assert check_name_article_value == text_test
@@ -414,10 +420,13 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         # self.element_is_visible(Locators.EDIT_ARTICLE).click()
         time.sleep(3)
-        field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
+        try:
+            field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
+        except TimeoutException:
+            self.element_is_visible(Locators.EDIT_ARTICLE).click()
+            field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
         field5 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR_1)
         field6 = driver.find_element(By.XPATH, f"//pre[text()='{mail}']")
-
         for_click = self.element_is_visible(Locators.FOR_CLICK)
         actions.click(field4)
         for n in range(1, 20):
@@ -561,8 +570,200 @@ class StepByScriptPage(BasePage):
 
     def add_script(self):
         self.element_is_visible(Locators.CREATE_BUTTON).click()
-        # self.element_is_visible(Locators.ADD_SCRIPT).click()
-        # pass
+        self.element_is_visible(self.Locators.ADD_SCRIPT).click()
+        time.sleep(1)
+
+    def check_opened_added_script(self, driver):
+        """check button text"""
+        check_button_add_step = self.element_is_clickable(self.Locators.ADD_STEP_BUTTON)
+        check_button_add_step_value = check_button_add_step.text
+        assert check_button_add_step_value == "добавить шаг"
+        """check typography button"""
+        try:
+            self.element_is_clickable(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
+            # button_script_typography = driver.find_element(By.XPATH, "//p[text()='Опубликовать']")
+            # button_script_typography.click()
+        except ElementClickInterceptedException:
+            print("Element is not clickable")
+        """check name placeholder"""
+        placeholder_check = self.element_is_visible(self.Locators.INPUT_NAME_PLACEHOLDER).get_attribute("placeholder")
+        # print(type(placeholder_check), placeholder_check)
+        assert placeholder_check == 'Введите название контента'
+        """check name folder"""
+        target_folder_name = self.element_is_visible(self.Locators.TARGET_FOLDER_NAME)
+        target_folder_name_value = target_folder_name.text
+        assert target_folder_name_value == "расположение контента:"
+        """check plus button"""
+        self.element_is_clickable(self.Locators.PLUS_BUTTON_ADD_STEP)
+
+    def check_len_name_content(self, driver):
+        # для цифр заменить ascii_uppercase на digits
+        name_content = ''.join(choice(ascii_uppercase) for i in range(256)) + str(7)
+        # print(name_content)
+        self.element_is_visible(self.Locators.INPUT_NAME_PLACEHOLDER).send_keys(name_content)
+        value_text = self.element_is_visible(self.Locators.INPUT_NAME_PLACEHOLDER).get_attribute("value")
+        len_name_text = len(value_text)
+        # print(value_text, len(value_text))
+        assert len_name_text == 256
+
+        self.element_is_clickable(self.Locators.INPUT_TARGET_FOLDER).send_keys('Контент 1')
+        """check typography button"""
+        try:
+            self.element_is_clickable(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
+        except ElementClickInterceptedException:
+            print("Element is not clickable")
+
+    def add_new_step(self, driver):
+        driver.implicitly_wait(10)
+        # """check and push plus button"""
+        # self.element_is_visible(self.Locators.PLUS_BUTTON_ADD_STEP).click()
+        # time.sleep(10)
+        self.element_is_clickable(self.Locators.ADD_STEP_BUTTON).click()
+        """check name fields"""
+        check_text_begin = self.element_is_clickable(self.Locators.CHECK_TEXT_BEGIN).text
+        assert check_text_begin == 'Начало'
+        check_text_step1 = self.element_is_clickable(self.Locators.CHECK_TEXT_STEP1).text
+        assert check_text_step1 == 'Шаг 1'
+
+        edit_step_text_check = self.element_is_clickable(self.Locators.EDIT_STEP_TEXT_CHECK)
+        edit_step_text_check_value = edit_step_text_check.text
+        assert edit_step_text_check_value == 'Редактор шага'
+        edit_name_text_check = self.element_is_clickable(self.Locators.EDIT_NAME_TEXT_CHECK)
+        edit_name_text_check_value = edit_name_text_check.text
+        assert edit_name_text_check_value == 'название:'
+        edit_content_text_check = self.element_is_clickable(self.Locators.EDIT_CONTENT_TEXT_CHECK)
+        edit_content_text_check_value = edit_content_text_check.text
+        assert edit_content_text_check_value == 'контент шага:'
+        self.element_is_clickable(self.Locators.DELETE_STEP)
+        time.sleep(10)
+        try:
+            self.element_is_visible(self.Locators.ADD_TRANSITION).click()
+        except ElementClickInterceptedException:
+            time.sleep(5)
+            self.element_is_visible(self.Locators.ADD_TRANSITION).click()
+        self.element_is_visible(self.Locators.NEW_TRANSITION).is_displayed()
+        placeholder_name = self.element_is_visible(self.Locators.NAME_TRANSACTION_FIELD).get_attribute("placeholder")
+        assert placeholder_name == "Введите название", 'name placeholder is not'
+        text_transaction_to_step = self.element_is_visible(self.Locators.TEXT_TRANSACTION_TO_STEP)
+        text_transaction_to_step_value = text_transaction_to_step.text
+        assert text_transaction_to_step_value == 'переход к шагу:'
+        self.element_is_visible(self.Locators.LIST_DROPDOWN).send_keys(Keys.DOWN)
+        text_check_script_finish = self.element_is_visible(self.Locators.TEXT_CHECK_SCRIPT_FINISH)
+        text_check_script_finish_value = text_check_script_finish.text
+        assert text_check_script_finish_value == 'Сценарий завершён'
+        print(text_check_script_finish_value)
+        self.element_is_visible(self.Locators.GO_TO_STEP_ARROW).is_displayed()
+        self.element_is_visible(self.Locators.DELETE_STEP_ICON).is_displayed()
+
+    def delete_all(self):
+        self.element_is_visible(self.Locators.DELETE_STEP_ICON).click()
+        self.element_is_visible(self.Locators.DELETE_STEP).click()
+        text_check_add_new_step = self.element_is_visible(self.Locators.TEXT_CHECK_ADD_NEW_STEP)
+        text_check_add_new_step_value = text_check_add_new_step.text
+        assert text_check_add_new_step_value == 'Для начала добавьте первый шаг', "not message add new step before use"
+
+    def add_text_in_textarea(self, driver):
+        """ADD TEXT IN TEXTAREA"""
+        # для цифр заменить ascii_uppercase на digits
+        text_area = ''.join(choice(ascii_uppercase) for i in range(10)) + str(777)
+        """add text in textarea"""
+        actions = ActionChains(driver)
+        actions.send_keys(text_area)
+        actions.move_by_offset(0, 0)
+        actions.click()
+        actions.perform()
+        # self.element_is_visible(self.Locators.TEXT_BOLD_IN_TEXTAREA_EDITOR).click()
+
+        time.sleep(1)
+
+    def new_step(self, driver):
+        person = generated_person()
+        text_name = person.first_name + str(random.randint(99, 999))
+        text_area = person.last_name + str(random.randint(99, 999))
+        """add step"""
+        self.element_is_visible(self.Locators.ADD_STEP_BUTTON).click()
+        text_check_name_new_step = self.element_is_visible(self.Locators.TEXT_CHECK_NAME_NEW_STEP).get_attribute("placeholder")
+        assert text_check_name_new_step == 'Введите название'
+        # self.element_is_visible(self.Locators.TEXT_AREA).click()
+        # self.element_is_visible(self.Locators.TEXT_AREA).send_keys(text_area)
+        """minimap"""
+        # self.element_is_visible(self.Locators.MINIMAP).is_displayed()
+        self.element_is_visible(self.Locators.PLUS).is_displayed()
+        self.element_is_visible(self.Locators.MINUS).is_displayed()
+        self.element_is_visible(self.Locators.FANCYBOX).is_displayed()
+        """check alerts"""
+        self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
+        check_alert_text_content_step = self.element_is_visible(self.Locators.CHECK_ALERT_TEXT_CONTENT_STEP).text
+        assert check_alert_text_content_step == 'Не должно быть пустым', 'wrong or not alert'
+        check_alert_text_name_step = self.element_is_visible(self.Locators.CHECK_ALERT_TEXT_NAME_STEP).text
+        assert check_alert_text_name_step == 'Не должно быть пустым'
+        """add text in textarea"""
+        time.sleep(1)
+        self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+        self.add_text_in_textarea(driver)
+        time.sleep(1)
+        self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(text_name)
+        self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
+        check_text_chose_transaction = self.element_is_visible(self.Locators.CHECK_TEXT_CHOSE_TRANSACTION).text
+        assert check_text_chose_transaction == 'Необходимо выбрать шаг'
+        self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
+        self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
+        check_text_preview = self.element_is_visible(self.Locators.CHECK_TEXT_PREVIEW).text
+        assert check_text_preview == 'Предпросмотр'
+        self.element_is_visible(self.Locators.CLOSE_WINDOW_PREVIEW).click()
+        # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+        # # self.element_is_visible(self.Locators.TEXT_BOLD_IN_TEXTAREA_EDITOR).click()
+        # self.add_text_in_textarea(driver)
+        """add step one more"""
+        self.element_is_visible(self.Locators.PLUS_BUTTON_ADD_STEP).click()
+        self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+        self.add_text_in_textarea(driver)
+        self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(text_area)
+        self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
+        text_end_script = self.element_is_clickable(self.Locators.TEXT_END_SCRIPT).text
+        assert text_end_script == 'Завершение'
+        """check blocks of field"""
+        check_text_begin = self.element_is_clickable(self.Locators.CHECK_TEXT_BEGIN).text
+        assert check_text_begin == 'Начало'
+        check_text_step1 = self.element_is_clickable(self.Locators.CHECK_TEXT_STEP1).text
+        assert check_text_step1 == 'Шаг 1'
+        check_text_step2 = self.element_is_clickable(self.Locators.CHECK_TEXT_STEP2).text
+        assert check_text_step2 == 'Шаг 2'
+        self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
+        text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
+        assert text_check_typography_window == 'Настройки публикации контента'
+
+
+
+
+        time.sleep(5)
+
+
+
+
+
+
+
+
+
+        # data_n = ["Выберите шаг", "Сценарий завершён"]
+        # assert data_n in data
+
+        # """check new transaction"""
+        # data = []
+        # atr = self.elements_are_visible(self.Locators.GO_TO_STEP_ARROW)
+        # for n in atr:
+        #     n.get_attribute("title")
+        #     data.append(n)
+        # assert len(data) == 2
+
+
+
+
+
+
+
+
 
 
 

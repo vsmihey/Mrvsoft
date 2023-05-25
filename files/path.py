@@ -2,6 +2,7 @@ import os
 import pathlib
 import random
 import uuid
+from itertools import count
 from pathlib import Path
 
 # home = Path.home()
@@ -56,5 +57,6 @@ from random import choice
 from string import ascii_uppercase
 
 # для цифр заменить ascii_uppercase на digits
-
-print(''.join(choice(ascii_uppercase) for i in range(256))+str(7))
+ddd = ''.join(choice(ascii_uppercase) for i in range(256))+str(7)
+print(ddd)
+print(len(ddd))

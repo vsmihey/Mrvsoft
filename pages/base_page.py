@@ -49,6 +49,7 @@ class BasePage:
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         try:
+            time.sleep(0.5)
             self.element_is_visible(Locators.TEST_PROJECT).click()
         except TimeoutException:
             self.element_is_visible(Locators.ADD).click()

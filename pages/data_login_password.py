@@ -1,7 +1,10 @@
+# верные данные
 login = 'a.mihey'
-# login = 'm.andrey'
 password = '1be55449'
-# password = '32c314e7'
+
+
+
+# неверные данные
 login_incorrect = 'm.andreyq'
 password_incorrect = '395a5555'
 url = 'https://test2.minervasoft.ru/login?from=%2F'
