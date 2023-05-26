@@ -305,6 +305,8 @@ class FormPagesLocators:
     UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
     D = (By.XPATH, "//form[@enctype='multipart/form-data']")
     ADD_TEST_PROJECT = (By.XPATH, "//p[text()='добавить проект']")
+    TEXT_CHECK_LINK = (By.XPATH, "//a[text()='https://openai.com/']")
+
 
 
 class StepByScriptLocators:
@@ -360,6 +362,7 @@ class StepByScriptLocators:
     TEXT_BOLD_IN_TEXTAREA_EDITOR = (By.XPATH, "//span[text()='полужирный']")
     # LIST_DROPDOWN_FIRST_STEP1 = (By.CSS_SELECTOR, "option[label='Выберите шаг']")
     TEXT_CHECK_TYPOGRAPHY_WINDOW = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
+    TEXT_CHECK_LINK = (By.XPATH, "//a[text()='https://openai.com/']")
 
 class CopyPastePageLocators:
 
@@ -368,6 +371,12 @@ class CopyPastePageLocators:
     CHECK_LINK_CORRECT = (By.XPATH, "//a[@href='https://openai.com/']")
     CHECK_TEXT_CORRECT = (By.XPATH, "//div/div/div/p/text()[1]")
     FOLDER_DROPDOWN = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
+
+class CreateDraftLocators:
+
+    ALERT_CREATE_DRAFT = (By.XPATH, "//article[text()='Контент сохраняется автоматически']")
+    FIELD_DRAFT = (By.XPATH, "//p[contains(text(),'Черновики')]")
+
 
 
 

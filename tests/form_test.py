@@ -4,7 +4,7 @@ from selenium.common import TimeoutException
 from pages import base_page
 from pages.form_page import FormPage
 from pages.data_login_password import *
-from pages.article_page import ArticlePage, CopyPastePage
+from pages.article_page import ArticlePage, CopyPastePage, CreateDraftPage
 from pages.article_page import StepByScriptPage
 
 
@@ -135,6 +135,12 @@ class TestFormPage:
         # time.sleep(3)
         article_page.add_article_by_templates(driver)
 
+    def test_check_text_link(self, driver):
+        article_page = ArticlePage(driver, url)
+        article_page.open()
+        article_page.input_in_my_project(driver)
+        article_page.check_text_link(driver)
+
     # @pytest.mark.skip('delete folders')
     class TestStepByScriptPage:
 
@@ -157,6 +163,14 @@ class TestFormPage:
             copy_paste_page.input_in_my_project(driver)
             copy_paste_page.add_text_in_article(driver)
 
+    @pytest.mark.skip('create_draft')
+    class TestCreateDraft:
+
+        def test_create_draft(self, driver):
+            create_draft_page = CreateDraftPage(driver, url)
+            create_draft_page.open()
+            create_draft_page.input_in_my_project(driver)
+            create_draft_page.open_4_tab(driver)
 
 
 

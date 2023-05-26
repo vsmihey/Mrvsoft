@@ -13,7 +13,8 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person
 from pages.base_page import BasePage
-from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators
+from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
+    CreateDraftLocators
 # from locators.form_pages_locators import StepByScriptLocators as Locators
 # from locators.form_pages_locators import FixingArticle as Locators
 from pages.data_login_password import *
@@ -203,8 +204,9 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.POPUP_CLOSE_SVG).click()
         self.element_is_visible(Locators.SEARCH_OF_CONTENTS).send_keys(text_fixing)
         print(text_fixing)
-        time.sleep(1)
         self.element_is_visible(Locators.FIND_OF_CONTENT).click()
+        time.sleep(1)
+        self.screenshot()
         check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
         check_text_hello_value = check_text_hello.text
         assert check_text_hello_value == "Hello"
@@ -289,6 +291,7 @@ class ArticlePage(BasePage):
         field_input_4 = self.element_is_visible(Locators.EDIT_TEMPLATES_4)
         field_input_5 = self.element_is_visible(Locators.EDIT_TEMPLATES_5)
         # field_input_6 = self.element_is_visible(Locators.CHOSE_ANSWER)
+        """add and check text correct link"""
         actions = ActionChains(driver)
         actions.click(field_input_1)
         actions.send_keys("some text")
@@ -306,17 +309,14 @@ class ArticlePage(BasePage):
         mail = person.email
         actions.send_keys(mail)
         actions.click(field_input)
-        # actions.click(field_input_6)
-        # actions.click(field_input_6)
-        # actions.send_keys(Keys.DOWN)
-        # actions.click(field_input)
+
         actions.perform()
         time.sleep(1)
         check_name_of_templates = driver.find_element(By.XPATH, f"//h1[normalize-space()='{name}']")
         check_name_of_templates.is_displayed()
         self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
         time.sleep(0.5)
-        self.screenshot()
+        # self.screenshot()
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         check_search_text = driver.find_element(By.XPATH, "//p[contains(text(),'поиск')]")
         check_search_text_value = check_search_text.text
@@ -343,8 +343,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        # self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name"+ str(random.randint(999, 99999)))
-        # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+
         check_utility_text = self.element_is_visible(Locators.UTILITY_TEMPLATE)
         check_utility_text_value = check_utility_text.text
         assert check_utility_text_value == "полезен"
@@ -387,10 +386,7 @@ class ArticlePage(BasePage):
         actions.send_keys(Keys.BACKSPACE)
         actions.send_keys(Keys.BACKSPACE)
         actions.click(field2)
-        # actions.click(field_answer)
-        # actions.move_to_element(delete_answer)
-        # actions.click(delete_answer)
-        # actions.click(field)
+
         actions.perform()
         # time.sleep(10)
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
@@ -453,7 +449,6 @@ class ArticlePage(BasePage):
             field1.click()
         except WebDriverException:
             print("очищенных полей в запросе нет")
-
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
         self.element_is_visible(Locators.SEARCH_HEAD_PAGE).click()
         search_of_contents = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
@@ -499,9 +494,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        # time.sleep(5)
-        # edit_article = self.element_is_visible(Locators.EDIT_ARTICLE)
-        # actions.click(edit_article).perform()
+
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         self.element_is_visible(Locators.CHANGE_TEMPLATES).click()
         self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON_1).click()
@@ -564,6 +557,66 @@ class ArticlePage(BasePage):
         assert check_fixing_content_text_value == 'В этой папке пока нет контента, но Вы можете это изменить.'
         print("нет закрепленного контента")
 
+    def check_text_link(self, driver):
+        driver.implicitly_wait(5)
+        person = generated_person()
+        name = "Templates" + str(random.randint(999, 99999))
+        name_content = "Content" + str(random.randint(999, 99999))
+        self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
+        self.element_is_visible(Locators.CREATE_TEMPLATES).click()
+        self.element_is_visible(Locators.CREATE_TEMPLATES_NEW).click()
+        for i in range(1, 6):
+            time.sleep(1)
+            self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+            list_of_fields = driver.find_element(By.XPATH, f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[{i}]")
+            list_of_fields.click()
+            self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name"+str(random.randint(999, 99999)))
+            self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+        list_of_fields = driver.find_element(By.XPATH, f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[6]")
+        list_of_fields.click()
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.ANSWER).send_keys("answer 1")
+        self.element_is_visible(Locators.ADD_ANSWER).click()
+        self.element_is_visible(Locators.SAVE_BUTTON).click()
+        """step 5"""
+        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+        self.element_is_visible(Locators.LIST_OF_FIELDS_2).click()
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name"+str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.CHECKBOX_VALUE).click()
+        self.element_is_visible(Locators.INPUT_VALUE).send_keys("Name"+str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        """step 6"""
+        self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name)
+        print(name)
+        self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
+        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        name_of_templates = driver.find_element(By.XPATH, f"//div[contains(text(),'{name}')]")
+        name_of_templates.click()
+        self.element_is_visible(Locators.check_name_input).send_keys(name_content)
+        print(name_content)
+        time.sleep(3)
+        self.element_is_visible(Locators.FOLDER_SAVE).send_keys("Контент 1")
+        # field_input = self.element_is_visible(Locators.EDIT_TEMPLATES)
+        field_input_1 = self.element_is_visible(Locators.EDIT_TEMPLATES_1)
+        field_input_2 = self.element_is_visible(Locators.EDIT_TEMPLATES_2)
+        # field_input_3 = self.element_is_visible(Locators.EDIT_TEMPLATES_3)
+        # field_input_4 = self.element_is_visible(Locators.EDIT_TEMPLATES_4)
+        # field_input_5 = self.element_is_visible(Locators.EDIT_TEMPLATES_5)
+        # field_input_6 = self.element_is_visible(Locators.CHOSE_ANSWER)
+        """add and check text correct link"""
+        text_content = "OpenAI is GPT-3 model is an impressive language model that has gained significant attention. " \
+                       " It has been trained on a massive amount of data and can generate human-like text in a wide range " \
+                       "of topics and styles. You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
+                       "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
+        actions = ActionChains(driver)
+        actions.click(field_input_1)
+        actions.send_keys(text_content)
+        actions.click(field_input_2)
+        actions.perform()
+        text_check_link = self.element_is_visible(Locators.TEXT_CHECK_LINK).get_attribute('href')
+        assert text_check_link == 'https://openai.com/'
+
 
 class StepByScriptPage(BasePage):
     Locators = StepByScriptLocators()
@@ -624,7 +677,6 @@ class StepByScriptPage(BasePage):
         assert check_text_begin == 'Начало'
         check_text_step1 = self.element_is_clickable(self.Locators.CHECK_TEXT_STEP1).text
         assert check_text_step1 == 'Шаг 1'
-
         edit_step_text_check = self.element_is_clickable(self.Locators.EDIT_STEP_TEXT_CHECK)
         edit_step_text_check_value = edit_step_text_check.text
         assert edit_step_text_check_value == 'Редактор шага'
@@ -697,11 +749,23 @@ class StepByScriptPage(BasePage):
         check_alert_text_name_step = self.element_is_visible(self.Locators.CHECK_ALERT_TEXT_NAME_STEP).text
         assert check_alert_text_name_step == 'Не должно быть пустым'
         """add text in textarea"""
-        time.sleep(1)
+        # time.sleep(1)
+        text_content = "OpenAI is GPT-3 model is an impressive language model that has gained significant attention. " \
+                    " It has been trained on a massive amount of data and can generate human-like text in a wide range " \
+                    "of topics and styles. You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
+                    "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
-        self.add_text_in_textarea(driver)
-        time.sleep(2)
-        self.screenshot()
+        actions = ActionChains(driver)
+        actions.send_keys(text_content)
+        actions.move_by_offset(0, 0)
+        actions.click()
+        actions.perform()
+        """check text link correct """
+        check_link_correct = self.element_is_visible(self.Locators.TEXT_CHECK_LINK).get_attribute("href")
+        print(check_link_correct)
+        assert check_link_correct == 'https://openai.com/'
+        # time.sleep(2)
+        # self.screenshot()
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(text_name)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
         check_text_chose_transaction = self.element_is_visible(self.Locators.CHECK_TEXT_CHOSE_TRANSACTION).text
@@ -711,9 +775,6 @@ class StepByScriptPage(BasePage):
         check_text_preview = self.element_is_visible(self.Locators.CHECK_TEXT_PREVIEW).text
         assert check_text_preview == 'Предпросмотр'
         self.element_is_visible(self.Locators.CLOSE_WINDOW_PREVIEW).click()
-        # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
-        # # self.element_is_visible(self.Locators.TEXT_BOLD_IN_TEXTAREA_EDITOR).click()
-        # self.add_text_in_textarea(driver)
         """add step one more"""
         self.element_is_visible(self.Locators.PLUS_BUTTON_ADD_STEP).click()
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
@@ -745,6 +806,11 @@ class CopyPastePage(BasePage):
                        " It has been trained on a massive amount of data and can generate human-like text in a wide range " \
                        "of topics and styles. You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
                        "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
+        import pyperclip
+        # set the clipboard
+        # pyperclip.copy(example_text)
+        # get the clipboard
+        # pyperclip.paste()
         # driver.execute_script("window.open('https://ru.wikipedia.org/wiki/Пикабу')")
         # time.sleep(1)
         # finish = self.element_is_visible(self.Locators.FINISH)
@@ -753,7 +819,6 @@ class CopyPastePage(BasePage):
         # actions = ActionChains(driver)
         # actions.drag_and_drop(start, finish)
         # actions.send_keys(Keys.CONTROL + "c")
-
         # actions.send_keys(Keys.CONTROL + "t")
         # actions.perform()
         # time.sleep(2)
@@ -763,29 +828,90 @@ class CopyPastePage(BasePage):
         # driver.switch_to.window(driver.window_handles[0])
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
-        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(text_name)
+        # time.sleep(10)
         self.element_is_visible(self.Locators.FOLDER_DROPDOWN).send_keys("Контент 1")
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(text_name)
+        # ach = self.element_is_visible(Locators.TEXT_AREA_ARTICLE)
+        # actions.click(ach)
+        # actions.send_keys(Keys.CONTROL + 'v')
+        # actions.perform()
+        # pyperclip.paste()
+        # time.sleep(10)
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(example_text)
         check_link_correct = self.element_is_visible(self.Locators.CHECK_LINK_CORRECT).get_attribute("href")
         print(check_link_correct)
         assert check_link_correct == 'https://openai.com/'
-
         # time.sleep(3)
         # check_text_correct = self.element_is_visible(self.Locators.CHECK_TEXT_CORRECT)
         # print(check_text_correct)
         # assert check_text_correct == "OpenAI is GPT-3 model is an impressive language model that has gained significant attention"
-        time.sleep(15)
+        time.sleep(0.5)
         self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         self.element_is_visible(Locators.TEXTAREA_ARTICLE).send_keys(text_area)
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
-        time.sleep(1)
-        self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+        # time.sleep(1)
+        check_link_correct = self.element_is_visible(self.Locators.CHECK_LINK_CORRECT).get_attribute("href")
+        print(check_link_correct)
+        assert check_link_correct == 'https://openai.com/'
 
+class CreateDraftPage(BasePage):
 
+    Locators = CreateDraftLocators()
+    def alert_draft(self, driver):
+        # self.element_is_visible(Locators.CREATE_BUTTON).click()
+        # self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        # self.element_is_visible(self.Locators.ALERT_CREATE_DRAFT).is_displayed()
+        alert_create_draft = self.element_is_visible(self.Locators.ALERT_CREATE_DRAFT).text
+        assert alert_create_draft == "Контент сохраняется автоматически"
         time.sleep(3)
+        try:
+            # alert_create_draft = self.element_is_visible(self.Locators.ALERT_CREATE_DRAFT).text
+            # print(alert_create_draft)
+            alert_create_draft = driver.find_element(By.XPATH, "//article[text()='Контент сохраняется автоматически']")
+            alert_create_draft_value = alert_create_draft.text
+            print(alert_create_draft_value)
+        except NoSuchElementException:
+            print("плашка исчезла")
+
+    def open_4_tab(self, driver):
+        # base_url
+        # article_url
+        # driver.execute_script(f"window.open('{base_url}')")
+        # time.sleep(5)
+        person = generated_person()
+        name_article = person.first_name + str(random.randint(99, 999))
+        # text_area = person.last_name + str(random.randint(99, 999))
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.FIELD_DRAFT).click()
+
+        for n in range(4):
+            driver.execute_script(f"window.open('{base_url+article_url}')")
+            # name_article = person.first_name + str(random.randint(99, 999))
+            # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
+            time.sleep(1)
+
+        self.driver.switch_to.window(self.driver.window_handles[1])
+
+
+
+        time.sleep(20)
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        self.alert_draft(driver)
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
+
+
+
+
+        # for i in range(1, 3):
+        #     self.driver.switch_to.window(self.driver.window_handles[i])
+        #     name_article = person.first_name + str(random.randint(99, 999))
+        #     self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
+
+        time.sleep(5)
 
 
 
@@ -796,22 +922,6 @@ class CopyPastePage(BasePage):
 
 
 
-
-
-
-
-
-
-    # data_n = ["Выберите шаг", "Сценарий завершён"]
-    #     # assert data_n in data
-    #
-    #     # """check new transaction"""
-    #     # data = []
-    #     # atr = self.elements_are_visible(self.Locators.GO_TO_STEP_ARROW)
-    #     # for n in atr:
-    #     #     n.get_attribute("title")
-    #     #     data.append(n)
-    #     # assert len(data) == 2
 
 
 
