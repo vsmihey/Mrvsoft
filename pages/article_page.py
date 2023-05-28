@@ -293,7 +293,11 @@ class ArticlePage(BasePage):
         print(name_content)
         time.sleep(3)
         self.element_is_visible(Locators.FOLDER_SAVE).send_keys("Контент 1")
-        field_input = self.element_is_visible(Locators.EDIT_TEMPLATES)
+        try:
+            field_input = self.element_is_visible(Locators.EDIT_TEMPLATES)
+        except TimeoutException:
+            time.sleep(1)
+            field_input = self.element_is_visible(Locators.EDIT_TEMPLATES)
         field_input_1 = self.element_is_visible(Locators.EDIT_TEMPLATES_1)
         field_input_2 = self.element_is_visible(Locators.EDIT_TEMPLATES_2)
         field_input_3 = self.element_is_visible(Locators.EDIT_TEMPLATES_3)
