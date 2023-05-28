@@ -209,8 +209,8 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SEARCH_OF_CONTENTS).send_keys(text_fixing)
         print(text_fixing)
         self.element_is_visible(Locators.FIND_OF_CONTENT).click()
-        time.sleep(1)
-        self.screenshot()
+        time.sleep(2)
+        # self.screenshot()
         check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
         check_text_hello_value = check_text_hello.text
         assert check_text_hello_value == "Hello"
@@ -249,7 +249,7 @@ class ArticlePage(BasePage):
         actions.perform()
 
     def add_article_by_templates(self, driver):
-        driver.implicitly_wait(5)
+        driver.implicitly_wait(10)
         person = generated_person()
         name = "Templates" + str(random.randint(999, 99999))
         name_content = "Content" + str(random.randint(999, 99999))
@@ -313,7 +313,6 @@ class ArticlePage(BasePage):
         mail = person.email
         actions.send_keys(mail)
         actions.click(field_input)
-
         actions.perform()
         time.sleep(1)
         check_name_of_templates = driver.find_element(By.XPATH, f"//h1[normalize-space()='{name}']")
@@ -342,12 +341,10 @@ class ArticlePage(BasePage):
             select_field_for_fixing.click()
             select_field_for_fixing.send_keys(Keys.DOWN)
             select_field_for_fixing.send_keys(Keys.RETURN)
-        # time.sleep(5)
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-
         check_utility_text = self.element_is_visible(Locators.UTILITY_TEMPLATE)
         check_utility_text_value = check_utility_text.text
         assert check_utility_text_value == "полезен"
@@ -390,7 +387,6 @@ class ArticlePage(BasePage):
         actions.send_keys(Keys.BACKSPACE)
         actions.send_keys(Keys.BACKSPACE)
         actions.click(field2)
-
         actions.perform()
         # time.sleep(10)
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
@@ -415,15 +411,21 @@ class ArticlePage(BasePage):
         check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         check_name_of_content_value = check_name_of_content.text
         assert check_name_of_content_value == name_content, "name content is not correct"
+        time.sleep(1)
         name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         name_of_content.click()
         time.sleep(1)
-        self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        # self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        time.sleep(3)
+        try:
+            self.element_is_visible(Locators.EDIT_ARTICLE).click()
+        except TimeoutException:
+            self.screenshot()
+            name_of_content.click()
+            self.element_is_visible(Locators.EDIT_ARTICLE).click()
+        time.sleep(1)
         try:
             field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
         except TimeoutException:
+            self.screenshot()
             self.element_is_visible(Locators.EDIT_ARTICLE).click()
             field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
         field5 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR_1)
@@ -499,7 +501,6 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         self.element_is_visible(Locators.CHANGE_TEMPLATES).click()
         self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON_1).click()
