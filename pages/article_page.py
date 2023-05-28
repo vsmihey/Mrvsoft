@@ -414,13 +414,11 @@ class ArticlePage(BasePage):
         time.sleep(1)
         name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         name_of_content.click()
-
         time.sleep(1)
-        self.screenshot()
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         # self.element_is_visible(Locators.EDIT_ARTICLE).click()
         #
-        time.sleep(3)
+        # time.sleep(1)
         try:
             field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
         except TimeoutException:
