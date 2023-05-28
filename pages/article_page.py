@@ -156,7 +156,11 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(text_test)
         time.sleep(1)
         self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
-        self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_area)
+        try:
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_area)
+        except TimeoutException:
+            time.sleep(1)
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_area)
         self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()

@@ -97,8 +97,6 @@ class BasePage:
         """open new tab"""
         driver.execute_script("window.open('https://google.com')")
 
-    # def switch_to_new_tab(self):
-
 
 
 
