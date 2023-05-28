@@ -415,17 +415,15 @@ class ArticlePage(BasePage):
         name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         name_of_content.click()
 
-        time.sleep(20)
+        time.sleep(1)
         self.screenshot()
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         # self.element_is_visible(Locators.EDIT_ARTICLE).click()
-
+        #
         time.sleep(3)
         try:
-            self.screenshot()
             field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
         except TimeoutException:
-            self.screenshot()
             time.sleep(1)
             field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
 
@@ -433,6 +431,9 @@ class ArticlePage(BasePage):
         field6 = driver.find_element(By.XPATH, f"//pre[text()='{mail}']")
         for_click = self.element_is_visible(Locators.FOR_CLICK)
         actions.click(field4)
+        # actions.move_by_offset(0, 0)
+        # actions.click()
+        # actions.perform()
         for n in range(1, 20):
             actions.send_keys(Keys.BACKSPACE)
         actions.click(field5)
@@ -445,7 +446,7 @@ class ArticlePage(BasePage):
             actions.send_keys(Keys.BACKSPACE)
         actions.click(for_click)
         actions.perform()
-        time.sleep(15)
+        time.sleep(5)
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()

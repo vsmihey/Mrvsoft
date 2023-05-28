@@ -452,7 +452,11 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.TEXTAREA_ARTICLE).send_keys(text_article)
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             time.sleep(1)
-            self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+            try:
+                self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+            except TimeoutException:
+                time.sleep(2)
+                self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
             n += 1
             x += 1
             if count_folders >= 4:
