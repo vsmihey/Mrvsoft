@@ -7,7 +7,7 @@ from string import ascii_uppercase
 from pathlib import Path
 import selenium
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException, \
-    WebDriverException
+    WebDriverException, ElementNotInteractableException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
@@ -167,8 +167,13 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys(text_area)
         self.element_is_visible(Locators.FINISH_BUTTON).click()
-        time.sleep(1)
-        self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+        time.sleep(3)
+        try:
+            self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+        except ElementNotInteractableException:
+            time.sleep(2)
+            self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+
         time.sleep(1)
         self.element_is_visible(Locators.SEARCH_HEAD_PAGE).click()
         self.element_is_visible(Locators.BUTTON_FIXING_CONTENT).click()
@@ -418,12 +423,12 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         # self.element_is_visible(Locators.EDIT_ARTICLE).click()
         #
-        # time.sleep(1)
-        try:
-            field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
-        except TimeoutException:
-            time.sleep(1)
-            field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
+        time.sleep(1)
+        # try:
+        field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
+        # except TimeoutException:
+        #     time.sleep(1)
+        #     field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
 
         field5 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR_1)
         field6 = driver.find_element(By.XPATH, f"//pre[text()='{mail}']")
@@ -834,7 +839,7 @@ class CopyPastePage(BasePage):
         # driver.switch_to.window(driver.window_handles[0])
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
-        # time.sleep(10)
+        time.sleep(5)
         self.element_is_visible(self.Locators.FOLDER_DROPDOWN).send_keys("Контент 1")
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(text_name)
         # ach = self.element_is_visible(Locators.TEXT_AREA_ARTICLE)
@@ -901,16 +906,11 @@ class CreateDraftPage(BasePage):
 
         self.driver.switch_to.window(self.driver.window_handles[1])
 
-
-
-        time.sleep(20)
+        time.sleep(2)
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.alert_draft(driver)
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
-
-
-
 
         # for i in range(1, 3):
         #     self.driver.switch_to.window(self.driver.window_handles[i])
