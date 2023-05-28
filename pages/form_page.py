@@ -577,6 +577,7 @@ class FormPage(BasePage):
 
     def check_folder1_folder2(self, driver):
         """CHECK FOLDER 1 AND FOLDER 2"""
+        driver.implicitly_wait(10)
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         self.element_is_visible(Locators.FOLDER1).click()
@@ -626,6 +627,7 @@ class FormPage(BasePage):
 
     def favourites(self, driver):
         """FAVOURITES"""
+        driver.implicitly_wait(10)
         "в избранном не должно быть папок"
         driver.implicitly_wait(10)
         person = generated_person()
@@ -651,7 +653,7 @@ class FormPage(BasePage):
         check_text_structure_value = check_text_structure
         assert check_text_structure_value == 'Управление структурой'
         print("Управление структурой")
-        time.sleep(1)
+        time.sleep(2)
         edit_new_folder = driver.find_element(By.XPATH, f"//div[text()='{first_name}']")
         edit_new_folder.click()
         edit_name = first_name+'777'

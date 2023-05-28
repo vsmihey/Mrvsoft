@@ -66,3 +66,11 @@ text_content = "OpenAI is GPT-3 model is an impressive language model that has g
                     "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
 
 print(len(text_content))
+
+
+# универальный путь
+s = '/foo/bar/zoo/file.ext'
+import ntpath
+import os
+s.replace(os.sep,ntpath.sep)
+'\\foo\\bar\\zoo\\file.ext'

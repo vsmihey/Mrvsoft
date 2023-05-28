@@ -306,6 +306,7 @@ class FormPagesLocators:
     D = (By.XPATH, "//form[@enctype='multipart/form-data']")
     ADD_TEST_PROJECT = (By.XPATH, "//p[text()='добавить проект']")
     TEXT_CHECK_LINK = (By.XPATH, "//a[text()='https://openai.com/']")
+    TARGET_FOLDER_CONTENT = (By.XPATH, "//div[text()='расположение контента']")
 
 
 

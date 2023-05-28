@@ -417,6 +417,7 @@ class ArticlePage(BasePage):
         assert check_name_of_content_value == name_content, "name content is not correct"
         name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         name_of_content.click()
+        time.sleep(1)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         # self.element_is_visible(Locators.EDIT_ARTICLE).click()
         time.sleep(3)
