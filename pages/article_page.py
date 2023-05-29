@@ -673,7 +673,6 @@ class StepByScriptPage(BasePage):
         len_name_text = len(value_text)
         # print(value_text, len(value_text))
         assert len_name_text == 256
-
         self.element_is_clickable(self.Locators.INPUT_TARGET_FOLDER).send_keys('Контент 1')
         """check typography button"""
         try:
@@ -708,8 +707,6 @@ class StepByScriptPage(BasePage):
         except ElementClickInterceptedException:
             time.sleep(5)
             self.element_is_visible(self.Locators.ADD_TRANSITION).click()
-
-
         self.element_is_visible(self.Locators.NEW_TRANSITION).is_displayed()
         placeholder_name = self.element_is_visible(self.Locators.NAME_TRANSACTION_FIELD).get_attribute("placeholder")
         assert placeholder_name == "Введите название", 'name placeholder is not'
@@ -746,7 +743,7 @@ class StepByScriptPage(BasePage):
 
     def new_step(self, driver):
         person = generated_person()
-        text_name = person.first_name + str(random.randint(99, 999))
+        to_get_name = person.first_name + str(random.randint(99, 999))
         text_area = person.last_name + str(random.randint(99, 999))
         """add step"""
         self.element_is_visible(self.Locators.ADD_STEP_BUTTON).click()
@@ -781,9 +778,7 @@ class StepByScriptPage(BasePage):
         check_link_correct = self.element_is_visible(self.Locators.TEXT_CHECK_LINK).get_attribute("href")
         print(check_link_correct)
         assert check_link_correct == 'https://openai.com/'
-        # time.sleep(2)
-        # self.screenshot()
-        self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(text_name)
+        self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(to_get_name)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
         check_text_chose_transaction = self.element_is_visible(self.Locators.CHECK_TEXT_CHOSE_TRANSACTION).text
         assert check_text_chose_transaction == 'Необходимо выбрать шаг'
@@ -810,6 +805,107 @@ class StepByScriptPage(BasePage):
         self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
         text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
         assert text_check_typography_window == 'Настройки публикации контента'
+
+    def check_step_fixing(self, driver):
+        driver.implicitly_wait(10)
+        """fixing added script"""
+        # to_get_name = self.elements_is_present(self.Locators.TO_GET_NAME)
+        # to_get_name_text = to_get_name.get_attribute("value")
+        # print(to_get_name_text)
+        """create step script"""
+        to_get_name = "NAME SCRIPT" + str(random.randint(99, 999))
+        text_fixing = "как помыть крота" + str(random.randint(99, 999))
+        text_content = "Text" + str(random.randint(99, 999))
+        name_of_step = "Step" + str(random.randint(99, 999))
+        self.element_is_visible(self.Locators.INPUT_NAME_PLACEHOLDER).send_keys(to_get_name)
+        print(5)
+        self.element_is_clickable(self.Locators.INPUT_TARGET_FOLDER).send_keys('Контент 1')
+        self.element_is_visible(self.Locators.ADD_STEP_BUTTON).click()
+        self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+        actions = ActionChains(driver)
+        actions.send_keys(text_content)
+        actions.move_by_offset(0, 0)
+        actions.click()
+        actions.perform()
+        self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(name_of_step)
+        self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
+        self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
+        # to_get_name = self.element_is_visible(self.Locators.INPUT_NAME_PLACEHOLDER).get_attribute("value")
+        self.element_is_visible(self.Locators.INPUT_FIXING_FIELD_REQUEST).send_keys(text_fixing)
+        self.element_is_visible(self.Locators.ADD_BUTTON_FIXING_FIELD_REQUEST).click()
+        window_fixing_request = self.element_is_visible(self.Locators.WINDOW_FIXING_REQUEST_TEXT_CHECK).text
+        assert window_fixing_request == "Закрепление контента"
+        display_check_text = self.element_is_visible(self.Locators.DISPLAY_CHECK_TEXT).text
+        assert display_check_text == "отображение"
+        """check radio"""
+        self.element_is_visible(self.Locators.CHECK_RADIO_LINK_CONTENT1).is_selected()
+        self.element_is_visible(self.Locators.CHECK_RADIO_DISABLED).is_displayed()
+        """check content name"""
+        check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
+        assert check_text_content_script == "Контент 1"
+        """check name script"""
+        # time.sleep(1)
+        check_text_name_script = driver.find_element(By.XPATH, f"//p[text()='{to_get_name}']")
+        check_text_name_script_value = check_text_name_script.text
+        assert check_text_name_script_value == to_get_name
+        self.element_is_visible(self.Locators.FINISH_BUTTON_SCRIPT).click()
+        """check text wizard and search"""
+        text_check_window_typography_content = self.element_is_visible(self.Locators.TEXT_CHECK_WINDOW_TYPOGRAPHY_CONTENT).text
+        assert text_check_window_typography_content == 'Настройки публикации контента'
+        text_check_search = self.element_is_visible(self.Locators.TEXT_CHECK_SEARCH).text
+        assert text_check_search == 'поиск'
+        """check text request search fixing"""
+        check_text_request_search_fixing = driver.find_element(By.XPATH, f"//span[text()='{text_fixing}']")
+        check_text_request_search_fixing_value = check_text_request_search_fixing.text
+        assert check_text_request_search_fixing_value == text_fixing
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.TEXT_AREA_ALERT_INPUT).send_keys("Alert")
+        self.element_is_visible(self.Locators.FINISH_BUTTON_SCRIPT).click()
+        """content"""
+        # time.sleep(5)
+        self.element_is_visible(self.Locators.CONTENT_TRANSFER).click()
+        time.sleep(3)
+        self.element_is_visible(self.Locators.CONTENT_SEARCH).click()
+        # time.sleep(5)
+        search_of_contents = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
+        search_of_contents.send_keys(text_fixing)
+        search_of_contents.send_keys(Keys.RETURN)
+        time.sleep(1)
+        """text search of content"""
+        check_text_search = driver.find_element(By.XPATH, f"//p[text()='{to_get_name}']")
+        check_text_search_value = check_text_search.text
+        assert check_text_search_value == to_get_name
+        check_text_fixing_expert = self.element_is_visible(self.Locators.CHECK_TEXT_FIXING_EXPERT).text
+        assert check_text_fixing_expert == "Закреплено экспертом"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class CopyPastePage(BasePage):

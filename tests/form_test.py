@@ -155,6 +155,13 @@ class TestFormPage:
             article_page.delete_all()
             article_page.new_step(driver)
 
+        def test_fixing_script(self, driver):
+            article_page = StepByScriptPage(driver, url)
+            article_page.open()
+            article_page.input_in_my_project(driver)
+            article_page.add_script()
+            article_page.check_step_fixing(driver)
+
     class TestCopyPastePage:
 
         def test_copy_paste(self, driver):

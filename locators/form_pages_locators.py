@@ -363,6 +363,25 @@ class StepByScriptLocators:
     # LIST_DROPDOWN_FIRST_STEP1 = (By.CSS_SELECTOR, "option[label='Выберите шаг']")
     TEXT_CHECK_TYPOGRAPHY_WINDOW = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
     TEXT_CHECK_LINK = (By.XPATH, "//a[text()='https://openai.com/']")
+    """fixing script"""
+    INPUT_FIXING_FIELD_REQUEST = (By.XPATH, "//input[@placeholder='Введите запрос']")
+    ADD_BUTTON_FIXING_FIELD_REQUEST = (By.XPATH, "//p[contains(text(),'Добавить')]")
+    WINDOW_FIXING_REQUEST_TEXT_CHECK = (By.XPATH, "//h3[contains(text(),'Закрепление контента')]")
+    DISPLAY_CHECK_TEXT = (By.XPATH, "//p[contains(text(),'отображение')]")
+    CHECK_RADIO_LINK_CONTENT1 = (By.XPATH, "//span[contains(text(),'Ссылка на контент')]/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
+    CHECK_RADIO_DISABLED = (By.XPATH, "//span[contains(text(),'Содержимое контента')]/../../label[@class='radio-wrapper m-content-fix-wizard__radio-button radio-wrapper--disabled']")
+    CHECK_TEXT_CONTENT_SCRIPT = (By.XPATH, "//p[text()='Контент 1']")
+    FINISH_BUTTON_SCRIPT = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    TEXT_CHECK_WINDOW_TYPOGRAPHY_CONTENT = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
+    TEXT_CHECK_SEARCH = (By.XPATH, "//p[contains(text(),'поиск')]")
+    BUTTON_CONTINUE = (By.XPATH, "//p[contains(text(),'Продолжить')]")
+    TEXT_AREA_ALERT_INPUT = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
+    CONTENT_TRANSFER = (By.XPATH, "//section[@class='m-bread-crumbs']//div[@class='m-button-basic__text'][contains(text(),'Контент 1')]")
+    CONTENT_SEARCH = (By.XPATH, "//div[text()='Поиск']")
+    CHECK_TEXT_FIXING_EXPERT = (By.XPATH, "//p[text()='Закреплено экспертом']")
+    TO_GET_NAME = (By.XPATH, "//input[@class='m-ui-text-input__input']")
+    CLOSE_SCRIPT = (By.XPATH, "//div[@class='popup__close']")
+
 
 class CopyPastePageLocators:
 

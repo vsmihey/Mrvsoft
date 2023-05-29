@@ -758,9 +758,8 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.ARTICLE_FIRST9).click()
         self.add_favourites_to_folder(folder="папка3")
         """check count articles in folder 1"""
-        # time.sleep(2)
         self.element_is_visible(Locators.CREATED_FOLDER1).click()
-        # time.sleep(2)
+        time.sleep(2)
         check_text_count_of_articles = self.element_is_visible(Locators.CHECK_TEXT_COUNT_OF_ARTICLES1)
         check_text_count_of_articles_value = check_text_count_of_articles.text
         assert check_text_count_of_articles_value == '2 документа'

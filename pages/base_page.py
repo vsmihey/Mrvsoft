@@ -98,8 +98,6 @@ class BasePage:
         driver.execute_script("window.open('https://google.com')")
 
 
-
-
     # def element_is_visibility(self, element):
     #     element = element.find_element_by_css_selector("input")
     #     self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
