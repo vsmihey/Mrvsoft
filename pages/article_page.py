@@ -30,7 +30,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         try:
-            time.sleep(0.5)
+            time.sleep(1)
             self.element_is_visible(Locators.TEST_PROJECT).click()
         except TimeoutException:
             self.element_is_visible(Locators.ADD).click()
@@ -973,6 +973,17 @@ class CopyPastePage(BasePage):
 class CreateDraftPage(BasePage):
 
     Locators = CreateDraftLocators()
+
+    def create_name_article(self):
+        person = generated_person()
+        name_article = person.first_name + str(random.randint(99, 999))
+        # self.element_is_visible(Locators.CREATE_BUTTON).click()
+        # self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        time.sleep(3)
+        # self.alert_draft(driver)
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
+
+
     def alert_draft(self, driver):
         # self.element_is_visible(Locators.CREATE_BUTTON).click()
         # self.element_is_visible(Locators.CREATE_ARTICLE).click()
@@ -990,36 +1001,89 @@ class CreateDraftPage(BasePage):
             print("плашка исчезла")
 
     def open_4_tab(self, driver):
-        # base_url
-        # article_url
-        # driver.execute_script(f"window.open('{base_url}')")
-        # time.sleep(5)
+        """open draft"""
         person = generated_person()
         name_article = person.first_name + str(random.randint(99, 999))
         # text_area = person.last_name + str(random.randint(99, 999))
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.FIELD_DRAFT).click()
-
+        """open 4 tab"""
         for n in range(4):
             driver.execute_script(f"window.open('{base_url+article_url}')")
             # name_article = person.first_name + str(random.randint(99, 999))
             # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
             time.sleep(1)
+        """open tab and fill name article"""
+        tab0 = driver.window_handles[0]
+        tab4 = driver.window_handles[1]
+        tab3 = driver.window_handles[2]
+        tab2 = driver.window_handles[3]
+        tab1 = driver.window_handles[4]
+        time.sleep(1)
+        self.driver.switch_to.window(tab1)
+        time.sleep(1)
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name1")
+        self.driver.switch_to.window(tab2)
+        time.sleep(1)
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name2")
+        self.driver.switch_to.window(tab3)
+        time.sleep(1)
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name3")
+        self.driver.switch_to.window(tab4)
+        time.sleep(1)
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name4")
+        """close article tab1"""
+        self.driver.switch_to.window(tab2)
+        time.sleep(10)
+        try:
+            self.element_is_visible(self.Locators.CLOSE_PAGE_ARTICLE).click()
+        except ElementClickInterceptedException:
+            time.sleep(10)
+            self.element_is_visible(self.Locators.CLOSE_PAGE_ARTICLE).click()
+        self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.CREATE_ARTICLE).click()
+        """move to tab4 and hold"""
+        self.driver.switch_to.window(tab4)
+        time.sleep(1)  # Заменить на 30
 
-        self.driver.switch_to.window(self.driver.window_handles[1])
 
-        time.sleep(2)
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
-        self.element_is_visible(Locators.CREATE_ARTICLE).click()
-        self.alert_draft(driver)
-        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
+
+
+        self.driver.switch_to.window(tab0)
+        # self.element_is_visible(self.Locators.CHECK_TEXT_FIELD).is_displayed()
+        # self.element_is_visible(self.Locators.CHECK_TEXT_NAMES_ARTICLE).is_displayed()
+        # self.element_is_visible(self.Locators.CHECK_TEXT_NAMES_ARTICLE).is_displayed()
+        # self.element_is_visible(self.Locators.DEL_DRAFT_SVG).is_displayed()
+        # self.element_is_visible(self.Locators.TIME_OF_CREATE_ARTICLE).is_displayed()
+        # self.element_is_visible(self.Locators.TIME_OF_CREATE_ARTICLE1).click()
+
+
+
+
+
+
+
+
+
+
+
+
+        time.sleep(3)
+
+
+
+        # time.sleep(2)
+        # self.element_is_visible(Locators.CREATE_BUTTON).click()
+        # self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        # time.sleep(3)
+        # self.alert_draft(driver)
+        # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
 
         # for i in range(1, 3):
         #     self.driver.switch_to.window(self.driver.window_handles[i])
         #     name_article = person.first_name + str(random.randint(99, 999))
         #     self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
 
-        time.sleep(5)
 
 
 

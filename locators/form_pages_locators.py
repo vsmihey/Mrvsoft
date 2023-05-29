@@ -395,6 +395,15 @@ class CreateDraftLocators:
 
     ALERT_CREATE_DRAFT = (By.XPATH, "//article[text()='Контент сохраняется автоматически']")
     FIELD_DRAFT = (By.XPATH, "//p[contains(text(),'Черновики')]")
+    CLOSE_PAGE_ARTICLE = (By.XPATH, "//div[@class='article-editor__controls']//*[local-name()='svg']")
+    # CLOSE_CREATE_EDIT_CONTENT_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")
+    CREATE_ARTICLE = (By.XPATH, "//div[contains(text(),'Статья')]")
+    CREATE_BUTTON = (By.XPATH, "//div[text()='Создать']")
+    CHECK_TEXT_FIELD = (By.XPATH, "//div[@class='m-popup__root']//section[3]//span[text()='Контент 1']")
+    CHECK_TEXT_NAMES_ARTICLE = (By.XPATH, "//div[@class='m-popup__root']//section[3]//span[text()='Mihey Andrey']")
+    DEL_DRAFT_SVG = (By.XPATH, "(//div[@class='m-draft-card__top-right-element'])[3]")
+    TIME_OF_CREATE_ARTICLE = (By.XPATH, "(//div[@class='m-drafts-list__date'])[3]")
+    TIME_OF_CREATE_ARTICLE1 = (By.XPATH, "(//div[@class='m-drafts-list__date'])[2]")
 
 
 
