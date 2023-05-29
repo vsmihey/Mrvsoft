@@ -708,6 +708,8 @@ class StepByScriptPage(BasePage):
         except ElementClickInterceptedException:
             time.sleep(5)
             self.element_is_visible(self.Locators.ADD_TRANSITION).click()
+
+
         self.element_is_visible(self.Locators.NEW_TRANSITION).is_displayed()
         placeholder_name = self.element_is_visible(self.Locators.NAME_TRANSACTION_FIELD).get_attribute("placeholder")
         assert placeholder_name == "Введите название", 'name placeholder is not'

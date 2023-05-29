@@ -255,8 +255,6 @@ class FormPagesLocators:
     """CHECK_FIXING_TEMPLATES"""
     # EDIT_ARTICLE = (By.XPATH, "//*[name()='svg']/../button[@class='article-modal__controls-item icon-button']")
     EDIT_ARTICLE = (By.XPATH, "//div[text()='изменить']")
-
-
     ANSWER = (By.XPATH, "//input[@placeholder='Введите название ответа']")
     ADD_ANSWER = (By.XPATH, "//p[contains(text(),'добавить')]")
     SAVE_BUTTON = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']")
