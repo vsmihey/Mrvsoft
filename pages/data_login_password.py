@@ -3,7 +3,6 @@ login = 'm.andrey'
 password = 'eb68a96c'
 
 
-
 # неверные данные
 login_incorrect = 'm.andreyq'
 password_incorrect = '395a5555'
