@@ -1,6 +1,6 @@
 # верные данные
-login = 'a.mihey'
-password = '1be55449'
+login = 'm.andrey'
+password = 'eb68a96c'
 
 
 

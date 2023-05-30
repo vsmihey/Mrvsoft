@@ -59,7 +59,7 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.TEST_PROJECT).click()
             time.sleep(1)
             self.element_is_visible(Locators.CONTENT).click()
-            time.sleep(5)
+            time.sleep(12)
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
@@ -70,7 +70,7 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.ADD_TEST_PROJECT).click()
             self.element_is_visible(Locators.TEST_PROJECT).click()
             self.element_is_visible(Locators.CONTENT).click()
-            time.sleep(2)
+            time.sleep(12)
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
@@ -396,6 +396,7 @@ class FormPage(BasePage):
     def delete_some_folder(self, driver, count_folders=3): # ставить на 1 папку больше
         """DELETE SOME FOLDERS"""
         self.element_is_visible(Locators.CONTENT).click()
+        time.sleep(1)
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         n = 0
         try:

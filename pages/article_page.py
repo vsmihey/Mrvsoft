@@ -39,7 +39,7 @@ class ArticlePage(BasePage):
             self.element_is_visible(Locators.ADD_PROJECT_BUTTON).click()
             self.element_is_visible(Locators.TEST_PROJECT).click()
             self.element_is_visible(Locators.CONTENT).click()
-            time.sleep(2)
+            time.sleep(12)
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
@@ -50,7 +50,7 @@ class ArticlePage(BasePage):
             self.element_is_visible(Locators.ADD_PROJECT_BUTTON).click()
             self.element_is_visible(Locators.TEST_PROJECT).click()
             self.element_is_visible(Locators.CONTENT).click()
-            time.sleep(2)
+            time.sleep(12)
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
@@ -631,7 +631,7 @@ class ArticlePage(BasePage):
         actions.send_keys(text_content)
         actions.click(field_input_2)
         actions.perform()
-        time.sleep(1)
+        time.sleep(5)
         text_check_link = self.element_is_visible(Locators.TEXT_CHECK_LINK).get_attribute('href')
         assert text_check_link == 'https://openai.com/'
 
@@ -778,7 +778,7 @@ class StepByScriptPage(BasePage):
         actions.click()
         actions.perform()
         """check text link correct """
-        time.sleep(1)
+        time.sleep(5)
         check_link_correct = self.element_is_visible(self.Locators.TEXT_CHECK_LINK).get_attribute("href")
         print(check_link_correct)
         assert check_link_correct == 'https://openai.com/'
@@ -884,12 +884,6 @@ class StepByScriptPage(BasePage):
         assert check_text_fixing_expert == "Закреплено экспертом"
 
 
-
-
-
-
-
-
 class CopyPastePage(BasePage):
     Locators = CopyPastePageLocators()
 
@@ -933,7 +927,8 @@ class CopyPastePage(BasePage):
         # pyperclip.paste()
         # time.sleep(10)
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(example_text)
-        time.sleep(1)
+        # self.screenshot()
+        time.sleep(5)
         check_link_correct = self.element_is_visible(self.Locators.CHECK_LINK_CORRECT).get_attribute("href")
         print(check_link_correct)
         assert check_link_correct == 'https://openai.com/'
