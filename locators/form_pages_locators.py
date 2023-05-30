@@ -351,7 +351,8 @@ class StepByScriptLocators:
     """alerts text"""
     CHECK_ALERT_TEXT_CONTENT_STEP = (By.XPATH, "//div[text()='Не должно быть пустым']/../div[2]")
     CHECK_ALERT_TEXT_NAME_STEP = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--14x14'][contains(text(),'Не должно быть пустым')]")
-    INPUT_NAME_FIRST_STEP = (By.XPATH, "//input[@name='articleName']")
+    # INPUT_NAME_FIRST_STEP = (By.XPATH, "//input[@name='articleName']")
+    INPUT_NAME_FIRST_STEP = (By.XPATH, "(//input[@placeholder='Введите название'])[2]")
     BUTTON_PREVIEW = (By.CSS_SELECTOR, "button[data-tip='предпросмотр']")
     """drop down step"""
     CHECK_TEXT_CHOSE_TRANSACTION = (By.XPATH, "//div[text()='Необходимо выбрать шаг']")
@@ -361,7 +362,8 @@ class StepByScriptLocators:
     # TEXT_BOLD_IN_TEXTAREA_EDITOR = (By.CSS_SELECTOR, "//span[@class='cke_button_icon cke_button__bold_icon']")
     TEXT_BOLD_IN_TEXTAREA_EDITOR = (By.XPATH, "//span[text()='полужирный']")
     # LIST_DROPDOWN_FIRST_STEP1 = (By.CSS_SELECTOR, "option[label='Выберите шаг']")
-    TEXT_CHECK_TYPOGRAPHY_WINDOW = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
+    # TEXT_CHECK_TYPOGRAPHY_WINDOW = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
+    TEXT_CHECK_TYPOGRAPHY_WINDOW = (By.XPATH, "//h3[text()='Настройки публикации контента']")
     TEXT_CHECK_LINK = (By.XPATH, "//a[text()='https://openai.com/']")
     """fixing script"""
     INPUT_FIXING_FIELD_REQUEST = (By.XPATH, "//input[@placeholder='Введите запрос']")
