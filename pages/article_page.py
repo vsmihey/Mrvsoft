@@ -563,7 +563,6 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.CONFIRM_DEL_ONE_MORE).click()
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.FINISH_BUTTON).click()
-
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
         self.element_is_visible(Locators.SEARCH_HEAD_PAGE).click()
         search_of_contents = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
@@ -783,9 +782,7 @@ class StepByScriptPage(BasePage):
         # check_link_correct = self.element_is_visible(self.Locators.TEXT_CHECK_LINK).get_attribute("href")
         # print(check_link_correct)
         # assert check_link_correct == 'https://openai.com/'
-        time.sleep(10)
-
-
+        # time.sleep(10)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(to_get_name)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
         check_text_chose_transaction = self.element_is_visible(self.Locators.CHECK_TEXT_CHOSE_TRANSACTION).text
@@ -810,6 +807,7 @@ class StepByScriptPage(BasePage):
         assert check_text_step1 == 'Шаг 1'
         check_text_step2 = self.element_is_visible(self.Locators.CHECK_TEXT_STEP2).text
         assert check_text_step2 == 'Шаг 2'
+        time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
         time.sleep(1)
         text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
@@ -827,16 +825,17 @@ class StepByScriptPage(BasePage):
         text_content = "Text" + str(random.randint(99, 999))
         name_of_step = "Step" + str(random.randint(99, 999))
         self.element_is_visible(self.Locators.INPUT_NAME_PLACEHOLDER).send_keys(to_get_name)
-        print(5)
         self.element_is_clickable(self.Locators.INPUT_TARGET_FOLDER).send_keys('Контент 1')
         self.element_is_visible(self.Locators.ADD_STEP_BUTTON).click()
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+        time.sleep(1)
         actions = ActionChains(driver)
         actions.send_keys(text_content)
+        time.sleep(1)
         actions.move_by_offset(0, 0)
         actions.click()
         actions.perform()
-        time.sleep(1)
+        time.sleep(2)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(name_of_step)
         self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
         self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
@@ -1029,6 +1028,11 @@ class CreateDraftPage(BasePage):
 
 
         time.sleep(3)
+
+
+
+
+
 
 
 
