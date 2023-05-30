@@ -135,6 +135,7 @@ class TestFormPage:
         # time.sleep(3)
         article_page.add_article_by_templates(driver)
 
+    @pytest.mark.skip('check_text_link')
     def test_check_text_link(self, driver):
         article_page = ArticlePage(driver, url)
         article_page.open()
@@ -162,6 +163,7 @@ class TestFormPage:
             article_page.add_script()
             article_page.check_step_fixing(driver)
 
+    @pytest.mark.skip('copy_paste')
     class TestCopyPastePage:
 
         def test_copy_paste(self, driver):

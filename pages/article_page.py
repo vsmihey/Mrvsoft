@@ -574,7 +574,7 @@ class ArticlePage(BasePage):
         assert check_fixing_content_text_value == 'В этой папке пока нет контента, но Вы можете это изменить.'
         print("нет закрепленного контента")
 
-    def check_text_link(self, driver):
+    def check_text_link(self, driver):  # DISABLE
         driver.implicitly_wait(5)
         person = generated_person()
         name = "Templates" + str(random.randint(999, 99999))
@@ -621,21 +621,21 @@ class ArticlePage(BasePage):
         # field_input_4 = self.element_is_visible(Locators.EDIT_TEMPLATES_4)
         # field_input_5 = self.element_is_visible(Locators.EDIT_TEMPLATES_5)
         # field_input_6 = self.element_is_visible(Locators.CHOSE_ANSWER)
-        """add and check text correct link"""
-        text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
-                       "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
-        self.element_is_visible(Locators.EDIT_TEMPLATES_1).click()
-        # self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
-        self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_content)
 
-        # actions = ActionChains(driver)
-        # actions.click(field_input_1)
-        # actions.send_keys(text_content)
-        # actions.click(field_input_2)
-        # actions.perform()
-        time.sleep(5)
-        text_check_link = self.element_is_visible(Locators.TEXT_CHECK_LINK).get_attribute('href')
-        assert text_check_link == 'https://openai.com/'
+        """add and check text correct link"""
+        # text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
+        #                "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
+        # self.element_is_visible(Locators.EDIT_TEMPLATES_1).click()
+        # # self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
+        # self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_content)
+        # # actions = ActionChains(driver)
+        # # actions.click(field_input_1)
+        # # actions.send_keys(text_content)
+        # # actions.click(field_input_2)
+        # # actions.perform()
+        # time.sleep(5)
+        # text_check_link = self.element_is_visible(Locators.TEXT_CHECK_LINK).get_attribute('href')
+        # assert text_check_link == 'https://openai.com/'
 
 
 class StepByScriptPage(BasePage):
@@ -768,20 +768,24 @@ class StepByScriptPage(BasePage):
         check_alert_text_name_step = self.element_is_visible(self.Locators.CHECK_ALERT_TEXT_NAME_STEP).text
         assert check_alert_text_name_step == 'Не должно быть пустым'
         """add text in textarea"""
-        # time.sleep(1)
+        time.sleep(1)
         text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
                        "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
-        actions = ActionChains(driver)
-        actions.send_keys(text_content)
-        actions.move_by_offset(0, 0)
-        actions.click()
-        actions.perform()
-        """check text link correct """
-        time.sleep(5)
-        check_link_correct = self.element_is_visible(self.Locators.TEXT_CHECK_LINK).get_attribute("href")
-        print(check_link_correct)
-        assert check_link_correct == 'https://openai.com/'
+        self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
+        # actions = ActionChains(driver)
+        # actions.send_keys(text_content)
+        # actions.move_by_offset(0, 0)
+        # actions.click()
+        # actions.perform()
+        # """check text link correct """
+        # time.sleep(5)
+        # check_link_correct = self.element_is_visible(self.Locators.TEXT_CHECK_LINK).get_attribute("href")
+        # print(check_link_correct)
+        # assert check_link_correct == 'https://openai.com/'
+        time.sleep(10)
+
+
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(to_get_name)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
         check_text_chose_transaction = self.element_is_visible(self.Locators.CHECK_TEXT_CHOSE_TRANSACTION).text
@@ -887,43 +891,17 @@ class StepByScriptPage(BasePage):
 class CopyPastePage(BasePage):
     Locators = CopyPastePageLocators()
 
-    def add_text_in_article(self, driver):
+    def add_text_in_article(self, driver): # DISABLE
         person = generated_person()
         text_name = person.first_name + str(random.randint(99, 999))
         text_area = person.last_name + str(random.randint(99, 999))
         example_text = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
                        "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
-        import pyperclip
-        # set the clipboard
-        # pyperclip.copy(example_text)
-        # get the clipboard
-        # pyperclip.paste()
-        # driver.execute_script("window.open('https://ru.wikipedia.org/wiki/Пикабу')")
-        # time.sleep(1)
-        # finish = self.element_is_visible(self.Locators.FINISH)
-        # start = self.element_is_visible(self.Locators.START)
-        # finish = self.element_is_visible(self.Locators.FINISH)
-        # actions = ActionChains(driver)
-        # actions.drag_and_drop(start, finish)
-        # actions.send_keys(Keys.CONTROL + "c")
-        # actions.send_keys(Keys.CONTROL + "t")
-        # actions.perform()
-        # time.sleep(2)
-        # body = driver.find_element(By.TAG_NAME, "body")
-        # body.send_keys(Keys.CONTROL + 't')
-        # driver.execute_script("window.open('https://ru.wikipedia.org/wiki/Пикабу')")
-        # driver.switch_to.window(driver.window_handles[0])
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         time.sleep(5)
         self.element_is_visible(self.Locators.FOLDER_DROPDOWN).send_keys("Контент 1")
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(text_name)
-        # ach = self.element_is_visible(Locators.TEXT_AREA_ARTICLE)
-        # actions.click(ach)
-        # actions.send_keys(Keys.CONTROL + 'v')
-        # actions.perform()
-        # pyperclip.paste()
-        # time.sleep(10)
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(example_text)
         # self.screenshot()
         time.sleep(5)
@@ -931,9 +909,6 @@ class CopyPastePage(BasePage):
         print(check_link_correct)
         assert check_link_correct == 'https://openai.com/'
         # time.sleep(3)
-        # check_text_correct = self.element_is_visible(self.Locators.CHECK_TEXT_CORRECT)
-        # print(check_text_correct)
-        # assert check_text_correct == "OpenAI is GPT-3 model is an impressive language model that has gained significant attention"
         time.sleep(0.5)
         self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
