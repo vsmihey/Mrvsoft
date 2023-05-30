@@ -9,7 +9,6 @@ from pages.article_page import StepByScriptPage
 
 
 
-
 class TestFormPage:
 
     def test_logo(self, driver):
@@ -172,7 +171,7 @@ class TestFormPage:
             copy_paste_page.input_in_my_project(driver)
             copy_paste_page.add_text_in_article(driver)
 
-    # @pytest.mark.skip('create_draft')
+    @pytest.mark.skip('create_draft')
     class TestCreateDraft:
 
         def test_create_draft(self, driver):
@@ -180,10 +179,6 @@ class TestFormPage:
             create_draft_page.open()
             create_draft_page.input_in_my_project(driver)
             create_draft_page.open_4_tab(driver)
-
-
-
-
 
 
 

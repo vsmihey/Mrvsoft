@@ -811,6 +811,7 @@ class StepByScriptPage(BasePage):
         check_text_step2 = self.element_is_visible(self.Locators.CHECK_TEXT_STEP2).text
         assert check_text_step2 == 'Шаг 2'
         self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
+        time.sleep(1)
         text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
         assert text_check_typography_window == 'Настройки публикации контента'
 
@@ -835,6 +836,7 @@ class StepByScriptPage(BasePage):
         actions.move_by_offset(0, 0)
         actions.click()
         actions.perform()
+        time.sleep(1)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(name_of_step)
         self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
         self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
