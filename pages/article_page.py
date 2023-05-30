@@ -435,7 +435,6 @@ class ArticlePage(BasePage):
         # except TimeoutException:
         #     time.sleep(1)
         #     field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
-
         field5 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR_1)
         field6 = driver.find_element(By.XPATH, f"//pre[text()='{mail}']")
         for_click = self.element_is_visible(Locators.FOR_CLICK)
@@ -746,6 +745,7 @@ class StepByScriptPage(BasePage):
         time.sleep(1)
 
     def new_step(self, driver):
+        actions = ActionChains(driver)
         person = generated_person()
         to_get_name = person.first_name + str(random.randint(99, 999))
         text_area = person.last_name + str(random.randint(99, 999))
@@ -768,21 +768,23 @@ class StepByScriptPage(BasePage):
         assert check_alert_text_name_step == 'Не должно быть пустым'
         """add text in textarea"""
         time.sleep(1)
-        text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
-                       "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
+        # text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
+        #                "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
+        text_content = "Text Content Example"
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
-        self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
-        # actions = ActionChains(driver)
-        # actions.send_keys(text_content)
-        # actions.move_by_offset(0, 0)
-        # actions.click()
+        # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
+        actions.send_keys(text_content).perform()
+        time.sleep(1)
+        actions.move_by_offset(0, 0).perform()
+        time.sleep(1)
+        actions.click().perform()
         # actions.perform()
         # """check text link correct """
         # time.sleep(5)
         # check_link_correct = self.element_is_visible(self.Locators.TEXT_CHECK_LINK).get_attribute("href")
         # print(check_link_correct)
         # assert check_link_correct == 'https://openai.com/'
-        # time.sleep(10)
+        time.sleep(1)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(to_get_name)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
         check_text_chose_transaction = self.element_is_visible(self.Locators.CHECK_TEXT_CHOSE_TRANSACTION).text
@@ -814,6 +816,7 @@ class StepByScriptPage(BasePage):
         assert text_check_typography_window == 'Настройки публикации контента'
 
     def check_step_fixing(self, driver):
+        actions = ActionChains(driver)
         driver.implicitly_wait(10)
         """fixing added script"""
         # to_get_name = self.elements_is_present(self.Locators.TO_GET_NAME)
@@ -829,12 +832,13 @@ class StepByScriptPage(BasePage):
         self.element_is_visible(self.Locators.ADD_STEP_BUTTON).click()
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
         time.sleep(1)
-        actions = ActionChains(driver)
-        actions.send_keys(text_content)
+
+        actions.send_keys(text_content).perform()
         time.sleep(1)
-        actions.move_by_offset(0, 0)
-        actions.click()
-        actions.perform()
+        actions.move_by_offset(0, 0).perform()
+        time.sleep(1)
+        actions.click().perform()
+        # actions.perform()
         time.sleep(1)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(name_of_step)
         self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
@@ -970,15 +974,15 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.FIELD_DRAFT).click()
         """open 4 tab"""
-        # for n in range(4):
-        #     driver.execute_script(f"window.open('{base_url}')")
-        #     time.sleep(1)
-        #     self.element_is_visible(Locators.TEST_PROJECT).click()
-        #     self.element_is_visible(Locators.CREATE_BUTTON).click()
-        #     self.element_is_visible(Locators.CREATE_ARTICLE).click()
-        #     # name_article = person.first_name + str(random.randint(99, 999))
-        #     # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
-        #     time.sleep(1)
+        for n in range(4):
+            driver.execute_script(f"window.open('{base_url}')")
+            time.sleep(2)
+            self.element_is_visible(Locators.TEST_PROJECT).click()
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_ARTICLE).click()
+            # name_article = person.first_name + str(random.randint(99, 999))
+            # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
+            time.sleep(1)
         # self.open_tab_send_name(driver, name="Article_Name1")
         # self.open_tab_send_name(driver, name="Article_Name2")
         # self.open_tab_send_name(driver, name="Article_Name3")
@@ -1016,7 +1020,6 @@ class CreateDraftPage(BasePage):
         """move to tab4 and hold"""
         self.driver.switch_to.window(tab4)
         time.sleep(1)  # Заменить на 30
-
 
         self.driver.switch_to.window(tab0)
         # self.element_is_visible(self.Locators.CHECK_TEXT_FIELD).is_displayed()
@@ -1056,22 +1059,6 @@ class CreateDraftPage(BasePage):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     # def mytest(self, driver):
     #     driver.implicitly_wait(10)
     #     self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("text_test")
@@ -1086,6 +1073,8 @@ class CreateDraftPage(BasePage):
     #     path = str(avatar)
     #     self.elements_is_present(Locators.ddd).send_keys(path)
     #     time.sleep(5)
+
+
 
 
 
