@@ -624,11 +624,15 @@ class ArticlePage(BasePage):
         """add and check text correct link"""
         text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
                        "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
-        actions = ActionChains(driver)
-        actions.click(field_input_1)
-        actions.send_keys(text_content)
-        actions.click(field_input_2)
-        actions.perform()
+        self.element_is_visible(Locators.EDIT_TEMPLATES_1).click()
+        # self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
+        self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_content)
+
+        # actions = ActionChains(driver)
+        # actions.click(field_input_1)
+        # actions.send_keys(text_content)
+        # actions.click(field_input_2)
+        # actions.perform()
         time.sleep(5)
         text_check_link = self.element_is_visible(Locators.TEXT_CHECK_LINK).get_attribute('href')
         assert text_check_link == 'https://openai.com/'
