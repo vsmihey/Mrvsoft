@@ -622,9 +622,7 @@ class ArticlePage(BasePage):
         # field_input_5 = self.element_is_visible(Locators.EDIT_TEMPLATES_5)
         # field_input_6 = self.element_is_visible(Locators.CHOSE_ANSWER)
         """add and check text correct link"""
-        text_content = "OpenAI is GPT-3 model is an impressive language model that has gained significant attention. " \
-                       " It has been trained on a massive amount of data and can generate human-like text in a wide range " \
-                       "of topics and styles. You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
+        text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
                        "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
         actions = ActionChains(driver)
         actions.click(field_input_1)
@@ -767,10 +765,8 @@ class StepByScriptPage(BasePage):
         assert check_alert_text_name_step == 'Не должно быть пустым'
         """add text in textarea"""
         # time.sleep(1)
-        text_content = "OpenAI is GPT-3 model is an impressive language model that has gained significant attention. " \
-                    " It has been trained on a massive amount of data and can generate human-like text in a wide range " \
-                    "of topics and styles. You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
-                    "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
+        text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
+                       "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
         actions = ActionChains(driver)
         actions.send_keys(text_content)
@@ -891,9 +887,7 @@ class CopyPastePage(BasePage):
         person = generated_person()
         text_name = person.first_name + str(random.randint(99, 999))
         text_area = person.last_name + str(random.randint(99, 999))
-        example_text = "OpenAI is GPT-3 model is an impressive language model that has gained significant attention. " \
-                       " It has been trained on a massive amount of data and can generate human-like text in a wide range " \
-                       "of topics and styles. You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
+        example_text = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
                        "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
         import pyperclip
         # set the clipboard
@@ -980,9 +974,10 @@ class CreateDraftPage(BasePage):
 
     def open_tab_send_name(self, driver, name="Article_Name1"):
         driver.execute_script(f"window.open('{base_url}')")
-        time.sleep(1)
+        time.sleep(5)
         self.element_is_visible(Locators.TEST_PROJECT).click()
         self.element_is_visible(Locators.CREATE_BUTTON).click()
+        time.sleep(10)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name)
         return name
@@ -1004,10 +999,10 @@ class CreateDraftPage(BasePage):
         #     # name_article = person.first_name + str(random.randint(99, 999))
         #     # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
         #     time.sleep(1)
-        self.open_tab_send_name(driver, name="Article_Name1")
-        self.open_tab_send_name(driver, name="Article_Name2")
-        self.open_tab_send_name(driver, name="Article_Name3")
-        self.open_tab_send_name(driver, name="Article_Name4")
+        # self.open_tab_send_name(driver, name="Article_Name1")
+        # self.open_tab_send_name(driver, name="Article_Name2")
+        # self.open_tab_send_name(driver, name="Article_Name3")
+        # self.open_tab_send_name(driver, name="Article_Name4")
 
         """open tab and fill name article"""
         tab0 = driver.window_handles[0]
@@ -1050,16 +1045,6 @@ class CreateDraftPage(BasePage):
         # self.element_is_visible(self.Locators.DEL_DRAFT_SVG).is_displayed()
         # self.element_is_visible(self.Locators.TIME_OF_CREATE_ARTICLE).is_displayed()
         # self.element_is_visible(self.Locators.TIME_OF_CREATE_ARTICLE1).click()
-
-
-
-
-
-
-
-
-
-
 
 
         time.sleep(3)
