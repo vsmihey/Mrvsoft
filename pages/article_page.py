@@ -216,7 +216,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SEARCH_OF_CONTENTS).send_keys(text_fixing)
         print(text_fixing)
         self.element_is_visible(Locators.FIND_OF_CONTENT).click()
-        time.sleep(2)
+        time.sleep(5)
         # self.screenshot()
         check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
         check_text_hello_value = check_text_hello.text
