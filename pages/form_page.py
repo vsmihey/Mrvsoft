@@ -94,7 +94,7 @@ class FormPage(BasePage):
         check_password_text = self.element_is_visible(Locators.INCORRECT_PASSWORD_TEXT)
         check_password_text_value = check_password_text.text
         assert check_password_text_value == 'Неверный пароль'
-        print(f'Текст: <{check_logit_text_value}> и <{check_password_text_value}> на странице авторизации УСПЕШНО')
+        # print(f'Текст: <{check_logit_text_value}> и <{check_password_text_value}> на странице авторизации УСПЕШНО')
 
     def restore_incorrect(self):
         """RESTORE INPUT INCORRECT LOGIN"""
@@ -108,7 +108,7 @@ class FormPage(BasePage):
         check_logit_text = self.element_is_visible(Locators.INCORRECT_LOGIN_TEXT)
         check_logit_text_value = check_logit_text.text
         assert check_logit_text_value == 'Неверный логин'
-        print(f'Текст: <{check_logit_text_value}> на странице восстановления УСПЕШНО')
+        # print(f'Текст: <{check_logit_text_value}> на странице восстановления УСПЕШНО')
 
     def restore_correct(self):
         """RESTORE PASSWORD BY CORRECT LOGIN END PUSH REMEMBER PASSWORD"""
@@ -122,15 +122,15 @@ class FormPage(BasePage):
         check_page_author = self.element_is_visible(Locators.PAGE_AUTH)
         check_page_author_value = check_page_author.text
         assert check_page_author_value == 'Вход в систему'
-        print('Письмо с новым паролем отправлено на почту УСПЕШНО')
-        print(f'Страница {check_page_author_value} УСПЕШНО')
+        # print('Письмо с новым паролем отправлено на почту УСПЕШНО')
+        # print(f'Страница {check_page_author_value} УСПЕШНО')
 
     def check_project_page(self):
         """CHECK PAGE BY WORDS"""
         check_project = self.element_is_visible(Locators.CHANGE_PROJECT)
         check_project_value = check_project.text
         assert check_project_value == 'Выберите проект'
-        print('Страница ' + check_project_value + ' открыта')
+        # print('Страница ' + check_project_value + ' открыта')
 
     def logo_head(self):
         """LOGO"""
@@ -155,7 +155,7 @@ class FormPage(BasePage):
         title = driver.title
         result = f'{name_} / {name_project} — Minervasoft'
         assert title == result
-        print(result)
+        # print(result)
 
     def all_title(self, driver):
         """CHECK ALL TITLE"""
@@ -217,13 +217,13 @@ class FormPage(BasePage):
         first_name = person.first_name
         email = person.email
         self.element_is_visible(Locators.SETTINGS).click()
-        print("settings")
+        # print("settings")
         self.element_is_visible(Locators.PERSONS).click()
-        print("person")
+        # print("person")
         self.element_is_visible(Locators.NEW_PERSON).click()
-        print("new person")
+        # print("new person")
         self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Администратор')
-        print("administrator")
+        # print("administrator")
         self.remove_class_script()
         """add avatar"""
         avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
@@ -233,7 +233,7 @@ class FormPage(BasePage):
         text_name = self.element_is_visible(Locators.UPLOAD_FILE_NAME)
         text_name_value = text_name.text
         assert text_name_value == 'animal.jpeg'
-        print('file name is correct')
+        # print('file name is correct')
         self.button_invisible_check(driver)
         self.element_is_visible(Locators.LAST_NAME).send_keys(last_name)
         self.button_invisible_check(driver)
@@ -245,13 +245,13 @@ class FormPage(BasePage):
         check_text_must_be = self.element_is_visible(Locators.CHECK_MUST_BE_ADD)
         check_text_must_be_value = check_text_must_be.text
         assert check_text_must_be_value == 'Должно быть заполнено'
-        print(check_text_must_be_value)
+        # print(check_text_must_be_value)
         self.element_is_visible(Locators.EMAIL).send_keys(email)
         self.element_is_visible(Locators.SAVE_PERSON).click()
         check_text_login_used = self.element_is_visible(Locators.CHECK_LOGIN_IS_USED)
         check_text_login_used_value = check_text_login_used.text
         assert check_text_login_used_value == 'Данный логин уже используется'
-        print(check_text_login_used_value)
+        # print(check_text_login_used_value)
         value_random = str(random.randint(999,9999))
         self.element_is_visible(Locators.LOGIN_NEW_PERSON).clear()
         self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login+value_random)
@@ -262,18 +262,18 @@ class FormPage(BasePage):
         text_check_created_new_user_name = driver.find_element(By.XPATH, f"//span[text()='{name_check}']")
         text_check_created_new_user_name_value = text_check_created_new_user_name.text
         assert text_check_created_new_user_name_value == name_check
-        print(text_check_created_new_user_name_value)
+        # print(text_check_created_new_user_name_value)
         """check result create new person login"""
         text_check_created_new_user_login = driver.find_element(By.XPATH, f"//span[text()='{login+value_random} ']")
         text_check_created_new_user_value = text_check_created_new_user_login.text
         assert text_check_created_new_user_value == login+value_random
-        print(text_check_created_new_user_value)
+        # print(text_check_created_new_user_value)
         """check result create new person mail"""
         email_check = email
         text_check_created_new_user_mail = driver.find_element(By.XPATH, f"//a[text()='{email_check}']")
         text_check_created_new_mail_value = text_check_created_new_user_mail.text
         assert text_check_created_new_mail_value == email_check
-        print(text_check_created_new_mail_value)
+        # print(text_check_created_new_mail_value)
 
     def button_invisible_check(self, driver):
         """CHECK INVISIBLE BUTTON"""
@@ -315,7 +315,7 @@ class FormPage(BasePage):
         text_check_created_new_role = driver.find_element(By.XPATH, f"//span[text()='{check_role}']")
         text_check_created_new_role_value = text_check_created_new_role.text
         assert text_check_created_new_role_value == check_role
-        print(text_check_created_new_role_value)
+        # print(text_check_created_new_role_value)
         self.element_is_visible(Locators.EDIT_NEW_ROLE).click()
         self.element_is_clickable(Locators.DEACTIVATE_ROLE)
         for x in range(1, 14):
@@ -348,7 +348,7 @@ class FormPage(BasePage):
             text_all_content_check = driver.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
             text_all_content_check_value = text_all_content_check.text
             assert text_all_content_check_value == "Весь контент"
-            print(text_all_content_check_value)
+            # print(text_all_content_check_value)
         except NoSuchElementException:
             print('Контента пока нет')
         # time.sleep(1)
@@ -356,7 +356,7 @@ class FormPage(BasePage):
         check_created_new_folder = driver.find_element(By.XPATH, f"//p[text()='{name_of_new_folder}']")
         check_created_new_folder_value = check_created_new_folder.text
         assert check_created_new_folder_value == name_of_new_folder
-        print(check_created_new_folder_value)
+        # print(check_created_new_folder_value)
         # time.sleep(2)
         # for x in self.element_is_clickable(Locators.RADIOBUTTON_SEARCH).get_attribute("class"):
         #     print(x)
@@ -380,7 +380,7 @@ class FormPage(BasePage):
             n += 1
             if count_folders == 5:
                 break
-        print("создано 5 папок")
+        # print("создано 5 папок")
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
 
     def delete_folder(self):
@@ -391,7 +391,7 @@ class FormPage(BasePage):
         check_del_text = self.element_is_visible(Locators.DELETE_FOLDER_CONFIRM_TEXT)
         check_del_text_value = check_del_text.text
         assert check_del_text_value == 'Подтверждение действия'
-        print(check_del_text_value)
+        # print(check_del_text_value)
         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
         print("папка удалена")
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
@@ -472,7 +472,7 @@ class FormPage(BasePage):
                 name_folder = "папка2"
                 if count_folders >= 9:
                     break
-        print("создано по 5 статей")
+        # print("создано по 5 статей")
 
     def create_del_recovery_folder_content(self, driver):
         """CREATE DELETE RECOVERY FOLDER"""
@@ -481,12 +481,12 @@ class FormPage(BasePage):
         text_folder_check = self.element_is_visible(Locators.TEXT_FOLDERS_CHECK)
         text_folder_check_value = text_folder_check.text
         assert text_folder_check_value == "Папки"
-        print(text_folder_check_value)
+        # print(text_folder_check_value)
         try:
             text_all_content_check = driver.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
             text_all_content_check_value = text_all_content_check.text
             assert text_all_content_check_value == "Весь контент"
-            print(text_all_content_check_value)
+            # print(text_all_content_check_value)
         except NoSuchElementException:
             print('Контента пока нет')
         """reproduce steps"""
@@ -494,7 +494,7 @@ class FormPage(BasePage):
         text_open_form_check = self.element_is_visible(Locators.TEXT_OPEN_FORM_CHECK)
         text_open_form_check_value = text_open_form_check.text
         assert text_open_form_check_value == "Управление структурой"
-        print(text_open_form_check_value)
+        # print(text_open_form_check_value)
         """create folder"""
         person = generated_person()
         name_of_new_folder = person.first_name+str(random.randint(99,999))
@@ -509,7 +509,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.PARENT_FOLDERS_CHOICE).send_keys('Нет')
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(name_of_new_folder)
         # self.screenshot()
-        print("check radiobutton")
+        # print("check radiobutton")
         self.element_is_visible(Locators.CHECK_RADIO_POPULAR).is_displayed()
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_POPULAR).click()
@@ -521,7 +521,7 @@ class FormPage(BasePage):
             text_all_content_check = driver.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
             text_all_content_check_value = text_all_content_check.text
             assert text_all_content_check_value == "Весь контент"
-            print(text_all_content_check_value)
+            # print(text_all_content_check_value)
         except NoSuchElementException:
             print('Контента пока нет')
         # time.sleep(1)
@@ -529,7 +529,7 @@ class FormPage(BasePage):
         check_created_new_folder = driver.find_element(By.XPATH, f"//p[text()='{name_of_new_folder}']")
         check_created_new_folder_value = check_created_new_folder.text
         assert check_created_new_folder_value == name_of_new_folder
-        print(check_created_new_folder_value)
+        # print(check_created_new_folder_value)
         """del folder"""
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
         folder_fol_del_by_name = driver.find_element(By.XPATH, f"//div[contains(text(),'{name_of_new_folder}')]")
@@ -538,9 +538,9 @@ class FormPage(BasePage):
         check_del_text = self.element_is_visible(Locators.DELETE_FOLDER_CONFIRM_TEXT)
         check_del_text_value = check_del_text.text
         assert check_del_text_value == 'Подтверждение действия'
-        print(check_del_text_value)
+        # print(check_del_text_value)
         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-        print("папка удалена")
+        # print("папка удалена")
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
         time.sleep(2)
         """recovery folder"""
@@ -551,7 +551,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON).click()
         time.sleep(1)
         self.element_is_visible(Locators.RECOVERY_FOLDER_BUTTON_CONFIRM).click()
-        print("папка восстановлена")
+        # print("папка восстановлена")
 
         driver.refresh()
         self.element_is_visible(Locators.FOLDERS_CHANGE).click()
@@ -636,7 +636,7 @@ class FormPage(BasePage):
         text_sort_by_all_content = driver.find_element(By.XPATH, "//span[contains(text(),'по популярности')]")
         text_sort_by_all_content_value = text_sort_by_all_content.text
         assert text_sort_by_all_content_value == 'по популярности'
-        print("сортировка по популярности сохранена")
+        # print("сортировка по популярности сохранена")
 
     def favourites(self, driver):
         """FAVOURITES"""
@@ -650,22 +650,22 @@ class FormPage(BasePage):
         check_text_structure = self.element_is_visible(Locators.CHECK_TEXT_STRUCTURE).text
         check_text_structure_value = check_text_structure
         assert check_text_structure_value == 'Управление структурой'
-        print("Управление структурой")
+        # print("Управление структурой")
         check_text_favourites = self.element_is_visible(Locators.CHECK_TEXT_FAVOURITES).text
         check_text_favourites_value = check_text_favourites
         assert check_text_favourites_value == 'избранное'
-        print("избранное")
+        # print("избранное")
         self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
         text_new_folder_check = self.element_is_visible(Locators.TEXT_NEW_FOLDER_CHECK).text
         text_new_folder_check_value = text_new_folder_check
         assert text_new_folder_check_value == "Новая папка"
-        print("Новая папка")
+        # print("Новая папка")
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys(first_name)
         self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
         check_text_structure = self.element_is_visible(Locators.CHECK_TEXT_STRUCTURE).text
         check_text_structure_value = check_text_structure
         assert check_text_structure_value == 'Управление структурой'
-        print("Управление структурой")
+        # print("Управление структурой")
         time.sleep(2)
         edit_new_folder = driver.find_element(By.XPATH, f"//div[text()='{first_name}']")
         edit_new_folder.click()
@@ -683,7 +683,7 @@ class FormPage(BasePage):
         text_not_folders = self.element_is_visible(Locators.TEXT_NOT_FOLDERS)
         text_not_folders_value = text_not_folders.text
         assert text_not_folders_value == "У вас нет избранных папок. Создайте папку."
-        print("У вас нет избранных папок. Создайте папку.")
+        # print("У вас нет избранных папок. Создайте папку.")
 
     def add_favourites_to_folder(self, folder="папка1"):
         self.element_is_visible(Locators.ADD_TO_FAVOURITES_ARTICLE).click()

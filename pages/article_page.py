@@ -98,20 +98,20 @@ class ArticlePage(BasePage):
         navigation_text_check = self.element_is_visible(Locators.NAVIGATION)
         navigation_text_check_value = navigation_text_check.text
         assert navigation_text_check_value == "навигация"
-        print(navigation_text_check_value)
+        # print(navigation_text_check_value)
         """check text"""
         search_text_check = self.element_is_visible(Locators.SEARCH)
         search_text_check_value = search_text_check.text
         assert search_text_check_value == "поиск"
-        print(search_text_check_value)
+        # print(search_text_check_value)
         access_text_check = self.element_is_visible(Locators.ACCESS)
         access_text_check_value = access_text_check.text
         assert access_text_check_value == "доступ"
-        print(access_text_check_value)
+        # print(access_text_check_value)
         version_text_check = self.element_is_visible(Locators.VERSION)
         version_text_check_value = version_text_check.text
         assert version_text_check_value == "версионность"
-        print(version_text_check_value)
+        # print(version_text_check_value)
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         self.element_is_visible(Locators.SEARCH_INPUT_REQUEST).send_keys(text_long)
         self.element_is_visible(Locators.ADD_SEARCH_BUTTON).click()
@@ -121,19 +121,19 @@ class ArticlePage(BasePage):
         check_text_role = self.element_is_visible(Locators.CHECK_TEXT_ROLE)
         check_text_role_value = check_text_role.text
         assert check_text_role_value == "роль"
-        print(check_text_role_value)
+        # print(check_text_role_value)
         # self.element_is_visible(Locators.MYTEST).click()
         check_select_radio = self.element_is_visible(Locators.CHECK_RADIOBUTTON_TYPOGRAPHY_NOW)
         check_select_radio.is_selected()
-        print("radiobutton_typography_now True")
+        # print("radiobutton_typography_now True")
         check_select_radio2 = self.element_is_visible(Locators.CHECK_RADIOBUTTON_NO_DELETE)
         check_select_radio2.is_selected()
-        print("radiobutton_no_delete True")
+        # print("radiobutton_no_delete True")
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         check_text_filled = self.element_is_visible(Locators.CHECK_TEXT_FILLED_NEED)
         check_text_filled_value = check_text_filled.text
         assert check_text_filled_value == "Должно быть заполнено"
-        print(check_text_filled_value)
+        # print(check_text_filled_value)
         time.sleep(1)
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys(first_name)
         self.element_is_visible(Locators.FINISH_BUTTON).click()
@@ -141,7 +141,7 @@ class ArticlePage(BasePage):
         check_new_article = self.element_is_visible(Locators.CHECK_NEW_ARTICLE)
         check_new_article_value = check_new_article.text
         assert check_new_article_value == "Hello"
-        print(check_new_article_value, "статья отображается")
+        # print(check_new_article_value, "статья отображается")
 
     def fixing_article(self, driver):
         """FIXING_ARTICLE"""
@@ -189,7 +189,7 @@ class ArticlePage(BasePage):
         check_add_fixing_content = self.element_is_visible(Locators.CHECK_ADD_FIXING_CONTENT)
         check_add_fixing_content_value = check_add_fixing_content.text
         assert check_add_fixing_content_value == "Добавление закрепленного контента"
-        print(check_add_fixing_content_value)
+        # print(check_add_fixing_content_value)
         self.element_is_visible(Locators.SEARCH_TEST_ARTICLE).send_keys(text_test)
         time.sleep(1)
         self.element_is_visible(Locators.TEST_ARTICLE_NAME).click()
@@ -200,25 +200,25 @@ class ArticlePage(BasePage):
         check_name_content = self.element_is_visible(Locators.CHECK_NAME_CONTENT)
         check_name_content_value = check_name_content.text
         assert check_name_content_value == "Контент 1"
-        print(check_name_content_value)
+        # print(check_name_content_value)
         time.sleep(1)
         check_name_article = driver.find_element(By.XPATH, f"//section[@class='m-content-fix-wizard__link']/./p[text()='{text_test}']")
         check_name_article_value = check_name_article.text
         assert check_name_article_value == text_test
-        print(check_name_article_value)
+        # print(check_name_article_value)
         self.element_is_visible(Locators.INCLUDED_CONTENT_RADIO).click()
         included_content = self.element_is_visible(Locators.INCLUDED_CONTENT)
         included_content_value = included_content.text
         assert included_content_value == text_area
-        print(included_content_value)
+        # print(included_content_value)
         self.element_is_visible(Locators.FIXING).click()
         check_number_1_of_list = self.element_is_visible(Locators.LIST_OF_ARTICLES)
         check_number_1_of_list_value = check_number_1_of_list.text
         assert check_number_1_of_list_value == text_test
-        print(check_number_1_of_list_value)
+        # print(check_number_1_of_list_value)
         self.element_is_visible(Locators.POPUP_CLOSE_SVG).click()
         self.element_is_visible(Locators.SEARCH_OF_CONTENTS).send_keys(text_fixing)
-        print(text_fixing)
+        # print(text_fixing)
         self.element_is_visible(Locators.FIND_OF_CONTENT).click()
         time.sleep(5)
         # self.screenshot()
@@ -229,12 +229,12 @@ class ArticlePage(BasePage):
             check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
         check_text_hello_value = check_text_hello.text
         assert check_text_hello_value == "Hello"
-        print(check_text_hello_value)
+        # print(check_text_hello_value)
         check_article = driver.find_element(By.XPATH, f"//p[normalize-space()='{text_test}']")
         check_article_value = check_article.text
         assert check_article_value == text_test
-        print(check_article_value)
-        print(text_fixing)
+        # print(check_article_value)
+        # print(text_fixing)
 
     def filling_all_fields(self, driver):
         person = generated_person()
@@ -294,13 +294,13 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SAVE_TEMPLATES).click()
         """step 6"""
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name)
-        print(name)
+        # print(name)
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         name_of_templates = driver.find_element(By.XPATH, f"//div[contains(text(),'{name}')]")
         name_of_templates.click()
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
-        print(name_content)
+        # print(name_content)
         time.sleep(3)
         self.element_is_visible(Locators.FOLDER_SAVE).send_keys("Контент 1")
         try:
@@ -346,7 +346,7 @@ class ArticlePage(BasePage):
         check_version_text = driver.find_element(By.XPATH, "//p[contains(text(),'версионность')]")
         check_version_text_value = check_version_text.text
         assert check_version_text_value == "версионность"
-        print(check_version_text_value)
+        # print(check_version_text_value)
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         input_request = self.element_is_visible(Locators.INPUT_REQUEST)
         requests_name = "как помыть крота" + str(random.randint(999, 99999))
@@ -367,15 +367,15 @@ class ArticlePage(BasePage):
         check_utility_text = self.element_is_visible(Locators.UTILITY_TEMPLATE)
         check_utility_text_value = check_utility_text.text
         assert check_utility_text_value == "полезен"
-        print(check_utility_text_value)
+        # print(check_utility_text_value)
         check_utility_text = self.element_is_visible(Locators.NO_UTILITY_TEMPLATE)
         check_utility_text_value = check_utility_text.text
         assert check_utility_text_value == "не полезен"
-        print(check_utility_text_value)
+        # print(check_utility_text_value)
         check_name_of_templates_text = driver.find_element(By.XPATH, f"//header[@id='article-content-modal-header']//span[contains(text(),'{name_content}')]")
         check_name_of_templates_text_value = check_name_of_templates_text.text
         assert check_name_of_templates_text_value == name_content
-        print(check_name_of_templates_text_value)
+        # print(check_name_of_templates_text_value)
         """CHECK_FIXING_TEMPLATES"""
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
         # time.sleep(1)
@@ -413,7 +413,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        print(requests_name)
+        # print(requests_name)
         """search_by_request"""
         time.sleep(1)
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
@@ -497,7 +497,7 @@ class ArticlePage(BasePage):
         text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
         text_check_link_of_content_value = text_check_link_of_content.text
         assert text_check_link_of_content_value == 'Ссылка на контент', "не закреплена как ссылка на контент"
-        print(text_check_link_of_content_value)
+        # print(text_check_link_of_content_value)
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
@@ -578,7 +578,7 @@ class ArticlePage(BasePage):
         check_fixing_content_text = self.element_is_visible(Locators.CHECK_FIXING_CONTENT_TEXT)
         check_fixing_content_text_value = check_fixing_content_text.text
         assert check_fixing_content_text_value == 'В этой папке пока нет контента, но Вы можете это изменить.'
-        print("нет закрепленного контента")
+        # print("нет закрепленного контента")
 
     def check_text_link(self, driver):  # DISABLE
         driver.implicitly_wait(5)
@@ -611,13 +611,13 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SAVE_TEMPLATES).click()
         """step 6"""
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name)
-        print(name)
+        # print(name)
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         name_of_templates = driver.find_element(By.XPATH, f"//div[contains(text(),'{name}')]")
         name_of_templates.click()
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
-        print(name_content)
+        # print(name_content)
         time.sleep(3)
         self.element_is_visible(Locators.FOLDER_SAVE).send_keys("Контент 1")
         # field_input = self.element_is_visible(Locators.EDIT_TEMPLATES)
@@ -642,8 +642,6 @@ class ArticlePage(BasePage):
         # time.sleep(5)
         # text_check_link = self.element_is_visible(Locators.TEXT_CHECK_LINK).get_attribute('href')
         # assert text_check_link == 'https://openai.com/'
-
-
 
 
 class StepByScriptPage(BasePage):
@@ -730,7 +728,7 @@ class StepByScriptPage(BasePage):
         text_check_script_finish = self.element_is_visible(self.Locators.TEXT_CHECK_SCRIPT_FINISH)
         text_check_script_finish_value = text_check_script_finish.text
         assert text_check_script_finish_value == 'Сценарий завершён'
-        print(text_check_script_finish_value)
+        # print(text_check_script_finish_value)
         self.element_is_visible(self.Locators.GO_TO_STEP_ARROW).is_displayed()
         self.element_is_visible(self.Locators.DELETE_STEP_ICON).is_displayed()
 
@@ -856,10 +854,7 @@ class StepByScriptPage(BasePage):
             self.element_is_clickable(self.Locators.INPUT_TARGET_FOLDER).send_keys('Контент 1')
         self.element_is_visible(self.Locators.ADD_STEP_BUTTON).click()
         time.sleep(5)
-
-
         self.elements_is_present(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
-
         # textarea = self.elements_is_present(self.Locators.TEXTAREA_INVISIBLE)
         # driver.execute_script("arguments[0].setAttribute('style','visibility:visible;');", textarea)
         # time.sleep(1)
@@ -867,10 +862,7 @@ class StepByScriptPage(BasePage):
         # self.element_is_visible(self.Locators.TEXTAREA_VISIBLE).send_keys(text_content)
         # time.sleep(3)
         # # driver.execute_script("arguments[0].setAttribute('style','visibility: hidden;');", textarea)
-
-
         time.sleep(1)
-
         actions.send_keys(text_content)
         time.sleep(1)
         # actions.move_by_offset(1, 1)
@@ -878,7 +870,6 @@ class StepByScriptPage(BasePage):
         time.sleep(1)
         actions.click()
         actions.perform()
-
         # time.sleep(5)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(name_of_step)
         # time.sleep(1)
@@ -954,7 +945,7 @@ class CopyPastePage(BasePage):
         # self.screenshot()
         time.sleep(5)
         check_link_correct = self.element_is_visible(self.Locators.CHECK_LINK_CORRECT).get_attribute("href")
-        print(check_link_correct)
+        # print(check_link_correct)
         assert check_link_correct == 'https://openai.com/'
         # time.sleep(3)
         time.sleep(0.5)
@@ -966,7 +957,7 @@ class CopyPastePage(BasePage):
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         time.sleep(1)
         check_link_correct = self.element_is_visible(self.Locators.CHECK_LINK_CORRECT).get_attribute("href")
-        print(check_link_correct)
+        # print(check_link_correct)
         assert check_link_correct == 'https://openai.com/'
 
 class CreateDraftPage(BasePage):
@@ -995,7 +986,7 @@ class CreateDraftPage(BasePage):
             # print(alert_create_draft)
             alert_create_draft = driver.find_element(By.XPATH, "//article[text()='Контент сохраняется автоматически']")
             alert_create_draft_value = alert_create_draft.text
-            print(alert_create_draft_value)
+            # print(alert_create_draft_value)
         except NoSuchElementException:
             print("плашка исчезла")
 
