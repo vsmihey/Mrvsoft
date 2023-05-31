@@ -217,16 +217,19 @@ class ArticlePage(BasePage):
         assert check_number_1_of_list_value == text_test
         # print(check_number_1_of_list_value)
         self.element_is_visible(Locators.POPUP_CLOSE_SVG).click()
-        self.element_is_visible(Locators.SEARCH_OF_CONTENTS).send_keys(text_fixing)
+        time.sleep(1)
+        search = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
+        actions = ActionChains(driver)
+        actions.click(search)
+        actions.send_keys(text_fixing)
+        actions.send_keys(Keys.RETURN)
+        actions.perform()
+        # self.element_is_visible(Locators.SEARCH_OF_CONTENTS).send_keys(text_fixing)
         # print(text_fixing)
-        self.element_is_visible(Locators.FIND_OF_CONTENT).click()
-        time.sleep(5)
+        # self.element_is_visible(Locators.FIND_OF_CONTENT).click()
+        time.sleep(1)
         # self.screenshot()
-        try:
-            check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
-        except TimeoutException:
-            self.element_is_visible(Locators.FIND_OF_CONTENT).click()
-            check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
+        check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
         check_text_hello_value = check_text_hello.text
         assert check_text_hello_value == "Hello"
         # print(check_text_hello_value)
@@ -990,15 +993,12 @@ class CreateDraftPage(BasePage):
         except NoSuchElementException:
             print("плашка исчезла")
 
-    def open_tab_send_name(self, driver, name="Article_Name1"):
-        driver.execute_script(f"window.open('{base_url}')")
-        time.sleep(5)
+    def to_article(self, name="Article_Name1"):
         self.element_is_visible(Locators.TEST_PROJECT).click()
         self.element_is_visible(Locators.CREATE_BUTTON).click()
-        time.sleep(10)
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name)
-        return name
+
 
     def open_4_tab(self, driver):
         """open draft"""
@@ -1010,37 +1010,40 @@ class CreateDraftPage(BasePage):
         """open 4 tab"""
         for n in range(4):
             driver.execute_script(f"window.open('{base_url}')")
-            time.sleep(2)
-            self.element_is_visible(Locators.TEST_PROJECT).click()
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
-            self.element_is_visible(Locators.CREATE_ARTICLE).click()
-            # name_article = person.first_name + str(random.randint(99, 999))
-            # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
-            time.sleep(1)
-        # self.open_tab_send_name(driver, name="Article_Name1")
-        # self.open_tab_send_name(driver, name="Article_Name2")
-        # self.open_tab_send_name(driver, name="Article_Name3")
-        # self.open_tab_send_name(driver, name="Article_Name4")
+            time.sleep(0.5)
+        #     self.element_is_visible(Locators.TEST_PROJECT).click()
+        #     self.element_is_visible(Locators.CREATE_BUTTON).click()
+        #     self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        #
+        #     # name_article = person.first_name + str(random.randint(99, 999))
+        #     # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
 
+        time.sleep(10)
         """open tab and fill name article"""
         tab0 = driver.window_handles[0]
         tab4 = driver.window_handles[1]
         tab3 = driver.window_handles[2]
         tab2 = driver.window_handles[3]
         tab1 = driver.window_handles[4]
-        time.sleep(1)
+        # time.sleep(1)
         self.driver.switch_to.window(tab1)
-        time.sleep(1)
+        # time.sleep(1)
+        driver.refresh()
+        self.element_is_visible(Locators.TEST_PROJECT).click()
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name1")
         self.driver.switch_to.window(tab2)
         time.sleep(1)
-        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name2")
+        self.to_article(name="Article_Name2")
+        # time.sleep(1)
         self.driver.switch_to.window(tab3)
-        time.sleep(1)
-        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name3")
+        self.to_article(name="Article_Name3")
         self.driver.switch_to.window(tab4)
-        time.sleep(1)
-        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name4")
+        self.to_article(name="Article_Name4")
+        self.driver.switch_to.window(tab0)
+        time.sleep(50)
+
         """close article tab1"""
         self.driver.switch_to.window(tab2)
         time.sleep(10)
@@ -1065,7 +1068,6 @@ class CreateDraftPage(BasePage):
 
 
         time.sleep(3)
-
 
         # time.sleep(2)
         # self.element_is_visible(Locators.CREATE_BUTTON).click()

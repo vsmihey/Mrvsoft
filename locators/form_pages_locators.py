@@ -214,7 +214,7 @@ class FormPagesLocators:
     POPUP_CLOSE_SVG = (By.XPATH, "//div[@class='popup__close']")
     SEARCH_OF_CONTENTS = (By.XPATH, "//input[@placeholder='Поиск контента']")
     FIND_OF_CONTENT = (By.XPATH, "//span[@class='m-ui-button-hint__highlight']")
-    CHECK_TEXT_HELLO = (By.XPATH, "//p[normalize-space()='Hello']")
+    CHECK_TEXT_HELLO = (By.XPATH, "//p[text()='Hello']")
     """ADD ARTICLE BY TEMPLATES"""
     # CREATE_BUTTON_ON_HEAD_PAGE = (By.XPATH, "//p[contains(text(),'Создать')]")
     CREATE_BUTTON_ON_HEAD_PAGE = (By.XPATH, "//div[contains(text(),'Создать')]")
