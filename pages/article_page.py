@@ -166,7 +166,7 @@ class ArticlePage(BasePage):
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_area)
         except TimeoutException:
-            time.sleep(1)
+            time.sleep(2)
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_area)
         self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
@@ -180,7 +180,6 @@ class ArticlePage(BasePage):
         except ElementNotInteractableException:
             time.sleep(2)
             self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
-
         time.sleep(1)
         self.element_is_visible(Locators.SEARCH_HEAD_PAGE).click()
         self.element_is_visible(Locators.BUTTON_FIXING_CONTENT).click()
@@ -223,7 +222,11 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.FIND_OF_CONTENT).click()
         time.sleep(5)
         # self.screenshot()
-        check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
+        try:
+            check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
+        except TimeoutException:
+            self.element_is_visible(Locators.FIND_OF_CONTENT).click()
+            check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
         check_text_hello_value = check_text_hello.text
         assert check_text_hello_value == "Hello"
         print(check_text_hello_value)
@@ -779,12 +782,8 @@ class StepByScriptPage(BasePage):
         # text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
         #                "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
         text_content = "Text Content Example"
-
-
-
         # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
-
         # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
         actions.send_keys(text_content)
         time.sleep(1)
@@ -793,9 +792,7 @@ class StepByScriptPage(BasePage):
         time.sleep(1)
         actions.click()
         actions.perform()
-
         # self.elements_is_present(self.Locators.INPUT_NAME_FIRST_STEP).click()
-
         # """check text link correct """
         # time.sleep(5)
         # check_link_correct = self.element_is_visible(self.Locators.TEXT_CHECK_LINK).get_attribute("href")
