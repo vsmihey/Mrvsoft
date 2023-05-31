@@ -7,7 +7,7 @@ from string import ascii_uppercase
 from pathlib import Path
 import selenium
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException, \
-    WebDriverException, ElementNotInteractableException
+    WebDriverException, ElementNotInteractableException, StaleElementReferenceException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
@@ -62,7 +62,7 @@ class ArticlePage(BasePage):
         text = "Hello"
         text_long = 100*first_name
         self.element_is_visible(Locators.CONTENT).click()
-        time.sleep(1)
+        time.sleep(2)
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         time.sleep(7)
@@ -137,6 +137,7 @@ class ArticlePage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys(first_name)
         self.element_is_visible(Locators.FINISH_BUTTON).click()
+        time.sleep(1)
         check_new_article = self.element_is_visible(Locators.CHECK_NEW_ARTICLE)
         check_new_article_value = check_new_article.text
         assert check_new_article_value == "Hello"
@@ -152,7 +153,11 @@ class ArticlePage(BasePage):
         """create test article"""
         text_area = "Hello"
         time.sleep(1)
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(3)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         time.sleep(5)
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(text_test)
@@ -636,6 +641,8 @@ class ArticlePage(BasePage):
         # assert text_check_link == 'https://openai.com/'
 
 
+
+
 class StepByScriptPage(BasePage):
     Locators = StepByScriptLocators()
 
@@ -665,7 +672,7 @@ class StepByScriptPage(BasePage):
         target_folder_name_value = target_folder_name.text
         assert target_folder_name_value == "расположение контента:"
         """check plus button"""
-        self.element_is_clickable(self.Locators.PLUS_BUTTON_ADD_STEP)
+        self.element_is_clickable(self.Locators.PLUS_BUTTON_ADD_STEP).is_displayed()
 
     def check_len_name_content(self, driver):
         # для цифр заменить ascii_uppercase на digits
@@ -738,9 +745,10 @@ class StepByScriptPage(BasePage):
         """add text in textarea"""
         actions = ActionChains(driver)
         actions.send_keys(text_area)
-        actions.move_by_offset(0, 0)
-        actions.click()
+        # actions.move_by_offset(0, 0)
+        # actions.click()
         actions.perform()
+
         # self.element_is_visible(self.Locators.TEXT_BOLD_IN_TEXTAREA_EDITOR).click()
         time.sleep(1)
 
@@ -771,25 +779,36 @@ class StepByScriptPage(BasePage):
         # text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
         #                "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
         text_content = "Text Content Example"
-        self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+
+
+
         # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
-        actions.send_keys(text_content).perform()
+        self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+
+        # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
+        actions.send_keys(text_content)
         time.sleep(1)
-        actions.move_by_offset(0, 0).perform()
+        actions.move_by_offset(1, 1)
         time.sleep(1)
-        actions.click().perform()
-        # actions.perform()
+        actions.click()
+        actions.perform()
+
+        # self.elements_is_present(self.Locators.INPUT_NAME_FIRST_STEP).click()
+
         # """check text link correct """
         # time.sleep(5)
         # check_link_correct = self.element_is_visible(self.Locators.TEXT_CHECK_LINK).get_attribute("href")
         # print(check_link_correct)
         # assert check_link_correct == 'https://openai.com/'
-        time.sleep(1)
+        # time.sleep(1)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(to_get_name)
+        # time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
+        # time.sleep(1)
         check_text_chose_transaction = self.element_is_visible(self.Locators.CHECK_TEXT_CHOSE_TRANSACTION).text
         assert check_text_chose_transaction == 'Необходимо выбрать шаг'
         self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
+        # time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
         check_text_preview = self.element_is_visible(self.Locators.CHECK_TEXT_PREVIEW).text
         assert check_text_preview == 'Предпросмотр'
@@ -797,9 +816,13 @@ class StepByScriptPage(BasePage):
         """add step one more"""
         self.element_is_visible(self.Locators.PLUS_BUTTON_ADD_STEP).click()
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+
         self.add_text_in_textarea(driver)
+        self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).click()
+
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(text_area)
         self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
+        time.sleep(1)
         text_end_script = self.element_is_clickable(self.Locators.TEXT_END_SCRIPT).text
         assert text_end_script == 'Завершение'
         """check blocks of field"""
@@ -830,19 +853,27 @@ class StepByScriptPage(BasePage):
         self.element_is_visible(self.Locators.INPUT_NAME_PLACEHOLDER).send_keys(to_get_name)
         self.element_is_clickable(self.Locators.INPUT_TARGET_FOLDER).send_keys('Контент 1')
         self.element_is_visible(self.Locators.ADD_STEP_BUTTON).click()
-        self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+        time.sleep(5)
+        self.elements_is_present(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
         time.sleep(1)
 
-        actions.send_keys(text_content).perform()
+
+
+        actions.send_keys(text_content)
         time.sleep(1)
-        actions.move_by_offset(0, 0).perform()
+        actions.move_by_offset(1, 1)
         time.sleep(1)
-        actions.click().perform()
-        # actions.perform()
-        time.sleep(1)
+        actions.click()
+        # self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).click()
+        actions.perform()
+
+        # time.sleep(5)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(name_of_step)
+        # time.sleep(1)
         self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
+        time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
+        time.sleep(1)
         # to_get_name = self.element_is_visible(self.Locators.INPUT_NAME_PLACEHOLDER).get_attribute("value")
         self.element_is_visible(self.Locators.INPUT_FIXING_FIELD_REQUEST).send_keys(text_fixing)
         self.element_is_visible(self.Locators.ADD_BUTTON_FIXING_FIELD_REQUEST).click()
@@ -1033,12 +1064,6 @@ class CreateDraftPage(BasePage):
         time.sleep(3)
 
 
-
-
-
-
-
-
         # time.sleep(2)
         # self.element_is_visible(Locators.CREATE_BUTTON).click()
         # self.element_is_visible(Locators.CREATE_ARTICLE).click()
@@ -1054,26 +1079,17 @@ class CreateDraftPage(BasePage):
 
 
 
-
-
-
-
-
-    # def mytest(self, driver):
-    #     driver.implicitly_wait(10)
-    #     self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("text_test")
-    #     time.sleep(3)
-    #     self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
-    #     # self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys("text_area")
-    #     self.element_is_visible(Locators.UPLOAD_MEDIA).click()
-    #     # element = self.element_is_visible(Locators.D)
-    #     # driver.execute_script("arguments[0].style.visibility = 'visible';", element)
-    #
-    #     avatar = Path(pathlib.Path.cwd(), "media.jpeg")
-    #     path = str(avatar)
-    #     self.elements_is_present(Locators.ddd).send_keys(path)
-    #     time.sleep(5)
-
+# class Debager(BasePage):
+#
+#     def deb(self, driver):
+#         time.sleep(1)
+#         add_script = driver.find_element(By.XPATH, "//p[contains(text(),'добавить шаг')]")
+#         add_script.click()
+#         time.sleep(1)
+#
+#         element = driver.find_element(By.XPATH, "//div[@class='wysiwyg-minerva wysiwyg-minerva--embedded wysiwyg-minerva--hide']")
+#         driver.execute_script("arguments[0].setAttribute('style','visibility:visible;');", element)
+#         time.sleep(10)
 
 
 

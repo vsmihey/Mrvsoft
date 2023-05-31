@@ -450,7 +450,11 @@ class FormPage(BasePage):
                 time.sleep(10)
             else:
                 time.sleep(1)
-            self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
+            try:
+                self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
+            except ElementClickInterceptedException:
+                time.sleep(5)
+                self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()

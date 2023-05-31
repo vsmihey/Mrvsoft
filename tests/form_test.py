@@ -183,11 +183,11 @@ class TestFormPage:
 
 
     # def test_t(self, driver):
-    #     article_page = ArticlePage(driver, url)
-    #     article_page.open()
-    #     article_page.input_in_my_project(driver)
-    #     driver.get("https://test1.minervasoft.ru/content/space/56/article/2029")
-    #     article_page.testirovka(driver)
+    #     debager_page = Debager(driver, url)
+    #     debager_page.open()
+    #     debager_page.input_in_my_project(driver)
+    #     driver.get("https://test2.minervasoft.ru/news/space/55?popup=article-editor&chosenSpaceId=55&articleId=new&article-type=SCENARIO")
+    #     debager_page.deb(driver)
 
 
 
