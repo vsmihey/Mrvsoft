@@ -788,7 +788,8 @@ class StepByScriptPage(BasePage):
         # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
         actions.send_keys(text_content)
         time.sleep(1)
-        actions.move_by_offset(1, 1)
+        # actions.move_by_offset(1, 1)
+        actions.move_to_element(self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP))
         time.sleep(1)
         actions.click()
         actions.perform()
@@ -851,20 +852,34 @@ class StepByScriptPage(BasePage):
         text_content = "Text" + str(random.randint(99, 999))
         name_of_step = "Step" + str(random.randint(99, 999))
         self.element_is_visible(self.Locators.INPUT_NAME_PLACEHOLDER).send_keys(to_get_name)
-        self.element_is_clickable(self.Locators.INPUT_TARGET_FOLDER).send_keys('Контент 1')
+        try:
+            self.element_is_clickable(self.Locators.INPUT_TARGET_FOLDER).send_keys('Контент 1')
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_clickable(self.Locators.INPUT_TARGET_FOLDER).send_keys('Контент 1')
         self.element_is_visible(self.Locators.ADD_STEP_BUTTON).click()
         time.sleep(5)
+
+
         self.elements_is_present(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
+
+        # textarea = self.elements_is_present(self.Locators.TEXTAREA_INVISIBLE)
+        # driver.execute_script("arguments[0].setAttribute('style','visibility:visible;');", textarea)
+        # time.sleep(1)
+        #
+        # self.element_is_visible(self.Locators.TEXTAREA_VISIBLE).send_keys(text_content)
+        # time.sleep(3)
+        # # driver.execute_script("arguments[0].setAttribute('style','visibility: hidden;');", textarea)
+
+
         time.sleep(1)
-
-
 
         actions.send_keys(text_content)
         time.sleep(1)
-        actions.move_by_offset(1, 1)
+        # actions.move_by_offset(1, 1)
+        actions.move_to_element(self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP))
         time.sleep(1)
         actions.click()
-        # self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).click()
         actions.perform()
 
         # time.sleep(5)
