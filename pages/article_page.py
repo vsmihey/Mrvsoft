@@ -180,12 +180,17 @@ class ArticlePage(BasePage):
         except ElementNotInteractableException:
             time.sleep(2)
             self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
-        time.sleep(1)
+        # time.sleep(1)
         self.element_is_visible(Locators.SEARCH_HEAD_PAGE).click()
         self.element_is_visible(Locators.BUTTON_FIXING_CONTENT).click()
-        self.element_is_visible(Locators.INPUT_REQUEST).send_keys(text_fixing)
         time.sleep(1)
-        self.element_is_visible(Locators.BUTTON_FIXING_CONTENT1).click()
+        self.element_is_visible(Locators.INPUT_REQUEST).send_keys(text_fixing)
+        time.sleep(5)
+        try:
+            self.element_is_visible(Locators.BUTTON_FIXING_CONTENT1).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(Locators.BUTTON_FIXING_CONTENT1).click()
         check_add_fixing_content = self.element_is_visible(Locators.CHECK_ADD_FIXING_CONTENT)
         check_add_fixing_content_value = check_add_fixing_content.text
         assert check_add_fixing_content_value == "Добавление закрепленного контента"

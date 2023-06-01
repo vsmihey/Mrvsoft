@@ -171,7 +171,7 @@ class TestFormPage:
             copy_paste_page.input_in_my_project(driver)
             copy_paste_page.add_text_in_article(driver)
 
-    @pytest.mark.skip('create_draft')
+    # @pytest.mark.skip('create_draft')
     class TestCreateDraft:
 
         def test_create_draft(self, driver):
