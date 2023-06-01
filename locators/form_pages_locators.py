@@ -408,8 +408,30 @@ class CreateDraftLocators:
     DEL_DRAFT_SVG = (By.XPATH, "(//div[@class='m-draft-card__top-right-element'])[3]")
     TIME_OF_CREATE_ARTICLE = (By.XPATH, "(//div[@class='m-drafts-list__date'])[3]")
     TIME_OF_CREATE_ARTICLE1 = (By.XPATH, "(//div[@class='m-drafts-list__date'])[2]")
+    EDIT_TEMPLATE_1 = (By.XPATH, "//div[@class='m-popup__root']//a[1]")
+    NAME_OF_STEP_SCRIPT = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    CREATE_FILE = (By.XPATH, "//div[text()='Файл']")
+    INPUT_NAME_FILE = (By.XPATH, "//input[@placeholder='Введите название']")
+    DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    """check text"""
+    TIME_FIRST_SECTION = (By.XPATH, "(//div[@class='m-drafts-list__date'])[1]")
+    TIME_FIRST_SECTION_TEXT = (By.XPATH, "(//div[@class='m-drafts-list__date-text'])[1]")
+    TIME_ALL_SECTION = (By.CSS_SELECTOR, ".m-drafts-list__date")
+    TIME_TEXT_ALL = (By.XPATH, "//div[@class='m-drafts-list__date-text']")
+    CONTENT_TEXT_ALL = (By.XPATH, "//span[text()='Контент 1']")
+    SECTION2_CHECK = (By.XPATH, "(//div[@class='m-draft-card__top-side'])[2]")
+    SECTION3 = (By.XPATH, "(//div[@class='m-draft-card__top-side'])[3]")
+    CHECK_TEXT_OPEN_EDIT_DRAFT = (By.XPATH, "//span[text()='изменить']")
+    CHANGE_TEMPLATE = (By.XPATH, "//p[text()='Изменить шаблон']")
+    CHANGE_TEMPLATE_NAME_TEXT_CHECK = (By.XPATH, "//div[text()='Название шаблона']")
 
 
+class FilesPagesLocators:
+    TEST_PROJECT = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
+    UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
+    INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
+    FILES_MANAGER = (By.XPATH, "//span[text()='менеджер файлов']")
+    FOOTER_HIDDEN = (By.XPATH, "//footer[@class='popup__footer file-manager__foot file-manager--hidden']")
 
 
 

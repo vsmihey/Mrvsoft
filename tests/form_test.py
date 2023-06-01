@@ -4,7 +4,7 @@ from selenium.common import TimeoutException
 from pages import base_page
 from pages.form_page import FormPage
 from pages.data_login_password import *
-from pages.article_page import ArticlePage, CopyPastePage, CreateDraftPage
+from pages.article_page import ArticlePage, CopyPastePage, CreateDraftPage, FilesPages
 from pages.article_page import StepByScriptPage
 
 
@@ -179,6 +179,19 @@ class TestFormPage:
             create_draft_page.open()
             create_draft_page.input_in_my_project(driver)
             create_draft_page.open_4_tab(driver)
+
+
+
+
+    class TestFilesPage:
+
+        def test_check_format_files(self, driver):
+            article_pages = FilesPages(driver, url)
+            article_pages.open()
+            article_pages.input_in_my_project(driver)
+            article_pages.add_files(driver)
+            time.sleep(5)
+
 
 
 

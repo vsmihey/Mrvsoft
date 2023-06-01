@@ -224,10 +224,13 @@ class FormPage(BasePage):
         # print("new person")
         self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Администратор')
         # print("administrator")
+
+        time.sleep(50)
         self.remove_class_script()
         """add avatar"""
         avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
         path = str(avatar)
+        time.sleep(50)
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
         time.sleep(3)
         text_name = self.element_is_visible(Locators.UPLOAD_FILE_NAME)

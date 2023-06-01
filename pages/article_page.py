@@ -14,7 +14,7 @@ from selenium.webdriver.common.by import By
 from generator.generator import generated_person
 from pages.base_page import BasePage
 from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
-    CreateDraftLocators
+    CreateDraftLocators, FilesPagesLocators
 # from locators.form_pages_locators import StepByScriptLocators as Locators
 # from locators.form_pages_locators import FixingArticle as Locators
 from pages.data_login_password import *
@@ -1022,7 +1022,6 @@ class CreateDraftPage(BasePage):
         #
         #     # name_article = person.first_name + str(random.randint(99, 999))
         #     # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
-
         time.sleep(10)
         """open tab and fill name article"""
         tab0 = driver.window_handles[0]
@@ -1039,52 +1038,99 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name1")
         self.driver.switch_to.window(tab2)
+        self.element_is_visible(Locators.TEST_PROJECT).click()
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_TEMPLATES).click()
+        self.element_is_visible(self.Locators.EDIT_TEMPLATE_1).click()
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Template_Name2")
         time.sleep(1)
-        self.to_article(name="Article_Name2")
-        # time.sleep(1)
         self.driver.switch_to.window(tab3)
-        self.to_article(name="Article_Name3")
+        self.element_is_visible(Locators.TEST_PROJECT).click()
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
+        self.element_is_visible(self.Locators.NAME_OF_STEP_SCRIPT).send_keys("Script_Name3")
         self.driver.switch_to.window(tab4)
-        self.to_article(name="Article_Name4")
-        self.driver.switch_to.window(tab0)
-        time.sleep(50)
-
+        self.element_is_visible(Locators.TEST_PROJECT).click()
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.CREATE_FILE).click()
+        self.element_is_visible(self.Locators.INPUT_NAME_FILE).send_keys("File_Name4")
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         """close article tab1"""
         self.driver.switch_to.window(tab2)
-        time.sleep(10)
+        time.sleep(1)
         try:
-            self.element_is_visible(self.Locators.CLOSE_PAGE_ARTICLE).click()
+            self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         except ElementClickInterceptedException:
-            time.sleep(10)
-            self.element_is_visible(self.Locators.CLOSE_PAGE_ARTICLE).click()
-        self.element_is_visible(self.Locators.CREATE_BUTTON).click()
-        self.element_is_visible(self.Locators.CREATE_ARTICLE).click()
-        """move to tab4 and hold"""
-        self.driver.switch_to.window(tab4)
-        time.sleep(1)  # Заменить на 30
-
+            time.sleep(5)
+            self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
+        """check text all"""
         self.driver.switch_to.window(tab0)
-        # self.element_is_visible(self.Locators.CHECK_TEXT_FIELD).is_displayed()
-        # self.element_is_visible(self.Locators.CHECK_TEXT_NAMES_ARTICLE).is_displayed()
-        # self.element_is_visible(self.Locators.CHECK_TEXT_NAMES_ARTICLE).is_displayed()
-        # self.element_is_visible(self.Locators.DEL_DRAFT_SVG).is_displayed()
-        # self.element_is_visible(self.Locators.TIME_OF_CREATE_ARTICLE).is_displayed()
-        # self.element_is_visible(self.Locators.TIME_OF_CREATE_ARTICLE1).click()
-
-
         time.sleep(3)
+        """time check"""
+        i = 0
+        text_time = self.elements_are_visible(self.Locators.TIME_TEXT_ALL)
+        data_time = []
+        for n in text_time:
+            n.is_displayed()
+            text_time_value = n.text
+            data_time.append(text_time_value)
+            print(n.is_displayed())
+            i += 1
+            if i == 4:
+                break
+        # print(data_time)
+        """content check"""
+        i = 0
+        text_content = self.elements_are_visible(self.Locators.CONTENT_TEXT_ALL)
+        data_content = []
+        for n in text_content:
+            # n.is_displayed()
+            text_content_value = n.text
+            data_content.append(text_content_value)
+            i += 1
+            if i == 4:
+                break
+        # print(data_content)
+        content_list = ['Контент 1', 'Контент 1', 'Контент 1', 'Контент 1']
+        assert content_list == data_content
+        """check click"""
+        try:
+            self.element_is_clickable(self.Locators.SECTION2_CHECK).click()
+        except ElementClickInterceptedException:
+            print("некликабельный")
+        # time.sleep(1)
+        """check svg del"""
+        self.element_is_visible(self.Locators.DEL_DRAFT_SVG).is_displayed()
+        """check click"""
+        # time.sleep(5)
+        self.element_is_visible(self.Locators.SECTION3).click()
+        """check open edit text"""
+        self.element_is_visible(self.Locators.CHECK_TEXT_OPEN_EDIT_DRAFT).click()
+        self.element_is_visible(self.Locators.CHANGE_TEMPLATE).click()
+        change_template_name_text_check = self.element_is_visible(self.Locators.CHANGE_TEMPLATE_NAME_TEXT_CHECK)
+        change_template_name_text_check_value = change_template_name_text_check.text
+        assert change_template_name_text_check_value == "Название шаблона"
 
-        # time.sleep(2)
-        # self.element_is_visible(Locators.CREATE_BUTTON).click()
-        # self.element_is_visible(Locators.CREATE_ARTICLE).click()
-        # time.sleep(3)
-        # self.alert_draft(driver)
-        # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
 
-        # for i in range(1, 3):
-        #     self.driver.switch_to.window(self.driver.window_handles[i])
-        #     name_article = person.first_name + str(random.randint(99, 999))
-        #     self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
+class FilesPages(BasePage):
+    Locators = FilesPagesLocators()
+
+    def add_files(self, driver):
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        try:
+            self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        except TimeoutException:
+            time.sleep(10)
+        self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
+        # element = self.elements_is_present(self.Locators.INPUT_INVISIBLE)
+        # driver.execute_script("arguments[0].style.visibility = 'visible';", element)
+        self.driver.execute_script("""document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        # self.elements_is_present(self.Locators.INPUT_INVISIBLE).send_keys("dddd")
+        time.sleep(50)
+
+
+
 
 
 

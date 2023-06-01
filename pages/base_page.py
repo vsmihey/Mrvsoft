@@ -1,5 +1,6 @@
 import datetime
 import pathlib
+import pickle
 import time
 from pathlib import Path
 
@@ -97,9 +98,19 @@ class BasePage:
         """open new tab"""
         driver.execute_script("window.open('https://google.com')")
 
+    def get_cookies(self, driver):
+        """COOKIES GET"""
+        pickle.dump(driver.get_cookies(), open("cookies.pkl", "wb"))
+
+    def insert_cookies(self, driver):
+        """COOKIES INSERT"""
+        cookies = pickle.load(open("cookies.pkl", "rb"))
+        for cookie in cookies:
+            driver.add_cookie(cookie)
+
 
     # def element_is_visibility(self, element):
-    #     element = element.find_element_by_css_selector("input")
+    #     element = driver.find_element_by_css_selector("input")
     #     self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
 
 
