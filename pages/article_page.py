@@ -1123,8 +1123,8 @@ class FilesPages(BasePage):
         bf.write(b"\0")
         bf.close()
 
-    def create_files(self):
-        file_name,  path = generated_file()
+    # def create_files(self):
+    #     file_name,  path = generated_file()
 
     def add_big_file(self, driver):
         big_file = Path(pathlib.Path.cwd(), "bigfile")

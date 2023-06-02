@@ -183,10 +183,10 @@ class TestFormPage:
     class TestFilesPage:
 
 
-        def test_generate_files(self, driver):
-            article_pages = FilesPages(driver, url)
-            article_pages.open()
-            article_pages.create_files()
+        # def test_generate_files(self, driver):
+        #     article_pages = FilesPages(driver, url)
+        #     article_pages.open()
+        #     article_pages.create_files()
 
 
         def test_check_size_file(self, driver):
