@@ -433,6 +433,10 @@ class FilesPagesLocators:
     FILES_MANAGER = (By.XPATH, "//span[text()='менеджер файлов']")
     FOOTER_HIDDEN = (By.XPATH, "//footer[@class='popup__footer file-manager__foot file-manager--hidden']")
     FORM_INVISIBLE_INPUT = (By.XPATH, "//form[@enctype='multipart/form-data']")
+    CLOSE_DOWNLOAD_WINDOW = (By.XPATH, "//div[@class='popup__close']")
+    CHECK_TEXT_WARNING = (By.XPATH, "//div[@class='warning-block__text']")
+    SHOW_BUTTON = (By.XPATH, "//p[contains(text(),'показать')]")
+    CHECK_TEXT_BIG_FILE_ERR = (By.XPATH, "//div[@class='error-list-item__body']")
 
 
 

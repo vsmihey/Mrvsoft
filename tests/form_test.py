@@ -182,17 +182,19 @@ class TestFormPage:
 
     class TestFilesPage:
 
+
         def test_generate_files(self, driver):
             article_pages = FilesPages(driver, url)
             article_pages.open()
             article_pages.create_files()
 
 
-        def test_check_format_files(self, driver):
+        def test_check_size_file(self, driver):
             article_pages = FilesPages(driver, url)
             article_pages.open()
             article_pages.input_in_my_project(driver)
-            article_pages.add_files(driver)
+            article_pages.generated_big_file()
+            article_pages.add_big_file(driver)
 
 
 

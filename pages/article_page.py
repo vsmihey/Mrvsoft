@@ -1,4 +1,5 @@
 import datetime
+import os
 import pathlib
 import random
 import time
@@ -11,7 +12,7 @@ from selenium.common.exceptions import TimeoutException, ElementClickIntercepted
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
-from generator.generator import generated_person, generated_file
+from generator.generator import generated_person, generated_file, generated_big_file
 from pages.base_page import BasePage
 from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
     CreateDraftLocators, FilesPagesLocators
@@ -1115,15 +1116,19 @@ class CreateDraftPage(BasePage):
 class FilesPages(BasePage):
     Locators = FilesPagesLocators()
 
+    def generated_big_file(self):
+        """created bigfile"""
+        bf = open('bigfile', "wb")
+        bf.seek(1073741824 - 1)
+        bf.write(b"\0")
+        bf.close()
+
     def create_files(self):
         file_name,  path = generated_file()
 
-
-
-
-    def add_files(self, driver):
-        avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
-        path = str(avatar)
+    def add_big_file(self, driver):
+        big_file = Path(pathlib.Path.cwd(), "bigfile")
+        path = str(big_file)
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         try:
@@ -1139,8 +1144,14 @@ class FilesPages(BasePage):
         self.driver.execute_script("""document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
         # self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
         self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
-        time.sleep(100)
-
+        self.element_is_visible(self.Locators.CLOSE_DOWNLOAD_WINDOW).click()
+        check_text_warning = self.element_is_visible(self.Locators.CHECK_TEXT_WARNING).text
+        assert check_text_warning == "Ошибка загрузки файлов"
+        self.element_is_visible(self.Locators.SHOW_BUTTON).click()
+        check_text_big_file_err = self.element_is_visible(self.Locators.CHECK_TEXT_BIG_FILE_ERR).text
+        assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб"
+        time.sleep(1)
+        os.remove(path)
 
 
 
