@@ -180,17 +180,25 @@ class TestFormPage:
             create_draft_page.input_in_my_project(driver)
             create_draft_page.open_4_tab(driver)
 
-
-
-
     class TestFilesPage:
+
+        def test_generate_files(self, driver):
+            article_pages = FilesPages(driver, url)
+            article_pages.open()
+            article_pages.create_files()
+
 
         def test_check_format_files(self, driver):
             article_pages = FilesPages(driver, url)
             article_pages.open()
             article_pages.input_in_my_project(driver)
             article_pages.add_files(driver)
-            time.sleep(5)
+
+
+
+
+
+
 
 
 

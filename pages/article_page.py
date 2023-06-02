@@ -11,7 +11,7 @@ from selenium.common.exceptions import TimeoutException, ElementClickIntercepted
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
-from generator.generator import generated_person
+from generator.generator import generated_person, generated_file
 from pages.base_page import BasePage
 from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
     CreateDraftLocators, FilesPagesLocators
@@ -1115,19 +1115,31 @@ class CreateDraftPage(BasePage):
 class FilesPages(BasePage):
     Locators = FilesPagesLocators()
 
+    def create_files(self):
+        file_name,  path = generated_file()
+
+
+
+
     def add_files(self, driver):
+        avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
+        path = str(avatar)
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         try:
             self.element_is_visible(Locators.CREATE_ARTICLE).click()
         except TimeoutException:
-            time.sleep(10)
+            time.sleep(1)
         self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
-        # element = self.elements_is_present(self.Locators.INPUT_INVISIBLE)
+        # element = self.elements_is_present(self.Locators.FORM_INVISIBLE_INPUT)
         # driver.execute_script("arguments[0].style.visibility = 'visible';", element)
+        # driver.execute_script("arguments[0].style.opacity=1;", element)
+        """input is visible for load files"""
         self.driver.execute_script("""document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        # self.elements_is_present(self.Locators.INPUT_INVISIBLE).send_keys("dddd")
-        time.sleep(50)
+        self.driver.execute_script("""document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        # self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
+        self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
+        time.sleep(100)
 
 
 

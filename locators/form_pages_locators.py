@@ -432,6 +432,8 @@ class FilesPagesLocators:
     INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
     FILES_MANAGER = (By.XPATH, "//span[text()='менеджер файлов']")
     FOOTER_HIDDEN = (By.XPATH, "//footer[@class='popup__footer file-manager__foot file-manager--hidden']")
+    FORM_INVISIBLE_INPUT = (By.XPATH, "//form[@enctype='multipart/form-data']")
+
 
 
 
