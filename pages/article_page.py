@@ -1017,12 +1017,6 @@ class CreateDraftPage(BasePage):
         for n in range(4):
             driver.execute_script(f"window.open('{base_url}')")
             time.sleep(0.5)
-        #     self.element_is_visible(Locators.TEST_PROJECT).click()
-        #     self.element_is_visible(Locators.CREATE_BUTTON).click()
-        #     self.element_is_visible(Locators.CREATE_ARTICLE).click()
-        #
-        #     # name_article = person.first_name + str(random.randint(99, 999))
-        #     # self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
         time.sleep(10)
         """open tab and fill name article"""
         tab0 = driver.window_handles[0]
