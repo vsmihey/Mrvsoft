@@ -27,16 +27,20 @@ def generated_big_file():
 
 def generated_file():
 
-    files_list = ["doc", "docx", "odt", "ott", "rtf", "xls", "xlsx", "ods", "ots",
+    files_list = ["csv", "exe", "doc", "docx", "odt", "ott", "rtf", "xls", "xlsx", "ods", "ots",
                   "fods", "odp", "otp", "odg", "fodp", "ppt", "pptx", "pdf", "txt", "html", "zip", "jpg", "jpeg", "png", "gif"]
+    # files_list = ["csv", "exe"]
+    data_files = []
     for i in files_list:
         # path = Path(pathlib.Path.cwd(), "files", f"pic{random.randint(1, 99)}.{i}")
-        path = Path(f"pic{random.randint(1, 99)}.{i}")
+        path = Path(f"file{random.randint(1, 99)}.{i}")
         # path = os.path.abspath(f"pic{random.randint(1, 99)}.jpg")
         file = open(path, "w+")
         file.close()
-        print(file.name)
+        # print(file.name)
+        data_files.append(path)
         # return file.name, path
+    return data_files
 
     # # path = Path(pathlib.Path.cwd(), "files", f"pic{random.randint(1, 99)}.{i}")
     # path = Path(f"pic{random.randint(1, 99)}.xls")

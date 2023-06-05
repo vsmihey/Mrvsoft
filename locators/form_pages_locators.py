@@ -437,6 +437,18 @@ class FilesPagesLocators:
     CHECK_TEXT_WARNING = (By.XPATH, "//div[@class='warning-block__text']")
     SHOW_BUTTON = (By.XPATH, "//p[contains(text(),'показать')]")
     CHECK_TEXT_BIG_FILE_ERR = (By.XPATH, "//div[@class='error-list-item__body']")
+    """check tooltip"""
+    CHECK_TOOLTIP_TEXT = (By.XPATH, "(//div[text()='Тип и размер файлов:'])[1]")
+    # BUTTON_DOWNLOAD = (By.XPATH, "//div[@class='empty-layout__upload']//button[@type='button']")
+    BUTTON_DOWNLOAD = (By.XPATH, "//div[@class='empty-layout__upload']")
+    """check for templates"""
+    DROPDOWN = (By.XPATH, "//span[@class='cke_button_icon cke_button__inserttemplated_icon']")
+    EDIT_TEMPLATES_FIRST = (By.XPATH, "(//a[@class='m-modal-templates__template-card'])[1]")
+    DROP_DOWN_FILES = (By.XPATH, "//a[@title='Файлы']")
+    FIELD_INPUT = (By.XPATH, "//div[@class='form-input-wrapper__field form-input-wrapper__field-arrow']")
+    # FRAME = (By.XPATH, "//div[@title='Параметры']")
+    # FRAME = (By.XPATH, "//div[@role='presentation']")
+    FRAME = (By.XPATH, "//iframe[@class='cke_panel_frame']")
 
 
 

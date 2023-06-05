@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 
 from selenium.common import TimeoutException, ElementClickInterceptedException
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 from locators.form_pages_locators import *
@@ -107,6 +108,33 @@ class BasePage:
         cookies = pickle.load(open("cookies.pkl", "rb"))
         for cookie in cookies:
             driver.add_cookie(cookie)
+
+    def action_double_click(self, element):
+        action = ActionChains(self.driver)
+        action.double_click(element)
+        action.perform()
+
+    def action_move_to_element(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
+
+    def switch_to_frame(self, frame):
+        """input frame"""
+        self.driver.switch_to.frame(frame)
+
+    def switch_out_frame(self):
+        """out frame"""
+        self.driver.switch_to.default_content()
+
+    def download_files_is_visible(self):
+        """input is visible for load files"""
+        self.driver.execute_script(
+            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        self.driver.execute_script(
+            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+
+
 
 
     # def element_is_visibility(self, element):

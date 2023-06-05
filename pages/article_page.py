@@ -12,6 +12,8 @@ from selenium.common.exceptions import TimeoutException, ElementClickIntercepted
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+
 from generator.generator import generated_person, generated_file, generated_big_file
 from pages.base_page import BasePage
 from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
@@ -1110,18 +1112,30 @@ class CreateDraftPage(BasePage):
 class FilesPages(BasePage):
     Locators = FilesPagesLocators()
 
-    def generated_big_file(self):
+    def check_tooltip(self):
+        element = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD)
+        self.action_move_to_element(element)
+        self.element_is_visible(self.Locators.CHECK_TOOLTIP_TEXT)
+        check_tooltip_text = self.element_is_visible(self.Locators.CHECK_TOOLTIP_TEXT).text
+        assert check_tooltip_text == "Тип и размер файлов:"
+
+
+    def generated_big_file_jpg(self):
         """created bigfile"""
-        bf = open('bigfile', "wb")
+        bf = open('bigfile.jpg', "wb")
         bf.seek(1073741824 - 1)
         bf.write(b"\0")
         bf.close()
 
-    # def create_files(self):
-    #     file_name,  path = generated_file()
+    def generated_big_file_exe(self):
+        """created bigfile"""
+        bf = open('bigfile.exe', "wb")
+        bf.seek(1073741824 - 1)
+        bf.write(b"\0")
+        bf.close()
 
     def add_big_file(self, driver):
-        big_file = Path(pathlib.Path.cwd(), "bigfile")
+        big_file = Path(pathlib.Path.cwd(), "bigfile.jpg")
         path = str(big_file)
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
@@ -1130,6 +1144,7 @@ class FilesPages(BasePage):
         except TimeoutException:
             time.sleep(1)
         self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
+        self.check_tooltip()
         # element = self.elements_is_present(self.Locators.FORM_INVISIBLE_INPUT)
         # driver.execute_script("arguments[0].style.visibility = 'visible';", element)
         # driver.execute_script("arguments[0].style.opacity=1;", element)
@@ -1144,8 +1159,113 @@ class FilesPages(BasePage):
         self.element_is_visible(self.Locators.SHOW_BUTTON).click()
         check_text_big_file_err = self.element_is_visible(self.Locators.CHECK_TEXT_BIG_FILE_ERR).text
         assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб"
-        time.sleep(1)
+        time.sleep(2)
         os.remove(path)
+
+    def create_data_files(self, driver):
+        driver.implicitly_wait(10)
+        data_files = generated_file()
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        try:
+            self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
+        except TimeoutException:
+            time.sleep(5)
+            self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
+        """input is visible for load files"""
+        self.driver.execute_script(
+            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        self.driver.execute_script(
+            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        # self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
+        for n in data_files:
+            file_type = Path(pathlib.Path.cwd(), f"{n}")
+            path = str(file_type)
+            # time.sleep(0.5)
+            self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
+        time.sleep(5)  # ожидание перед удалением
+        for n in data_files:
+            file_type = Path(pathlib.Path.cwd(), f"{n}")
+            path = str(file_type)
+            os.remove(path)
+
+    def check_template_download(self, driver):
+        data_files = generated_file()
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_TEMPLATES).click()
+        self.element_is_visible(self.Locators.EDIT_TEMPLATES_FIRST).click()
+        try:
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
+        except TimeoutException:
+            time.sleep(5)
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
+        self.element_is_visible(self.Locators.DROPDOWN).click()
+        frame = self.elements_is_present(self.Locators.FRAME)
+        self.switch_to_frame(frame)
+        self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
+        self.switch_out_frame()
+        time.sleep(1)
+        self.check_tooltip()
+        """for visible"""
+        self.download_files_is_visible()
+        for n in data_files:
+            file_type = Path(pathlib.Path.cwd(), f"{n}")
+            path = str(file_type)
+            self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
+        time.sleep(5)  # ожидание перед удалением
+        for n in data_files:
+            file_type = Path(pathlib.Path.cwd(), f"{n}")
+            path = str(file_type)
+            os.remove(path)
+
+        time.sleep(100)
+
+    def template_download_bigfile(self):
+        big_file = Path(pathlib.Path.cwd(), "bigfile.exe")
+        path = str(big_file)
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_TEMPLATES).click()
+        self.element_is_visible(self.Locators.EDIT_TEMPLATES_FIRST).click()
+        try:
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
+        except TimeoutException:
+            time.sleep(5)
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
+        self.element_is_visible(self.Locators.DROPDOWN).click()
+        frame = self.elements_is_present(self.Locators.FRAME)
+        self.switch_to_frame(frame)
+        self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
+        self.switch_out_frame()
+        self.download_files_is_visible()
+        time.sleep(5)
+        self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
+        self.element_is_visible(self.Locators.CLOSE_DOWNLOAD_WINDOW).click()
+        check_text_warning = self.element_is_visible(self.Locators.CHECK_TEXT_WARNING).text
+        assert check_text_warning == "Ошибка загрузки файлов"
+        self.element_is_visible(self.Locators.SHOW_BUTTON).click()
+        check_text_big_file_err = self.element_is_visible(self.Locators.CHECK_TEXT_BIG_FILE_ERR).text
+        assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб"
+        time.sleep(2)
+        os.remove(path)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1155,14 +1275,18 @@ class FilesPages(BasePage):
 # class Debager(BasePage):
 #
 #     def deb(self, driver):
-#         time.sleep(1)
-#         add_script = driver.find_element(By.XPATH, "//p[contains(text(),'добавить шаг')]")
-#         add_script.click()
-#         time.sleep(1)
+#         time.sleep(20)
 #
-#         element = driver.find_element(By.XPATH, "//div[@class='wysiwyg-minerva wysiwyg-minerva--embedded wysiwyg-minerva--hide']")
-#         driver.execute_script("arguments[0].setAttribute('style','visibility:visible;');", element)
+#         frame = driver.find_element(By.XPATH, "//div[@aria-label='false']")
+#         df = driver.switch_to.frame(frame)
 #         time.sleep(10)
+#         # add_script = driver.find_element(By.XPATH, "//p[contains(text(),'добавить шаг')]")
+#         # add_script.click()
+#         # time.sleep(1)
+#         #
+#         # element = driver.find_element(By.XPATH, "//div[@class='wysiwyg-minerva wysiwyg-minerva--embedded wysiwyg-minerva--hide']")
+#         # driver.execute_script("arguments[0].setAttribute('style','visibility:visible;');", element)
+#         # time.sleep(10)
 
 
 

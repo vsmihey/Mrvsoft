@@ -182,20 +182,30 @@ class TestFormPage:
 
     class TestFilesPage:
 
-
-        # def test_generate_files(self, driver):
-        #     article_pages = FilesPages(driver, url)
-        #     article_pages.open()
-        #     article_pages.create_files()
-
+        def test_create_data_files(self, driver):
+            article_pages = FilesPages(driver, url)
+            article_pages.open()
+            article_pages.input_in_my_project(driver)
+            article_pages.create_data_files(driver)
 
         def test_check_size_file(self, driver):
             article_pages = FilesPages(driver, url)
             article_pages.open()
             article_pages.input_in_my_project(driver)
-            article_pages.generated_big_file()
+            article_pages.generated_big_file_jpg()
             article_pages.add_big_file(driver)
 
+        def test_check_template_download(self, driver):
+            article_pages = FilesPages(driver, url)
+            article_pages.open()
+            article_pages.input_in_my_project(driver)
+            article_pages.check_template_download(driver)
+
+        def test_check_template_download_bigfile(self, driver):
+            article_pages = FilesPages(driver, url)
+            article_pages.open()
+            article_pages.input_in_my_project(driver)
+            article_pages.template_download_bigfile()
 
 
 
@@ -204,12 +214,15 @@ class TestFormPage:
 
 
 
+
+
+# тестирование, раскоментить в article_page
 
     # def test_t(self, driver):
     #     debager_page = Debager(driver, url)
     #     debager_page.open()
     #     debager_page.input_in_my_project(driver)
-    #     driver.get("https://test2.minervasoft.ru/news/space/55?popup=article-editor&chosenSpaceId=55&articleId=new&article-type=SCENARIO")
+    #     driver.get("https://test2.minervasoft.ru/news/space/55?popup=article-editor&chosenSpaceId=55&articleId=new&article-type=ARTICLE")
     #     debager_page.deb(driver)
 
 
