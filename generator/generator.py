@@ -43,10 +43,25 @@ def generated_file():
         # return file.name, path
     return data_files
 
-    # # path = Path(pathlib.Path.cwd(), "files", f"pic{random.randint(1, 99)}.{i}")
-    # path = Path(f"pic{random.randint(1, 99)}.xls")
-    # # path = os.path.abspath(f"pic{random.randint(1, 99)}.jpg")
-    # file = open(path, "w+")
-    # file.close()
-    # print(file.name)
-    # return file.name, path
+
+def generated_files_audio():
+    audio_files_format = ["mp3", "aac", "ac3", "aiff", "au", "dts", "flac", "m4a", "m4p", "m4r", "mp2", "ogg", "opus", "ra", "tta", "voc", "vox", "wav", "wma"]
+    audio_files = []
+    for i in audio_files_format:
+        path = Path(f"file{random.randint(1, 99)}.{i}")
+        file = open(path, "w+")
+        file.close()
+        audio_files.append(path)
+    return audio_files
+
+
+def generated_files_video():
+    video_files_format = ["mp4", "avi", "flv", "mov", "3gp", "m4v", "asf", "m2ts", "m4v", "mkv", "mts", "swf", "vob", "wmv", "webm"]
+    video_files = []
+    for i in video_files_format:
+        path = Path(f"file{random.randint(1, 99)}.{i}")
+        file = open(path, "w+")
+        file.close()
+        video_files.append(path)
+    return video_files
+

@@ -1305,7 +1305,6 @@ class FilesPages(BasePage):
         self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
         self.element_is_visible(self.Locators.ADD_STEP).click()
         self.element_is_visible(self.Locators.TEXT_AREA).click()
-
         self.element_is_visible(self.Locators.DROPDOWN).click()
         frame = self.elements_is_present(self.Locators.FRAME)
         self.switch_to_frame(frame)
