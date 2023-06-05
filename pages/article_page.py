@@ -1134,6 +1134,13 @@ class FilesPages(BasePage):
         bf.write(b"\0")
         bf.close()
 
+    def generated_big_file_csv(self):
+        """created bigfile"""
+        bf = open('bigfile.csv', "wb")
+        bf.seek(1073741824 - 1)
+        bf.write(b"\0")
+        bf.close()
+
     def add_big_file(self, driver):
         big_file = Path(pathlib.Path.cwd(), "bigfile.jpg")
         path = str(big_file)
@@ -1217,8 +1224,7 @@ class FilesPages(BasePage):
             file_type = Path(pathlib.Path.cwd(), f"{n}")
             path = str(file_type)
             os.remove(path)
-
-        time.sleep(100)
+        # time.sleep(100)
 
     def template_download_bigfile(self):
         big_file = Path(pathlib.Path.cwd(), "bigfile.exe")
@@ -1237,7 +1243,7 @@ class FilesPages(BasePage):
         self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
         self.switch_out_frame()
         self.download_files_is_visible()
-        time.sleep(5)
+        # time.sleep(1)
         self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
         self.element_is_visible(self.Locators.CLOSE_DOWNLOAD_WINDOW).click()
         check_text_warning = self.element_is_visible(self.Locators.CHECK_TEXT_WARNING).text
@@ -1247,6 +1253,80 @@ class FilesPages(BasePage):
         assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб"
         time.sleep(2)
         os.remove(path)
+
+    def download_files_from_files(self):
+        path2 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
+        path3 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
+        path4 = str(Path(pathlib.Path.cwd(), "files", "animal.jpeg"))
+        path5 = str(Path(pathlib.Path.cwd(), "files", "pe.pdf"))
+        path6 = str(Path(pathlib.Path.cwd(), "files", "gomer.gif"))
+        # path = str(big_file)
+        data_path = [path2, path3, path4, path5, path6]
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        try:
+            self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        except TimeoutException:
+            time.sleep(1)
+        self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
+        self.download_files_is_visible()
+        for n in data_path:
+            self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
+        # time.sleep(5)
+
+
+    def check_script_download_bigfile(self):
+        path = str(Path(pathlib.Path.cwd(), "bigfile.csv"))
+        # path = str(big_file)
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
+        self.element_is_visible(self.Locators.ADD_STEP).click()
+        self.element_is_visible(self.Locators.TEXT_AREA).click()
+        self.element_is_visible(self.Locators.DROPDOWN).click()
+        frame = self.elements_is_present(self.Locators.FRAME)
+        self.switch_to_frame(frame)
+        self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
+        self.switch_out_frame()
+        self.download_files_is_visible()
+        time.sleep(1)
+        self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
+        self.element_is_visible(self.Locators.CLOSE_DOWNLOAD_WINDOW).click()
+        check_text_warning = self.element_is_visible(self.Locators.CHECK_TEXT_WARNING).text
+        assert check_text_warning == "Ошибка загрузки файлов"
+        self.element_is_visible(self.Locators.SHOW_BUTTON).click()
+        check_text_big_file_err = self.element_is_visible(self.Locators.CHECK_TEXT_BIG_FILE_ERR).text
+        assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб"
+        time.sleep(2)
+        os.remove(path)
+
+    def check_script_download(self):
+        data_files = generated_file()
+        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
+        self.element_is_visible(self.Locators.ADD_STEP).click()
+        self.element_is_visible(self.Locators.TEXT_AREA).click()
+
+        self.element_is_visible(self.Locators.DROPDOWN).click()
+        frame = self.elements_is_present(self.Locators.FRAME)
+        self.switch_to_frame(frame)
+        self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
+        self.switch_out_frame()
+        time.sleep(1)
+        self.check_tooltip()
+        """for visible"""
+        self.download_files_is_visible()
+        for n in data_files:
+            file_type = Path(pathlib.Path.cwd(), f"{n}")
+            path = str(file_type)
+            self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
+        time.sleep(5)  # ожидание перед удалением
+        for n in data_files:
+            file_type = Path(pathlib.Path.cwd(), f"{n}")
+            path = str(file_type)
+            os.remove(path)
+
+
+
 
 
 

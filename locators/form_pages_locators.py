@@ -449,6 +449,10 @@ class FilesPagesLocators:
     # FRAME = (By.XPATH, "//div[@title='Параметры']")
     # FRAME = (By.XPATH, "//div[@role='presentation']")
     FRAME = (By.XPATH, "//iframe[@class='cke_panel_frame']")
+    """check for script"""
+    ADD_STEP = (By.XPATH, "//p[contains(text(),'добавить шаг')]")
+    CREATE_SCRIPT = (By.XPATH, "//div[contains(text(),'Пошаговый сценарий')]")
+    TEXT_AREA = (By.XPATH, "//div[@aria-label='false']")
 
 
 

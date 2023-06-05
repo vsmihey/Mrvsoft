@@ -205,7 +205,30 @@ class TestFormPage:
             article_pages = FilesPages(driver, url)
             article_pages.open()
             article_pages.input_in_my_project(driver)
+            article_pages.generated_big_file_exe()
             article_pages.template_download_bigfile()
+
+        def test_download_files_from_files(self, driver):
+            article_pages = FilesPages(driver, url)
+            article_pages.open()
+            article_pages.input_in_my_project(driver)
+            article_pages.download_files_from_files()
+
+        def test_script_download_bigfile(self, driver):
+            article_pages = FilesPages(driver, url)
+            article_pages.open()
+            article_pages.input_in_my_project(driver)
+            article_pages.generated_big_file_csv()
+            article_pages.check_script_download_bigfile()
+
+        def test_script_download(self, driver):
+            article_pages = FilesPages(driver, url)
+            article_pages.open()
+            article_pages.input_in_my_project(driver)
+            article_pages.check_script_download()
+
+
+
 
 
 

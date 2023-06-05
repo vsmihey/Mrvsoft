@@ -17,6 +17,8 @@ def generated_person():
         mobile=faker_en.msisdn(),
         subject='English'
     )
+
+
 def generated_big_file():
     """created bigfile"""
     bf = open('bigfile', "wb")
@@ -26,10 +28,9 @@ def generated_big_file():
 
 
 def generated_file():
-
     files_list = ["csv", "exe", "doc", "docx", "odt", "ott", "rtf", "xls", "xlsx", "ods", "ots",
-                  "fods", "odp", "otp", "odg", "fodp", "ppt", "pptx", "pdf", "txt", "html", "zip", "jpg", "jpeg", "png", "gif"]
-    # files_list = ["csv", "exe"]
+                  "fods", "odp", "otp", "odg", "fodp", "ppt", "pptx", "txt", "zip"]
+    # files_list = ["html", "jpg", "jpeg", "png", "gif"]
     data_files = []
     for i in files_list:
         # path = Path(pathlib.Path.cwd(), "files", f"pic{random.randint(1, 99)}.{i}")
