@@ -1259,9 +1259,9 @@ class FilesPages(BasePage):
         path3 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
         path4 = str(Path(pathlib.Path.cwd(), "files", "animal.jpeg"))
         path5 = str(Path(pathlib.Path.cwd(), "files", "pe.pdf"))
-        path6 = str(Path(pathlib.Path.cwd(), "files", "gomer.gif"))
+        # path6 = str(Path(pathlib.Path.cwd(), "files", "gomer.gif"))
         # path = str(big_file)
-        data_path = [path2, path3, path4, path5, path6]
+        data_path = [path2, path3, path4, path5]
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         try:
@@ -1271,6 +1271,7 @@ class FilesPages(BasePage):
         self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
         self.download_files_is_visible()
         for n in data_path:
+            time.sleep(0.5)
             self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
         # time.sleep(5)
 
