@@ -28,9 +28,9 @@ class FilesFormatPage(BasePage):
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         """del hidden class input file"""
         self.remove_class_script()
-        self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path1)
+        self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path2)
         """check file picture"""
-        check_file_pictures = driver.find_element(By.CSS_SELECTOR, "img[alt='png_g']")
+        check_file_pictures = driver.find_element(By.CSS_SELECTOR, "img[alt='media']")
         check_file_pictures.is_displayed()
         """typography"""
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
@@ -39,7 +39,7 @@ class FilesFormatPage(BasePage):
         self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT).send_keys(text_area_alert)
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         """check file picture"""
-        check_file_pictures = driver.find_element(By.CSS_SELECTOR, "img[alt='png_g']")
+        check_file_pictures = driver.find_element(By.CSS_SELECTOR, "img[alt='media']")
         check_file_pictures.is_displayed()
         self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
 
