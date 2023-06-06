@@ -8,10 +8,16 @@ class TestFilesFormat:
 
     class TestCheckFormat:
 
-        def test_add_support_files(self, driver):
+        def test_add_pic_files(self, driver):
             files_format_page = FilesFormatPage(driver, url)
             files_format_page.open()
             files_format_page.add_files_pict(driver)
+
+        def test_audio_files(self, driver):
+            files_format_page = FilesFormatPage(driver, url)
+            files_format_page.open()
+            files_format_page.check_audio_files(driver)
+
 
 
 
