@@ -18,6 +18,13 @@ class TestFilesFormat:
             files_format_page.open()
             files_format_page.check_audio_files(driver)
 
+        def test_video_files(self, driver):
+            files_format_page = FilesFormatPage(driver, url)
+            files_format_page.open()
+            files_format_page.check_video_files(driver)
+
+
+
 
 
 

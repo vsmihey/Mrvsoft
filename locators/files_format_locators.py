@@ -14,6 +14,8 @@ class FilesFormatPageLocators:
     TEXTAREA_INPUT_TEXT = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
     BUTTON_FINISH = (By.XPATH, "//p[contains(text(),'Завершить')]")
     SVG_CLOSE_ARTICLE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close article-modal__close--white'])[1]")
+    """check audio"""
+    CHECK_AUDIO = (By.XPATH, "//div[@class='article-modal__container article-modal__container--type-file']//audio[@class='article-modal__content-file']")
 
 
 

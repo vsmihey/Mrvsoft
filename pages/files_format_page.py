@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 from selenium.common import StaleElementReferenceException
 from selenium.webdriver.common.by import By
-from generator.generator import generated_person, generated_files_audio
+from generator.generator import generated_person, generated_files_audio, generated_files_video
 from locators.files_format_locators import FilesFormatPageLocators
 from pages.base_page import BasePage
 
@@ -114,12 +114,22 @@ class FilesFormatPage(BasePage):
             file_audio = Path(pathlib.Path.cwd(), f"{n}")
             path = str(file_audio)
             self.add_all_files(path)
-
         for n in audio_files:
             file_audio = Path(pathlib.Path.cwd(), f"{n}")
             path = str(file_audio)
             os.remove(path)
 
+    def check_video_files(self, driver):
+        self.input_in_my_project(driver)
+        video_files = generated_files_video()
+        for n in video_files:
+            file_audio = Path(pathlib.Path.cwd(), f"{n}")
+            path = str(file_audio)
+            self.add_all_files(path)
+        for n in video_files:
+            file_audio = Path(pathlib.Path.cwd(), f"{n}")
+            path = str(file_audio)
+            os.remove(path)
 
 
 
