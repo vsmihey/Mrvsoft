@@ -23,6 +23,10 @@ class TestFilesFormat:
             files_format_page.open()
             files_format_page.check_video_files(driver)
 
+        # def test_file_replacement(self, driver):
+        #     files_format_page = FilesFormatPage(driver, url)
+        #     files_format_page.open()
+
 
 
 
