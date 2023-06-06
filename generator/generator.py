@@ -28,7 +28,7 @@ def generated_big_file():
 
 
 def generated_file():
-    files_list = ["csv", "exe", "doc", "docx", "odt", "ott", "rtf", "xls", "xlsx", "ods", "ots",
+    files_list = ["jpeg", "gif", "png", "jpg", "csv", "exe", "doc", "docx", "odt", "ott", "rtf", "xls", "xlsx", "ods", "ots",
                   "fods", "odp", "otp", "odg", "fodp", "ppt", "pptx", "txt", "zip"]
     # files_list = ["html", "jpg", "jpeg", "png", "gif"]
     data_files = []

@@ -37,7 +37,7 @@ from pathlib import Path
 #
 # print(ddd)
 
-sss = os.path.abspath("media.jpg")
+sss = os.path.abspath("gomer.gif")
 print(sss)
 
 

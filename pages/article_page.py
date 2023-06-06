@@ -1235,7 +1235,7 @@ class FilesPages(BasePage):
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
         except TimeoutException:
-            time.sleep(5)
+            time.sleep(10)
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
         self.element_is_visible(self.Locators.DROPDOWN).click()
         frame = self.elements_is_present(self.Locators.FRAME)
@@ -1255,25 +1255,33 @@ class FilesPages(BasePage):
         os.remove(path)
 
     def download_files_from_files(self):
-        path2 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
-        path3 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
-        path4 = str(Path(pathlib.Path.cwd(), "files", "animal.jpeg"))
-        path5 = str(Path(pathlib.Path.cwd(), "files", "pe.pdf"))
-        # path6 = str(Path(pathlib.Path.cwd(), "files", "gomer.gif"))
+        path_1 = Path(pathlib.Path.cwd(), "files", "png_g.png")
+        path1 = str(path_1)
+        path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
+        path3 = str(Path(pathlib.Path.cwd(), "files", "animal.jpeg"))
+        path4 = str(Path(pathlib.Path.cwd(), "files", "pe.pdf"))
+        path5 = str(Path(pathlib.Path.cwd(), "files", "gomer.gif"))
         # path = str(big_file)
-        data_path = [path2, path3, path4, path5]
+        data_path = [path1, path2, path3, path4, path5]
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         try:
             self.element_is_visible(Locators.CREATE_ARTICLE).click()
         except TimeoutException:
-            time.sleep(1)
+            time.sleep(5)
         self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
         self.download_files_is_visible()
+        # time.sleep(1)
+        """download files"""
+        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path1)
+        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path2)
+        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path3)
+        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path4)
+        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path5)
         for n in data_path:
-            time.sleep(0.5)
             self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
-        # time.sleep(5)
+        # time.sleep(1)
+
 
 
     def check_script_download_bigfile(self):

@@ -208,6 +208,7 @@ class TestFormPage:
             article_pages.generated_big_file_exe()
             article_pages.template_download_bigfile()
 
+        # @pytest.mark.skip('download_files_from_files')
         def test_download_files_from_files(self, driver):
             article_pages = FilesPages(driver, url)
             article_pages.open()

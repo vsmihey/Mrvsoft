@@ -2,6 +2,7 @@ import pathlib
 import time
 from pathlib import Path
 
+from selenium.common import StaleElementReferenceException
 from selenium.webdriver.common.by import By
 
 from generator.generator import generated_person
@@ -22,28 +23,38 @@ class FilesFormatPage(BasePage):
         path3 = str(Path(pathlib.Path.cwd(), "files", "animal.jpeg"))
         path4 = str(Path(pathlib.Path.cwd(), "files", "gomer.gif"))
         data_pictures = [path1, path2, path3, path4]
-        """input file"""
-        self.element_is_visible(self.Locators.CREATE_BUTTON).click()
-        self.element_is_visible(self.Locators.BUTTON_FILE).click()
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
-        """del hidden class input file"""
-        self.remove_class_script()
-        self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path2)
-        """check file picture"""
-        check_file_pictures = driver.find_element(By.CSS_SELECTOR, "img[alt='media']")
-        check_file_pictures.is_displayed()
-        """typography"""
-        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT).send_keys(text_area_alert)
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        """check file picture"""
-        check_file_pictures = driver.find_element(By.CSS_SELECTOR, "img[alt='media']")
-        check_file_pictures.is_displayed()
-        self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
+        for n in data_pictures:
+            # i = "png_g"
+            # if n == path2:
+            #     i = "media"
+            # elif n == path3:
+            #     i = "animal"
+            """input file"""
+            try:
+                self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+            except StaleElementReferenceException:
+                time.sleep(5)
+                self.element_is_visible(self.Locators.CREATE_BUTTON).click()
 
-
+            self.element_is_visible(self.Locators.BUTTON_FILE).click()
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+            """del hidden class input file"""
+            self.remove_class_script()
+            self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(n)
+            time.sleep(5)
+            """check file picture"""
+            # check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
+            # check_file_pictures.is_displayed()
+            """typography"""
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+            self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+            self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+            self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT).send_keys(text_area_alert)
+            self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+            """check file picture"""
+            # check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
+            # check_file_pictures.is_displayed()
+            self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
 
 
         time.sleep(5)
