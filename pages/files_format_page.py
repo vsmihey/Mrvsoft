@@ -217,7 +217,11 @@ class FilesFormatPage(BasePage):
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         self.input_in_my_project(driver)
         """edit pic file"""
-        self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
+        try:
+            self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
+        except:
+            time.sleep(5)
+            self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
         self.check_replacement_files_text()
         """replacement check"""
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path1)
