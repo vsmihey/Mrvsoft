@@ -1273,15 +1273,9 @@ class FilesPages(BasePage):
         self.download_files_is_visible()
         # time.sleep(1)
         """download files"""
-        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path1)
-        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path2)
-        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path3)
-        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path4)
-        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path5)
         for n in data_path:
             self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
         # time.sleep(1)
-
 
 
     def check_script_download_bigfile(self):
