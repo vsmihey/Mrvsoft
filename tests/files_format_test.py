@@ -23,9 +23,27 @@ class TestFilesFormat:
             files_format_page.open()
             files_format_page.check_video_files(driver)
 
-        # def test_file_replacement(self, driver):
-        #     files_format_page = FilesFormatPage(driver, url)
-        #     files_format_page.open()
+        def test_create_pic_video_audio_files(self, driver):
+            files_format_page = FilesFormatPage(driver, url)
+            files_format_page.open()
+            files_format_page.create_pic_video_audio_files(driver)
+
+        def test_file_check_replacement_video(self, driver):
+            files_format_page = FilesFormatPage(driver, url)
+            files_format_page.open()
+            files_format_page.check_replacement_files_video(driver)
+
+        def test_file_check_replacement_audio(self, driver):
+            files_format_page = FilesFormatPage(driver, url)
+            files_format_page.open()
+            files_format_page.file_check_replacement_audio(driver)
+
+        def test_file_check_replacement_pic(self, driver):
+            files_format_page = FilesFormatPage(driver, url)
+            files_format_page.open()
+            files_format_page.file_check_replacement_pic(driver)
+
+
 
 
 
