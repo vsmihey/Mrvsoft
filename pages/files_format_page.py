@@ -228,7 +228,11 @@ class UnformatFilePage(BasePage):
         text_area_alert = person.first_name + "-Alert"
         self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        try:
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        except TimeoutException:
+            time.sleep(5)
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         self.remove_class_script()
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """check text alert"""
@@ -254,14 +258,7 @@ class UnformatFilePage(BasePage):
         self.element_is_visible(self.Locators.SVG_CLOSE_DOWNLOADED_FILE).click()
 
 
-
-
-
-
-
-
-
-    def add_unformat_file(self, driver):
+    def add_unformat_file_rar_zip(self, driver):
         self.input_in_my_project(driver)
         path1 = str(Path(pathlib.Path.cwd(), "files", "rar.rar"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "zip.zip"))
@@ -271,15 +268,52 @@ class UnformatFilePage(BasePage):
         data_unsupported = data_unsupported[i]
         path = data_unsupported
         self.download_files_and_check(path)
-        # """check text alert"""
-        # check_text_only_download_alert = self.element_is_visible(self.Locators.CHECK_TEXT_ONLY_DOWNLOAD_ALERT).text
-        # assert check_text_only_download_alert == "Файл будет доступен только для скачивания"
-        # check_text_not_preview = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW).text
-        # assert check_text_not_preview == "Для этого формата не доступен предпросмотр"
-        # button_download_file = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD_FILE).text
-        # assert button_download_file == "Скачать файл"
-        # self.element_is_clickable(self.Locators.BUTTON_DOWNLOAD_FILE)
-        time.sleep(5)
+
+    def add_unformat_file_exel(self):
+        path1 = str(Path(pathlib.Path.cwd(), "files", "xlsx.xlsx"))
+        path2 = str(Path(pathlib.Path.cwd(), "files", "xls.xls"))
+        """random file by index"""
+        data_unsupported = [path1, path2]
+        i = random.randint(0, 1)
+        data_unsupported = data_unsupported[i]
+        path = data_unsupported
+        self.download_files_and_check(path)
+
+    def add_unformat_file_other(self):
+        path1 = str(Path(pathlib.Path.cwd(), "files", "pe.pdf"))
+        path2 = str(Path(pathlib.Path.cwd(), "files", "google.html"))
+        """random file by index"""
+        data_unsupported = [path1, path2]
+        i = random.randint(0, 1)
+        data_unsupported = data_unsupported[i]
+        path = data_unsupported
+        # self.download_files_and_check(path)
+        person = generated_person()
+        text_area_alert = person.first_name + "-Alert"
+        self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.BUTTON_FILE).click()
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        self.remove_class_script()
+        self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
+        """check text alert"""
+        check_text_not_preview_1 = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW_1).text
+        assert check_text_not_preview_1 == "Просмотр файла недоступен"
+        button_download_check_after_typography = self.element_is_visible(
+            self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
+        assert button_download_check_after_typography == "Скачать файл"
+        """typography"""
+        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT_ALERT).send_keys(text_area_alert)
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        """check text alert"""
+        check_text_not_preview_1 = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW_1).text
+        assert check_text_not_preview_1 == "Просмотр файла недоступен"
+        button_download_check_after_typography = self.element_is_visible(
+            self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
+        assert button_download_check_after_typography == "Скачать файл"
+        time.sleep(1)
 
 
 

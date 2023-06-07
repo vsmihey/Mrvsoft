@@ -54,6 +54,9 @@ class UnformatFilePageLocators:
     DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
     INPUT_FIELD_SELECT_FILE = (By.CSS_SELECTOR, "input[type='file']")
     SVG_CLOSE_DOWNLOADED_FILE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close article-modal__close--white'])[1]")
+    """check text convert files"""
+    CHECK_TEXT_NOT_PREVIEW_1 = (By.XPATH, "//h2[text()='Просмотр файла недоступен']")
+
 
 
 

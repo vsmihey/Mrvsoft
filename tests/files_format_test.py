@@ -48,7 +48,9 @@ class TestFilesFormat:
         def test_add_unformat_file(self, driver):
             files_format_page = UnformatFilePage(driver, url)
             files_format_page.open()
-            files_format_page.add_unformat_file(driver)
+            files_format_page.add_unformat_file_rar_zip(driver)
+            files_format_page.add_unformat_file_exel()
+            files_format_page.add_unformat_file_other()
 
 
 
