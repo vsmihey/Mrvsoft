@@ -6,7 +6,7 @@ from selenium.common import StaleElementReferenceException, ElementClickIntercep
     JavascriptException
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person, generated_files_audio, generated_files_video
-from locators.files_format_locators import FilesFormatPageLocators
+from locators.files_format_locators import FilesFormatPageLocators, UnformatFilePageLocators
 from pages.base_page import BasePage
 
 
@@ -142,12 +142,16 @@ class FilesFormatPage(BasePage):
         element = self.element_is_visible(self.Locators.SVG_INFORMATION_FOR_TOOLTIP)
         self.action_move_to_element(element)
         """text of tooltip"""
+        # data_list_tooltip = []
         try:
             list_tooltip = self.element_is_visible(self.Locators.LIST_TOOLTIP).text
+            # data_list_tooltip.append(list_tooltip)
         except TimeoutException:
             time.sleep(5)
             list_tooltip = self.element_is_visible(self.Locators.LIST_TOOLTIP).text
-        print(list_tooltip)
+        #     data_list_tooltip.append(list_tooltip)
+        # print(data_list_tooltip)
+        assert list_tooltip == '«Аудио» - файлы форматов: mp3, aac, ac3, aiff, au, dts, flac, m4a, m4p, m4r, mp2, ogg, opus, ra, tta, voc, vox, wav, wma.\n«Видео» - файлы форматов: mp4, avi, flv, mov, 3gp, m4v, asf, m2ts, m4v, mkv, mts, swf, vob, wmv, webm.\n«Изображение» - файлы форматов: jpg, jpeg, png, gif.\n«Документ» - все остальные файлы.'
 
     def check_replacement_files_video(self, driver):
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
@@ -158,6 +162,8 @@ class FilesFormatPage(BasePage):
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         self.input_in_my_project(driver)
         """edit avi file"""
+        element = self.elements_is_present(self.Locators.AVI_FILE_CREATED)
+        self.action_move_to_element(element)
         self.elements_is_present(self.Locators.AVI_FILE_CREATED).click()
         self.check_replacement_files_text()
         """change files """
@@ -166,27 +172,6 @@ class FilesFormatPage(BasePage):
         check_text_incorrect_format_replacement = self.element_is_visible(self.Locators.CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT).text
         assert check_text_incorrect_format_replacement == "Неверный формат файла для замены"
         self.element_is_visible(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE).click()
-        # time.sleep(5)
-        # assert list_tooltip == "«Аудио» - файлы форматов: mp3, aac, ac3, aiff, au, dts, flac, m4a, m4p, m4r, mp2, ogg, opus, ra, tta, voc, vox, wav, wma.\n"
-        #                        "«Видео» - файлы форматов: mp4, avi, flv, mov, 3gp, m4v, asf, m2ts, m4v, mkv, mts, swf, vob, wmv, webm.\n"
-        #                        "«Изображение» - файлы форматов: jpg, jpeg, png, gif.\n"
-        #                        "«Документ» - все остальные файлы."
-
-        # check_tooltip_format_support_audio = self.element_is_visible(self.Locators.CHECK_TOOLTIP_FORMAT_SUPPORT_AUDIO)
-        # check_tooltip_format_support_audio_value = check_tooltip_format_support_audio.text
-        # assert check_tooltip_format_support_audio_value == "- файлы форматов: mp3, aac, ac3, aiff, au, dts, flac, m4a, m4p, m4r, mp2, ogg, opus, ra, tta, voc, vox, wav, wma."
-        #
-        # check_tooltip_format_support_video = self.element_is_visible(
-        #     self.Locators.CHECK_TOOLTIP_FORMAT_SUPPORT_VIDEO).text
-        # assert check_tooltip_format_support_video == "- файлы форматов: mp4, avi, flv, mov, 3gp, m4v, asf, m2ts, m4v, mkv, mts, swf, vob, wmv, webm."
-        #
-        # check_tooltip_format_support_pict = self.element_is_visible(
-        #     self.Locators.CHECK_TOOLTIP_FORMAT_SUPPORT_PICT).text
-        # assert check_tooltip_format_support_pict == "- файлы форматов: jpg, jpeg, png, gif."
-        #
-        # check_tooltip_format_support_other = self.element_is_visible(
-        #     self.Locators.CHECK_TOOLTIP_FORMAT_SUPPORT_OTHER).text
-        # assert check_tooltip_format_support_other == "- все остальные файлы."
 
     def file_check_replacement_audio(self, driver):
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
@@ -197,6 +182,8 @@ class FilesFormatPage(BasePage):
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         self.input_in_my_project(driver)
         """edit avi file"""
+        element = self.elements_is_present(self.Locators.MP3_FILE_CREATED)
+        self.action_move_to_element(element)
         self.elements_is_present(self.Locators.MP3_FILE_CREATED).click()
         self.check_replacement_files_text()
         """replacement check"""
@@ -217,11 +204,9 @@ class FilesFormatPage(BasePage):
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         self.input_in_my_project(driver)
         """edit pic file"""
-        try:
-            self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
-        except:
-            time.sleep(5)
-            self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
+        element = self.elements_is_present(self.Locators.JPEG_FILE_CREATED)
+        self.action_move_to_element(element)
+        self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
         self.check_replacement_files_text()
         """replacement check"""
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path1)
@@ -231,6 +216,18 @@ class FilesFormatPage(BasePage):
             self.Locators.CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT).text
         assert check_text_incorrect_format_replacement == "Неверный формат файла для замены"
         self.element_is_visible(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE).click()
+
+
+class UnformatFilePage(BasePage):
+
+    Locators = UnformatFilePageLocators()
+
+    def download_files_and_check(self):
+        pass
+
+
+    def add_unformat_file(self, driver):
+        self.input_in_my_project(driver)
 
 
 

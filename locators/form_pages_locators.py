@@ -13,6 +13,7 @@ class FormPagesLocators:
     LOGIN = (By.NAME, "username")
     PASSWORD = (By.NAME, "password")
     INPUT_BUTTON = (By.XPATH, "//button[@type='submit']")
+    HISTORY_BUTTON = (By.XPATH, "//a[@data-html='true']")
     """name project selen"""
     TEST_PROJECT = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
     """restore forms"""

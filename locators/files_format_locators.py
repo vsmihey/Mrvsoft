@@ -30,10 +30,28 @@ class FilesFormatPageLocators:
     CHECK_TOOLTIP_FORMAT_SUPPORT_OTHER = (By.XPATH, "//p[text()='- все остальные файлы.']")
     CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT = (By.XPATH, "//div[text()='Неверный формат файла для замены']")
     SVG_TEXT_INCORRECT_FORMAT_CLOSE = (By.XPATH, "//div[@class='m-popup__close']")
-    AVI_FILE_CREATED = (By.XPATH, "//h3[normalize-space()='avi.avi']")
-    MP3_FILE_CREATED = (By.XPATH, "//h3[normalize-space()='mp3.mp3']")
-    JPEG_FILE_CREATED = (By.XPATH, "//h3[normalize-space()='media.jpg']")
+    AVI_FILE_CREATED = (By.XPATH, "//p[text()='avi.avi']")
+    MP3_FILE_CREATED = (By.XPATH, "//p[text()='mp3.mp3']")
+    JPEG_FILE_CREATED = (By.XPATH, "//p[text()='media.jpg']")
     DELETE_DRAFT = (By.XPATH, "//p[contains(text(),'Удалить черновик')]")
+
+
+class UnformatFilePageLocators:
+    """check add unformat files"""
+    CHECK_TEXT_ONLY_DOWNLOAD_ALERT = (By.XPATH, "//h2[contains(text(),'Файл будет доступен только для скачивания')]")
+    CHECK_TEXT_NOT_PREVIEW = (By.XPATH, "//h3[contains(text(),'Для этого формата не доступен предпросмотр')]")
+    BUTTON_DOWNLOAD_FILE = (By.XPATH, "//p[contains(text(),'Скачать файл')]")
+    BUTTON_TYPOGRAPHY = (By.XPATH, "//p[text()='Опубликовать файл']")
+    BUTTON_CONTINUE = (By.XPATH, "//p[contains(text(),'Продолжить')]")
+    TEXTAREA_INPUT_TEXT_ALERT = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
+    BUTTON_FINISH = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    """check after typography"""
+    TEXT_CHECK_AFTER_TYPOGRAPHY = (By.XPATH, "(//h2[@class='article-modal__view-unavailable-title'][contains(text(),'Просмотр файла недоступен')])[1]")
+    BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY = (By.XPATH, "(//p[text()='Скачать файл'])[1]")
+
+
+
+
 
 
 

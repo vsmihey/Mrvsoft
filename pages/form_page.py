@@ -50,7 +50,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         try:
             time.sleep(1)
-            self.element_is_visible(Locators.TEST_PROJECT).click()
+            self.element_is_visible(Locators.TEST_PROJECT, timeout=3).click()
         except TimeoutException:
             self.element_is_visible(Locators.ADD).click()
             self.element_is_visible(Locators.ADD_NAMES_PROJECT).send_keys("selen")
@@ -58,8 +58,11 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.ADD_TEST_PROJECT).click()
             self.element_is_visible(Locators.TEST_PROJECT).click()
             time.sleep(1)
+            self.element_is_visible(Locators.TEST_PROJECT).click()
+            # self.element_is_visible(Locators.HISTORY_BUTTON).click()
+            time.sleep(2)
             self.element_is_visible(Locators.CONTENT).click()
-            time.sleep(12)
+            time.sleep(10)
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()

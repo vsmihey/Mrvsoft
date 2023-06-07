@@ -43,6 +43,13 @@ class TestFilesFormat:
             files_format_page.open()
             files_format_page.file_check_replacement_pic(driver)
 
+    class TestUnformatFile:
+
+        def test_add_unformat_file(self, driver):
+            files_format_page = FilesFormatPage(driver, url)
+            files_format_page.open()
+
+
 
 
 

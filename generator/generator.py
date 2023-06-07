@@ -28,8 +28,8 @@ def generated_big_file():
 
 
 def generated_file():
-    files_list = ["csv", "exe", "doc", "docx", "odt", "ott", "rtf", "xls", "xlsx", "ods", "ots",
-                  "fods", "odp", "otp", "odg", "fodp", "ppt", "pptx", "txt", "zip"]
+    files_list = ["csv", "exe", "odt", "ott", "rtf", "ots",
+                  "fods", "odp", "otp", "odg", "fodp", "ppt", "pptx"]
     # files_list = ["html", "jpg", "jpeg", "png", "gif"]
     data_files = []
     for i in files_list:
@@ -45,7 +45,7 @@ def generated_file():
 
 
 def generated_files_audio():
-    audio_files_format = ["mp3", "aac", "ac3", "aiff", "au", "dts", "flac", "m4a", "m4p", "m4r", "mp2", "ogg", "opus", "ra", "tta", "voc", "vox", "wav", "wma"]
+    audio_files_format = ["ac3", "aiff", "au", "dts", "flac", "m4a", "m4p", "m4r", "mp2", "ogg", "opus", "ra", "tta", "voc", "vox", "wav", "wma"]
     audio_files = []
     for i in audio_files_format:
         path = Path(f"file{random.randint(1, 99)}.{i}")
@@ -56,7 +56,7 @@ def generated_files_audio():
 
 
 def generated_files_video():
-    video_files_format = ["mp4", "avi", "flv", "mov", "3gp", "m4v", "asf", "m2ts", "m4v", "mkv", "mts", "swf", "vob", "wmv", "webm"]
+    video_files_format = ["flv", "mov", "3gp", "m4v", "asf", "m2ts", "m4v", "mkv", "mts", "swf", "vob", "wmv", "webm"]
     video_files = []
     for i in video_files_format:
         path = Path(f"file{random.randint(1, 99)}.{i}")

@@ -42,6 +42,7 @@ class ArticlePage(BasePage):
             self.element_is_visible(Locators.ADD_PROJECT_BUTTON).click()
             self.element_is_visible(Locators.TEST_PROJECT).click()
             self.element_is_visible(Locators.CONTENT).click()
+            driver.refresh()
             time.sleep(12)
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
