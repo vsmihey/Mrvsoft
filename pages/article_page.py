@@ -348,8 +348,12 @@ class ArticlePage(BasePage):
         time.sleep(1)
         check_name_of_templates = driver.find_element(By.XPATH, f"//h1[normalize-space()='{name}']")
         check_name_of_templates.is_displayed()
-        self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
-        time.sleep(0.5)
+        try:
+            self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
+        except TimeoutException:
+            time.sleep(5)
+            self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
+        time.sleep(1)
         # self.screenshot()
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         check_search_text = driver.find_element(By.XPATH, "//p[contains(text(),'поиск')]")
@@ -900,7 +904,11 @@ class StepByScriptPage(BasePage):
         self.element_is_visible(self.Locators.CHECK_RADIO_LINK_CONTENT1).is_selected()
         self.element_is_visible(self.Locators.CHECK_RADIO_DISABLED).is_displayed()
         """check content name"""
-        check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
+        try:
+            check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
+        except TimeoutException:
+            time.sleep(5)
+            check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
         assert check_text_content_script == "Контент 1"
         """check name script"""
         # time.sleep(1)
@@ -922,11 +930,9 @@ class StepByScriptPage(BasePage):
         self.element_is_visible(self.Locators.TEXT_AREA_ALERT_INPUT).send_keys("Alert")
         self.element_is_visible(self.Locators.FINISH_BUTTON_SCRIPT).click()
         """content"""
-        # time.sleep(5)
         self.element_is_visible(self.Locators.CONTENT_TRANSFER).click()
         time.sleep(3)
         self.element_is_visible(self.Locators.CONTENT_SEARCH).click()
-        # time.sleep(5)
         search_of_contents = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
         search_of_contents.send_keys(text_fixing)
         search_of_contents.send_keys(Keys.RETURN)
@@ -979,17 +985,11 @@ class CreateDraftPage(BasePage):
     def create_name_article(self):
         person = generated_person()
         name_article = person.first_name + str(random.randint(99, 999))
-        # self.element_is_visible(Locators.CREATE_BUTTON).click()
-        # self.element_is_visible(Locators.CREATE_ARTICLE).click()
         time.sleep(3)
-        # self.alert_draft(driver)
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
 
 
     def alert_draft(self, driver):
-        # self.element_is_visible(Locators.CREATE_BUTTON).click()
-        # self.element_is_visible(Locators.CREATE_ARTICLE).click()
-        # self.element_is_visible(self.Locators.ALERT_CREATE_DRAFT).is_displayed()
         alert_create_draft = self.element_is_visible(self.Locators.ALERT_CREATE_DRAFT).text
         assert alert_create_draft == "Контент сохраняется автоматически"
         time.sleep(3)
@@ -1103,7 +1103,11 @@ class CreateDraftPage(BasePage):
         # time.sleep(5)
         self.element_is_visible(self.Locators.SECTION3).click()
         """check open edit text"""
-        self.element_is_visible(self.Locators.CHECK_TEXT_OPEN_EDIT_DRAFT).click()
+        try:
+            self.element_is_visible(self.Locators.CHECK_TEXT_OPEN_EDIT_DRAFT).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.CHECK_TEXT_OPEN_EDIT_DRAFT).click()
         self.element_is_visible(self.Locators.CHANGE_TEMPLATE).click()
         change_template_name_text_check = self.element_is_visible(self.Locators.CHANGE_TEMPLATE_NAME_TEXT_CHECK)
         change_template_name_text_check_value = change_template_name_text_check.text
@@ -1145,6 +1149,7 @@ class FilesPages(BasePage):
     def add_big_file(self, driver):
         big_file = Path(pathlib.Path.cwd(), "bigfile.jpg")
         path = str(big_file)
+        time.sleep(1)
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         try:
