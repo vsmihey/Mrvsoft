@@ -1,5 +1,6 @@
 import os
 import pathlib
+import random
 import time
 from pathlib import Path
 from selenium.common import StaleElementReferenceException, ElementClickInterceptedException, TimeoutException, \
@@ -222,12 +223,46 @@ class UnformatFilePage(BasePage):
 
     Locators = UnformatFilePageLocators()
 
-    def download_files_and_check(self):
-        pass
+    def download_files_and_check(self, path):
+        self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.BUTTON_FILE).click()
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        self.remove_class_script()
+        self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
+        """check text alert"""
+        check_text_only_download_alert = self.element_is_visible(self.Locators.CHECK_TEXT_ONLY_DOWNLOAD_ALERT).text
+        assert check_text_only_download_alert == "Файл будет доступен только для скачивания"
+        check_text_not_preview = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW).text
+        assert check_text_not_preview == "Для этого формата не доступен предпросмотр"
+        button_download_file = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD_FILE).text
+        assert button_download_file == "Скачать файл"
+        self.element_is_clickable(self.Locators.BUTTON_DOWNLOAD_FILE)
+        """download file"""
+
+
 
 
     def add_unformat_file(self, driver):
         self.input_in_my_project(driver)
+        path1 = str(Path(pathlib.Path.cwd(), "files", "rar.rar"))
+        path2 = str(Path(pathlib.Path.cwd(), "files", "zip.zip"))
+        """random file by index"""
+        data_unsupported = [path1, path2]
+        i = random.randint(0, 1)
+        data_unsupported = data_unsupported[i]
+        path = data_unsupported
+        self.download_files_and_check(path)
+        # """check text alert"""
+        # check_text_only_download_alert = self.element_is_visible(self.Locators.CHECK_TEXT_ONLY_DOWNLOAD_ALERT).text
+        # assert check_text_only_download_alert == "Файл будет доступен только для скачивания"
+        # check_text_not_preview = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW).text
+        # assert check_text_not_preview == "Для этого формата не доступен предпросмотр"
+        # button_download_file = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD_FILE).text
+        # assert button_download_file == "Скачать файл"
+        # self.element_is_clickable(self.Locators.BUTTON_DOWNLOAD_FILE)
+        time.sleep(5)
+
+
 
 
 

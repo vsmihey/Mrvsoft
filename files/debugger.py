@@ -40,6 +40,11 @@ from pathlib import Path
 sss = os.path.abspath("gomer.gif")
 print(sss)
 
+data_unsupported = ["w", "e"]
+i = random.randint(0, 1)
+data_unsupported = data_unsupported[i]
+print(data_unsupported, type(data_unsupported))
+
 
 # avatar = Path(pathlib.Path.cwd(), "media.jpeg")
 # path = str(avatar)

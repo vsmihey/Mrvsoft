@@ -48,6 +48,11 @@ class UnformatFilePageLocators:
     """check after typography"""
     TEXT_CHECK_AFTER_TYPOGRAPHY = (By.XPATH, "(//h2[@class='article-modal__view-unavailable-title'][contains(text(),'Просмотр файла недоступен')])[1]")
     BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY = (By.XPATH, "(//p[text()='Скачать файл'])[1]")
+    """input file"""
+    CREATE_BUTTON = (By.XPATH, "//div[text()='Создать']")
+    BUTTON_FILE = (By.XPATH, "//div[contains(text(),'Файл')]")
+    DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    INPUT_FIELD_SELECT_FILE = (By.CSS_SELECTOR, "input[type='file']")
 
 
 

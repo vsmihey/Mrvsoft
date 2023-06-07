@@ -1,6 +1,6 @@
 import time
 import pytest
-from pages.files_format_page import FilesFormatPage
+from pages.files_format_page import FilesFormatPage, UnformatFilePage
 from pages.data_login_password import *
 
 
@@ -46,8 +46,9 @@ class TestFilesFormat:
     class TestUnformatFile:
 
         def test_add_unformat_file(self, driver):
-            files_format_page = FilesFormatPage(driver, url)
+            files_format_page = UnformatFilePage(driver, url)
             files_format_page.open()
+            files_format_page.add_unformat_file(driver)
 
 
 
