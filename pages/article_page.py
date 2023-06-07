@@ -348,11 +348,7 @@ class ArticlePage(BasePage):
         time.sleep(1)
         check_name_of_templates = driver.find_element(By.XPATH, f"//h1[normalize-space()='{name}']")
         check_name_of_templates.is_displayed()
-        try:
-            self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
-        except TimeoutException:
-            time.sleep(5)
-            self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
+        self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
         time.sleep(1)
         # self.screenshot()
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
@@ -904,11 +900,7 @@ class StepByScriptPage(BasePage):
         self.element_is_visible(self.Locators.CHECK_RADIO_LINK_CONTENT1).is_selected()
         self.element_is_visible(self.Locators.CHECK_RADIO_DISABLED).is_displayed()
         """check content name"""
-        try:
-            check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
-        except TimeoutException:
-            time.sleep(5)
-            check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
+        check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
         assert check_text_content_script == "Контент 1"
         """check name script"""
         # time.sleep(1)

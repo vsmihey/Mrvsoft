@@ -602,11 +602,7 @@ class FormPage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_DATE).click()
         time.sleep(1)
-        try:
-            self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
-        except TimeoutException:
-            time.sleep(5)
-            self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
+        self.element_is_visible(Locators.SAVE_CHANGES_FOLDER).click()
         self.element_is_visible(Locators.FOLDER2).click()
         time.sleep(1)
         self.element_is_visible(Locators.RADIOBUTTON_SORT_BY_POPULAR).click()

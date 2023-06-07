@@ -224,6 +224,8 @@ class UnformatFilePage(BasePage):
     Locators = UnformatFilePageLocators()
 
     def download_files_and_check(self, path):
+        person = generated_person()
+        text_area_alert = person.first_name + "-Alert"
         self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
@@ -238,6 +240,22 @@ class UnformatFilePage(BasePage):
         assert button_download_file == "Скачать файл"
         self.element_is_clickable(self.Locators.BUTTON_DOWNLOAD_FILE)
         """download file"""
+        """typography"""
+        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT_ALERT).send_keys(text_area_alert)
+        text_check_after_typography = self.element_is_visible(self.Locators.TEXT_CHECK_AFTER_TYPOGRAPHY).text
+        assert text_check_after_typography == "Просмотр файла недоступен"
+        button_download_check_after_typography = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
+        assert button_download_check_after_typography == "Скачать файл"
+        """close"""
+        self.element_is_visible(self.Locators.SVG_CLOSE_DOWNLOADED_FILE).click()
+
+
+
+
+
 
 
 
