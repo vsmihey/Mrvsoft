@@ -1095,11 +1095,7 @@ class CreateDraftPage(BasePage):
         # time.sleep(5)
         self.element_is_visible(self.Locators.SECTION3).click()
         """check open edit text"""
-        try:
-            self.element_is_visible(self.Locators.CHECK_TEXT_OPEN_EDIT_DRAFT).click()
-        except TimeoutException:
-            time.sleep(3)
-            self.element_is_visible(self.Locators.CHECK_TEXT_OPEN_EDIT_DRAFT).click()
+        self.element_is_visible(self.Locators.CHECK_TEXT_OPEN_EDIT_DRAFT).click()
         self.element_is_visible(self.Locators.CHANGE_TEMPLATE).click()
         change_template_name_text_check = self.element_is_visible(self.Locators.CHANGE_TEMPLATE_NAME_TEXT_CHECK)
         change_template_name_text_check_value = change_template_name_text_check.text

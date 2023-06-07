@@ -245,6 +245,7 @@ class UnformatFilePage(BasePage):
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
         self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT_ALERT).send_keys(text_area_alert)
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         text_check_after_typography = self.element_is_visible(self.Locators.TEXT_CHECK_AFTER_TYPOGRAPHY).text
         assert text_check_after_typography == "Просмотр файла недоступен"
         button_download_check_after_typography = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
