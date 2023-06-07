@@ -257,7 +257,6 @@ class UnformatFilePage(BasePage):
         """close"""
         self.element_is_visible(self.Locators.SVG_CLOSE_DOWNLOADED_FILE).click()
 
-
     def add_unformat_file_rar_zip(self, driver):
         self.input_in_my_project(driver)
         path1 = str(Path(pathlib.Path.cwd(), "files", "rar.rar"))

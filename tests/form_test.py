@@ -162,7 +162,7 @@ class TestFormPage:
             article_page.add_script()
             article_page.check_step_fixing(driver)
 
-    @pytest.mark.skip('copy_paste')
+    # @pytest.mark.skip('copy_paste')
     class TestCopyPastePage:
 
         def test_copy_paste(self, driver):

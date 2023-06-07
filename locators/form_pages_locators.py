@@ -397,7 +397,8 @@ class CopyPastePageLocators:
     FINISH = (By.XPATH, "//a[normalize-space()='iOS']")
     CHECK_LINK_CORRECT = (By.XPATH, "//a[@href='https://openai.com/']")
     CHECK_TEXT_CORRECT = (By.XPATH, "//div/div/div/p/text()[1]")
-    FOLDER_DROPDOWN = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
+    # FOLDER_DROPDOWN = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
+    FOLDER_DROPDOWN = (By.XPATH, "//select[@class='m-ui-select__select']")
 
 class CreateDraftLocators:
 
