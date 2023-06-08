@@ -24,9 +24,10 @@ class CreateTopicDatabase(BasePage):
         self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).click()
         """input name topic and check len"""
         element = self.element_is_visible(self.Locators.INPUT_NAME_TOPIC)
-        name_content = self.check_len_name_content(driver, element, n=65, attribute="maxlength")
-
+        name_content, get_name = self.check_len_name_content(driver, element, n=65)
         self.element_is_visible(self.Locators.INPUT_NAME_TOPIC).send_keys(name_content)
+        print(len(name_content), len(get_name))
+        assert len(get_name) == 64
 
 
 
