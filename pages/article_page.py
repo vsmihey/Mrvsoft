@@ -1303,7 +1303,6 @@ class FilesPages(BasePage):
             self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
         # time.sleep(1)
 
-
     def check_script_download_bigfile(self):
         path = str(Path(pathlib.Path.cwd(), "bigfile.csv"))
         # path = str(big_file)

@@ -25,6 +25,7 @@ class FilesFormatPage(BasePage):
             time.sleep(5)
             self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
+        time.sleep(1)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         """del hidden class input file"""
         self.remove_class_script()
