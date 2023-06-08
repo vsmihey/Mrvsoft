@@ -1153,7 +1153,7 @@ class FilesPages(BasePage):
     def add_big_file(self, driver):
         big_file = Path(pathlib.Path.cwd(), "bigfile.jpg")
         path = str(big_file)
-        time.sleep(1)
+        time.sleep(5)
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         try:

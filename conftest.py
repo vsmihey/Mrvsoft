@@ -10,12 +10,11 @@ from selenium.webdriver.chrome.options import Options
 def driver():
     driver_service = Service(ChromeDriverManager().install()) # вкючить для загрузки новой версии дров
     chrome_options = Options()
-    # chrome_options.add_argument("--headless")   # запуск в скрытом режиме (без браузера)
+    chrome_options.add_argument("--headless")   # запуск в скрытом режиме (без браузера)
     # chrome_options.headless = True
     chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
     # prefs = {"profile.default_content_setting_values.notifications": 1}  # принять уведомление всплывающее
     # chrome_options.add_experimental_option("prefs", prefs)
-
     # chrome_options.add_argument('--allow-silent-push')
     chrome_options.add_argument('--disable-notifications')
     # chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
@@ -23,7 +22,6 @@ def driver():
     # chrome_options.add_argument('--disable-gpu')
     # chrome_options.add_argument("--incognito") # принудительный режим инкогнито
     # chrome_options.add_argument("--user-data-dir") # выключение режима инкогнито
-
     chrome_options.add_argument("--window-size=1280,800")  # в скрытом режиме запускать в полный размер
     # chrome_options.add_argument('--enable-javascript')
     # chrome_options.add_argument("disable-infobars")

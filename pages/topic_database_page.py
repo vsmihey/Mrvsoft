@@ -22,6 +22,14 @@ class CreateTopicDatabase(BasePage):
         button_add_topic = self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).text
         assert button_add_topic == 'Создать темы'
         self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).click()
+        """input name topic and check len"""
+        element = self.element_is_visible(self.Locators.INPUT_NAME_TOPIC)
+        name_content = self.check_len_name_content(driver, element, n=65, attribute="maxlength")
+
+        self.element_is_visible(self.Locators.INPUT_NAME_TOPIC).send_keys(name_content)
+
+
+
 
         time.sleep(5)
 

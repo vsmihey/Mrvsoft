@@ -4,6 +4,8 @@ import pickle
 import random
 import time
 from pathlib import Path
+from random import choice
+from string import ascii_uppercase
 
 from selenium.common import TimeoutException, ElementClickInterceptedException
 from selenium.webdriver import ActionChains
@@ -154,6 +156,16 @@ class BasePage:
         time.sleep(2)
         templates_download = driver.find_element(By.XPATH, f"//div[text()='{name_templates}']")
         templates_download.click()
+
+    def check_len_name_content(self, driver, element, n: int = 256, attribute: str = "value"):
+        # Locators = StepByScriptLocators
+        # для цифр заменить ascii_uppercase на digits
+        name_content = ''.join(choice(ascii_uppercase) for i in range(n)) + str(7)
+        element.send_keys(name_content)
+        value_text = element.get_attribute(attribute)
+        len_name_text = len(value_text)
+        assert len_name_text == n
+        return name_content
 
 
     # def element_is_visibility(self, element):

@@ -16,5 +16,7 @@ class CreateTopicDatabaseLocators:
     TEXT_PARENT_TOPIC = (By.XPATH, "//div[text()='родительская тема']")
     TEXT_DROPDOWN_DEFAULT = (By.XPATH, "//select[@class='m-ui-select__select']//option[text()='Нет']") # ПРОВЕРИТЬ
     BUTTON_CREATE_TOPIC = (By.XPATH, "//footer[@class='m-popup__footer lms-edit-theme-popup__footer']//p[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text'][contains(text(),'Создать тему')]") # ПРОВЕРИТЬ
+    """input name topic and check len"""
+    INPUT_NAME_TOPIC = (By.XPATH, "//input[@placeholder='Введите название темы']")
 
 
