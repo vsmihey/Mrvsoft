@@ -1041,7 +1041,11 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(self.Locators.NAME_OF_STEP_SCRIPT).send_keys("Script_Name3")
         self.driver.switch_to.window(tab4)
         self.element_is_visible(Locators.TEST_PROJECT).click()
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(5)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_FILE).click()
         self.element_is_visible(self.Locators.INPUT_NAME_FILE).send_keys("File_Name4")
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
@@ -1192,13 +1196,29 @@ class FilesPages(BasePage):
 
     def check_template_download(self, driver):
         data_files = generated_file()
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(5)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_TEMPLATES).click()
-        self.element_is_visible(self.Locators.EDIT_TEMPLATES_FIRST).click()
+        """create new template"""
+        self.element_is_visible(self.Locators.NEW_TEMPLATE).click()
+        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+        self.element_is_visible(Locators.LIST_OF_FIELDS_1).click()
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        name_templates = "for download file testing" + str(random.randint(999, 99999))
+        self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name_templates)
+        self.element_is_visible(Locators.SAVE_TEMPLATES_CHANGE).click()
+        self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
+        time.sleep(2)
+        templates_download = driver.find_element(By.XPATH, f"//div[text()='{name_templates}']")
+        templates_download.click()
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
         except TimeoutException:
-            time.sleep(5)
+            time.sleep(10)
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
         self.element_is_visible(self.Locators.DROPDOWN).click()
         frame = self.elements_is_present(self.Locators.FRAME)
@@ -1220,12 +1240,24 @@ class FilesPages(BasePage):
             os.remove(path)
         # time.sleep(100)
 
-    def template_download_bigfile(self):
+    def template_download_bigfile(self, driver):
         big_file = Path(pathlib.Path.cwd(), "bigfile.exe")
         path = str(big_file)
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_TEMPLATES).click()
-        self.element_is_visible(self.Locators.EDIT_TEMPLATES_FIRST).click()
+        """create new template"""
+        self.element_is_visible(self.Locators.NEW_TEMPLATE).click()
+        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+        self.element_is_visible(Locators.LIST_OF_FIELDS_1).click()
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        name_templates = "for download file testing" + str(random.randint(999, 99999))
+        self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name_templates)
+        self.element_is_visible(Locators.SAVE_TEMPLATES_CHANGE).click()
+        self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
+        time.sleep(2)
+        templates_download = driver.find_element(By.XPATH, f"//div[text()='{name_templates}']")
+        templates_download.click()
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
         except TimeoutException:
@@ -1275,7 +1307,11 @@ class FilesPages(BasePage):
     def check_script_download_bigfile(self):
         path = str(Path(pathlib.Path.cwd(), "bigfile.csv"))
         # path = str(big_file)
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except TimeoutException:
+            time.sleep(5)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
         self.element_is_visible(self.Locators.ADD_STEP).click()
         self.element_is_visible(self.Locators.TEXT_AREA).click()

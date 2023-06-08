@@ -228,6 +228,7 @@ class FormPagesLocators:
     INPUT_NAME_OF_FIELD = (By.XPATH, "//input[@placeholder='Введите название поля']")
     SAVE_TEMPLATES = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']//p[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text'][contains(text(),'сохранить')]")
     CHECKBOX_VALUE = (By.XPATH, "//p[contains(text(),'Запретить изменение значения по умолчанию')]")
+    SAVE_TEMPLATES_CHANGE = (By.XPATH, "//p[text()='Сохранить']")
     INPUT_VALUE = (By.XPATH, "//input[@placeholder='Не указано']")
     INPUT_NAME_OF_TEMPLATES = (By.XPATH, "//input[@placeholder='Введите название шаблона']")
     # SAVE_CREATED_TEMPLATES = (By.XPATH, "//p[contains(text(),'сохранить')]")
@@ -309,8 +310,8 @@ class FormPagesLocators:
     ADD_TEST_PROJECT = (By.XPATH, "//p[text()='добавить проект']")
     TEXT_CHECK_LINK = (By.XPATH, "//a[text()='https://openai.com/']")
     TARGET_FOLDER_CONTENT = (By.XPATH, "//div[text()='расположение контента']")
-
-
+    FINISH_BUTTON_SCRIPT = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    EDIT_TEMPLATE_1 = (By.XPATH, "//div[@class='m-popup__root']//a[1]")
 
 class StepByScriptLocators:
     ADD_SCRIPT = (By.XPATH, "//div[text()='Пошаговый сценарий']")
@@ -391,6 +392,7 @@ class StepByScriptLocators:
     TEXTAREA_VISIBLE = (By.XPATH, "//textarea[@style='visibility:visible;']")
 
 
+
 class CopyPastePageLocators:
 
     START = (By.XPATH, "//b[contains(text(),'Пикабу́ (Pikabu)')]")
@@ -434,6 +436,8 @@ class CreateDraftLocators:
 
 
 class FilesPagesLocators:
+    NEW_TEMPLATE = (By.XPATH, "//div[@class='m-lms-action-tooltip m-modal-templates__template-card']")
+
     TEST_PROJECT = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
     UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
     INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
