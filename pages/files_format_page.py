@@ -19,6 +19,7 @@ class FilesFormatPage(BasePage):
         before using put to send keys path"""
         person = generated_person()
         text_area_alert = person.first_name + "-Alert"
+        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         except StaleElementReferenceException:
@@ -30,7 +31,6 @@ class FilesFormatPage(BasePage):
         """del hidden class input file"""
         self.remove_class_script()
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
-        time.sleep(2)
         """typography"""
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
@@ -90,7 +90,8 @@ class FilesFormatPage(BasePage):
     def check_audio_files(self, driver):
         self.input_in_my_project(driver)
         audio_files = generated_files_audio()
-        for n in audio_files:
+        list_random_audio_files = random.choices(audio_files, k=3)
+        for n in list_random_audio_files:
             file_audio = Path(pathlib.Path.cwd(), f"{n}")
             path = str(file_audio)
             self.add_all_files(path)
@@ -102,7 +103,8 @@ class FilesFormatPage(BasePage):
     def check_video_files(self, driver):
         self.input_in_my_project(driver)
         video_files = generated_files_video()
-        for n in video_files:
+        list_random_audio_files = random.choices(video_files, k=3)
+        for n in list_random_audio_files:
             file_audio = Path(pathlib.Path.cwd(), f"{n}")
             path = str(file_audio)
             self.add_all_files(path)

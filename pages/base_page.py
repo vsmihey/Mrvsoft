@@ -1,6 +1,7 @@
 import datetime
 import pathlib
 import pickle
+import random
 import time
 from pathlib import Path
 
@@ -138,7 +139,21 @@ class BasePage:
         self.driver.execute_script(
             """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
 
-
+    def create_and_open_new_template(self, driver):
+        """create and open new template"""
+        Locators = FormPagesLocators
+        self.element_is_visible(Locators.NEW_TEMPLATE).click()
+        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+        self.element_is_visible(Locators.LIST_OF_FIELDS_1).click()
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        name_templates = "for download file testing" + str(random.randint(999, 99999))
+        self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name_templates)
+        self.element_is_visible(Locators.SAVE_TEMPLATES_CHANGE).click()
+        self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
+        time.sleep(2)
+        templates_download = driver.find_element(By.XPATH, f"//div[text()='{name_templates}']")
+        templates_download.click()
 
 
     # def element_is_visibility(self, element):

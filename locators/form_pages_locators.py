@@ -312,6 +312,10 @@ class FormPagesLocators:
     TARGET_FOLDER_CONTENT = (By.XPATH, "//div[text()='расположение контента']")
     FINISH_BUTTON_SCRIPT = (By.XPATH, "//p[contains(text(),'Завершить')]")
     EDIT_TEMPLATE_1 = (By.XPATH, "//div[@class='m-popup__root']//a[1]")
+    NEW_TEMPLATE = (By.XPATH, "//div[@class='m-lms-action-tooltip m-modal-templates__template-card']")
+
+
+
 
 class StepByScriptLocators:
     ADD_SCRIPT = (By.XPATH, "//div[text()='Пошаговый сценарий']")

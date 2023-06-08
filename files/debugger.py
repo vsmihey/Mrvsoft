@@ -40,10 +40,15 @@ from pathlib import Path
 sss = os.path.abspath("gomer.gif")
 print(sss)
 
-data_unsupported = ["w", "e"]
-i = random.randint(0, 1)
-data_unsupported = data_unsupported[i]
-print(data_unsupported, type(data_unsupported))
+# data_unsupported = ["w", "e"]
+# i = random.randint(0, 1)
+# data_unsupported = data_unsupported[i]
+# print(data_unsupported, type(data_unsupported))
+
+# рандомно выбрать несколько элементов из списка
+lst = [10, 25, 30, 45, 50 ,65, 70, 85, 90, 105]
+list_random = random.choices(lst, k=3)
+print(list_random)
 
 
 # avatar = Path(pathlib.Path.cwd(), "media.jpeg")

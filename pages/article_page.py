@@ -970,6 +970,7 @@ class CopyPastePage(BasePage):
         # print(check_link_correct)
         assert check_link_correct == 'https://openai.com/'
 
+
 class CreateDraftPage(BasePage):
 
     Locators = CreateDraftLocators()
@@ -979,7 +980,6 @@ class CreateDraftPage(BasePage):
         name_article = person.first_name + str(random.randint(99, 999))
         time.sleep(3)
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)
-
 
     def alert_draft(self, driver):
         alert_create_draft = self.element_is_visible(self.Locators.ALERT_CREATE_DRAFT).text
@@ -1031,7 +1031,19 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(Locators.TEST_PROJECT).click()
         self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_TEMPLATES).click()
-        self.element_is_visible(self.Locators.EDIT_TEMPLATE_1).click()
+        """create new template"""
+        self.element_is_visible(Locators.NEW_TEMPLATE).click()
+        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+        self.element_is_visible(Locators.LIST_OF_FIELDS_1).click()
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        name_templates = "for download file testing" + str(random.randint(999, 99999))
+        self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name_templates)
+        self.element_is_visible(Locators.SAVE_TEMPLATES_CHANGE).click()
+        self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
+        time.sleep(2)
+        templates_download = driver.find_element(By.XPATH, f"//div[text()='{name_templates}']")
+        templates_download.click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Template_Name2")
         time.sleep(1)
         self.driver.switch_to.window(tab3)
