@@ -415,8 +415,9 @@ class FormPage(BasePage):
                     break
                 try:
                     time.sleep(1)
-                    second_folder_in_list = driver.find_element(By.XPATH, "(//div[@class='tree-item-content'])[2]")
-                    second_folder_in_list.click()
+                    self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST_FOR_DEL, timeout=3).click()
+                    # second_folder_in_list = driver.find_element(By.XPATH, "(//div[@class='tree-item-content'])[2]")
+                    # second_folder_in_list.click()
                     # self.element_is_visible(Locators.SECOND_FOLDER_IN_LIST).click()
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
                     time.sleep(1)
@@ -550,6 +551,7 @@ class FormPage(BasePage):
         time.sleep(2)
         """recovery folder"""
         self.element_is_visible(Locators.SHOW_DELETED_FOLDERS).click()
+        time.sleep(1)
         recovery_folder_by_name = driver.find_element(By.XPATH, f"//p[normalize-space()='{name_of_new_folder}']")
         recovery_folder_by_name.click()
         time.sleep(1)

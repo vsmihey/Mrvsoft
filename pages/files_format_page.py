@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 from selenium.common import StaleElementReferenceException, ElementClickInterceptedException, TimeoutException, \
     JavascriptException
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person, generated_files_audio, generated_files_video
 from locators.files_format_locators import FilesFormatPageLocators, UnformatFilePageLocators
@@ -231,11 +232,16 @@ class UnformatFilePage(BasePage):
         text_area_alert = person.first_name + "-Alert"
         self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
-        try:
-            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
-        except TimeoutException:
-            time.sleep(10)
-            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        """direct folder save"""
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).click()
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.RETURN)
+        # try:
+        #     self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        # except TimeoutException:
+        #     time.sleep(10)
+        #     self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         self.remove_class_script()
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """check text alert"""
@@ -298,7 +304,12 @@ class UnformatFilePage(BasePage):
         text_area_alert = person.first_name + "-Alert"
         self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        """direct folder save"""
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).click()
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.RETURN)
+        # self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         self.remove_class_script()
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """check text alert"""
