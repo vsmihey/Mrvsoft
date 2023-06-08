@@ -41,8 +41,8 @@ class UnformatFilePageLocators:
     CHECK_TEXT_ONLY_DOWNLOAD_ALERT = (By.XPATH, "//h2[contains(text(),'Файл будет доступен только для скачивания')]")
     CHECK_TEXT_NOT_PREVIEW = (By.XPATH, "//h3[contains(text(),'Для этого формата не доступен предпросмотр')]")
     BUTTON_DOWNLOAD_FILE = (By.XPATH, "//p[contains(text(),'Скачать файл')]")
-    # BUTTON_TYPOGRAPHY = (By.XPATH, "//p[text()='Опубликовать файл']")
-    BUTTON_TYPOGRAPHY = (By.XPATH, "article-editor-container-document__publish-button-wrapper")
+    BUTTON_TYPOGRAPHY = (By.XPATH, "//p[text()='Опубликовать файл']")
+    # BUTTON_TYPOGRAPHY = (By.XPATH, "article-editor-container-document__publish-button-wrapper")
     BUTTON_CONTINUE = (By.XPATH, "//p[contains(text(),'Продолжить')]")
     TEXTAREA_INPUT_TEXT_ALERT = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
     BUTTON_FINISH = (By.XPATH, "//p[contains(text(),'Завершить')]")
@@ -52,7 +52,7 @@ class UnformatFilePageLocators:
     """input file"""
     CREATE_BUTTON = (By.XPATH, "//div[text()='Создать']")
     BUTTON_FILE = (By.XPATH, "//div[contains(text(),'Файл')]")
-    DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    DIRECT_FOLDER = (By.XPATH, "//select[@class='m-ui-select__select']")
     INPUT_FIELD_SELECT_FILE = (By.CSS_SELECTOR, "input[type='file']")
     SVG_CLOSE_DOWNLOADED_FILE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close article-modal__close--white'])[1]")
     """check text convert files"""

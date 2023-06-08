@@ -8,7 +8,7 @@ from pages.article_page import ArticlePage, CopyPastePage, CreateDraftPage, File
 from pages.article_page import StepByScriptPage
 
 
-@pytest.mark.order(0)
+
 class TestFormPage:
 
     def test_logo(self, driver):
