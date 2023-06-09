@@ -4,8 +4,7 @@ from pages.files_format_page import FilesFormatPage, UnformatFilePage
 from pages.data_login_password import *
 
 
-
-
+@pytest.mark.order(2)
 class TestFilesFormat:
 
     class TestCheckFormat:

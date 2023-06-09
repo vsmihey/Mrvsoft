@@ -1,8 +1,10 @@
+import pytest
 
 from pages.data_login_password import url
 from pages.topic_database_page import CreateTopicDatabase
 
 
+@pytest.mark.order(1)
 class TestTopicDatabase:
 
     class TestCreateTopicDatabase:

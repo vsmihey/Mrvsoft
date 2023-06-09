@@ -34,6 +34,8 @@ class FilesFormatPageLocators:
     MP3_FILE_CREATED = (By.XPATH, "//p[text()='mp3.mp3']")
     JPEG_FILE_CREATED = (By.XPATH, "//p[text()='media.jpg']")
     DELETE_DRAFT = (By.XPATH, "//p[contains(text(),'Удалить черновик')]")
+    TEXT_FILE_DOWNLOADS = (By.XPATH, "//h2[contains(text(),'Файл загружается')]")
+
 
 
 class UnformatFilePageLocators:
@@ -57,6 +59,7 @@ class UnformatFilePageLocators:
     SVG_CLOSE_DOWNLOADED_FILE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close article-modal__close--white'])[1]")
     """check text convert files"""
     CHECK_TEXT_NOT_PREVIEW_1 = (By.XPATH, "//h2[text()='Просмотр файла недоступен']")
+    TEXT_FILE_DOWNLOADS = (By.XPATH, "//h2[contains(text(),'Файл загружается')]")
 
 
 
