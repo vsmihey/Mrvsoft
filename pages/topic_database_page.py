@@ -142,7 +142,9 @@ class CreateTopicDatabase(BasePage):
         the_same_name_list = self.elements_are_visible(self.Locators.THE_SAME_NAME_LIST)
         for n in the_same_name_list:
             the_same_name = n.text
+            time.sleep(0.5)
             data_same_name.append(the_same_name)
+        # print(len(data_same_name), data_same_name, type(len(data_same_name)))
         assert len(data_same_name) == 2
 
         # time.sleep(2)
