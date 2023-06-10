@@ -20,11 +20,11 @@ class FilesFormatPage(BasePage):
         before using put to send keys path"""
         person = generated_person()
         text_area_alert = person.first_name + "-Alert"
-        time.sleep(1)
+        time.sleep(2)
         try:
             self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         except StaleElementReferenceException:
-            self.screenshot()
+            # self.screenshot()
             time.sleep(5)
             self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
@@ -36,7 +36,7 @@ class FilesFormatPage(BasePage):
         try:
             self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         except TimeoutException:
-            self.screenshot()
+            # self.screenshot()
             time.sleep(5)
             self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """typography"""
@@ -44,7 +44,7 @@ class FilesFormatPage(BasePage):
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         except ElementClickInterceptedException:
-            self.screenshot()
+            # self.screenshot()
             time.sleep(20)
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
@@ -242,7 +242,6 @@ class UnformatFilePage(BasePage):
         person = generated_person()
         text_area_alert = person.first_name + "-Alert"
         time.sleep(1)
-
         self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
         """direct folder save"""
@@ -258,17 +257,15 @@ class UnformatFilePage(BasePage):
         self.remove_class_script()
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """check text alert"""
-
         time.sleep(1)
         try:
             self.element_is_visible(self.Locators.CHECK_TEXT_ONLY_DOWNLOAD_ALERT).text
         except TimeoutException:
-            self.screenshot()
+            # self.screenshot()
             time.sleep(20)
             check_text_only_download_alert = self.element_is_visible(
                 self.Locators.CHECK_TEXT_ONLY_DOWNLOAD_ALERT).text
             assert check_text_only_download_alert == "Файл будет доступен только для скачивания"
-
         check_text_not_preview = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW).text
         assert check_text_not_preview == "Для этого формата не доступен предпросмотр"
         button_download_file = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD_FILE).text
@@ -356,7 +353,7 @@ class UnformatFilePage(BasePage):
         button_download_check_after_typography = self.element_is_visible(
             self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
         assert button_download_check_after_typography == "Скачать файл"
-        time.sleep(1)
+
 
 
 

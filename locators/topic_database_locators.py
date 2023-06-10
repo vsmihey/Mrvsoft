@@ -58,6 +58,7 @@ class CreateTopicDatabaseLocators:
     NAME_1 = (By.XPATH, "(//div[contains(text(),'THE SAME NAME')])[1]")
     NAME_2 = (By.XPATH, "(//div[contains(text(),'THE SAME NAME')])[2]")
     NAME_2_LAST_IN_LIST = (By.XPATH, "(//li[@class='m-tree-item m-tree-item__wrapper'])[23]")
+    THE_SAME_NAME_LIST = (By.XPATH, "//div[text()='THE SAME NAME']")
 
 
 
