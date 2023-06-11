@@ -43,7 +43,7 @@ class CreateTopicDatabase(BasePage):
         self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).click()
         """input name topic and check len"""
         element = self.element_is_visible(self.Locators.INPUT_NAME_TOPIC)
-        name_content, get_name = self.check_len_name_content(driver, element, n=65)
+        name_content, get_name = self.check_len_name(driver, element, n=65)
         self.element_is_visible(self.Locators.INPUT_NAME_TOPIC).send_keys(name_content)
         # print(len(name_content), len(get_name))
         assert len(get_name) == 64
@@ -74,9 +74,14 @@ class CreateTopicDatabase(BasePage):
         """DELETE CREATED TOPICS"""
         list_created_topics = self.elements_are_visible(self.Locators.LIST_CREATED_TOPICS)
         for n in list_created_topics:
+            time.sleep(1)
             n.click()
             time.sleep(1)
-            self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
+            try:
+                self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
+            except TimeoutException:
+                time.sleep(5)
+                self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
             self.element_is_visible(self.Locators.BUTTON_CONFIRM_DELETE_TOPIC).click()
             #
             # try:

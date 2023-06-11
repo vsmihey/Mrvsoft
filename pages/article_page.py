@@ -660,7 +660,11 @@ class StepByScriptPage(BasePage):
     Locators = StepByScriptLocators()
 
     def add_script(self):
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(3)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.ADD_SCRIPT).click()
         time.sleep(1)
 
@@ -1000,13 +1004,16 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name)
 
-
     def open_4_tab(self, driver):
         """open draft"""
         person = generated_person()
         name_article = person.first_name + str(random.randint(99, 999))
         # text_area = person.last_name + str(random.randint(99, 999))
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(5)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.FIELD_DRAFT).click()
         """open 4 tab"""
         for n in range(4):
@@ -1182,7 +1189,11 @@ class FilesPages(BasePage):
     def create_data_files(self, driver):
         driver.implicitly_wait(10)
         data_files = generated_file()
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         try:
             self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()

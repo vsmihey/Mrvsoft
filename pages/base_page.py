@@ -157,7 +157,7 @@ class BasePage:
         templates_download = driver.find_element(By.XPATH, f"//div[text()='{name_templates}']")
         templates_download.click()
 
-    def check_len_name_content(self, driver, element, n: int = 256):
+    def check_len_name(self, driver, element, n: int = 256):
         # для цифр заменить ascii_uppercase на digits
         """генерация имени по n количеству символов"""
         name_content = ''.join(choice(ascii_uppercase) for i in range(n)) # + str(7)
