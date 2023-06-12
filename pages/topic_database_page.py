@@ -45,7 +45,6 @@ class CreateTopicDatabase(BasePage):
         element = self.element_is_visible(self.Locators.INPUT_NAME_TOPIC)
         name_content, get_name = self.check_len_name(driver, element, n=65)
         self.element_is_visible(self.Locators.INPUT_NAME_TOPIC).send_keys(name_content)
-        # print(len(name_content), len(get_name))
         assert len(get_name) == 64
         """create topic"""
         self.element_is_visible(self.Locators.BUTTON_CREATE_TOPIC).click()
@@ -86,7 +85,6 @@ class CreateTopicDatabase(BasePage):
     def create_new_question(self, driver):
         """CREATE AN CHECK NEW QUESTION"""
         """check open form"""
-        # person = generated_person()
         text_of_question = "Здесь должен быть текст вопроса"+str(random.randint(99, 999))
         answer_of_question = "Ответ на вопрпос"+str(random.randint(99, 999))
         text_database_of_question_head = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION_HEAD).text
@@ -134,24 +132,11 @@ class CreateTopicDatabase(BasePage):
         self.element_is_visible(self.Locators.TEXT_PLACEHOLDER_INPUT_NAME_TOPIC).send_keys("THE SAME NAME")
         self.element_is_visible(self.Locators.BUTTON_CREATE_TOPIC_CONFIRM).click()
         """check count the same name, locators: name_1 and name_2 contains text THE SAME NAME """
-        # name_1
-        # data_same_name = []
-        # the_same_name_list = self.elements_are_visible(self.Locators.THE_SAME_NAME_LIST)
-        # for n in the_same_name_list:
-        #     the_same_name = n.text
-        #     time.sleep(1)
-        #     data_same_name.append(the_same_name)
-        # # print(len(data_same_name), data_same_name, type(len(data_same_name)))
-        # assert len(data_same_name) == 2
-        # time.sleep(2)
         data_same_name = []
         name_1 = self.element_is_visible(self.Locators.NAME_1)
         data_same_name.append(name_1)
         name_2 = self.elements_is_present(self.Locators.NAME_2)
         data_same_name.append(name_2)
-        # driver.driver.execute_script("window.scrollBy(0, 20)")
-        # name_2 = self.element_is_visible(self.Locators.NAME_2)
-        # driver.execute_script("return arguments[0].scrollIntoView(true);", name_2)
         self.go_to_element(name_2)
         """check name las topic"""
         self.element_is_visible(self.Locators.NAME_2).click()
@@ -192,8 +177,6 @@ class CreateTopicDatabase(BasePage):
         text_questions_options = self.element_is_visible(self.Locators.TEXT_QUESTIONS_OPTIONS).text
         assert text_questions_options == "Варианты ответа"
 
-
-
     def edit_topic_in_database(self):
         self.input_in_my_project(driver)
         self.element_is_visible(self.Locators.LEARNING_BUTTON).click()
@@ -224,12 +207,10 @@ class CreateTopicDatabase(BasePage):
         self.input_random_symbols(element, 5)
         self.element_is_visible(self.Locators.ANSWER_CHECKBOX).click()
         self.element_is_visible(self.Locators.BUTTON_CREATE_QUESTION).click()
-
         """check open modal window"""
         text_database_of_question_head = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION_HEAD).text
         assert text_database_of_question_head == "База вопросов"
         text_created_new_question = self.element_is_visible(self.Locators.TEXT_CREATED_NEW_QUESTION).text
-        print(text_created_new_question)
         assert text_created_new_question == name_content
 
     def edit_question(self):
@@ -277,7 +258,6 @@ class CreateTopicDatabase(BasePage):
             n.click()
             self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
 
-        time.sleep(5)
 
 
 
