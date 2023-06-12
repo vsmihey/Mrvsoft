@@ -16,3 +16,5 @@ class TestTopicDatabase:
         def test_edit_topic_in_database(self, driver):
             topic_database_page = CreateTopicDatabase(driver, url)
             topic_database_page.open()
+            topic_database_page.edit_topic_in_database()
+

@@ -61,6 +61,17 @@ class CreateTopicDatabaseLocators:
     NAME_2_LAST_IN_LIST = (By.XPATH, "(//li[@class='m-tree-item m-tree-item__wrapper'])[23]")
     THE_SAME_NAME_LIST = (By.XPATH, "//div[text()='THE SAME NAME']")
     SVG_CLOSE_TOPICS_WINDOW = (By.XPATH, "//div[@class='button-action__icon-wrapper']")
+    """edit question"""
+    TEXT_SETTINGS_QUESTION = (By.XPATH, "//h4[contains(text(),'Настройка вопроса')]")
+    TEXT_QUESTIONS_TEXT = (By.XPATH, "//div[text()='текст вопроса']")
+    TEXT_QUESTIONS_TYPE = (By.XPATH, "//div[text()='тип вопроса']")
+    TEXT_QUESTIONS_OPTIONS = (By.XPATH, "//h4[contains(text(),'Варианты ответа')]")
+    TEXT_TOPIC = (By.XPATH, "//h4[contains(text(),'Тема')]")
+    TEXT_CHOOSE_TOPIC = (By.XPATH, "//div[text()='выберите тему']")
+    ANSWER_CHECKBOX_1 = (By.XPATH, "//label[@class='checkbox-wrapper checkbox-wrapper--no-label']")
+    # DROPDOWN_TIPE_OF_QUESTION = (By.XPATH, "(//select[@class='m-ui-select__select'])[1]")
+
+
 
 
 

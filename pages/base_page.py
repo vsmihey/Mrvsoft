@@ -168,6 +168,16 @@ class BasePage:
         """возвращение имени которое сгенерировали и имени которое вставилось по ограничениям"""
         return name_content, get_name
 
+    def input_random_symbols(self, element, n: int = 25):
+        # для цифр заменить ascii_uppercase на digits
+        """генерация имени по n количеству символов"""
+        name_content = ''.join(choice(ascii_uppercase) for i in range(n)) # + str(7)
+        """вставка сгенерированного имени в поле ввода"""
+        element.send_keys(name_content)
+        return name_content
+
+
+
 
     # def element_is_visibility(self, element):
     #     element = driver.find_element_by_css_selector("input")

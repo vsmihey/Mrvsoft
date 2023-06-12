@@ -159,16 +159,89 @@ class CreateTopicDatabase(BasePage):
         assert name_2_value == "THE SAME NAME"
         print(len(data_same_name))
         assert len(data_same_name) == 2
+        self.element_is_visible(self.Locators.BUTTON_SAVE_TOPIC).click()
+        try:
+            self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
         """delete question"""
         self.element_is_visible(self.Locators.SVG_DEL_QUESTION).click()
         self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
-        time.sleep(5)
 
     def edit_topic_in_database(self):
         self.input_in_my_project(driver)
         self.element_is_visible(self.Locators.LEARNING_BUTTON).click()
         self.element_is_visible(self.Locators.TAB_ALL_COURSES).click()
         self.element_is_visible(self.Locators.DATABASE_OF_QUESTIONS).click()
+        """check text and button"""
+        text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
+        assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
+        button_question_add = self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).text
+        assert button_question_add == "Добавить"
+        self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).click()
+        """check add new question"""
+        text_new_question = self.element_is_visible(self.Locators.TEXT_NEW_QUESTION).text
+        assert text_new_question == "Новый вопрос"
+        text_settings_question = self.element_is_visible(self.Locators.TEXT_SETTINGS_QUESTION).text
+        assert text_settings_question == "Настройка вопроса"
+        text_questions_text = self.element_is_visible(self.Locators.TEXT_QUESTIONS_TEXT).text
+        assert text_questions_text == "текст вопроса:"
+        textarea_placeholder_input_name_question = self.element_is_visible(self.Locators.TEXTAREA_PLACEHOLDER_INPUT_NAME_QUESTION).get_attribute("placeholder")
+        assert textarea_placeholder_input_name_question == "Введите текст вопроса"
+        """check first dropdown"""
+        text_questions_type = self.element_is_visible(self.Locators.TEXT_QUESTIONS_TYPE).text
+        assert text_questions_type == "тип вопроса:"
+        text_dropdown = self.element_is_visible(self.Locators.DROPDOWN_TIPE_OF_QUESTION).text
+        assert text_dropdown == 'Выбор нескольких ответов\nВыбор одного ответа\nВвод ответа'
+        # data_dropdown = []
+        # data_dropdown.append(text_dropdown)
+        # print(data_dropdown)
+        # assert label == "Выбор нескольких ответов"
+        """check topic text"""
+        text_topic = self.element_is_visible(self.Locators.TEXT_TOPIC).text
+        assert text_topic == "Тема"
+        text_choose_topic = self.element_is_visible(self.Locators.TEXT_CHOOSE_TOPIC).text
+        assert text_choose_topic == "выберите тему:"
+        """questions options check"""
+        text_questions_options = self.element_is_visible(self.Locators.TEXT_QUESTIONS_OPTIONS).text
+        assert text_questions_options == "Варианты ответа"
+
+        """dropdown tipe"""
+        # self.element_is_visible(self.Locators.DROPDOWN_TIPE_OF_QUESTION).click()
+        # self.element_is_visible(self.Locators.DROPDOWN_TIPE_OF_QUESTION).send_keys(Keys.ARROW_DOWN)
+        # self.element_is_visible(self.Locators.DROPDOWN_TIPE_OF_QUESTION).send_keys(Keys.RETURN)
+        """dropdown topic"""
+        self.element_is_visible(self.Locators.DROPDOWN_TOPIC).click()
+        self.element_is_visible(self.Locators.DROPDOWN_TOPIC).send_keys(Keys.ARROW_DOWN)
+        self.element_is_visible(self.Locators.DROPDOWN_TOPIC).send_keys(Keys.RETURN)
+        """input random text"""
+        element = self.element_is_visible(self.Locators.TEXTAREA_PLACEHOLDER_INPUT_NAME_QUESTION)
+        name_content = self.input_random_symbols(element, 20)
+        """dropdown choose answer"""
+        self.element_is_visible(self.Locators.DROPDOWN_TIPE_OF_QUESTION).send_keys("Выбор одного ответа")
+        """add questions options answers"""
+        element = self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX)
+        self.input_random_symbols(element, 5)
+        self.element_is_visible(self.Locators.ANSWER_CHECKBOX).click()
+        self.element_is_visible(self.Locators.BUTTON_CREATE_QUESTION).click()
+        """check open modal window"""
+        text_database_of_question_head = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION_HEAD).text
+        assert text_database_of_question_head == "База вопросов"
+        text_created_new_question = self.element_is_visible(self.Locators.TEXT_CREATED_NEW_QUESTION).text
+        print(text_created_new_question)
+        assert text_created_new_question == name_content
+
+
+
+        time.sleep(5)
+
+
+
+
+
+
+
 
 
 
