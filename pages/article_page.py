@@ -280,7 +280,11 @@ class ArticlePage(BasePage):
         person = generated_person()
         name = "Templates" + str(random.randint(999, 99999))
         name_content = "Content" + str(random.randint(999, 99999))
-        self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
         self.element_is_visible(Locators.CREATE_TEMPLATES).click()
         self.element_is_visible(Locators.CREATE_TEMPLATES_NEW).click()
         for i in range(1, 6):
@@ -1316,7 +1320,11 @@ class FilesPages(BasePage):
         path5 = str(Path(pathlib.Path.cwd(), "files", "gomer.gif"))
         # path = str(big_file)
         data_path = [path1, path2, path3, path4, path5]
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         try:
             self.element_is_visible(Locators.CREATE_ARTICLE).click()

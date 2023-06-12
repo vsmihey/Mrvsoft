@@ -350,8 +350,13 @@ class UnformatFilePage(BasePage):
         """check text alert"""
         check_text_not_preview_1 = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW_1).text
         assert check_text_not_preview_1 == "Просмотр файла недоступен"
-        button_download_check_after_typography = self.element_is_visible(
-            self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
+        try:
+            button_download_check_after_typography = self.element_is_visible(
+                self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
+        except StaleElementReferenceException:
+            time.sleep(2)
+            button_download_check_after_typography = self.element_is_visible(
+                self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
         assert button_download_check_after_typography == "Скачать файл"
 
 
