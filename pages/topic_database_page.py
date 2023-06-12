@@ -76,11 +76,10 @@ class CreateTopicDatabase(BasePage):
         for n in list_created_topics:
             time.sleep(1)
             n.click()
-            time.sleep(1)
             try:
                 self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
             except TimeoutException:
-                time.sleep(5)
+                time.sleep(2)
                 self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
             self.element_is_visible(self.Locators.BUTTON_CONFIRM_DELETE_TOPIC).click()
             #
@@ -143,19 +142,33 @@ class CreateTopicDatabase(BasePage):
         self.element_is_visible(self.Locators.TEXT_PLACEHOLDER_INPUT_NAME_TOPIC).send_keys("THE SAME NAME")
         self.element_is_visible(self.Locators.BUTTON_CREATE_TOPIC_CONFIRM).click()
         """check count the same name"""
-        data_same_name = []
-        the_same_name_list = self.elements_are_visible(self.Locators.THE_SAME_NAME_LIST)
-        for n in the_same_name_list:
-            the_same_name = n.text
-            time.sleep(1)
-            data_same_name.append(the_same_name)
-        # print(len(data_same_name), data_same_name, type(len(data_same_name)))
-        assert len(data_same_name) == 2
+        # data_same_name = []
+        # the_same_name_list = self.elements_are_visible(self.Locators.THE_SAME_NAME_LIST)
+        # for n in the_same_name_list:
+        #     the_same_name = n.text
+        #     time.sleep(1)
+        #     data_same_name.append(the_same_name)
+        # # print(len(data_same_name), data_same_name, type(len(data_same_name)))
+        # assert len(data_same_name) == 2
 
         # time.sleep(2)
-        # data_same_name = []
-        # name_1 = self.element_is_visible(self.Locators.NAME_1)
+        data_same_name = []
+        name_1 = self.element_is_visible(self.Locators.NAME_1)
+        data_same_name.append(name_1)
+        name_2 = self.elements_is_present(self.Locators.NAME_2)
+        data_same_name.append(name_2)
+        # driver.driver.execute_script("window.scrollBy(0, 20)")
         # name_2 = self.element_is_visible(self.Locators.NAME_2)
+        driver.execute_script("return arguments[0].scrollIntoView(true);", name_2)
+        self.element_is_visible(self.Locators.NAME_2).click()
+        name_2_value = self.element_is_visible(self.Locators.TEXT_PLACEHOLDER_INPUT_NAME_TOPIC).get_attribute("value")
+        assert name_2_value == "THE SAME NAME"
+        # data_same_name.append(name_2)
+        print(len(data_same_name))
+        assert len(data_same_name) == 2
+
+
+        time.sleep(5)
         # data_same_name.append(name_1)
         # data_same_name.append(name_2)
         # len_data_same_name = len(data_same_name)

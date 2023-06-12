@@ -1274,7 +1274,11 @@ class FilesPages(BasePage):
     def template_download_bigfile(self, driver):
         big_file = Path(pathlib.Path.cwd(), "bigfile.exe")
         path = str(big_file)
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_TEMPLATES).click()
         """create new template"""
         self.element_is_visible(self.Locators.NEW_TEMPLATE).click()

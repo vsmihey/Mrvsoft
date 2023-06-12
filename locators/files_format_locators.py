@@ -36,8 +36,6 @@ class FilesFormatPageLocators:
     DELETE_DRAFT = (By.XPATH, "//p[contains(text(),'Удалить черновик')]")
     TEXT_FILE_DOWNLOADS = (By.XPATH, "//h2[contains(text(),'Файл загружается')]")
 
-
-
 class UnformatFilePageLocators:
     """check add unformat files"""
     CHECK_TEXT_ONLY_DOWNLOAD_ALERT = (By.XPATH, "//h2[contains(text(),'Файл будет доступен только для скачивания')]")

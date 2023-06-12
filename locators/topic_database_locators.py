@@ -55,6 +55,11 @@ class CreateTopicDatabaseLocators:
     BUTTON_DELETE_TOPIC_CONFIRM = (By.XPATH, "//p[contains(text(),'Удалить тему')]")
     BUTTON_CREATE_TOPIC_CONFIRM = (By.XPATH, "//p[contains(text(),'Создать тему')]")
     """check same name and last in list"""""
+    # GO_TO_TOPICS_LIST = (By.CSS_SELECTOR, "div[class='m-popover-window__window themes-side-popup-filter'] div[class='scroller'")
+    # GO_TO_TOPICS_LIST = (By.XPATH, "//div[@class='m-popover-window__window themes-side-popup-filter']")
+    # GO_TO_TOPICS_LIST = (By.XPATH, "//div[@class='m-popup__container']")
+    GO_TO_TOPICS_LIST = (By.XPATH, "//div[@class='ReactModal__Content ReactModal__Content--after-open lms-theme-structure m-popup__window']")
+
     NAME_1 = (By.XPATH, "(//div[contains(text(),'THE SAME NAME')])[1]")
     NAME_2 = (By.XPATH, "(//div[contains(text(),'THE SAME NAME')])[2]")
     NAME_2_LAST_IN_LIST = (By.XPATH, "(//li[@class='m-tree-item m-tree-item__wrapper'])[23]")

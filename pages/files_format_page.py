@@ -249,11 +249,6 @@ class UnformatFilePage(BasePage):
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.RETURN)
-        # try:
-        #     self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
-        # except TimeoutException:
-        #     time.sleep(10)
-        #     self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         self.remove_class_script()
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """check text alert"""
