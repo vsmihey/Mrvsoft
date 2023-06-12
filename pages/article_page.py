@@ -1031,7 +1031,11 @@ class CreateDraftPage(BasePage):
         # time.sleep(1)
         driver.refresh()
         self.element_is_visible(Locators.TEST_PROJECT).click()
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name1")
         self.driver.switch_to.window(tab2)
@@ -1329,10 +1333,14 @@ class FilesPages(BasePage):
     def check_script_download_bigfile(self):
         path = str(Path(pathlib.Path.cwd(), "bigfile.csv"))
         # path = str(big_file)
+        time.sleep(0.5)
         try:
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         except TimeoutException:
-            time.sleep(5)
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
         self.element_is_visible(self.Locators.ADD_STEP).click()
