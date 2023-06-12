@@ -80,6 +80,14 @@ class CreateTopicDatabaseLocators:
     TEXT_CHECK_RESULT_CREATED_QUESTIONS_FIRST = (By.XPATH, "(//div[@class='lms-question-bar__wrapper'])[1]")
     TEXT_CHECK_RESULT_CREATED_QUESTIONS_SECOND = (By.XPATH, "(//div[@class='lms-question-bar__wrapper'])[2]")
     LIST_QUESTIONS = (By.XPATH, "//span[contains(text(),'Вопрос')]")
+    """add and edit question in article"""
+    CREATE_BUTTON = (By.XPATH, "//div[text()='Создать']")
+    CREATE_ARTICLE = (By.XPATH, "//div[contains(text(),'Статья')]")
+    UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
+    INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
+
+
+
 
     # DROPDOWN_TIPE_OF_QUESTION = (By.XPATH, "(//select[@class='m-ui-select__select'])[1]")
 

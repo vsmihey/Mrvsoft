@@ -1,7 +1,9 @@
+import pathlib
 import random
 import time
+from pathlib import Path
 
-from selenium.common import TimeoutException
+from selenium.common import TimeoutException, StaleElementReferenceException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
@@ -258,6 +260,35 @@ class CreateTopicDatabase(BasePage):
             n.click()
             self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
 
+    def add_edit_question_article(self, driver):
+        """ADD AND EDIT QUESTION IN ARTICLE"""
+        self.input_in_my_project(driver)
+        # data_files = generated_file()
+        """upload media"""
+        try:
+            self.element_is_visible(self.Locators.CREATE_BUTTON, timeout=1).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.CREATE_ARTICLE).click()
+        try:
+            self.elements_is_present(self.Locators.UPLOAD_MEDIA, timeout=2).click()
+        except TimeoutException:
+            time.sleep(5)
+            self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
+        """input is visible for load files"""
+        self.driver.execute_script(
+            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        self.driver.execute_script(
+            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
+        path2 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
+        data_path = [path1, path2]
+        for n in data_path:
+            self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
+
+
+        time.sleep(10)
 
 
 

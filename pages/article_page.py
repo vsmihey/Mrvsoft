@@ -1185,9 +1185,6 @@ class FilesPages(BasePage):
             time.sleep(1)
         self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
         self.check_tooltip()
-        # element = self.elements_is_present(self.Locators.FORM_INVISIBLE_INPUT)
-        # driver.execute_script("arguments[0].style.visibility = 'visible';", element)
-        # driver.execute_script("arguments[0].style.opacity=1;", element)
         """input is visible for load files"""
         self.driver.execute_script("""document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
         self.driver.execute_script("""document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
