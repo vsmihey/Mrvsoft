@@ -54,9 +54,9 @@ class FilesFormatPage(BasePage):
         self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
 
     def add_files_pict(self, driver):
+        driver.implicitly_wait(5)
         person = generated_person()
         text_area_alert = person.first_name+"-Alert"
-        self.implicitly_wait()
         self.input_in_my_project(driver)
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))

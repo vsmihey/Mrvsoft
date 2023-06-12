@@ -27,8 +27,8 @@ class BasePage:
     def open(self):
         self.driver.get(self.url)
 
-    def implicitly_wait(self, time=10):
-        self.implicitly_wait(time)
+    def implicitly_wait(self):
+        self.implicitly_wait()
 
     def element_is_visible(self, locator, timeout=10):
         return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))

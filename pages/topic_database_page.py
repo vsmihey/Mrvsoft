@@ -82,13 +82,6 @@ class CreateTopicDatabase(BasePage):
                 time.sleep(2)
                 self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
             self.element_is_visible(self.Locators.BUTTON_CONFIRM_DELETE_TOPIC).click()
-            #
-            # try:
-            #     self.element_is_visible(self.Locators.BUTTON_CONFIRM_DELETE_TOPIC).click()
-            # except TimeoutException:
-            #     self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC_CONFIRM).click()
-            #     time.sleep(1)
-
 
     def create_new_question(self, driver):
         """CREATE AN CHECK NEW QUESTION"""
@@ -120,7 +113,6 @@ class CreateTopicDatabase(BasePage):
         """created question window"""
         text_database_of_question_head = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION_HEAD).text
         assert text_database_of_question_head == "База вопросов"
-        # time.sleep(5)
         text_created_new_question = self.element_is_visible(self.Locators.TEXT_CREATED_NEW_QUESTION).text
         assert text_created_new_question == text_of_question
         self.element_is_visible(self.Locators.SVG_SLIDERS).click()
@@ -167,19 +159,21 @@ class CreateTopicDatabase(BasePage):
         assert name_2_value == "THE SAME NAME"
         print(len(data_same_name))
         assert len(data_same_name) == 2
-
-
+        """delete question"""
+        self.element_is_visible(self.Locators.SVG_DEL_QUESTION).click()
+        self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
         time.sleep(5)
-        # data_same_name.append(name_1)
-        # data_same_name.append(name_2)
-        # len_data_same_name = len(data_same_name)
-        # assert len_data_same_name == 2
-        # """check last topic"""
-        # element = self.elements_are_present(self.Locators.NAME_2)
-        # self.action_move_to_element(element)
-        # self.elements_are_present(self.Locators.NAME_2).click()
-        # name_2_value = self.element_is_visible(self.Locators.TEXT_PLACEHOLDER_INPUT_NAME_TOPIC).get_attribute("value")
-        # assert name_2_value == "THE SAME NAME"
+
+    def edit_topic_in_database(self):
+        self.input_in_my_project(driver)
+        self.element_is_visible(self.Locators.LEARNING_BUTTON).click()
+        self.element_is_visible(self.Locators.TAB_ALL_COURSES).click()
+        self.element_is_visible(self.Locators.DATABASE_OF_QUESTIONS).click()
+
+
+
+
+
 
 
 

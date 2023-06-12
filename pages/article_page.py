@@ -1044,7 +1044,11 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name1")
         self.driver.switch_to.window(tab2)
         self.element_is_visible(Locators.TEST_PROJECT).click()
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_TEMPLATES).click()
         """create new template"""
         self.element_is_visible(Locators.NEW_TEMPLATE).click()
