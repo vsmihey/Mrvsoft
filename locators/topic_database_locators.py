@@ -69,6 +69,18 @@ class CreateTopicDatabaseLocators:
     TEXT_TOPIC = (By.XPATH, "//h4[contains(text(),'Тема')]")
     TEXT_CHOOSE_TOPIC = (By.XPATH, "//div[text()='выберите тему']")
     ANSWER_CHECKBOX_1 = (By.XPATH, "//label[@class='checkbox-wrapper checkbox-wrapper--no-label']")
+    ANSWER_CHECKBOX_1_1 = (By.CSS_SELECTOR, "label[class='checkbox-wrapper checkbox-wrapper--no-label']")
+    """edit"""
+    SVG_EDIT_QUESTION = (By.XPATH, "//div[@class='lms-question-bar__wrapper']//a[@class='m-link']")
+    BUTTON_EDIT_QUESTION_SAVE = (By.XPATH, "//p[contains(text(),'Сохранить изменения')]")
+    """new question"""
+    BUTTON_NEW_QUESTION = (By.XPATH, "//p[contains(text(),'Новый вопрос')]")
+    NEW_ANSWER_PLACEHOLDER = (By.XPATH, "(//textarea[@placeholder='Введите текст ответа'])[2]")
+    ANSWER_CHECKBOX_ADD = (By.XPATH, "(//label[@class='checkbox-wrapper checkbox-wrapper--no-label'])[2]")
+    TEXT_CHECK_RESULT_CREATED_QUESTIONS_FIRST = (By.XPATH, "(//div[@class='lms-question-bar__wrapper'])[1]")
+    TEXT_CHECK_RESULT_CREATED_QUESTIONS_SECOND = (By.XPATH, "(//div[@class='lms-question-bar__wrapper'])[2]")
+    LIST_QUESTIONS = (By.XPATH, "//span[contains(text(),'Вопрос')]")
+
     # DROPDOWN_TIPE_OF_QUESTION = (By.XPATH, "(//select[@class='m-ui-select__select'])[1]")
 
 
