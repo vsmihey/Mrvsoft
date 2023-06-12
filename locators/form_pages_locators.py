@@ -202,6 +202,7 @@ class FormPagesLocators:
     INPUT_REQUEST = (By.XPATH, "//input[@placeholder='Введите запрос']")
     CHECK_ADD_FIXING_CONTENT = (By.XPATH, "//h3[contains(text(),'Добавление закрепленного контента')]")
     BUTTON_FIXING_CONTENT1 = (By.XPATH, "//p[text()='закрепить контент']")
+    BUTTON_FIXING_CONTENT_CHANGE = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium m-content-fix-manager__empty-button']")
     ARTICLE_1_IN_LIST = (By.XPATH, "//span[normalize-space()='tesss']")
     BUTTON_SUBMIT = (By.XPATH, "//p[contains(text(),'Продолжить')]")
     CHECK_LINK_OF_CONTENT_RADIO = (By.XPATH, "//span[text()='Ссылка на контент']/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")

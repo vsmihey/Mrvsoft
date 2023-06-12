@@ -189,12 +189,12 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.BUTTON_FIXING_CONTENT).click()
         time.sleep(1)
         self.element_is_visible(Locators.INPUT_REQUEST).send_keys(text_fixing)
-        time.sleep(5)
+        time.sleep(2)
         try:
-            self.element_is_visible(Locators.BUTTON_FIXING_CONTENT1).click()
+            self.element_is_visible(Locators.BUTTON_FIXING_CONTENT_CHANGE).click()
         except TimeoutException:
             time.sleep(3)
-            self.element_is_visible(Locators.BUTTON_FIXING_CONTENT1).click()
+            self.element_is_visible(Locators.BUTTON_FIXING_CONTENT_CHANGE).click()
         check_add_fixing_content = self.element_is_visible(Locators.CHECK_ADD_FIXING_CONTENT)
         check_add_fixing_content_value = check_add_fixing_content.text
         assert check_add_fixing_content_value == "Добавление закрепленного контента"
@@ -1067,7 +1067,11 @@ class CreateDraftPage(BasePage):
         time.sleep(1)
         self.driver.switch_to.window(tab3)
         self.element_is_visible(Locators.TEST_PROJECT).click()
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
+        except StaleElementReferenceException:
+            time.sleep(3)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
         self.element_is_visible(self.Locators.NAME_OF_STEP_SCRIPT).send_keys("Script_Name3")
         self.driver.switch_to.window(tab4)
@@ -1385,7 +1389,11 @@ class FilesPages(BasePage):
 
     def check_script_download(self):
         data_files = generated_file()
-        self.element_is_visible(Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(3)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
         self.element_is_visible(self.Locators.ADD_STEP).click()
         self.element_is_visible(self.Locators.TEXT_AREA).click()
