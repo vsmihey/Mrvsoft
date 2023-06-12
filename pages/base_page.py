@@ -93,14 +93,14 @@ class BasePage:
         path = str(path)
         self.driver.save_screenshot(path)
 
-    def implicitly_wait(self):
-        self.driver.implicitly_wait(10)
+    # def implicitly_wait(self):
+    #     self.driver.implicitly_wait(10)
 
     def remove_class_script(self):
         self.driver.execute_script("""document.querySelector("input[type='file']").removeAttribute('class')""")
 
     def go_to_element(self, element):
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
 
     def open_new_tab(self, driver):
         """open new tab"""
