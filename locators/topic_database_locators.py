@@ -85,6 +85,51 @@ class CreateTopicDatabaseLocators:
     CREATE_ARTICLE = (By.XPATH, "//div[contains(text(),'Статья')]")
     UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
     INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
+    NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    FOLDER_SAVE_ARTICLE = (By.XPATH, "//select[@class='m-ui-select__select']")
+    TEXT_AREA_ARTICLE = (By.XPATH, "//div[@aria-label='false']")
+    CHECKBOX_INSERT_FILES = (By.CSS_SELECTOR, "section[class='m-file-view__content-block']")
+    INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")
+    BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    # TEXT_TYPOGRAPHY_CONTENT = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
+    TEXT_TYPOGRAPHY_CONTENT = (By.XPATH, "//h3[text()='Настройки публикации контента']")
+    BUTTON_JUST_NOTIFY = (By.XPATH, "(//span[contains(text(),'только оповестить')])[1]")
+    TEXT_CONFIRM_READ = (By.XPATH, "//span[contains(text(),'подтвердить прочтение')]")
+    TEXT_TAB_TEST = (By.XPATH, "//p[text()='тест']")
+    BUTTON_SUBMIT = (By.CSS_SELECTOR, "button[type='submit']")
+    TEXTAREA_ALERT = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
+    """check checked"""
+    CHECKED_CHECK = (By.XPATH, "//section[@class='m-file-view m-file-view--selected m-file-view--image-cover m-file-view--selectable file-manager__item']")
+    LIST_TABS = (By.CSS_SELECTOR, "li[class='tabs__list-item']")
+    """add question"""
+    BUTTON_ADD_QUESTION = (By.XPATH, "//p[contains(text(),'Добавить вопрос')]")
+    """check text an checkboxes"""
+    TEXT_CHOOSE_QUESTION_FOR_TEST = (By.CSS_SELECTOR, "header[class='m-popup__header']")
+    LIST_CHECKBOXES = (By.CSS_SELECTOR, "label[class='m-switch-box lms-question-bar__switch']")
+    ON_CHECKBOX_ALL_QUESTIONS = (By.XPATH, "//label[@class='m-switch-box lms-questions-lib__header-switch']")
+    """move questions"""
+    QUESTIONS_FIRST_POSITION_CHECK = (By.XPATH, "(//p[normalize-space()='Edit question'])[1]")
+    QUESTIONS_SECOND_POSITION_CHECK = (By.XPATH, "(//div[@class='article-wizard-tests-question-row__left-side'])[2]")
+    TAB_ACTIVE = (By.XPATH, "//div[@class='tab-item tab-item--active']")
+    BUTTON_FINISH = (By.XPATH, "//button[@type='submit']")
+    EDIT_ARTICLE = (By.XPATH, "//div[text()='изменить']")
+    BUTTON_GO_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
+    TEXT_GET_TESTED = (By.XPATH, "//span[contains(text(),'пройти тестирование')]")
+    RADIOBUTTON_SMALL_CORRECT_CONTENT = (By.XPATH, "//span[contains(text(),'Небольшие корректировки контента')]")
+    RADIOBUTTON_BIG_CORRECT_CONTENT = (By.XPATH, "//span[contains(text(),'Значительные изменения контента')]")
+    """check position"""
+    LIST_QUESTIONS_POSITION = (By.CSS_SELECTOR, "div[class='article-wizard-tests-question-row__left-side']")
+
+
+
+
+
+
+
+
+
+
+
 
 
 

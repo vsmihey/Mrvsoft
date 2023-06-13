@@ -61,7 +61,6 @@ class ArticlePage(BasePage):
 
     def add_normal_article(self, driver):
         person = generated_person()
-        # last_name = person.last_name
         first_name = person.first_name
         text = "Hello"
         text_long = 100*first_name
