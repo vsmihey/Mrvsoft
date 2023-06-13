@@ -32,10 +32,12 @@ class CreateTopicDatabase(BasePage):
             assert text_not_questions_now == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
         except TimeoutException:
             try:
-                self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=2).click()
+                self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=3).click()
             except TimeoutException:
+                time.sleep(1)
                 self.element_is_visible(self.Locators.SVG_DEL_QUESTION).click()
                 self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
+                time.sleep(1)
                 self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD).click()
             self.element_is_visible(self.Locators.BUTTON_CHANGE_QUESTION).click()
             self.delete_created_topics()
@@ -186,7 +188,11 @@ class CreateTopicDatabase(BasePage):
         self.element_is_visible(self.Locators.TAB_ALL_COURSES).click()
         self.element_is_visible(self.Locators.DATABASE_OF_QUESTIONS).click()
         """check text and button"""
-        text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
+        try:
+            text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
+        except TimeoutException:
+            time.sleep(1)
+            text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
         assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
         button_question_add = self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).text
         assert button_question_add == "Добавить"
@@ -357,7 +363,11 @@ class CreateTopicDatabase(BasePage):
         """check first position by index xpath dom and active tab"""
         tab_active = self.element_is_visible(self.Locators.TAB_ACTIVE).text
         assert tab_active == 'тест'
-        questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
+        try:
+            questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
+        except TimeoutException:
+            time.sleep(1)
+            questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         assert questions_first_position_check == "Edit question"
         """change position move"""
         # action = ActionChains(self.driver)

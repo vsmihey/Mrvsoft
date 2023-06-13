@@ -7,7 +7,7 @@ from pathlib import Path
 from random import choice
 from string import ascii_uppercase
 
-from selenium.common import TimeoutException, ElementClickInterceptedException
+from selenium.common import TimeoutException, ElementClickInterceptedException, StaleElementReferenceException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
@@ -57,7 +57,7 @@ class BasePage:
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         try:
-            time.sleep(1)
+            time.sleep(0.5)
             self.element_is_visible(Locators.TEST_PROJECT).click()
         except TimeoutException:
             self.element_is_visible(Locators.ADD).click()
@@ -82,6 +82,9 @@ class BasePage:
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(Locators.TEST_PROJECT).click()
 
     def screenshot(self):
         offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)

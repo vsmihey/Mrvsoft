@@ -664,9 +664,12 @@ class StepByScriptPage(BasePage):
 
     def add_script(self):
         try:
-            self.element_is_visible(Locators.CREATE_BUTTON, timeout=1).click()
+            self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
         except StaleElementReferenceException:
             time.sleep(3)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        except TimeoutException:
+            time.sleep(2)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.ADD_SCRIPT).click()
         time.sleep(1)
