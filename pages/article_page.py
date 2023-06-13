@@ -129,20 +129,20 @@ class ArticlePage(BasePage):
         # self.element_is_visible(Locators.MYTEST).click()
         check_select_radio = self.element_is_visible(Locators.CHECK_RADIOBUTTON_TYPOGRAPHY_NOW)
         check_select_radio.is_selected()
-        # print("radiobutton_typography_now True")
         check_select_radio2 = self.element_is_visible(Locators.CHECK_RADIOBUTTON_NO_DELETE)
         check_select_radio2.is_selected()
-        # print("radiobutton_no_delete True")
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         check_text_filled = self.element_is_visible(Locators.CHECK_TEXT_FILLED_NEED)
         check_text_filled_value = check_text_filled.text
         assert check_text_filled_value == "Должно быть заполнено"
-        # print(check_text_filled_value)
         time.sleep(1)
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys(first_name)
         self.element_is_visible(Locators.FINISH_BUTTON).click()
-        time.sleep(1)
-        check_new_article = self.element_is_visible(Locators.CHECK_NEW_ARTICLE)
+        try:
+            check_new_article = self.element_is_visible(Locators.CHECK_NEW_ARTICLE)
+        except TimeoutException:
+            time.sleep(2)
+            check_new_article = self.element_is_visible(Locators.CHECK_NEW_ARTICLE)
         check_new_article_value = check_new_article.text
         assert check_new_article_value == "Hello"
         # print(check_new_article_value, "статья отображается")
@@ -665,7 +665,7 @@ class StepByScriptPage(BasePage):
 
     def add_script(self):
         try:
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_BUTTON, timeout=1).click()
         except StaleElementReferenceException:
             time.sleep(3)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
@@ -1014,7 +1014,7 @@ class CreateDraftPage(BasePage):
         name_article = person.first_name + str(random.randint(99, 999))
         # text_area = person.last_name + str(random.randint(99, 999))
         try:
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
         except StaleElementReferenceException:
             time.sleep(5)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
@@ -1036,7 +1036,7 @@ class CreateDraftPage(BasePage):
         driver.refresh()
         self.element_is_visible(Locators.TEST_PROJECT).click()
         try:
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
         except StaleElementReferenceException:
             time.sleep(2)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
@@ -1045,7 +1045,7 @@ class CreateDraftPage(BasePage):
         self.driver.switch_to.window(tab2)
         self.element_is_visible(Locators.TEST_PROJECT).click()
         try:
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
         except StaleElementReferenceException:
             time.sleep(2)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
@@ -1077,7 +1077,7 @@ class CreateDraftPage(BasePage):
         self.driver.switch_to.window(tab4)
         self.element_is_visible(Locators.TEST_PROJECT).click()
         try:
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
+            self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
         except StaleElementReferenceException:
             time.sleep(5)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
