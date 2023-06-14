@@ -52,7 +52,11 @@ class BasePage:
     def input_in_my_project(self, driver):
         """INPUT IN MY PROJECT"""
         Locators = FormPagesLocators
-        self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
+        try:
+            self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
+        except TimeoutException:
+            time.sleep(2)
+            self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
         self.element_is_visible(Locators.LOGIN).send_keys(login)
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
