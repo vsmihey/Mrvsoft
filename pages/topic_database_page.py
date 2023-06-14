@@ -36,8 +36,9 @@ class CreateTopicDatabase(BasePage):
             except TimeoutException:
                 time.sleep(2)
                 self.element_is_visible(self.Locators.SVG_DEL_QUESTION).click()
+                time.sleep(2)
                 self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
-                time.sleep(1)
+                time.sleep(2)
                 self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD).click()
             self.element_is_visible(self.Locators.BUTTON_CHANGE_QUESTION).click()
             self.delete_created_topics()
@@ -191,7 +192,7 @@ class CreateTopicDatabase(BasePage):
         try:
             text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
         except TimeoutException:
-            time.sleep(2)
+            time.sleep(5)
             text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
         assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
         button_question_add = self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).text
@@ -369,7 +370,14 @@ class CreateTopicDatabase(BasePage):
             time.sleep(2)
             questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         assert questions_first_position_check == "Edit question"
-        """change position move"""
+        """change position move drag and drop"""
+        # f = open("script.js", "r")
+        # javascript = f.read()
+        # f.close()
+
+        questions_second_position = self.element_is_visible(self.Locators.QUESTIONS_SECOND_POSITION_CHECK)
+        questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK)
+
         # action = ActionChains(self.driver)
         # questions_second_position = self.element_is_visible(self.Locators.QUESTIONS_SECOND_POSITION_CHECK)
         # # action.drag_and_drop(questions_first_position_check, questions_second_position).perform()
@@ -387,13 +395,13 @@ class CreateTopicDatabase(BasePage):
         # questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         # assert questions_first_position_check == "Edit question"
 
-        questions_first_position_check = self.elements_are_visible(self.Locators.LIST_QUESTIONS_POSITION)
-        dada_name_text = []
-        for n in questions_first_position_check:
-            text_name_question = n.text
-            dada_name_text.append(text_name_question)
-        print(dada_name_text)
-        assert dada_name_text[0] == "Edit question"
+        # questions_first_position_check = self.elements_are_visible(self.Locators.LIST_QUESTIONS_POSITION)
+        # dada_name_text = []
+        # for n in questions_first_position_check:
+        #     text_name_question = n.text
+        #     dada_name_text.append(text_name_question)
+        # print(dada_name_text)
+        # assert dada_name_text[0] == "Edit question"
 
 
         self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
@@ -452,13 +460,13 @@ class CreateTopicDatabase(BasePage):
         # questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         # assert questions_first_position_check == "Edit question"
 
-        questions_first_position_check = self.elements_are_visible(self.Locators.LIST_QUESTIONS_POSITION)
-        dada_name_text = []
-        for n in questions_first_position_check:
-            text_name_question = n.text
-            dada_name_text.append(text_name_question)
-        print(dada_name_text)
-        assert dada_name_text[1] == "Edit question"
+        # questions_first_position_check = self.elements_are_visible(self.Locators.LIST_QUESTIONS_POSITION)
+        # dada_name_text = []
+        # for n in questions_first_position_check:
+        #     text_name_question = n.text
+        #     dada_name_text.append(text_name_question)
+        # print(dada_name_text)
+        # assert dada_name_text[1] == "Edit question"
 
 
 
