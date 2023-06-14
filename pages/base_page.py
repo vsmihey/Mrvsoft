@@ -156,8 +156,17 @@ class BasePage:
         self.driver.execute_script(
             """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
 
+    def create_and_open_new_article(self, driver):
+        """CREATE AND OPEN NEW ARTICLE"""
+
+
+
+
+
+
+
     def create_and_open_new_template(self, driver):
-        """create and open new template"""
+        """CREATE AND OPEN NEW TEMPLATE"""
         Locators = FormPagesLocators
         self.element_is_visible(Locators.NEW_TEMPLATE).click()
         self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()

@@ -237,7 +237,11 @@ class ArticlePage(BasePage):
         # self.element_is_visible(Locators.FIND_OF_CONTENT).click()
         time.sleep(1)
         # self.screenshot()
-        check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
+        try:
+            check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO, timeout=2)
+        except TimeoutException:
+            time.sleep(2)
+            check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
         check_text_hello_value = check_text_hello.text
         assert check_text_hello_value == "Hello"
         # print(check_text_hello_value)
@@ -442,7 +446,12 @@ class ArticlePage(BasePage):
         except WebDriverException:
             print("очищенных полей в запросе нет")
         # check_name_of_content = self.element_is_visible(Locators.CHECK_NAME_OF_CONTENT)
-        check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
+        time.sleep(1)
+        try:
+            check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
+        except NoSuchElementException:
+            time.sleep(2)
+            check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         check_name_of_content_value = check_name_of_content.text
         assert check_name_of_content_value == name_content, "name content is not correct"
         time.sleep(1)

@@ -814,8 +814,18 @@ class CreateTopicDatabase(BasePage):
         # del2
         self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
         self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
+        """del all question"""
+        self.element_is_visible(self.Locators.BUTTON_ADD_QUESTION).click()
+        list_delete = self.elements_are_visible(self.Locators.SVG_DEL_QUESTION)
+        for n in list_delete:
+            time.sleep(0.5)
+            n.click()
+            self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
+
 
         time.sleep(10)
+
+
 
 
 
