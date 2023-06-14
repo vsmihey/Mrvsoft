@@ -88,7 +88,7 @@ class CreateTopicDatabaseLocators:
     NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название контента']")
     FOLDER_SAVE_ARTICLE = (By.XPATH, "//select[@class='m-ui-select__select']")
     TEXT_AREA_ARTICLE = (By.XPATH, "//div[@aria-label='false']")
-    CHECKBOX_INSERT_FILES = (By.CSS_SELECTOR, "section[class='m-file-view__content-block']")
+    CHECKBOX_INSERT_FILES = (By.XPATH, "//section[@class='m-file-view__content-block']")
     INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")
     BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
     # TEXT_TYPOGRAPHY_CONTENT = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
@@ -109,7 +109,10 @@ class CreateTopicDatabaseLocators:
     ON_CHECKBOX_ALL_QUESTIONS = (By.XPATH, "//label[@class='m-switch-box lms-questions-lib__header-switch']")
     """move questions"""
     QUESTIONS_FIRST_POSITION_CHECK = (By.XPATH, "(//p[normalize-space()='Edit question'])[1]")
-    QUESTIONS_SECOND_POSITION_CHECK = (By.XPATH, "(//div[@class='article-wizard-tests-question-row__left-side'])[2]")
+    QUESTIONS_FIRST_POSITION = (By.XPATH, "(//div[@class='article-wizard-tests-question-row__left-side'])[1]")
+    QUESTIONS_FIRST_POSITION_CSS = (By.CSS_SELECTOR, "body > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)")
+    QUESTIONS_SECOND_POSITION = (By.XPATH, "(//div[@class='article-wizard-tests-question-row__left-side'])[2]")
+    QUESTIONS_SECOND_POSITION_CSS = (By.CSS_SELECTOR, "body > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
     TAB_ACTIVE = (By.XPATH, "//div[@class='tab-item tab-item--active']")
     BUTTON_FINISH = (By.XPATH, "//button[@type='submit']")
     EDIT_ARTICLE = (By.XPATH, "//div[text()='изменить']")
@@ -119,6 +122,42 @@ class CreateTopicDatabaseLocators:
     RADIOBUTTON_BIG_CORRECT_CONTENT = (By.XPATH, "//span[contains(text(),'Значительные изменения контента')]")
     """check position"""
     LIST_QUESTIONS_POSITION = (By.CSS_SELECTOR, "div[class='article-wizard-tests-question-row__left-side']")
+    """del question from test"""
+    SVG_DEL_FIRST_QUESTION = (By.XPATH, "(//*[local-name()='svg'][@class='article-wizard-tests-question-row__control-icon'])[3]")
+    SVG_DEL_SECOND_QUESTION = (By.XPATH, "(//*[local-name()='svg'][@class='article-wizard-tests-question-row__control-icon'])[6]")
+    LIST_SVG_DEL_QUESTION = (By.XPATH, "//div[@class='article-wizard-tests-question-row__control-button article-wizard-tests-question-row__control-button--remove']")
+    CONFIRM_BUTTON_DELETE = (By.XPATH, "//button[@class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
+    """check by template"""
+    CREATE_TEMPLATES = (By.XPATH, "//div[contains(text(),'Шаблон')]")
+    NEW_TEMPLATE = (By.XPATH, "//div[@class='m-lms-action-tooltip m-modal-templates__template-card']")
+    ADD_FIELD_BUTTON = (By.XPATH, "//button[contains(text(),'Добавить поле')]")
+    LIST_OF_FIELDS_1 = (By.XPATH, "//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[1]")
+    INPUT_NAME_OF_FIELD = (By.XPATH, "//input[@placeholder='Введите название поля']")
+    SAVE_TEMPLATES = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']//p[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text'][contains(text(),'сохранить')]")
+    INPUT_NAME_OF_TEMPLATES = (By.XPATH, "//input[@placeholder='Введите название шаблона']")
+    SAVE_TEMPLATES_CHANGE = (By.XPATH, "//p[text()='Сохранить']")
+    FINISH_BUTTON_SCRIPT = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    DROPDOWN = (By.XPATH, "//span[@class='cke_button_icon cke_button__inserttemplated_icon']")
+    FRAME = (By.XPATH, "//iframe[@class='cke_panel_frame']")
+    DROP_DOWN_FILES = (By.XPATH, "//a[@title='Файлы']")
+    FOLDER_SAVE = (By.XPATH, "//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled']//select[@class='m-ui-select__select']")
+    INPUT_NAME_CONTENT = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    """conversation status check"""
+    CONVERSATION_CHECK = (By.XPATH, "//div[@class='m-file-view__status']")
+    """script"""
+    CREATE_SCRIPT = (By.XPATH, "//div[contains(text(),'Пошаговый сценарий')]")
+    ADD_STEP = (By.XPATH, "//p[contains(text(),'добавить шаг')]")
+    TEXT_AREA = (By.XPATH, "//div[@aria-label='false']")
+    # BUTTON_TYPOGRAPHY_SCRIPT = (By.XPATH, "//section[@class='m-scenario-flow__editor-actions']//button[@type='button']")
+    BUTTON_TYPOGRAPHY_SCRIPT = (By.CSS_SELECTOR, "section[class='m-scenario-flow__editor-actions'] button[type='button']")
+    # BUTTON_TYPOGRAPHY_SCRIPT = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
+    NAME_OF_STEP_SCRIPT = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    INPUT_NAME_STEP = (By.XPATH, "//input[@name='articleName']")
+    DROPDOWN_STEP = (By.CSS_SELECTOR, "select[name='id']")
+
+
+
 
 
 

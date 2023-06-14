@@ -4,13 +4,14 @@ import time
 from pathlib import Path
 
 from selenium.common import TimeoutException, StaleElementReferenceException, ElementClickInterceptedException, \
-    ElementNotInteractableException
+    ElementNotInteractableException, WebDriverException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 
 from conftest import driver
-from generator.generator import generated_person
+from generator.generator import generated_person, generated_file
 from locators.topic_database_locators import CreateTopicDatabaseLocators
+from pages import article_page
 from pages.base_page import BasePage
 from pages.data_login_password import url
 
@@ -84,7 +85,7 @@ class CreateTopicDatabase(BasePage):
             try:
                 self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
             except TimeoutException:
-                time.sleep(2)
+                time.sleep(3)
                 self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
             self.element_is_visible(self.Locators.BUTTON_CONFIRM_DELETE_TOPIC).click()
 
@@ -309,17 +310,16 @@ class CreateTopicDatabase(BasePage):
         data_path = [path1, path2]
         for n in data_path:
             self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
-        while True:
-            time.sleep(1)
-            checkbox_insert_files = self.elements_are_visible(self.Locators.CHECKBOX_INSERT_FILES)
-            for n in checkbox_insert_files:
-                n.click()
-            try:
-                self.element_is_visible(self.Locators.INPUT_SELECTED, timeout=2).click()
-                break
-            except ElementClickInterceptedException:
-                time.sleep(2)
-                continue
+        time.sleep(5)
+        checkbox_insert_files = self.elements_are_visible(self.Locators.CHECKBOX_INSERT_FILES)
+        for n in checkbox_insert_files:
+            time.sleep(0.5)
+            n.click()
+        try:
+            self.element_is_visible(self.Locators.INPUT_SELECTED).click()
+        except ElementClickInterceptedException:
+            time.sleep(2)
+            self.element_is_visible(self.Locators.INPUT_SELECTED).click()
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         """open vizard"""
         text_typography_content = self.element_is_visible(self.Locators.TEXT_TYPOGRAPHY_CONTENT).text
@@ -344,6 +344,145 @@ class CreateTopicDatabase(BasePage):
             value_text = n.text
             data_tabs.append(value_text)
         assert ['навигация', 'поиск', 'доступ', 'версионность', 'тест'] == data_tabs
+        # self.element_is_visible(self.Locators.TEXT_TAB_TEST).is_displayed()
+        text_alert = "ALERT-" + str(random.randint(99, 999))
+        self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert)
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        """add question"""
+        self.element_is_visible(self.Locators.BUTTON_ADD_QUESTION).click()
+        """check text and checkboxes"""
+        text_choose_question_for_test = self.element_is_visible(self.Locators.TEXT_CHOOSE_QUESTION_FOR_TEST).text
+        assert text_choose_question_for_test == "Выберите вопросы для теста"
+        list_checkboxes = self.elements_are_visible(self.Locators.LIST_CHECKBOXES)
+        for n in list_checkboxes:
+            attribute_class = n.get_attribute("class")
+            assert attribute_class == "m-switch-box lms-question-bar__switch"
+        # assert text_choose_question_for_test == "Выберите вопросы для теста"
+        self.element_is_visible(self.Locators.ON_CHECKBOX_ALL_QUESTIONS).click()
+        time.sleep(1)
+        self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+        """check first position by index xpath dom and active tab"""
+        tab_active = self.element_is_visible(self.Locators.TAB_ACTIVE).text
+        assert tab_active == 'тест'
+        try:
+            questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
+        except TimeoutException:
+            time.sleep(2)
+            questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
+        assert questions_first_position_check == "Edit question"
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.EDIT_ARTICLE).click()
+        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        """go tu test tab"""
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        """check position"""
+
+        self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
+        self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).clear()
+        self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).send_keys("edit answer")
+        self.element_is_visible(self.Locators.BUTTON_EDIT_QUESTION_SAVE).click()
+        self.element_is_visible(self.Locators.BUTTON_GO_BACK).click()
+        self.element_is_visible(self.Locators.TEXT_GET_TESTED).click()
+        """check tab text"""
+        list_tabs = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['навигация', 'поиск', 'доступ', 'версионность'] == data_tabs
+        # self.element_is_visible(self.Locators.TEXTAREA_ALERT).clear()
+        self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert + " new")
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.EDIT_ARTICLE).click()
+        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
+        self.element_is_visible(self.Locators.TEXT_CONFIRM_READ).click()
+        """text test tab check"""
+        list_tabs_test = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs_test:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['навигация', 'поиск', 'доступ', 'версионность', 'тест'] == data_tabs
+        self.element_is_visible(self.Locators.RADIOBUTTON_SMALL_CORRECT_CONTENT).click()
+        """check tab text"""
+        list_tabs = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['навигация', 'поиск', 'доступ', 'версионность'] == data_tabs
+        self.element_is_visible(self.Locators.RADIOBUTTON_BIG_CORRECT_CONTENT).click()
+        """text test tab check"""
+        list_tabs_test = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs_test:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['навигация', 'поиск', 'доступ', 'версионность', 'тест'] == data_tabs
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        """check position"""
+
+        """del question from test"""
+        # del1
+        self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
+        self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
+        # del2
+        self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
+        self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
+
+    def check_add_question_func(self):
+        path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
+        path2 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
+        data_path = [path1, path2]
+        for n in data_path:
+            self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
+        time.sleep(5)
+        checkbox_insert_files = self.elements_are_visible(self.Locators.CHECKBOX_INSERT_FILES)
+        for n in checkbox_insert_files:
+            time.sleep(0.5)
+            n.click()
+        try:
+            self.element_is_visible(self.Locators.INPUT_SELECTED).click()
+        except ElementClickInterceptedException:
+            time.sleep(2)
+            self.element_is_visible(self.Locators.INPUT_SELECTED).click()
+        typography_for_click = self.elements_is_present(self.Locators.BUTTON_TYPOGRAPHY)
+        action = ActionChains(self.driver)
+        action.click(typography_for_click)
+        action.perform()
+        self.element_is_visible(self.Locators.FOLDER_SAVE).send_keys("Контент 1")
+        self.element_is_visible(self.Locators.INPUT_NAME_CONTENT).send_keys("NAME-"+str(random.randint(99, 999)))
+        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        """open vizard"""
+        text_typography_content = self.element_is_visible(self.Locators.TEXT_TYPOGRAPHY_CONTENT).text
+        assert text_typography_content == "Настройки публикации контента"
+        """check tab text"""
+        list_tabs = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['поиск', 'версионность'] == data_tabs
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        # self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        # self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        """change testing"""
+        self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
+        self.element_is_visible(self.Locators.TEXT_CONFIRM_READ).click()
+        """text test tab check"""
+        list_tabs_test = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs_test:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['поиск', 'версионность', 'тест'] == data_tabs
         # self.element_is_visible(self.Locators.TEXT_TAB_TEST).is_displayed()
         text_alert = "ALERT-"+str(random.randint(99, 999))
         self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert)
@@ -370,14 +509,15 @@ class CreateTopicDatabase(BasePage):
             time.sleep(2)
             questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         assert questions_first_position_check == "Edit question"
-        """change position move drag and drop"""
+        # time.sleep(5)
+        # """change position move drag and drop"""
         # f = open("script.js", "r")
         # javascript = f.read()
         # f.close()
-
-        questions_second_position = self.element_is_visible(self.Locators.QUESTIONS_SECOND_POSITION_CHECK)
-        questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK)
-
+        # target = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION)
+        # source = self.element_is_visible(self.Locators.QUESTIONS_SECOND_POSITION)
+        # driver.execute_script(javascript, source, target)
+        # time.sleep(10)
         # action = ActionChains(self.driver)
         # questions_second_position = self.element_is_visible(self.Locators.QUESTIONS_SECOND_POSITION_CHECK)
         # # action.drag_and_drop(questions_first_position_check, questions_second_position).perform()
@@ -389,8 +529,8 @@ class CreateTopicDatabase(BasePage):
         """go tu test tab"""
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         """check position"""
         # questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         # assert questions_first_position_check == "Edit question"
@@ -402,8 +542,6 @@ class CreateTopicDatabase(BasePage):
         #     dada_name_text.append(text_name_question)
         # print(dada_name_text)
         # assert dada_name_text[0] == "Edit question"
-
-
         self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).clear()
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).send_keys("edit answer")
@@ -416,13 +554,230 @@ class CreateTopicDatabase(BasePage):
         for n in list_tabs:
             value_text = n.text
             data_tabs.append(value_text)
-        assert ['навигация', 'поиск', 'доступ', 'версионность'] == data_tabs
+        assert ['поиск', 'версионность'] == data_tabs
         # self.element_is_visible(self.Locators.TEXTAREA_ALERT).clear()
         self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert+" new")
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         self.element_is_visible(self.Locators.EDIT_ARTICLE).click()
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
+        self.element_is_visible(self.Locators.TEXT_CONFIRM_READ).click()
+        """text test tab check"""
+        list_tabs_test = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs_test:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['поиск', 'версионность', 'тест'] == data_tabs
+        self.element_is_visible(self.Locators.RADIOBUTTON_SMALL_CORRECT_CONTENT).click()
+        """check tab text"""
+        list_tabs = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['поиск', 'версионность'] == data_tabs
+        self.element_is_visible(self.Locators.RADIOBUTTON_BIG_CORRECT_CONTENT).click()
+        """text test tab check"""
+        list_tabs_test = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs_test:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['поиск', 'версионность', 'тест'] == data_tabs
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        """check position"""
+        # questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
+        # assert questions_first_position_check == "Edit question"
+        # questions_first_position_check = self.elements_are_visible(self.Locators.LIST_QUESTIONS_POSITION)
+        # dada_name_text = []
+        # for n in questions_first_position_check:
+        #     text_name_question = n.text
+        #     dada_name_text.append(text_name_question)
+        # print(dada_name_text)
+        # assert dada_name_text[1] == "Edit question"
+        """del question from test"""
+        # del1
+        self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
+        self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
+        # del2
+        self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
+        self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
+
+    def add_edit_question_template(self):
+        person = generated_person()
+        first_name = person.first_name
+        text = "Hello"
+        self.input_in_my_project(driver)
+        try:
+            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.CREATE_TEMPLATES).click()
+        """create new template"""
+        self.element_is_visible(self.Locators.NEW_TEMPLATE).click()
+        self.element_is_visible(self.Locators.ADD_FIELD_BUTTON).click()
+        self.element_is_visible(self.Locators.LIST_OF_FIELDS_1).click()
+        self.element_is_visible(self.Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(self.Locators.SAVE_TEMPLATES).click()
+        name_templates = "for download file testing" + str(random.randint(999, 99999))
+        self.element_is_visible(self.Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name_templates)
+        self.element_is_visible(self.Locators.SAVE_TEMPLATES_CHANGE).click()
+        self.element_is_visible(self.Locators.FINISH_BUTTON_SCRIPT).click()
+        time.sleep(2)
+        templates_download = self.driver.find_element(By.XPATH, f"//div[text()='{name_templates}']")
+        templates_download.click()
+        try:
+            self.element_is_visible(self.Locators.TEXT_AREA_ARTICLE).click()
+        except TimeoutException:
+            time.sleep(10)
+            self.element_is_visible(self.Locators.TEXT_AREA_ARTICLE).click()
+        self.element_is_visible(self.Locators.DROPDOWN).click()
+        frame = self.elements_is_present(self.Locators.FRAME)
+        self.switch_to_frame(frame)
+        self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
+        self.switch_out_frame()
+        self.download_files_is_visible()
+        self.check_add_question_func()
+        # time.sleep(1)
+        # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
+
+    def add_edit_question_script(self):
+        self.input_in_my_project(self.driver)
+        try:
+            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        except StaleElementReferenceException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
+
+        self.element_is_visible(self.Locators.NAME_OF_STEP_SCRIPT).send_keys("NAME_SCRIPT-"+str(random.randint(99, 999)))
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+
+        self.element_is_visible(self.Locators.ADD_STEP).click()
+
+        self.element_is_visible(self.Locators.INPUT_NAME_STEP).send_keys("name_step-"+str(random.randint(99, 999)))
+        self.element_is_visible(self.Locators.DROPDOWN_STEP).send_keys("Сценарий завершён")
+        try:
+            self.element_is_visible(self.Locators.TEXT_AREA).click()
+        except TimeoutException:
+            time.sleep(5)
+            self.element_is_visible(self.Locators.TEXT_AREA).click()
+        self.element_is_visible(self.Locators.DROPDOWN).click()
+        frame = self.elements_is_present(self.Locators.FRAME)
+        self.switch_to_frame(frame)
+        self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
+        self.switch_out_frame()
+        time.sleep(1)
+        """for visible"""
+        self.download_files_is_visible()
+        path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
+        path2 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
+        data_path = [path1, path2]
+        for n in data_path:
+            self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
+        time.sleep(5)
+        checkbox_insert_files = self.elements_are_visible(self.Locators.CHECKBOX_INSERT_FILES)
+        for n in checkbox_insert_files:
+            time.sleep(0.5)
+            n.click()
+        try:
+            self.element_is_visible(self.Locators.INPUT_SELECTED).click()
+        except ElementClickInterceptedException:
+            time.sleep(2)
+            self.element_is_visible(self.Locators.INPUT_SELECTED).click()
+        typography_for_click = self.elements_is_present(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
+        action = ActionChains(self.driver)
+        action.click(typography_for_click)
+        action.perform()
+
+        """open vizard"""
+        text_typography_content = self.element_is_visible(self.Locators.TEXT_TYPOGRAPHY_CONTENT).text
+        assert text_typography_content == "Настройки публикации контента"
+        """check tab text"""
+        list_tabs = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['поиск', 'доступ', 'версионность'] == data_tabs
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        # self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        """change testing"""
+        self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
+        self.element_is_visible(self.Locators.TEXT_CONFIRM_READ).click()
+        """text test tab check"""
+        list_tabs_test = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs_test:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['поиск', 'доступ', 'версионность', 'тест'] == data_tabs
+        # self.element_is_visible(self.Locators.TEXT_TAB_TEST).is_displayed()
+        text_alert = "ALERT-" + str(random.randint(99, 999))
+        self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert)
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        """add question"""
+        self.element_is_visible(self.Locators.BUTTON_ADD_QUESTION).click()
+        """check text and checkboxes"""
+        text_choose_question_for_test = self.element_is_visible(self.Locators.TEXT_CHOOSE_QUESTION_FOR_TEST).text
+        assert text_choose_question_for_test == "Выберите вопросы для теста"
+        list_checkboxes = self.elements_are_visible(self.Locators.LIST_CHECKBOXES)
+        for n in list_checkboxes:
+            attribute_class = n.get_attribute("class")
+            assert attribute_class == "m-switch-box lms-question-bar__switch"
+        # assert text_choose_question_for_test == "Выберите вопросы для теста"
+        self.element_is_visible(self.Locators.ON_CHECKBOX_ALL_QUESTIONS).click()
+        time.sleep(1)
+        self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+        """check first position by index xpath dom and active tab"""
+        tab_active = self.element_is_visible(self.Locators.TAB_ACTIVE).text
+        assert tab_active == 'тест'
+        try:
+            questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
+        except TimeoutException:
+            time.sleep(2)
+            questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
+        assert questions_first_position_check == "Edit question"
+
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.EDIT_ARTICLE).click()
+
+        self.element_is_visible(self.Locators.INPUT_NAME_STEP).send_keys("Edit")
+        try:
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
+        except TimeoutException:
+            time.sleep(2)
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
+
+        """go tu test tab"""
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        """check position"""
+        self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
+        self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).clear()
+        self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).send_keys("edit answer")
+        self.element_is_visible(self.Locators.BUTTON_EDIT_QUESTION_SAVE).click()
+        self.element_is_visible(self.Locators.BUTTON_GO_BACK).click()
+        self.element_is_visible(self.Locators.TEXT_GET_TESTED).click()
+        """check tab text"""
+        list_tabs = self.elements_are_visible(self.Locators.LIST_TABS)
+        data_tabs = []
+        for n in list_tabs:
+            value_text = n.text
+            data_tabs.append(value_text)
+        assert ['поиск', 'доступ', 'версионность'] == data_tabs
+        # self.element_is_visible(self.Locators.TEXTAREA_ALERT).clear()
+        self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert + " new")
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.EDIT_ARTICLE).click()
+
+        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
@@ -433,60 +788,34 @@ class CreateTopicDatabase(BasePage):
         for n in list_tabs_test:
             value_text = n.text
             data_tabs.append(value_text)
-        assert ['навигация', 'поиск', 'доступ', 'версионность', 'тест'] == data_tabs
-
+        assert ['поиск', 'доступ', 'версионность', 'тест'] == data_tabs
         self.element_is_visible(self.Locators.RADIOBUTTON_SMALL_CORRECT_CONTENT).click()
-
         """check tab text"""
         list_tabs = self.elements_are_visible(self.Locators.LIST_TABS)
         data_tabs = []
         for n in list_tabs:
             value_text = n.text
             data_tabs.append(value_text)
-        assert ['навигация', 'поиск', 'доступ', 'версионность'] == data_tabs
-
+        assert ['поиск', 'доступ', 'версионность'] == data_tabs
         self.element_is_visible(self.Locators.RADIOBUTTON_BIG_CORRECT_CONTENT).click()
-
         """text test tab check"""
         list_tabs_test = self.elements_are_visible(self.Locators.LIST_TABS)
         data_tabs = []
         for n in list_tabs_test:
             value_text = n.text
             data_tabs.append(value_text)
-        assert ['навигация', 'поиск', 'доступ', 'версионность', 'тест'] == data_tabs
-
+        assert ['поиск', 'доступ', 'версионность', 'тест'] == data_tabs
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         """check position"""
-        # questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
-        # assert questions_first_position_check == "Edit question"
+        """del question from test"""
+        # del1
+        self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
+        self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
+        # del2
+        self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
+        self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
 
-        # questions_first_position_check = self.elements_are_visible(self.Locators.LIST_QUESTIONS_POSITION)
-        # dada_name_text = []
-        # for n in questions_first_position_check:
-        #     text_name_question = n.text
-        #     dada_name_text.append(text_name_question)
-        # print(dada_name_text)
-        # assert dada_name_text[1] == "Edit question"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        time.sleep(5)
+        time.sleep(10)
 
 
 
