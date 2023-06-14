@@ -34,7 +34,7 @@ class CreateTopicDatabase(BasePage):
             try:
                 self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=3).click()
             except TimeoutException:
-                time.sleep(1)
+                time.sleep(2)
                 self.element_is_visible(self.Locators.SVG_DEL_QUESTION).click()
                 self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
                 time.sleep(1)
@@ -191,7 +191,7 @@ class CreateTopicDatabase(BasePage):
         try:
             text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
         except TimeoutException:
-            time.sleep(1)
+            time.sleep(2)
             text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
         assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
         button_question_add = self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).text
@@ -366,7 +366,7 @@ class CreateTopicDatabase(BasePage):
         try:
             questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         except TimeoutException:
-            time.sleep(1)
+            time.sleep(2)
             questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         assert questions_first_position_check == "Edit question"
         """change position move"""
