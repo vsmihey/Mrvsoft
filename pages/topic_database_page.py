@@ -86,6 +86,7 @@ class CreateTopicDatabase(BasePage):
                 self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
             except TimeoutException:
                 time.sleep(3)
+                n.click()
                 self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
             self.element_is_visible(self.Locators.BUTTON_CONFIRM_DELETE_TOPIC).click()
 
@@ -692,9 +693,12 @@ class CreateTopicDatabase(BasePage):
         action = ActionChains(self.driver)
         action.click(typography_for_click)
         action.perform()
-
         """open vizard"""
-        text_typography_content = self.element_is_visible(self.Locators.TEXT_TYPOGRAPHY_CONTENT).text
+        try:
+            text_typography_content = self.element_is_visible(self.Locators.TEXT_TYPOGRAPHY_CONTENT, timeout=2).text
+        except TimeoutException:
+            time.sleep(2)
+            text_typography_content = self.element_is_visible(self.Locators.TEXT_TYPOGRAPHY_CONTENT).text
         assert text_typography_content == "Настройки публикации контента"
         """check tab text"""
         list_tabs = self.elements_are_visible(self.Locators.LIST_TABS)

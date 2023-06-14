@@ -191,13 +191,17 @@ class FormPage(BasePage):
         time.sleep(1)
         # self.element_is_visible(Locators.SEARCH_PROJECT).click()
         self.element_is_visible(Locators.SEARCH_PROJECT_TEST1).click()
+        time.sleep(1)
         self.element_is_visible(Locators.SEARCH_INPUT).send_keys('название 1')
         time.sleep(1)
         self.element_is_visible(Locators.SEARCH_INPUT).send_keys(Keys.RETURN)
-        time.sleep(1)
+        time.sleep(2)
         try:
             self.assert_title(driver, name_project='selen', name_='название 1')
         except TimeoutException:
+            time.sleep(2)
+            self.element_is_visible(Locators.SEARCH_INPUT).send_keys('название 1')
+            self.element_is_visible(Locators.SEARCH_INPUT).send_keys(Keys.RETURN)
             time.sleep(2)
             self.assert_title(driver, name_project='selen', name_='название 1')
         self.element_is_visible(Locators.HISTORY_BUTTON).click()

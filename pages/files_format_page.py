@@ -323,15 +323,8 @@ class UnformatFilePage(BasePage):
         self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
         """direct folder save"""
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).click()
-        try:
-            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
-        except ElementNotInteractableException:
-            time.sleep(2)
-            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.RETURN)
-        # self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+
         self.remove_class_script()
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """check text alert"""

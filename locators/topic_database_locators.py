@@ -152,7 +152,8 @@ class CreateTopicDatabaseLocators:
     BUTTON_TYPOGRAPHY_SCRIPT = (By.CSS_SELECTOR, "section[class='m-scenario-flow__editor-actions'] button[type='button']")
     # BUTTON_TYPOGRAPHY_SCRIPT = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
     NAME_OF_STEP_SCRIPT = (By.XPATH, "//input[@placeholder='Введите название контента']")
-    DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    # DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    DIRECT_FOLDER = (By.XPATH, "//select[@class='m-ui-select__select']")
     INPUT_NAME_STEP = (By.XPATH, "//input[@name='articleName']")
     DROPDOWN_STEP = (By.CSS_SELECTOR, "select[name='id']")
 

@@ -367,6 +367,11 @@ class ArticlePage(BasePage):
         assert check_version_text_value == "версионность"
         # print(check_version_text_value)
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+
+
+
+
+
         input_request = self.element_is_visible(Locators.INPUT_REQUEST)
         requests_name = "как помыть крота" + str(random.randint(999, 99999))
         input_request.send_keys(requests_name)
@@ -439,6 +444,8 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SEARCH_HEAD_PAGE).click()
         search_of_contents = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
         search_of_contents.send_keys(requests_name)
+        print(requests_name)
+        time.sleep(1)
         search_of_contents.send_keys(Keys.RETURN)
         try:
             field.click()
@@ -447,10 +454,19 @@ class ArticlePage(BasePage):
             print("очищенных полей в запросе нет")
         # check_name_of_content = self.element_is_visible(Locators.CHECK_NAME_OF_CONTENT)
         time.sleep(1)
+
+
+
+
+
+
+
+
+
         try:
             check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         except NoSuchElementException:
-            time.sleep(2)
+            time.sleep(3)
             check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         check_name_of_content_value = check_name_of_content.text
         assert check_name_of_content_value == name_content, "name content is not correct"
@@ -949,7 +965,12 @@ class StepByScriptPage(BasePage):
         search_of_contents.send_keys(Keys.RETURN)
         time.sleep(1)
         """text search of content"""
-        check_text_search = driver.find_element(By.XPATH, f"//p[text()='{to_get_name}']")
+        try:
+            check_text_search = driver.find_element(By.XPATH, f"//p[text()='{to_get_name}']")
+        except TimeoutException:
+            time.sleep(2)
+            check_text_search = driver.find_element(By.XPATH, f"//p[text()='{to_get_name}']")
+
         check_text_search_value = check_text_search.text
         assert check_text_search_value == to_get_name
         check_text_fixing_expert = self.element_is_visible(self.Locators.CHECK_TEXT_FIXING_EXPERT).text
