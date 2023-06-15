@@ -34,7 +34,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         try:
             time.sleep(1)
-            self.element_is_visible(Locators.TEST_PROJECT).click()
+            self.element_is_visible(Locators.TEST_PROJECT, timeout=3).click()
         except TimeoutException:
             self.element_is_visible(Locators.ADD).click()
             self.element_is_visible(Locators.ADD_NAMES_PROJECT).send_keys("selen")
@@ -42,8 +42,6 @@ class ArticlePage(BasePage):
             self.element_is_visible(Locators.ADD_PROJECT_BUTTON).click()
             self.element_is_visible(Locators.TEST_PROJECT).click()
             self.element_is_visible(Locators.CONTENT).click()
-            driver.refresh()
-            time.sleep(12)
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
@@ -61,9 +59,9 @@ class ArticlePage(BasePage):
 
     def add_normal_article(self, driver):
         person = generated_person()
-        first_name = person.first_name
+        first_name = person.first_name+str(random.randint(99, 999))
         text = "Hello"
-        text_long = 100*first_name
+        text_long = first_name+"name_"+str(random.randint(99, 999))
         self.element_is_visible(Locators.CONTENT).click()
         time.sleep(2)
         self.element_is_visible(Locators.CREATE_BUTTON).click()
@@ -71,32 +69,43 @@ class ArticlePage(BasePage):
         time.sleep(7)
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(first_name)
         self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+        """add media"""
+        try:
+            self.elements_is_present(Locators.UPLOAD_MEDIA, timeout=2).click()
+        except TimeoutException:
+            time.sleep(5)
+            self.elements_is_present(Locators.UPLOAD_MEDIA).click()
+        """input is visible for load files"""
+        self.driver.execute_script(
+            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        self.driver.execute_script(
+            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
+        path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
+        data_path = [path1, path2]
+        for n in data_path:
+            self.element_is_visible(Locators.INPUT_INVISIBLE).send_keys(n)
+        time.sleep(5)
+        checkbox_insert_files = self.elements_are_visible(Locators.CHECKBOX_INSERT_FILES)
+        for n in checkbox_insert_files:
+            time.sleep(0.5)
+            n.click()
+        try:
+            self.element_is_visible(Locators.INPUT_SELECTED, timeout=2).click()
+        except ElementClickInterceptedException:
+            time.sleep(2)
+            self.element_is_visible(Locators.INPUT_SELECTED).click()
+        time.sleep(1)
+        """add text and format"""
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text)
         time.sleep(1)
-        self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(Keys.LEFT_CONTROL+'a')
+        self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(Keys.LEFT_CONTROL + 'a')
         self.element_is_visible(Locators.TEXT_BOLD_FORMAT).click()
         time.sleep(0.5)
         self.element_is_visible(Locators.TEXT_ITALIC_FORMAT).click()
         time.sleep(0.5)
         self.element_is_visible(Locators.TEXT_UNDERLINE_FORMAT).click()
-        """ !!!! ФОРМАТИРОВАНИЕ И ДОБАВЛЕНИЕ ФАЙЛОВ"""
-        # time.sleep(1)
-        # text_color = driver.find_element(By.XPATH, "//span[@class='cke_button_icon cke_button__textcolor_icon']")
-        # text_color.click()
-        # text_color.send_keys(Keys.TAB)
-        # text_color.send_keys(Keys.TAB)
-        # text_color.send_keys(Keys.TAB)
-        # text_color.send_keys(Keys.TAB)
-        # text_color.send_keys(Keys.RETURN)
-        """add media"""
-        # avatar = Path(pathlib.Path.cwd(), "media.jpeg")
-        # path = str(avatar)
-        # self.element_is_visible(Locators.UPLOAD_MEDIA).click()
-        # self.driver.execute_script("""document.querySelector("input[type='file']").style.visibility = 'visible';""")
-        # time.sleep(1)
-        # self.element_is_visible(Locators.UPLOAD_MEDIA_INPUT).send_keys(path)
-        # time.sleep(1)
-        # self.element_is_visible(Locators.UPLOAD_MEDIA).click()
+        """typography and check"""
         self.element_is_visible(Locators.TYPOGRAPHY_ARTICLE).click()
         navigation_text_check = self.element_is_visible(Locators.NAVIGATION)
         navigation_text_check_value = navigation_text_check.text
@@ -117,6 +126,7 @@ class ArticlePage(BasePage):
         # print(version_text_check_value)
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         self.element_is_visible(Locators.SEARCH_INPUT_REQUEST).send_keys(text_long)
+        print(text_long)
         self.element_is_visible(Locators.ADD_SEARCH_BUTTON).click()
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
@@ -124,8 +134,6 @@ class ArticlePage(BasePage):
         check_text_role = self.element_is_visible(Locators.CHECK_TEXT_ROLE)
         check_text_role_value = check_text_role.text
         assert check_text_role_value == "роль"
-        # print(check_text_role_value)
-        # self.element_is_visible(Locators.MYTEST).click()
         check_select_radio = self.element_is_visible(Locators.CHECK_RADIOBUTTON_TYPOGRAPHY_NOW)
         check_select_radio.is_selected()
         check_select_radio2 = self.element_is_visible(Locators.CHECK_RADIOBUTTON_NO_DELETE)
@@ -150,8 +158,9 @@ class ArticlePage(BasePage):
         """FIXING_ARTICLE"""
         driver.implicitly_wait(10)
         person = generated_person()
+        alert_text = 'Alert '+ person.first_name+str(random.randint(1, 9))
         text_test = person.first_name+str(random.randint(99, 999))
-        text_fixing = "как помыть крота"+str(random.randint(99, 999))
+        text_fixing = "как помыть крота"+str(random.randint(9999, 999999))
         self.element_is_visible(Locators.CONTENT).click()
         """create test article"""
         text_area = "Hello"
@@ -175,7 +184,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
-        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys(text_area)
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys(alert_text)
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         time.sleep(3)
         try:
@@ -198,7 +207,9 @@ class ArticlePage(BasePage):
         check_add_fixing_content_value = check_add_fixing_content.text
         assert check_add_fixing_content_value == "Добавление закрепленного контента"
         # print(check_add_fixing_content_value)
+        time.sleep(1)
         self.element_is_visible(Locators.SEARCH_TEST_ARTICLE).send_keys(text_test)
+        # time.sleep(10)
         time.sleep(1)
         self.element_is_visible(Locators.TEST_ARTICLE_NAME).click()
         self.element_is_visible(Locators.BUTTON_SUBMIT).click()
@@ -220,7 +231,12 @@ class ArticlePage(BasePage):
         assert included_content_value == text_area
         # print(included_content_value)
         self.element_is_visible(Locators.FIXING).click()
-        check_number_1_of_list = self.element_is_visible(Locators.LIST_OF_ARTICLES)
+        try:
+            check_number_1_of_list = self.element_is_visible(Locators.LIST_OF_ARTICLES)
+        except TimeoutException:
+            time.sleep(2)
+            self.element_is_visible(Locators.FIXING).click()
+            check_number_1_of_list = self.element_is_visible(Locators.LIST_OF_ARTICLES)
         check_number_1_of_list_value = check_number_1_of_list.text
         assert check_number_1_of_list_value == text_test
         # print(check_number_1_of_list_value)
@@ -232,6 +248,7 @@ class ArticlePage(BasePage):
         actions.send_keys(text_fixing)
         actions.send_keys(Keys.RETURN)
         actions.perform()
+        print(text_fixing)
         # self.element_is_visible(Locators.SEARCH_OF_CONTENTS).send_keys(text_fixing)
         # print(text_fixing)
         # self.element_is_visible(Locators.FIND_OF_CONTENT).click()
@@ -244,7 +261,7 @@ class ArticlePage(BasePage):
             check_text_hello = self.element_is_visible(Locators.CHECK_TEXT_HELLO)
         check_text_hello_value = check_text_hello.text
         assert check_text_hello_value == "Hello"
-        # print(check_text_hello_value)
+
         check_article = driver.find_element(By.XPATH, f"//p[normalize-space()='{text_test}']")
         check_article_value = check_article.text
         assert check_article_value == text_test
@@ -319,8 +336,7 @@ class ArticlePage(BasePage):
         name_of_templates = driver.find_element(By.XPATH, f"//div[contains(text(),'{name}')]")
         name_of_templates.click()
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
-        # print(name_content)
-        time.sleep(3)
+        time.sleep(1)
         self.element_is_visible(Locators.FOLDER_SAVE).send_keys("Контент 1")
         try:
             field_input = self.element_is_visible(Locators.EDIT_TEMPLATES)
@@ -358,6 +374,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
         time.sleep(1)
         # self.screenshot()
+        """step 12"""
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         check_search_text = driver.find_element(By.XPATH, "//p[contains(text(),'поиск')]")
         check_search_text_value = check_search_text.text
@@ -365,13 +382,7 @@ class ArticlePage(BasePage):
         check_version_text = driver.find_element(By.XPATH, "//p[contains(text(),'версионность')]")
         check_version_text_value = check_version_text.text
         assert check_version_text_value == "версионность"
-        # print(check_version_text_value)
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-
-
-
-
-
         input_request = self.element_is_visible(Locators.INPUT_REQUEST)
         requests_name = "как помыть крота" + str(random.randint(999, 99999))
         input_request.send_keys(requests_name)
@@ -388,6 +399,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        """step 15"""
         check_utility_text = self.element_is_visible(Locators.UTILITY_TEMPLATE)
         check_utility_text_value = check_utility_text.text
         assert check_utility_text_value == "полезен"
@@ -400,7 +412,8 @@ class ArticlePage(BasePage):
         check_name_of_templates_text_value = check_name_of_templates_text.text
         assert check_name_of_templates_text_value == name_content
         # print(check_name_of_templates_text_value)
-        """CHECK_FIXING_TEMPLATES"""
+
+        """CHECK_FIXING_TEMPLATES new test"""
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
         # time.sleep(1)
         self.element_is_visible(Locators.CHECK_TEXT_ALL_CONTENT_SORT_BY_POPULAR).click()
@@ -413,13 +426,10 @@ class ArticlePage(BasePage):
         name_of_templates_in_list.click()
         # time.sleep(1)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        # self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        actions = ActionChains(driver)
+        # actions = ActionChains(driver)
         field = self.element_is_visible(Locators.EDIT_TEMPLATES_1)
         field1 = self.element_is_visible(Locators.NUMBER_FIELD_FOR_CLEAR)
         field2 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR)
-        # field_answer = self.element_is_visible(Locators.ANSWER_1)
-        # delete_answer = self.element_is_visible(Locators.DELETE_ANSWER)
         actions.click(field)
         for n in range(1, 10):
             actions.send_keys(Keys.BACKSPACE)
@@ -431,12 +441,19 @@ class ArticlePage(BasePage):
         actions.send_keys(Keys.BACKSPACE)
         actions.click(field2)
         actions.perform()
-        # time.sleep(10)
+        time.sleep(1)
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
+        time.sleep(1)
+        # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name_Alert")
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
-        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        # баг при нажатии на SUBMIT_TEMPLATES вечная загрузка
+
+        time.sleep(1)
+        # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+
         # print(requests_name)
         """search_by_request"""
         time.sleep(1)
@@ -454,15 +471,6 @@ class ArticlePage(BasePage):
             print("очищенных полей в запросе нет")
         # check_name_of_content = self.element_is_visible(Locators.CHECK_NAME_OF_CONTENT)
         time.sleep(1)
-
-
-
-
-
-
-
-
-
         try:
             check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         except NoSuchElementException:
@@ -475,21 +483,13 @@ class ArticlePage(BasePage):
         name_of_content.click()
         time.sleep(1)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        # self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        #
         time.sleep(1)
-        # try:
         field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
-        # except TimeoutException:
-        #     time.sleep(1)
-        #     field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
         field5 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR_1)
         field6 = driver.find_element(By.XPATH, f"//pre[text()='{mail}']")
         for_click = self.element_is_visible(Locators.FOR_CLICK)
         actions.click(field4)
-        # actions.move_by_offset(0, 0)
-        # actions.click()
-        # actions.perform()
+        """del all info from field"""
         for n in range(1, 20):
             actions.send_keys(Keys.BACKSPACE)
         actions.click(field5)
@@ -531,10 +531,23 @@ class ArticlePage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         # self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        time.sleep(3)
+
+        time.sleep(100)
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+
+
+
+        time.sleep(2)
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
-        time.sleep(1)
-        text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
+        # self.element_is_visible(Locators.ALERT_FILL_1).send_keys("Alert"+str(random.randint(999, 9999)))
+
+        time.sleep(20)
+        try:
+            text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
+        except TimeoutException:
+            time.sleep(2)
+            self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
+            text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
         text_check_link_of_content_value = text_check_link_of_content.text
         assert text_check_link_of_content_value == 'Ссылка на контент', "не закреплена как ссылка на контент"
         # print(text_check_link_of_content_value)

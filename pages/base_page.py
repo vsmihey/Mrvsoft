@@ -62,7 +62,7 @@ class BasePage:
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         try:
             time.sleep(0.5)
-            self.element_is_visible(Locators.TEST_PROJECT).click()
+            self.element_is_visible(Locators.TEST_PROJECT, timeout=3).click()
         except TimeoutException:
             self.element_is_visible(Locators.ADD).click()
             self.element_is_visible(Locators.ADD_NAMES_PROJECT).send_keys("selen")
@@ -70,8 +70,6 @@ class BasePage:
             self.element_is_visible(Locators.ADD_PROJECT_BUTTON).click()
             self.element_is_visible(Locators.TEST_PROJECT).click()
             self.element_is_visible(Locators.CONTENT).click()
-            driver.refresh()
-            time.sleep(12)
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
@@ -155,15 +153,6 @@ class BasePage:
             """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
         self.driver.execute_script(
             """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
-
-    def create_and_open_new_article(self, driver):
-        """CREATE AND OPEN NEW ARTICLE"""
-
-
-
-
-
-
 
     def create_and_open_new_template(self, driver):
         """CREATE AND OPEN NEW TEMPLATE"""

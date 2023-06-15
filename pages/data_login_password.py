@@ -1,7 +1,7 @@
 # верные данные
 # login = 'm.andrey'
-login = 'a.mihey'
-password = '31c4cbe8'
+login = 'andrey'
+password = 'c07ffb67'
 
 
 # неверные данные

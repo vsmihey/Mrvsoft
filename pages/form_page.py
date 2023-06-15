@@ -204,8 +204,7 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.SEARCH_INPUT).send_keys(Keys.RETURN)
             time.sleep(2)
             self.assert_title(driver, name_project='selen', name_='название 1')
-        self.element_is_visible(Locators.HISTORY_BUTTON).click()
-        time.sleep(1)
+        self.element_is_visible(Locators.HISTORY_BUTTON_1).click()
         self.assert_title(driver, name_project='selen', name_='История')
         self.element_is_visible(Locators.LEARNING_BUTTON).click()
         time.sleep(1)
@@ -276,10 +275,13 @@ class FormPage(BasePage):
         text_check_created_new_user_name_value = text_check_created_new_user_name.text
         assert text_check_created_new_user_name_value == name_check
         # print(text_check_created_new_user_name_value)
+        print(login+value_random)
+        time.sleep(1)
         """check result create new person login"""
-        text_check_created_new_user_login = driver.find_element(By.XPATH, f"//span[text()='{login+value_random} ']")
+        login_admin = login+value_random+' (администратор)'
+        text_check_created_new_user_login = driver.find_element(By.XPATH, f"//span[text()='{login_admin}']")
         text_check_created_new_user_value = text_check_created_new_user_login.text
-        assert text_check_created_new_user_value == login+value_random
+        assert text_check_created_new_user_value == login_admin
         # print(text_check_created_new_user_value)
         """check result create new person mail"""
         email_check = email
@@ -474,11 +476,13 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             self.element_is_visible(Locators.TEXTAREA_ARTICLE).send_keys(text_article)
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+            # при нажатии на SUBMIT_ARTICLE вечная загрузка
             time.sleep(1)
             try:
                 self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
             except TimeoutException:
-                time.sleep(2)
+                time.sleep(3)
+                # self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
                 self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
             n += 1
             x += 1

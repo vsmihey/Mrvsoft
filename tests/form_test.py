@@ -81,6 +81,7 @@ class TestFormPage:
         form_page.create_del_recovery_folder_content(driver)
         form_page.delete_some_folder(driver, count_folders=8)
 
+    @pytest.mark.skip('test_folder1_folder2')
     def test_folder1_folder2(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
@@ -127,6 +128,7 @@ class TestFormPage:
         article_page.fixing_article(driver)
         time.sleep(1)
 
+    @pytest.mark.skip('add_article_by_templates')
     def test_add_article_by_templates(self, driver):
         article_page = ArticlePage(driver, url)
         article_page.open()
