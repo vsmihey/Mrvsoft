@@ -31,7 +31,10 @@ class FilesFormatPage(BasePage):
         time.sleep(1)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         """del hidden class input file"""
-        self.remove_class_script()
+        try:
+            self.remove_class_script()
+        except JavascriptException:
+            time.sleep(5)
         time.sleep(1)
         try:
             self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
@@ -45,7 +48,7 @@ class FilesFormatPage(BasePage):
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         except ElementClickInterceptedException:
             # self.screenshot()
-            time.sleep(20)
+            time.sleep(30)
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
@@ -80,7 +83,10 @@ class FilesFormatPage(BasePage):
             self.element_is_visible(self.Locators.BUTTON_FILE).click()
             self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
             """del hidden class input file"""
-            self.remove_class_script()
+            try:
+                self.remove_class_script()
+            except JavascriptException:
+                time.sleep(5)
             self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(n)
             time.sleep(2)
             """check file picture"""
@@ -245,11 +251,20 @@ class UnformatFilePage(BasePage):
         self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
         """direct folder save"""
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).click()
+        time.sleep(1)
+        try:
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        except TimeoutException:
+            time.sleep(5)
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).click()
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.RETURN)
-        self.remove_class_script()
+        time.sleep(1)
+        try:
+            self.remove_class_script()
+        except JavascriptException:
+            time.sleep(5)
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """check text alert"""
         time.sleep(1)
@@ -271,7 +286,10 @@ class UnformatFilePage(BasePage):
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         except TimeoutException:
-            time.sleep(10)
+            time.sleep(5)
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        except ElementClickInterceptedException:
+            time.sleep(5)
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
@@ -307,7 +325,57 @@ class UnformatFilePage(BasePage):
         i = random.randint(0, 1)
         data_unsupported = data_unsupported[i]
         path = data_unsupported
-        self.download_files_and_check(path)
+        person = generated_person()
+        text_area_alert = person.first_name + "-Alert"
+        time.sleep(1)
+        self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        self.element_is_visible(self.Locators.BUTTON_FILE).click()
+        time.sleep(1)
+        try:
+            self.remove_class_script()
+        except JavascriptException:
+            time.sleep(5)
+        self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
+        """check text alert"""
+        time.sleep(1)
+        try:
+            self.element_is_visible(self.Locators.CHECK_TEXT_ONLY_DOWNLOAD_ALERT).text
+        except TimeoutException:
+            # self.screenshot()
+            time.sleep(20)
+            check_text_only_download_alert = self.element_is_visible(
+                self.Locators.CHECK_TEXT_ONLY_DOWNLOAD_ALERT).text
+            assert check_text_only_download_alert == "Файл будет доступен только для скачивания"
+        check_text_not_preview = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW).text
+        assert check_text_not_preview == "Для этого формата не доступен предпросмотр"
+        button_download_file = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD_FILE).text
+        assert button_download_file == "Скачать файл"
+        self.element_is_clickable(self.Locators.BUTTON_DOWNLOAD_FILE)
+        """download file"""
+        """typography"""
+        try:
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        except TimeoutException:
+            time.sleep(5)
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        except ElementClickInterceptedException:
+            time.sleep(5)
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT_ALERT).send_keys(text_area_alert)
+        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        try:
+            text_check_after_typography = self.element_is_visible(self.Locators.TEXT_CHECK_AFTER_TYPOGRAPHY).text
+        except TimeoutException:
+            time.sleep(2)
+            text_check_after_typography = self.element_is_visible(self.Locators.TEXT_CHECK_AFTER_TYPOGRAPHY).text
+        assert text_check_after_typography == "Просмотр файла недоступен"
+        button_download_check_after_typography = self.element_is_visible(
+            self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
+        assert button_download_check_after_typography == "Скачать файл"
+        """close"""
+        self.element_is_visible(self.Locators.SVG_CLOSE_DOWNLOADED_FILE).click()
 
     def add_unformat_file_other(self):
         path1 = str(Path(pathlib.Path.cwd(), "files", "pe.pdf"))
@@ -317,15 +385,17 @@ class UnformatFilePage(BasePage):
         i = random.randint(0, 1)
         data_unsupported = data_unsupported[i]
         path = data_unsupported
-        # self.download_files_and_check(path)
         person = generated_person()
         text_area_alert = person.first_name + "-Alert"
         self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
         """direct folder save"""
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
-
-        self.remove_class_script()
+        # self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        try:
+            self.remove_class_script()
+        except JavascriptException:
+            time.sleep(5)
+            self.remove_class_script()
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """check text alert"""
         check_text_not_preview_1 = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW_1).text

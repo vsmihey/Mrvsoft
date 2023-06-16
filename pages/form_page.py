@@ -713,6 +713,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
 
     def add_to_favourites(self, driver):
+        """ДОЛЖНЫ БЫТЬ СОЗДАНЫ СТАТЬИ"""
         self.element_is_visible(Locators.CONTENT).click()
         self.element_is_visible(Locators.FAVOURITES).click()
         try:
@@ -746,7 +747,6 @@ class FormPage(BasePage):
                 except TimeoutException:
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
-
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("папка1")
         self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
@@ -764,7 +764,12 @@ class FormPage(BasePage):
         """add to folder1"""
         # self.element_is_visible(Locators.CONTENT).click()
         time.sleep(2)
-        self.element_is_visible(Locators.ARTICLE_FIRST1).click()
+        try:
+            self.element_is_visible(Locators.ARTICLE_FIRST1).click()
+        except TimeoutException:
+            time.sleep(2)
+            self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
+            self.element_is_visible(Locators.ARTICLE_FIRST1).click()
         time.sleep(1)
         self.add_favourites_to_folder(folder="папка1")
         self.element_is_visible(Locators.ARTICLE_FIRST2).click()

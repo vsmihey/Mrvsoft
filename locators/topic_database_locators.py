@@ -86,7 +86,7 @@ class CreateTopicDatabaseLocators:
     UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
     INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
     NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название контента']")
-    FOLDER_SAVE_ARTICLE = (By.XPATH, "//select[@class='m-ui-select__select']")
+    FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR, "select[class='m-ui-select__select']")
     TEXT_AREA_ARTICLE = (By.XPATH, "//div[@aria-label='false']")
     CHECKBOX_INSERT_FILES = (By.XPATH, "//section[@class='m-file-view__content-block']")
     INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")

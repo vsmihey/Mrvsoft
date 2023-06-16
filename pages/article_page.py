@@ -372,7 +372,6 @@ class ArticlePage(BasePage):
         check_name_of_templates = driver.find_element(By.XPATH, f"//h1[normalize-space()='{name}']")
         check_name_of_templates.is_displayed()
         self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
-        time.sleep(1)
         # self.screenshot()
         """step 12"""
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
@@ -412,8 +411,7 @@ class ArticlePage(BasePage):
         check_name_of_templates_text_value = check_name_of_templates_text.text
         assert check_name_of_templates_text_value == name_content
         # print(check_name_of_templates_text_value)
-
-        """CHECK_FIXING_TEMPLATES new test"""
+        """-----------------------CHECK_FIXING_TEMPLATES new test------------------------"""
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
         # time.sleep(1)
         self.element_is_visible(Locators.CHECK_TEXT_ALL_CONTENT_SORT_BY_POPULAR).click()
@@ -427,6 +425,7 @@ class ArticlePage(BasePage):
         # time.sleep(1)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         # actions = ActionChains(driver)
+        """step 4"""
         field = self.element_is_visible(Locators.EDIT_TEMPLATES_1)
         field1 = self.element_is_visible(Locators.NUMBER_FIELD_FOR_CLEAR)
         field2 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR)
@@ -442,20 +441,15 @@ class ArticlePage(BasePage):
         actions.click(field2)
         actions.perform()
         time.sleep(1)
+        """step 5"""
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         time.sleep(1)
         # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name_Alert")
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         # баг при нажатии на SUBMIT_TEMPLATES вечная загрузка
-
         time.sleep(1)
-        # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-
-        # print(requests_name)
-        """search_by_request"""
+        """search_by_request step 6"""
         time.sleep(1)
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
         self.element_is_visible(Locators.SEARCH_HEAD_PAGE).click()
@@ -479,6 +473,7 @@ class ArticlePage(BasePage):
         check_name_of_content_value = check_name_of_content.text
         assert check_name_of_content_value == name_content, "name content is not correct"
         time.sleep(1)
+        """step 7"""
         name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         name_of_content.click()
         time.sleep(1)
@@ -502,7 +497,8 @@ class ArticlePage(BasePage):
             actions.send_keys(Keys.BACKSPACE)
         actions.click(for_click)
         actions.perform()
-        time.sleep(5)
+        time.sleep(2)
+        """step 9"""
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
@@ -515,6 +511,7 @@ class ArticlePage(BasePage):
         except WebDriverException:
             print("очищенных полей в запросе нет")
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
+        """step 10"""
         self.element_is_visible(Locators.SEARCH_HEAD_PAGE).click()
         search_of_contents = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
         search_of_contents.send_keys(requests_name)
@@ -525,29 +522,55 @@ class ArticlePage(BasePage):
         check_name_of_content_value = check_name_of_content.text
         assert check_name_of_content_value == name_content, "name content is not correct"
         time.sleep(1)
+        """step 11"""
         # name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         name_of_content = driver.find_element(By.XPATH, "//section[@class='article-preview__header']")
         name_of_content.click()
-        time.sleep(1)
+        time.sleep(2)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
+
+
+
+        # self.element_is_visible(Locators.EDIT_ARTICLE).click()
+        time.sleep(3)
+        self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
+
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Alert" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+
+        time.sleep(10)
+
+        text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
+        text_check_link_of_content_value = text_check_link_of_content.text
+        assert text_check_link_of_content_value == 'Ссылка на контент', "не закреплена как ссылка на контент"
+        # print(text_check_link_of_content_value)
+        # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        self.element_is_visible(Locators.EDIT_ARTICLE).click()
+
+        # try:
+        #     self.element_is_visible(Locators.EDIT_ARTICLE).click()
+        # except TimeoutException:
+        #     time.sleep(3)
+        #     self.element_is_visible(Locators.EDIT_ARTICLE).click()
+
+        # self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON_CONFIRM).click()
         # self.element_is_visible(Locators.EDIT_ARTICLE).click()
 
-        time.sleep(100)
-        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+        # self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+        # self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
+        # time.sleep(2)
+        # self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
+        # # self.element_is_visible(Locators.ALERT_FILL_1).send_keys("Alert"+str(random.randint(999, 9999)))
+        #
+        # time.sleep(20)
+        # try:
+        #     text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
+        # except TimeoutException:
+        #     time.sleep(2)
+        #     self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
 
-
-
-        time.sleep(2)
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
-        # self.element_is_visible(Locators.ALERT_FILL_1).send_keys("Alert"+str(random.randint(999, 9999)))
-
-        time.sleep(20)
-        try:
-            text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
-        except TimeoutException:
-            time.sleep(2)
-            self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
-            text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
+        text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
         text_check_link_of_content_value = text_check_link_of_content.text
         assert text_check_link_of_content_value == 'Ссылка на контент', "не закреплена как ссылка на контент"
         # print(text_check_link_of_content_value)
@@ -587,6 +610,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
         self.element_is_visible(Locators.SEARCH_HEAD_PAGE).click()
+        """step 18"""
         search_of_contents = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
         search_of_contents.send_keys(requests_name)
         time.sleep(1)
@@ -951,7 +975,7 @@ class StepByScriptPage(BasePage):
         check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
         assert check_text_content_script == "Контент 1"
         """check name script"""
-        # time.sleep(1)
+        time.sleep(1)
         check_text_name_script = driver.find_element(By.XPATH, f"//p[text()='{to_get_name}']")
         check_text_name_script_value = check_text_name_script.text
         assert check_text_name_script_value == to_get_name
@@ -1079,7 +1103,11 @@ class CreateDraftPage(BasePage):
         self.driver.switch_to.window(tab1)
         # time.sleep(1)
         driver.refresh()
-        self.element_is_visible(Locators.TEST_PROJECT).click()
+        try:
+            self.element_is_visible(Locators.TEST_PROJECT).click()
+        except TimeoutException:
+            time.sleep(5)
+            self.element_is_visible(Locators.TEST_PROJECT).click()
         try:
             self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
         except StaleElementReferenceException:

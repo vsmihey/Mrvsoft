@@ -81,7 +81,7 @@ class TestFormPage:
         form_page.create_del_recovery_folder_content(driver)
         form_page.delete_some_folder(driver, count_folders=8)
 
-    @pytest.mark.skip('test_folder1_folder2')
+    # @pytest.mark.skip('test_folder1_folder2')
     def test_folder1_folder2(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()

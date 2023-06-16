@@ -33,14 +33,24 @@ class CreateTopicDatabase(BasePage):
             assert text_not_questions_now == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
         except TimeoutException:
             try:
-                self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=3).click()
+                self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=2).click()
             except TimeoutException:
                 time.sleep(2)
-                self.element_is_visible(self.Locators.SVG_DEL_QUESTION).click()
-                time.sleep(2)
-                self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
-                time.sleep(2)
-                self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD).click()
+                list_question = self.elements_are_visible(self.Locators.SVG_DEL_QUESTION)
+                for n in list_question:
+                    time.sleep(1)
+                    n.click()
+                    time.sleep(0.5)
+                    self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
+                # try:
+                #     self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=2).click()
+                # except TimeoutException:
+                #     time.sleep(2)
+                #     self.element_is_visible(self.Locators.SVG_DEL_QUESTION).click()
+                #     time.sleep(1)
+                #     self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
+                #     self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=2).click()
+            self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD).click()
             self.element_is_visible(self.Locators.BUTTON_CHANGE_QUESTION).click()
             self.delete_created_topics()
             self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
@@ -192,11 +202,22 @@ class CreateTopicDatabase(BasePage):
         self.element_is_visible(self.Locators.DATABASE_OF_QUESTIONS).click()
         """check text and button"""
         try:
-            text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
+            text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION, timeout=3).text
+            assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
         except TimeoutException:
-            time.sleep(5)
-            text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
-        assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
+            try:
+                list_delete = self.elements_are_visible(self.Locators.SVG_DEL_QUESTION)
+                for n in list_delete:
+                    time.sleep(1)
+                    n.click()
+                    time.sleep(0.5)
+                    self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
+                text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
+                assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
+            except TimeoutException:
+                time.sleep(5)
+                text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
+                assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
         button_question_add = self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).text
         assert button_question_add == "Добавить"
         self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).click()
@@ -271,7 +292,8 @@ class CreateTopicDatabase(BasePage):
         #     self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
 
     def add_edit_question_article(self, driver):
-        """ADD AND EDIT QUESTION IN ARTICLE"""
+        """ADD AND EDIT QUESTION IN ARTICLE
+        В БАЗЕ ДОЛЖНЫ БЫТЬ ВОПРОСЫ С ПРЕДЫДУЩЕГО ТЕСТА"""
         person = generated_person()
         first_name = person.first_name
         text = "Hello"
@@ -290,6 +312,9 @@ class CreateTopicDatabase(BasePage):
             self.element_is_visible(self.Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
         except ElementNotInteractableException:
             time.sleep(2)
+            driver.refresh()
+            time.sleep(5)
+            self.element_is_visible(self.Locators.NAME_OF_ARTICLE).send_keys(first_name)
             self.element_is_visible(self.Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
         try:
             self.element_is_visible(self.Locators.TEXT_AREA_ARTICLE).send_keys(text)
@@ -375,12 +400,14 @@ class CreateTopicDatabase(BasePage):
         self.element_is_visible(self.Locators.EDIT_ARTICLE).click()
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         """go tu test tab"""
+        # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert + " new")
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        # time.sleep(3)
+        # self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert + " new")
+        # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         """check position"""
-
         self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).clear()
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).send_keys("edit answer")
@@ -477,6 +504,10 @@ class CreateTopicDatabase(BasePage):
         """change testing"""
         self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
         self.element_is_visible(self.Locators.TEXT_CONFIRM_READ).click()
+        time.sleep(6)
+
+
+
         """text test tab check"""
         list_tabs_test = self.elements_are_visible(self.Locators.LIST_TABS)
         data_tabs = []
@@ -488,9 +519,9 @@ class CreateTopicDatabase(BasePage):
         text_alert = "ALERT-"+str(random.randint(99, 999))
         self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert)
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        """add question"""
+        """add question step 10"""
         self.element_is_visible(self.Locators.BUTTON_ADD_QUESTION).click()
-        """check text and checkboxes"""
+        """check text and checkboxes step 10"""
         text_choose_question_for_test = self.element_is_visible(self.Locators.TEXT_CHOOSE_QUESTION_FOR_TEST).text
         assert text_choose_question_for_test == "Выберите вопросы для теста"
         list_checkboxes = self.elements_are_visible(self.Locators.LIST_CHECKBOXES)
@@ -524,12 +555,25 @@ class CreateTopicDatabase(BasePage):
         # # action.drag_and_drop(questions_first_position_check, questions_second_position).perform()
         # # self.action_drag_and_drop_by_offset(questions_second_position, 0, 8)
         # # action.click_and_hold(questions_first_position_check).move_to_element(questions_second_position).release().perform()
+        "step 14"
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        "step 15"
         self.element_is_visible(self.Locators.EDIT_ARTICLE).click()
+        "step 16"
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         """go tu test tab"""
+
+
+
+
+        time.sleep(50)
+        self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert + " new")
+        """change testing"""
+        # self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
+        # self.element_is_visible(self.Locators.TEXT_CONFIRM_READ).click()
+
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         """check position"""
@@ -562,6 +606,10 @@ class CreateTopicDatabase(BasePage):
         self.element_is_visible(self.Locators.EDIT_ARTICLE).click()
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+
+
+
+
         self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
         self.element_is_visible(self.Locators.TEXT_CONFIRM_READ).click()
         """text test tab check"""
@@ -655,10 +703,16 @@ class CreateTopicDatabase(BasePage):
         self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
 
         self.element_is_visible(self.Locators.NAME_OF_STEP_SCRIPT).send_keys("NAME_SCRIPT-"+str(random.randint(99, 999)))
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
-
+        try:
+            self.element_is_visible(self.Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+        except ElementNotInteractableException:
+            time.sleep(2)
+            self.driver.refresh()
+            time.sleep(5)
+            self.element_is_visible(self.Locators.NAME_OF_STEP_SCRIPT).send_keys(
+                "NAME_SCRIPT-" + str(random.randint(99, 999)))
+            self.element_is_visible(self.Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
         self.element_is_visible(self.Locators.ADD_STEP).click()
-
         self.element_is_visible(self.Locators.INPUT_NAME_STEP).send_keys("name_step-"+str(random.randint(99, 999)))
         self.element_is_visible(self.Locators.DROPDOWN_STEP).send_keys("Сценарий завершён")
         try:
@@ -818,16 +872,14 @@ class CreateTopicDatabase(BasePage):
         # del2
         self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
         self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
-        """del all question"""
-        self.element_is_visible(self.Locators.BUTTON_ADD_QUESTION).click()
-        list_delete = self.elements_are_visible(self.Locators.SVG_DEL_QUESTION)
-        for n in list_delete:
-            time.sleep(0.5)
-            n.click()
-            self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
+        # """del all question"""
+        # self.element_is_visible(self.Locators.BUTTON_ADD_QUESTION).click()
+        # list_delete = self.elements_are_visible(self.Locators.SVG_DEL_QUESTION)
+        # for n in list_delete:
+        #     time.sleep(0.5)
+        #     n.click()
+        #     self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
 
-
-        time.sleep(10)
 
 
 
