@@ -81,7 +81,11 @@ class FilesFormatPage(BasePage):
                 time.sleep(5)
                 self.element_is_visible(self.Locators.CREATE_BUTTON).click()
             self.element_is_visible(self.Locators.BUTTON_FILE).click()
-            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+            try:
+                self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+            except ElementNotInteractableException:
+                time.sleep(3)
+                self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
             """del hidden class input file"""
             try:
                 self.remove_class_script()
@@ -161,7 +165,7 @@ class FilesFormatPage(BasePage):
         assert check_text_replacement_alert == "При замене необходимо использовать тот же тип файла"
         element = self.element_is_visible(self.Locators.SVG_INFORMATION_FOR_TOOLTIP)
         self.action_move_to_element(element)
-        time.sleep(1)
+        # time.sleep(1)
         """text of tooltip"""
         # data_list_tooltip = []
         try:
@@ -170,40 +174,45 @@ class FilesFormatPage(BasePage):
         except TimeoutException:
             self.screenshot()
             time.sleep(5)
+            self.action_move_to_element(element)
             list_tooltip = self.element_is_visible(self.Locators.LIST_TOOLTIP).text
         #     data_list_tooltip.append(list_tooltip)
         # print(data_list_tooltip)
         assert list_tooltip == '«Аудио» - файлы форматов: mp3, aac, ac3, aiff, au, dts, flac, m4a, m4p, m4r, mp2, ogg, opus, ra, tta, voc, vox, wav, wma.\n«Видео» - файлы форматов: mp4, avi, flv, mov, 3gp, m4v, asf, m2ts, m4v, mkv, mts, swf, vob, wmv, webm.\n«Изображение» - файлы форматов: jpg, jpeg, png, gif.\n«Документ» - все остальные файлы.'
 
     def check_replacement_files_video(self, driver):
+        self.input_in_my_project(driver)
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
         path3 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
         path4 = str(Path(pathlib.Path.cwd(), "files", "aac.aac"))
         path5 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
-        self.input_in_my_project(driver)
-        """edit avi file"""
+        """edit created avi file"""
+        # здесь нужно найти ранее созданный файл
         element = self.elements_is_present(self.Locators.AVI_FILE_CREATED)
         self.action_move_to_element(element)
         self.elements_is_present(self.Locators.AVI_FILE_CREATED).click()
+        time.sleep(1)
         self.check_replacement_files_text()
         """change files """
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path5)
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path4)
-        check_text_incorrect_format_replacement = self.element_is_visible(self.Locators.CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT).text
+        check_text_incorrect_format_replacement = self.element_is_visible(
+            self.Locators.CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT).text
         assert check_text_incorrect_format_replacement == "Неверный формат файла для замены"
         self.element_is_visible(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE).click()
 
     def file_check_replacement_audio(self, driver):
+        self.input_in_my_project(driver)
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
         path3 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
         path4 = str(Path(pathlib.Path.cwd(), "files", "aac.aac"))
         path5 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
-        self.input_in_my_project(driver)
         """edit avi file"""
+        # здесь нужно найти ранее созданный файл
         element = self.elements_is_present(self.Locators.MP3_FILE_CREATED)
         self.action_move_to_element(element)
         self.elements_is_present(self.Locators.MP3_FILE_CREATED).click()
@@ -226,6 +235,7 @@ class FilesFormatPage(BasePage):
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         self.input_in_my_project(driver)
         """edit pic file"""
+        # здесь нужно найти ранее созданный файл
         element = self.elements_is_present(self.Locators.JPEG_FILE_CREATED)
         self.action_move_to_element(element)
         self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
