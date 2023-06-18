@@ -128,8 +128,8 @@ class TestFormPage:
         article_page.fixing_article(driver)
         time.sleep(1)
 
-    @pytest.mark.skip('add_article_by_templates')
-    def test_add_article_by_templates(self, driver):
+    # @pytest.mark.skip('add_article_by_templates')
+    def atest_add_article_by_templtes(self, driver):
         article_page = ArticlePage(driver, url)
         article_page.open()
         article_page.input_in_my_project(driver)

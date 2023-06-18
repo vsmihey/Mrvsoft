@@ -280,6 +280,7 @@ class FormPagesLocators:
     SAVE_CHANGE_CONTENT = (By.XPATH, "//p[contains(text(),'Сохранить изменения')]")
     POPUP_CLOSE_SVG_1 = (By.XPATH, "//body/div[3]/div[1]/div[1]/div[1]")
     CHECK_LINK_OF_CONTENT = (By.XPATH, "//span[text()='Ссылка на контент']")
+    BUTTON_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
     CLOSE_LINK_OF_CONTENT = (By.XPATH, "//span[@class='both-sides-alignment-card-line__container']")
     # TEXT_FIELD_ONE_MORE = (By.XPATH, "//pre[text()='one more some text']")
     TEXT_FIELD_ONE_MORE = (By.XPATH, "//pre[text()='one more some text']/../../div[@class='form-input-wrapper__field form-input-wrapper__field-arrow']")
