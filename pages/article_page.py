@@ -16,7 +16,7 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_person, generated_file, generated_big_file
 from pages.base_page import BasePage
-from locators.form_pages_locators import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
+from locators.locators_form_pages import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
     CreateDraftLocators, FilesPagesLocators
 # from locators.form_pages_locators import StepByScriptLocators as Locators
 # from locators.form_pages_locators import FixingArticle as Locators

@@ -10,7 +10,7 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person
 from pages.base_page import BasePage
-from locators.form_pages_locators import FormPagesLocators as Locators
+from locators.locators_form_pages import FormPagesLocators as Locators
 from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
 

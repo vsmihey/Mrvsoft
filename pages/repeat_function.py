@@ -8,8 +8,8 @@ from selenium.common import StaleElementReferenceException, ElementNotInteractab
 from selenium.webdriver.common.by import By
 
 from generator.generator import generated_person
-from locators.form_pages_locators import FormPagesLocators
-from locators.topic_database_locators import CreateTopicDatabaseLocators
+from locators.locators_form_pages import FormPagesLocators
+from locators.locators_topic_database import CreateTopicDatabaseLocators
 from pages.base_page import BasePage
 
 

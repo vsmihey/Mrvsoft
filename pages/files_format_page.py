@@ -8,7 +8,7 @@ from selenium.common import StaleElementReferenceException, ElementClickIntercep
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person, generated_files_audio, generated_files_video
-from locators.files_format_locators import FilesFormatPageLocators, UnformatFilePageLocators
+from locators.locators_files_format import FilesFormatPageLocators, UnformatFilePageLocators
 from pages.base_page import BasePage
 
 
