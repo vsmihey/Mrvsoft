@@ -443,7 +443,7 @@ class CreateDraftLocators:
     SECTION2_CHECK = (By.XPATH, "(//div[@class='m-draft-card__top-side'])[2]")
     SECTION3 = (By.XPATH, "(//div[@class='m-draft-card__top-side'])[3]")
     # CHECK_TEXT_OPEN_EDIT_DRAFT = (By.XPATH, "//span[text()='изменить']")
-    CHECK_TEXT_OPEN_EDIT_DRAFT = (By.XPATH, "(//span[text()='изменить'])[3]")
+    CHECK_TEXT_OPEN_EDIT_DRAFT = (By.XPATH, "//button[@class='m-ui-button-text']")
     CHECK_TEXT_OPEN_EDIT_DRAFT_NAME_CONTENT = (By.XPATH, "//div[text()='название контента']")
     CHANGE_TEMPLATE = (By.XPATH, "//p[text()='Изменить шаблон']")
     CHANGE_TEMPLATE_NAME_TEXT_CHECK = (By.XPATH, "//div[text()='Название шаблона']")

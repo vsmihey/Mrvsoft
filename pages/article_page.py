@@ -1055,7 +1055,6 @@ class CreateDraftPage(BasePage):
         """open draft"""
         person = generated_person()
         name_article = person.first_name + str(random.randint(99, 999))
-        # text_area = person.last_name + str(random.randint(99, 999))
         try:
             self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
         except StaleElementReferenceException:
@@ -1064,7 +1063,7 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(self.Locators.FIELD_DRAFT).click()
         """open 4 tab"""
         for n in range(4):
-            driver.execute_script(f"window.open('{base_url}')")
+            driver.execute_script(f"window.open('{url}')")
             time.sleep(0.5)
         time.sleep(10)
         """open tab and fill name article"""
@@ -1073,14 +1072,13 @@ class CreateDraftPage(BasePage):
         tab3 = driver.window_handles[2]
         tab2 = driver.window_handles[3]
         tab1 = driver.window_handles[4]
-        # time.sleep(1)
         self.driver.switch_to.window(tab1)
-        # time.sleep(1)
         driver.refresh()
+        # time.sleep(5)
         try:
             self.element_is_visible(Locators.TEST_PROJECT).click()
         except TimeoutException:
-            time.sleep(10)
+            time.sleep(5)
             self.element_is_visible(Locators.TEST_PROJECT).click()
         try:
             self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
