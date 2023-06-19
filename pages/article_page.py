@@ -1063,7 +1063,7 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(self.Locators.FIELD_DRAFT).click()
         """open 4 tab"""
         for n in range(4):
-            driver.execute_script(f"window.open('{url}')")
+            driver.execute_script(f"window.open('{base_url}')")
             time.sleep(0.5)
         time.sleep(10)
         """open tab and fill name article"""
