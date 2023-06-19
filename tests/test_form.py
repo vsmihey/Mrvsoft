@@ -1,7 +1,5 @@
 import time
 import pytest
-from selenium.common import TimeoutException
-from pages import base_page
 from pages.form_page import FormPage
 from pages.data_login_password import *
 from pages.article_page import ArticlePage, CopyPastePage, CreateDraftPage, FilesPages
