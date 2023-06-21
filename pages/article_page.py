@@ -593,7 +593,11 @@ class ArticlePage(BasePage):
         time.sleep(1)
         search_of_contents.send_keys(Keys.RETURN)
         check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
-        check_name_of_content_value = check_name_of_content.text
+        try:
+            check_name_of_content_value = check_name_of_content.text
+        except StaleElementReferenceException:
+            time.sleep(3)
+            check_name_of_content_value = check_name_of_content.text
         assert check_name_of_content_value == name_content, "name content is not correct"
         try:
             field_text_check = driver.find_element(By.XPATH, "//section[text()='Текст']")

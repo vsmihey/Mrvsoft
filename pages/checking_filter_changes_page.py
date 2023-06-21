@@ -301,7 +301,11 @@ class AddFilterChanges(BasePage):
         """check filters sort"""
         data = []
         # dropdown_filter = self.elements_is_present(self.Locators.DROPDOWN_FILTERS).text
-        dropdown_filter1 = self.elements_is_present(self.Locators.FILTER1).text
+        try:
+            dropdown_filter1 = self.elements_is_present(self.Locators.FILTER1, timeout=3).text
+        except TimeoutException:
+            time.sleep(3)
+            dropdown_filter1 = self.elements_is_present(self.Locators.FILTER1).text
         dropdown_filter2 = self.elements_is_present(self.Locators.FILTER2).text
         dropdown_filter3 = self.elements_is_present(self.Locators.FILTER3).text
         data.append(dropdown_filter1)
