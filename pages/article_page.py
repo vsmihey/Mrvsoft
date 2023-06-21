@@ -149,7 +149,8 @@ class ArticlePage(BasePage):
         try:
             check_new_article = self.element_is_visible(Locators.CHECK_NEW_ARTICLE)
         except TimeoutException:
-            time.sleep(2)
+            time.sleep(3)
+            self.element_is_visible(Locators.FINISH_BUTTON).click()
             check_new_article = self.element_is_visible(Locators.CHECK_NEW_ARTICLE)
         check_new_article_value = check_new_article.text
         assert check_new_article_value == "Hello"

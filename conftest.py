@@ -22,8 +22,8 @@ def driver():
     # chrome_options.add_argument('--disable-gpu')
     # chrome_options.add_argument("--incognito") # принудительный режим инкогнито
     # chrome_options.add_argument("--user-data-dir") # выключение режима инкогнито
-    chrome_options.add_argument("--window-size=1280,800")  # в скрытом режиме запускать в полный размер
-    # chrome_options.add_argument("--window-size=1920,1080")  # в скрытом режиме запускать в полный размер
+    # chrome_options.add_argument("--window-size=1280,800")  # в скрытом режиме запускать в полный размер
+    chrome_options.add_argument("--window-size=1920,1080")  # в скрытом режиме запускать в полный размер
     # chrome_options.add_argument('--enable-javascript')
     # chrome_options.add_argument("disable-infobars")
     # chrome_options.add_argument("--disable-extensions")
