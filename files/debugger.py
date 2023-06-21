@@ -51,6 +51,13 @@ list_random = random.choices(lst, k=3)
 print(list_random)
 
 
+lst = [10, 25, 30, 45, 50 ,65, 70, 85, 90, 105]
+
+li = sorted(lst, reverse=True)
+print(li)
+
+
+
 # avatar = Path(pathlib.Path.cwd(), "media.jpeg")
 # path = str(avatar)
 #

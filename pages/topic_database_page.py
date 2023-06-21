@@ -564,19 +564,17 @@ class CreateTopicDatabase(BasePage):
         # self.element_is_visible(self.Locators.EDIT_ARTICLE).click()
         # self.element_is_visible(self.Locators.INPUT_NAME_STEP).send_keys("Edit")
 
-        time.sleep(1000)
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
         except TimeoutException:
             time.sleep(2)
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
         """go tu test tab"""
-        self.element_is_visible(self.Locators.TEXTAREA_ALERT).click()
+        # self.element_is_visible(self.Locators.TEXTAREA_ALERT).click()
+        self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys("One More" + text_alert)
 
 
         """-----------------BUG---------------------------"""
-
-
 
 
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()

@@ -6,28 +6,24 @@ import time
 from pathlib import Path
 from random import choice
 from string import ascii_uppercase
-
 from selenium.common import TimeoutException, ElementClickInterceptedException, StaleElementReferenceException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
-
-from locators.locators_checking_filter_changes import AddFilterChangesLocators
 from locators.locators_form_pages import *
-
 from pages.data_login_password import *
 
 
 # from locators.form_pages_locators import FormPagesLocators as Locators
 # from pages.data_login_password import *
 
-class BasePage:
-    def __init__(self, driver, url):
+class RepeatBasePage:
+    def __init__(self, driver):
         self.driver = driver
-        self.url = url
+        # self.url = url
 
-    def open(self):
-        self.driver.get(self.url)
+    # def open(self):
+    #     self.driver.get(self.url)
 
     def implicitly_wait(self):
         self.implicitly_wait()
@@ -48,18 +44,8 @@ class BasePage:
     def elements_is_not_visible(self, locator, timeout=10):
         return Wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
 
-    def element_is_clickable(self, locator, timeout=2):
+    def element_is_clickable(self, locator, timeout=10):
         return Wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
-
-    def check_button_click(self, element):
-        """put element is visible or is present"""
-        # Locators = AddFilterChangesLocators()
-        try:
-            element.click()
-            click = "True"
-        except ElementClickInterceptedException:
-            click = "False"
-        assert click == "False"
 
     def input_in_my_project(self, driver):
         """INPUT IN MY PROJECT"""
@@ -200,12 +186,6 @@ class BasePage:
         """вставка сгенерированного имени в поле ввода"""
         element.send_keys(name_content)
         return name_content
-
-    def data_sort(self, data):
-        """SORT LIST False сортировка по алфавиту, True - наоборот """
-        data_sort = sorted(data, reverse=False)
-        return data_sort
-
 
 
 
