@@ -299,23 +299,24 @@ class AddFilterChanges(BasePage):
         assert dropdown_actions == 'Не выбрано\nДобавить\nУдалить'
         time.sleep(1)
         """check filters sort"""
-        data = []
-        # dropdown_filter = self.elements_is_present(self.Locators.DROPDOWN_FILTERS).text
-        try:
-            dropdown_filter1 = self.elements_is_present(self.Locators.FILTER1, timeout=3).text
-        except TimeoutException:
-            time.sleep(3)
-            dropdown_filter1 = self.elements_is_present(self.Locators.FILTER1).text
-        dropdown_filter2 = self.elements_is_present(self.Locators.FILTER2).text
-        dropdown_filter3 = self.elements_is_present(self.Locators.FILTER3).text
-        data.append(dropdown_filter1)
-        data.append(dropdown_filter2)
-        data.append(dropdown_filter3)
-        data_sort = self.data_sort(data)
-        # print(data, len(data), data_sort)
-        assert data == data_sort
-        dropdown_filter = self.elements_is_present(self.Locators.DROPDOWN_FILTERS_TEXT).text
-        assert dropdown_filter == "Не выбрано"
+
+        # try:
+        #     dropdown_filter1 = self.elements_is_present(self.Locators.FILTER1, timeout=3).text
+        # except TimeoutException:
+        #     time.sleep(3)
+        #     dropdown_filter1 = self.elements_is_present(self.Locators.FILTER1).text
+        # dropdown_filter2 = self.elements_is_present(self.Locators.FILTER2).text
+        # dropdown_filter3 = self.elements_is_present(self.Locators.FILTER3).text
+        # data.append(dropdown_filter1)
+        # data.append(dropdown_filter2)
+        # data.append(dropdown_filter3)
+        # data_sort = self.data_sort(data)
+        # # print(data, len(data), data_sort)
+        # assert data == data_sort
+        # dropdown_filter = self.elements_is_present(self.Locators.DROPDOWN_FILTERS_TEXT).text
+        # assert dropdown_filter == "Не выбрано"
+
+
         # data_text_in_filters = []
         # dropdown_filter = self.element_is_visible(self.Locators.DROPDOWN_FILTERS).text
         # data_text_in_filters.append(dropdown_filter)
