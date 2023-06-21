@@ -420,7 +420,11 @@ class UnformatFilePage(BasePage):
         self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT_ALERT).send_keys(text_area_alert)
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         """check text alert"""
-        check_text_not_preview_1 = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW_1).text
+        try:
+            check_text_not_preview_1 = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW_1).text
+        except StaleElementReferenceException:
+            time.sleep(3)
+            check_text_not_preview_1 = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW_1).text
         assert check_text_not_preview_1 == "Просмотр файла недоступен"
         try:
             button_download_check_after_typography = self.element_is_visible(
