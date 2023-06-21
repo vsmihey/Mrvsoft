@@ -47,7 +47,6 @@ class TestFormPage:
         form_page = FormPage(driver, url)
         form_page.open()
         form_page.input_in_my_project(driver)
-        # driver.get_screenshot_as_file("scr.png")
         print("input project")
         form_page.all_title(driver)
 

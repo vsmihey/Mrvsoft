@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 class AddFilterChangesLocators:
 
-    SETTINGS = (By.XPATH, "(//a[@class='m-button-main-menu m-button-main-menu--no-action-type dashboard-left__module-button'][5])")
+    SETTINGS = (By.XPATH, "//a[@data-tip='Настройки']")
     FILTERS_FOR_SEARCHING = (By.CSS_SELECTOR, ".m-ui-paper.m-big-card.m-tags-button.m-ui-paper--hoverable.m-ui-paper--shadowed")
     BUTTON_CREATE_GROUP_FILTER = (By.CSS_SELECTOR, ".empty-layout__upload")
     INPUT_NAME_GROUP = (By.CSS_SELECTOR, "input[class='m-ui-text-input__input']")
