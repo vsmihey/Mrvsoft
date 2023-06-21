@@ -58,6 +58,7 @@ class ArticlePage(BasePage):
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
 
     def add_normal_article(self, driver):
+        self.input_in_my_project(driver)
         person = generated_person()
         first_name = person.first_name+str(random.randint(99, 999))
         text = "Hello"

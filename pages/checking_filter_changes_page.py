@@ -15,7 +15,6 @@ class AddFilterChanges(BasePage):
     def add_filters_changes(self, count_filters=3):
         """ADD 3 FILTERS"""
         self.input_in_my_project(self.driver)
-        self.screenshot()
         self.element_is_visible(self.Locators.SETTINGS).click()
         self.element_is_visible(self.Locators.FILTERS_FOR_SEARCHING).click()
         try:

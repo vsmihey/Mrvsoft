@@ -116,7 +116,7 @@ class TestFormPage:
     def test_add_normal_article(self, driver):
         article_page = ArticlePage(driver, url)
         article_page.open()
-        article_page.input_in_my_project(driver)
+        # article_page.input_in_my_project(driver)
         article_page.add_normal_article(driver)
 
     def test_fixing_article(self, driver):
