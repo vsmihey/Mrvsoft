@@ -37,18 +37,50 @@ class AddFilterChangesLocators:
     BUTTON_FINISH = (By.XPATH, "//p[contains(text(),'Завершить')]")
     INPUT_TEXTAREA_FIELD = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
     """script"""
-    BUTTON_TYPOGRAPHY = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
+    # BUTTON_TYPOGRAPHY = (By.XPATH, "//p[contains(text(),'опубликовать')]")
+    BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
     DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled']//select[@class='m-ui-select__select']")
     BUTTON_FINISH_CONFIRM = (By.XPATH, "//p[contains(text(),'Продолжить')]")
     """check article"""
-    DROPDOWN_ACTIONS = (By.XPATH, "(//select[@class='m-ui-select__select'])[4]")
-    DROPDOWN_FILTERS = (By.XPATH, "(//select[@class='m-ui-select__select'])[5]")
+    DROPDOWN_ACTIONS = (By.XPATH, "(//select[@class='m-ui-select__select'])[2]")
+    DROPDOWN_FILTERS = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
     DROPDOWN_FILTERS_TEXT = (By.XPATH, "(//select[@class='m-ui-select__select'])[5]//option[1]")
     BUTTON_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium']")
     BUTTON_CONTINUE = (By.CSS_SELECTOR, "button[class='m-button m-button--success m-button--medium']")
     FILTER1 = (By.CSS_SELECTOR, "option[value='403']")
     FILTER2 = (By.CSS_SELECTOR, "option[value='402']")
     FILTER3 = (By.CSS_SELECTOR, "option[value='404']")
+    """tooltips"""
+    # TOOLTIP_ACTION = (By.XPATH, "(//style[@aria-hidden='true'])[4]")
+    # TOOLTIP_ACTION = (By.XPATH, "//style[@aria-hidden='true']")
+    # TOOLTIP_ACTION = (By.XPATH, "//h4[contains(text(),'Действие')]")
+    TOOLTIP_ACTION = (By.XPATH, "//h4[contains(text(),'Действие')]//*[local-name()='svg']")
+    TOOLTIP_FILTERS = (By.XPATH, "//h4[contains(text(),'Фильтры')]//*[local-name()='svg']")
+    # TOOLTIP_ALL_LIST = (By.CSS_SELECTOR, "div[class='m-role-tooltip__toggler-icon m-role-tooltip__toggler-icon--simple m-title__icon']")
+    # TOOLTIP_ALL_LIST = (By.XPATH, "//style[@aria-hidden='true']")
+    """check click button"""
+    ACTION_CHECK_VISIBLE = (By.XPATH, "//option[@value='add']")
+    LIST_ADDED_FILTERS = (By.CSS_SELECTOR, ".massive-change__tags-item")
+    # FIRST_OF_CONTENT_FOR_CHOOSE = (By.XPATH, "//div[@class='m-selection-card massive-change__content_item'][1]")
+    GO_TO_CONTENT = (By.XPATH, "(//div[text()='Контент 1'])[2]")
+    INPUT_SEARCH_CONTENT_BY_NAME_FOR_ADD_FILTERS = (By.CSS_SELECTOR, "input[placeholder='Введите название контента']")
+    CREATED_CONTENT_FOR_FILTERS = (By.CSS_SELECTOR, ".massive-change__check-all-wrapper")
+    # FILTERS = (By.CSS_SELECTOR, ".action-button__icon")
+    FILTERS = (By.XPATH, "//div[@class='m-ui-paper tag-item button-sort__item action-button m-ui-paper--hoverable m-ui-paper--shadowed']")
+    ARTICLE_BY_FILTERS = (By.CSS_SELECTOR, ".m-ui-paper.article-preview__body.m-ui-paper--shadowed")
+    """check article"""
+    TEXT_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader']//p[contains(text(),'Hello')]")
+    VIDEO_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader']//div[@class='m-video']")
+    AUDIO_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader']//div[@class='m-audio']")
+    CHANGE_ARTICLE = (By.XPATH, "//div[text()='изменить']")
+    BUTTON_TYPOGRAPHY_ARTICLE = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    BUTTON_ARTICLE_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
+    TEXT_REQUEST_ARTICLE = (By.CSS_SELECTOR, "div[class='both-sides-alignment-card-line__left-side both-sides-alignment-card-line__left-side--bottom-text both-sides-alignment-card-line--black-label-text'] span[class='both-sides-alignment-card-line__text']")
+
+
+
+
+
 
 
 

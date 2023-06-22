@@ -51,7 +51,7 @@ class BasePage:
     def element_is_clickable(self, locator, timeout=2):
         return Wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
-    def check_button_click(self, element):
+    def check_button_not_click(self, element):
         """put element is visible or is present"""
         # Locators = AddFilterChangesLocators()
         try:
@@ -60,6 +60,7 @@ class BasePage:
         except ElementClickInterceptedException:
             click = "False"
         assert click == "False"
+        return click
 
     def input_in_my_project(self, driver):
         """INPUT IN MY PROJECT"""
