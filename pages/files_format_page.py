@@ -103,7 +103,11 @@ class FilesFormatPage(BasePage):
             self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT).send_keys(text_area_alert)
             self.element_is_visible(self.Locators.BUTTON_FINISH).click()
             """check file picture"""
-            check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
+            try:
+                check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
+            except (StaleElementReferenceException, TimeoutException):
+                time.sleep(3)
+                check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
             check_file_pictures.is_displayed()
             self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
 
