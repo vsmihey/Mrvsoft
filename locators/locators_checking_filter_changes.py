@@ -24,7 +24,7 @@ class AddFilterChangesLocators:
     BUTTON_DEL_GROUP = (By.CSS_SELECTOR, "button[class='m-button m-button--danger m-button--medium editable-items-list__action']")
     BUTTON_DEL_GROUP_CONFIRM = (By.CSS_SELECTOR, "button[class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
     """close window"""
-    SVF_CLOSE_WINDOW = (By.CSS_SELECTOR, "div[class='popup__close']")
+    SVG_CLOSE_WINDOW = (By.CSS_SELECTOR, "div[class='popup__close']")
     """mass change"""
     MEATBALL_MENU = (By.CSS_SELECTOR, "button[class='m-button-basic-wrapper m-button-basic m-button-basic--tertiary m-button-basic--medium m-button-basic-wrapper--tertiary m-button-basic-wrapper--medium m-button-basic-wrapper--square']")
     MASS_CHANGE = (By.XPATH, "//div[text()='Массовое изменение']")
@@ -76,6 +76,11 @@ class AddFilterChangesLocators:
     BUTTON_TYPOGRAPHY_ARTICLE = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
     BUTTON_ARTICLE_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
     TEXT_REQUEST_ARTICLE = (By.CSS_SELECTOR, "div[class='both-sides-alignment-card-line__left-side both-sides-alignment-card-line__left-side--bottom-text both-sides-alignment-card-line--black-label-text'] span[class='both-sides-alignment-card-line__text']")
+    SVG_DELETE_FILTER_ADDED = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__action.search-wrapper__tag-btn--delete.icon-button")
+    DROPDOWN_FILTERS_FOR_CHANGE = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed']//select[@class='m-ui-select__select']")
+    TO_GO_CONTENT = (By.CSS_SELECTOR, "section[class='m-bread-crumbs'] div[class='m-button-basic__text']")
+    CLOSE_WINDOW = (By.CSS_SELECTOR, "//div[class='popup__close']")
+
 
 
 

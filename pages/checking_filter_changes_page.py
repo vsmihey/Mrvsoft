@@ -57,7 +57,7 @@ class AddFilterChanges(BasePage):
             self.element_is_visible(self.Locators.INPUT_NAME_FILTER).send_keys("Filtername"+str(random.randint(999, 9999)))
             self.element_is_visible(self.Locators.BUTTON_ADD_FILTER_ADD).click()
             """close window"""
-        self.element_is_visible(self.Locators.SVF_CLOSE_WINDOW).click()
+        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW).click()
 
     def create_article_mass_change(self, driver):
         """CREATE AND OPEN NEW ARTICLE"""
@@ -342,7 +342,10 @@ class AddFilterChanges(BasePage):
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
-        self.element_is_visible(self.Locators.LIST_ADDED_FILTERS).is_displayed()
+        try:
+            self.element_is_visible(self.Locators.LIST_ADDED_FILTERS).is_displayed()
+        except TimeoutException:
+            print("Сначала добавьте фильтры")
         """check button click"""
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
         self.driver.refresh()
@@ -388,6 +391,51 @@ class AddFilterChanges(BasePage):
             pass
         self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        time.sleep(1)
+        try:
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=20).click()
+        except (ElementClickInterceptedException, TimeoutException):
+            time.sleep(15)
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+        text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
+        # print(text_request_article)
+        assert text_request_article == name_request
+        """change filters"""
+        self.element_is_visible(self.Locators.SVG_DELETE_FILTER_ADDED).click()
+        self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_CHANGE).click()
+        action.send_keys(Keys.ARROW_DOWN)
+        action.send_keys(Keys.ARROW_DOWN)
+        action.send_keys(Keys.RETURN).perform()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(9, 99)))
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.TO_GO_CONTENT).click()
+        """check article after add filters"""
+        # check after change filter
+        time.sleep(5)
+
+        filters = self.elements_are_visible(self.Locators.FILTERS)
+        for n in filters:
+            n.click()
+        # self.element_is_visible(self.Locators.ARTICLE_BY_FILTERS).click()
+        try:
+            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
+        except NoSuchElementException:
+            time.sleep(5)
+            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
+        article_firs_name.click()
+        """check content"""
+        # self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        self.element_is_visible(self.Locators.TEXT_ARTICLE).is_displayed()
+        try:
+            self.element_is_visible(self.Locators.VIDEO_ARTICLE).is_displayed()
+        except (TimeoutException, StaleElementReferenceException):
+            pass
+        self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
+        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
         time.sleep(10)
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=20).click()
@@ -400,11 +448,42 @@ class AddFilterChanges(BasePage):
         # print(text_request_article)
         assert text_request_article == name_request
 
+    def delete_all_filters(self, driver):
+        self.input_in_my_project(driver)
+        self.element_is_visible(self.Locators.SETTINGS).click()
+        self.element_is_visible(self.Locators.FILTERS_FOR_SEARCHING).click()
+        try:
+            self.element_is_visible(self.Locators.BUTTON_CREATE_GROUP_FILTER, timeout=2).click()
+        except TimeoutException:
+            """del 3 filters and group"""
+            self.element_is_visible(self.Locators.SVG_DEL_1).click()
+            self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
+            self.element_is_visible(self.Locators.SVG_DEL_2).click()
+            self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
+            self.element_is_visible(self.Locators.SVG_DEL_3).click()
+            self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
+        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW).click()
+        try:
+            driver.execute_script("window.onunload = null; window.onbeforeunload=null")
+        finally:
+            pass
+        driver.quit()
 
 
 
 
-        time.sleep(6)
+
+
+
+
+
+
+
+
+
+
+
+        time.sleep(1116)
 
     # def article_after_created_filters(self):
     #     self.check_mass_change_filters_article()

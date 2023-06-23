@@ -4,6 +4,9 @@ import random
 import uuid
 from itertools import count
 from pathlib import Path
+import requests
+import json
+from requests.auth import HTTPBasicAuth
 
 # home = Path.home()
 # wave_absolute = Path("files", "animal.jpeg")
@@ -46,15 +49,21 @@ print(sss)
 # print(data_unsupported, type(data_unsupported))
 
 # рандомно выбрать несколько элементов из списка
-lst = [10, 25, 30, 45, 50 ,65, 70, 85, 90, 105]
-list_random = random.choices(lst, k=3)
-print(list_random)
+# lst = [10, 25, 30, 45, 50 ,65, 70, 85, 90, 105]
+# list_random = random.choices(lst, k=3)
+# print(list_random)
+#
+#
+# lst = [10, 25, 30, 45, 50 ,65, 70, 85, 90, 105]
+#
+# li = sorted(lst, reverse=True)
+# print(li)
 
-
-lst = [10, 25, 30, 45, 50 ,65, 70, 85, 90, 105]
-
-li = sorted(lst, reverse=True)
-print(li)
+url = "https://test6.minervasoft.ru/api/space/55/folder"
+result = requests.get(url, auth=HTTPBasicAuth("m.andrey", 'e70a8e89'))
+resp = result.text
+d = json.loads(resp)
+print(d)
 
 
 
