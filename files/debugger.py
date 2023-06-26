@@ -59,11 +59,11 @@ print(sss)
 # li = sorted(lst, reverse=True)
 # print(li)
 
-url = "https://test6.minervasoft.ru/api/space/55/folder"
-result = requests.get(url, auth=HTTPBasicAuth("m.andrey", 'e70a8e89'))
-resp = result.text
-d = json.loads(resp)
-print(d)
+# url = "https://test6.minervasoft.ru/api/space/55/folder"
+# result = requests.get(url, auth=HTTPBasicAuth("m.andrey", 'e70a8e89'))
+# resp = result.text
+# d = json.loads(resp)
+# print(d)
 
 
 

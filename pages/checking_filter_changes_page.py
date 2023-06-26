@@ -5,7 +5,7 @@ import time
 from pathlib import Path
 
 from selenium.common import TimeoutException, StaleElementReferenceException, ElementClickInterceptedException, \
-    ElementNotInteractableException, NoSuchElementException
+    ElementNotInteractableException, NoSuchElementException, WebDriverException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 
@@ -296,7 +296,7 @@ class AddFilterChanges(BasePage):
         action = ActionChains(self.driver)
         try:
             self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=5).click()
-        except StaleElementReferenceException:
+        except (StaleElementReferenceException, WebDriverException):
             time.sleep(3)
             self.element_is_visible(self.Locators.MEATBALL_MENU).click()
         try:
@@ -372,7 +372,7 @@ class AddFilterChanges(BasePage):
         time.sleep(5)
         try:
             self.element_is_visible(self.Locators.FILTERS).click()
-        except StaleElementReferenceException:
+        except (StaleElementReferenceException, TimeoutException):
             time.sleep(5)
             self.element_is_visible(self.Locators.FILTERS).click()
         # self.element_is_visible(self.Locators.ARTICLE_BY_FILTERS).click()
@@ -416,7 +416,6 @@ class AddFilterChanges(BasePage):
         """check article after add filters"""
         # check after change filter
         time.sleep(5)
-
         filters = self.elements_are_visible(self.Locators.FILTERS)
         for n in filters:
             n.click()
@@ -448,6 +447,171 @@ class AddFilterChanges(BasePage):
         # print(text_request_article)
         assert text_request_article == name_request
 
+
+
+
+
+
+    def check_mass_change_filters_template(self):
+        name, name_content, name_of_templates, requests_name = self.add_article_by_template_mass_change(self.driver)
+        # self.input_in_my_project(self.driver)
+        action = ActionChains(self.driver)
+        try:
+            self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=5).click()
+        except (StaleElementReferenceException, WebDriverException):
+            time.sleep(3)
+            self.element_is_visible(self.Locators.MEATBALL_MENU).click()
+        try:
+            self.element_is_visible(self.Locators.MASS_CHANGE).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.MASS_CHANGE).click()
+        self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
+        """check dropdown"""
+        try:
+            dropdown_actions = self.element_is_visible(self.Locators.DROPDOWN_ACTIONS).text
+        except TimeoutException:
+            time.sleep(3)
+            dropdown_actions = self.element_is_visible(self.Locators.DROPDOWN_ACTIONS).text
+        assert dropdown_actions == 'Не выбрано\nДобавить\nУдалить'
+        time.sleep(1)
+        """check filters sort"""
+        dropdown_filter = self.elements_is_present(self.Locators.DROPDOWN_FILTERS)
+        dropdown_filter_value = dropdown_filter.text
+        list_split = dropdown_filter_value.split("\n")
+        del list_split[0]
+        data_sort = self.data_sort(data=list_split)
+        # print(data_sort, list_split)
+        assert data_sort == list_split
+        """check button click"""
+        element = self.element_is_visible(self.Locators.BUTTON_BACK, timeout=1)
+        self.check_button_not_click(element)
+        element = self.element_is_visible(self.Locators.BUTTON_CONTINUE, timeout=1)
+        self.check_button_not_click(element)
+        """check tooltips"""
+        tooltip_action = self.elements_is_present(self.Locators.TOOLTIP_ACTION)
+        ta = tooltip_action.get_attribute("data-tip")
+        assert ta == "Выберите действие, которое необходимо сделать с контентом"
+        tooltip_filters = self.elements_is_present(self.Locators.TOOLTIP_FILTERS)
+        tf = tooltip_filters.get_attribute("data-tip")
+        assert tf == "С помощью фильтров контент будет проще найти сокращая область поиска"
+        """---add action---"""
+        self.element_is_visible(self.Locators.DROPDOWN_ACTIONS).send_keys("Добавить")
+        """check button click"""
+        element = self.element_is_visible(self.Locators.BUTTON_CONTINUE, timeout=1)
+        self.check_button_not_click(element)
+        """---add filter---"""
+        self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+        action.send_keys(Keys.ARROW_DOWN)
+        action.send_keys(Keys.RETURN).perform()
+        try:
+            self.element_is_visible(self.Locators.LIST_ADDED_FILTERS).is_displayed()
+        except TimeoutException:
+            print("Сначала добавьте фильтры")
+        """check button click"""
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.driver.refresh()
+        self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
+        """---add filter---"""
+        self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+        action.send_keys(Keys.ARROW_DOWN)
+        action.send_keys(Keys.RETURN).perform()
+        self.element_is_visible(self.Locators.LIST_ADDED_FILTERS).is_displayed()
+        """check button click"""
+        element = self.element_is_visible(self.Locators.BUTTON_CONTINUE, timeout=1)
+        self.check_button_not_click(element)
+        """---add action---"""
+        self.element_is_visible(self.Locators.DROPDOWN_ACTIONS).send_keys("Добавить")
+        """check button click"""
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.INPUT_SEARCH_CONTENT_BY_NAME_FOR_ADD_FILTERS).send_keys(name_content)
+        time.sleep(1)
+        self.element_is_visible(self.Locators.CREATED_CONTENT_FOR_FILTERS).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        print(name, requests_name, name_of_templates, name_content)
+        """check article after add filters"""
+        time.sleep(5)
+        try:
+            self.element_is_visible(self.Locators.FILTERS).click()
+        except (StaleElementReferenceException, TimeoutException):
+            time.sleep(5)
+            self.element_is_visible(self.Locators.FILTERS).click()
+        # self.element_is_visible(self.Locators.ARTICLE_BY_FILTERS).click()
+        try:
+            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+        except NoSuchElementException:
+            time.sleep(5)
+            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+        article_firs_name.click()
+        """check content"""
+
+
+
+        # self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        self.element_is_visible(self.Locators.TEXT_ARTICLE).is_displayed()
+        try:
+            self.element_is_visible(self.Locators.VIDEO_ARTICLE).is_displayed()
+        except (TimeoutException, StaleElementReferenceException):
+            pass
+        self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
+        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        time.sleep(1)
+        try:
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=20).click()
+        except (ElementClickInterceptedException, TimeoutException):
+            time.sleep(15)
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+        text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
+        # print(text_request_article)
+        assert text_request_article == requests_name
+        """change filters"""
+        self.element_is_visible(self.Locators.SVG_DELETE_FILTER_ADDED).click()
+        self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_CHANGE).click()
+        action.send_keys(Keys.ARROW_DOWN)
+        action.send_keys(Keys.ARROW_DOWN)
+        action.send_keys(Keys.RETURN).perform()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(9, 99)))
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.TO_GO_CONTENT).click()
+        """check article after add filters"""
+        # check after change filter
+        time.sleep(5)
+        filters = self.elements_are_visible(self.Locators.FILTERS)
+        for n in filters:
+            n.click()
+        # self.element_is_visible(self.Locators.ARTICLE_BY_FILTERS).click()
+        try:
+            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+        except NoSuchElementException:
+            time.sleep(5)
+            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+        article_firs_name.click()
+        """check content"""
+        # self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        self.element_is_visible(self.Locators.TEXT_ARTICLE).is_displayed()
+        try:
+            self.element_is_visible(self.Locators.VIDEO_ARTICLE).is_displayed()
+        except (TimeoutException, StaleElementReferenceException):
+            pass
+        self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
+        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        time.sleep(10)
+        try:
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=20).click()
+        except TimeoutException:
+            time.sleep(10)
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+        text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
+        # print(text_request_article)
+        assert text_request_article == requests_name
+
     def delete_all_filters(self, driver):
         self.input_in_my_project(driver)
         self.element_is_visible(self.Locators.SETTINGS).click()
@@ -463,27 +627,10 @@ class AddFilterChanges(BasePage):
             self.element_is_visible(self.Locators.SVG_DEL_3).click()
             self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
         self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW).click()
-        try:
-            driver.execute_script("window.onunload = null; window.onbeforeunload=null")
-        finally:
-            pass
-        driver.quit()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        time.sleep(1116)
+        time.sleep(6)
 
     # def article_after_created_filters(self):
     #     self.check_mass_change_filters_article()
