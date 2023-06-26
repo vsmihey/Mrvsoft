@@ -438,6 +438,7 @@ class AddFilterChanges(BasePage):
         name, name_content, name_of_templates, requests_name = self.add_article_by_template_mass_change(self.driver)
         # self.input_in_my_project(self.driver)
         action = ActionChains(self.driver)
+        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
         try:
             self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=5).click()
         except (StaleElementReferenceException, WebDriverException):
@@ -591,10 +592,11 @@ class AddFilterChanges(BasePage):
     def check_mass_change_filters_script(self):
         name_request_script, name_script = self.add_script_mass_change()
         action = ActionChains(self.driver)
+        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
         try:
-            self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=5).click()
+            self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=10).click()
         except (StaleElementReferenceException, WebDriverException):
-            time.sleep(3)
+            time.sleep(5)
             self.element_is_visible(self.Locators.MEATBALL_MENU).click()
         try:
             self.element_is_visible(self.Locators.MASS_CHANGE).click()

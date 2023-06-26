@@ -30,7 +30,7 @@ class TestCheckingFilterChanges:
             checking_filters_changes_page.open()
             checking_filters_changes_page.check_mass_change_filters_script()
             checking_filters_changes_page.open()
-            checking_filters_changes_page.delete_all_filters(driver)
+            # checking_filters_changes_page.delete_all_filters(driver)
 
 
 
