@@ -10,6 +10,8 @@ from selenium.common import TimeoutException, ElementClickInterceptedException, 
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
+
+from generator.generator import generated_person
 from locators.locators_form_pages import *
 from pages.data_login_password import *
 
@@ -20,10 +22,10 @@ from pages.data_login_password import *
 class RepeatBasePage:
     def __init__(self, driver):
         self.driver = driver
-        # self.url = url
+        self.url = url
 
-    # def open(self):
-    #     self.driver.get(self.url)
+    def open(self):
+        self.driver.get(self.url)
 
     def implicitly_wait(self):
         self.implicitly_wait()
@@ -187,7 +189,102 @@ class RepeatBasePage:
         element.send_keys(name_content)
         return name_content
 
-
+    def create_article_by_templates_repeat(self, driver):
+        Locators = FormPagesLocators
+        actions = ActionChains(driver)
+        driver.implicitly_wait(10)
+        person = generated_person()
+        name = "Templates" + str(random.randint(999, 99999))
+        name_content = "Content" + str(random.randint(999, 99999))
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
+        except StaleElementReferenceException:
+            time.sleep(2)
+            self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
+        self.element_is_visible(Locators.CREATE_TEMPLATES).click()
+        self.element_is_visible(Locators.CREATE_TEMPLATES_NEW).click()
+        for i in range(1, 6):
+            time.sleep(1)
+            self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+            list_of_fields = driver.find_element(By.XPATH,
+                                                 f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[{i}]")
+            list_of_fields.click()
+            self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys(
+                "Name" + str(random.randint(999, 99999)))
+            self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+        list_of_fields = driver.find_element(By.XPATH,
+                                             f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[6]")
+        list_of_fields.click()
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.ANSWER).send_keys("answer 1")
+        self.element_is_visible(Locators.ADD_ANSWER).click()
+        self.element_is_visible(Locators.SAVE_BUTTON).click()
+        """step 5"""
+        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+        self.element_is_visible(Locators.LIST_OF_FIELDS_2).click()
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.CHECKBOX_VALUE).click()
+        self.element_is_visible(Locators.INPUT_VALUE).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        """step 6"""
+        self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name)
+        # print(name)
+        self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
+        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        name_of_templates = driver.find_element(By.XPATH, f"//div[contains(text(),'{name}')]")
+        name_of_templates.click()
+        self.element_is_visible(Locators.check_name_input).send_keys(name_content)
+        # print(name_content)
+        time.sleep(3)
+        self.element_is_visible(Locators.FOLDER_SAVE).send_keys("Контент 1")
+        try:
+            field_input = self.element_is_visible(Locators.EDIT_TEMPLATES)
+        except TimeoutException:
+            time.sleep(1)
+            field_input = self.element_is_visible(Locators.EDIT_TEMPLATES)
+        field_input_1 = self.element_is_visible(Locators.EDIT_TEMPLATES_1)
+        field_input_2 = self.element_is_visible(Locators.EDIT_TEMPLATES_2)
+        field_input_3 = self.element_is_visible(Locators.EDIT_TEMPLATES_3)
+        field_input_4 = self.element_is_visible(Locators.EDIT_TEMPLATES_4)
+        field_input_5 = self.element_is_visible(Locators.EDIT_TEMPLATES_5)
+        # field_input_6 = self.element_is_visible(Locators.CHOSE_ANSWER)
+        """add and check text correct link"""
+        actions.click(field_input_1)
+        actions.send_keys("some text")
+        actions.click(field_input_2)
+        actions.click(field_input_2)
+        actions.send_keys("one more some text")
+        actions.click(field_input_3)
+        actions.click(field_input_3)
+        actions.send_keys("777")
+        actions.click(field_input_4)
+        actions.click(field_input_4)
+        actions.send_keys("https://www.something.com")
+        actions.click(field_input_5)
+        actions.click(field_input_5)
+        mail = person.email
+        actions.send_keys(mail)
+        actions.click(field_input)
+        actions.perform()
+        time.sleep(1)
+        check_name_of_templates = driver.find_element(By.XPATH, f"//h1[normalize-space()='{name}']")
+        check_name_of_templates.is_displayed()
+        self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
+        time.sleep(1)
+        self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
+        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        input_request = self.element_is_visible(Locators.INPUT_REQUEST)
+        requests_name = "как помыть крота" + str(random.randint(999, 99999))
+        input_request.send_keys(requests_name)
+        self.element_is_visible(Locators.ADD_SEARCH_BUTTON).click()
+        """fixing_all_fields"""
+        self.element_is_visible(Locators.FINISH_BUTTON).click()
+        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        print(name, name_content, name_of_templates, requests_name)
+        return name, name_content, name_of_templates, requests_name
 
 
     # def element_is_visibility(self, element):

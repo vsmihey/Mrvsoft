@@ -163,6 +163,16 @@ class CreateTopicDatabaseLocators:
     DROPDOWN_STEP = (By.CSS_SELECTOR, "select[name='id']")
     BUTTON_DELETE_DRAFT = (By.XPATH, "//p[text()='Удалить черновик']")
 
+    INPUT_NAME_REQUEST = (By.CSS_SELECTOR, "input[placeholder='Введите запрос']")
+    BUTTON_ADD = (By.XPATH, "//p[contains(text(),'Добавить')]")
+    RADIOBUTTON_INCLUDED_CONTENT = (By.XPATH, "//span[contains(text(),'Содержимое контента')]")
+    BUTTON_FINISH_1 = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    INPUT_TEXTAREA_FIELD = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
+    GO_TO_CONTENT = (By.XPATH, "(//div[text()='Контент 1'])[2]")
+
+    BUTTON_FINISH_CONFIRM = (By.XPATH, "//p[contains(text(),'Продолжить')]")
+
+
 
 
 

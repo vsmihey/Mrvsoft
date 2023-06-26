@@ -9,6 +9,7 @@ from selenium.common import TimeoutException, StaleElementReferenceException, El
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 
+from conftest import driver
 from generator.generator import generated_person
 from locators.locators_checking_filter_changes import AddFilterChangesLocators
 from locators.locators_form_pages import FormPagesLocators
@@ -38,13 +39,6 @@ class AddFilterChanges(BasePage):
             self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
             self.element_is_visible(self.Locators.SVG_DEL_3).click()
             self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
-            # time.sleep(1)
-            # svg_del_list = self.elements_are_visible(self.Locators.SVG_DEL_LIST)
-            # for n in svg_del_list:
-            #     time.sleep(1)
-            #     n.click()
-            #     time.sleep(1)
-            #     self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
             self.element_is_visible(self.Locators.CHANGE_NAME_GROUP).click()
             self.element_is_visible(self.Locators.BUTTON_DEL_GROUP).click()
             self.element_is_visible(self.Locators.BUTTON_DEL_GROUP_CONFIRM).click()
@@ -761,12 +755,6 @@ class AddFilterChanges(BasePage):
             self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
         self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW).click()
 
-
-
-        time.sleep(6)
-
-    # def article_after_created_filters(self):
-    #     self.check_mass_change_filters_article()
 
 
 
