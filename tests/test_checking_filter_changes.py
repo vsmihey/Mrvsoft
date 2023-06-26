@@ -25,6 +25,11 @@ class TestCheckingFilterChanges:
             checking_filters_changes_page.open()
             checking_filters_changes_page.check_mass_change_filters_template()
 
+        def test_check_mass_change_filters_script(self, driver):
+            checking_filters_changes_page = AddFilterChanges(driver, url)
+            checking_filters_changes_page.open()
+            checking_filters_changes_page.check_mass_change_filters_template()
+
 
 
 

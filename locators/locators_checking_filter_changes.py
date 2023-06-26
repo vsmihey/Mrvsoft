@@ -80,6 +80,15 @@ class AddFilterChangesLocators:
     DROPDOWN_FILTERS_FOR_CHANGE = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed']//select[@class='m-ui-select__select']")
     TO_GO_CONTENT = (By.CSS_SELECTOR, "section[class='m-bread-crumbs'] div[class='m-button-basic__text']")
     CLOSE_WINDOW = (By.CSS_SELECTOR, "//div[class='popup__close']")
+    """check template"""
+    FIELD_TEXT = (By.XPATH, "(//p[contains(text(),'some text')])[1]")
+    FIELD_TEXT_2 = (By.XPATH, "//section[@class='m-article-editor-templated article-modal__content article-modal--unique-class']//pre[@class='m-article-editor-templated__field-value'][normalize-space()='one more some text']")
+    FIELD_TEXT_777 = (By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'][normalize-space()='777'])[1]")
+    FIELD_TEXT_WEBSITE = (By.XPATH, "(//a[@href='https://www.something.com'])[1]")
+    FIELD_TEXT_MAIL = (By.XPATH, "(//a[@class='m-article-editor-templated__field-value m-article-editor-templated__field-value--link'])[2]")
+    FIELD_TEXT_NAME = (By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'])[3]")
+
+
 
 
 
