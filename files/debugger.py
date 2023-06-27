@@ -55,7 +55,8 @@ print(sss)
 #
 #
 # lst = [10, 25, 30, 45, 50 ,65, 70, 85, 90, 105]
-#
+# lst.reverse()
+# print(lst)
 # li = sorted(lst, reverse=True)
 # print(li)
 

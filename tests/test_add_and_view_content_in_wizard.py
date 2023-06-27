@@ -12,7 +12,10 @@ class TestAddViewContentWizard:
     def test_add_view_article(self, driver):
         add_view_content_page = AddViewContentWizard(driver, url)
         add_view_content_page.open()
-        add_view_content_page.check_article()
+        add_view_content_page.check_article(driver)
+        # add_view_content_page.open()
+
+
 
 
 

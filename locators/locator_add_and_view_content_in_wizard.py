@@ -22,11 +22,77 @@ class AddViewContentWizardLocators:
     TEXT_LINK_TO_CONTENT = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__bottom-text")
     """search"""
     SEARCH = (By.XPATH, "//div[text()='Поиск']")
+    INPUT_SEARCH = (By.XPATH, "//input[@placeholder='Поиск по истории']")
     INPUT_SEARCH_NAME = (By.XPATH, "//input[@placeholder='Поиск контента']")
     CHECK_SEARCH_RESULT = (By.XPATH, "//p[@class='article-preview__title title-element']")
     TEXT_FIXING_BY_EXPERT = (By.XPATH, "//p[text()='Закреплено экспертом']")
     CHANGE_FIXING_CONTENT = (By.XPATH, "//span[contains(text(),'изменить')]")
     INPUT_FIELD_NAME_REQUEST = (By.XPATH, "(//input[@placeholder='Введите запрос'])[1]")
+    SVG_CLOSE_WINDOWS_CHECK = (By.XPATH, "(//div[@role='presentation'])[2]")
+    """create more requests"""
+    HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    CHANGE_ARTICLE = (By.XPATH, "//div[contains(text(),'изменить')]")
+    BUTTON_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
+    TO_GET_NAME_ADDED_REQUEST = (By.CSS_SELECTOR, ".m-content-fix-wizard__content-wrapper")
+    INPUT_TEXT_ALERT_NAME = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
+    """check added request"""
+    LIST_ADDED_REQUEST = (By.CSS_SELECTOR, "span[class='both-sides-alignment-card-line__text']")
+    BUTTON_CONTINUE_DRAFT = (By.XPATH, "//p[text()='Продолжить']")
+    SVG_CLOSE_WINDOW_REQUEST = (By.CSS_SELECTOR, "div[class='popup__close']")
+    SVG_CLOSE_WINDOW_ARTICLE = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg path")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    TO_GET_NAME_REQUEST = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__text")
+    BUTTON_ADD_REQUEST = (By.CSS_SELECTOR, "div[class='search-wrapper__form-field'] button[type='button']")
+
+
+
 
 
 

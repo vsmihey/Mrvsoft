@@ -2,7 +2,6 @@ import os
 import pathlib
 import random
 from pathlib import Path
-
 from data.data import Person
 from faker import Faker
 faker_en = Faker('En')
@@ -17,7 +16,6 @@ def generated_person():
         mobile=faker_en.msisdn(),
         subject='English'
     )
-
 
 def generated_big_file():
     """created bigfile"""

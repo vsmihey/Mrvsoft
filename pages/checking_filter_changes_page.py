@@ -269,7 +269,7 @@ class AddFilterChanges(BasePage):
         try:
             self.element_is_visible(Locators.INPUT_SELECTED).click()
         except ElementClickInterceptedException:
-            time.sleep(2)
+            time.sleep(5)
             self.element_is_visible(Locators.INPUT_SELECTED).click()
         button_typography = self.elements_is_present(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
         action.click(button_typography).perform()
