@@ -19,3 +19,13 @@ article_url = "news/space/75?popup=article-editor&chosenSpaceId=75&articleId=new
 name_project ='selen'
 name_ = 'Весь контент'
 
+
+text_ru = "С другой стороны курс на социально-ориентированный национальный проект обеспечивает актуальность " \
+          "дальнейших направлений развитая системы массового участия. Соображения высшего порядка, а также " \
+          "дальнейшее развитие различных форм деятельности в значительной степени обуславливает создание " \
+          "существующих финансовых и административных условий?"
+
+text_en = "A lot of the central bank news is priced into equities and investors are now taking a step back" \
+          " to evaluate why central banks have turned more dovish, said David Holohan, a strategist at Mediolanum" \
+          " Asset Management in Dublin."
+

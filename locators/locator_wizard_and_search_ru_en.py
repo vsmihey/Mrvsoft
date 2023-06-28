@@ -54,6 +54,17 @@ class AddViewContentWizardLocators:
     CLOSE_WINDOW_FILES = (By.CSS_SELECTOR, ".article-editor-container-document__close-button-wrapper svg path")
 
 
+class SearchRuEnLocators:
+    SVG_CLOSE_WINDOW_ARTICLE_RU_EN = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close'])[1]")
+    BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    """del article created"""
+    MEATBALL_ARTICLE = (By.CSS_SELECTOR, ".popuper__wrapper")
+    SVG_DEL = (By.XPATH, "//p[contains(text(),'Удалить')]")
+    INPUT_ALERT_FOR_DEL = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
+    BUTTON_EXECUTE = (By.CSS_SELECTOR, "button[class='m-button m-button--success m-button--medium wizard-wrapper__action']")
+    LIST_ARTICLE_FOR_DEL = (By.XPATH, "//div[contains(text(),'text_alert')]")
+
 
 
 

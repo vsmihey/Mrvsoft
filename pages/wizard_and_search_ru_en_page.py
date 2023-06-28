@@ -10,12 +10,12 @@ from selenium.webdriver.common.by import By
 
 from conftest import driver
 from generator.generator import generated_person
-from locators.locator_add_and_view_content_in_wizard import AddViewContentWizardLocators
+from locators.locator_wizard_and_search_ru_en import AddViewContentWizardLocators, SearchRuEnLocators
 from locators.locators_topic_database import CreateTopicDatabaseLocators
 from pages import checking_filter_changes_page
 from pages.base_page import BasePage
 from pages.checking_filter_changes_page import AddFilterChanges
-from pages.data_login_password import url
+from pages.data_login_password import url, text_ru, text_en
 from pages.repeat_function import RepeatFunction
 
 
@@ -468,11 +468,111 @@ class AddViewContentWizard(BasePage):
         assert text_fixing_by_expert == "Закреплено экспертом"
 
 
+class SearchRuEn(BasePage):
+
+    Locators = SearchRuEnLocators()
+
+    def create_article_ru(self):
+        self.input_in_my_project(self.driver)
+        Locators = CreateTopicDatabaseLocators
+        # person = generated_person()
+        first_name_ru = "Статья " + str(random.randint(999, 9999))
+        text_article_ru = text_ru
+        """upload media"""
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON, timeout=5).click()
+        except (StaleElementReferenceException, TimeoutException):
+            time.sleep(3)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        """input name and text an folder direct"""
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(first_name_ru)
+        try:
+            self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE, timeout=2).send_keys("Контент 1")
+        except ElementNotInteractableException:
+            time.sleep(2)
+            self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+        try:
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE, timeout=3).send_keys(text_article_ru)
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_article_ru)
+        list_split_ru = text_article_ru.split()
+        self.element_is_visible(Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(Locators.INPUT_TEXTAREA_FIELD).send_keys("text_alert")
+        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_ARTICLE_RU_EN).click()
+        self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
+        return first_name_ru, text_article_ru, list_split_ru
+
+    def create_article_en(self):
+        self.input_in_my_project(self.driver)
+        Locators = CreateTopicDatabaseLocators
+        # person = generated_person()
+        first_name_en = "Article " + str(random.randint(999, 9999))
+        text_article_en = text_en
+        """upload media"""
+        try:
+            self.element_is_visible(Locators.CREATE_BUTTON, timeout=5).click()
+        except (StaleElementReferenceException, TimeoutException):
+            time.sleep(3)
+            self.element_is_visible(Locators.CREATE_BUTTON).click()
+        self.element_is_visible(Locators.CREATE_ARTICLE).click()
+        """input name and text an folder direct"""
+        self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(first_name_en)
+        try:
+            self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE, timeout=2).send_keys("Контент 1")
+        except ElementNotInteractableException:
+            time.sleep(2)
+            self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+        try:
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE, timeout=3).send_keys(text_article_en)
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text_article_en)
+        list_split_en = text_article_en.split()
+        self.element_is_visible(Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(Locators.INPUT_TEXTAREA_FIELD).send_keys("text_alert")
+        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_ARTICLE_RU_EN).click()
+        self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
+        return first_name_en, text_article_en, list_split_en
+
+    # def del_article_ru_en(self, driver):
+    #     """del articles ru and en"""
+    #     driver.implicitly_wait(3)
+    #     self.input_in_my_project(driver)
+    #     self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
+    #     list_article_for_del = self.elements_are_present(self.Locators.LIST_ARTICLE_FOR_DEL)
+    #     for n in list_article_for_del:
+    #         try:
+    #             n.click()
+    #         except StaleElementReferenceException:
+    #             time.sleep(2)
+    #             n.click()
+    #         self.element_is_visible(self.Locators.MEATBALL_ARTICLE).click()
+    #         self.element_is_visible(self.Locators.SVG_DEL).click()
+    #         self.element_is_visible(self.Locators.INPUT_ALERT_FOR_DEL).send_keys("Alert - delete")
+    #         self.element_is_visible(self.Locators.BUTTON_EXECUTE).click()
+
+    # def ddd(self, driver):
+    #     first_name_ru = self.create_article_ru()
+    #     self.del_article_ru_en(driver, name=first_name_ru)
 
 
 
 
-        time.sleep(6)
+
+
+
+
+
 
 
 
