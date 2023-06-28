@@ -235,7 +235,7 @@ class BasePage:
             time.sleep(2)
             self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
         try:
-            self.element_is_visible(Locators.TEXT_AREA_ARTICLE, timeout=2).send_keys(text)
+            self.element_is_visible(Locators.TEXT_AREA_ARTICLE, timeout=3).send_keys(text)
         except TimeoutException:
             time.sleep(5)
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text)
@@ -386,7 +386,7 @@ class BasePage:
         # self.input_in_my_project(self.driver)
         action = ActionChains(self.driver)
         Locators = CreateTopicDatabaseLocators
-        name_request_script = "request-scrpt " + str(random.randint(999, 9999))
+        name_request_script = "request_script " + str(random.randint(999, 9999))
         name_script = "NAME_SCRIPT-" + str(random.randint(99, 999))
         try:
             self.element_is_visible(Locators.CREATE_BUTTON).click()
@@ -395,8 +395,7 @@ class BasePage:
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_SCRIPT).click()
         self.element_is_visible(Locators.NAME_OF_STEP_SCRIPT).send_keys(name_script)
-        time.sleep(1)
-        self.element_is_visible(Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        self.element_is_visible(Locators.DIRECT_FOLDER_NAME).send_keys("Контент 1")
         self.element_is_visible(Locators.ADD_STEP).click()
         self.element_is_visible(Locators.INPUT_NAME_STEP).send_keys("name_step-" + str(random.randint(99, 999)))
         self.element_is_visible(Locators.DROPDOWN_STEP).send_keys("Сценарий завершён")
@@ -449,6 +448,7 @@ class BasePage:
         Locators = FilesFormatPageLocators()
         person = generated_person()
         text_area_alert = person.first_name + "-Alert"
+        name_script = person.first_name + str(random.randint(999, 9999))
         time.sleep(2)
         try:
             self.element_is_visible(Locators.CREATE_BUTTON).click()
@@ -457,6 +457,7 @@ class BasePage:
             time.sleep(5)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.BUTTON_FILE).click()
+        self.element_is_visible(Locators.INPUT_NAME_FILE).send_keys(name_script)
         time.sleep(1)
         self.element_is_visible(Locators.DIRECT_FOLDER).send_keys("Контент 1")
         """del hidden class input file"""
@@ -484,7 +485,7 @@ class BasePage:
         # self.element_is_visible(Locators.TEXTAREA_INPUT_TEXT).send_keys(text_area_alert)
         # self.element_is_visible(Locators.BUTTON_FINISH).click()
         # self.element_is_visible(Locators.SVG_CLOSE_ARTICLE).click()
-
+        return name_script
 
     # def element_is_visibility(self, element):
     #     element = driver.find_element_by_css_selector("input")

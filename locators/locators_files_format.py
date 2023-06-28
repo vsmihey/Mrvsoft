@@ -38,6 +38,8 @@ class FilesFormatPageLocators:
     JPEG_FILE_CREATED = (By.XPATH, "(//h3[text()='media.jpg'])[1]")
     DELETE_DRAFT = (By.XPATH, "//p[contains(text(),'Удалить черновик')]")
     TEXT_FILE_DOWNLOADS = (By.XPATH, "//h2[contains(text(),'Файл загружается')]")
+    INPUT_NAME_FILE = (By.CSS_SELECTOR, "input[placeholder='Введите название']")
+
 
 class UnformatFilePageLocators:
     """check add unformat files"""

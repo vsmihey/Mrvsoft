@@ -13,7 +13,22 @@ class TestAddViewContentWizard:
         add_view_content_page = AddViewContentWizard(driver, url)
         add_view_content_page.open()
         add_view_content_page.check_article(driver)
-        # add_view_content_page.open()
+
+    def test_add_view_template(self, driver):
+        add_view_content_page = AddViewContentWizard(driver, url)
+        add_view_content_page.open()
+        add_view_content_page.check_template(driver)
+
+    def test_add_view_script(self, driver):
+        add_view_content_page = AddViewContentWizard(driver, url)
+        add_view_content_page.open()
+        add_view_content_page.check_script(driver)
+
+    def test_add_view_files(self, driver):
+        add_view_content_page = AddViewContentWizard(driver, url)
+        add_view_content_page.open()
+        add_view_content_page.check_files(driver)
+
 
 
 

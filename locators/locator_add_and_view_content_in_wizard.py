@@ -40,6 +40,27 @@ class AddViewContentWizardLocators:
     BUTTON_CONTINUE_DRAFT = (By.XPATH, "//p[text()='Продолжить']")
     SVG_CLOSE_WINDOW_REQUEST = (By.CSS_SELECTOR, "div[class='popup__close']")
     SVG_CLOSE_WINDOW_ARTICLE = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg path")
+    """check template"""
+    TYPOGRAPHY_TEMPLATE = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
+    SUBMIT_TEMPLATES = (By.XPATH, "//button[@type='submit']")
+    INPUT_REQUEST = (By.XPATH, "//input[@placeholder='Введите запрос']")
+    SVG_CLOSE_WINDOW_ARTICLE_BY_TEMPLATE = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg")
+    """check script"""
+    BUTTON_TYPOGRAPHY_SCRIPT = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
+    SVG_CLOSE_WINDOW_EDIT_SCRIPT = (By.CSS_SELECTOR, "section[class='m-scenario-flow__editor-actions'] svg path")
+    """check files"""
+    FILES_NAME = (By.CSS_SELECTOR, ".m-content-fix-wizard__article-name")
+    INPUT_NAME_FILE = (By.CSS_SELECTOR, "input[placeholder='Введите название']")
+    CLOSE_WINDOW_FILES = (By.CSS_SELECTOR, ".article-editor-container-document__close-button-wrapper svg path")
+
+
+
+
+
+
+
+
+
 
 
 
