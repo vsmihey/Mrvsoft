@@ -481,7 +481,11 @@ class ArticlePage(BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         time.sleep(1)
-        field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
+        try:
+            field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
+        except TimeoutException:
+            time.sleep(3)
+            field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
         field5 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR_1)
         field6 = driver.find_element(By.XPATH, f"//pre[text()='{mail}']")
         for_click = self.element_is_visible(Locators.FOR_CLICK)
@@ -546,7 +550,7 @@ class ArticlePage(BasePage):
         self.element_is_visible(Locators.INCLUDED_CONTENT_RADIO).click()
         select_field_for_fixing = self.element_is_visible(Locators.SELECT_FIELD_FOR_FIXING)
         for i in range(6):
-            time.sleep(0.5)
+            time.sleep(1)
             select_field_for_fixing.click()
             select_field_for_fixing.send_keys(Keys.DOWN)
             select_field_for_fixing.send_keys(Keys.RETURN)
