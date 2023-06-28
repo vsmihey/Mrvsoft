@@ -394,7 +394,7 @@ class ArticlePage(BasePage):
         # print(check_version_text_value)
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         input_request = self.element_is_visible(Locators.INPUT_REQUEST)
-        requests_name = "как помыть крота" + str(random.randint(999, 99999))
+        requests_name = "request " + str(random.randint(999, 99999))
         input_request.send_keys(requests_name)
         self.element_is_visible(Locators.ADD_SEARCH_BUTTON).click()
         self.element_is_visible(Locators.FIELD_OF_CONTENT_RADIO).click()
@@ -412,16 +412,13 @@ class ArticlePage(BasePage):
         check_utility_text = self.element_is_visible(Locators.UTILITY_TEMPLATE)
         check_utility_text_value = check_utility_text.text
         assert check_utility_text_value == "полезен"
-        # print(check_utility_text_value)
         check_utility_text = self.element_is_visible(Locators.NO_UTILITY_TEMPLATE)
         check_utility_text_value = check_utility_text.text
         assert check_utility_text_value == "не полезен"
-        # print(check_utility_text_value)
         check_name_of_templates_text = driver.find_element(By.XPATH,
                                                            f"//header[@id='article-content-modal-header']//span[contains(text(),'{name_content}')]")
         check_name_of_templates_text_value = check_name_of_templates_text.text
         assert check_name_of_templates_text_value == name_content
-        # print(check_name_of_templates_text_value)
         """CHECK_FIXING_TEMPLATES"""
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
         # time.sleep(1)
@@ -435,13 +432,10 @@ class ArticlePage(BasePage):
         name_of_templates_in_list.click()
         # time.sleep(1)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        # self.element_is_visible(Locators.EDIT_ARTICLE).click()
         actions = ActionChains(driver)
         field = self.element_is_visible(Locators.EDIT_TEMPLATES_1)
         field1 = self.element_is_visible(Locators.NUMBER_FIELD_FOR_CLEAR)
         field2 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR)
-        # field_answer = self.element_is_visible(Locators.ANSWER_1)
-        # delete_answer = self.element_is_visible(Locators.DELETE_ANSWER)
         actions.click(field)
         for n in range(1, 10):
             actions.send_keys(Keys.BACKSPACE)
@@ -486,21 +480,12 @@ class ArticlePage(BasePage):
         name_of_content.click()
         time.sleep(1)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        # self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        #
         time.sleep(1)
-        # try:
         field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
-        # except TimeoutException:
-        #     time.sleep(1)
-        #     field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
         field5 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR_1)
         field6 = driver.find_element(By.XPATH, f"//pre[text()='{mail}']")
         for_click = self.element_is_visible(Locators.FOR_CLICK)
         actions.click(field4)
-        # actions.move_by_offset(0, 0)
-        # actions.click()
-        # actions.perform()
         for n in range(1, 20):
             actions.send_keys(Keys.BACKSPACE)
         actions.click(field5)
@@ -531,17 +516,14 @@ class ArticlePage(BasePage):
         search_of_contents.send_keys(requests_name)
         search_of_contents.send_keys(Keys.RETURN)
         time.sleep(1)
-        # check_name_of_content = self.element_is_visible(Locators.CHECK_NAME_OF_CONTENT)
         check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         check_name_of_content_value = check_name_of_content.text
         assert check_name_of_content_value == name_content, "name content is not correct"
         time.sleep(1)
-        # name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         name_of_content = driver.find_element(By.XPATH, "//section[@class='article-preview__header']")
         name_of_content.click()
         time.sleep(1)
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        # self.element_is_visible(Locators.EDIT_ARTICLE).click()
         time.sleep(3)
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         time.sleep(1)
@@ -549,7 +531,6 @@ class ArticlePage(BasePage):
         text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
         text_check_link_of_content_value = text_check_link_of_content.text
         assert text_check_link_of_content_value == 'Ссылка на контент', "не закреплена как ссылка на контент"
-        # print(text_check_link_of_content_value)
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
@@ -611,7 +592,6 @@ class ArticlePage(BasePage):
         name_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         name_content.click()
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
-        # actions.click(edit_article).perform()
         self.element_is_visible(Locators.CHANGE_TEMPLATES).click()
         self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON_1).click()
         self.element_is_visible(Locators.LINK_FOR_DEL).click()
@@ -633,7 +613,13 @@ class ArticlePage(BasePage):
         search_of_contents = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
         search_of_contents.send_keys(requests_name)
         search_of_contents.send_keys(Keys.RETURN)
-        check_fixing_content_text = self.element_is_visible(Locators.CHECK_FIXING_CONTENT_TEXT)
+        print(requests_name, name_content, name)
+        time.sleep(1)
+        try:
+            check_fixing_content_text = self.element_is_visible(Locators.CHECK_FIXING_CONTENT_TEXT)
+        except TimeoutException:
+            time.sleep(3)
+            check_fixing_content_text = self.element_is_visible(Locators.CHECK_FIXING_CONTENT_TEXT)
         check_fixing_content_text_value = check_fixing_content_text.text
         assert check_fixing_content_text_value == 'В этой папке пока нет контента, но Вы можете это изменить.'
 
