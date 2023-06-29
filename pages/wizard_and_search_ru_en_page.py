@@ -473,7 +473,9 @@ class SearchRuEn(BasePage):
     Locators = SearchRuEnLocators()
 
     def create_article_ru(self):
+        """CREATE ARTICLE RU"""
         self.input_in_my_project(self.driver)
+        actions = ActionChains(self.driver)
         Locators = CreateTopicDatabaseLocators
         # person = generated_person()
         first_name_ru = "Статья " + str(random.randint(999, 9999))
@@ -505,11 +507,55 @@ class SearchRuEn(BasePage):
         self.element_is_visible(Locators.INPUT_TEXTAREA_FIELD).send_keys("text_alert")
         self.element_is_visible(Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_ARTICLE_RU_EN).click()
-        self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
+        # self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
+        """check article ru"""
+        # 1 test
+        search_request = "Соображения dscituj"
+        search = self.element_is_visible(self.Locators.SEARCH)
+        actions.click(search)
+        actions.send_keys(search_request)
+        actions.send_keys(Keys.RETURN)
+        actions.perform()
+        list_article_ru = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_RU_FIRST)
+        for n in list_article_ru:
+            # time.sleep(1)
+            t = n.text
+            # print(t)
+            assert t == "Соображения"
+        # 2 test
+        search_request_new = "Cjj,hf;tybz высшего"
+        self.element_is_visible(self.Locators.SEARCH).click()
+        search = self.element_is_visible(self.Locators.SEARCH)
+        actions.click(search)
+        actions.send_keys(search_request_new)
+        actions.send_keys(Keys.RETURN)
+        actions.perform()
+        list_article_ru = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_EN_SECOND)
+        for n in list_article_ru:
+            # time.sleep(1)
+            t = n.text
+            # print(t)
+            assert t == "высшего"
+        # 3 test check inversion
+        search_request_new = "Cjj,hf;tybz dscituj"
+        self.element_is_visible(self.Locators.SEARCH).click()
+        search = self.element_is_visible(self.Locators.SEARCH)
+        actions.click(search)
+        actions.send_keys(search_request_new)
+        actions.send_keys(Keys.RETURN)
+        actions.perform()
+        list_article_ru = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_INVERSION)
+        for n in list_article_ru:
+            # time.sleep(1)
+            t = n.text
+            # print(t)
+            assert t == "Соображения высшего"
         return first_name_ru, text_article_ru, list_split_ru
 
     def create_article_en(self):
+        """CREATE ARTICLE EN"""
         self.input_in_my_project(self.driver)
+        actions = ActionChains(self.driver)
         Locators = CreateTopicDatabaseLocators
         # person = generated_person()
         first_name_en = "Article " + str(random.randint(999, 9999))
@@ -541,29 +587,58 @@ class SearchRuEn(BasePage):
         self.element_is_visible(Locators.INPUT_TEXTAREA_FIELD).send_keys("text_alert")
         self.element_is_visible(Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_ARTICLE_RU_EN).click()
-        self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
+        # self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
+        """check article en"""
+        # 1 test
+        search_request = "said вщмшыр"
+        search = self.element_is_visible(self.Locators.SEARCH)
+        actions.click(search)
+        actions.send_keys(search_request)
+        actions.send_keys(Keys.RETURN)
+        actions.perform()
+        list_article_en = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_EN_FIRST_EN)
+        for n in list_article_en:
+            # time.sleep(1)
+            t = n.text
+            # print(t)
+            assert t == "said"
+        # 2 test
+        search_request_new = "ыфшв dovish"
+        self.element_is_visible(self.Locators.SEARCH).click()
+        search = self.element_is_visible(self.Locators.SEARCH)
+        actions.click(search)
+        actions.send_keys(search_request_new)
+        actions.send_keys(Keys.RETURN)
+        actions.perform()
+        list_article_en = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_EN_SECOND_EN)
+        for n in list_article_en:
+            # time.sleep(1)
+            t = n.text
+            # print(t)
+            assert t == "dovish"
+        # 3 test check inversion
+        search_request_new = "ьщку вщмшыр"
+        self.element_is_visible(self.Locators.SEARCH).click()
+        search = self.element_is_visible(self.Locators.SEARCH)
+        actions.click(search)
+        actions.send_keys(search_request_new)
+        actions.send_keys(Keys.RETURN)
+        actions.perform()
+        list_article_en = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_EN_INVERSION_EN)
+        for n in list_article_en:
+            # time.sleep(1)
+            t = n.text
+            # print(t)
+            assert t == "more dovish"
+
         return first_name_en, text_article_en, list_split_en
 
-    # def del_article_ru_en(self, driver):
-    #     """del articles ru and en"""
-    #     driver.implicitly_wait(3)
-    #     self.input_in_my_project(driver)
-    #     self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
-    #     list_article_for_del = self.elements_are_present(self.Locators.LIST_ARTICLE_FOR_DEL)
-    #     for n in list_article_for_del:
-    #         try:
-    #             n.click()
-    #         except StaleElementReferenceException:
-    #             time.sleep(2)
-    #             n.click()
-    #         self.element_is_visible(self.Locators.MEATBALL_ARTICLE).click()
-    #         self.element_is_visible(self.Locators.SVG_DEL).click()
-    #         self.element_is_visible(self.Locators.INPUT_ALERT_FOR_DEL).send_keys("Alert - delete")
-    #         self.element_is_visible(self.Locators.BUTTON_EXECUTE).click()
 
     # def ddd(self, driver):
     #     first_name_ru = self.create_article_ru()
     #     self.del_article_ru_en(driver, name=first_name_ru)
+
+
 
 
 

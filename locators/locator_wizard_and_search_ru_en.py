@@ -64,6 +64,15 @@ class SearchRuEnLocators:
     INPUT_ALERT_FOR_DEL = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
     BUTTON_EXECUTE = (By.CSS_SELECTOR, "button[class='m-button m-button--success m-button--medium wizard-wrapper__action']")
     LIST_ARTICLE_FOR_DEL = (By.XPATH, "//div[contains(text(),'text_alert')]")
+    """check search"""
+    SEARCH = (By.XPATH, "//div[text()='Поиск']")
+    LIST_RESULT_SEARCH_RU_FIRST = (By.XPATH, "//span[contains(text(),'Соображения')]")
+    LIST_RESULT_SEARCH_EN_SECOND = (By.XPATH, "//span[contains(text(),'высшего')]")
+    LIST_RESULT_SEARCH_INVERSION = (By.XPATH, "//span[contains(text(),'Соображения высшего')]")
+    LIST_RESULT_SEARCH_EN_FIRST_EN = (By.XPATH, "//span[contains(text(),'said')]")
+    LIST_RESULT_SEARCH_EN_SECOND_EN = (By.XPATH, "//span[contains(text(),'dovish')]")
+    LIST_RESULT_SEARCH_EN_INVERSION_EN = (By.XPATH, "//span[contains(text(),'more dovish')]")
+
 
 
 

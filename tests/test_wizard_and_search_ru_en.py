@@ -32,10 +32,15 @@ class TestWizardAndSearchRuEen:
 
     class TestSearchRuEn:
 
-        def test_create_article_ru(self, driver):
+        def test_check_search_article_ru(self, driver):
             add_view_content_page = SearchRuEn(driver, url)
             add_view_content_page.open()
             add_view_content_page.create_article_ru()
+
+        def test_check_search_article_en(self, driver):
+            add_view_content_page = SearchRuEn(driver, url)
+            add_view_content_page.open()
+            add_view_content_page.create_article_en()
 
 
 
