@@ -412,8 +412,14 @@ class AddViewContentWizard(BasePage):
         time.sleep(3)
         search_by_name = driver.find_element(By.XPATH, f'//h3[normalize-space()="{name_script}"]')
         search_by_name.click()
+        time.sleep(1)
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
-        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
+        try:
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT, timeout=2).click()
+        except TimeoutException:
+            time.sleep(2)
+            self.element_is_visible(self.Locators.BUTTON_CONTINUE_DRAFT).click()
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
         self.element_is_visible(self.Locators.BUTTON_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_BACK).click()
         data_request = self.add_more_requests()
@@ -550,6 +556,20 @@ class SearchRuEn(BasePage):
             t = n.text
             # print(t)
             assert t == "Соображения высшего"
+        # 4 test check search inversion -minus
+        search_request_new = "Cjj,hf;tybz -высшего"
+        self.element_is_visible(self.Locators.SEARCH).click()
+        search = self.element_is_visible(self.Locators.SEARCH)
+        actions.click(search)
+        actions.send_keys(search_request_new)
+        actions.send_keys(Keys.RETURN)
+        actions.perform()
+        list_article_ru = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_RU_FIRST)
+        for n in list_article_ru:
+            # time.sleep(1)
+            t = n.text
+            # print(t)
+            assert t == "Соображения"
         return first_name_ru, text_article_ru, list_split_ru
 
     def create_article_en(self):
@@ -630,13 +650,8 @@ class SearchRuEn(BasePage):
             t = n.text
             # print(t)
             assert t == "more dovish"
-
         return first_name_en, text_article_en, list_split_en
 
-
-    # def ddd(self, driver):
-    #     first_name_ru = self.create_article_ru()
-    #     self.del_article_ru_en(driver, name=first_name_ru)
 
 
 

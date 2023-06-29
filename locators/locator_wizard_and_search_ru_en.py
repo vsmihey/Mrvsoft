@@ -36,6 +36,8 @@ class AddViewContentWizardLocators:
     TO_GET_NAME_ADDED_REQUEST = (By.CSS_SELECTOR, ".m-content-fix-wizard__content-wrapper")
     INPUT_TEXT_ALERT_NAME = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
     """check added request"""
+    TO_GET_NAME_REQUEST = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__text")
+    BUTTON_ADD_REQUEST = (By.CSS_SELECTOR, "div[class='search-wrapper__form-field'] button[type='button']")
     LIST_ADDED_REQUEST = (By.CSS_SELECTOR, "span[class='both-sides-alignment-card-line__text']")
     BUTTON_CONTINUE_DRAFT = (By.XPATH, "//p[text()='Продолжить']")
     SVG_CLOSE_WINDOW_REQUEST = (By.CSS_SELECTOR, "div[class='popup__close']")
@@ -76,61 +78,6 @@ class SearchRuEnLocators:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    TO_GET_NAME_REQUEST = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__text")
-    BUTTON_ADD_REQUEST = (By.CSS_SELECTOR, "div[class='search-wrapper__form-field'] button[type='button']")
 
 
 
