@@ -273,7 +273,11 @@ class UnformatFilePage(BasePage):
             self.element_is_visible(self.Locators.DIRECT_FOLDER).click()
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.RETURN)
+        try:
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.RETURN)
+        except ElementNotInteractableException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.RETURN)
         time.sleep(1)
         try:
             self.remove_class_script()

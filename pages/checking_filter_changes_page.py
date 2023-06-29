@@ -5,7 +5,7 @@ import time
 from pathlib import Path
 
 from selenium.common import TimeoutException, StaleElementReferenceException, ElementClickInterceptedException, \
-    ElementNotInteractableException, NoSuchElementException, WebDriverException
+    ElementNotInteractableException, NoSuchElementException, WebDriverException, JavascriptException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 
@@ -87,7 +87,12 @@ class AddFilterChanges(BasePage):
             time.sleep(5)
             self.elements_is_present(Locators.UPLOAD_MEDIA).click()
         """input is visible for load files"""
-        self.driver.execute_script(
+        try:
+            self.driver.execute_script(
+            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        except JavascriptException:
+            time.sleep(3)
+            self.driver.execute_script(
             """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
         self.driver.execute_script(
             """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
@@ -430,7 +435,11 @@ class AddFilterChanges(BasePage):
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
-        text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
+        try:
+            text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
+        except ElementNotInteractableException:
+            time.sleep(3)
+            text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
         # print(text_request_article)
         assert text_request_article == name_request
 

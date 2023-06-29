@@ -169,7 +169,7 @@ class ArticlePage(BasePage):
         time.sleep(1)
         try:
             self.element_is_visible(Locators.CREATE_BUTTON).click()
-        except StaleElementReferenceException:
+        except (WebDriverException, StaleElementReferenceException):
             time.sleep(3)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         try:

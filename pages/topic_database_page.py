@@ -153,7 +153,11 @@ class CreateTopicDatabase(BasePage):
         data_same_name = []
         name_1 = self.element_is_visible(self.Locators.NAME_1)
         data_same_name.append(name_1)
-        name_2 = self.elements_is_present(self.Locators.NAME_2)
+        try:
+            name_2 = self.elements_is_present(self.Locators.NAME_2)
+        except TimeoutException:
+            time.sleep(3)
+            name_2 = self.elements_is_present(self.Locators.NAME_2)
         data_same_name.append(name_2)
         self.go_to_element(name_2)
         """check name las topic"""
