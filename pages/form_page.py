@@ -455,8 +455,10 @@ class FormPage(BasePage):
             person = generated_person()
             name_article = person.first_name
             text_article = person.last_name
-            time.sleep(1)
-            self.element_is_visible(Locators.CREATE_BUTTON_1).click()
+            try:
+                self.element_is_visible(Locators.CREATE_BUTTON_1).click()
+            except TimeoutException:
+                time.sleep(3)
             self.element_is_visible(Locators.CREATE_ARTICLE).click()
             time.sleep(1)
             self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(name_article)

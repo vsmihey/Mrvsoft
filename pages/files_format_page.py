@@ -268,9 +268,9 @@ class UnformatFilePage(BasePage):
         time.sleep(1)
         try:
             self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
-        except TimeoutException:
+        except (TimeoutException, ElementNotInteractableException):
             time.sleep(5)
-            self.element_is_visible(self.Locators.DIRECT_FOLDER).click()
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys(Keys.ARROW_DOWN)
         try:
