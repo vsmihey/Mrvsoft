@@ -487,9 +487,37 @@ class BasePage:
         # self.element_is_visible(Locators.SVG_CLOSE_ARTICLE).click()
         return name_script
 
-    # def element_is_visibility(self, element):
-    #     element = driver.find_element_by_css_selector("input")
-    #     self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
+    def add_new_person_base(self, driver):
+        """ADD NEW PERSON"""
+        Locators = FormPagesLocators()
+        driver.implicitly_wait(10)
+        person = generated_person()
+        last_name = person.last_name + str(random.randint(999, 9999))
+        first_name = person.first_name
+        login = "login" + str(random.randint(999, 9999))
+        email = person.email
+        self.element_is_visible(Locators.SETTINGS).click()
+        self.element_is_visible(Locators.PERSONS).click()
+        self.element_is_visible(Locators.NEW_PERSON).click()
+        self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Пользователь')
+        time.sleep(1)
+        self.remove_class_script()
+        """add avatar"""
+        avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
+        path = str(avatar)
+        time.sleep(1)
+        self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
+
+        self.element_is_visible(Locators.LAST_NAME).send_keys(last_name)
+        self.element_is_visible(Locators.FIRST_NAME).send_keys(first_name)
+        self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login)
+
+        self.element_is_visible(Locators.EMAIL).send_keys(email)
+        self.element_is_visible(Locators.SAVE_PERSON).click()
+        self.element_is_visible(Locators.FRAME_PERSON_CLOSE).click()
+
+        return login
+
 
 
 

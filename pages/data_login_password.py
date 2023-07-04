@@ -34,3 +34,18 @@ text_en = "A lot of the central bank news is priced into equities and investors 
           " to evaluate why central banks have turned more dovish, said David Holohan, a strategist at Mediolanum" \
           " Asset Management in Dublin."
 
+# Persons 1
+"""data input person 1"""
+person_1 = "person1"
+name_1 = "name1"
+mail_1 = "testperson0001@mail.ru"
+login_person1 = "login1111"
+password_person1 = "97718d75"
+
+# Persons 2
+"""data input person 2"""
+person_2 = "person1"
+name_2 = "name1"
+mail_2 = "testperson0001@mail.ru"
+login_person2 = "login112"
+password_person2 = "63a45e26"

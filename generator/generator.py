@@ -4,6 +4,9 @@ import random
 from pathlib import Path
 from data.data import Person
 from faker import Faker
+from tempmail import TempMail
+
+
 faker_en = Faker('En')
 
 
@@ -63,3 +66,7 @@ def generated_files_video():
         video_files.append(path)
     return video_files
 
+# def temp_mail():
+#     tm = TempMail()
+#     email = tm.get_email_address()  # v5gwnrnk7f@gnail.pw
+#     print(tm.get_mailbox(email))  # list of emails

@@ -1,3 +1,4 @@
+import hashlib
 import os
 import pathlib
 import random
@@ -7,6 +8,7 @@ from pathlib import Path
 import requests
 import json
 from requests.auth import HTTPBasicAuth
+from tempmail import TempMail
 
 # home = Path.home()
 # wave_absolute = Path("files", "animal.jpeg")
@@ -94,7 +96,6 @@ print(sss)
 #
 # print(len(text_content))
 
-
 # универальный путь
 # s = '/foo/bar/zoo/file.ext'
 # import ntpath
@@ -102,4 +103,56 @@ print(sss)
 # s.replace(os.sep,ntpath.sep)
 # '\\foo\\bar\\zoo\\file.ext'
 
+
+#
+# tm = TempMail()
+# email = tm.get_email_address() # v5gwnrnk7f@gnail.pw
+# print(email)
+# print(tm.get_mailbox(email))  # list of emails
+
+# from tempmail import TempMail
+# tm = TempMail(login='denis', domain='@gnail.pw')
+# print(tm.get_mailbox())  # list of emails in denis@gnail.pw
+
+
+
+tm = TempMail(api_key='lYTy1Sh54YOW0538l8jNxL4Oc9SHM9P3')
+
+# domains = tm.get_domains()
+# print(domains)
+
+# Create a temporary email address with a random username
+# email = tm.create_email()
+# print(email)
+
+
+# Create a temporary email address with a specified username
+
+#
+# "http://api.temp-mail.org/request/mail/id/md5/"
+# email = tm.create_email(username='person1')
+# print(email)
+#
+# email_ = tm.get_mail('mail_id')
+# print(email_)
+
+
+
+
+#
+# hash_object = hashlib.md5(b'oc5sjMnh@tgvis.com')
+# print(hash_object.hexdigest())
+#
+# url = f"https://api.apilayer.com/temp_mail/mail/id/{hash_object}"
+#
+# payload = {}
+# headers= {
+#   "apikey": "lYTy1Sh54YOW0538l8jNxL4Oc9SHM9P3"
+# }
+#
+# response = requests.request("GET", url, headers=headers, data=payload)
+#
+# status_code = response.status_code
+# result = response.text
+# print(result)
 

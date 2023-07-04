@@ -69,7 +69,7 @@ class TestFormPage:
         form_page.open()
         form_page.input_in_my_project(driver)
         form_page.add_new_role(driver)
-        time.sleep(1)
+        # time.sleep(1)
 
     def test_folder_create_del_recovery(self, driver):
         form_page = FormPage(driver, url)

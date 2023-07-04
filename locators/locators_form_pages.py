@@ -199,6 +199,7 @@ class FormPagesLocators:
     CHECK_RADIOBUTTON_TYPOGRAPHY_NOW = (By.XPATH, "//span[text()='Опубликовать сейчас']/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
     CHECK_RADIOBUTTON_NO_DELETE = (By.XPATH, "//span[text()='Не удалять']/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
     CHECK_TEXT_ROLE = (By.XPATH, "//span[contains(text(),'роль')]")
+    FRAME_PERSON_CLOSE = (By.XPATH, "//div[@role='presentation']")
     """FIXING ARTICLE"""
     # SEARCH_HEAD_PAGE = (By.XPATH, "//p[contains(text(),'Поиск')]")
     SEARCH_HEAD_PAGE = (By.XPATH, "//div[contains(text(),'Поиск')]")
@@ -322,10 +323,6 @@ class FormPagesLocators:
     EDIT_TEMPLATE_1 = (By.XPATH, "//div[@class='m-popup__root']//a[1]")
     NEW_TEMPLATE = (By.XPATH, "//div[@class='m-lms-action-tooltip m-modal-templates__template-card']")
     SECOND_FOLDER_IN_LIST_FOR_DEL = (By.XPATH, "(//li[@class='m-tree-item m-tree-item__wrapper'])[2]")
-
-
-
-
 
 class StepByScriptLocators:
     ADD_SCRIPT = (By.XPATH, "//div[text()='Пошаговый сценарий']")
@@ -472,7 +469,7 @@ class FilesPagesLocators:
     DROP_DOWN_FILES = (By.XPATH, "//a[@title='Файлы']")
     FIELD_INPUT = (By.XPATH, "//div[@class='form-input-wrapper__field form-input-wrapper__field-arrow']")
     # FRAME = (By.XPATH, "//div[@title='Параметры']")
-    # FRAME = (By.XPATH, "//div[@role='presentation']")
+    # FRAME_PERSON_CLOSE = (By.XPATH, "//div[@role='presentation']")
     FRAME = (By.XPATH, "//iframe[@class='cke_panel_frame']")
     """check for script"""
     ADD_STEP = (By.XPATH, "//p[contains(text(),'добавить шаг')]")

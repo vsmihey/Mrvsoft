@@ -227,13 +227,9 @@ class FormPage(BasePage):
         first_name = person.first_name
         email = person.email
         self.element_is_visible(Locators.SETTINGS).click()
-        # print("settings")
         self.element_is_visible(Locators.PERSONS).click()
-        # print("person")
         self.element_is_visible(Locators.NEW_PERSON).click()
-        # print("new person")
         self.element_is_visible(Locators.CHANGE_ADMIN).send_keys('Администратор')
-        # print("administrator")
         time.sleep(1)
         self.remove_class_script()
         """add avatar"""
@@ -245,7 +241,6 @@ class FormPage(BasePage):
         text_name = self.element_is_visible(Locators.UPLOAD_FILE_NAME)
         text_name_value = text_name.text
         assert text_name_value == 'animal.jpeg'
-        # print('file name is correct')
         self.button_invisible_check(driver)
         self.element_is_visible(Locators.LAST_NAME).send_keys(last_name)
         self.button_invisible_check(driver)
@@ -315,7 +310,7 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.ADD_NEW_ROLE).click()
         driver.implicitly_wait(10)
         person = generated_person()
-        first_name = person.first_name
+        first_name ="role " + person.first_name + str(random.randint(999, 9999))
         self.button_invisible_role_check(driver)
         self.element_is_visible(Locators.INPUT_NAME_ROLE).send_keys(first_name)
         # push 13 check boxes
@@ -337,6 +332,7 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.SWITCH_BOX_CHECKED).is_displayed()
         self.element_is_visible(Locators.SWITCH_BOX).is_displayed()
         self.element_is_visible(Locators.SAVE_CHANGES_ROLE).click()
+        return first_name
 
     def create_new_folder(self, driver):
         """CREATE NEW FOLDER"""
