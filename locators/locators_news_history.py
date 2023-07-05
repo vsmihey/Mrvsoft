@@ -37,6 +37,22 @@ class LocatorsCheckNewsHistory:
     BUTTON_CHANGE_PASSWORD = (By.XPATH, "//p[contains(text(),'Сменить пароль')]")
     INPUT_NEW_PASSWORD = (By.CSS_SELECTOR, "#newPass")
     INPUT_REPEAT_PASSWORD = (By.CSS_SELECTOR, "#repPass")
+    TEST_PROJECT = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
+    SVG_POPUP_CLOSE_CREATED_PERSON = (By.XPATH, "//div[@class='popup__close']")
+    PERSONS_AND_ROLES = (By.XPATH, "//span[text()='Участники']")
+    BUTTON_HISTORY = (By.XPATH, "//a[@data-tip='История']")
+    """check del article person1"""
+    DEL_ARTICLE_2 = (By.XPATH, "(//header[@class='m-news-item__header'])[1]/../div[text()='deleted 2']")
+    DEL_ARTICLE_2_WARNING = (By.XPATH, "//div[text()='Внимание! Этот контент удален']")
+    RESTORED_ARTICLE_1 = (By.XPATH, "(//header[@class='m-news-item__header'])[4]/../div[text()='restored 1']")
+    RESTORED_ARTICLE_1_CHECK_CHANGE = (By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'changed name')]")
+    RESTORED_ARTICLE_1_CHECK_ADDED_COMMENT = (By.XPATH, "//p[text()='1 комментарий']")
+    SVG_CLOSE_CREATED_ARTICLE = (By.XPATH, "//body/div[@class='article-modal__portal']/div[@class='ReactModal__Overlay ReactModal__Overlay--after-open article-modal__overlay']/div[@role='dialog']/article[@class='article-modal']/div[@class='article-modal__main']/div[@class='article-modal__breadcrumbs-wrapper']/div[2]//*[local-name()='svg']")
+    """check del article person2"""
+    RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2 = (By.CSS_SELECTOR, "div[data-title='Восстановлен контент']")
+
+
+
 
 
 

@@ -2,7 +2,7 @@ import random
 import time
 
 from selenium.common import TimeoutException, NoSuchElementException, StaleElementReferenceException, \
-    InvalidSelectorException
+    InvalidSelectorException, ElementNotInteractableException
 from selenium.webdriver.common.by import By
 
 import pages
@@ -20,23 +20,23 @@ class CheckNewsHistoryPage(BasePage):
     def create_change_del_restored_article(self):
         self.input_in_my_project(self.driver)
         """create article"""
-        first_name = self.create_article_base()
-        changed_name = "changed name " + str(random.randint(999, 9999))
+        first_name_1 = self.create_article_base()
+        changed_name_1 = "changed name " + str(random.randint(999, 9999))
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("created")
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("created 1")
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         """change article"""
         self.element_is_visible(self.Locators.ARTICLE_CHANGE).click()
         self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).clear()
-        self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).send_keys(changed_name)
+        self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).send_keys(changed_name_1)
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("changed")
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("changed 1")
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         """add comment"""
-        self.element_is_visible(self.Locators.ADD_COMMENT).send_keys("comment")
+        self.element_is_visible(self.Locators.ADD_COMMENT).send_keys("comment 1")
         self.element_is_visible(self.Locators.SEND_COMMENT).click()
         self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
         """del article"""
@@ -45,9 +45,8 @@ class CheckNewsHistoryPage(BasePage):
         self.element_is_visible(self.Locators.OPEN_ARTICLE_FOR_DEL).click()
         self.element_is_visible(self.Locators.MEATBALL_MENU).click()
         self.element_is_visible(self.Locators.DEL_ARTICLE).click()
-        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("deleted")
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("deleted 1")
         self.element_is_visible(self.Locators.BUTTON_CONFIRM_DEL).click()
-
         """restored"""
         self.element_is_visible(self.Locators.SHOW_ALL_DELETED).click()
         self.element_is_visible(self.Locators.BUTTON_ALL_DELETED).click()
@@ -58,19 +57,60 @@ class CheckNewsHistoryPage(BasePage):
         #     time.sleep(3)
         #     self.element_is_visible(self.Locators.SHOW_ALL_DELETED).click()
         #     self.element_is_visible(self.Locators.BUTTON_ALL_DELETED).click()
+
+        time.sleep(1)
         try:
-            deleted_article_search = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{changed_name}']")
+            deleted_article_search = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{changed_name_1}']")
         except (TimeoutException, NoSuchElementException):
             time.sleep(3)
-            deleted_article_search = self.driver.find_element(By.ID, f"//p[normalize-space()='{changed_name}']")
+            # self.element_is_visible(self.Locators.BUTTON_HISTORY).click()
+            deleted_article_search = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{changed_name_1}']")
         deleted_article_search.click()
         self.element_is_visible(self.Locators.BUTTON_RESTORED).click()
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("restored")
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("restored 1")
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        return first_name
+        return first_name_1, changed_name_1
 
-    def person1_auth(self, login, password):
+    def create_change_del_article(self):
+        self.input_in_my_project(self.driver)
+        """create article"""
+        first_name_2 = self.create_article_base()
+        changed_name_2 = "changed name " + str(random.randint(999, 9999))
+        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("created 2")
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        """change article"""
+        self.element_is_visible(self.Locators.ARTICLE_CHANGE).click()
+        self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).clear()
+        self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).send_keys(changed_name_2)
+        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("changed 2")
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        """add comment"""
+        time.sleep(6)
+        self.element_is_visible(self.Locators.ADD_COMMENT).send_keys("comment 2")
+        self.element_is_visible(self.Locators.SEND_COMMENT).click()
+        self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
+        """del article"""
+        self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
+        self.element_is_visible(self.Locators.ADDED_COMMENT).click()
+        self.element_is_visible(self.Locators.OPEN_ARTICLE_FOR_DEL).click()
+        time.sleep(1)
+        self.element_is_visible(self.Locators.MEATBALL_MENU).click()
+        time.sleep(1)
+        self.element_is_visible(self.Locators.DEL_ARTICLE).click()
+        time.sleep(1)
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("deleted 2")
+        time.sleep(1)
+        self.element_is_visible(self.Locators.BUTTON_CONFIRM_DEL).click()
+        time.sleep(2)
+        return first_name_2, changed_name_2
+
+    def persons_auth(self, login, password):
         # self.input_in_my_project(self.driver)
         Locators = FormPagesLocators()
         try:
@@ -81,6 +121,7 @@ class CheckNewsHistoryPage(BasePage):
         self.element_is_visible(Locators.LOGIN).send_keys(login)
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
+        # self.element_is_visible(self.Locators.TEST_PROJECT).click()
         # time.sleep(6)
 
     def add_role_content(self):
@@ -89,10 +130,9 @@ class CheckNewsHistoryPage(BasePage):
         self.element_is_visible(self.Locators.PERSONS).click()
         self.element_is_visible(self.Locators.ADD_ROLE).click()
         self.element_is_visible(self.Locators.INPUT_NAME_ROLE).send_keys(name_role_content)
-        # self.element_is_visible(self.Locators.SWITCH_BOX_CONTROL_CONTENT).click()
-        # content = self.element_is_visible(self.Locators.CHECKBOX_RESTORE_CONTENT)
-        # content.click()
+        self.element_is_visible(self.Locators.SWITCH_BOX_CONTROL_CONTENT).click()
         self.element_is_visible(self.Locators.BUTTON_CREATE_ROLE).click()
+        time.sleep(3)
         return name_role_content
 
     def add_role_no_content(self):
@@ -105,17 +145,21 @@ class CheckNewsHistoryPage(BasePage):
             time.sleep(3)
             self.element_is_visible(self.Locators.ADD_ROLE).click()
         self.element_is_visible(self.Locators.INPUT_NAME_ROLE).send_keys(name_role_no_content)
+        time.sleep(1)
         self.element_is_visible(self.Locators.SWITCH_BOX_CONTROL_CONTENT).click()
+        time.sleep(1)
         content = self.element_is_visible(self.Locators.CHECKBOX_RESTORE_CONTENT)
+        time.sleep(1)
         content.click()
         self.element_is_visible(self.Locators.BUTTON_CREATE_ROLE).click()
+        time.sleep(3)
         return name_role_no_content
 
     def create_person1(self):
         self.input_in_my_project(self.driver)
         password_person1 = "97718d75"
         name_role_content = self.add_role_content()
-        name_role_no_content = self.add_role_no_content()
+        # name_role_no_content = self.add_role_no_content()
         login1 = self.add_new_person_base(self.driver)
         self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
         try:
@@ -123,7 +167,11 @@ class CheckNewsHistoryPage(BasePage):
         except TimeoutException:
             time.sleep(3)
             choose_name_role_content = self.driver.find_element(By.XPATH, f"//span[normalize-space()='{name_role_content}']")
-        choose_name_role_content.click()
+        try:
+            choose_name_role_content.click()
+        except ElementNotInteractableException:
+            time.sleep(3)
+            choose_name_role_content.click()
         self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES).click()
         self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES_CONFIRM).click()
         self.element_is_visible(self.Locators.BUTTON_CHANGE_PASSWORD).click()
@@ -135,12 +183,94 @@ class CheckNewsHistoryPage(BasePage):
             self.element_is_visible(self.Locators.INPUT_REPEAT_PASSWORD).send_keys(password_person1)
         self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES).click()
         self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES_CONFIRM).click()
-        # """ath"""
-        # self.person1_auth(login=login, password=password_person1)
-
-        # time.sleep(16)
-
+        print(login1, password_person1)
         return login1, password_person1
+
+    def create_person2(self):
+        # self.input_in_my_project(self.driver)
+        password_person2 = "63a45e26"
+        # name_role_content = self.add_role_content()
+        self.element_is_visible(self.Locators.SVG_POPUP_CLOSE_CREATED_PERSON).click()
+        self.element_is_visible(self.Locators.PERSONS_AND_ROLES).click()
+        name_role_no_content = self.add_role_no_content()
+        login2 = self.add_new_person_base(self.driver)
+        self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
+        try:
+            choose_name_role_content = self.driver.find_element(By.XPATH,
+                                                                f"//span[normalize-space()='{name_role_no_content}']")
+        except TimeoutException:
+            time.sleep(3)
+            choose_name_role_content = self.driver.find_element(By.XPATH,
+                                                                f"//span[normalize-space()='{name_role_no_content}']")
+        choose_name_role_content.click()
+        self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES).click()
+        self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES_CONFIRM).click()
+        self.element_is_visible(self.Locators.BUTTON_CHANGE_PASSWORD).click()
+        self.element_is_visible(self.Locators.INPUT_NEW_PASSWORD).send_keys(password_person2)
+        try:
+            self.element_is_visible(self.Locators.INPUT_REPEAT_PASSWORD).send_keys(password_person2)
+        except InvalidSelectorException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.INPUT_REPEAT_PASSWORD).send_keys(password_person2)
+        self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES).click()
+        self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES_CONFIRM).click()
+        print(login2, password_person2)
+        return login2, password_person2
+
+    def check_restored_1(self):
+        """check restored article for person 1: can restore article"""
+        try:
+            self.element_is_visible(self.Locators.RESTORED_ARTICLE_1).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.RESTORED_ARTICLE_1).click()
+        self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE).is_displayed()
+        comment = self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_ADDED_COMMENT).is_displayed()
+        print(comment)
+        self.element_is_visible(self.Locators.SVG_CLOSE_CREATED_ARTICLE).click()
+
+    def check_del_article_2(self):
+        try:
+            self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
+        warning = self.element_is_visible(self.Locators.DEL_ARTICLE_2_WARNING).is_displayed()
+        print(warning)
+
+    def check_restored_1_person2(self):
+        """check restored article for person 2: can not restore article"""
+        try:
+            self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2).click()
+        self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE).is_displayed()
+        comment = self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_ADDED_COMMENT).is_displayed()
+        print(comment)
+        self.element_is_visible(self.Locators.SVG_CLOSE_CREATED_ARTICLE).click()
+
+    def check_del_article_2_person2(self):
+        try:
+            self.element_is_visible(self.Locators.DEL_ARTICLE_2, timeout=1).click()
+            warning = True
+        except TimeoutException:
+            warning = False
+            # warning = "Нет удаленной статьи"
+            print("Нет удаленной статьи")
+        assert warning == False
+        #     time.sleep(3)
+        #     self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
+        # warning = self.element_is_visible(self.Locators.DEL_ARTICLE_2_WARNING).is_displayed()
+        # print(warning)
+
+
+
+
+
+
+
+
 
 
 

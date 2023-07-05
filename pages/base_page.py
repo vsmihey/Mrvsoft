@@ -507,11 +507,9 @@ class BasePage:
         path = str(avatar)
         time.sleep(1)
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
-
         self.element_is_visible(Locators.LAST_NAME).send_keys(last_name)
         self.element_is_visible(Locators.FIRST_NAME).send_keys(first_name)
         self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login)
-
         self.element_is_visible(Locators.EMAIL).send_keys(email)
         self.element_is_visible(Locators.SAVE_PERSON).click()
         self.element_is_visible(Locators.FRAME_PERSON_CLOSE).click()
