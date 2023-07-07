@@ -1,9 +1,10 @@
 import time
-
+import pytest
 from pages.data_login_password import url
 from pages.news_history_page import CheckNewsHistoryPage
 
 
+@pytest.mark.order(6)
 class TestNewsHistory:
 
     class TestCheckNewsHistory:
