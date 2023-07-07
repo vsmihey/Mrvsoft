@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class LocatorsCheckNewsHistory:
+    FRAME_PERSON_CLOSE = (By.XPATH, "//div[@role='presentation']")
     BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
     BUTTON_SUBMIT = (By.CSS_SELECTOR, "button[type='submit']")
     BUTTON_FINISH_1 = (By.XPATH, "//p[contains(text(),'Завершить')]")
@@ -9,6 +10,7 @@ class LocatorsCheckNewsHistory:
     """change article"""
     ARTICLE_CHANGE = (By.XPATH, "//div[text()='изменить']")
     ARTICLE_NAME_CHANGE = (By.CSS_SELECTOR, "input[placeholder='Введите название контента']")
+    CHECKBOX_ADD_ALL_ROLE_FOR_ARTICLE = (By.CSS_SELECTOR, "div[class='access-wrapper__header-block'] svg")
     """add comment"""
     ADD_COMMENT = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст комментария']")
     SEND_COMMENT = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
@@ -24,6 +26,7 @@ class LocatorsCheckNewsHistory:
     BUTTON_ALL_DELETED = (By.CSS_SELECTOR, "#all-trashed-folders-item")
     BUTTON_RESTORED = (By.CSS_SELECTOR, ".warning-block__action")
     SHOW_ALL_DELETED = (By.XPATH, "//span[contains(text(),'показать')]")
+    SVG_CLOSE_RESTORED_ARTICLE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close'])[1]")
     """add new role"""
     PERSONS = (By.XPATH, "//a[@data-tip='Участники']")
     ADD_ROLE = (By.CSS_SELECTOR, "button[class='m-ui-button-text']")
@@ -41,6 +44,7 @@ class LocatorsCheckNewsHistory:
     SVG_POPUP_CLOSE_CREATED_PERSON = (By.XPATH, "//div[@class='popup__close']")
     PERSONS_AND_ROLES = (By.XPATH, "//span[text()='Участники']")
     BUTTON_HISTORY = (By.XPATH, "//a[@data-tip='История']")
+    SVG_CLOSE_WINDOW_CREATED_PERSON = (By.CSS_SELECTOR, "div[role='presentation']")
     """check del article person1"""
     DEL_ARTICLE_2 = (By.XPATH, "(//header[@class='m-news-item__header'])[1]/../div[text()='deleted 2']")
     DEL_ARTICLE_2_WARNING = (By.XPATH, "//div[text()='Внимание! Этот контент удален']")
@@ -50,6 +54,14 @@ class LocatorsCheckNewsHistory:
     SVG_CLOSE_CREATED_ARTICLE = (By.XPATH, "//body/div[@class='article-modal__portal']/div[@class='ReactModal__Overlay ReactModal__Overlay--after-open article-modal__overlay']/div[@role='dialog']/article[@class='article-modal']/div[@class='article-modal__main']/div[@class='article-modal__breadcrumbs-wrapper']/div[2]//*[local-name()='svg']")
     """check del article person2"""
     RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2 = (By.CSS_SELECTOR, "div[data-title='Восстановлен контент']")
+    LABEL_ADMINISTRATOR_PERSON = (By.CSS_SELECTOR, "article[class='m-ui-avatar-default m-ui-avatar-default--small']")
+    LABEL_ADMINISTRATOR_PERSON_OUT = (By.XPATH, "//p[contains(text(),'выйти')]")
+    """del person"""
+    LIST_ALL_PERSON = (By.CSS_SELECTOR, "div[class='m-user-card-info user-card__item m-user-card-info--without-checkbox']")
+    CHANGE_DATA_PERSON = (By.XPATH, "//p[contains(text(),'Изменить данные')]")
+    DEL_PERSON = (By.XPATH, "//p[contains(text(),'Удалить пользователя')]")
+    DEL_PERSON_CONFIRM = (By.CSS_SELECTOR, "button[class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
+
 
 
 

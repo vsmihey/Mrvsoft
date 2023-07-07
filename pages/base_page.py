@@ -503,7 +503,10 @@ class BasePage:
         time.sleep(1)
         self.remove_class_script()
         """add avatar"""
-        avatar = Path(pathlib.Path.cwd(), "animal.jpeg")
+        data_avatar = ["bender.jpg", "amy.jpg", "fry.jpg", "leela.jpg", "hermes.jpg", "kif.jpg", "mom.jpg", "professor.jpg", "zapp.jpg", "zoldberg.jpg"]
+        # i = random.randint(0, 9)
+        n = data_avatar[random.randint(0, 9)]
+        avatar = Path(pathlib.Path.cwd(), "avatars", n)
         path = str(avatar)
         time.sleep(1)
         self.element_is_visible(Locators.UPLOAD_FILE).send_keys(path)
@@ -513,7 +516,6 @@ class BasePage:
         self.element_is_visible(Locators.EMAIL).send_keys(email)
         self.element_is_visible(Locators.SAVE_PERSON).click()
         self.element_is_visible(Locators.FRAME_PERSON_CLOSE).click()
-
         return login
 
 
