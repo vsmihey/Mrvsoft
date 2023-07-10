@@ -6,19 +6,16 @@ import time
 from pathlib import Path
 from random import choice
 from string import ascii_uppercase
-
 from selenium.common import TimeoutException, ElementClickInterceptedException, StaleElementReferenceException, \
     ElementNotInteractableException, JavascriptException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
-
 from generator.generator import generated_person
 from locators.locators_checking_filter_changes import AddFilterChangesLocators
 from locators.locators_files_format import FilesFormatPageLocators
 from locators.locators_form_pages import *
 from locators.locators_topic_database import CreateTopicDatabaseLocators
-
 from pages.data_login_password import *
 
 
@@ -232,7 +229,7 @@ class BasePage:
         try:
             self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE, timeout=2).send_keys("Контент 1")
         except ElementNotInteractableException:
-            time.sleep(2)
+            time.sleep(5)
             self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE, timeout=3).send_keys(text)
