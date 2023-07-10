@@ -1,4 +1,6 @@
 # верные данные
+import os
+
 login = 'm.andrey'
 # login = 'a.mihey'
 # login = 'andrey'
@@ -13,6 +15,9 @@ login_incorrect = 'm.andreyq'
 password_incorrect = '395a5555'
 # url
 url = 'https://test6.minervasoft.ru/login?from=%2F'
+# url = os.getenv('https://test6.minervasoft.ru/login?from=%2F')
+
+
 # url = 'https://dev-5811.t5.minervasoft.ru/login?from=%2F'
 base_url = "https://test6.minervasoft.ru/"
 
