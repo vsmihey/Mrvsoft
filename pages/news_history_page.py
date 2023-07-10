@@ -60,6 +60,7 @@ class CheckNewsHistoryPage(BasePage):
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("deleted 1")
         self.element_is_visible(self.Locators.BUTTON_CONFIRM_DEL).click()
         """restored"""
+        time.sleep(5)
         try:
             self.element_is_visible(self.Locators.SHOW_ALL_DELETED).click()
         except TimeoutException:
@@ -67,9 +68,6 @@ class CheckNewsHistoryPage(BasePage):
             self.element_is_visible(self.Locators.SHOW_ALL_DELETED).click()
         self.element_is_visible(self.Locators.BUTTON_ALL_DELETED).click()
         print(changed_name_1)
-
-
-
         time.sleep(2)
         try:
             deleted_article_search = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{first_name + changed_name_1}']")
