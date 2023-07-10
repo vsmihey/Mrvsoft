@@ -42,8 +42,8 @@ from requests.auth import HTTPBasicAuth
 #
 # print(ddd)
 
-sss = os.path.abspath("gomer.gif")
-print(sss)
+# sss = os.path.abspath("gomer.gif")
+# print(sss)
 
 # data_unsupported = ["w", "e"]
 # i = random.randint(0, 1)
@@ -155,4 +155,5 @@ print(sss)
 # status_code = response.status_code
 # result = response.text
 # print(result)
+
 

@@ -56,7 +56,7 @@ class FormPagesLocators:
     # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
     # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[local-name()='svg']")
     # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[local-name()='svg']")
-    CLOSE_PAGE_LIST = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg path")
+    CLOSE_PAGE_LIST = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg")
     CLOSE_PAGE_SCRIPT = (By.XPATH, "(//*[name()='svg'][@class='m-scenario-flow__close'])[1]")
     CLOSE_CREATE_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")
     SEARCH_PROJECT = (By.CSS_SELECTOR, ".m-dashboard-top__search")
