@@ -1122,7 +1122,7 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         """close article tab1"""
         self.driver.switch_to.window(tab2)
-        time.sleep(1)
+        time.sleep(5)
         try:
             self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         except ElementClickInterceptedException:

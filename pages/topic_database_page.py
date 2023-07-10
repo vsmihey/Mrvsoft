@@ -388,6 +388,7 @@ class CreateTopicDatabase(BasePage):
         """check first position by index xpath dom and active tab"""
         tab_active = self.element_is_visible(self.Locators.TAB_ACTIVE).text
         assert tab_active == 'тест'
+        time.sleep(1)
         try:
             questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         except TimeoutException:
@@ -400,13 +401,17 @@ class CreateTopicDatabase(BasePage):
         """go tu test tab"""
         # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert + " new")
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
         # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         # time.sleep(3)
         # self.element_is_visible(self.Locators.TEXTAREA_ALERT).send_keys(text_alert + " new")
         # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         """check position"""
-        self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
+        try:
+            self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).clear()
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).send_keys("edit answer")
         self.element_is_visible(self.Locators.BUTTON_EDIT_QUESTION_SAVE).click()
@@ -796,12 +801,17 @@ class CreateTopicDatabase(BasePage):
             time.sleep(2)
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
         """go tu test tab"""
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_ALERT).send_keys("Alert")
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        # self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         """check position"""
-        self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
+        try:
+            self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
+        except StaleElementReferenceException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).click()
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).clear()
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).send_keys("edit answer")
         self.element_is_visible(self.Locators.BUTTON_EDIT_QUESTION_SAVE).click()

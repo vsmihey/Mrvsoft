@@ -112,7 +112,10 @@ class CreateTopicDatabaseLocators:
     ON_CHECKBOX_ALL_QUESTIONS = (By.XPATH, "//label[@class='m-switch-box lms-questions-lib__header-switch']")
     """move questions"""
     QUESTIONS_FIRST_POSITION_CHECK = (By.XPATH, "(//p[normalize-space()='Edit question'])[1]")
+    INPUT_TEXTAREA_ALERT = (By.CSS_SELECTOR, "textarea[class='m-ui-textarea__textarea']")
+    BUTTON_CONTINUE = (By.XPATH, "//p[text()='Продолжить']")
     QUESTIONS_FIRST_POSITION = (By.XPATH, "(//div[@class='article-wizard-tests-question-row__left-side'])[1]")
+    SVG_CLOSE_CREATED_ARTICLE = (By.CSS_SELECTOR, "svg[class='article-modal__close']")
     QUESTIONS_FIRST_POSITION_CSS = (By.CSS_SELECTOR, "body > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)")
     QUESTIONS_SECOND_POSITION = (By.XPATH, "(//div[@class='article-wizard-tests-question-row__left-side'])[2]")
     QUESTIONS_SECOND_POSITION_CSS = (By.CSS_SELECTOR, "body > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
