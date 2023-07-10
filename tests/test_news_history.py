@@ -23,11 +23,13 @@ class TestNewsHistory:
             news_history_page.persons_auth(login=login1, password=password_person1)
             news_history_page.check_restored_1()
             news_history_page.check_del_article_2()
+            news_history_page.check_comment_1()
             news_history_page.open()
             """check person2"""
             news_history_page.persons_auth(login=login2, password=password_person2)
             news_history_page.check_restored_1_person2()
             news_history_page.check_del_article_2_person2()
+            news_history_page.check_comment_1_person2()
             # time.sleep(6)
 
         # def test_del_all_person(self, driver):

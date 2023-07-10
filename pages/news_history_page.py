@@ -260,7 +260,17 @@ class CheckNewsHistoryPage(BasePage):
             time.sleep(3)
             self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
         warning = self.element_is_visible(self.Locators.DEL_ARTICLE_2_WARNING).is_displayed()
+        self.element_is_visible(self.Locators.SVG_CLOSE_CREATED_ARTICLE).click()
         print(warning)
+
+    def check_comment_1(self):
+        """check comment"""
+        self.element_is_visible(self.Locators.COMMENT_CREATED).click()
+        self.element_is_visible(self.Locators.TEXT_COMMENT_CHECK).click()
+        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_CREATED_PERSON).click()
+        """check del comment"""
+        self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
+        self.element_is_visible(self.Locators.TEXT_CHECK_CANT_COMMENT).is_displayed()
 
     def check_restored_1_person2(self):
         """check restored article for person 2: can not restore article"""
@@ -284,6 +294,21 @@ class CheckNewsHistoryPage(BasePage):
             # warning = "Нет удаленной статьи"
             print("Нет удаленной статьи")
         assert warning == False
+
+    def check_comment_1_person2(self):
+        """check comment"""
+        self.element_is_visible(self.Locators.COMMENT_CREATED).click()
+        self.element_is_visible(self.Locators.TEXT_COMMENT_CHECK).click()
+        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_CREATED_PERSON).click()
+        """check del comment"""
+        try:
+            self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
+            warning = True
+        except TimeoutException:
+            warning = False
+            print("Нет удаленной статьи для проверки комментария")
+        assert warning == False
+
 
 
     # def del_all_person(self):

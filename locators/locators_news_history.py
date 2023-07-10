@@ -61,7 +61,11 @@ class LocatorsCheckNewsHistory:
     CHANGE_DATA_PERSON = (By.XPATH, "//p[contains(text(),'Изменить данные')]")
     DEL_PERSON = (By.XPATH, "//p[contains(text(),'Удалить пользователя')]")
     DEL_PERSON_CONFIRM = (By.CSS_SELECTOR, "button[class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
-
+    """comment check"""
+    COMMENT_CREATED = (By.CSS_SELECTOR, ".m-ui-paper.m-news-item__canvas.m-news-item__canvas--ticket.m-ui-paper--hoverable.m-ui-paper--shadowed")
+    TEXT_COMMENT_CHECK = (By.XPATH, "//div[contains(text(),'Комментарий к контенту')]")
+    FIRST_DELETED_CONTENT = (By.XPATH, "(//div[normalize-space()='deleted 2'])[1]")
+    TEXT_CHECK_CANT_COMMENT = (By.XPATH, "//span[text()='Комментирование в этом контенте запрещено']")
 
 
 
