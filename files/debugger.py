@@ -8,7 +8,7 @@ from pathlib import Path
 import requests
 import json
 from requests.auth import HTTPBasicAuth
-from tempmail import TempMail
+# from tempmail import TempMail
 
 # home = Path.home()
 # wave_absolute = Path("files", "animal.jpeg")
@@ -116,7 +116,7 @@ print(sss)
 
 
 
-tm = TempMail(api_key='lYTy1Sh54YOW0538l8jNxL4Oc9SHM9P3')
+# tm = TempMail(api_key='lYTy1Sh54YOW0538l8jNxL4Oc9SHM9P3')
 
 # domains = tm.get_domains()
 # print(domains)
