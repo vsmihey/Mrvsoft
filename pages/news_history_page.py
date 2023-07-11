@@ -92,7 +92,6 @@ class CheckNewsHistoryPage(BasePage):
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-
         self.element_is_visible(self.Locators.CHECKBOX_ADD_ALL_ROLE_FOR_ARTICLE).click()
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("created 2")
@@ -306,6 +305,63 @@ class CheckNewsHistoryPage(BasePage):
             warning = False
             print("Нет удаленной статьи для проверки комментария")
         assert warning == False
+
+    def create_person1_2(self):
+        """create person for check  Alert"""
+        # self.input_in_my_project(self.driver)
+        password_person1_2 = "97718d75"
+        self.element_is_visible(self.Locators.SVG_POPUP_CLOSE_CREATED_PERSON).click()
+        name_role_content = self.add_role_content()
+        login1_2 = self.add_new_person_base(self.driver)
+        try:
+            self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.FRAME_PERSON_CLOSE).click()
+            self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
+        time.sleep(1)
+        try:
+            choose_name_role_content = self.driver.find_element(By.XPATH,
+                                                                f"//span[normalize-space()='{name_role_content}']")
+        except TimeoutException:
+            time.sleep(3)
+            choose_name_role_content = self.driver.find_element(By.XPATH,
+                                                                f"//span[normalize-space()='{name_role_content}']")
+        try:
+            choose_name_role_content.click()
+        except ElementNotInteractableException:
+            time.sleep(3)
+            choose_name_role_content.click()
+        self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES).click()
+        self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES_CONFIRM).click()
+        self.element_is_visible(self.Locators.BUTTON_CHANGE_PASSWORD).click()
+        self.element_is_visible(self.Locators.INPUT_NEW_PASSWORD).send_keys(password_person1_2)
+        try:
+            self.element_is_visible(self.Locators.INPUT_REPEAT_PASSWORD).send_keys(password_person1_2)
+        except InvalidSelectorException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.INPUT_REPEAT_PASSWORD).send_keys(password_person1_2)
+        self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES).click()
+        self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES_CONFIRM).click()
+        self.element_is_visible(self.Locators.SVG_POPUP_CLOSE_CREATED_PERSON).click()
+        print(login1_2, password_person1_2)
+        return login1_2, password_person1_2
+
+
+    def create_and_add_comment(self):
+        name = "name " + str(random.randint(999, 9999))
+        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.CHECKBOX_ADD_ALL_ROLE_FOR_ARTICLE).click()
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("created")
+        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        """add comment"""
+        time.sleep(6)
+        self.element_is_visible(self.Locators.ADD_COMMENT).send_keys("comment_for_check")
+        self.element_is_visible(self.Locators.SEND_COMMENT).click()
+        self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
 
 
 

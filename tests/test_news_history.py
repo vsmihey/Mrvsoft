@@ -37,6 +37,23 @@ class TestNewsHistory:
         #     news_history_page.open()
         #     news_history_page.del_all_person()
 
+        def test_check_bell_notification(self, driver):
+            news_history_page = CheckNewsHistoryPage(driver, url)
+            news_history_page.open()
+            """create person1"""
+            login1, password_person1 = news_history_page.create_person1()
+            login1_2, password_person1_2 = news_history_page.create_person1_2()
+            news_history_page.open()
+            news_history_page.persons_auth(login=login1, password=password_person1)
+            news_history_page.create_article_base()
+            news_history_page.create_and_add_comment()
+            news_history_page.open()
+            news_history_page.persons_auth(login=login1_2, password=login1_2)
+
+
+
+
+
 
 
 

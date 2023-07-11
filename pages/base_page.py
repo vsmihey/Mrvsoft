@@ -218,6 +218,7 @@ class BasePage:
         name_request = "request " + str(random.randint(999, 9999))
         text_alert = "Alert " + str(random.randint(999, 9999))
         """upload media"""
+        time.sleep(1)
         try:
             self.element_is_visible(Locators.CREATE_BUTTON, timeout=5).click()
         except (StaleElementReferenceException, TimeoutException):
