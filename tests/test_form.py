@@ -239,24 +239,6 @@ class TestFormPage:
 
 
 
-# тестирование, раскоментить в article_page
-
-    # def test_t(self, driver):
-    #     debager_page = Debager(driver, url)
-    #     debager_page.open()
-    #     debager_page.input_in_my_project(driver)
-    #     driver.get("https://test2.minervasoft.ru/news/space/55?popup=article-editor&chosenSpaceId=55&articleId=new&article-type=ARTICLE")
-    #     debager_page.deb(driver)
-
-
-
-
-
-
-
-
-
-
 
 
 
