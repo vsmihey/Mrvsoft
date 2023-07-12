@@ -1,3 +1,6 @@
+import functools
+from selenium.webdriver.support.ui import WebDriverWait as Wait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 import data_login_password
 
@@ -23,3 +26,6 @@ class MainPage:
 
     def get_actual_url(self):
         return self.browser.current_url
+
+    def element_is_visible(self, locator, timeout=10):
+        return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))

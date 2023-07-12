@@ -2,14 +2,15 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Users:
+class StableUsers:
     """Пользователи эталона"""
     login: str
     password: str
 
 
-admin = Users('b.pogodin', '68f1d85b')
-jerry = Users('jerry_smith', '123456')
-# morty = Users()
-# summer= Users()
-# beth= Users()
+admin = StableUsers('b.pogodin', '68f1d85b')
+jerry = StableUsers('jerry_smith', '123456')
+# morty = StableUsers()
+# summer= StableUsers()
+# beth= StableUsers()
+

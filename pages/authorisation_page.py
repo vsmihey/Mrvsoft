@@ -1,4 +1,3 @@
-import time
 import base_class
 import data_login_password
 from locators.locators_form_pages import FormPagesLocators
@@ -22,15 +21,16 @@ class Authorisation(base_class.MainPage):
 
     def confirm_button(self):
         """Нажимаем кнопку войти"""
-        self.browser.find_element(*FormPagesLocators.INPUT_BUTTON).click()
+        self.element_is_visible(FormPagesLocators.INPUT_BUTTON).click()
 
     def select_project_superbank(self):
         """Выбор проекта СуперБанка"""
-        self.browser.find_element(*FormPagesLocators.SUPER_BANK_PROJECT).click()
+        self.element_is_visible(FormPagesLocators.SUPER_BANK_PROJECT).click()
 
     @staticmethod
     def get_authorisation_in_superbank(user=users.admin, url=None):
-        """Авторизация"""
+        """Метод для прохождения авторизации в проект СуперБанка"""
+        # TODO: вынести авторизацию по переданной ссылке в отдельный метод
         try:
             page = Authorisation(url=url)
             page.open()
@@ -39,7 +39,7 @@ class Authorisation(base_class.MainPage):
             page.input_password(user.password)
             page.confirm_button()
             page.select_project_superbank()
-            time.sleep(3)
+            # time.sleep(0.5)
             assert page.get_actual_url() == f'{data_login_password.url}/news/space/1'
             print('Авторизация - Passed')
         except Exception:
