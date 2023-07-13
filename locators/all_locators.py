@@ -1,4 +1,3 @@
-from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
 
@@ -53,9 +52,6 @@ class FormPagesLocators:
     CHECKBOX_INSERT_FILES = (By.XPATH, "//section[@class='m-file-view__content-block']")
     # CLOSE_CREATED_ARTICLE = (By.XPATH, "//header[@id='article-content-modal-header']//span[@class='link-iconed__label-text'][normalize-space()='selen']")
     CLOSE_CREATED_ARTICLE = (By.CSS_SELECTOR, ".article-modal__close")
-    # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[name()='svg']")
-    # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[local-name()='svg']")
-    # CLOSE_PAGE_LIST = (By.XPATH, "//div[@class='article-editor__controls']//*[local-name()='svg']")
     CLOSE_PAGE_LIST = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg")
     CLOSE_PAGE_SCRIPT = (By.XPATH, "(//*[name()='svg'][@class='m-scenario-flow__close'])[1]")
     CLOSE_CREATE_WINDOW = (By.XPATH, "//div[@class='m-popup__close']//*[name()='svg']")
@@ -70,7 +66,6 @@ class FormPagesLocators:
     SETTINGS = (By.XPATH, "//a[@data-tip='Настройки']")
     ALERT_FILL_1 = (By.XPATH, "//textarea[text()='Введите текст сообщения]")
     """add new person"""
-    # PERSONS = (By.XPATH, "//a[2]//article[1]//pre[1]")
     PERSONS = (By.XPATH, "//article[@class='m-ui-paper m-big-card m-users-management-button m-ui-paper--hoverable m-ui-paper--shadowed']")
     NEW_PERSON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
     CHANGE_ADMIN = (By.XPATH, "//select[@class='m-ui-select__select']")
@@ -404,7 +399,6 @@ class StepByScriptLocators:
     TEXTAREA_VISIBLE = (By.XPATH, "//textarea[@style='visibility:visible;']")
 
 
-
 class CopyPastePageLocators:
 
     START = (By.XPATH, "//b[contains(text(),'Пикабу́ (Pikabu)')]")
@@ -413,6 +407,7 @@ class CopyPastePageLocators:
     CHECK_TEXT_CORRECT = (By.XPATH, "//div/div/div/p/text()[1]")
     # FOLDER_DROPDOWN = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
     FOLDER_DROPDOWN = (By.XPATH, "//select[@class='m-ui-select__select']")
+
 
 class CreateDraftLocators:
 
@@ -476,37 +471,476 @@ class FilesPagesLocators:
     CREATE_SCRIPT = (By.XPATH, "//div[contains(text(),'Пошаговый сценарий')]")
     TEXT_AREA = (By.XPATH, "//div[@aria-label='false']")
 
+class FilesFormatPageLocators:
+    CREATE_BUTTON = (By.XPATH, "//div[text()='Создать']")
+    BUTTON_FILE = (By.XPATH, "//div[contains(text(),'Файл')]")
+    DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    INPUT_FIELD_SELECT_FILE = (By.CSS_SELECTOR, "input[type='file']")
+    """check picture"""
+    CHECK_FILE_PICTURES = (By.CSS_SELECTOR, "img[alt='animal1']")
+    """typography"""
+    BUTTON_TYPOGRAPHY = (By.XPATH, "//p[text()='Опубликовать файл']")
+    BUTTON_CONTINUE = (By.XPATH, "//p[contains(text(),'Продолжить')]")
+    TEXTAREA_INPUT_TEXT = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
+    BUTTON_FINISH = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    SVG_CLOSE_ARTICLE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close article-modal__close--white'])[1]")
+    """check audio"""
+    CHECK_AUDIO = (By.XPATH, "//div[@class='article-modal__container article-modal__container--type-file']//audio[@class='article-modal__content-file']")
+    """replacement"""
+    CHECK_TEXT_TYPE_FILE = (By.XPATH, "//div[text()='Тип файла:']")
+    CHECK_TEXT_TYPE_DOWNLOAD_FILE_VIDEO = (By.XPATH, "//div[text()='Видео']")
+    SVG_INFORMATION_FOR_TOOLTIP = (By.XPATH, "//div[@class='article-editor-container-document__sidebar-file-type']//*[local-name()='svg']")
+    CHANGE_FILE = (By.XPATH, "//div[contains(text(),'изменить')]")
+    CHECK_TEXT_REPLACEMENT_ALERT = (By.XPATH, "//p[text()='При замене необходимо использовать тот же тип файла']")
+    CHECK_TOOLTIP_TEXT_AUDIO = (By.XPATH, "//b[text()='Аудио']")
+    LIST_TOOLTIP = (By.XPATH, "//div[@class='scroller__content m-role-tooltip__scroller-content']")
+    CHECK_TOOLTIP_FORMAT_SUPPORT_AUDIO = (By.XPATH, "//p[text()='- файлы форматов: mp3, aac, ac3, aiff, au, dts, flac, m4a, m4p, m4r, mp2, ogg, opus, ra, tta, voc, vox, wav, wma.']")
+    CHECK_TOOLTIP_FORMAT_SUPPORT_VIDEO = (By.XPATH, "//p[text()='- файлы форматов: mp4, avi, flv, mov, 3gp, m4v, asf, m2ts, m4v, mkv, mts, swf, vob, wmv, webm.']")
+    CHECK_TOOLTIP_FORMAT_SUPPORT_PICT = (By.XPATH, "//p[text()='- файлы форматов: jpg, jpeg, png, gif.']")
+    CHECK_TOOLTIP_FORMAT_SUPPORT_OTHER = (By.XPATH, "//p[text()='- все остальные файлы.']")
+    CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT = (By.XPATH, "//div[text()='Неверный формат файла для замены']")
+    SVG_TEXT_INCORRECT_FORMAT_CLOSE = (By.XPATH, "//div[@class='m-popup__close']")
+    # AVI_FILE_CREATED = (By.XPATH, "//p[text()='avi.avi']")
+    AVI_FILE_CREATED = (By.XPATH, "(//h3[text()='avi.avi'])[1]")
+    # MP3_FILE_CREATED = (By.XPATH, "//p[text()='mp3.mp3']")
+    MP3_FILE_CREATED = (By.XPATH, "(//h3[text()='mp3.mp3'])[1]")
+    # JPEG_FILE_CREATED = (By.XPATH, "//p[text()='media.jpg']")
+    JPEG_FILE_CREATED = (By.XPATH, "(//h3[text()='media.jpg'])[1]")
+    DELETE_DRAFT = (By.XPATH, "//p[contains(text(),'Удалить черновик')]")
+    TEXT_FILE_DOWNLOADS = (By.XPATH, "//h2[contains(text(),'Файл загружается')]")
+    INPUT_NAME_FILE = (By.CSS_SELECTOR, "input[placeholder='Введите название']")
 
 
+class UnformatFilePageLocators:
+    """check add unformat files"""
+    CHECK_TEXT_ONLY_DOWNLOAD_ALERT = (By.XPATH, "//h2[contains(text(),'Файл будет доступен только для скачивания')]")
+    CHECK_TEXT_NOT_PREVIEW = (By.XPATH, "//h3[contains(text(),'Для этого формата не доступен предпросмотр')]")
+    BUTTON_DOWNLOAD_FILE = (By.XPATH, "//p[contains(text(),'Скачать файл')]")
+    BUTTON_TYPOGRAPHY = (By.XPATH, "//p[text()='Опубликовать файл']")
+    # BUTTON_TYPOGRAPHY = (By.XPATH, "article-editor-container-document__publish-button-wrapper")
+    BUTTON_CONTINUE = (By.XPATH, "//p[contains(text(),'Продолжить')]")
+    TEXTAREA_INPUT_TEXT_ALERT = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
+    BUTTON_FINISH = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    """check after typography"""
+    TEXT_CHECK_AFTER_TYPOGRAPHY = (By.XPATH, "(//h2[@class='article-modal__view-unavailable-title'][contains(text(),'Просмотр файла недоступен')])[1]")
+    BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY = (By.XPATH, "(//p[text()='Скачать файл'])[1]")
+    """input file"""
+    CREATE_BUTTON = (By.XPATH, "//div[text()='Создать']")
+    BUTTON_FILE = (By.XPATH, "//div[contains(text(),'Файл')]")
+    DIRECT_FOLDER = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
+    INPUT_FIELD_SELECT_FILE = (By.CSS_SELECTOR, "input[type='file']")
+    SVG_CLOSE_DOWNLOADED_FILE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close article-modal__close--white'])[1]")
+    """check text convert files"""
+    CHECK_TEXT_NOT_PREVIEW_1 = (By.XPATH, "//h2[text()='Просмотр файла недоступен']")
+    TEXT_FILE_DOWNLOADS = (By.XPATH, "//h2[contains(text(),'Файл загружается')]")
 
 
+class CreateTopicDatabaseLocators:
+    LEARNING_BUTTON = (By.XPATH, "//a[@data-html='true']")
+    TAB_ALL_COURSES = (By.XPATH, "//p[contains(text(),'все курсы')]")
+    DATABASE_OF_QUESTIONS = (By.XPATH, "//p[contains(text(),'База вопросов')]")
+    """check text open form"""
+    TEXT_DATABASE_OF_QUESTIONS = (By.XPATH, "//p[contains(text(),'База вопросов')]")
+    TEXT_NOT_QUESTIONS_NOW = (By.XPATH, "//p[text()='В этом проекте пока нет вопросов. Создайте структуру тем для его размещения']")
+    BUTTON_ADD_TOPIC = (By.XPATH, "//p[contains(text(),'Создать темы')]")
+    """check text open form new topic"""
+    TEXT_NEW_QUESTION_TOPIC_WINDOW = (By.XPATH, "//h3[contains(text(),'Новая тема')]")
+    TEXT_NAME = (By.XPATH, "//div[text()= 'название']")
+    TEXT_PLACEHOLDER_INPUT_NAME_TOPIC = (By.XPATH, "//input[@placeholder='Введите название темы']")
+    TEXT_PARENT_TOPIC = (By.XPATH, "//div[text()='родительская тема']")
+    TEXT_DROPDOWN_DEFAULT = (By.XPATH, "//select[@class='m-ui-select__select']//option[text()='Нет']") # ПРОВЕРИТЬ
+    BUTTON_CREATE_TOPIC = (By.XPATH, "//footer[@class='m-popup__footer lms-edit-theme-popup__footer']//p[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text'][contains(text(),'Создать тему')]") # ПРОВЕРИТЬ
+    """input name topic and check len"""
+    INPUT_NAME_TOPIC = (By.XPATH, "//input[@placeholder='Введите название темы']")
+    """check text structure"""
+    TEXT_RULE_STRUCTURE = (By.XPATH, "//h3[contains(text(),'Управление структурой')]")
+    TEXT_CREATED_TOPIC_NAME = (By.XPATH, "//div[@class='tree-item-content__name']")
+    """function create new topic"""
+    BUTTON_NEW_TOPIC = (By.XPATH, "//p[contains(text(),'Новая тема')]")
+    """del created topics"""
+    LIST_CREATED_TOPICS = (By.CSS_SELECTOR, "li[class='m-tree-item m-tree-item__wrapper']")
+    BUTTON_DELETE_TOPIC = (By.XPATH, "//button[@class='m-button m-button--danger m-button--medium lms-edit-theme-popup__delete']")
+    BUTTON_CONFIRM_DELETE_TOPIC = (By.XPATH, "//button[@class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
+    SVG_CLOSE_DELETED_WINDOW = (By.XPATH, "//div[@class='m-popup__close']")
+    """question add"""
+    BUTTON_QUESTION_ADD = (By.XPATH, "//p[contains(text(),'Добавить')]")
+    BUTTON_CHANGE_QUESTION = (By.XPATH, "//p[contains(text(),'Изменить тему')]")
+    TEXT_DATABASE_OF_QUESTION = (By.XPATH, "//p[text()='В этом проекте пока нет вопросов. Вы можете это исправить']")
+    TEXT_DATABASE_OF_QUESTION_HEAD = (By.XPATH, "//h3[contains(text(),'База вопросов')]")
+    """new question form"""
+    TEXT_NEW_QUESTION = (By.XPATH, "//h3[contains(text(),'Новый вопрос')]")
+    TEXTAREA_PLACEHOLDER_INPUT_NAME_QUESTION = (By.XPATH, "//textarea[@placeholder='Введите текст вопроса']")
+    DROPDOWN_TIPE_OF_QUESTION = (By.XPATH, "//div[@class='lms-question-editor__field m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    DROPDOWN_TOPIC = (By.XPATH, "//div[@class='lms-question-editor__input m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    ANSWER_AND_CHECKBOX = (By.XPATH, "//textarea[@placeholder='Введите текст ответа']")
+    ANSWER_CHECKBOX = (By.XPATH, "//label[@class='radio-wrapper lms-answer-field__radio radio-wrapper--no-label']")
+    BUTTON_CREATE_QUESTION = (By.XPATH, "//p[contains(text(),'Создать вопрос')]")
+    """check created window question"""
+    SVG_SLIDERS = (By.XPATH, "//div[@class='themes-side-popup-filter__icon-container']")
+    TEXT_MODAL_WINDOW_TOPICS = (By.XPATH, "//h3[contains(text(),'Темы')]")
+    CHANGE_TOPICS_WINDOW = (By.XPATH, "//span[contains(text(),'изменить')]")
+    TEXT_CREATED_NEW_QUESTION = (By.XPATH, "//span[@class='lms-question-bar__text']")
+    SVG_DEL_QUESTION = (By.XPATH, "(//*[local-name()='svg'][@class='lms-question-bar__icon lms-question-bar__icon-trash'])")
+    SVG_DEL_QUESTION_CONFIRM = (By.XPATH, "//p[contains(text(),'Удалить вопрос')]")
+    """check all created topics"""
+    TEXT_FIRST_TOPIC = (By.XPATH, "(//div[@class='tree-item-content__name'])[1]")
+    DROPDOWN_PARENTS_TOPIC = (By.XPATH, "//select[@class='m-ui-select__select']")
+    BUTTON_SAVE_TOPIC = (By.XPATH, "//p[contains(text(),'Сохранить тему')]")
+    BUTTON_DELETE_TOPIC_CONFIRM = (By.XPATH, "//p[contains(text(),'Удалить тему')]")
+    BUTTON_CREATE_TOPIC_CONFIRM = (By.XPATH, "//p[contains(text(),'Создать тему')]")
+    """check same name and last in list"""""
+    GO_TO_TOPICS_LIST = (By.XPATH, "//div[@class='ReactModal__Content ReactModal__Content--after-open lms-theme-structure m-popup__window']")
+    NAME_1 = (By.XPATH, "(//div[contains(text(),'THE SAME NAME')])[1]")
+    NAME_2 = (By.XPATH, "(//div[contains(text(),'THE SAME NAME')])[2]")
+    NAME_2_LAST_IN_LIST = (By.XPATH, "(//li[@class='m-tree-item m-tree-item__wrapper'])[23]")
+    THE_SAME_NAME_LIST = (By.XPATH, "//div[text()='THE SAME NAME']")
+    SVG_CLOSE_TOPICS_WINDOW = (By.XPATH, "//div[@class='button-action__icon-wrapper']")
+    """edit question"""
+    TEXT_SETTINGS_QUESTION = (By.XPATH, "//h4[contains(text(),'Настройка вопроса')]")
+    TEXT_QUESTIONS_TEXT = (By.XPATH, "//div[text()='текст вопроса']")
+    TEXT_QUESTIONS_TYPE = (By.XPATH, "//div[text()='тип вопроса']")
+    TEXT_QUESTIONS_OPTIONS = (By.XPATH, "//h4[contains(text(),'Варианты ответа')]")
+    TEXT_TOPIC = (By.XPATH, "//h4[contains(text(),'Тема')]")
+    TEXT_CHOOSE_TOPIC = (By.XPATH, "//div[text()='выберите тему']")
+    ANSWER_CHECKBOX_1 = (By.XPATH, "//label[@class='checkbox-wrapper checkbox-wrapper--no-label']")
+    ANSWER_CHECKBOX_1_1 = (By.CSS_SELECTOR, "label[class='checkbox-wrapper checkbox-wrapper--no-label']")
+    """edit"""
+    SVG_EDIT_QUESTION = (By.XPATH, "//div[@class='lms-question-bar__wrapper']//a[@class='m-link']")
+    BUTTON_EDIT_QUESTION_SAVE = (By.XPATH, "//p[contains(text(),'Сохранить изменения')]")
+    """new question"""
+    BUTTON_NEW_QUESTION = (By.XPATH, "//p[contains(text(),'Новый вопрос')]")
+    NEW_ANSWER_PLACEHOLDER = (By.XPATH, "(//textarea[@placeholder='Введите текст ответа'])[2]")
+    ANSWER_CHECKBOX_ADD = (By.XPATH, "(//label[@class='checkbox-wrapper checkbox-wrapper--no-label'])[2]")
+    TEXT_CHECK_RESULT_CREATED_QUESTIONS_FIRST = (By.XPATH, "(//div[@class='lms-question-bar__wrapper'])[1]")
+    TEXT_CHECK_RESULT_CREATED_QUESTIONS_SECOND = (By.XPATH, "(//div[@class='lms-question-bar__wrapper'])[2]")
+    LIST_QUESTIONS = (By.XPATH, "//span[contains(text(),'Вопрос')]")
+    """add and edit question in article"""
+    CREATE_BUTTON = (By.XPATH, "//div[text()='Создать']")
+    CREATE_ARTICLE = (By.XPATH, "//div[contains(text(),'Статья')]")
+    UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
+    INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
+    NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    # FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR, "select[class='m-ui-select__select']")
+    # FOLDER_SAVE_ARTICLE = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
+    FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR, "div[class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled'] select[class='m-ui-select__select']")
+    TEXT_AREA_ARTICLE = (By.XPATH, "//div[@aria-label='false']")
+    CHECKBOX_INSERT_FILES = (By.XPATH, "//section[@class='m-file-view__content-block']")
+    INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")
+    BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    # TEXT_TYPOGRAPHY_CONTENT = (By.XPATH, "//h3[contains(text(),'Настройки публикации контента')]")
+    TEXT_TYPOGRAPHY_CONTENT = (By.XPATH, "//h3[text()='Настройки публикации контента']")
+    BUTTON_JUST_NOTIFY = (By.XPATH, "(//span[contains(text(),'только оповестить')])[1]")
+    TEXT_CONFIRM_READ = (By.XPATH, "//span[contains(text(),'подтвердить прочтение')]")
+    TEXT_TAB_TEST = (By.XPATH, "//p[text()='тест']")
+    BUTTON_SUBMIT = (By.CSS_SELECTOR, "button[type='submit']")
+    TEXTAREA_ALERT = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
+    """check checked"""
+    CHECKED_CHECK = (By.XPATH, "//section[@class='m-file-view m-file-view--selected m-file-view--image-cover m-file-view--selectable file-manager__item']")
+    # LIST_TABS = (By.CSS_SELECTOR, "li[class='tabs__list-item']")
+    LIST_TABS = (By.CSS_SELECTOR, "ul[class='tabs']")
+    """add question"""
+    BUTTON_ADD_QUESTION = (By.XPATH, "//p[contains(text(),'Добавить вопрос')]")
+    """check text an checkboxes"""
+    TEXT_CHOOSE_QUESTION_FOR_TEST = (By.CSS_SELECTOR, "header[class='m-popup__header']")
+    LIST_CHECKBOXES = (By.CSS_SELECTOR, "label[class='m-switch-box lms-question-bar__switch']")
+    ON_CHECKBOX_ALL_QUESTIONS = (By.XPATH, "//label[@class='m-switch-box lms-questions-lib__header-switch']")
+    """move questions"""
+    QUESTIONS_FIRST_POSITION_CHECK = (By.XPATH, "(//p[normalize-space()='Edit question'])[1]")
+    INPUT_TEXTAREA_ALERT = (By.CSS_SELECTOR, "textarea[class='m-ui-textarea__textarea']")
+    BUTTON_CONTINUE = (By.XPATH, "//p[text()='Продолжить']")
+    QUESTIONS_FIRST_POSITION = (By.XPATH, "(//div[@class='article-wizard-tests-question-row__left-side'])[1]")
+    SVG_CLOSE_CREATED_ARTICLE = (By.CSS_SELECTOR, "svg[class='article-modal__close']")
+    QUESTIONS_FIRST_POSITION_CSS = (By.CSS_SELECTOR, "body > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)")
+    QUESTIONS_SECOND_POSITION = (By.XPATH, "(//div[@class='article-wizard-tests-question-row__left-side'])[2]")
+    QUESTIONS_SECOND_POSITION_CSS = (By.CSS_SELECTOR, "body > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)")
+    # TAB_ACTIVE = (By.XPATH, "//div[@class='tab-item tab-item--active']")
+    TAB_ACTIVE = (By.XPATH, "(//div[@class='tab-item tab-item--active'])[2]")
+    BUTTON_FINISH = (By.XPATH, "//button[@type='submit']")
+    EDIT_ARTICLE = (By.XPATH, "//div[text()='изменить']")
+    BUTTON_GO_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
+    TEXT_GET_TESTED = (By.XPATH, "//span[contains(text(),'пройти тестирование')]")
+    RADIOBUTTON_SMALL_CORRECT_CONTENT = (By.XPATH, "//span[contains(text(),'Небольшие корректировки контента')]")
+    RADIOBUTTON_BIG_CORRECT_CONTENT = (By.XPATH, "//span[contains(text(),'Значительные изменения контента')]")
+    """check position"""
+    LIST_QUESTIONS_POSITION = (By.CSS_SELECTOR, "div[class='article-wizard-tests-question-row__left-side']")
+    """del question from test"""
+    SVG_DEL_FIRST_QUESTION = (By.XPATH, "(//*[local-name()='svg'][@class='article-wizard-tests-question-row__control-icon'])[3]")
+    SVG_DEL_SECOND_QUESTION = (By.XPATH, "(//*[local-name()='svg'][@class='article-wizard-tests-question-row__control-icon'])[6]")
+    LIST_SVG_DEL_QUESTION = (By.XPATH, "//div[@class='article-wizard-tests-question-row__control-button article-wizard-tests-question-row__control-button--remove']")
+    CONFIRM_BUTTON_DELETE = (By.XPATH, "//button[@class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
+    """check by template"""
+    CREATE_TEMPLATES = (By.XPATH, "//div[contains(text(),'Шаблон')]")
+    NEW_TEMPLATE = (By.XPATH, "//div[@class='m-lms-action-tooltip m-modal-templates__template-card']")
+    ADD_FIELD_BUTTON = (By.XPATH, "//button[contains(text(),'Добавить поле')]")
+    LIST_OF_FIELDS_1 = (By.XPATH, "//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[1]")
+    INPUT_NAME_OF_FIELD = (By.XPATH, "//input[@placeholder='Введите название поля']")
+    SAVE_TEMPLATES = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']//p[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text'][contains(text(),'сохранить')]")
+    INPUT_NAME_OF_TEMPLATES = (By.XPATH, "//input[@placeholder='Введите название шаблона']")
+    SAVE_TEMPLATES_CHANGE = (By.XPATH, "//p[text()='Сохранить']")
+    FINISH_BUTTON_SCRIPT = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    DROPDOWN = (By.XPATH, "//span[@class='cke_button_icon cke_button__inserttemplated_icon']")
+    FRAME = (By.XPATH, "//iframe[@class='cke_panel_frame']")
+    DROP_DOWN_FILES = (By.XPATH, "//a[@title='Файлы']")
+    FOLDER_SAVE = (By.XPATH, "//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled']//select[@class='m-ui-select__select']")
+    INPUT_NAME_CONTENT = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    TABS_CHECK_TEXT_ALL = (By.XPATH, "//div[@class='wizard-wrapper__head']//ul[@class='tabs']")
+    """conversation status check"""
+    CONVERSATION_CHECK = (By.XPATH, "//div[@class='m-file-view__status']")
+    """script"""
+    CREATE_SCRIPT = (By.XPATH, "//div[contains(text(),'Пошаговый сценарий')]")
+    ADD_STEP = (By.XPATH, "//p[contains(text(),'добавить шаг')]")
+    TEXT_AREA = (By.XPATH, "//div[@aria-label='false']")
+    # BUTTON_TYPOGRAPHY_SCRIPT = (By.XPATH, "//section[@class='m-scenario-flow__editor-actions']//button[@type='button']")
+    # BUTTON_TYPOGRAPHY_SCRIPT = (By.CSS_SELECTOR, "section[class='m-scenario-flow__editor-actions'] button[type='button']")
+    DIRECT_FOLDER_NAME = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
+    BUTTON_TYPOGRAPHY_SCRIPT = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
+    NAME_OF_STEP_SCRIPT = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    # DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
+    DIRECT_FOLDER = (By.XPATH, "//select[@class='m-ui-select__select']")
+    INPUT_NAME_STEP = (By.XPATH, "//input[@name='articleName']")
+    DROPDOWN_STEP = (By.CSS_SELECTOR, "select[name='id']")
+    BUTTON_DELETE_DRAFT = (By.XPATH, "//p[text()='Удалить черновик']")
+    INPUT_NAME_REQUEST = (By.CSS_SELECTOR, "input[placeholder='Введите запрос']")
+    BUTTON_ADD = (By.XPATH, "//p[contains(text(),'Добавить')]")
+    RADIOBUTTON_INCLUDED_CONTENT = (By.XPATH, "//span[contains(text(),'Содержимое контента')]")
+    BUTTON_FINISH_1 = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    INPUT_TEXTAREA_FIELD = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
+    GO_TO_CONTENT = (By.XPATH, "(//div[text()='Контент 1'])[2]")
+    BUTTON_FINISH_CONFIRM = (By.XPATH, "//p[contains(text(),'Продолжить')]")
 
 
+class LocatorsCheckNewsHistory:
+    FRAME_PERSON_CLOSE = (By.XPATH, "//div[@role='presentation']")
+    BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    BUTTON_SUBMIT = (By.CSS_SELECTOR, "button[type='submit']")
+    BUTTON_FINISH_1 = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    INPUT_TEXTAREA_FIELD = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
+    """change article"""
+    ARTICLE_CHANGE = (By.XPATH, "//div[text()='изменить']")
+    ARTICLE_NAME_CHANGE = (By.CSS_SELECTOR, "input[placeholder='Введите название контента']")
+    CHECKBOX_ADD_ALL_ROLE_FOR_ARTICLE = (By.CSS_SELECTOR, "div[class='access-wrapper__header-block'] svg")
+    """add comment"""
+    ADD_COMMENT = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст комментария']")
+    SEND_COMMENT = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
+    SVG_CLOSE_ARTICLE = (By.XPATH, "//body/div[@class='article-modal__portal']/div[@class='ReactModal__Overlay ReactModal__Overlay--after-open article-modal__overlay']/div[@role='dialog']/article[@class='article-modal']/div[@class='article-modal__main']/div[@class='article-modal__breadcrumbs-wrapper']/div[2]//*[local-name()='svg']")
+    """del article"""
+    HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    ADDED_COMMENT = (By.XPATH, "(//div[@data-title='Добавлен комментарий'])[1]")
+    OPEN_ARTICLE_FOR_DEL = (By.CSS_SELECTOR, ".link-iconed__label-text")
+    MEATBALL_MENU = (By.CSS_SELECTOR, ".popuper__wrapper")
+    DEL_ARTICLE = (By.XPATH, "//p[contains(text(),'Удалить')]")
+    BUTTON_CONFIRM_DEL = (By.CSS_SELECTOR, "button[class='m-button m-button--success m-button--medium wizard-wrapper__action']")
+    """restored"""
+    BUTTON_ALL_DELETED = (By.CSS_SELECTOR, "#all-trashed-folders-item")
+    BUTTON_RESTORED = (By.CSS_SELECTOR, ".warning-block__action")
+    SHOW_ALL_DELETED = (By.XPATH, "//span[contains(text(),'показать')]")
+    SVG_CLOSE_RESTORED_ARTICLE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close'])[1]")
+    """add new role"""
+    PERSONS = (By.XPATH, "//a[@data-tip='Участники']")
+    ADD_ROLE = (By.CSS_SELECTOR, "button[class='m-ui-button-text']")
+    INPUT_NAME_ROLE = (By.CSS_SELECTOR, "input[placeholder='Введите название роли']")
+    SWITCH_BOX_CONTROL_CONTENT = (By.XPATH, "//span[contains(text(),'Управление контентом')]/../label[@class='m-switch-box']")
+    CHECKBOX_RESTORE_CONTENT = (By.XPATH, "//span[contains(text(),'Восстановление контента')]")
+    BUTTON_CREATE_ROLE = (By.CSS_SELECTOR, "button[class='m-button m-button--success m-button--medium']")
+    BUTTON_SETTING_ACCESS = (By.XPATH, "//p[contains(text(),'Настроить доступы')]")
+    BUTTON_SAVE_CHANGES = (By.CSS_SELECTOR, "button[class='m-button m-button--success m-button--medium']")
+    BUTTON_SAVE_CHANGES_CONFIRM = (By.CSS_SELECTOR, "button[class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
+    BUTTON_CHANGE_PASSWORD = (By.XPATH, "//p[contains(text(),'Сменить пароль')]")
+    INPUT_NEW_PASSWORD = (By.CSS_SELECTOR, "#newPass")
+    INPUT_REPEAT_PASSWORD = (By.CSS_SELECTOR, "#repPass")
+    TEST_PROJECT = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
+    SVG_POPUP_CLOSE_CREATED_PERSON = (By.XPATH, "//div[@class='popup__close']")
+    PERSONS_AND_ROLES = (By.XPATH, "//span[text()='Участники']")
+    BUTTON_HISTORY = (By.XPATH, "//a[@data-tip='История']")
+    SVG_CLOSE_WINDOW_CREATED_PERSON = (By.CSS_SELECTOR, "div[role='presentation']")
+    """check del article person1"""
+    DEL_ARTICLE_2 = (By.XPATH, "(//header[@class='m-news-item__header'])[1]/../div[text()='deleted 2']")
+    DEL_ARTICLE_2_WARNING = (By.XPATH, "//div[text()='Внимание! Этот контент удален']")
+    RESTORED_ARTICLE_1 = (By.XPATH, "(//header[@class='m-news-item__header'])[4]/../div[text()='restored 1']")
+    RESTORED_ARTICLE_1_CHECK_CHANGE = (By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'changed name')]")
+    RESTORED_ARTICLE_1_CHECK_ADDED_COMMENT = (By.XPATH, "//p[text()='1 комментарий']")
+    SVG_CLOSE_CREATED_ARTICLE = (By.XPATH, "//body/div[@class='article-modal__portal']/div[@class='ReactModal__Overlay ReactModal__Overlay--after-open article-modal__overlay']/div[@role='dialog']/article[@class='article-modal']/div[@class='article-modal__main']/div[@class='article-modal__breadcrumbs-wrapper']/div[2]//*[local-name()='svg']")
+    """check del article person2"""
+    RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2 = (By.CSS_SELECTOR, "div[data-title='Восстановлен контент']")
+    LABEL_ADMINISTRATOR_PERSON = (By.CSS_SELECTOR, "article[class='m-ui-avatar-default m-ui-avatar-default--small']")
+    LABEL_ADMINISTRATOR_PERSON_OUT = (By.XPATH, "//p[contains(text(),'выйти')]")
+    """del person"""
+    LIST_ALL_PERSON = (By.CSS_SELECTOR, "div[class='m-user-card-info user-card__item m-user-card-info--without-checkbox']")
+    CHANGE_DATA_PERSON = (By.XPATH, "//p[contains(text(),'Изменить данные')]")
+    DEL_PERSON = (By.XPATH, "//p[contains(text(),'Удалить пользователя')]")
+    DEL_PERSON_CONFIRM = (By.CSS_SELECTOR, "button[class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
+    """comment check"""
+    COMMENT_CREATED = (By.CSS_SELECTOR, ".m-ui-paper.m-news-item__canvas.m-news-item__canvas--ticket.m-ui-paper--hoverable.m-ui-paper--shadowed")
+    TEXT_COMMENT_CHECK = (By.XPATH, "//div[contains(text(),'Комментарий к контенту')]")
+    FIRST_DELETED_CONTENT = (By.XPATH, "(//div[normalize-space()='deleted 2'])[1]")
+    TEXT_CHECK_CANT_COMMENT = (By.XPATH, "//span[text()='Комментирование в этом контенте запрещено']")
+    SVG_CLOSE_ARTICLE_ALERT = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg")
 
 
+class AddFilterChangesLocators:
+
+    SETTINGS = (By.XPATH, "//a[@data-tip='Настройки']")
+    FILTERS_FOR_SEARCHING = (By.CSS_SELECTOR, ".m-ui-paper.m-big-card.m-tags-button.m-ui-paper--hoverable.m-ui-paper--shadowed")
+    BUTTON_CREATE_GROUP_FILTER = (By.CSS_SELECTOR, ".empty-layout__upload")
+    INPUT_NAME_GROUP = (By.CSS_SELECTOR, "input[class='m-ui-text-input__input']")
+    BUTTON_GROUP_ADD = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium']")
+    """add filters"""
+    SEARCH_INPUT_BY_NAME_FILTER = (By.ID, "#tagManagerSearchInput")
+    BUTTON_ADD_FILTER = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium single-editable-item__button']")
+    INPUT_NAME_FILTER = (By.CSS_SELECTOR, "input[class='form-input-wrapper__input']")
+    BUTTON_ADD_FILTER_ADD = (By.CSS_SELECTOR, "div[class='single-editable-item__actions single-editable-item__actions--edit'] button[type='button']")
+    """del filters"""
+    # SVG_DEL_LIST = (By.XPATH, "//button[@class='both-sides-alignment-card-line__action single-editable-item__action single-editable-item__action--remove icon-button']")
+    SVG_DEL_LIST = (By.XPATH, "//span[1]//button[2]//*[local-name()='svg']")
+    SVG_DEL_1 = (By.XPATH, "(//button[@class='both-sides-alignment-card-line__action single-editable-item__action single-editable-item__action--remove icon-button'])[1]")
+    SVG_DEL_2 = (By.XPATH, "(//button[@class='both-sides-alignment-card-line__action single-editable-item__action single-editable-item__action--remove icon-button'])[2]")
+    SVG_DEL_3 = (By.XPATH, "//button[@class='both-sides-alignment-card-line__action single-editable-item__action single-editable-item__action--remove icon-button']")
+    SVG_DEL_LIST_CONFIRM = (By.CSS_SELECTOR, "button[class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
+    CHANGE_NAME_GROUP = (By.CSS_SELECTOR, ".m-ui-typography.m-ui-typography--bold.m-ui-typography--14x14.m-ui-button-text__label")
+    BUTTON_DEL_GROUP = (By.CSS_SELECTOR, "button[class='m-button m-button--danger m-button--medium editable-items-list__action']")
+    BUTTON_DEL_GROUP_CONFIRM = (By.CSS_SELECTOR, "button[class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
+    """close window"""
+    SVG_CLOSE_WINDOW = (By.CSS_SELECTOR, "div[class='popup__close']")
+    """mass change"""
+    MEATBALL_MENU = (By.CSS_SELECTOR, "button[class='m-button-basic-wrapper m-button-basic m-button-basic--tertiary m-button-basic--medium m-button-basic-wrapper--tertiary m-button-basic-wrapper--medium m-button-basic-wrapper--square']")
+    MASS_CHANGE = (By.XPATH, "//div[text()='Массовое изменение']")
+    DROPDOWN_FILTERS_FOR_SEARCHING = (By.CSS_SELECTOR, "div[class='m-ui-select m-ui-input-wrapper-2'] select[class='m-ui-select__select']")
+    """article by template"""
+    BUTTON_SUBMIT = (By.CSS_SELECTOR, "button[type='submit']")
+    INPUT_NAME_REQUEST = (By.CSS_SELECTOR, "input[placeholder='Введите запрос']")
+    BUTTON_ADD = (By.XPATH, "//p[contains(text(),'Добавить')]")
+    RADIOBUTTON_INCLUDED_CONTENT = (By.XPATH, "//span[contains(text(),'Содержимое контента')]")
+    BUTTON_FINISH = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    INPUT_TEXTAREA_FIELD = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
+    """script"""
+    # BUTTON_TYPOGRAPHY = (By.XPATH, "//p[contains(text(),'опубликовать')]")
+    BUTTON_TYPOGRAPHY_SCRIPT = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
+    BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled']//select[@class='m-ui-select__select']")
+    BUTTON_FINISH_CONFIRM = (By.XPATH, "//p[contains(text(),'Продолжить')]")
+    """check article"""
+    DROPDOWN_ACTIONS = (By.XPATH, "(//select[@class='m-ui-select__select'])[2]")
+    DROPDOWN_FILTERS = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
+    DROPDOWN_FILTERS_TEXT = (By.XPATH, "(//select[@class='m-ui-select__select'])[5]//option[1]")
+    BUTTON_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium']")
+    BUTTON_CONTINUE = (By.CSS_SELECTOR, "button[class='m-button m-button--success m-button--medium']")
+    FILTER1 = (By.CSS_SELECTOR, "option[value='403']")
+    FILTER2 = (By.CSS_SELECTOR, "option[value='402']")
+    FILTER3 = (By.CSS_SELECTOR, "option[value='404']")
+    """tooltips"""
+    # TOOLTIP_ACTION = (By.XPATH, "(//style[@aria-hidden='true'])[4]")
+    # TOOLTIP_ACTION = (By.XPATH, "//style[@aria-hidden='true']")
+    # TOOLTIP_ACTION = (By.XPATH, "//h4[contains(text(),'Действие')]")
+    TOOLTIP_ACTION = (By.XPATH, "//h4[contains(text(),'Действие')]//*[local-name()='svg']")
+    TOOLTIP_FILTERS = (By.XPATH, "//h4[contains(text(),'Фильтры')]//*[local-name()='svg']")
+    # TOOLTIP_ALL_LIST = (By.CSS_SELECTOR, "div[class='m-role-tooltip__toggler-icon m-role-tooltip__toggler-icon--simple m-title__icon']")
+    # TOOLTIP_ALL_LIST = (By.XPATH, "//style[@aria-hidden='true']")
+    """check click button"""
+    ACTION_CHECK_VISIBLE = (By.XPATH, "//option[@value='add']")
+    LIST_ADDED_FILTERS = (By.CSS_SELECTOR, ".massive-change__tags-item")
+    # FIRST_OF_CONTENT_FOR_CHOOSE = (By.XPATH, "//div[@class='m-selection-card massive-change__content_item'][1]")
+    GO_TO_CONTENT = (By.XPATH, "(//div[text()='Контент 1'])[2]")
+    INPUT_SEARCH_CONTENT_BY_NAME_FOR_ADD_FILTERS = (By.CSS_SELECTOR, "input[placeholder='Введите название контента']")
+    CREATED_CONTENT_FOR_FILTERS = (By.CSS_SELECTOR, ".massive-change__check-all-wrapper")
+    # FILTERS = (By.CSS_SELECTOR, ".action-button__icon")
+    FILTERS = (By.XPATH, "//div[@class='m-ui-paper tag-item button-sort__item action-button m-ui-paper--hoverable m-ui-paper--shadowed']")
+    ARTICLE_BY_FILTERS = (By.CSS_SELECTOR, ".m-ui-paper.article-preview__body.m-ui-paper--shadowed")
+    """check article"""
+    TEXT_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader']//p[contains(text(),'Hello')]")
+    VIDEO_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader']//div[@class='m-video']")
+    AUDIO_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader']//div[@class='m-audio']")
+    AUDIO_SCRIPT = (By.CSS_SELECTOR, "audio[title='undefined']")
+    CHANGE_ARTICLE = (By.XPATH, "//div[text()='изменить']")
+    BUTTON_TYPOGRAPHY_ARTICLE = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    BUTTON_ARTICLE_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
+    TEXT_REQUEST_ARTICLE = (By.CSS_SELECTOR, "div[class='both-sides-alignment-card-line__left-side both-sides-alignment-card-line__left-side--bottom-text both-sides-alignment-card-line--black-label-text'] span[class='both-sides-alignment-card-line__text']")
+    TEXT_REQUEST_SCRIPT = (By.XPATH, "(//span[@class='both-sides-alignment-card-line__text'])[2]")
+    SVG_DELETE_FILTER_ADDED = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__action.search-wrapper__tag-btn--delete.icon-button")
+    DROPDOWN_FILTERS_FOR_CHANGE = (By.XPATH, "//div[@class='m-ui-select m-ui-input-wrapper-2']//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed']//select[@class='m-ui-select__select']")
+    TO_GO_CONTENT = (By.CSS_SELECTOR, "section[class='m-bread-crumbs'] div[class='m-button-basic__text']")
+    CLOSE_WINDOW = (By.CSS_SELECTOR, "//div[class='popup__close']")
+    """check template"""
+    FIELD_TEXT = (By.XPATH, "(//p[contains(text(),'some text')])[1]")
+    FIELD_TEXT_2 = (By.XPATH, "//section[@class='m-article-editor-templated article-modal__content article-modal--unique-class']//pre[@class='m-article-editor-templated__field-value'][normalize-space()='one more some text']")
+    FIELD_TEXT_777 = (By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'][normalize-space()='777'])[1]")
+    FIELD_TEXT_WEBSITE = (By.XPATH, "(//a[@href='https://www.something.com'])[1]")
+    FIELD_TEXT_MAIL = (By.XPATH, "(//a[@class='m-article-editor-templated__field-value m-article-editor-templated__field-value--link'])[2]")
+    FIELD_TEXT_NAME = (By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'])[3]")
 
 
+class AddViewContentWizardLocators:
+    """create article"""
+    INPUT_NAME_REQUEST = (By.CSS_SELECTOR, "input[placeholder='Введите запрос']")
+    BUTTON_ADD = (By.XPATH, "//p[contains(text(),'Добавить')]")
+    RADIOBUTTON_INCLUDED_CONTENT = (By.XPATH, "//span[contains(text(),'Содержимое контента')]")
+    BUTTON_FINISH = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    BUTTON_SUBMIT = (By.CSS_SELECTOR, "button[type='submit']")
+    INPUT_TEXTAREA_FIELD = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
+    GO_TO_CONTENT = (By.XPATH, "(//div[text()='Контент 1'])[2]")
+    BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    """tooltip"""
+    SVG_TOOLTIP_REQUEST_FIELD = (By.XPATH, "//h4[contains(text(),'Закрепление контента в поисковой выдаче')]//*[local-name()='svg']")
+    """check radio request"""
+    RADIO_LINK_TO_CONTENT = (By.XPATH, "//span[contains(text(),'Ссылка на контент')]/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
+    CHECK_REQUEST = (By.CSS_SELECTOR, ".m-content-fix-wizard__content-wrapper")
+    FOLDER_CONTENT = (By.XPATH, "//p[text()='Контент 1']")
+    NAME_ARTICLE = (By.CSS_SELECTOR, ".m-content-fix-wizard__article-name")
+    BUTTON_FINISH_1 = (By.XPATH, "//p[contains(text(),'Завершить')]")
+    TEXT_LINK_TO_CONTENT = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__bottom-text")
+    """search"""
+    SEARCH = (By.XPATH, "//div[text()='Поиск']")
+    INPUT_SEARCH = (By.XPATH, "//input[@placeholder='Поиск по истории']")
+    INPUT_SEARCH_NAME = (By.XPATH, "//input[@placeholder='Поиск контента']")
+    CHECK_SEARCH_RESULT = (By.XPATH, "//p[@class='article-preview__title title-element']")
+    TEXT_FIXING_BY_EXPERT = (By.XPATH, "//p[text()='Закреплено экспертом']")
+    CHANGE_FIXING_CONTENT = (By.XPATH, "//span[contains(text(),'изменить')]")
+    INPUT_FIELD_NAME_REQUEST = (By.XPATH, "(//input[@placeholder='Введите запрос'])[1]")
+    SVG_CLOSE_WINDOWS_CHECK = (By.XPATH, "(//div[@role='presentation'])[2]")
+    """create more requests"""
+    HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    CHANGE_ARTICLE = (By.XPATH, "//div[contains(text(),'изменить')]")
+    BUTTON_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
+    TO_GET_NAME_ADDED_REQUEST = (By.CSS_SELECTOR, ".m-content-fix-wizard__content-wrapper")
+    INPUT_TEXT_ALERT_NAME = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
+    """check added request"""
+    TO_GET_NAME_REQUEST = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__text")
+    BUTTON_ADD_REQUEST = (By.CSS_SELECTOR, "div[class='search-wrapper__form-field'] button[type='button']")
+    LIST_ADDED_REQUEST = (By.CSS_SELECTOR, "span[class='both-sides-alignment-card-line__text']")
+    BUTTON_CONTINUE_DRAFT = (By.XPATH, "//p[text()='Продолжить']")
+    SVG_CLOSE_WINDOW_REQUEST = (By.CSS_SELECTOR, "div[class='popup__close']")
+    SVG_CLOSE_WINDOW_ARTICLE = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg path")
+    """check template"""
+    TYPOGRAPHY_TEMPLATE = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
+    SUBMIT_TEMPLATES = (By.XPATH, "//button[@type='submit']")
+    INPUT_REQUEST = (By.XPATH, "//input[@placeholder='Введите запрос']")
+    SVG_CLOSE_WINDOW_ARTICLE_BY_TEMPLATE = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg")
+    """check script"""
+    BUTTON_TYPOGRAPHY_SCRIPT = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
+    SVG_CLOSE_WINDOW_EDIT_SCRIPT = (By.CSS_SELECTOR, "section[class='m-scenario-flow__editor-actions'] svg path")
+    """check files"""
+    FILES_NAME = (By.CSS_SELECTOR, ".m-content-fix-wizard__article-name")
+    INPUT_NAME_FILE = (By.CSS_SELECTOR, "input[placeholder='Введите название']")
+    CLOSE_WINDOW_FILES = (By.CSS_SELECTOR, ".article-editor-container-document__close-button-wrapper svg path")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class SearchRuEnLocators:
+    SVG_CLOSE_WINDOW_ARTICLE_RU_EN = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close'])[1]")
+    BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    """del article created"""
+    MEATBALL_ARTICLE = (By.CSS_SELECTOR, ".popuper__wrapper")
+    SVG_DEL = (By.XPATH, "//p[contains(text(),'Удалить')]")
+    INPUT_ALERT_FOR_DEL = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
+    BUTTON_EXECUTE = (By.CSS_SELECTOR, "button[class='m-button m-button--success m-button--medium wizard-wrapper__action']")
+    LIST_ARTICLE_FOR_DEL = (By.XPATH, "//div[contains(text(),'text_alert')]")
+    """check search"""
+    SEARCH = (By.XPATH, "//div[text()='Поиск']")
+    LIST_RESULT_SEARCH_RU_FIRST = (By.XPATH, "//span[contains(text(),'Соображения')]")
+    LIST_RESULT_SEARCH_EN_SECOND = (By.XPATH, "//span[contains(text(),'высшего')]")
+    LIST_RESULT_SEARCH_INVERSION = (By.XPATH, "//span[contains(text(),'Соображения высшего')]")
+    LIST_RESULT_SEARCH_EN_FIRST_EN = (By.XPATH, "//span[contains(text(),'said')]")
+    LIST_RESULT_SEARCH_EN_SECOND_EN = (By.XPATH, "//span[contains(text(),'dovish')]")
+    LIST_RESULT_SEARCH_EN_INVERSION_EN = (By.XPATH, "//span[contains(text(),'more dovish')]")
 
 
 

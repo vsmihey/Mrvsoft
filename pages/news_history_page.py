@@ -36,8 +36,6 @@ class CheckNewsHistoryPage(BasePage):
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         """change article"""
         self.element_is_visible(self.Locators.ARTICLE_CHANGE).click()
-
-
         time.sleep(1)
         # self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).clear()
         # time.sleep(1)
