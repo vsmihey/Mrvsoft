@@ -34,26 +34,32 @@ class BasePage:
         self.implicitly_wait()
 
     def element_is_visible(self, locator, timeout=10):
+        """ожидает появления элемента"""
         return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     def elements_are_visible(self, locator, timeout=10):
+        """работа с несколькоми элементами (например: список элементов)"""
         return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     """поиск по тексту в DOM дереве даже если элемент не виден"""
     def elements_is_present(self, locator, timeout=10):
+        """поиск элемента даже если он не виден"""
         return Wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
     def elements_are_present(self, locator, timeout=10):
+        """поиск элементов (спика элементов) даже если они не видны"""
         return Wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
 
     def elements_is_not_visible(self, locator, timeout=10):
+        """'элемент не виден (например: проверка что элемент не виден)"""
         return Wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
 
     def element_is_clickable(self, locator, timeout=2):
+        """элемент кликабельный"""
         return Wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
     def check_button_not_click(self, element):
-        """put element is visible or is present"""
+        """проверка что кнопка не кликабельны"""
         # Locators = AddFilterChangesLocators()
         try:
             element.click()
@@ -64,7 +70,7 @@ class BasePage:
         return click
 
     def input_in_my_project(self, driver):
-        """INPUT IN MY PROJECT"""
+        """вход в проект, если проект не создан, проект создается и выполняется вход"""
         Locators = FormPagesLocators
         try:
             self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
@@ -116,29 +122,33 @@ class BasePage:
     #     self.driver.implicitly_wait(10)
 
     def remove_class_script(self):
+        """Удаление класса элемента, что бы он стал видимым и с ним можно совершить действие"""
         self.driver.execute_script("""document.querySelector("input[type='file']").removeAttribute('class')""")
 
     def go_to_element(self, element):
+        """Переход к нужному едлементу (на вход принимает необходимый элемент)"""
         self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
 
     def scroll_to_down_page(self):
+        """Прокрутка вниз сраницы"""
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
 
     def open_new_tab(self, driver):
-        """open new tab"""
+        """Открытие новой вкладки"""
         driver.execute_script("window.open('https://google.com')")
 
     def get_cookies(self, driver):
-        """COOKIES GET"""
+        """Получение cookies"""
         pickle.dump(driver.get_cookies(), open("cookies.pkl", "wb"))
 
     def insert_cookies(self, driver):
-        """COOKIES INSERT"""
+        """Вставка cookies"""
         cookies = pickle.load(open("cookies.pkl", "rb"))
         for cookie in cookies:
             driver.add_cookie(cookie)
 
     def action_double_click(self, element):
+        """Двойной клик левой кнопкой мыши на элементе (на вход принимает необходимый элемент)"""
         action = ActionChains(self.driver)
         action.double_click(element)
         action.perform()
@@ -149,27 +159,29 @@ class BasePage:
         action.perform()
 
     def action_drag_and_drop_by_offset(self, element, x_coords, y_coords):
+        """Перетаскивание элемента путем зажатия ЛКМ на определенные координаты (на вход принимает необходимый элемент
+         и координаты сдвига по x и y)"""
         action = ActionChains(self.driver)
         action.drag_and_drop_by_offset(element, x_coords, y_coords)
         action.perform()
 
     def switch_to_frame(self, frame):
-        """input frame"""
+        """Переход в модалбное окно , на вход принимает модальное окно (пример: работа с виджетами)"""
         self.driver.switch_to.frame(frame)
 
     def switch_out_frame(self):
-        """out frame"""
+        """Выход из модального окна, на вход принимает модальное окно (пример: работа с виджетами)"""
         self.driver.switch_to.default_content()
 
     def download_files_is_visible(self):
-        """input is visible for load files"""
+        """Делает элемент видимым (пример: загрузка файлов)"""
         self.driver.execute_script(
             """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
         self.driver.execute_script(
             """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
 
     def create_and_open_new_template(self, driver):
-        """CREATE AND OPEN NEW TEMPLATE"""
+        """Создание и открытие нового шаблона"""
         Locators = FormPagesLocators
         self.element_is_visible(Locators.NEW_TEMPLATE).click()
         self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
@@ -185,6 +197,8 @@ class BasePage:
         templates_download.click()
 
     def check_len_name(self, driver, element, n: int = 256):
+        """Проверка длины слова (количество символов, пример: длина вводимых символов логина) На вход
+        принимает элемент куда вставляем эти символы"""
         # для цифр заменить ascii_uppercase на digits
         """генерация имени по n количеству символов"""
         name_content = ''.join(choice(ascii_uppercase) for i in range(n)) # + str(7)
@@ -196,6 +210,8 @@ class BasePage:
         return name_content, get_name
 
     def input_random_symbols(self, element, n: int = 25):
+        """Генерация имени по количеству символов. На вход
+        принимает элемент куда вставляем эти символы"""
         # для цифр заменить ascii_uppercase на digits
         """генерация имени по n количеству символов"""
         name_content = ''.join(choice(ascii_uppercase) for i in range(n)) # + str(7)
@@ -204,12 +220,12 @@ class BasePage:
         return name_content
 
     def data_sort(self, data):
-        """SORT LIST False сортировка по алфавиту, True - наоборот """
+        """Сортировка. False - сортировка по алфавиту, True - наоборот """
         data_sort = sorted(data, reverse=False)
         return data_sort
 
     def create_article_base(self):
-        """CREATE AND OPEN NEW ARTICLE"""
+        """Создание базовой статьи"""
         # self.input_in_my_project(self.driver)
         Locators = CreateTopicDatabaseLocators
         person = generated_person()
@@ -276,6 +292,7 @@ class BasePage:
         return first_name, name_request, text_alert
 
     def create_article_by_template_base(self, driver):
+        """Создание статьи по шаблону"""
         # self.input_in_my_project(self.driver)
         Locators = FormPagesLocators
         actions = ActionChains(driver)
@@ -381,6 +398,7 @@ class BasePage:
         return name, name_content, name_of_templates, name_request
 
     def create_script_base(self):
+        """Создание пошагового сценария"""
         # self.input_in_my_project(self.driver)
         action = ActionChains(self.driver)
         Locators = CreateTopicDatabaseLocators
@@ -437,8 +455,7 @@ class BasePage:
         return name_request_script, name_script
 
     def add_files_base(self, path):
-        """ADD AFF FILES FUNCTION
-        before using put to send keys path"""
+        """Добавление файлов в раздел Файлы"""
         # example:
         # path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
         # path5 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
@@ -486,7 +503,7 @@ class BasePage:
         return name_script
 
     def add_new_person_base(self, driver):
-        """ADD NEW PERSON"""
+        """Добавление нового пользователя"""
         Locators = FormPagesLocators()
         driver.implicitly_wait(10)
         person = generated_person()

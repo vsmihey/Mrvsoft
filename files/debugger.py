@@ -156,4 +156,9 @@ from requests.auth import HTTPBasicAuth
 # result = response.text
 # print(result)
 
+# path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
+# path2 = str(Path(pathlib.Path.cwd(), "avi.avi"))
+#
+# print(path2)
+
 
