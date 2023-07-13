@@ -1,7 +1,7 @@
-import base_class
-import data_login_password
+from pages import data_login_password
+from pages import users
 from locators.locators_form_pages import FormPagesLocators
-import users
+from pages import base_class
 
 
 class Authorisation(base_class.MainPage):
@@ -11,12 +11,12 @@ class Authorisation(base_class.MainPage):
         """Выбирается "встроенный" тип авторизации"""
         self.browser.find_element(*FormPagesLocators.TYPE_AUTHOR).send_keys('Встроенный')
 
-    def input_login(self, login=data_login_password.user_login_pogodin):
-        """Заполняем поле для ввода логина, если не передаем логин по дефолту вводит логин админа"""
+    def input_login(self, login=data_login_password.login):
+        """Заполняем поле для ввода логина, если не передаем логин, по дефолту вводит логин админа"""
         self.browser.find_element(*FormPagesLocators.LOGIN).send_keys(login)
 
-    def input_password(self, password=data_login_password.user_password_pogodin):
-        """Заполняем поле для ввода пароля, если не передаем пароль по дефолту вводит пароль админа"""
+    def input_password(self, password=data_login_password.password):
+        """Заполняем поле для ввода пароля, если не передаем пароль, по дефолту вводит пароль админа"""
         self.browser.find_element(*FormPagesLocators.PASSWORD).send_keys(password)
 
     def confirm_button(self):
@@ -39,7 +39,6 @@ class Authorisation(base_class.MainPage):
             page.input_password(user.password)
             page.confirm_button()
             page.select_project_superbank()
-            # time.sleep(0.5)
             assert page.get_actual_url() == f'{data_login_password.url}/news/space/1'
             print('Авторизация - Passed')
         except Exception:

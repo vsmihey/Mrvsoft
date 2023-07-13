@@ -4,7 +4,7 @@ import random
 from pathlib import Path
 from data.data import Person
 from faker import Faker
-from tempmail import TempMail
+#from tempmail import TempMail
 
 
 faker_en = Faker('En')

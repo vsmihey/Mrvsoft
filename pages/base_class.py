@@ -1,8 +1,7 @@
-import functools
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
-import data_login_password
+from pages import data_login_password
 
 # Настройки браузера
 chrome_options = webdriver.ChromeOptions()

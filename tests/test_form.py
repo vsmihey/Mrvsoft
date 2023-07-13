@@ -4,6 +4,7 @@ from pages.form_page import FormPage
 from pages.data_login_password import *
 from pages.article_page import ArticlePage, CopyPastePage, CreateDraftPage, FilesPages
 from pages.article_page import StepByScriptPage
+from pages import base_class
 
 
 @pytest.mark.order(1)
@@ -43,12 +44,13 @@ class TestFormPage:
         form_page.restore_incorrect()
         form_page.check_restore_text()
 
-    def test_title(self, driver):
-        form_page = FormPage(driver, url)
-        form_page.open()
-        form_page.input_in_my_project(driver)
-        print("input project")
-        form_page.all_title(driver)
+    def test_title(self):
+        form_page = FormPage()
+        #form_page.open()
+        form_page.get_authorisation_in_superbank()
+        #form_page.input_in_my_project(driver)
+        # print("input project")
+        form_page.all_title(base_class.driver)
 
     @pytest.mark.skip('restore password')
     def test_form_restore(self, driver):

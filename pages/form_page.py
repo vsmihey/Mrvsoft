@@ -13,9 +13,10 @@ from pages.base_page import BasePage
 from locators.locators_form_pages import FormPagesLocators as Locators
 from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
+from pages.authorisation_page import Authorisation
 
 
-class FormPage(BasePage):
+class FormPage(Authorisation, BasePage):
 
     def screenshot(self):
         offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
@@ -263,9 +264,9 @@ class FormPage(BasePage):
         check_text_login_used_value = check_text_login_used.text
         assert check_text_login_used_value == 'Данный логин уже используется'
         # print(check_text_login_used_value)
-        value_random = str(random.randint(999,9999))
+        value_random = str(random.randint(999, 9999))
         self.element_is_visible(Locators.LOGIN_NEW_PERSON).clear()
-        self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login+value_random)
+        self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login + value_random)
         self.element_is_visible(Locators.SAVE_PERSON).click()
         """check result create new person name"""
         name_check = last_name + ' ' + first_name
@@ -274,10 +275,10 @@ class FormPage(BasePage):
         text_check_created_new_user_name_value = text_check_created_new_user_name.text
         assert text_check_created_new_user_name_value == name_check
         # print(text_check_created_new_user_name_value)
-        print(login+value_random)
+        print(login + value_random)
         time.sleep(1)
         """check result create new person login"""
-        login_admin = login+value_random+' (администратор)'
+        login_admin = login + value_random + ' (администратор)'
         text_check_created_new_user_login = driver.find_element(By.XPATH, f"//span[text()='{login_admin}']")
         text_check_created_new_user_value = text_check_created_new_user_login.text
         assert text_check_created_new_user_value == login_admin
@@ -314,7 +315,7 @@ class FormPage(BasePage):
             self.element_is_visible(Locators.ADD_NEW_ROLE).click()
         driver.implicitly_wait(10)
         person = generated_person()
-        first_name ="role " + person.first_name + str(random.randint(999, 9999))
+        first_name = "role " + person.first_name + str(random.randint(999, 9999))
         self.button_invisible_role_check(driver)
         self.element_is_visible(Locators.INPUT_NAME_ROLE).send_keys(first_name)
         # push 13 check boxes
@@ -412,7 +413,7 @@ class FormPage(BasePage):
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
         time.sleep(2)
 
-    def delete_some_folder(self, driver, count_folders=3): # ставить на 1 папку больше
+    def delete_some_folder(self, driver, count_folders=3):  # ставить на 1 папку больше
         """DELETE SOME FOLDERS"""
         self.element_is_visible(Locators.CONTENT).click()
         time.sleep(1)
@@ -433,7 +434,7 @@ class FormPage(BasePage):
                     time.sleep(1)
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
                     time.sleep(1)
-                except ElementClickInterceptedException:    # ElementClickInterceptedException
+                except ElementClickInterceptedException:  # ElementClickInterceptedException
                     self.element_is_visible(Locators.MOVE_FROM_DEL_FOLDER).send_keys('Контент 1')
                     self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
                 except TimeoutException:
@@ -517,7 +518,7 @@ class FormPage(BasePage):
         # print(text_open_form_check_value)
         """create folder"""
         person = generated_person()
-        name_of_new_folder = person.first_name+str(random.randint(99,999))
+        name_of_new_folder = person.first_name + str(random.randint(99, 999))
         self.element_is_visible(Locators.NEW_FOLDER).click()
         text_new_folder_check = self.element_is_visible(Locators.TEXT_NEW_FOLDER_CHECK)
         text_new_folder_check_value = text_new_folder_check.text
@@ -690,7 +691,7 @@ class FormPage(BasePage):
         time.sleep(2)
         edit_new_folder = driver.find_element(By.XPATH, f"//div[text()='{first_name}']")
         edit_new_folder.click()
-        edit_name = first_name+'777'
+        edit_name = first_name + '777'
         # self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).clear()
         time.sleep(1)
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("777")
@@ -733,7 +734,8 @@ class FormPage(BasePage):
                     time.sleep(1)
                     try:
                         # self.element_is_visible(Locators.FOLDER1_FOR_DEL).click()
-                        folder1_for_del = driver.find_element(By.XPATH, "//div[@class='m-tree-item__draggable-content']")
+                        folder1_for_del = driver.find_element(By.XPATH,
+                                                              "//div[@class='m-tree-item__draggable-content']")
                         folder1_for_del.click()
                     except NoSuchElementException:
                         break
@@ -833,33 +835,3 @@ class FormPage(BasePage):
                     break
             except TimeoutException:
                 self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
