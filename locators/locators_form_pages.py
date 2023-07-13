@@ -17,6 +17,7 @@ class FormPagesLocators:
     HISTORY_BUTTON = (By.XPATH, "//a[@data-html='true']")
     """name project selen"""
     TEST_PROJECT = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
+    SUPER_BANK_PROJECT = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']") # name project
     """restore forms"""
     RESTORE = (By.XPATH, "//span[text()='Восстановить доступ']")
     RESTORE_LOGIN = (By.NAME, "username")
