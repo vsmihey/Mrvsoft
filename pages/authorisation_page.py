@@ -8,8 +8,6 @@ from pages import base_class
 class Authorisation(base_class.MainPage):
     """Класс авторизации в системе"""
 
-    # TODO: вынести авторизацию по переданной ссылке в отдельный метод
-
     def select_authorisation_type(self):
         """Выбирается "встроенный" тип авторизации"""
         self.browser.find_element(*FormPagesLocators.TYPE_AUTHOR).send_keys('Встроенный')
@@ -68,6 +66,22 @@ class Authorisation(base_class.MainPage):
             print('Авторизация - Failed')
             raise Exception
 
+    @staticmethod
+    def get_authorisation_in_url(url, user=users.admin):
+        """Метод для прохождения авторизации и переходы по переданной ссылке"""
+        try:
+            page = Authorisation(url=url)
+            page.open()
+            page.select_authorisation_type()
+            page.input_login(user.login)
+            page.input_password(user.password)
+            page.confirm_button()
+            time.sleep(0.5)
+            assert page.get_actual_url() == url
+            print('Авторизация - Passed')
+        except Exception:
+            print('Авторизация - Failed')
+            raise Exception
 
 # if __name__ == '__main__':
 #     # Authorisation.get_authorisation_in_superbank()
