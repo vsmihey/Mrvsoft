@@ -84,7 +84,7 @@ class TestFormPage:
     # @pytest.mark.skip('test_folder1_folder2')
     def test_folder1_folder2(self):
         form_page = FormPage()
-        form_page.open()
+        # form_page.open()
         form_page.get_authorisation_in_selen()
         form_page.folder1_folder2(base_class.driver)
         form_page.check_folder1_folder2(base_class.driver)

@@ -943,5 +943,9 @@ class SearchRuEnLocators:
     LIST_RESULT_SEARCH_EN_INVERSION_EN = (By.XPATH, "//span[contains(text(),'more dovish')]")
 
 
+class Comments:
+    EXPERT_QUESTION = (By.XPATH, "//span[@class='checkbox__label']")
+
+
 
 
