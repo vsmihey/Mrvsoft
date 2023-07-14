@@ -1,2 +1,0 @@
-class CKERedactor:
-    pass

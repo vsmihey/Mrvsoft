@@ -1,9 +1,6 @@
 import pathlib
 from pathlib import Path
 import time
-
-from selenium.common import TimeoutException
-
 from creating_panel import CreatingPanel
 from locators.locators_topic_database import CreateTopicDatabaseLocators as locators_topic_database
 from authorisation_page import Authorisation
@@ -20,18 +17,13 @@ class BaseArticleEditor(CreatingPanel):
 
     def change_folder(self):
         """Выбор папки сохранения"""
-        time.sleep(10)
         self.element_is_visible(locators_topic_database.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
-
 
     def text_area_article(self):
         """Наполнение тела статьи"""
 
-        path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
-        path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
-
-
-        print(path1, path2)
+        path1 = r'D:\проекты\Mrvsoft\tests\files\mp3.mp3'
+        path2 = r'D:\проекты\Mrvsoft\tests\files\avi.avi'
 
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Hello')
         self.elements_is_present(locators_topic_database.UPLOAD_MEDIA).click()
@@ -100,9 +92,8 @@ class Comments(Authorisation):
         page.comment_text_area('Серый комментарий')
         page.send_comment()
 
-
 if __name__ == '__main__':
-    BaseArticleEditor.creating_base_article()
-    print(BaseArticleEditor.BASE_ARCTICLE_URL)
+    # BaseArticleEditor.creating_base_article()
+    # print(BaseArticleEditor.BASE_ARCTICLE_URL)
 
-    # Comments.create_comment('https://test6.minervasoft.ru/news/space/1/article/3389')
+    Comments.create_comment('https://test6.minervasoft.ru/news/space/1/article/3389')
