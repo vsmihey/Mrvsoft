@@ -413,7 +413,7 @@ class FormPage(Authorisation, BasePage):
         self.element_is_visible(Locators.CLOSE_WINDOW_STRUCTURE).click()
         time.sleep(2)
 
-    def delete_some_folder(self, driver, count_folders=3):  # ставить на 1 папку больше
+    def delete_some_folder(self, count_folders=3):  # ставить на 1 папку больше
         """DELETE SOME FOLDERS"""
         self.element_is_visible(Locators.CONTENT).click()
         time.sleep(1)

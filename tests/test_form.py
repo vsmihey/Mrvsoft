@@ -47,7 +47,7 @@ class TestFormPage:
     def test_title(self):
         form_page = FormPage()
         #form_page.open()
-        form_page.get_authorisation_in_superbank()
+        form_page.get_authorisation_in_selen()
         #form_page.input_in_my_project(driver)
         # print("input project")
         form_page.all_title(base_class.driver)
@@ -60,34 +60,35 @@ class TestFormPage:
         form_page.authorization(login, password)
         form_page.restore_correct()
 
-    def test_add_new_person(self, driver):
-        form_page = FormPage(driver, url)
-        form_page.open()
-        form_page.input_in_my_project(driver)
-        form_page.add_new_person(driver)
+    def test_add_new_person(self):
+        form_page = FormPage()
+        # form_page.open()
+        form_page.get_authorisation_in_selen()
+        # form_page.input_in_my_project(driver)
+        form_page.add_new_person(base_class.driver)
 
-    def test_add_new_role(self, driver):
-        form_page = FormPage(driver, url)
-        form_page.open()
-        form_page.input_in_my_project(driver)
-        form_page.add_new_role(driver)
+    def test_add_new_role(self):
+        form_page = FormPage()
+        # form_page.open()
+        form_page.get_authorisation_in_selen()
+        form_page.add_new_role(base_class.driver)
         # time.sleep(1)
 
-    def test_folder_create_del_recovery(self, driver):
-        form_page = FormPage(driver, url)
-        form_page.open()
-        form_page.input_in_my_project(driver)
-        form_page.create_del_recovery_folder_content(driver)
-        form_page.delete_some_folder(driver, count_folders=8)
+    def test_folder_create_del_recovery(self):
+        form_page = FormPage()
+        # form_page.open()
+        form_page.get_authorisation_in_selen()
+        form_page.create_del_recovery_folder_content(base_class.driver)
+        form_page.delete_some_folder(count_folders=8)
 
     # @pytest.mark.skip('test_folder1_folder2')
-    def test_folder1_folder2(self, driver):
-        form_page = FormPage(driver, url)
+    def test_folder1_folder2(self):
+        form_page = FormPage()
         form_page.open()
-        form_page.input_in_my_project(driver)
-        form_page.folder1_folder2(driver)
-        form_page.check_folder1_folder2(driver)
-        form_page.delete_some_folder(driver, count_folders=5)
+        form_page.get_authorisation_in_selen()
+        form_page.folder1_folder2(base_class.driver)
+        form_page.check_folder1_folder2(base_class.driver)
+        form_page.delete_some_folder(count_folders=5)
 
     # def test_check_folder1_folder2(self, driver):
     #     form_page = FormPage(driver, url)
@@ -96,29 +97,29 @@ class TestFormPage:
     #     form_page.check_folder1_folder2(driver)
 
     # @pytest.mark.skip('delete folders')
-    def test_del_some_folders(self, driver):
-        form_page = FormPage(driver, url)
-        form_page.open()
-        form_page.input_in_my_project(driver)
-        form_page.delete_some_folder(driver, count_folders=15)  # ставить на 1 папку больше
+    def test_del_some_folders(self):
+        form_page = FormPage()
+        # form_page.open()
+        form_page.get_authorisation_in_selen()
+        form_page.delete_some_folder(count_folders=15)  # ставить на 1 папку больше
 
-    def test_favourites(self, driver):
-        form_page = FormPage(driver, url)
-        form_page.open()
-        form_page.input_in_my_project(driver)
-        form_page.favourites(driver)
+    def test_favourites(self):
+        form_page = FormPage()
+        # form_page.open()
+        form_page.get_authorisation_in_selen()
+        form_page.favourites(base_class.driver)
 
-    def test_add_to_favourites(self, driver):
-        form_page = FormPage(driver, url)
-        form_page.open()
-        form_page.input_in_my_project(driver)
-        form_page.add_to_favourites(driver)
+    def test_add_to_favourites(self):
+        form_page = FormPage()
+        # form_page.open()
+        form_page.get_authorisation_in_selen()
+        form_page.add_to_favourites(base_class.driver)
 
-    def test_add_normal_article(self, driver):
-        article_page = ArticlePage(driver, url)
-        article_page.open()
-        # article_page.input_in_my_project(driver)
-        article_page.add_normal_article(driver)
+    def test_add_normal_article(self):
+        article_page = ArticlePage()
+        # article_page.open()
+        article_page.get_authorisation_in_selen()
+        article_page.add_normal_article(base_class.driver)
 
     def test_fixing_article(self, driver):
         article_page = ArticlePage(driver, url)

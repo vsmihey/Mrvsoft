@@ -34,32 +34,32 @@ class BasePage:
         self.implicitly_wait()
 
     def element_is_visible(self, locator, timeout=10):
-        """ожидает появления элемента"""
+        """Ожидает появления элемента"""
         return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     def elements_are_visible(self, locator, timeout=10):
-        """работа с несколькоми элементами (например: список элементов)"""
+        """Работа с несколькоми элементами (например: список элементов)"""
         return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     """поиск по тексту в DOM дереве даже если элемент не виден"""
     def elements_is_present(self, locator, timeout=10):
-        """поиск элемента даже если он не виден"""
+        """Поиск элемента даже если он не виден"""
         return Wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
     def elements_are_present(self, locator, timeout=10):
-        """поиск элементов (спика элементов) даже если они не видны"""
+        """Поиск элементов (спика элементов) даже если они не видны"""
         return Wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
 
     def elements_is_not_visible(self, locator, timeout=10):
-        """'элемент не виден (например: проверка что элемент не виден)"""
+        """'Элемент не виден (например: проверка, что элемент не виден)"""
         return Wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
 
     def element_is_clickable(self, locator, timeout=2):
-        """элемент кликабельный"""
+        """Элемент кликабельный"""
         return Wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
     def check_button_not_click(self, element):
-        """проверка что кнопка не кликабельны"""
+        """Проверка, что кнопка не кликабельны"""
         # Locators = AddFilterChangesLocators()
         try:
             element.click()
@@ -70,7 +70,7 @@ class BasePage:
         return click
 
     def input_in_my_project(self, driver):
-        """вход в проект, если проект не создан, проект создается и выполняется вход"""
+        """Вход в проект, если проект не создан, проект создается и выполняется вход"""
         Locators = FormPagesLocators
         try:
             self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
