@@ -22,8 +22,8 @@ class BaseArticleEditor(CreatingPanel):
     def text_area_article(self):
         """Наполнение тела статьи"""
 
-        path1 = r'D:\проекты\Mrvsoft\tests\files\mp3.mp3'
-        path2 = r'D:\проекты\Mrvsoft\tests\files\avi.avi'
+        path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
+        path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
 
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Hello')
         self.elements_is_present(locators_topic_database.UPLOAD_MEDIA).click()
