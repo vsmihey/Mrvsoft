@@ -13,8 +13,8 @@ from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-
 from generator.generator import generated_person, generated_file, generated_big_file
+from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
 from locators.locators_form_pages import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
     CreateDraftLocators, FilesPagesLocators
@@ -24,7 +24,7 @@ from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
 
 
-class ArticlePage(BasePage):
+class ArticlePage(Authorisation, BasePage):
 
     def input_in_my_project(self, driver):
         """INPUT IN MY PROJECT"""
@@ -58,7 +58,7 @@ class ArticlePage(BasePage):
             self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
 
     def add_normal_article(self, driver):
-        self.input_in_my_project(driver)
+        # self.get_authorisation_in_selen(driver)
         person = generated_person()
         first_name = person.first_name+str(random.randint(99, 999))
         text = "Hello"
@@ -77,12 +77,13 @@ class ArticlePage(BasePage):
             time.sleep(5)
             self.elements_is_present(Locators.UPLOAD_MEDIA).click()
         """input is visible for load files"""
-        self.driver.execute_script(
+        self.browser.execute_script(
             """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        self.driver.execute_script(
+        self.browser.execute_script(
             """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
         path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
+        print(path2, path1)
         data_path = [path1, path2]
         for n in data_path:
             self.element_is_visible(Locators.INPUT_INVISIBLE).send_keys(n)

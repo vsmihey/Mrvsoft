@@ -26,11 +26,41 @@ class MainPage:
     def get_actual_url(self):
         return self.browser.current_url
 
+    # def element_is_visible(self, locator, timeout=10):
+    #     return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+    #
+    # def elements_is_present(self, locator, timeout=10):
+    #     return Wait(self.browser, timeout).until(EC.presence_of_element_located(locator))
+    #
+    # def elements_are_visible(self, locator, timeout=10):
+    #     return Wait(self.browser, timeout).until(EC.visibility_of_all_elements_located(locator))
+
     def element_is_visible(self, locator, timeout=10):
+        """Ожидает появления элемента"""
         return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
 
+    def elements_are_visible(self, locator, timeout=10):
+        """Работа с несколькоми элементами (например: список элементов)"""
+        return Wait(self.browser, timeout).until(EC.visibility_of_all_elements_located(locator))
+
+    """поиск по тексту в DOM дереве даже если элемент не виден"""
     def elements_is_present(self, locator, timeout=10):
+        """Поиск элемента даже если он не виден"""
         return Wait(self.browser, timeout).until(EC.presence_of_element_located(locator))
 
-    def elements_are_visible(self, locator, timeout=10):
-        return Wait(self.browser, timeout).until(EC.visibility_of_all_elements_located(locator))
+    def element_is_clickable(self, locator, timeout=2):
+        """Элемент кликабельный"""
+        return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator))
+
+    def remove_class_script(self):
+        """Удаление класса элемента, что бы он стал видимым и с ним можно совершить действие"""
+        self.browser.execute_script("""document.querySelector("input[type='file']").removeAttribute('class')""")
+
+    def download_files_is_visible(self):
+        """Делает элемент видимым (пример: загрузка файлов)"""
+        self.browser.execute_script(
+            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        self.browser.execute_script(
+            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+
+
