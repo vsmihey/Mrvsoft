@@ -1,5 +1,4 @@
 import time
-
 from pages import data_login_password
 from pages import users
 from locators.locators_form_pages import FormPagesLocators
@@ -45,7 +44,7 @@ class Authorisation(base_class.MainPage):
             page.input_login(user.login)
             page.input_password(user.password)
             page.confirm_button()
-            page.select_project_selen()
+            page.select_project_superbank()
             assert page.get_actual_url() == f'{data_login_password.url}/news/space/1'
             print('Авторизация - Passed')
         except Exception:
@@ -70,8 +69,8 @@ class Authorisation(base_class.MainPage):
             raise Exception
 
 
-if __name__ == '__main__':
-    # Authorisation.get_authorisation_in_superbank()
-    # base_class.driver.delete_all_cookies()
-    Authorisation.get_authorisation_in_selen()
-    base_class.driver.quit()
+# if __name__ == '__main__':
+#     # Authorisation.get_authorisation_in_superbank()
+#     # base_class.driver.delete_all_cookies()
+#     # Authorisation.get_authorisation_in_selen()
+#     # base_class.driver.quit()

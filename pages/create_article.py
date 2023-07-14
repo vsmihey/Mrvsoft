@@ -15,7 +15,7 @@ class BaseArticleEditor(CreatingPanel):
 
     def change_folder(self):
         """Выбор папки сохранения"""
-        self.element_is_visible(locators_topic_database.FOLDER_SAVE_ARTICLE).send_keys("Для Демо")
+        self.element_is_visible(locators_topic_database.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
 
     def text_area_article(self):
         """Наполнение тела статьи"""
@@ -48,7 +48,7 @@ class BaseArticleEditor(CreatingPanel):
     def creating_base_article():
         try:
             page = BaseArticleEditor()
-            page.get_authorisation_in_superbank()
+            page.get_authorisation_in_selen()
             page.create_button()
             page.create_base_article_button()
             page.title_arcticle()
