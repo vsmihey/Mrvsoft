@@ -93,7 +93,7 @@ class Comments(Authorisation):
         page.send_comment()
 
 if __name__ == '__main__':
-    # BaseArticleEditor.creating_base_article()
-    # print(BaseArticleEditor.BASE_ARCTICLE_URL)
+    BaseArticleEditor.creating_base_article()
+    print(BaseArticleEditor.BASE_ARCTICLE_URL)
 
-    Comments.create_comment('https://test6.minervasoft.ru/news/space/1/article/3389')
+    # Comments.create_comment('https://test6.minervasoft.ru/news/space/1/article/3389')

@@ -947,5 +947,22 @@ class Comments:
     EXPERT_QUESTION = (By.XPATH, "//span[@class='checkbox__label']")
 
 
+class WizardPublic:
+    BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    CHECKBOX_ALL_ROLES = (By.CSS_SELECTOR, "div[class='versioning-wrapper__header-block versioning-wrapper__header-role'] svg")
+    ROLE_2 = (By.XPATH, "//p[contains(text(),'2 роль - редактор')]")
+    ROLE_2_NOTIFICATION = (By.XPATH, "//p[contains(text(),'2 роль - редактор')]/../..//span[text()='только оповестить']")
+    ROLE_3 = (By.XPATH, "//p[contains(text(),'3 роль - редактор')]")
+    ROLE_3_NOTIFICATION = (By.XPATH, "//p[contains(text(),'3 роль - редактор')]/../..//span[text()='только оповестить']")
+    ROLE_4 = (By.XPATH, "//p[contains(text(),'4 роль - редактор')]")
+    ROLE_4_NOTIFICATION = (By.XPATH, "//p[contains(text(),'4 роль - редактор')]/../..//span[text()='только оповестить']")
+    INPUT_TEXT_TEXTAREA = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
+    BUTTON_FINISH = (By.CSS_SELECTOR, "button[type='submit']")
+
+
+
+
+
+
 
 
