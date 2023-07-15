@@ -22,11 +22,11 @@ class CreatingPanel(authorisation.Authorisation):
         pass
 
 
-if __name__ == '__main__':
-    try:
-        page = CreatingPanel()
-        page.get_authorisation_in_superbank()
-        page.create_button()
-        page.create_base_article_button()
-    except Exception as e:
-        print(e)
+# if __name__ == '__main__':
+#     try:
+#         page = CreatingPanel()
+#         page.get_authorisation_in_superbank()
+#         page.create_button()
+#         page.create_base_article_button()
+#     except Exception as e:
+#         print(e)

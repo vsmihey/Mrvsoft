@@ -1,19 +1,19 @@
-import pathlib
-from pathlib import Path
 import time
 from creating_panel import CreatingPanel
-from locators.locators_topic_database import CreateTopicDatabaseLocators as locators_topic_database
+from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
 from authorisation_page import Authorisation
-import locators.all_locators
+import locators.all_locators as locators
+from CKE_redactor_and_public_vizard import CKERedactor, PublicVizard
 
 
-class BaseArticleEditor(CreatingPanel):
-    """Cоздание и наполнение Базовой статьи"""
+class BaseArticleEditor(CreatingPanel, CKERedactor, PublicVizard):
+    """Создание и наполнение Базовой статьи"""
     BASE_ARCTICLE_URL = ''
+    BASE_ARCTICLE_TITLE = 'Максимально подробное название статьи'
 
     def title_arcticle(self):
-        self.element_is_visible(locators_topic_database.NAME_OF_ARTICLE).send_keys(
-            'Максимально подробное название статьи')
+        """Заголовок статьи"""
+        self.element_is_visible(locators_topic_database.NAME_OF_ARTICLE).send_keys(self.BASE_ARCTICLE_TITLE)
 
     def change_folder(self):
         """Выбор папки сохранения"""
@@ -21,29 +21,8 @@ class BaseArticleEditor(CreatingPanel):
 
     def text_area_article(self):
         """Наполнение тела статьи"""
-
-        path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
-        path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
-
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Hello')
-        self.elements_is_present(locators_topic_database.UPLOAD_MEDIA).click()
-
-        self.browser.execute_script(
-            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        self.browser.execute_script(
-            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
-
-        self.element_is_visible(locators_topic_database.INPUT_INVISIBLE).send_keys(path1)
-        self.element_is_visible(locators_topic_database.INPUT_INVISIBLE).send_keys(path2)
-        time.sleep(5)
-
-        checkbox_insert_files = self.elements_are_visible(locators_topic_database.CHECKBOX_INSERT_FILES)
-
-        for n in checkbox_insert_files:
-            time.sleep(0.5)
-            n.click()
-
-        self.element_is_visible(locators_topic_database.INPUT_SELECTED).click()
+        self.input_files()
 
     @staticmethod
     def creating_base_article():
@@ -56,9 +35,6 @@ class BaseArticleEditor(CreatingPanel):
             page.change_folder()
             page.text_area_article()
 
-            if not BaseArticleEditor.BASE_ARCTICLE_URL:
-                BaseArticleEditor.BASE_ARCTICLE_URL = page.get_actual_url()
-
         except Exception:
             raise Exception
 
@@ -68,32 +44,35 @@ class Comments(Authorisation):
 
     def comment_text_area(self, text='Максимально понятный коммент'):
         """Заполнение поля комментария, можно передать текст для заполнения"""
-        self.element_is_visible(locators.all_locators.LocatorsCheckNewsHistory.ADD_COMMENT).send_keys(text)
+        self.element_is_visible(locators.LocatorsCheckNewsHistory.ADD_COMMENT).send_keys(text)
 
     def send_comment(self):
         """Подтверждение отправки комментария"""
-        self.element_is_visible(locators.all_locators.LocatorsCheckNewsHistory.SEND_COMMENT).click()
+        self.element_is_visible(locators.LocatorsCheckNewsHistory.SEND_COMMENT).click()
 
     def disable_the_question_to_the_expert_option(self):
         """Отключение галочки 'с вопросом к эксперту'"""
-        self.element_is_visible(locators.all_locators.LocatorsCheckNewsHistory.SVG_CLOSE_ARTICLE).click()
+        self.element_is_visible(locators.Comments.EXPERT_QUESTION).click()
 
     @staticmethod
-    def create_comment(url):
-        """Создание тестового набора комментариев в статье по переданной ссылке, c прохождением авторизации"""
+    def create_comments(url):
+        """Создание тестового набора комментариев в статье по переданной ссылке, с прохождением авторизации"""
         page = Comments()
         page.get_authorisation_in_url(url)
 
         for i in range(4):
-            page.comment_text_area(f'Тестовый комментарий {i+1}')
+            page.comment_text_area(f'Тестовый комментарий {i + 1}')
             page.send_comment()
 
         page.disable_the_question_to_the_expert_option()
         page.comment_text_area('Серый комментарий')
         page.send_comment()
 
-if __name__ == '__main__':
-    BaseArticleEditor.creating_base_article()
-    print(BaseArticleEditor.BASE_ARCTICLE_URL)
 
-    # Comments.create_comment('https://test6.minervasoft.ru/news/space/1/article/3389')
+if __name__ == '__main__':
+    test = BaseArticleEditor()
+    test.creating_base_article()
+    print(test.BASE_ARCTICLE_URL)
+    test.browser.delete_all_cookies()
+
+    # Comments.create_comments('https://test6.minervasoft.ru/news/space/1/article/3389')
