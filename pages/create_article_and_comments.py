@@ -3,13 +3,16 @@ from creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
 from authorisation_page import Authorisation
 import locators.all_locators as locators
-from CKE_redactor_and_public_vizard import CKERedactor, PublicVizard
+from CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
 
 
-class BaseArticleEditor(CreatingPanel, CKERedactor, PublicVizard):
+class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
     """Создание и наполнение Базовой статьи"""
-    BASE_ARCTICLE_URL = ''
     BASE_ARCTICLE_TITLE = 'Максимально подробное название статьи'
+
+    def __init__(self):
+        super().__init__()
+        self.url = None
 
     def title_arcticle(self):
         """Заголовок статьи"""
@@ -24,16 +27,17 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicVizard):
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Hello')
         self.input_files()
 
-    @staticmethod
-    def creating_base_article():
+    def creating_base_article(self):
         try:
-            page = BaseArticleEditor()
-            page.get_authorisation_in_selen()
-            page.create_button()
-            page.create_base_article_button()
-            page.title_arcticle()
-            page.change_folder()
-            page.text_area_article()
+            self.get_authorisation_in_selen()
+            self.create_button()
+            self.create_base_article_button()
+            self.title_arcticle()
+            self.change_folder()
+            self.text_area_article()
+            self.save_base_article()
+            time.sleep(1)
+            self.url = self.get_actual_url()
 
         except Exception:
             raise Exception
@@ -72,7 +76,7 @@ class Comments(Authorisation):
 if __name__ == '__main__':
     test = BaseArticleEditor()
     test.creating_base_article()
-    print(test.BASE_ARCTICLE_URL)
+    print(test.url)
     test.browser.delete_all_cookies()
 
-    # Comments.create_comments('https://test6.minervasoft.ru/news/space/1/article/3389')
+    Comments.create_comments(test.url)

@@ -4,6 +4,7 @@ import pathlib
 from pathlib import Path
 import locators.all_locators as locators
 
+
 class CKERedactor(MainPage):
     """Виджеты CKE редактора"""
 
@@ -34,25 +35,36 @@ class CKERedactor(MainPage):
         self.element_is_visible(locators.CKERedactor.INPUT_SELECTED).click()
 
 
-class PublicVizard(MainPage):
+class PublicWizard(MainPage):
     """Визард публикации"""
 
     def publish_button_click(self):
         """Кнопка 'опубликовать' в редакторе"""
-        #self.browser.find_element(By.CLASS_NAME, 'm-button.m-button--default.m-button--small').click()
+        self.element_is_visible(locators.WizardPublic.BUTTON_TYPOGRAPHY).click()
 
-    def next_button_click(self):
-        """Кнопка 'продолжить' в визадре"""
-        pass
+    def next_and_finish_button_click(self):
+        """Кнопка 'продолжить' и 'завершить' в визадре"""
+        self.element_is_visible(locators.WizardPublic.BUTTON_FINISH).click()
 
-    def finish_button_click(self):
-        """Кнопка 'завершить' в визадре"""
-        pass
-
-    def notification_text_area(self):
+    def notification_text_area(self, text='Создание статьи'):
         """Заполнение поля уведомления"""
-        pass
+        self.element_is_visible(locators.WizardPublic.INPUT_TEXT_TEXTAREA).send_keys(text)
 
     def notification_type(self):
         """Настройка типа оповещения для ранее созданных ролей"""
-        pass
+        self.element_is_visible(locators.WizardPublic.ROLE_3_NOTIFICATION).click()
+        self.element_is_visible(locators.WizardPublic.ROLE_4).click()
+
+    def role_access(self):
+        """Доступ к статье"""
+        self.element_is_visible(locators.WizardPublic.CHECKBOX_ALL_ROLES).click()
+
+    def save_base_article(self):
+        """Сохранение статьи"""
+        self.publish_button_click()
+        self.next_and_finish_button_click()
+        self.next_and_finish_button_click()
+        self.next_and_finish_button_click()
+        self.notification_text_area()
+        self.notification_type()
+        self.next_and_finish_button_click()

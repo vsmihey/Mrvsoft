@@ -1065,6 +1065,8 @@ class Comments:
 
 class WizardPublic:
     BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    BUTTON_NEXT = (By.CLASS_NAME,
+                   'm-button.m-button--success.m-button--medium.wizard-wrapper__action')
     CHECKBOX_ALL_ROLES = (
         By.CSS_SELECTOR, "div[class='versioning-wrapper__header-block versioning-wrapper__header-role'] svg")
     ROLE_2 = (By.XPATH, "//p[contains(text(),'2 роль - редактор')]")

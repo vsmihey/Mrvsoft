@@ -55,7 +55,6 @@ class Authorisation(base_class.MainPage):
         try:
             page = Authorisation()
             page.open()
-            time.sleep(1)
             page.select_authorisation_type()
             page.input_login(user.login)
             page.input_password(user.password)
