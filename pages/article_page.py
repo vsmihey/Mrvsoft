@@ -1178,7 +1178,7 @@ class CreateDraftPage(Authorisation, BasePage):
         assert change_template_name_text_check_value == "Название шаблона"
 
 
-class FilesPages(Authorisation, BasePage):
+class FilesPages(BasePage):
     Locators = FilesPagesLocators()
 
     def check_tooltip(self):
@@ -1187,7 +1187,6 @@ class FilesPages(Authorisation, BasePage):
         self.element_is_visible(self.Locators.CHECK_TOOLTIP_TEXT)
         check_tooltip_text = self.element_is_visible(self.Locators.CHECK_TOOLTIP_TEXT).text
         assert check_tooltip_text == "Тип и размер файлов:"
-
 
     def generated_big_file_jpg(self):
         """created bigfile"""

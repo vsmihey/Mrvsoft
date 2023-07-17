@@ -72,8 +72,10 @@ class BasePage:
     def input_in_my_project(self, driver):
         """Вход в проект, если проект не создан, проект создается и выполняется вход"""
         Locators = FormPagesLocators
+        self.screenshot()
         try:
             self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
+            self.screenshot()
         except TimeoutException:
             time.sleep(2)
             self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
