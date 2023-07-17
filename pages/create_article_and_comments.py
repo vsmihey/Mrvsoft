@@ -1,7 +1,7 @@
 import time
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
-from authorisation_page import Authorisation
+from pages.authorisation_page import Authorisation
 import locators.all_locators as locators
 from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
 

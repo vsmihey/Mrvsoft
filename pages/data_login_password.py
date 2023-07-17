@@ -11,8 +11,8 @@ import os
 # login = 'b.pogodin'
 # password = '68f1d85b'
 
-login = ''
-password = '68f1d85b'
+login = 'minervakms'
+password = 'minervakms'
 
 # тест 2
 #
@@ -24,12 +24,12 @@ password = '68f1d85b'
 login_incorrect = 'm.andreyq'
 password_incorrect = '395a5555'
 # url
-url = 'https://test6.minervasoft.ru'
+url = 'https://test2.minervasoft.ru'
 # url = 'https://test2.minervasoft.ru'
 #url = input("введите url адрес (без кавычек): ")
 
 # url = 'https://dev-5811.t5.minervasoft.ru/login?from=%2F'
-base_url = "https://test6.minervasoft.ru/"
+base_url = "https://test2.minervasoft.ru/"
 
 # url = 'https://test2.minervasoft.ru/login?from=%2F'
 # base_url = "https://test2.minervasoft.ru/"
