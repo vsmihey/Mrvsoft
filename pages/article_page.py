@@ -692,7 +692,7 @@ class ArticlePage(Authorisation, BasePage):
         # assert text_check_link == 'https://openai.com/'
 
 
-class StepByScriptPage(BasePage):
+class StepByScriptPage(Authorisation, BasePage):
     Locators = StepByScriptLocators()
 
     def add_script(self):
@@ -1014,7 +1014,7 @@ class CopyPastePage(BasePage):
         assert check_link_correct == 'https://openai.com/'
 
 
-class CreateDraftPage(BasePage):
+class CreateDraftPage(Authorisation, BasePage):
 
     Locators = CreateDraftLocators()
 
@@ -1064,7 +1064,7 @@ class CreateDraftPage(BasePage):
         tab3 = driver.window_handles[2]
         tab2 = driver.window_handles[3]
         tab1 = driver.window_handles[4]
-        self.driver.switch_to.window(tab1)
+        self.browser.switch_to.window(tab1)
         driver.refresh()
         # time.sleep(5)
         try:
@@ -1079,7 +1079,7 @@ class CreateDraftPage(BasePage):
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Article_Name1")
-        self.driver.switch_to.window(tab2)
+        self.browser.switch_to.window(tab2)
         self.element_is_visible(Locators.TEST_PROJECT).click()
         try:
             self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
@@ -1102,7 +1102,7 @@ class CreateDraftPage(BasePage):
         templates_download.click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Template_Name2")
         time.sleep(1)
-        self.driver.switch_to.window(tab3)
+        self.browser.switch_to.window(tab3)
         self.element_is_visible(Locators.TEST_PROJECT).click()
         try:
             self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
@@ -1111,7 +1111,7 @@ class CreateDraftPage(BasePage):
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_STEP_SCRIPT).click()
         self.element_is_visible(self.Locators.NAME_OF_STEP_SCRIPT).send_keys("Script_Name3")
-        self.driver.switch_to.window(tab4)
+        self.browser.switch_to.window(tab4)
         self.element_is_visible(Locators.TEST_PROJECT).click()
         try:
             self.element_is_visible(Locators.CREATE_BUTTON, timeout=2).click()
@@ -1122,7 +1122,7 @@ class CreateDraftPage(BasePage):
         self.element_is_visible(self.Locators.INPUT_NAME_FILE).send_keys("File_Name4")
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         """close article tab1"""
-        self.driver.switch_to.window(tab2)
+        self.browser.switch_to.window(tab2)
         time.sleep(3)
         try:
             self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
@@ -1130,7 +1130,7 @@ class CreateDraftPage(BasePage):
             time.sleep(5)
             self.element_is_visible(Locators.CLOSE_PAGE_LIST).click()
         """check text all"""
-        self.driver.switch_to.window(tab0)
+        self.browser.switch_to.window(tab0)
         time.sleep(3)
         """time check"""
         i = 0
@@ -1178,7 +1178,7 @@ class CreateDraftPage(BasePage):
         assert change_template_name_text_check_value == "Название шаблона"
 
 
-class FilesPages(BasePage):
+class FilesPages(Authorisation, BasePage):
     Locators = FilesPagesLocators()
 
     def check_tooltip(self):
@@ -1251,9 +1251,9 @@ class FilesPages(BasePage):
             time.sleep(5)
             self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
         """input is visible for load files"""
-        self.driver.execute_script(
+        self.browser.execute_script(
             """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        self.driver.execute_script(
+        self.browser.execute_script(
             """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
         # self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
         for n in data_files:
@@ -1477,24 +1477,6 @@ class FilesPages(BasePage):
 
 
 
-
-
-
-# class Debager(BasePage):
-#
-#     def deb(self, driver):
-#         time.sleep(20)
-#
-#         frame = driver.find_element(By.XPATH, "//div[@aria-label='false']")
-#         df = driver.switch_to.frame(frame)
-#         time.sleep(10)
-#         # add_script = driver.find_element(By.XPATH, "//p[contains(text(),'добавить шаг')]")
-#         # add_script.click()
-#         # time.sleep(1)
-#         #
-#         # element = driver.find_element(By.XPATH, "//div[@class='wysiwyg-minerva wysiwyg-minerva--embedded wysiwyg-minerva--hide']")
-#         # driver.execute_script("arguments[0].setAttribute('style','visibility:visible;');", element)
-#         # time.sleep(10)
 
 
 
