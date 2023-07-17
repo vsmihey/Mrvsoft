@@ -8,7 +8,8 @@ class StableUsers:
     password: str
 
 
-admin = StableUsers('b.pogodin', '68f1d85b')
+# admin = StableUsers('b.pogodin', '68f1d85b')
+admin = StableUsers('minervakms', 'minervakms')
 jerry = StableUsers('jerry_smith', '123456')
 # morty = StableUsers()
 # summer= StableUsers()
