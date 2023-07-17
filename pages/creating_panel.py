@@ -1,8 +1,9 @@
-import authorisation_page as authorisation
+# import authorisation_page as authorisation
+from pages.authorisation_page import Authorisation
 from locators.locators_form_pages import FormPagesLocators
 
 
-class CreatingPanel(authorisation.Authorisation):
+class CreatingPanel(Authorisation):
     """Класс панели создания статей"""
 
     def create_button(self):

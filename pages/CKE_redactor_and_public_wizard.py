@@ -1,5 +1,5 @@
 import time
-from base_class import MainPage
+from pages.base_class import MainPage
 import pathlib
 from pathlib import Path
 import locators.all_locators as locators

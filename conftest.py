@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.options import Options
 # scope='session'
 # @pytest.fixture(scope='function')
 
+
 @pytest.fixture(scope='session')
 def driver():
     # driver_service = Service(ChromeDriverManager().install())  # вкючить для загрузки новой версии дров

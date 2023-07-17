@@ -1,5 +1,7 @@
 import time
 import pytest
+
+from pages.create_article_and_comments import BaseArticleEditor
 from pages.form_page import FormPage
 from pages.data_login_password import *
 from pages.article_page import ArticlePage, CopyPastePage, CreateDraftPage, FilesPages
@@ -115,17 +117,17 @@ class TestFormPage:
         form_page.get_authorisation_in_selen()
         form_page.add_to_favourites(base_class.driver)
 
-    def test_add_normal_article(self):
+    def test_add_normal_article(self, driver):
+        article_page = BaseArticleEditor(driver)
+        article_page.creating_base_article()
+        # article_page.get_authorisation_in_selen()
+        # article_page.add_normal_article(base_class.driver)
+
+    def test_fixing_article(self, driver):
         article_page = ArticlePage()
         # article_page.open()
         article_page.get_authorisation_in_selen()
-        article_page.add_normal_article(base_class.driver)
-
-    def test_fixing_article(self, driver):
-        article_page = ArticlePage(driver, url)
-        article_page.open()
-        article_page.input_in_my_project(driver)
-        article_page.fixing_article(driver)
+        article_page.fixing_article(base_class.driver)
         time.sleep(1)
 
     # @pytest.mark.skip('add_article_by_templates')

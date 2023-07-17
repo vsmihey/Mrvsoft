@@ -1067,11 +1067,17 @@ class Comments:
 
     # TODO: написать нормальные локаторы
     # Ответ на первый комментарий
+    TEST_COMMENT_1 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]")
+    TO_ANSWER_COMMENT_1 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]/..//span[text()='ответить']")
+    TEST_COMMENT_2 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 2')]")
+    TO_ANSWER_COMMENT_2 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 2')]/..//span[text()='ответить']")
+    TEST_COMMENT_3 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 3')]")
+    TO_ANSWER_COMMENT_3 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 3')]/..//span[text()='ответить']")
+
     COMMENT_BOX = (
     By.XPATH, "//div[@class='m-ui-paper m-ui-paper--shadowed']//textarea[@placeholder='Введите текст комментария']")
-    TICK_SOLVED = (By.CSS_SELECTOR,"label[class='m-ui-paper checkbox discuss-form__tag-item m-ui-paper--hoverable m-ui-paper--shadowed'] span[class='checkbox__label']")
-
-    ANSWER_FIRST_COMMENT = (By.XPATH, '//div[6]//div[1]//div[2]//div[3]//button[2]//span[1]')
+    CHECK_BOX_TICK_SOLVED = (By.CSS_SELECTOR, "label[class='m-ui-paper checkbox discuss-form__tag-item m-ui-paper--hoverable m-ui-paper--shadowed'] span[class='checkbox__label']")
+    # ANSWER_FIRST_COMMENT = (By.XPATH, '//div[6]//div[1]//div[2]//div[3]//button[2]//span[1]')
 
 
 class WizardPublic:
