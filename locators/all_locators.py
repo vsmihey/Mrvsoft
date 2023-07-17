@@ -1061,6 +1061,17 @@ class SearchRuEnLocators:
 ##################################################################################################
 class Comments:
     EXPERT_QUESTION = (By.XPATH, "//span[@class='checkbox__label']")
+    ADD_COMMENT = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст комментария']")
+    SEND_COMMENT = (
+        By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
+
+    # TODO: написать нормальные локаторы
+    # Ответ на первый комментарий
+    COMMENT_BOX = (
+    By.XPATH, "//div[@class='m-ui-paper m-ui-paper--shadowed']//textarea[@placeholder='Введите текст комментария']")
+    TICK_SOLVED = (By.CSS_SELECTOR,"label[class='m-ui-paper checkbox discuss-form__tag-item m-ui-paper--hoverable m-ui-paper--shadowed'] span[class='checkbox__label']")
+
+    ANSWER_FIRST_COMMENT = (By.XPATH, '//div[6]//div[1]//div[2]//div[3]//button[2]//span[1]')
 
 
 class WizardPublic:

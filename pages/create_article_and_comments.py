@@ -48,11 +48,11 @@ class Comments(Authorisation):
 
     def comment_text_area(self, text='Максимально понятный коммент'):
         """Заполнение поля комментария, можно передать текст для заполнения"""
-        self.element_is_visible(locators.LocatorsCheckNewsHistory.ADD_COMMENT).send_keys(text)
+        self.element_is_visible(locators.Comments.ADD_COMMENT).send_keys(text)
 
     def send_comment(self):
         """Подтверждение отправки комментария"""
-        self.element_is_visible(locators.LocatorsCheckNewsHistory.SEND_COMMENT).click()
+        self.element_is_visible(locators.Comments.SEND_COMMENT).click()
 
     def disable_the_question_to_the_expert_option(self):
         """Отключение галочки 'с вопросом к эксперту'"""
@@ -72,11 +72,25 @@ class Comments(Authorisation):
         page.comment_text_area('Серый комментарий')
         page.send_comment()
 
+    @staticmethod
+    def close_first_comment(url):
+        """Закрытие первого комментария"""
+        page = Comments()
+        page.get_authorisation_in_url(url)
+        page.element_is_visible(locators.Comments.ANSWER_FIRST_COMMENT).click()
+        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
+        page.element_is_visible(locators.Comments.TICK_SOLVED).click()
+        page.send_comment()
+
+        time.sleep(10)
+
+
 
 if __name__ == '__main__':
-    test = BaseArticleEditor()
-    test.creating_base_article()
-    print(test.url)
-    test.browser.delete_all_cookies()
-
-    Comments.create_comments(test.url)
+    # test = BaseArticleEditor()
+    # test.creating_base_article()
+    # print(test.url)
+    # test.browser.delete_all_cookies()
+    #
+    # Comments.create_comments(test.url)
+    Comments.close_first_comment('https://test6.minervasoft.ru/content/space/55/folder/237/article/4540')
