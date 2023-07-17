@@ -684,7 +684,8 @@ class CreateTopicDatabaseLocators:
     UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
     INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
     # NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название контента']")
-    NAME_OF_ARTICLE = (By.CSS_SELECTOR, ".m-ui-paper.m-ui-text-input__main.m-ui-paper--shadowed.m-ui-paper--filled")
+    #NAME_OF_ARTICLE = (By.CSS_SELECTOR, ".m-ui-paper.m-ui-text-input__main.m-ui-paper--shadowed.m-ui-paper--filled")
+    NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название']")
     # FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR, "select[class='m-ui-select__select']")
     # FOLDER_SAVE_ARTICLE = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
     FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR,
@@ -1066,8 +1067,6 @@ class Comments:
     SEND_COMMENT = (
         By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
 
-    # TODO: написать нормальные локаторы
-    # Ответ на первый комментарий
     TEST_COMMENT_1 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]")
     TO_ANSWER_COMMENT_1 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]/..//span[text()='ответить']")
     TEST_COMMENT_2 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 2')]")
