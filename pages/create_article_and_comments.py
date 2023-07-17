@@ -1,3 +1,4 @@
+import random
 import time
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
@@ -8,11 +9,7 @@ from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
 
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
     """Создание и наполнение Базовой статьи"""
-    BASE_ARCTICLE_TITLE = 'Максимально подробное название статьи'
-
-    def __init__(self):
-        super().__init__()
-        self.url = None
+    BASE_ARCTICLE_TITLE = 'Максимально подробное название статьи' + str(random.randint(999, 9999))
 
     def title_arcticle(self):
         """Заголовок статьи"""
@@ -36,8 +33,6 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
             self.change_folder()
             self.text_area_article()
             self.save_base_article()
-            time.sleep(1)
-            # self.url = self.get_actual_url()
 
         except Exception:
             raise Exception
@@ -85,12 +80,11 @@ class Comments(Authorisation):
         time.sleep(10)
 
 
-
 if __name__ == '__main__':
-    # test = BaseArticleEditor()
-    # test.creating_base_article()
+    test = BaseArticleEditor()
+    test.creating_base_article()
     # print(test.url)
     # test.browser.delete_all_cookies()
     #
     # Comments.create_comments(test.url)
-    Comments.close_first_comment('https://test6.minervasoft.ru/content/space/55/folder/237/article/4540')
+    #Comments.close_first_comment('https://test6.minervasoft.ru/content/space/55/folder/237/article/4540')

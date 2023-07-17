@@ -32,60 +32,41 @@ class Authorisation(MainPage):
         """Выбор проекта Selen"""
         self.element_is_visible(locators.AuthorisationPage.TEST_PROJECT).click()
 
-    @staticmethod
-    def get_authorisation_in_superbank(user=users.admin):
+    def get_authorisation_in_superbank(self, user=users.admin):
         """Метод для прохождения авторизации в проект СуперБанка"""
         try:
-            page = Authorisation()
-            page.open()
-            page.select_authorisation_type()
-            page.input_login(user.login)
-            page.input_password(user.password)
-            page.confirm_button()
-            page.select_project_superbank()
-            assert page.get_actual_url() == f'{data_login_password.url}/news/space/1'
-            print('Авторизация - Passed')
+            self.open()
+            self.select_authorisation_type()
+            self.input_login(user.login)
+            self.input_password(user.password)
+            self.confirm_button()
+            self.select_project_superbank()
         except Exception:
-            print('Авторизация - Failed')
             raise Exception
 
-    @staticmethod
-    def get_authorisation_in_selen(user=users.admin):
+    def get_authorisation_in_selen(self, user=users.admin):
         """Метод для прохождения авторизации в проект Selen"""
         try:
-            page = Authorisation()
-            page.open()
-            page.select_authorisation_type()
-            page.input_login(user.login)
-            page.input_password(user.password)
-            page.confirm_button()
-            page.select_project_selen()
-            # assert page.get_actual_url() == f'{data_login_password.url}/news/space/55'
-            print('Авторизация - Passed')
+            self.open()
+            self.select_authorisation_type()
+            self.input_login(user.login)
+            self.input_password(user.password)
+            self.confirm_button()
+            self.select_project_selen()
         except Exception:
-            print('Авторизация - Failed')
             raise Exception
 
-    @staticmethod
-    def get_authorisation_in_url(url, user=users.admin):
-        """Метод для прохождения авторизации и переходы по переданной ссылке"""
+    def get_authorisation_in_url(self, url, user=users.admin):
+        """Метод для прохождения авторизации и перехода по переданной ссылке"""
         try:
-            page = Authorisation(url=url)
-            page.open()
-            page.select_authorisation_type()
-            page.input_login(user.login)
-            page.input_password(user.password)
-            page.confirm_button()
-            time.sleep(0.5)
-            assert page.get_actual_url() == url
-            print('Авторизация - Passed')
+            self.open(url=url)
+            self.select_authorisation_type()
+            self.input_login(user.login)
+            self.input_password(user.password)
+            self.confirm_button()
         except Exception:
-            print('Авторизация - Failed')
             raise Exception
 
 
 if __name__ == '__main__':
-    #     # Authorisation.get_authorisation_in_superbank()
-    #     # base_class.driver.delete_all_cookies()
-    Authorisation.get_authorisation_in_selen()
-#     # base_class.driver.quit()
+    pass

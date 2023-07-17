@@ -24,7 +24,7 @@ login_incorrect = 'm.andreyq'
 password_incorrect = '395a5555'
 # url
 # url = 'https://test6.minervasoft.ru'
-url = 'https://test2.minervasoft.ru/login?from=%2F'
+url = 'https://test6.minervasoft.ru'
 #url = input("введите url адрес (без кавычек): ")
 
 # url = 'https://dev-5811.t5.minervasoft.ru/login?from=%2F'

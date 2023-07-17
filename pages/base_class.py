@@ -15,15 +15,15 @@ driver.implicitly_wait(12)
 
 class MainPage:
 
-    def __init__(self, browser=driver, url=None):
+    def __init__(self, browser=driver, url=data_login_password.url):
         self.browser = browser
-        if url is None:
-            self.url = data_login_password.url
-        else:
-            self.url = url
+        self.url = url
 
-    def open(self):
-        self.browser.get(self.url)
+    def open(self, url=None):
+        if url is None:
+            self.browser.get(self.url)
+        else:
+            self.browser.get(url)
 
     def get_actual_url(self):
         return self.browser.current_url

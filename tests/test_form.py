@@ -47,14 +47,14 @@ class TestFormPage:
         form_page.check_restore_text()
         form_page.browser.quit()
 
-    def test_title(self):
-        form_page = FormPage()
-        #form_page.open()
+    def test_title(self, driver):
+        form_page = FormPage(driver)
+        # form_page.open()
         form_page.get_authorisation_in_selen()
-        #form_page.input_in_my_project(driver)
+        # form_page.input_in_my_project(driver)
         # print("input project")
-        form_page.all_title(base_class.driver)
-        form_page.browser.quit()
+        form_page.all_title(driver)
+        # form_page.browser.quit()
 
     @pytest.mark.skip('restore password')
     def test_form_restore(self, driver):
@@ -110,7 +110,7 @@ class TestFormPage:
         form_page = FormPage()
         # form_page.open()
         form_page.get_authorisation_in_selen()
-        form_page.delete_some_folder(count_folders=15) # ставить на 1 папку больше
+        form_page.delete_some_folder(count_folders=15)  # ставить на 1 папку больше
         form_page.browser.quit()
 
     def test_favourites(self):
@@ -247,38 +247,3 @@ class TestFormPage:
             article_pages.open()
             article_pages.input_in_my_project(driver)
             article_pages.check_script_download()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
