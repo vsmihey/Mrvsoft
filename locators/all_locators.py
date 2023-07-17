@@ -1090,7 +1090,7 @@ class CKERedactor:
     INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")
 
 
-class AutorisationPage:
+class AuthorisationPage:
     TYPE_AUTHOR = (By.CSS_SELECTOR, '.m-ui-select__select')  # type author
     TYPE_AUTHOR_CHANGE = (By.XPATH, "//option[@type='EMBEDDED']")
     LOGIN = (By.NAME, "username")
