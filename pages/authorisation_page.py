@@ -2,10 +2,10 @@ import time
 from pages import data_login_password
 from pages import users
 import locators.all_locators as locators
-from pages import base_class
+from pages.base_class import MainPage
 
 
-class Authorisation(base_class.MainPage):
+class Authorisation(MainPage):
     """Класс авторизации в системе"""
 
     def select_authorisation_type(self):

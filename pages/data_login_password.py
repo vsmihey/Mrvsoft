@@ -8,7 +8,10 @@ import os
 # password = 'minervakms'
 
 # Учетка Бориса
-login = 'b.pogodin'
+# login = 'b.pogodin'
+# password = '68f1d85b'
+
+login = ''
 password = '68f1d85b'
 
 # тест 2

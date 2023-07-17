@@ -1,4 +1,4 @@
-# import authorisation_page as authorisation
+
 from pages.authorisation_page import Authorisation
 from locators.locators_form_pages import FormPagesLocators
 
