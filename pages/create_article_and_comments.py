@@ -1,15 +1,18 @@
-import random
 import time
-from pages.creating_panel import CreatingPanel
+from creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
-from pages.authorisation_page import Authorisation
+from authorisation_page import Authorisation
 import locators.all_locators as locators
-from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
+from CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
 
 
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
     """Создание и наполнение Базовой статьи"""
-    BASE_ARCTICLE_TITLE = 'Максимально подробное название статьи' + str(random.randint(999, 9999))
+    BASE_ARCTICLE_TITLE = 'Максимально подробное название статьи'
+
+    def __init__(self):
+        super().__init__()
+        self.url = None
 
     def title_arcticle(self):
         """Заголовок статьи"""
@@ -74,9 +77,9 @@ class Comments(Authorisation):
         """Закрытие первого комментария"""
         page = Comments()
         page.get_authorisation_in_url(url)
-        page.element_is_visible(locators.Comments.TO_ANSWER_COMMENT_1).click()
+        page.element_is_visible(locators.Comments.ANSWER_FIRST_COMMENT).click()
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
-        page.element_is_visible(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
+        page.element_is_visible(locators.Comments.TICK_SOLVED).click()
         page.send_comment()
 
         time.sleep(10)
@@ -84,10 +87,10 @@ class Comments(Authorisation):
 
 
 if __name__ == '__main__':
-    test = BaseArticleEditor()
-    test.creating_base_article()
-    print(test.url)
-    test.browser.delete_all_cookies()
-
-    Comments.create_comments(test.url)
-    # Comments.close_first_comment('https://test6.minervasoft.ru/content/space/55/folder/237/article/4540')
+    # test = BaseArticleEditor()
+    # test.creating_base_article()
+    # print(test.url)
+    # test.browser.delete_all_cookies()
+    #
+    # Comments.create_comments(test.url)
+    Comments.close_first_comment('https://test6.minervasoft.ru/content/space/55/folder/237/article/4540')
