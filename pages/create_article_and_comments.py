@@ -37,7 +37,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
             self.text_area_article()
             self.save_base_article()
             time.sleep(1)
-            self.url = self.get_actual_url()
+            # self.url = self.get_actual_url()
 
         except Exception:
             raise Exception

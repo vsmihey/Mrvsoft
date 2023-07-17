@@ -683,7 +683,8 @@ class CreateTopicDatabaseLocators:
     CREATE_ARTICLE = (By.XPATH, "//div[contains(text(),'Статья')]")
     UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
     INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
-    NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    # NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название контента']")
+    NAME_OF_ARTICLE = (By.CSS_SELECTOR, ".m-ui-paper.m-ui-text-input__main.m-ui-paper--shadowed.m-ui-paper--filled")
     # FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR, "select[class='m-ui-select__select']")
     # FOLDER_SAVE_ARTICLE = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
     FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR,
