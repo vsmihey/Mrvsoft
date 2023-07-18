@@ -5,6 +5,7 @@ from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_
 from pages.authorisation_page import Authorisation
 import locators.all_locators as locators
 from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
+from pages.users import minervakms
 
 
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
@@ -40,10 +41,11 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
     def creating_base_article(self):
         """Создание обычной статьи с наполнением"""
         try:
-            self.get_authorisation_in_selen()
+            self.get_authorisation_in_selen(minervakms)
             time.sleep(0.5)
             self.create_button()
             self.create_base_article_button()
+            time.sleep(1)
             self.title_article()
             self.change_folder()
             self.text_area_article()
@@ -103,4 +105,4 @@ if __name__ == '__main__':
 
     Comments.create_comments(BaseArticleEditor.get_url_from_data_file())
 
-    #Comments.close_first_comment(BaseArticleEditor.get_url_from_data_file())
+    # Comments.close_first_comment(BaseArticleEditor.get_url_from_data_file())
