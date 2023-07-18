@@ -1,6 +1,5 @@
 import time
 import pytest
-
 from pages.create_article_and_comments import BaseArticleEditor
 from pages.form_page import FormPage
 from pages.data_login_password import *

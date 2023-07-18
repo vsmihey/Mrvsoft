@@ -1,9 +1,8 @@
 # верные данные
 import os
 #login = input("введите логин (без кавычек): ")  #'m.andrey'
-# login = 'a.mihey'
 # login = 'andrey'
-# password = '2ec31135'
+# password = '004e9f86'
 #password = input("введите пароль (без кавычек): ")  #'e70a8e89'
 # password = 'minervakms'
 
@@ -13,18 +12,12 @@ import os
 login = 'minervakms'
 password = 'minervakms'
 
-# тест 2
-
-# login = 'm.andrey'
-# password = '194de736'
-
-
 # неверные данные
 login_incorrect = 'm.andreyq'
 password_incorrect = '395a5555'
 # url
-# url = 'https://test6.minervasoft.ru'
-url = 'https://test2.minervasoft.ru/login?from=%2F'
+url = 'https://test6.minervasoft.ru'
+# url = 'https://test2.minervasoft.ru/login?from=%2F'
 #url = input("введите url адрес (без кавычек): ")
 
 # url = 'https://dev-5811.t5.minervasoft.ru/login?from=%2F'

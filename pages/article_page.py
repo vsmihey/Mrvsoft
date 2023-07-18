@@ -1178,7 +1178,7 @@ class CreateDraftPage(Authorisation, BasePage):
         assert change_template_name_text_check_value == "Название шаблона"
 
 
-class FilesPages(BasePage):
+class FilesPages(Authorisation, BasePage):
     Locators = FilesPagesLocators()
 
     def check_tooltip(self):
