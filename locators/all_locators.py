@@ -1113,3 +1113,25 @@ class AuthorisationPage:
                     "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
     SUPER_BANK_PROJECT = (By.XPATH,
                           "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']")  # name project
+
+
+class CheckCommentsPersons:
+    """Комментарии и уведомления"""
+    EMPTY_HISTORY_CHECK = (By.CSS_SELECTOR, ".m-news-empty__title")
+    # через get_attribute("data-tip") получаем количество уведомлений
+    BELL_ALERT = (By.CSS_SELECTOR, ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification--collapsed.m-dashboard-top-right-side__notifications")
+    CREATE_ARTICLE_CHECK = (By.XPATH, "(//div[contains(text(),'Создание статьи')])[1]")
+    # здесь проверка тестового комментария 1 и статуса не решено через is_displayed()
+    CHECK_TEST_COMMENT_1 = (By.XPATH, f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 1']")
+    CHECK_TEST_COMMENT_2 = (By.XPATH, f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 2']")
+    CHECK_TEST_COMMENT_3 = (By.XPATH, f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 3']")
+    CHECK_TEST_COMMENT_4 = (By.XPATH, f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 4']")
+    CHECK_GRAY_COMMENT = (By.XPATH, "(//pre[contains(text(),'Серый комментарий')])[1]")
+    # открытие статьи проверка комментариев (проверка, что не решено)
+    TEST_COMMENT_1_NOT_SOLVED = (By.XPATH, "//div[text()='не решено']/..//pre[text()='Тестовый комментарий 1']")
+    TEST_COMMENT_2_NOT_SOLVED = (By.XPATH, "//div[text()='не решено']/..//pre[text()='Тестовый комментарий 2']")
+    TEST_COMMENT_3_NOT_SOLVED = (By.XPATH, "//div[text()='не решено']/..//pre[text()='Тестовый комментарий 3']")
+    TEST_COMMENT_4_NOT_SOLVED = (By.XPATH, "//div[text()='не решено']/..//pre[text()='Тестовый комментарий 4']")
+    GRAY_COMMENT_ARTICLE = (By.CSS_SELECTOR, "div[class='discuss__block discuss__block--COMMENT'] pre[class='m-discuss-text discuss-comment__text']")
+
+
