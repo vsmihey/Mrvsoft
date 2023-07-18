@@ -12,7 +12,7 @@ from pages import base_class
 class TestFormPage:
 
     def test_logo(self, driver):
-        form_page = FormPage(driver, url)
+        form_page = FormPage(driver)
         form_page.open()
         form_page.logo_head()
         # form_page.screenshot()
@@ -26,7 +26,6 @@ class TestFormPage:
         form_page.logo_head()
         # form_page.screenshot()
         form_page.title_find(driver)
-        form_page.browser.quit()
 
     def test_form_1(self, driver):
         """tests incorrect data"""
@@ -44,7 +43,6 @@ class TestFormPage:
         form_page.check_auth_text()
         form_page.restore_incorrect()
         form_page.check_restore_text()
-        form_page.browser.quit()
 
     def test_title(self, driver):
         form_page = FormPage(driver)
@@ -62,41 +60,35 @@ class TestFormPage:
         password = password_incorrect
         form_page.authorization(login, password)
         form_page.restore_correct()
-        form_page.browser.quit()
 
-    def test_add_new_person(self):
-        form_page = FormPage()
+    def test_add_new_person(self, driver):
+        form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
         # form_page.input_in_my_project(driver)
-        form_page.add_new_person(base_class.driver)
-        form_page.browser.quit()
+        form_page.add_new_person(driver)
 
-    def test_add_new_role(self):
-        form_page = FormPage()
+    def test_add_new_role(self, driver):
+        form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
-        form_page.add_new_role(base_class.driver)
-        form_page.browser.quit()
-        # time.sleep(1)
+        form_page.add_new_role(driver)
 
-    def test_folder_create_del_recovery(self):
-        form_page = FormPage()
+    def test_folder_create_del_recovery(self, driver):
+        form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
-        form_page.create_del_recovery_folder_content(base_class.driver)
+        form_page.create_del_recovery_folder_content(driver)
         form_page.delete_some_folder(count_folders=8)
-        form_page.browser.quit()
 
     # @pytest.mark.skip('test_folder1_folder2')
-    def test_folder1_folder2(self):
-        form_page = FormPage()
+    def test_folder1_folder2(self, driver):
+        form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
-        form_page.folder1_folder2(base_class.driver)
-        form_page.check_folder1_folder2(base_class.driver)
+        form_page.folder1_folder2(driver)
+        form_page.check_folder1_folder2(driver)
         form_page.delete_some_folder(count_folders=5)
-        form_page.browser.quit()
 
     # def test_check_folder1_folder2(self, driver):
     #     form_page = FormPage(driver, url)
@@ -105,49 +97,43 @@ class TestFormPage:
     #     form_page.check_folder1_folder2(driver)
 
     # @pytest.mark.skip('delete folders')
-    def test_del_some_folders(self):
-        form_page = FormPage()
+    def test_del_some_folders(self, driver):
+        form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
         form_page.delete_some_folder(count_folders=15)  # ставить на 1 папку больше
-        form_page.browser.quit()
 
-    def test_favourites(self):
-        form_page = FormPage()
+    def test_favourites(self, driver):
+        form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
-        form_page.favourites(base_class.driver)
-        form_page.browser.quit()
+        form_page.favourites(driver)
 
-    def test_add_to_favourites(self):
-        form_page = FormPage()
+    def test_add_to_favourites(self, driver):
+        form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
-        form_page.add_to_favourites(base_class.driver)
-        form_page.browser.quit()
+        form_page.add_to_favourites(driver)
 
-    def test_add_normal_article(self):
-        article_page = BaseArticleEditor()
+    def test_add_normal_article(self, driver):
+        article_page = BaseArticleEditor(driver)
         article_page.creating_base_article()
-        article_page.browser.quit()
         # article_page.get_authorisation_in_selen()
-        # article_page.add_normal_article(base_class.driver)
+        # article_page.add_normal_article(driver)
 
-    def test_fixing_article(self):
-        article_page = ArticlePage()
+    def test_fixing_article(self, driver):
+        article_page = ArticlePage(driver)
         # article_page.open()
         article_page.get_authorisation_in_selen()
-        article_page.fixing_article(base_class.driver)
-        article_page.browser.quit()
+        article_page.fixing_article(driver)
 
     # @pytest.mark.skip('add_article_by_templates')
-    def test_add_article_by_templates(self):
-        article_page = ArticlePage()
+    def test_add_article_by_templates(self, driver):
+        article_page = ArticlePage(driver)
         # article_page.open()
         article_page.get_authorisation_in_selen()
         # time.sleep(3)
-        article_page.add_article_by_templates(base_class.driver)
-        article_page.browser.quit()
+        article_page.add_article_by_templates(driver)
 
     @pytest.mark.skip('check_text_link')
     def test_check_text_link(self, driver):
@@ -159,25 +145,23 @@ class TestFormPage:
     # @pytest.mark.skip('delete folders')
     class TestStepByScriptPage:
 
-        def test_step_by_script(self):
-            article_page = StepByScriptPage()
+        def test_step_by_script(self, driver):
+            article_page = StepByScriptPage(driver)
             # article_page.open()
             article_page.get_authorisation_in_selen()
             article_page.add_script()
-            article_page.check_opened_added_script(base_class.driver)
-            article_page.check_len_name_content(base_class.driver)
-            article_page.add_new_step(base_class.driver)
+            article_page.check_opened_added_script(driver)
+            article_page.check_len_name_content(driver)
+            article_page.add_new_step(driver)
             article_page.delete_all()
-            article_page.new_step(base_class.driver)
-            article_page.browser.quit()
+            article_page.new_step(driver)
 
-        def test_fixing_script(self):
-            article_page = StepByScriptPage()
+        def test_fixing_script(self, driver):
+            article_page = StepByScriptPage(driver)
             # article_page.open()
             article_page.get_authorisation_in_selen()
             article_page.add_script()
-            article_page.check_step_fixing(base_class.driver)
-            article_page.browser.quit()
+            article_page.check_step_fixing(driver)
 
     @pytest.mark.skip('copy_paste')
     class TestCopyPastePage:
@@ -191,21 +175,19 @@ class TestFormPage:
     # @pytest.mark.skip('create_draft')
     class TestCreateDraft:
 
-        def test_create_draft(self):
-            create_draft_page = CreateDraftPage()
+        def test_create_draft(self, driver):
+            create_draft_page = CreateDraftPage(driver)
             # create_draft_page.open()
             create_draft_page.get_authorisation_in_selen()
-            create_draft_page.open_4_tab(base_class.driver)
-            create_draft_page.browser.quit()
+            create_draft_page.open_4_tab(driver)
 
     class TestFilesPage:
 
-        def test_create_data_files(self):
-            article_pages = FilesPages()
+        def test_create_data_files(self, driver):
+            article_pages = FilesPages(driver)
             # article_pages.open()
             article_pages.get_authorisation_in_selen()
-            article_pages.create_data_files(base_class.driver)
-            article_pages.browser.quit()
+            article_pages.create_data_files(driver)
 
         def test_check_size_file(self, driver):
             article_pages = FilesPages(driver, url)

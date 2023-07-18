@@ -40,21 +40,19 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
 
     def creating_base_article(self):
         """Создание обычной статьи с наполнением"""
-        try:
-            self.get_authorisation_in_selen(minervakms)
-            time.sleep(0.5)
-            self.create_button()
-            self.create_base_article_button()
-            time.sleep(1)
-            self.title_article()
-            self.change_folder()
-            self.text_area_article()
-            self.save_base_article()
-            time.sleep(0.5)
-            self.save_data_in_file()
+        self.get_authorisation_in_selen(minervakms)
+        time.sleep(1)
+        self.create_button()
+        self.create_base_article_button()
+        time.sleep(1)
+        self.title_article()
+        self.change_folder()
+        self.text_area_article()
+        self.save_base_article()
+        time.sleep(0.5)
+        self.save_data_in_file()
 
-        except Exception:
-            raise Exception
+
 
 
 class Comments(Authorisation):

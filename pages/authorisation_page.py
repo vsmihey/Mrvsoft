@@ -34,38 +34,32 @@ class Authorisation(MainPage):
 
     def get_authorisation_in_superbank(self, user=users.admin):
         """Метод для прохождения авторизации в проект СуперБанка"""
-        try:
-            self.open()
-            self.select_authorisation_type()
-            self.input_login(user.login)
-            self.input_password(user.password)
-            self.confirm_button()
-            self.select_project_superbank()
-        except Exception:
-            raise Exception
+        self.open()
+        self.select_authorisation_type()
+        self.input_login(user.login)
+        self.input_password(user.password)
+        self.confirm_button()
+        self.select_project_superbank()
+
 
     def get_authorisation_in_selen(self, user=users.admin):
         """Метод для прохождения авторизации в проект Selen"""
-        try:
-            self.open()
-            self.select_authorisation_type()
-            self.input_login(user.login)
-            self.input_password(user.password)
-            self.confirm_button()
-            self.select_project_selen()
-        except Exception:
-            raise Exception
+        self.open()
+        self.select_authorisation_type()
+        self.input_login(user.login)
+        self.input_password(user.password)
+        self.confirm_button()
+        self.select_project_selen()
+
 
     def get_authorisation_in_url(self, url, user=users.admin):
         """Метод для прохождения авторизации и перехода по переданной ссылке"""
-        try:
-            self.open(url=url)
-            self.select_authorisation_type()
-            self.input_login(user.login)
-            self.input_password(user.password)
-            self.confirm_button()
-        except Exception:
-            raise Exception
+        self.open(url=url)
+        self.select_authorisation_type()
+        self.input_login(user.login)
+        self.input_password(user.password)
+        self.confirm_button()
+
 
 
 if __name__ == '__main__':
