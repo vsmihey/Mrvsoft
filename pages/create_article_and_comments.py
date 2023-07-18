@@ -1,3 +1,4 @@
+import random
 import time
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
@@ -8,15 +9,11 @@ from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
 
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
     """Создание и наполнение Базовой статьи"""
-    BASE_ARCTICLE_TITLE = 'Максимально подробное название статьи'
+    BASE_ARTICLE_TITLE = 'Максимально подробное название статьи ' + str(random.randint(999, 9999))
 
-    def __init__(self):
-        super().__init__()
-        self.url = None
-
-    def title_arcticle(self):
+    def title_article(self):
         """Заголовок статьи"""
-        self.element_is_visible(locators_topic_database.NAME_OF_ARTICLE).send_keys(self.BASE_ARCTICLE_TITLE)
+        self.element_is_visible(locators_topic_database.NAME_OF_ARTICLE).send_keys(self.BASE_ARTICLE_TITLE)
 
     def change_folder(self):
         """Выбор папки сохранения"""
@@ -27,17 +24,32 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Hello')
         self.input_files()
 
+    def save_data_in_file(self):
+        """Метод сохранения ссылки и названия статьи, данные перезаписываются при каждом вызове"""
+        with open(r'data.txt', 'w', encoding='utf8') as file:
+            file.write(self.get_actual_url() + '\n')
+            file.write(self.BASE_ARTICLE_TITLE)
+
+    @staticmethod
+    def get_url_from_data_file():
+        """Метод парсит ссылку на статью из файла"""
+        with open(r'data.txt', 'r', encoding='utf8') as file:
+            url = file.readline()
+        return url
+
     def creating_base_article(self):
+        """Создание обычной статьи с наполнением"""
         try:
             self.get_authorisation_in_selen()
+            time.sleep(0.5)
             self.create_button()
             self.create_base_article_button()
-            self.title_arcticle()
+            self.title_article()
             self.change_folder()
             self.text_area_article()
             self.save_base_article()
-            time.sleep(1)
-            # self.url = self.get_actual_url()
+            time.sleep(0.5)
+            self.save_data_in_file()
 
         except Exception:
             raise Exception
@@ -62,6 +74,7 @@ class Comments(Authorisation):
     def create_comments(url):
         """Создание тестового набора комментариев в статье по переданной ссылке, с прохождением авторизации"""
         page = Comments()
+
         page.get_authorisation_in_url(url)
 
         for i in range(4):
@@ -77,20 +90,17 @@ class Comments(Authorisation):
         """Закрытие первого комментария"""
         page = Comments()
         page.get_authorisation_in_url(url)
-        page.element_is_visible(locators.Comments.ANSWER_FIRST_COMMENT).click()
+        page.element_is_visible(locators.Comments.TO_ANSWER_COMMENT_1).click()
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
-        page.element_is_visible(locators.Comments.TICK_SOLVED).click()
+        page.element_is_visible(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
         page.send_comment()
-
-        time.sleep(10)
-
 
 
 if __name__ == '__main__':
-    # test = BaseArticleEditor()
-    # test.creating_base_article()
-    # print(test.url)
-    # test.browser.delete_all_cookies()
-    #
-    # Comments.create_comments(test.url)
-    Comments.close_first_comment('https://test6.minervasoft.ru/content/space/55/folder/237/article/4540')
+    test = BaseArticleEditor()
+    test.creating_base_article()
+    test.browser.delete_all_cookies()
+
+    Comments.create_comments(BaseArticleEditor.get_url_from_data_file())
+
+    #Comments.close_first_comment(BaseArticleEditor.get_url_from_data_file())
