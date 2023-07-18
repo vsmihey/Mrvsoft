@@ -71,9 +71,9 @@ class Comments(Authorisation):
         self.element_is_visible(locators.Comments.EXPERT_QUESTION).click()
 
     @staticmethod
-    def create_comments(url):
+    def create_comments(driver, url):
         """Создание тестового набора комментариев в статье по переданной ссылке, с прохождением авторизации"""
-        page = Comments()
+        page = Comments(driver)
 
         page.get_authorisation_in_url(url)
 
@@ -86,9 +86,9 @@ class Comments(Authorisation):
         page.send_comment()
 
     @staticmethod
-    def close_first_comment(url):
+    def close_first_comment(driver, url):
         """Закрытие первого комментария"""
-        page = Comments()
+        page = Comments(driver)
         page.get_authorisation_in_url(url)
         page.element_is_visible(locators.Comments.TO_ANSWER_COMMENT_1).click()
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
