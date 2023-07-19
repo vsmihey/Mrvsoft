@@ -31,13 +31,6 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
             file.write(self.get_actual_url() + '\n')
             file.write(self.BASE_ARTICLE_TITLE)
 
-    @staticmethod
-    def get_url_from_data_file():
-        """Метод парсит ссылку на статью из файла"""
-        with open(r'data.txt', 'r', encoding='utf8') as file:
-            url = file.readline()
-        return url
-
     def creating_base_article(self):
         """Создание обычной статьи с наполнением"""
         self.get_authorisation_in_selen(minervakms)
@@ -53,6 +46,22 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
         self.save_data_in_file()
 
 
+class DataParser:
+    """Класс получения данных из файла"""
+
+    @staticmethod
+    def get_url_from_data_file():
+        """Метод парсит ссылку на статью из файла"""
+        with open(r'data.txt', 'r', encoding='utf8') as file:
+            url = file.readline()
+        return url
+
+    @staticmethod
+    def get_article_name_from_data_file():
+        """Метод парсит название статьи из файла"""
+        with open(r'data.txt', 'r', encoding='utf8') as file:
+            name = file.readlines()[1]
+        return name
 
 
 class Comments(Authorisation):
@@ -96,11 +105,3 @@ class Comments(Authorisation):
         page.send_comment()
 
 
-if __name__ == '__main__':
-    test = BaseArticleEditor()
-    test.creating_base_article()
-    test.browser.delete_all_cookies()
-
-    Comments.create_comments(BaseArticleEditor.get_url_from_data_file())
-
-    # Comments.close_first_comment(BaseArticleEditor.get_url_from_data_file())

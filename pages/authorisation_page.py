@@ -32,6 +32,10 @@ class Authorisation(MainPage):
         """Выбор проекта Selen"""
         self.element_is_visible(locators.AuthorisationPage.TEST_PROJECT).click()
 
+    def checking_the_authorization_page(self) -> str:
+        """Проверка, что открыта страница авторизации"""
+        return self.element_is_visible(locators.AuthorisationPage.INPUT_IN_SYSTEM_TEXT).text
+
     def get_authorisation_in_superbank(self, user=users.admin):
         """Метод для прохождения авторизации в проект СуперБанка"""
         self.open()
@@ -40,7 +44,6 @@ class Authorisation(MainPage):
         self.input_password(user.password)
         self.confirm_button()
         self.select_project_superbank()
-
 
     def get_authorisation_in_selen(self, user=users.admin):
         """Метод для прохождения авторизации в проект Selen"""
@@ -51,7 +54,6 @@ class Authorisation(MainPage):
         self.confirm_button()
         self.select_project_selen()
 
-
     def get_authorisation_in_url(self, url, user=users.admin):
         """Метод для прохождения авторизации и перехода по переданной ссылке"""
         self.open(url=url)
@@ -60,7 +62,3 @@ class Authorisation(MainPage):
         self.input_password(user.password)
         self.confirm_button()
 
-
-
-if __name__ == '__main__':
-    pass

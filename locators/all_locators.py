@@ -684,7 +684,7 @@ class CreateTopicDatabaseLocators:
     UPLOAD_MEDIA = (By.XPATH, "//span[@class='cke_button_icon cke_button__uploadminerva_icon']")
     INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
     # NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название контента']")
-    #NAME_OF_ARTICLE = (By.CSS_SELECTOR, ".m-ui-paper.m-ui-text-input__main.m-ui-paper--shadowed.m-ui-paper--filled")
+    # NAME_OF_ARTICLE = (By.CSS_SELECTOR, ".m-ui-paper.m-ui-text-input__main.m-ui-paper--shadowed.m-ui-paper--filled")
     NAME_OF_ARTICLE = (By.XPATH, "//input[@placeholder='Введите название']")
     # FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR, "select[class='m-ui-select__select']")
     # FOLDER_SAVE_ARTICLE = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
@@ -1067,14 +1067,23 @@ class Comments:
     SEND_COMMENT = (
         By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
 
-    TEST_COMMENT_1 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]")
-    TO_ANSWER_COMMENT_1 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]/..//span[text()='ответить']")
-    TEST_COMMENT_2 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 2')]")
-    TO_ANSWER_COMMENT_2 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 2')]/..//span[text()='ответить']")
-    TEST_COMMENT_3 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 3')]")
-    TO_ANSWER_COMMENT_3 = (By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 3')]/..//span[text()='ответить']")
-    COMMENT_BOX = (By.XPATH, "//div[@class='m-ui-paper m-ui-paper--shadowed']//textarea[@placeholder='Введите текст комментария']")
-    CHECK_BOX_TICK_SOLVED = (By.CSS_SELECTOR, "label[class='m-ui-paper checkbox discuss-form__tag-item m-ui-paper--hoverable m-ui-paper--shadowed'] span[class='checkbox__label']")
+    TEST_COMMENT_1 = (
+        By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]")
+    TO_ANSWER_COMMENT_1 = (By.XPATH,
+                           "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]/..//span[text()='ответить']")
+    TEST_COMMENT_2 = (
+        By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 2')]")
+    TO_ANSWER_COMMENT_2 = (By.XPATH,
+                           "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 2')]/..//span[text()='ответить']")
+    TEST_COMMENT_3 = (
+        By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 3')]")
+    TO_ANSWER_COMMENT_3 = (By.XPATH,
+                           "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 3')]/..//span[text()='ответить']")
+    COMMENT_BOX = (
+        By.XPATH, "//div[@class='m-ui-paper m-ui-paper--shadowed']//textarea[@placeholder='Введите текст комментария']")
+    CHECK_BOX_TICK_SOLVED = (By.CSS_SELECTOR,
+                             "label[class='m-ui-paper checkbox discuss-form__tag-item m-ui-paper--hoverable m-ui-paper--shadowed'] span[class='checkbox__label']")
+
 
 class WizardPublic:
     BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
@@ -1113,25 +1122,36 @@ class AuthorisationPage:
                     "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
     SUPER_BANK_PROJECT = (By.XPATH,
                           "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']")  # name project
-
+    INPUT_IN_SYSTEM_TEXT = (By. CSS_SELECTOR, '.m-ui-typography.m-ui-typography--bold.m-ui-typography--22x26.login__header')
 
 class CheckCommentsPersons:
     """Комментарии и уведомления"""
     EMPTY_HISTORY_CHECK = (By.CSS_SELECTOR, ".m-news-empty__title")
     # через get_attribute("data-tip") получаем количество уведомлений
-    BELL_ALERT = (By.CSS_SELECTOR, ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification--collapsed.m-dashboard-top-right-side__notifications")
+    BELL_ALERT = (By.CSS_SELECTOR,
+                  ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification--collapsed.m-dashboard-top-right-side__notifications")
+    EMPTY_BELL__CHECK = (By.CSS_SELECTOR, '.dashboard-notification-empty-layout__title')
     CREATE_ARTICLE_CHECK = (By.XPATH, "(//div[contains(text(),'Создание статьи')])[1]")
     # здесь проверка тестового комментария 1 и статуса не решено через is_displayed()
-    CHECK_TEST_COMMENT_1 = (By.XPATH, f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 1']")
-    CHECK_TEST_COMMENT_2 = (By.XPATH, f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 2']")
-    CHECK_TEST_COMMENT_3 = (By.XPATH, f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 3']")
-    CHECK_TEST_COMMENT_4 = (By.XPATH, f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 4']")
+    CHECK_TEST_COMMENT_1 = (By.XPATH,
+                            f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 1']")
+    CHECK_TEST_COMMENT_2 = (By.XPATH,
+                            f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 2']")
+    CHECK_TEST_COMMENT_3 = (By.XPATH,
+                            f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 3']")
+    CHECK_TEST_COMMENT_4 = (By.XPATH,
+                            f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 4']")
     CHECK_GRAY_COMMENT = (By.XPATH, "(//pre[contains(text(),'Серый комментарий')])[1]")
     # открытие статьи проверка комментариев (проверка, что не решено)
     TEST_COMMENT_1_NOT_SOLVED = (By.XPATH, "//div[text()='не решено']/..//pre[text()='Тестовый комментарий 1']")
     TEST_COMMENT_2_NOT_SOLVED = (By.XPATH, "//div[text()='не решено']/..//pre[text()='Тестовый комментарий 2']")
     TEST_COMMENT_3_NOT_SOLVED = (By.XPATH, "//div[text()='не решено']/..//pre[text()='Тестовый комментарий 3']")
     TEST_COMMENT_4_NOT_SOLVED = (By.XPATH, "//div[text()='не решено']/..//pre[text()='Тестовый комментарий 4']")
-    GRAY_COMMENT_ARTICLE = (By.CSS_SELECTOR, "div[class='discuss__block discuss__block--COMMENT'] pre[class='m-discuss-text discuss-comment__text']")
+    GRAY_COMMENT_ARTICLE = (By.CSS_SELECTOR,
+                            "div[class='discuss__block discuss__block--COMMENT'] pre[class='m-discuss-text discuss-comment__text']")
 
 
+class MenuNavigation:
+    # TODO: написать нормальные локаторы для навигации по левому меню
+    """Навигация по левому меню"""
+    HISTORY_BUTTON = (By.XPATH, "//*[name()='path' and contains(@d,'M11.1826 1')]")
