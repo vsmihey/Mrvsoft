@@ -42,7 +42,7 @@ class Authorisation(MainPage):
         self.select_project_superbank()
 
 
-    def get_authorisation_in_selen(self, user=users.admin):
+    def get_authorisation_in_selen(self, user=users.minervakms):
         """Метод для прохождения авторизации в проект Selen"""
         self.open()
         self.select_authorisation_type()

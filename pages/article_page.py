@@ -804,8 +804,6 @@ class StepByScriptPage(Authorisation, BasePage):
         # actions.move_by_offset(0, 0)
         # actions.click()
         actions.perform()
-
-        # self.element_is_visible(self.Locators.TEXT_BOLD_IN_TEXTAREA_EDITOR).click()
         time.sleep(1)
 
     def new_step(self, driver):
@@ -835,9 +833,7 @@ class StepByScriptPage(Authorisation, BasePage):
         # text_content = " You can learn more about GPT-3 by visiting the https://openai.com/ and exploring their documentation and resources. " \
         #                "Feel free to click on the link to delve into the fascinating world of GPT-3 and discover its capabilities!"
         text_content = "Text Content Example"
-        # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
-        # self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).send_keys(text_content)
         actions.send_keys(text_content)
         time.sleep(1)
         # actions.move_by_offset(1, 1)
@@ -853,24 +849,23 @@ class StepByScriptPage(Authorisation, BasePage):
         # assert check_link_correct == 'https://openai.com/'
         # time.sleep(1)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(to_get_name)
-        # time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
-        # time.sleep(1)
         check_text_chose_transaction = self.element_is_visible(self.Locators.CHECK_TEXT_CHOSE_TRANSACTION).text
         assert check_text_chose_transaction == 'Необходимо выбрать шаг'
         self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
-        # time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_PREVIEW).click()
         check_text_preview = self.element_is_visible(self.Locators.CHECK_TEXT_PREVIEW).text
         assert check_text_preview == 'Предпросмотр'
         self.element_is_visible(self.Locators.CLOSE_WINDOW_PREVIEW).click()
         """add step one more"""
         self.element_is_visible(self.Locators.PLUS_BUTTON_ADD_STEP).click()
+
+        time.sleep(2)
         self.element_is_visible(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP).click()
-
         self.add_text_in_textarea(driver)
-        self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).click()
 
+
+        self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).click()
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(text_area)
         self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
         time.sleep(1)
@@ -1181,9 +1176,9 @@ class CreateDraftPage(Authorisation, BasePage):
 class FilesPages(Authorisation, BasePage):
     Locators = FilesPagesLocators()
 
-    def check_tooltip(self):
+    def check_tooltip(self, driver):
         element = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD)
-        self.action_move_to_element(element)
+        self.action_move_to_element(element, driver)
         self.element_is_visible(self.Locators.CHECK_TOOLTIP_TEXT)
         check_tooltip_text = self.element_is_visible(self.Locators.CHECK_TOOLTIP_TEXT).text
         assert check_tooltip_text == "Тип и размер файлов:"
@@ -1220,10 +1215,10 @@ class FilesPages(Authorisation, BasePage):
         except TimeoutException:
             time.sleep(1)
         self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
-        self.check_tooltip()
+        self.check_tooltip(driver)
         """input is visible for load files"""
-        self.driver.execute_script("""document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        self.driver.execute_script("""document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        self.browser.execute_script("""document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        self.browser.execute_script("""document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
         # self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
         self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
         self.element_is_visible(self.Locators.CLOSE_DOWNLOAD_WINDOW).click()

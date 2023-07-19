@@ -155,8 +155,8 @@ class BasePage:
         action.double_click(element)
         action.perform()
 
-    def action_move_to_element(self, element):
-        action = ActionChains(self.driver)
+    def action_move_to_element(self, element, driver):
+        action = ActionChains(driver)
         action.move_to_element(element)
         action.perform()
 

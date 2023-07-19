@@ -702,9 +702,10 @@ class FormPage(Authorisation, BasePage):
         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
         time.sleep(1)
         self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        time.sleep(1)
         text_not_folders = self.element_is_visible(Locators.TEXT_NOT_FOLDERS)
         text_not_folders_value = text_not_folders.text
-        assert text_not_folders_value == "У вас нет избранных папок. Создайте папку."
+        assert text_not_folders_value == "У вас нет избранного контента. Для начала создайте папку."
         # print("У вас нет избранных папок. Создайте папку.")
 
     def add_favourites_to_folder(self, folder="папка1"):
