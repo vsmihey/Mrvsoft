@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
@@ -65,3 +66,4 @@ class MainPage:
             """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
         self.browser.execute_script(
             """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+

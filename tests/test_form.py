@@ -146,6 +146,7 @@ class TestFormPage:
     class TestStepByScriptPage:
 
         def test_step_by_script(self, driver):
+            # Тест падает - баг (не заполняется имя контент шага)
             article_page = StepByScriptPage(driver)
             # article_page.open()
             article_page.get_authorisation_in_selen()
@@ -190,16 +191,16 @@ class TestFormPage:
             article_pages.create_data_files(driver)
 
         def test_check_size_file(self, driver):
-            article_pages = FilesPages(driver, url)
-            article_pages.open()
-            article_pages.input_in_my_project(driver)
+            article_pages = FilesPages(driver)
+            # article_pages.open()
+            article_pages.get_authorisation_in_selen()
             article_pages.generated_big_file_jpg()
             article_pages.add_big_file(driver)
 
         def test_check_template_download(self, driver):
-            article_pages = FilesPages(driver, url)
-            article_pages.open()
-            article_pages.input_in_my_project(driver)
+            article_pages = FilesPages(driver)
+            # article_pages.open()
+            article_pages.get_authorisation_in_selen(driver)
             article_pages.check_template_download(driver)
 
         def test_check_template_download_bigfile(self, driver):
