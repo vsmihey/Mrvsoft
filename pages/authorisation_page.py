@@ -38,6 +38,7 @@ class Authorisation(MainPage):
 
     def get_authorisation_in_superbank(self, user=users.admin):
         """Метод для прохождения авторизации в проект СуперБанка"""
+        self.browser.delete_all_cookies()
         self.open()
         self.select_authorisation_type()
         self.input_login(user.login)
@@ -47,15 +48,18 @@ class Authorisation(MainPage):
 
     def get_authorisation_in_selen(self, user=users.admin):
         """Метод для прохождения авторизации в проект Selen"""
+        self.browser.delete_all_cookies()
         self.open()
         self.select_authorisation_type()
         self.input_login(user.login)
         self.input_password(user.password)
         self.confirm_button()
+        time.sleep(1)
         self.select_project_selen()
 
     def get_authorisation_in_url(self, url, user=users.admin):
         """Метод для прохождения авторизации и перехода по переданной ссылке"""
+        self.browser.delete_all_cookies()
         self.open(url=url)
         self.select_authorisation_type()
         self.input_login(user.login)

@@ -56,6 +56,7 @@ class PersonValidation(Authorisation, History, BellAlert, MenuNavigation):
     def switch_to_bell(self, person):
         """Метод переходна на страницу истории, с прохождением авторизации"""
         self.get_authorisation_in_selen(person)
+        time.sleep(1)
         self.yes_new_notification()
         self.bell_button_click()
 
@@ -67,6 +68,7 @@ class PersonValidation(Authorisation, History, BellAlert, MenuNavigation):
 class Person1(PersonValidation):
     def switch_to_bell(self, person):
         self.get_authorisation_in_selen(person)
+        time.sleep(1)
         self.no_new_notification()
         self.bell_button_click()
 
