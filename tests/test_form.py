@@ -30,6 +30,7 @@ class TestFormPage:
     def test_form_1(self, driver):
         """tests incorrect data"""
         form_page = FormPage(driver, url)
+        form_page.browser.delete_all_cookies()
         form_page.open()
         self.login = login_incorrect
         self.password = password

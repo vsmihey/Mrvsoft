@@ -34,7 +34,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
     def creating_base_article(self):
         """Создание обычной статьи с наполнением"""
         self.get_authorisation_in_selen(minervakms)
-        time.sleep(5)
+        time.sleep(1)
         self.create_button()
         self.create_base_article_button()
         time.sleep(1)
