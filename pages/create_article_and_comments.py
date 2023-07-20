@@ -39,6 +39,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
         self.create_base_article_button()
         time.sleep(1)
         self.title_article()
+        time.sleep(1)
         self.change_folder()
         self.text_area_article()
         self.save_base_article()

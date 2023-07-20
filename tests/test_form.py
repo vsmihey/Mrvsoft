@@ -37,7 +37,7 @@ class TestFormPage:
         form_page.fill_fields(self.login, self.password)
         self.login = login_incorrect
         self.password = password_incorrect
-        form_page.fill_fields(self.login, self.password)
+        form_page.fill_fields(login, password)
         self.login = login
         self.password = password_incorrect
         form_page.fill_fields(self.login, self.password)
