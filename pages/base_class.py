@@ -67,3 +67,11 @@ class MainPage:
         self.browser.execute_script(
             """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
 
+    def switch_to_frame(self, frame):
+        """Переход в модалбное окно, на вход принимает модальное окно (пример: работа с виджетами)"""
+        self.browser.switch_to.frame(frame)
+
+    def switch_out_frame(self):
+        """Выход из модального окна, на вход принимает модальное окно (пример: работа с виджетами)"""
+        self.browser.switch_to.default_content()
+

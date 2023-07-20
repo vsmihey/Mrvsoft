@@ -168,7 +168,7 @@ class BasePage:
         action.perform()
 
     def switch_to_frame(self, frame):
-        """Переход в модалбное окно , на вход принимает модальное окно (пример: работа с виджетами)"""
+        """Переход в модалбное окно, на вход принимает модальное окно (пример: работа с виджетами)"""
         self.driver.switch_to.frame(frame)
 
     def switch_out_frame(self):
