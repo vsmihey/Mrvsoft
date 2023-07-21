@@ -880,8 +880,11 @@ class StepByScriptPage(Authorisation, BasePage):
         assert check_text_step2 == 'Шаг 2'
         time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_SCRIPT_TYPOGRAPHY).click()
-        time.sleep(3)
-        text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
+        try:
+            text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
+        except TimeoutException:
+            time.sleep(3)
+            text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
         assert text_check_typography_window == 'Настройки публикации контента'
 
     def check_step_fixing(self, driver):
@@ -1061,7 +1064,7 @@ class CreateDraftPage(Authorisation, BasePage):
         tab1 = driver.window_handles[4]
         self.browser.switch_to.window(tab1)
         driver.refresh()
-        # time.sleep(5)
+        time.sleep(5)
         try:
             self.element_is_visible(Locators.TEST_PROJECT).click()
         except TimeoutException:
@@ -1293,7 +1296,7 @@ class FilesPages(Authorisation, BasePage):
         self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
         self.switch_out_frame()
         time.sleep(1)
-        self.check_tooltip()
+        self.check_tooltip(driver)
         """for visible"""
         self.download_files_is_visible()
         for n in data_files:
@@ -1415,7 +1418,7 @@ class FilesPages(Authorisation, BasePage):
         time.sleep(2)
         os.remove(path)
 
-    def check_script_download(self):
+    def check_script_download(self, driver):
         data_files = generated_file()
         try:
             self.element_is_visible(Locators.CREATE_BUTTON).click()
@@ -1423,15 +1426,23 @@ class FilesPages(Authorisation, BasePage):
             time.sleep(3)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
-        self.element_is_visible(self.Locators.ADD_STEP).click()
-        self.element_is_visible(self.Locators.TEXT_AREA).click()
+        try:
+            self.element_is_visible(self.Locators.ADD_STEP).click()
+        except (TimeoutException, ElementClickInterceptedException):
+            time.sleep(3)
+            self.element_is_visible(self.Locators.ADD_STEP).click()
+        try:
+            self.element_is_visible(self.Locators.TEXT_AREA).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.TEXT_AREA).click()
         self.element_is_visible(self.Locators.DROPDOWN).click()
         frame = self.elements_is_present(self.Locators.FRAME)
         self.switch_to_frame(frame)
         self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
         self.switch_out_frame()
         time.sleep(1)
-        self.check_tooltip()
+        self.check_tooltip(driver)
         """for visible"""
         self.download_files_is_visible()
         for n in data_files:

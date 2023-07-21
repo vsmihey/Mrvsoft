@@ -480,11 +480,11 @@ class FormPage(Authorisation, BasePage):
             self.element_is_visible(Locators.TEXTAREA_ARTICLE).send_keys(text_article)
             self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
             # при нажатии на SUBMIT_ARTICLE вечная загрузка
-            time.sleep(1)
+            time.sleep(5)
             try:
                 self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
             except TimeoutException:
-                time.sleep(3)
+                time.sleep(5)
                 # self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
                 self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
             n += 1

@@ -37,7 +37,7 @@ class TestFormPage:
         form_page.fill_fields(self.login, self.password)
         self.login = login_incorrect
         self.password = password_incorrect
-        form_page.fill_fields(self.login, self.password)
+        form_page.fill_fields(login, password)
         self.login = login
         self.password = password_incorrect
         form_page.fill_fields(self.login, self.password)
@@ -201,32 +201,32 @@ class TestFormPage:
         def test_check_template_download(self, driver):
             article_pages = FilesPages(driver)
             # article_pages.open()
-            article_pages.get_authorisation_in_selen(driver)
+            article_pages.get_authorisation_in_selen()
             article_pages.check_template_download(driver)
 
         def test_check_template_download_bigfile(self, driver):
-            article_pages = FilesPages(driver, url)
-            article_pages.open()
-            article_pages.input_in_my_project(driver)
+            article_pages = FilesPages(driver)
+            # article_pages.open()
+            article_pages.get_authorisation_in_selen()
             article_pages.generated_big_file_exe()
             article_pages.template_download_bigfile(driver)
 
         # @pytest.mark.skip('download_files_from_files')
         def test_download_files_from_files(self, driver):
-            article_pages = FilesPages(driver, url)
-            article_pages.open()
-            article_pages.input_in_my_project(driver)
+            article_pages = FilesPages(driver)
+            # article_pages.open()
+            article_pages.get_authorisation_in_selen()
             article_pages.download_files_from_files()
 
         def test_script_download_bigfile(self, driver):
-            article_pages = FilesPages(driver, url)
-            article_pages.open()
-            article_pages.input_in_my_project(driver)
+            article_pages = FilesPages(driver)
+            # article_pages.open()
+            article_pages.get_authorisation_in_selen()
             article_pages.generated_big_file_csv()
             article_pages.check_script_download_bigfile()
 
         def test_script_download(self, driver):
-            article_pages = FilesPages(driver, url)
-            article_pages.open()
-            article_pages.input_in_my_project(driver)
-            article_pages.check_script_download()
+            article_pages = FilesPages(driver)
+            # article_pages.open()
+            article_pages.get_authorisation_in_selen()
+            article_pages.check_script_download(driver)
