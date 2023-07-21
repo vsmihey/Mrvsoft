@@ -937,6 +937,7 @@ class StepByScriptPage(Authorisation, BasePage):
         self.element_is_visible(self.Locators.CHECK_RADIO_LINK_CONTENT1).is_selected()
         self.element_is_visible(self.Locators.CHECK_RADIO_DISABLED).is_displayed()
         """check content name"""
+        time.sleep(1)
         try:
             check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
         except TimeoutException:
