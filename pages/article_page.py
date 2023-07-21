@@ -1395,11 +1395,12 @@ class FilesPages(Authorisation, BasePage):
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
         self.element_is_visible(self.Locators.ADD_STEP).click()
+        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.TEXT_AREA).click()
         except TimeoutException:
             time.sleep(1)
-            self.element_is_visible(self.Locators.ADD_STEP).click()
+            # self.element_is_visible(self.Locators.ADD_STEP).click()
             self.element_is_visible(self.Locators.TEXT_AREA).click()
         self.element_is_visible(self.Locators.DROPDOWN).click()
         frame = self.elements_is_present(self.Locators.FRAME)
