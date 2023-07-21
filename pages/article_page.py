@@ -578,6 +578,7 @@ class ArticlePage(Authorisation, BasePage):
         search_of_contents.send_keys(requests_name)
         time.sleep(1)
         search_of_contents.send_keys(Keys.RETURN)
+        time.sleep(5)
         check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         try:
             check_name_of_content_value = check_name_of_content.text
