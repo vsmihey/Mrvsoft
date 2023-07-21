@@ -1122,7 +1122,9 @@ class AuthorisationPage:
                     "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
     SUPER_BANK_PROJECT = (By.XPATH,
                           "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']")  # name project
-    INPUT_IN_SYSTEM_TEXT = (By. CSS_SELECTOR, '.m-ui-typography.m-ui-typography--bold.m-ui-typography--22x26.login__header')
+    INPUT_IN_SYSTEM_TEXT = (
+        By.CSS_SELECTOR, '.m-ui-typography.m-ui-typography--bold.m-ui-typography--22x26.login__header')
+
 
 class CheckCommentsPersons:
     """Комментарии и уведомления"""
@@ -1155,3 +1157,7 @@ class MenuNavigation:
     # TODO: написать нормальные локаторы для навигации по левому меню
     """Навигация по левому меню"""
     HISTORY_BUTTON = (By.XPATH, "//*[name()='path' and contains(@d,'M11.1826 1')]")
+
+
+class OpenArticle:
+    ARTICLE_TITLE = (By.XPATH, '//*[@id="article-content-modal-header"]/div/h2/span')
