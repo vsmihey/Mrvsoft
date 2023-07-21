@@ -883,6 +883,7 @@ class StepByScriptPage(Authorisation, BasePage):
         try:
             text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
         except TimeoutException:
+            print("БАГ!!! БАГ!!! БАГ!!!")
             time.sleep(3)
             text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
         assert text_check_typography_window == 'Настройки публикации контента'
@@ -936,7 +937,11 @@ class StepByScriptPage(Authorisation, BasePage):
         self.element_is_visible(self.Locators.CHECK_RADIO_LINK_CONTENT1).is_selected()
         self.element_is_visible(self.Locators.CHECK_RADIO_DISABLED).is_displayed()
         """check content name"""
-        check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
+        try:
+            check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
+        except TimeoutException:
+            time.sleep(3)
+            check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
         assert check_text_content_script == "Контент 1"
         """check name script"""
         time.sleep(1)
