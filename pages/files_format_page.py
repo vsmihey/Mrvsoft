@@ -9,10 +9,11 @@ from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person, generated_files_audio, generated_files_video
 from locators.locators_files_format import FilesFormatPageLocators, UnformatFilePageLocators
+from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
 
 
-class FilesFormatPage(BasePage):
+class FilesFormatPage(Authorisation, BasePage):
     Locators = FilesFormatPageLocators()
 
     def add_all_files(self, path):
@@ -60,7 +61,7 @@ class FilesFormatPage(BasePage):
         driver.implicitly_wait(5)
         person = generated_person()
         text_area_alert = person.first_name+"-Alert"
-        self.input_in_my_project(driver)
+        # self.get_authorisation_in_selen()
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
         path3 = str(Path(pathlib.Path.cwd(), "files", "animal.jpeg"))

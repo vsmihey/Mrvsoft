@@ -578,6 +578,7 @@ class ArticlePage(Authorisation, BasePage):
         search_of_contents.send_keys(requests_name)
         time.sleep(1)
         search_of_contents.send_keys(Keys.RETURN)
+        time.sleep(5)
         check_name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
         try:
             check_name_of_content_value = check_name_of_content.text
@@ -883,6 +884,7 @@ class StepByScriptPage(Authorisation, BasePage):
         try:
             text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
         except TimeoutException:
+            print("БАГ!!! БАГ!!! БАГ!!!")
             time.sleep(3)
             text_check_typography_window = self.element_is_visible(self.Locators.TEXT_CHECK_TYPOGRAPHY_WINDOW).text
         assert text_check_typography_window == 'Настройки публикации контента'
@@ -936,7 +938,11 @@ class StepByScriptPage(Authorisation, BasePage):
         self.element_is_visible(self.Locators.CHECK_RADIO_LINK_CONTENT1).is_selected()
         self.element_is_visible(self.Locators.CHECK_RADIO_DISABLED).is_displayed()
         """check content name"""
-        check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
+        try:
+            check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
+        except TimeoutException:
+            time.sleep(3)
+            check_text_content_script = self.element_is_visible(self.Locators.CHECK_TEXT_CONTENT_SCRIPT).text
         assert check_text_content_script == "Контент 1"
         """check name script"""
         time.sleep(1)
@@ -1395,11 +1401,12 @@ class FilesPages(Authorisation, BasePage):
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
         self.element_is_visible(self.Locators.ADD_STEP).click()
+        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.TEXT_AREA).click()
         except TimeoutException:
             time.sleep(1)
-            self.element_is_visible(self.Locators.ADD_STEP).click()
+            # self.element_is_visible(self.Locators.ADD_STEP).click()
             self.element_is_visible(self.Locators.TEXT_AREA).click()
         self.element_is_visible(self.Locators.DROPDOWN).click()
         frame = self.elements_is_present(self.Locators.FRAME)

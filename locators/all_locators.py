@@ -1156,8 +1156,10 @@ class CheckCommentsPersons:
 class MenuNavigation:
     # TODO: написать нормальные локаторы для навигации по левому меню
     """Навигация по левому меню"""
-    HISTORY_BUTTON = (By.XPATH, "//*[name()='path' and contains(@d,'M11.1826 1')]")
+    HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
 
 
 class OpenArticle:
-    ARTICLE_TITLE = (By.XPATH, '//*[@id="article-content-modal-header"]/div/h2/span')
+    # ARTICLE_TITLE = (By.XPATH, '//*[@id="article-content-modal-header"]/div/h2/span')
+    # через .text  получаем название
+    ARTICLE_TITLE = (By.CSS_SELECTOR, "div[class='article-modal__header-wrapper'] span")
