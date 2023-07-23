@@ -620,7 +620,7 @@ class ArticlePage(Authorisation, BasePage):
         search_of_contents.send_keys(requests_name)
         search_of_contents.send_keys(Keys.RETURN)
         print(requests_name, name_content, name)
-        time.sleep(1)
+        time.sleep(2)
         try:
             check_fixing_content_text = self.element_is_visible(Locators.CHECK_FIXING_CONTENT_TEXT)
         except TimeoutException:

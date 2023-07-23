@@ -35,6 +35,10 @@ class History(MainPage):
         """Проверка, что комментарий в верном статусе"""
         assert self.element_is_visible(locator).is_displayed() is True
 
+    def status_comment_in_history_is_present(self, locator):
+        """Проверка, что комментарий в верном статусе"""
+        assert self.elements_is_present(locator).is_displayed() is True
+
     def text_comment_in_history(self, locator, text_comment):
         assert self.element_is_visible(locator).text == text_comment
 
@@ -52,10 +56,15 @@ class History(MainPage):
         time.sleep(1)
         self.text_comment_in_history(self.GRAY_COMMENT_CHECK, 'Серый комментарий')
         # print(self.element_is_visible(self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
+        time.sleep(1)
+        name = DataParser.get_article_name_from_data_file()
+        print(name)
         self.status_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK, 'Тестовый комментарий 4')
         # # print(self.element_is_visible(self.COMMENT_3_NO_SOLVE_CHECK).is_displayed())
+        time.sleep(1)
         self.status_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK)
+        # self.status_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK, 'Тестовый комментарий 3')
         # # print(self.element_is_visible(self.COMMENT_2_NO_SOLVE_CHECK).is_displayed())
         self.status_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK)
