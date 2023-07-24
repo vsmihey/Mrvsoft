@@ -35,7 +35,7 @@ def driver():
     # chrome_options.add_argument("--disable-extensions")
     # chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--lang=ru")
+    # chrome_options.add_argument("--lang=ru")
     # chrome_options.add_argument('--ignore-certificate-errors')
     # chrome_options.add_experimental_option("excludeSwitches", ["ignore-certificate-errors"])
     # chrome_options.add_argument('--allow-insecure-localhost')
