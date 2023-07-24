@@ -401,15 +401,14 @@ class StepByScriptLocators:
     TEXT_CHECK_SEARCH = (By.XPATH, "//p[contains(text(),'поиск')]")
     BUTTON_CONTINUE = (By.XPATH, "//p[contains(text(),'Продолжить')]")
     TEXT_AREA_ALERT_INPUT = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
-    CONTENT_TRANSFER = (By.XPATH, "//section[@class='m-bread-crumbs']//div[@class='m-button-basic__text'][contains(text(),'Контент 1')]")
+    # CONTENT_TRANSFER = (By.XPATH, "//section[@class='m-bread-crumbs']//div[@class='m-button-basic__text'][contains(text(),'Контент 1')]")
+    CONTENT_TRANSFER = (By.XPATH, "//section[@class='m-bread-crumbs']//div[@title='Контент 1']")
     CONTENT_SEARCH = (By.XPATH, "//div[text()='Поиск']")
     CHECK_TEXT_FIXING_EXPERT = (By.XPATH, "//p[text()='Закреплено экспертом']")
     TO_GET_NAME = (By.XPATH, "//input[@class='m-ui-text-input__input']")
     CLOSE_SCRIPT = (By.XPATH, "//div[@class='popup__close']")
     TEXTAREA_INVISIBLE = (By.XPATH, "//textarea[@style='visibility: hidden; display: none;']")
     TEXTAREA_VISIBLE = (By.XPATH, "//textarea[@style='visibility:visible;']")
-
-
 
 class CopyPastePageLocators:
 

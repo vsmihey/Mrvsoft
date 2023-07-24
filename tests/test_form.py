@@ -5,7 +5,8 @@ from pages.form_page import FormPage
 from pages.data_login_password import *
 from pages.article_page import ArticlePage, CopyPastePage, CreateDraftPage, FilesPages
 from pages.article_page import StepByScriptPage
-from pages import base_class
+from pages import base_class, users
+from pages.users import DataLoginPassword
 
 
 @pytest.mark.order(1)
@@ -15,16 +16,16 @@ class TestFormPage:
         form_page = FormPage(driver)
         form_page.open()
         form_page.logo_head()
-        # form_page.screenshot()
-        self.login = login
-        self.password = password_incorrect
-        form_page.authorization(self.login, self.password)
+        # self.login = login
+        login, password = DataLoginPassword.correct_data()
+        # self.password = password_incorrect
+        login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
+        # form_page.authorization(self.login, self.password)
+        form_page.authorization(login, password_incorrect)
         form_page.restore_incorrect()
         form_page.logo_head()
-        # form_page.screenshot()
         form_page.full_authorization(driver)
         form_page.logo_head()
-        # form_page.screenshot()
         form_page.title_find(driver)
 
     def test_form_1(self, driver):
@@ -32,15 +33,19 @@ class TestFormPage:
         form_page = FormPage(driver, url)
         form_page.browser.delete_all_cookies()
         form_page.open()
-        self.login = login_incorrect
-        self.password = password
-        form_page.fill_fields(self.login, self.password)
-        self.login = login_incorrect
-        self.password = password_incorrect
-        form_page.fill_fields(login, password)
-        self.login = login
-        self.password = password_incorrect
-        form_page.fill_fields(self.login, self.password)
+        # self.login = login_incorrect
+        login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
+        print(login_incorrect)
+        # self.password = password
+        login, password = DataLoginPassword.correct_data()
+        form_page.fill_fields(login_incorrect, password)
+        # self.login = login_incorrect
+        # self.password = password_incorrect
+        login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
+        form_page.fill_fields(login_incorrect, password_incorrect)
+        login, password = DataLoginPassword.correct_data()
+        password_incorrect = DataLoginPassword.incorrect_data()
+        form_page.fill_fields(login, password_incorrect)
         form_page.check_auth_text()
         form_page.restore_incorrect()
         form_page.check_restore_text()
@@ -147,7 +152,6 @@ class TestFormPage:
     class TestStepByScriptPage:
 
         def test_step_by_script(self, driver):
-            # Тест падает - баг (не заполняется имя контент шага)
             article_page = StepByScriptPage(driver)
             # article_page.open()
             article_page.get_authorisation_in_selen()

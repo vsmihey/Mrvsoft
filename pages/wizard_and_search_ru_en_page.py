@@ -15,7 +15,8 @@ from locators.locators_topic_database import CreateTopicDatabaseLocators
 from pages import checking_filter_changes_page
 from pages.base_page import BasePage
 from pages.checking_filter_changes_page import AddFilterChanges
-from pages.data_login_password import url, text_ru, text_en
+# from pages.data_login_password import url, text_ru, text_en
+from pages.users import text_ru, text_en
 from pages.repeat_function import RepeatFunction
 
 
