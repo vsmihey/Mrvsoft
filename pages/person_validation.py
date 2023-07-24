@@ -35,6 +35,10 @@ class History(MainPage):
         """Проверка, что комментарий в верном статусе"""
         assert locator.is_displayed() is True
 
+    def status_comment_in_history_is_present(self, locator):
+        """Проверка, что комментарий в верном статусе"""
+        assert self.elements_is_present(locator).is_displayed() is True
+
     def text_comment_in_history(self, locator, text_comment):
         assert self.element_is_visible(locator).text == text_comment
 

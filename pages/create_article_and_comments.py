@@ -1,5 +1,8 @@
 import random
 import time
+
+from selenium.common import StaleElementReferenceException
+
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
 from pages.authorisation_page import Authorisation
@@ -10,7 +13,7 @@ from pages.users import minervakms
 
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
     """Создание и наполнение Базовой статьи"""
-    BASE_ARTICLE_TITLE = 'Максимально подробное название статьи ' + str(random.randint(999, 9999))
+    BASE_ARTICLE_TITLE = 'Название статьи ' + str(random.randint(999, 9999))
 
     def title_article(self):
         """Заголовок статьи"""
@@ -35,7 +38,11 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
         """Создание обычной статьи с наполнением"""
         self.get_authorisation_in_selen(minervakms)
         time.sleep(1)
-        self.create_button()
+        try:
+            self.create_button()
+        except (StaleElementReferenceException):
+            time.sleep(5)
+            self.create_button()
         self.create_base_article_button()
         time.sleep(1)
         self.title_article()
@@ -88,6 +95,7 @@ class Comments(Authorisation):
         page.get_authorisation_in_url(url)
 
         for i in range(4):
+            time.sleep(1)
             page.comment_text_area(f'Тестовый комментарий {i + 1}')
             page.send_comment()
 
