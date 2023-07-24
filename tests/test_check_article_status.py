@@ -18,13 +18,13 @@ class TestCheckArticleStatus:
     def test_close_comment(self, driver):
         Comments.close_first_comment(driver, DataParser.get_url_from_data_file())
 
-    # def test_new_article_history_person1(self, driver):
-    #     person = Person1(driver)
-    #     person.get_check_history()
-    #
-    # def test_new_article_bell_person1(self, driver):
-    #     person = Person1(driver)
-    #     person.get_check_bell()
+    def test_new_article_history_person1(self, driver):
+        person = Person1(driver)
+        person.get_check_history()
+
+    def test_new_article_bell_person1(self, driver):
+        person = Person1(driver)
+        person.get_check_bell()
 
     def test_new_article_history_person2(self, driver):
         person = Person2(driver)
@@ -33,9 +33,9 @@ class TestCheckArticleStatus:
         person.go_to_article_from_history()
         person.check_open_valid_article()
 
-    # def test_new_article_bell_person2(self, driver):
-    #     person = Person2(driver)
-    #     person.get_check_bell()
+    def test_new_article_bell_person2(self, driver):
+        person = Person2(driver)
+        person.get_check_bell()
 
     def test_new_article_history_person3(self, driver):
         person = Person3(driver)
@@ -44,9 +44,9 @@ class TestCheckArticleStatus:
         person.go_to_article_from_history()
         person.check_open_valid_article()
 
-    # def test_new_article_bell_person3(self, driver):
-    #     person = Person3(driver)
-    #     person.get_check_bell()
+    def test_new_article_bell_person3(self, driver):
+        person = Person3(driver)
+        person.get_check_bell()
 
     def test_new_article_history_person4(self, driver):
         person = Person4(driver)
@@ -55,6 +55,6 @@ class TestCheckArticleStatus:
         person.go_to_article_from_history()
         person.check_open_valid_article()
 
-    # def test_new_article_bell_person4(self, driver):
-    #     person = Person4(driver)
-    #     person.get_check_bell()
+    def test_new_article_bell_person4(self, driver):
+        person = Person4(driver)
+        person.get_check_bell()
