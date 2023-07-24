@@ -34,9 +34,9 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
             file.write(self.get_actual_url() + '\n')
             file.write(self.BASE_ARTICLE_TITLE)
 
-    def creating_base_article(self):
+    def creating_base_article(self, user=minervakms):
         """Создание обычной статьи с наполнением"""
-        self.get_authorisation_in_selen(minervakms)
+        self.get_authorisation_in_selen(user)
         time.sleep(1)
         try:
             self.create_button()
@@ -83,25 +83,19 @@ class Comments(Authorisation):
         """Подтверждение отправки комментария"""
         self.element_is_visible(locators.Comments.SEND_COMMENT).click()
 
-    def send_comment_for_close(self):
-        """Подтверждение отправки комментария, вторая кнопка на странице - Отправить"""
-        self.element_is_visible(locators.Comments.SEND_COMMENT_FOR_CLOSE).click()
-
     def disable_the_question_to_the_expert_option(self):
         """Отключение галочки 'с вопросом к эксперту'"""
         self.element_is_visible(locators.Comments.EXPERT_QUESTION).click()
 
     @staticmethod
-    def create_comments(driver, url):
+    def create_comments(driver, url, user=minervakms):
         """Создание тестового набора комментариев в статье по переданной ссылке, с прохождением авторизации"""
         page = Comments(driver)
 
-        page.get_authorisation_in_url(url)
+        page.get_authorisation_in_url(url, user)
 
         for i in range(4):
-            time.sleep(1)
             page.comment_text_area(f'Тестовый комментарий {i + 1}')
-            time.sleep(1)
             page.send_comment()
 
         page.disable_the_question_to_the_expert_option()
@@ -109,14 +103,13 @@ class Comments(Authorisation):
         page.send_comment()
 
     @staticmethod
-    def close_first_comment(driver, url):
+    def close_first_comment(driver, url, user=minervakms):
         """Закрытие первого комментария"""
         page = Comments(driver)
-        page.get_authorisation_in_url(url)
-        time.sleep(1)
+        page.get_authorisation_in_url(url, user)
         page.element_is_visible(locators.Comments.TO_ANSWER_COMMENT_1).click()
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
         page.element_is_visible(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
-        page.send_comment_for_close()
+        page.send_comment()
 
 
