@@ -3,6 +3,7 @@ from pages import data_login_password
 from pages import users
 import locators.all_locators as locators
 from pages.base_class import MainPage
+from pages.users import minervakms
 
 
 class Authorisation(MainPage):
@@ -36,7 +37,7 @@ class Authorisation(MainPage):
         """Проверка, что открыта страница авторизации"""
         return self.element_is_visible(locators.AuthorisationPage.INPUT_IN_SYSTEM_TEXT).text
 
-    def get_authorisation_in_superbank(self, user=users.admin):
+    def get_authorisation_in_superbank(self, user=minervakms):
         """Метод для прохождения авторизации в проект СуперБанка"""
         self.browser.delete_all_cookies()
         self.open()
@@ -57,7 +58,7 @@ class Authorisation(MainPage):
         time.sleep(1)
         self.select_project_selen()
 
-    def get_authorisation_in_url(self, url, user=users.admin):
+    def get_authorisation_in_url(self, url, user=minervakms):
         """Метод для прохождения авторизации и перехода по переданной ссылке"""
         self.browser.delete_all_cookies()
         self.open(url=url)
