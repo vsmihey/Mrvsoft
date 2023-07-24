@@ -343,7 +343,7 @@ class ArticlePage(Authorisation, BasePage):
         print(name)
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        time.sleep(1)
+        time.sleep(2)
         name_of_templates = driver.find_element(By.XPATH, f"//span[contains(text(),'{name}')]")
         name_of_templates.click()
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
