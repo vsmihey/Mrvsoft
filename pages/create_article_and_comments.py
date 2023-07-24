@@ -1,7 +1,7 @@
 import random
 import time
 
-from selenium.common import StaleElementReferenceException
+from selenium.common import StaleElementReferenceException, ElementClickInterceptedException
 
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
@@ -111,3 +111,5 @@ class Comments(Authorisation):
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
         page.element_is_visible(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
         page.send_comment()
+
+

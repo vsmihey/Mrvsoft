@@ -1064,8 +1064,8 @@ class SearchRuEnLocators:
 class Comments:
     EXPERT_QUESTION = (By.XPATH, "//span[@class='checkbox__label']")
     ADD_COMMENT = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст комментария']")
-    SEND_COMMENT = (
-        By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
+    SEND_COMMENT = (By.XPATH, "//p[text()='Отправить']")
+    SEND_COMMENT_FOR_CLOSE = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
 
     TEST_COMMENT_1 = (
         By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]")

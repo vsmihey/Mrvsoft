@@ -231,6 +231,7 @@ class FormPage(Authorisation, BasePage):
         last_name = person.last_name
         first_name = person.first_name
         email = person.email
+        # self.screenshot()
         self.element_is_visible(Locators.SETTINGS).click()
         self.element_is_visible(Locators.PERSONS).click()
         self.element_is_visible(Locators.NEW_PERSON).click()

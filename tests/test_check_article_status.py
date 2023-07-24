@@ -28,7 +28,7 @@ class TestCheckArticleStatus:
     #     person.get_check_bell()
 
     def test_new_article_history_person2(self, driver):
-        person = Person2(driver.ha)
+        person = Person2(driver)
         person.get_check_history()
         person.new_article_history_check()
         person.go_to_article_from_history()
