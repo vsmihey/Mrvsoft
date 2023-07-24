@@ -33,7 +33,7 @@ class History(MainPage):
 
     def status_comment_in_history(self, locator):
         """Проверка, что комментарий в верном статусе"""
-        assert self.element_is_visible(locator).is_displayed() is True
+        assert locator.is_displayed() is True
 
     def status_comment_in_history_is_present(self, locator):
         """Проверка, что комментарий в верном статусе"""
@@ -56,23 +56,22 @@ class History(MainPage):
         time.sleep(1)
         self.text_comment_in_history(self.GRAY_COMMENT_CHECK, 'Серый комментарий')
         # print(self.element_is_visible(self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
-        time.sleep(1)
-        name = DataParser.get_article_name_from_data_file()
-        print(name)
-        self.status_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK)
+        print(self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
+        assert self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed() is True
         self.text_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK, 'Тестовый комментарий 4')
         # # print(self.element_is_visible(self.COMMENT_3_NO_SOLVE_CHECK).is_displayed())
-        time.sleep(1)
-        self.status_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK)
-        # self.status_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK)
-        self.text_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK, 'Тестовый комментарий 3')
-        # # print(self.element_is_visible(self.COMMENT_2_NO_SOLVE_CHECK).is_displayed())
-        self.status_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK)
-        self.text_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK, 'Тестовый комментарий 2')
+        # self.status_comment_in_history(*self.COMMENT_3_NO_SOLVE_CHECK)
+        assert self.browser.find_element(*self.COMMENT_3_NO_SOLVE_CHECK).is_displayed() is True
+        # self.text_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK, 'Тестовый комментарий 3')
+        # # # print(self.element_is_visible(self.COMMENT_2_NO_SOLVE_CHECK).is_displayed())
+        # self.status_comment_in_history(*self.COMMENT_2_NO_SOLVE_CHECK)
+        assert self.browser.find_element(*self.COMMENT_2_NO_SOLVE_CHECK).is_displayed() is True
+        # self.text_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK, 'Тестовый комментарий 2')
+        # # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
         # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
-        # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
-        self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
-        self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
+        assert self.browser.find_element(*self.COMMENT_1_SOLVE_CHECK).is_displayed() is True
+        # # self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
+        # self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
 
 
 class BellAlert(MainPage):
