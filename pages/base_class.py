@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from pages import data_login_password
-
+import pathlib
 # Настройки браузера
 # chrome_options = webdriver.ChromeOptions()
 # chrome_options.add_argument("--disable-notifications")
@@ -74,4 +74,15 @@ class MainPage:
     def switch_out_frame(self):
         """Выход из модального окна, на вход принимает модальное окно (пример: работа с виджетами)"""
         self.browser.switch_to.default_content()
+
+
+    def screenshot(self):
+        # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
+        # now_date = datetime.datetime.now(offset)
+        # now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
+        # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
+        name_screenshot = 'screenshot'+'.png'
+        path = pathlib.Path(pathlib.Path.cwd(), "screenshots", name_screenshot)
+        path = str(path)
+        self.browser.save_screenshot(path)
 

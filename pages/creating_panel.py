@@ -8,6 +8,7 @@ class CreatingPanel(Authorisation):
 
     def create_button(self):
         """Кнопка для перехода в панель создания статей"""
+        self.screenshot()
         self.element_is_visible(FormPagesLocators.CREATE_BUTTON).click()
 
     def create_base_article_button(self):
