@@ -12,6 +12,15 @@ class TestCheckArticleStatus:
         page_article_base = BaseArticleEditor(driver)
         page_article_base.creating_base_article()
 
+        Comments.create_comments(driver, DataParser.get_url_from_data_file())
+        Comments.close_first_comment(driver, DataParser.get_url_from_data_file())
+
+        person = Person2(driver)
+        person.get_check_history()
+        person.new_article_history_check()
+        person.go_to_article_from_history()
+        person.check_open_valid_article()
+
     def test_create_comments(self, driver):
         Comments.create_comments(driver, DataParser.get_url_from_data_file())
 

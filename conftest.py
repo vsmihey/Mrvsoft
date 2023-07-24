@@ -22,6 +22,7 @@ def driver():
     # chrome_options.add_experimental_option("prefs", prefs)
     # chrome_options.add_argument('--allow-silent-push')
     chrome_options.add_argument('--disable-notifications')
+    # chrome_options.add_argument("--lang = en")
     # chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
     # chrome_options.add_experimental_option('useAutomationExtension', False)
     # chrome_options.add_argument('--disable-gpu')
