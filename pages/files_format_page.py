@@ -195,8 +195,11 @@ class FilesFormatPage(Authorisation, BasePage):
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         """edit created avi file"""
         # здесь нужно найти ранее созданный файл
+        time.sleep(1)
         self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
+        time.sleep(1)
         element = self.elements_is_present(self.Locators.AVI_FILE_CREATED)
+        time.sleep(1)
         self.action_move_to_element(element, driver)
         self.elements_is_present(self.Locators.AVI_FILE_CREATED).click()
         time.sleep(1)
@@ -243,8 +246,11 @@ class FilesFormatPage(Authorisation, BasePage):
         # self.input_in_my_project(driver)
         """edit pic file"""
         # здесь нужно найти ранее созданный файл
+        time.sleep(1)
         self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
+        time.sleep(1)
         element = self.elements_is_present(self.Locators.JPEG_FILE_CREATED)
+        time.sleep(1)
         self.action_move_to_element(element, driver)
         try:
             self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()

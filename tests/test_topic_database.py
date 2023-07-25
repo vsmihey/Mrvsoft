@@ -9,8 +9,9 @@ class TestTopicDatabase:
     class TestCreateTopicDatabase:
 
         def test_add_topic_database(self, driver):
-            topic_database_page = CreateTopicDatabase(driver, url)
-            topic_database_page.open()
+            topic_database_page = CreateTopicDatabase(driver)
+            # topic_database_page.open()
+            topic_database_page.get_authorisation_in_selen()
             topic_database_page.add_topic_database(driver)
 
         def test_edit_topic_in_database(self, driver):

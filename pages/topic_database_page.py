@@ -12,16 +12,17 @@ from conftest import driver
 from generator.generator import generated_person, generated_file
 from locators.locators_topic_database import CreateTopicDatabaseLocators
 from pages import article_page
+from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
 from pages.data_login_password import url
 
 
-class CreateTopicDatabase(BasePage):
+class CreateTopicDatabase(Authorisation, BasePage):
     Locators = CreateTopicDatabaseLocators
 
     def add_topic_database(self, driver):
         """ADD TOPIC AND CHECK TEXTS, LEN INPUT NAME"""
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         self.element_is_visible(self.Locators.LEARNING_BUTTON).click()
         self.element_is_visible(self.Locators.TAB_ALL_COURSES).click()
         self.element_is_visible(self.Locators.DATABASE_OF_QUESTIONS).click()

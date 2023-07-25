@@ -78,8 +78,8 @@ class MainPage:
     def action_move_to_element(self, element, driver):
         """Переход к элементу которого не видно"""
         action = ActionChains(driver)
-        action.move_to_element(element)
-        action.perform()
+        action.move_to_element(element).perform()
+        # action.perform()
 
 
     def screenshot(self):
