@@ -44,12 +44,12 @@ class FilesFormatPage(Authorisation, BasePage):
             time.sleep(5)
             self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path)
         """typography"""
-        time.sleep(1)
+        time.sleep(2)
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         except ElementClickInterceptedException:
             # self.screenshot()
-            time.sleep(30)
+            time.sleep(5)
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
@@ -113,7 +113,7 @@ class FilesFormatPage(Authorisation, BasePage):
             self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
 
     def check_audio_files(self, driver):
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         audio_files = generated_files_audio()
         list_random_audio_files = random.choices(audio_files, k=3)
         for n in list_random_audio_files:
@@ -126,7 +126,7 @@ class FilesFormatPage(Authorisation, BasePage):
             os.remove(path)
 
     def check_video_files(self, driver):
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         video_files = generated_files_video()
         list_random_audio_files = random.choices(video_files, k=3)
         for n in list_random_audio_files:
@@ -139,7 +139,7 @@ class FilesFormatPage(Authorisation, BasePage):
             os.remove(path)
 
     def create_pic_video_audio_files(self, driver):
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         """create pic, video, audio files"""
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
