@@ -8,7 +8,7 @@ from string import ascii_uppercase
 from pathlib import Path
 import selenium
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException, \
-    WebDriverException, ElementNotInteractableException, StaleElementReferenceException
+    WebDriverException, ElementNotInteractableException, StaleElementReferenceException, InvalidSelectorException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
@@ -305,7 +305,7 @@ class ArticlePage(Authorisation, BasePage):
     def add_article_by_templates(self, driver):
         driver.implicitly_wait(10)
         person = generated_person()
-        name = "Templates" + str(random.randint(999, 99999))
+        name = "1_Templates" + str(random.randint(999, 99999))
         name_content = "Content" + str(random.randint(999, 99999))
         try:
             self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
@@ -343,8 +343,19 @@ class ArticlePage(Authorisation, BasePage):
         print(name)
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        time.sleep(2)
-        name_of_templates = driver.find_element(By.XPATH, f"//span[contains(text(),'{name}')]")
+
+        try:
+            name_of_templates = driver.find_element(By.XPATH, f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
+
+        except (InvalidSelectorException, NoSuchElementException):
+            # прокрутка окна вниз на 100 пикселей
+            action = ActionChains(driver)
+            scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER)
+            action.drag_and_drop_by_offset(scroller, "0", "100")
+            action.perform()
+            name_of_templates = driver.find_element(By.XPATH,
+                                                    f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
+
         name_of_templates.click()
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
         # print(name_content)
