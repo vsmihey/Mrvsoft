@@ -152,7 +152,7 @@ class FilesFormatPage(Authorisation, BasePage):
             self.add_all_files(path=n)
         return path1, path2, path3, path4, path5, path6
 
-    def check_replacement_files_text(self):
+    def check_replacement_files_text(self, driver):
         self.element_is_visible(self.Locators.CHANGE_FILE).click()
         try:
             self.elements_is_present(self.Locators.DELETE_DRAFT, timeout=2).click()
@@ -169,7 +169,7 @@ class FilesFormatPage(Authorisation, BasePage):
         check_text_replacement_alert = self.element_is_visible(self.Locators.CHECK_TEXT_REPLACEMENT_ALERT).text
         assert check_text_replacement_alert == "При замене необходимо использовать тот же тип файла"
         element = self.element_is_visible(self.Locators.SVG_INFORMATION_FOR_TOOLTIP)
-        self.action_move_to_element(element)
+        self.action_move_to_element(element, driver)
         # time.sleep(1)
         """text of tooltip"""
         # data_list_tooltip = []
@@ -179,14 +179,14 @@ class FilesFormatPage(Authorisation, BasePage):
         except TimeoutException:
             self.screenshot()
             time.sleep(5)
-            self.action_move_to_element(element)
+            self.action_move_to_element(element, driver)
             list_tooltip = self.element_is_visible(self.Locators.LIST_TOOLTIP).text
         #     data_list_tooltip.append(list_tooltip)
         # print(data_list_tooltip)
         assert list_tooltip == '«Аудио» - файлы форматов: mp3, aac, ac3, aiff, au, dts, flac, m4a, m4p, m4r, mp2, ogg, opus, ra, tta, voc, vox, wav, wma.\n«Видео» - файлы форматов: mp4, avi, flv, mov, 3gp, m4v, asf, m2ts, m4v, mkv, mts, swf, vob, wmv, webm.\n«Изображение» - файлы форматов: jpg, jpeg, png, gif.\n«Документ» - все остальные файлы.'
 
     def check_replacement_files_video(self, driver):
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
         path3 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
@@ -195,11 +195,12 @@ class FilesFormatPage(Authorisation, BasePage):
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         """edit created avi file"""
         # здесь нужно найти ранее созданный файл
+        self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
         element = self.elements_is_present(self.Locators.AVI_FILE_CREATED)
-        self.action_move_to_element(element)
+        self.action_move_to_element(element, driver)
         self.elements_is_present(self.Locators.AVI_FILE_CREATED).click()
         time.sleep(1)
-        self.check_replacement_files_text()
+        self.check_replacement_files_text(driver)
         """change files """
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path5)
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path4)
@@ -209,7 +210,7 @@ class FilesFormatPage(Authorisation, BasePage):
         self.element_is_visible(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE).click()
 
     def file_check_replacement_audio(self, driver):
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
         path3 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
@@ -218,10 +219,11 @@ class FilesFormatPage(Authorisation, BasePage):
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         """edit avi file"""
         # здесь нужно найти ранее созданный файл
+        self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
         element = self.elements_is_present(self.Locators.MP3_FILE_CREATED)
-        self.action_move_to_element(element)
+        self.action_move_to_element(element, driver)
         self.elements_is_present(self.Locators.MP3_FILE_CREATED).click()
-        self.check_replacement_files_text()
+        self.check_replacement_files_text(driver)
         """replacement check"""
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path4)
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path2)
@@ -238,13 +240,14 @@ class FilesFormatPage(Authorisation, BasePage):
         path4 = str(Path(pathlib.Path.cwd(), "files", "aac.aac"))
         path5 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
         path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         """edit pic file"""
         # здесь нужно найти ранее созданный файл
+        self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
         element = self.elements_is_present(self.Locators.JPEG_FILE_CREATED)
-        self.action_move_to_element(element)
+        self.action_move_to_element(element, driver)
         self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
-        self.check_replacement_files_text()
+        self.check_replacement_files_text(driver)
         """replacement check"""
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path1)
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path3)
@@ -255,7 +258,7 @@ class FilesFormatPage(Authorisation, BasePage):
         self.element_is_visible(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE).click()
 
 
-class UnformatFilePage(BasePage):
+class UnformatFilePage(Authorisation, BasePage):
 
     Locators = UnformatFilePageLocators()
 
@@ -263,10 +266,13 @@ class UnformatFilePage(BasePage):
         person = generated_person()
         text_area_alert = person.first_name + "-Alert"
         time.sleep(1)
-        self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        try:
+            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+        except (TimeoutException, StaleElementReferenceException):
+            time.sleep(5)
+            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
         """direct folder save"""
-        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         except (TimeoutException, ElementNotInteractableException):
@@ -326,7 +332,7 @@ class UnformatFilePage(BasePage):
         self.element_is_visible(self.Locators.SVG_CLOSE_DOWNLOADED_FILE).click()
 
     def add_unformat_file_rar_zip(self, driver):
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         path1 = str(Path(pathlib.Path.cwd(), "files", "rar.rar"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "zip.zip"))
         """random file by index"""

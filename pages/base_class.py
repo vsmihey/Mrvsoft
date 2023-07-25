@@ -75,6 +75,12 @@ class MainPage:
         """Выход из модального окна, на вход принимает модальное окно (пример: работа с виджетами)"""
         self.browser.switch_to.default_content()
 
+    def action_move_to_element(self, element, driver):
+        """Переход к элементу которого не видно"""
+        action = ActionChains(driver)
+        action.move_to_element(element)
+        action.perform()
+
 
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
