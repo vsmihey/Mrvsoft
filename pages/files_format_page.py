@@ -47,7 +47,7 @@ class FilesFormatPage(Authorisation, BasePage):
         time.sleep(2)
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        except ElementClickInterceptedException:
+        except (ElementClickInterceptedException, TimeoutException):
             # self.screenshot()
             time.sleep(5)
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
@@ -246,14 +246,22 @@ class FilesFormatPage(Authorisation, BasePage):
         self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
         element = self.elements_is_present(self.Locators.JPEG_FILE_CREATED)
         self.action_move_to_element(element, driver)
-        self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
+        try:
+            self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
+        except ElementClickInterceptedException:
+            time.sleep(3)
+            self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
         self.check_replacement_files_text(driver)
         """replacement check"""
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path1)
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path3)
-        time.sleep(3)
-        check_text_incorrect_format_replacement = self.element_is_visible(
+        try:
+            check_text_incorrect_format_replacement = self.element_is_visible(
             self.Locators.CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT).text
+        except TimeoutException:
+            time.sleep(3)
+            check_text_incorrect_format_replacement = self.element_is_visible(
+                self.Locators.CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT).text
         assert check_text_incorrect_format_replacement == "Неверный формат файла для замены"
         self.element_is_visible(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE).click()
 
