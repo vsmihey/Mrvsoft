@@ -81,6 +81,10 @@ class MainPage:
         action.move_to_element(element).perform()
         # action.perform()
 
+    def go_to_element(self, element):
+        """Переход к нужному едлементу (на вход принимает необходимый элемент)"""
+        self.browser.execute_script("arguments[0].scrollIntoView(true);", element)
+
 
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)

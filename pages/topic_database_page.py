@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 
 from selenium.common import TimeoutException, StaleElementReferenceException, ElementClickInterceptedException, \
-    ElementNotInteractableException, WebDriverException
+    ElementNotInteractableException, WebDriverException, InvalidSelectorException, NoSuchElementException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 
@@ -31,7 +31,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         assert text_database_of_questions == "База вопросов"
         try:
             text_not_questions_now = self.element_is_visible(self.Locators.TEXT_NOT_QUESTIONS_NOW, timeout=2).text
-            assert text_not_questions_now == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
+            assert text_not_questions_now == "В этом проекте пока нет вопросов. Вы можете это исправить"
         except TimeoutException:
             try:
                 self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=2).click()
@@ -53,14 +53,18 @@ class CreateTopicDatabase(Authorisation, BasePage):
                 #     self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=2).click()
             self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD).click()
             self.element_is_visible(self.Locators.BUTTON_CHANGE_QUESTION).click()
-            self.delete_created_topics()
+            self.delete_created_topics()                                            # не удаляется тема
             self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
             self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
         button_add_topic = self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).text
-        assert button_add_topic == 'Создать темы'
+        assert button_add_topic == 'Добавить'
         self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).click()
         """input name topic and check len"""
-        element = self.element_is_visible(self.Locators.INPUT_NAME_TOPIC)
+        try:
+            element = self.element_is_visible(self.Locators.INPUT_NAME_TOPIC)
+        except TimeoutException:
+            print("БАГ НЕ УДАЛЯЕТСЯ ТЕМА")
+            element = self.element_is_visible(self.Locators.INPUT_NAME_TOPIC)
         name_content, get_name = self.check_len_name(driver, element, n=65)
         self.element_is_visible(self.Locators.INPUT_NAME_TOPIC).send_keys(name_content)
         assert len(get_name) == 64
@@ -93,12 +97,14 @@ class CreateTopicDatabase(Authorisation, BasePage):
         for n in list_created_topics:
             time.sleep(1)
             n.click()
+            time.sleep(0.5)
             try:
                 self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
             except TimeoutException:
                 time.sleep(3)
                 n.click()
                 self.element_is_visible(self.Locators.BUTTON_DELETE_TOPIC).click()
+            time.sleep(1)
             self.element_is_visible(self.Locators.BUTTON_CONFIRM_DELETE_TOPIC).click()
 
     def create_new_question(self, driver):
@@ -202,7 +208,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         assert text_questions_options == "Варианты ответа"
 
     def edit_topic_in_database(self):
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         self.element_is_visible(self.Locators.LEARNING_BUTTON).click()
         self.element_is_visible(self.Locators.TAB_ALL_COURSES).click()
         self.element_is_visible(self.Locators.DATABASE_OF_QUESTIONS).click()
@@ -303,7 +309,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         person = generated_person()
         first_name = person.first_name
         text = "Hello"
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         # data_files = generated_file()
         """upload media"""
         try:
@@ -333,10 +339,11 @@ class CreateTopicDatabase(Authorisation, BasePage):
             time.sleep(5)
             self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
         """input is visible for load files"""
-        self.driver.execute_script(
-            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        self.driver.execute_script(
-            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        # self.driver.execute_script(
+        #     """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        # self.driver.execute_script(
+        #     """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        self.download_files_is_visible()
         path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
         data_path = [path1, path2]
@@ -457,7 +464,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
         self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
 
-    def check_add_question_func(self):
+    def check_add_question_func(self, driver):
         path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
         data_path = [path1, path2]
@@ -474,7 +481,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
             time.sleep(2)
             self.element_is_visible(self.Locators.INPUT_SELECTED).click()
         typography_for_click = self.elements_is_present(self.Locators.BUTTON_TYPOGRAPHY)
-        action = ActionChains(self.driver)
+        action = ActionChains(driver)
         action.click(typography_for_click)
         action.perform()
         self.element_is_visible(self.Locators.FOLDER_SAVE).send_keys("Контент 1")
@@ -509,7 +516,6 @@ class CreateTopicDatabase(Authorisation, BasePage):
             attribute_class = n.get_attribute("class")
             assert attribute_class == "m-switch-box lms-question-bar__switch"
         self.element_is_visible(self.Locators.ON_CHECKBOX_ALL_QUESTIONS).click()
-        time.sleep(1)
         self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
         """check first position by index xpath dom and active tab"""
         tab_active = self.element_is_visible(self.Locators.TAB_ACTIVE).text
@@ -657,11 +663,11 @@ class CreateTopicDatabase(Authorisation, BasePage):
         self.element_is_visible(self.Locators.SVG_DEL_FIRST_QUESTION).click()
         self.element_is_visible(self.Locators.CONFIRM_BUTTON_DELETE).click()
 
-    def add_edit_question_template(self):
+    def add_edit_question_template(self, driver):
         person = generated_person()
         first_name = person.first_name
         text = "Hello"
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         try:
             self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         except StaleElementReferenceException:
@@ -679,7 +685,17 @@ class CreateTopicDatabase(Authorisation, BasePage):
         self.element_is_visible(self.Locators.SAVE_TEMPLATES_CHANGE).click()
         self.element_is_visible(self.Locators.FINISH_BUTTON_SCRIPT).click()
         time.sleep(2)
-        templates_download = self.driver.find_element(By.XPATH, f"//div[text()='{name_templates}']")
+        try:
+            templates_download = self.browser.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        except (InvalidSelectorException, NoSuchElementException):
+            # прокрутка окна вниз на 100 пикселей
+            action = ActionChains(driver)
+            scroller = self.element_is_visible(self.Locators.MODAL_WINDOW_SCROLLER)
+            action.drag_and_drop_by_offset(scroller, "0", "300")
+            action.perform()
+            time.sleep(1)
+            templates_download = self.browser.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+
         templates_download.click()
         try:
             self.element_is_visible(self.Locators.TEXT_AREA_ARTICLE).click()
@@ -692,12 +708,12 @@ class CreateTopicDatabase(Authorisation, BasePage):
         self.element_is_visible(self.Locators.DROP_DOWN_FILES).click()
         self.switch_out_frame()
         self.download_files_is_visible()
-        self.check_add_question_func()
+        self.check_add_question_func(driver)
         # time.sleep(1)
         # self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
 
-    def add_edit_question_script(self):
-        self.input_in_my_project(self.driver)
+    def add_edit_question_script(self, driver):
+        # self.input_in_my_project(self.driver)
         try:
             self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         except StaleElementReferenceException:
@@ -747,7 +763,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
             time.sleep(2)
             self.element_is_visible(self.Locators.INPUT_SELECTED).click()
         typography_for_click = self.elements_is_present(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
-        action = ActionChains(self.driver)
+        action = ActionChains(driver)
         action.click(typography_for_click)
         action.perform()
         """open vizard"""
@@ -827,7 +843,11 @@ class CreateTopicDatabase(Authorisation, BasePage):
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
+        try:
+            self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
+        except ElementClickInterceptedException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.BUTTON_JUST_NOTIFY).click()
         self.element_is_visible(self.Locators.TEXT_CONFIRM_READ).click()
         """text test tab check"""
         tabs_check = self.element_is_visible(self.Locators.TABS_CHECK_TEXT_ALL).text

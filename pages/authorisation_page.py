@@ -47,7 +47,7 @@ class Authorisation(MainPage):
         self.confirm_button()
         self.select_project_superbank()
 
-    def get_authorisation_in_selen(self, user=users.minervakms):
+    def get_authorisation_in_selen(self, user=users.andrey):
         """Метод для прохождения авторизации в проект Selen"""
         self.browser.delete_all_cookies()
         self.open()
