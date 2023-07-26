@@ -59,6 +59,10 @@ class PublicWizard(MainPage):
         """Доступ к статье"""
         self.element_is_visible(locators.WizardPublic.CHECKBOX_ALL_ROLES).click()
 
+    def minor_type(self):
+        """Выбор минорных изменений"""
+        self.element_is_visible(locators.WizardPublic.CHECKBOX_MINOR_EDIT).click()
+
     def save_base_article(self):
         """Сохранение статьи"""
         self.publish_button_click()
@@ -67,4 +71,11 @@ class PublicWizard(MainPage):
         self.next_and_finish_button_click()
         self.notification_text_area()
         self.notification_type()
+        self.next_and_finish_button_click()
+
+    def save_minor_edit(self):
+        """Сохранение статьи с незначительными изменениями"""
+        self.publish_button_click()
+        self.notification_text_area('Минорное редактирование')
+        self.minor_type()
         self.next_and_finish_button_click()

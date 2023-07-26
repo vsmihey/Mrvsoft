@@ -1,5 +1,6 @@
 import time
 
+from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from pages.authorisation_page import Authorisation
 from pages.base_class import MainPage
@@ -38,9 +39,13 @@ class History(MainPage):
     def text_comment_in_history(self, locator, text_comment):
         assert self.element_is_visible(locator).text == text_comment
 
-    def go_to_article_from_history(self):
-        """Проверка перехода в статью из истории"""
+    def go_to_new_article_from_history(self):
+        """Проверка перехода в новую статью из истории"""
         self.element_is_visible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK).click()
+
+    def go_to_minor_edit_article_from_history(self):
+        """Проверка перехода в статью с минорным редактированием из истории"""
+        self.element_is_visible(locators.CheckCommentsPersons.MINOR_EDIT_ARTICLE_CHECK).click()
 
     def check_open_valid_article(self):
         """Проверка, что из истории открылась нужная статья"""
@@ -69,6 +74,11 @@ class History(MainPage):
         self.status_comment_in_history(self.browser.find_element(*self.COMMENT_1_SOLVE_CHECK))
         # # self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
+
+    def minor_edit_article_history_check(self):
+        """Проверка, комментов в истории по минорному редактированию статье"""
+        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_2_SOLVE_CHECK))
+        self.text_comment_in_history(self.COMMENT_2_SOLVE_CHECK, 'Тестовый комментарий 2')
 
 
 class BellAlert(MainPage):
@@ -158,11 +168,6 @@ class Person3(PersonValidation):
 
 
 class Person4(PersonValidation):
-    def switch_to_bell(self, person):
-        self.get_authorisation_in_selen(person)
-        time.sleep(1)
-        self.no_new_notification()
-        self.bell_button_click()
 
     def get_check_history(self):
         self.switch_to_history(person4)

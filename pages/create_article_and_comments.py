@@ -8,10 +8,19 @@ from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_
 from pages.authorisation_page import Authorisation
 import locators.all_locators as locators
 from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
+from pages.base_class import MainPage
 from pages.users import minervakms
 
 
-class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
+class ContentOptions(MainPage):
+    """Редактирование, избранное, комментарии и т.д."""
+
+    def redaction(self):
+        """Кнопка Редактировать"""
+        self.element_is_visible(locators.FormPagesLocators.EDIT_ARTICLE).click()
+
+
+class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions):
     """Создание и наполнение Базовой статьи"""
     BASE_ARTICLE_TITLE = 'Название статьи ' + str(random.randint(999, 9999))
 
@@ -52,6 +61,12 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard):
         self.save_base_article()
         time.sleep(0.5)
         self.save_data_in_file()
+
+    def edit_base_article(self, url):
+        self.get_authorisation_in_url(url)
+        self.redaction()
+        self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('HeyHey')
+        self.save_minor_edit()
 
 
 class DataParser:
@@ -110,6 +125,14 @@ class Comments(Authorisation):
         page.element_is_visible(locators.Comments.TO_ANSWER_COMMENT_1).click()
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
         page.element_is_visible(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
-        page.send_comment()
+        page.element_is_visible(locators.Comments.CLOSE_COMMENT).click()
 
-
+    @staticmethod
+    def close_second_comment(driver, url, user=minervakms):
+        """Закрытие первого комментария"""
+        page = Comments(driver)
+        page.get_authorisation_in_url(url, user)
+        page.element_is_visible(locators.Comments.TO_ANSWER_COMMENT_2).click()
+        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
+        page.element_is_visible(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
+        page.element_is_visible(locators.Comments.CLOSE_COMMENT).click()
