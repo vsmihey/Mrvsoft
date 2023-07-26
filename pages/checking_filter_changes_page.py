@@ -15,18 +15,19 @@ from locators.locators_checking_filter_changes import AddFilterChangesLocators
 from locators.locators_form_pages import FormPagesLocators
 from locators.locators_topic_database import CreateTopicDatabaseLocators
 from pages import repeat_function
+from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
 from pages.data_login_password import url
 from pages.repeat_function import RepeatFunction
 
 
-class AddFilterChanges(BasePage):
+class AddFilterChanges(Authorisation, BasePage):
 
     Locators = AddFilterChangesLocators()
 
     def add_filters_mass_change(self, count_filters=3):
         """ADD 3 FILTERS"""
-        self.input_in_my_project(self.driver)
+        # self.input_in_my_project(self.driver)
         self.element_is_visible(self.Locators.SETTINGS).click()
         self.element_is_visible(self.Locators.FILTERS_FOR_SEARCHING).click()
         try:
@@ -55,7 +56,7 @@ class AddFilterChanges(BasePage):
 
     def create_article_mass_change(self, driver):
         """CREATE AND OPEN NEW ARTICLE"""
-        self.input_in_my_project(self.driver)
+        # self.input_in_my_project(self.driver)
         Locators = CreateTopicDatabaseLocators
         person = generated_person()
         first_name = person.first_name + str(random.randint(999, 9999))
@@ -87,15 +88,17 @@ class AddFilterChanges(BasePage):
             time.sleep(5)
             self.elements_is_present(Locators.UPLOAD_MEDIA).click()
         """input is visible for load files"""
-        try:
-            self.driver.execute_script(
-            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        except JavascriptException:
-            time.sleep(3)
-            self.driver.execute_script(
-            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        self.driver.execute_script(
-            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        time.sleep(1)
+        self.download_files_is_visible()
+        # try:
+        #     self.driver.execute_script(
+        #     """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        # except JavascriptException:
+        #     time.sleep(3)
+        #     self.driver.execute_script(
+        #     """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        # self.driver.execute_script(
+        #     """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
         path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
         data_path = [path1, path2]
@@ -126,13 +129,13 @@ class AddFilterChanges(BasePage):
 
     # @staticmethod
     def add_article_by_template_mass_change(self, driver):
-        self.input_in_my_project(self.driver)
+        # self.input_in_my_project(self.driver)
         Locators = FormPagesLocators
         actions = ActionChains(driver)
-        driver.implicitly_wait(10)
+        self.browser.implicitly_wait(10)
         person = generated_person()
-        name = "Templates" + str(random.randint(999, 99999))
-        name_content = "Content" + str(random.randint(999, 99999))
+        name = "Templates" + str(random.randint(9999, 99999))
+        name_content = "Content" + str(random.randint(9999, 99999))
         try:
             self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
         except StaleElementReferenceException:
@@ -143,14 +146,14 @@ class AddFilterChanges(BasePage):
         for i in range(1, 6):
             time.sleep(1)
             self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
-            list_of_fields = driver.find_element(By.XPATH,
+            list_of_fields = self.browser.find_element(By.XPATH,
                                                  f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[{i}]")
             list_of_fields.click()
             self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys(
                 "Name" + str(random.randint(999, 99999)))
             self.element_is_visible(Locators.SAVE_TEMPLATES).click()
         self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
-        list_of_fields = driver.find_element(By.XPATH,
+        list_of_fields = self.browser.find_element(By.XPATH,
                                              f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[6]")
         list_of_fields.click()
         self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
@@ -169,8 +172,26 @@ class AddFilterChanges(BasePage):
         # print(name)
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        name_of_templates = driver.find_element(By.XPATH, f"//div[contains(text(),'{name}')]")
-        name_of_templates.click()
+        # скролл
+        locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
+        # self.scroll_wizard_template(locator_scroller, driver)
+        n = 0
+        while True:
+            if n == 7:
+                break
+            try:
+                name_of_templates = self.browser.find_element(By.XPATH, f"//span[contains(text(),'{name}')]")
+                name_of_templates.click()
+                break
+            except NoSuchElementException:
+                self.scroll_wizard_template(locator_scroller, driver)
+                n += 1
+
+        # name_of_templates.click()
+
+        time.sleep(1)
+        # name_of_templates.click()
+
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
         # print(name_content)
         time.sleep(3)
@@ -230,9 +251,9 @@ class AddFilterChanges(BasePage):
         print(name, name_content, name_of_templates, requests_name)
         return name, name_content, name_of_templates, requests_name
 
-    def add_script_mass_change(self):
-        self.input_in_my_project(self.driver)
-        action = ActionChains(self.driver)
+    def add_script_mass_change(self, driver):
+        # self.input_in_my_project(self.driver)
+        actions = ActionChains(driver)
         Locators = CreateTopicDatabaseLocators
         name_request_script = "request " + str(random.randint(999, 9999))
         name_script = "NAME_SCRIPT-" + str(random.randint(99, 999))
@@ -276,9 +297,15 @@ class AddFilterChanges(BasePage):
         except ElementClickInterceptedException:
             time.sleep(5)
             self.element_is_visible(Locators.INPUT_SELECTED).click()
+
+
+        time.sleep(1)
         button_typography = self.elements_is_present(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
-        action.click(button_typography).perform()
-        # action.perform()
+        button_typography.click()
+        # time.sleep(1)
+        # actions.click(button_typography)
+        # actions.perform()
+        # actions.perform()
         # self.element_is_visible(Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.INPUT_NAME_REQUEST).send_keys(name_request_script)
         self.element_is_visible(self.Locators.BUTTON_ADD).click()
@@ -290,9 +317,9 @@ class AddFilterChanges(BasePage):
         print(name_request_script)
         return name_request_script, name_script
 
-    def check_mass_change_filters_article(self):
-        first_name, name_request, text = self.create_article_mass_change(self.driver)
-        action = ActionChains(self.driver)
+    def check_mass_change_filters_article(self, driver):
+        first_name, name_request, text = self.create_article_mass_change(driver)
+        action = ActionChains(driver)
         try:
             self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=5).click()
         except (StaleElementReferenceException, WebDriverException):
@@ -346,7 +373,7 @@ class AddFilterChanges(BasePage):
             print("Сначала добавьте фильтры")
         """check button click"""
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.driver.refresh()
+        self.browser.refresh()
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
         """---add filter---"""
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
@@ -374,10 +401,10 @@ class AddFilterChanges(BasePage):
             time.sleep(5)
             self.element_is_visible(self.Locators.FILTERS).click()
         try:
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
         except NoSuchElementException:
             time.sleep(5)
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
         article_firs_name.click()
         """check content"""
         self.element_is_visible(self.Locators.TEXT_ARTICLE).is_displayed()
@@ -385,7 +412,11 @@ class AddFilterChanges(BasePage):
             self.element_is_visible(self.Locators.VIDEO_ARTICLE).is_displayed()
         except (TimeoutException, StaleElementReferenceException):
             pass
-        self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
+        try:
+            self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
         time.sleep(1)
         try:
@@ -407,17 +438,17 @@ class AddFilterChanges(BasePage):
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(9, 99)))
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.TO_GO_CONTENT).click()
+        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
         """check article after add filters"""
         time.sleep(5)
         filters = self.elements_are_visible(self.Locators.FILTERS)
         for n in filters:
             n.click()
         try:
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
         except NoSuchElementException:
             time.sleep(5)
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
         article_firs_name.click()
         """check content"""
         self.element_is_visible(self.Locators.TEXT_ARTICLE).is_displayed()
@@ -443,10 +474,10 @@ class AddFilterChanges(BasePage):
         # print(text_request_article)
         assert text_request_article == name_request
 
-    def check_mass_change_filters_template(self):
-        name, name_content, name_of_templates, requests_name = self.add_article_by_template_mass_change(self.driver)
+    def check_mass_change_filters_template(self, driver):
+        name, name_content, name_of_templates, requests_name = self.add_article_by_template_mass_change(driver)
         # self.input_in_my_project(self.driver)
-        action = ActionChains(self.driver)
+        action = ActionChains(driver)
         self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
         try:
             self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=5).click()
@@ -504,7 +535,7 @@ class AddFilterChanges(BasePage):
 
         time.sleep(3)
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.driver.refresh()
+        self.browser.refresh()
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
         """---add filter---"""
         try:
@@ -536,10 +567,10 @@ class AddFilterChanges(BasePage):
             time.sleep(5)
             self.element_is_visible(self.Locators.FILTERS).click()
         try:
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
         except NoSuchElementException:
             time.sleep(5)
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
         article_firs_name.click()
         """check content"""
         self.element_is_visible(self.Locators.FIELD_TEXT).is_displayed()
@@ -567,17 +598,17 @@ class AddFilterChanges(BasePage):
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(9, 99)))
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.TO_GO_CONTENT).click()
+        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
         """check article after add filters"""
         time.sleep(5)
         filters = self.elements_are_visible(self.Locators.FILTERS)
         for n in filters:
             n.click()
         try:
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
         except NoSuchElementException:
             time.sleep(5)
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
         article_firs_name.click()
         """check content"""
         self.element_is_visible(self.Locators.FIELD_TEXT).is_displayed()
@@ -598,9 +629,9 @@ class AddFilterChanges(BasePage):
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
         assert text_request_article == requests_name
 
-    def check_mass_change_filters_script(self):
-        name_request_script, name_script = self.add_script_mass_change()
-        action = ActionChains(self.driver)
+    def check_mass_change_filters_script(self, driver):
+        name_request_script, name_script = self.add_script_mass_change(driver)
+        action = ActionChains(driver)
         self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
         try:
             self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=10).click()
@@ -655,7 +686,7 @@ class AddFilterChanges(BasePage):
             print("Сначала добавьте фильтры")
         """check button click"""
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.driver.refresh()
+        self.browser.refresh()
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
         """---add filter---"""
         try:
@@ -686,11 +717,12 @@ class AddFilterChanges(BasePage):
         except (StaleElementReferenceException, TimeoutException):
             time.sleep(5)
             self.element_is_visible(self.Locators.FILTERS).click()
+        time.sleep(1)
         try:
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_script}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_script}']")
         except NoSuchElementException:
             time.sleep(5)
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_script}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_script}']")
         article_firs_name.click()
         """check content"""
         try:
@@ -720,17 +752,17 @@ class AddFilterChanges(BasePage):
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(9, 99)))
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.TO_GO_CONTENT).click()
+        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
         """check article after add filters"""
         time.sleep(5)
         filters = self.elements_are_visible(self.Locators.FILTERS)
         for n in filters:
             n.click()
         try:
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_script}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_script}']")
         except NoSuchElementException:
             time.sleep(5)
-            article_firs_name = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{name_script}']")
+            article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_script}']")
         article_firs_name.click()
         """check content"""
         try:

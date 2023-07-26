@@ -85,6 +85,12 @@ class MainPage:
         """Переход к нужному едлементу (на вход принимает необходимый элемент)"""
         self.browser.execute_script("arguments[0].scrollIntoView(true);", element)
 
+    def scroll_wizard_template(self, locator_scroller, driver):
+        """Скролл визарда шаблонов на величину в пикселях (x, y)"""
+        action = ActionChains(driver)
+        scroller = locator_scroller
+        action.drag_and_drop_by_offset(scroller, "0", "200")
+        action.perform()
 
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
