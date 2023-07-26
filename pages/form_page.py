@@ -3,6 +3,8 @@ import pathlib
 import random
 import time
 from pathlib import Path
+
+import allure
 import selenium
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException
 from selenium.webdriver import ActionChains, Keys
@@ -717,6 +719,7 @@ class FormPage(Authorisation, BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.CLOSE_CREATED_ARTICLE).click()
 
+    @allure.title("Добавление контента в Избранное")
     def add_to_favourites(self, driver):
         """ДОЛЖНЫ БЫТЬ СОЗДАНЫ СТАТЬИ"""
         self.element_is_visible(Locators.CONTENT).click()

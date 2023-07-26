@@ -1,4 +1,6 @@
 import time
+
+import allure
 import pytest
 from pages.create_article_and_comments import BaseArticleEditor
 from pages.form_page import FormPage
@@ -12,6 +14,7 @@ from pages.users import DataLoginPassword
 @pytest.mark.order(1)
 class TestFormPage:
 
+    @allure.title("Проверка логотипа")
     def test_logo(self, driver):
         form_page = FormPage(driver)
         form_page.open()
@@ -28,28 +31,33 @@ class TestFormPage:
         form_page.logo_head()
         form_page.title_find(driver)
 
+    @allure.title("Проверка авторизации в системе")
     def test_form_1(self, driver):
-        """tests incorrect data"""
+        """Тест авторизации"""
         form_page = FormPage(driver, url)
         form_page.browser.delete_all_cookies()
         form_page.open()
         # self.login = login_incorrect
-        login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
-        print(login_incorrect)
-        # self.password = password
-        login, password = DataLoginPassword.correct_data()
-        form_page.fill_fields(login_incorrect, password)
+        with allure.step("Неверный логин, верный пароль"):
+            login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
+            print(login_incorrect)
+            # self.password = password
+            login, password = DataLoginPassword.correct_data()
+            form_page.fill_fields(login_incorrect, password)
         # self.login = login_incorrect
         # self.password = password_incorrect
-        login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
-        form_page.fill_fields(login_incorrect, password_incorrect)
-        login, password = DataLoginPassword.correct_data()
-        password_incorrect = DataLoginPassword.incorrect_data()
-        form_page.fill_fields(login, password_incorrect)
+        with allure.step("Неверный логин, неверный пароль"):
+            login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
+            form_page.fill_fields(login_incorrect, password_incorrect)
+        with allure.step("Верный логин, неверный пароль"):
+            login, password = DataLoginPassword.correct_data()
+            password_incorrect = DataLoginPassword.incorrect_data()
+            form_page.fill_fields(login, password_incorrect)
         form_page.check_auth_text()
         form_page.restore_incorrect()
         form_page.check_restore_text()
 
+    @allure.title("Тест тайтлы")
     def test_title(self, driver):
         form_page = FormPage(driver)
         # form_page.open()
@@ -67,6 +75,7 @@ class TestFormPage:
         form_page.authorization(login, password)
         form_page.restore_correct()
 
+    @allure.title("Добавление нового пользователя")
     def test_add_new_person(self, driver):
         form_page = FormPage(driver)
         # form_page.open()
@@ -74,12 +83,14 @@ class TestFormPage:
         # form_page.input_in_my_project(driver)
         form_page.add_new_person(driver)
 
+    @allure.title("Добавление новой роли")
     def test_add_new_role(self, driver):
         form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
         form_page.add_new_role(driver)
 
+    @allure.title("Создание, удаление, восстановление папки в Контенте")
     def test_folder_create_del_recovery(self, driver):
         form_page = FormPage(driver)
         # form_page.open()
@@ -115,24 +126,28 @@ class TestFormPage:
         form_page.get_authorisation_in_selen()
         form_page.favourites(driver)
 
+    @allure.title("Избранное")
     def test_add_to_favourites(self, driver):
         form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
         form_page.add_to_favourites(driver)
 
+    @allure.title("Добавление обычной статьи")
     def test_add_normal_article(self, driver):
         article_page = BaseArticleEditor(driver)
         article_page.creating_base_article()
         # article_page.get_authorisation_in_selen()
         # article_page.add_normal_article(driver)
 
+    @allure.title("Способ закрепления для обычной статьи")
     def test_fixing_article(self, driver):
         article_page = ArticlePage(driver)
         # article_page.open()
         article_page.get_authorisation_in_selen()
         article_page.fixing_article(driver)
 
+    @allure.title("Добавление статьи по шаблону")
     # @pytest.mark.skip('add_article_by_templates')
     def test_add_article_by_templates(self, driver):
         article_page = ArticlePage(driver)
@@ -151,6 +166,7 @@ class TestFormPage:
     # @pytest.mark.skip('delete folders')
     class TestStepByScriptPage:
 
+        @allure.title("Добавление и валидация пошагового сценария")
         def test_step_by_script(self, driver):
             article_page = StepByScriptPage(driver)
             # article_page.open()
@@ -162,6 +178,7 @@ class TestFormPage:
             article_page.delete_all()
             article_page.new_step(driver)
 
+        @allure.title("Способ закрепления для пошагового сценария")
         def test_fixing_script(self, driver):
             article_page = StepByScriptPage(driver)
             # article_page.open()
@@ -181,6 +198,7 @@ class TestFormPage:
     # @pytest.mark.skip('create_draft')
     class TestCreateDraft:
 
+        @allure.title("Создание черновика")
         def test_create_draft(self, driver):
             create_draft_page = CreateDraftPage(driver)
             # create_draft_page.open()
@@ -189,12 +207,14 @@ class TestFormPage:
 
     class TestFilesPage:
 
+        @allure.title("Добавление файлов через файловый менеджер Статья")
         def test_create_data_files(self, driver):
             article_pages = FilesPages(driver)
             # article_pages.open()
             article_pages.get_authorisation_in_selen()
             article_pages.create_data_files(driver)
 
+        @allure.title("Размер файлов добавленных через файловый менеджер Статья")
         def test_check_size_file(self, driver):
             article_pages = FilesPages(driver)
             # article_pages.open()
@@ -202,12 +222,14 @@ class TestFormPage:
             article_pages.generated_big_file_jpg()
             article_pages.add_big_file(driver)
 
+        @allure.title("Добавление файлов через файловый менеджер Шаблон")
         def test_check_template_download(self, driver):
             article_pages = FilesPages(driver)
             # article_pages.open()
             article_pages.get_authorisation_in_selen()
             article_pages.check_template_download(driver)
 
+        @allure.title("Размер файлов добавленных через файловый менеджер Шаблон")
         def test_check_template_download_bigfile(self, driver):
             article_pages = FilesPages(driver)
             # article_pages.open()
@@ -222,6 +244,7 @@ class TestFormPage:
             article_pages.get_authorisation_in_selen()
             article_pages.download_files_from_files()
 
+        @allure.title("Размер файлов добавленных через файловый менеджер Сценарий")
         def test_script_download_bigfile(self, driver):
             article_pages = FilesPages(driver)
             # article_pages.open()
@@ -229,6 +252,7 @@ class TestFormPage:
             article_pages.generated_big_file_csv()
             article_pages.check_script_download_bigfile()
 
+        @allure.title("Добавление файлов через файловый менеджер Сценарий")
         def test_script_download(self, driver):
             article_pages = FilesPages(driver)
             # article_pages.open()
