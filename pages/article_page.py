@@ -305,8 +305,8 @@ class ArticlePage(Authorisation, BasePage):
     def add_article_by_templates(self, driver):
         driver.implicitly_wait(10)
         person = generated_person()
-        name = "1_Templates" + str(random.randint(999, 99999))
-        name_content = "Content" + str(random.randint(999, 99999))
+        name = "1_Templates" + str(random.randint(1111, 99999))
+        name_content = "Content" + str(random.randint(1111, 99999))
         try:
             self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
         except StaleElementReferenceException:
@@ -321,42 +321,51 @@ class ArticlePage(Authorisation, BasePage):
                                                  f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[{i}]")
             list_of_fields.click()
             self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys(
-                "Name" + str(random.randint(999, 99999)))
+                "Name" + str(random.randint(1111, 99999)))
             self.element_is_visible(Locators.SAVE_TEMPLATES).click()
         self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
         list_of_fields = driver.find_element(By.XPATH,
                                              f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[6]")
         list_of_fields.click()
-        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(1111, 99999)))
         self.element_is_visible(Locators.ANSWER).send_keys("answer 1")
         self.element_is_visible(Locators.ADD_ANSWER).click()
         self.element_is_visible(Locators.SAVE_BUTTON).click()
         """step 5"""
         self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
         self.element_is_visible(Locators.LIST_OF_FIELDS_2).click()
-        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(1111, 99999)))
         self.element_is_visible(Locators.CHECKBOX_VALUE).click()
-        self.element_is_visible(Locators.INPUT_VALUE).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.INPUT_VALUE).send_keys("Name" + str(random.randint(1111, 99999)))
         self.element_is_visible(Locators.SAVE_TEMPLATES).click()
         """step 6"""
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name)
         print(name)
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        # скрол
+        locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
+        n = 0
+        while True:
+            if n == 7:
+                break
+            try:
+                name_of_templates = driver.find_element(By.XPATH, f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
+                name_of_templates.click()
+                break
+            except (InvalidSelectorException, NoSuchElementException):
+                self.scroll_wizard_template(locator_scroller, driver)  # Функуия скролинга
+                #                 n += 1
+                # прокрутка окна вниз на 100 пикселей
+                # action = ActionChains(driver)
+                # scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER)
+                # action.drag_and_drop_by_offset(scroller, "0", "100")
+                # action.perform()
+                # name_of_templates = driver.find_element(By.XPATH,
+                #                                         f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
 
-        try:
-            name_of_templates = driver.find_element(By.XPATH, f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
-
-        except (InvalidSelectorException, NoSuchElementException):
-            # прокрутка окна вниз на 100 пикселей
-            action = ActionChains(driver)
-            scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER)
-            action.drag_and_drop_by_offset(scroller, "0", "100")
-            action.perform()
-            name_of_templates = driver.find_element(By.XPATH,
-                                                    f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
-
-        name_of_templates.click()
+        # name_of_templates.click()
+        time.sleep(1)
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
         # print(name_content)
         time.sleep(3)
@@ -407,7 +416,7 @@ class ArticlePage(Authorisation, BasePage):
         # print(check_version_text_value)
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         input_request = self.element_is_visible(Locators.INPUT_REQUEST)
-        requests_name = "request " + str(random.randint(999, 99999))
+        requests_name = "request " + str(random.randint(1111, 99999))
         input_request.send_keys(requests_name)
         self.element_is_visible(Locators.ADD_SEARCH_BUTTON).click()
         self.element_is_visible(Locators.FIELD_OF_CONTENT_RADIO).click()
@@ -420,7 +429,7 @@ class ArticlePage(Authorisation, BasePage):
             select_field_for_fixing.send_keys(Keys.RETURN)
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(1111, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         check_utility_text = self.element_is_visible(Locators.UTILITY_TEMPLATE)
         check_utility_text_value = check_utility_text.text
@@ -464,7 +473,7 @@ class ArticlePage(Authorisation, BasePage):
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(1111, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         # print(requests_name)
         """search_by_request"""
@@ -519,7 +528,7 @@ class ArticlePage(Authorisation, BasePage):
         self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(1111, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         time.sleep(1)
         try:
@@ -549,7 +558,7 @@ class ArticlePage(Authorisation, BasePage):
         text_check_link_of_content_value = text_check_link_of_content.text
         assert text_check_link_of_content_value == 'Ссылка на контент', "не закреплена как ссылка на контент"
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(1111, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         time.sleep(1)
         edit_article = self.element_is_visible(Locators.EDIT_ARTICLE)
@@ -569,7 +578,7 @@ class ArticlePage(Authorisation, BasePage):
             select_field_for_fixing.send_keys(Keys.RETURN)
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(1111, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.EDIT_ARTICLE).click()
         self.element_is_visible(Locators.CHANGE_TEMPLATES).click()
