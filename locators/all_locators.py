@@ -1065,7 +1065,8 @@ class Comments:
     EXPERT_QUESTION = (By.XPATH, "//span[@class='checkbox__label']")
     ADD_COMMENT = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст комментария']")
     SEND_COMMENT = (By.XPATH, "//p[text()='Отправить']")
-    SEND_COMMENT_FOR_CLOSE = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
+    SEND_COMMENT_FOR_CLOSE = (
+    By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
 
     TEST_COMMENT_1 = (
         By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]")
@@ -1083,6 +1084,8 @@ class Comments:
         By.XPATH, "//div[@class='m-ui-paper m-ui-paper--shadowed']//textarea[@placeholder='Введите текст комментария']")
     CHECK_BOX_TICK_SOLVED = (By.CSS_SELECTOR,
                              "label[class='m-ui-paper checkbox discuss-form__tag-item m-ui-paper--hoverable m-ui-paper--shadowed'] span[class='checkbox__label']")
+
+    CLOSE_COMMENT = (By.CSS_SELECTOR, 'button[class="m-button m-button--default m-button--medium discuss-form__button-send"]')
 
 
 class WizardPublic:
@@ -1102,6 +1105,7 @@ class WizardPublic:
         By.XPATH, "//p[contains(text(),'4 роль - редактор')]/../..//span[text()='только оповестить']")
     INPUT_TEXT_TEXTAREA = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст сообщения']")
     BUTTON_FINISH = (By.CSS_SELECTOR, "button[type='submit']")
+    CHECKBOX_MINOR_EDIT = (By.CLASS_NAME, "versioning-wrapper__form-field")
 
 
 class CKERedactor:
@@ -1134,6 +1138,7 @@ class CheckCommentsPersons:
                   ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification--collapsed.m-dashboard-top-right-side__notifications")
     EMPTY_BELL__CHECK = (By.CSS_SELECTOR, '.dashboard-notification-empty-layout__title')
     CREATE_ARTICLE_CHECK = (By.XPATH, "(//div[contains(text(),'Создание статьи')])[1]")
+    MINOR_EDIT_ARTICLE_CHECK = (By.XPATH, "(//div[contains(text(),'Минорное редактирование')])[1]")
     # здесь проверка тестового комментария 1 и статуса не решено через is_displayed()
     CHECK_TEST_COMMENT_1 = (By.XPATH,
                             f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 1']")
@@ -1163,3 +1168,4 @@ class OpenArticle:
     # ARTICLE_TITLE = (By.XPATH, '//*[@id="article-content-modal-header"]/div/h2/span')
     # через .text  получаем название
     ARTICLE_TITLE = (By.CSS_SELECTOR, "div[class='article-modal__header-wrapper'] span")
+
