@@ -345,6 +345,8 @@ class ArticlePage(Authorisation, BasePage):
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         # скрол
         locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
+        # modal_scroller = self.element_is_visible(Locators.MODAL_WIZARD_SCROLLER_TEMPLATE, timeout=3)
+
         n = 0
         while True:
             if n == 7:
@@ -355,7 +357,8 @@ class ArticlePage(Authorisation, BasePage):
                 break
             except (InvalidSelectorException, NoSuchElementException):
                 self.scroll_wizard_template(locator_scroller, driver)  # Функуия скролинга
-                #                 n += 1
+                n += 1
+
                 # прокрутка окна вниз на 100 пикселей
                 # action = ActionChains(driver)
                 # scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER)
@@ -363,7 +366,8 @@ class ArticlePage(Authorisation, BasePage):
                 # action.perform()
                 # name_of_templates = driver.find_element(By.XPATH,
                 #                                         f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
-
+        # for x in range(5):
+        #     ActionChains(driver).move_to_element(modal_scroller).scroll_by_amount(1, 500).perform()
         # name_of_templates.click()
         time.sleep(1)
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)

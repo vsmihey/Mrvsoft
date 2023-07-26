@@ -264,7 +264,9 @@ class AddFilterChanges(Authorisation, BasePage):
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_SCRIPT).click()
         self.element_is_visible(Locators.NAME_OF_STEP_SCRIPT).send_keys(name_script)
-        time.sleep(1)
+
+
+        time.sleep(2)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         self.element_is_visible(Locators.ADD_STEP).click()
         self.element_is_visible(Locators.INPUT_NAME_STEP).send_keys("name_step-" + str(random.randint(99, 999)))
