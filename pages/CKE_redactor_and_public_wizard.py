@@ -46,6 +46,10 @@ class PublicWizard(MainPage):
         """Кнопка 'продолжить' и 'завершить' в визадре"""
         self.element_is_visible(locators.WizardPublic.BUTTON_FINISH).click()
 
+    def execute_button_click(self):
+        """Кнопка 'выполнить' при удалении статьи в визадре"""
+        self.element_is_visible(locators.WizardPublic.BUTTON_EXECUTE).click()
+
     def notification_text_area(self, text='Создание статьи'):
         """Заполнение поля уведомления"""
         self.element_is_visible(locators.WizardPublic.INPUT_TEXT_TEXTAREA).send_keys(text)

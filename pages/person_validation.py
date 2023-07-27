@@ -1,6 +1,5 @@
 import time
 
-from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from pages.authorisation_page import Authorisation
 from pages.base_class import MainPage
@@ -44,50 +43,54 @@ class History(MainPage):
         """Проверка перехода в новую статью из истории"""
         self.element_is_visible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK).click()
 
-    def go_to_minor_edit_article_from_history(self):
-        """Проверка перехода в статью с минорным редактированием из истории"""
-        self.element_is_visible(locators.CheckCommentsPersons.MINOR_EDIT_ARTICLE_CHECK).click()
-
     def go_to_major_edit_article_from_history(self):
         """Проверка перехода в статью с мажорным редактированием из истории"""
         self.element_is_visible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK).click()
+
+    def go_to_delete_article_from_history(self):
+        """Проверка перехода в удаленную статью из истории"""
+        self.element_is_visible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK).click()
 
     def check_open_valid_article(self):
         """Проверка, что из истории открылась нужная статья"""
         assert DataParser.get_article_name_from_data_file() == self.element_is_visible(
             locators.OpenArticle.ARTICLE_TITLE).text
 
-    # def new_article_history_check(self):
-    #     """Проверка, комментов в истории по новой статье"""
-    #     time.sleep(1)
-    #     self.text_comment_in_history(self.GRAY_COMMENT_CHECK, 'Серый комментарий')
-    #     # print(self.element_is_visible(self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
-    #     # print(self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
-    #     self.status_comment_in_history(self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK))
-    #     # self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed() is True
-    #     self.text_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK, 'Тестовый комментарий 4')
-    #     # # print(self.element_is_visible(self.COMMENT_3_NO_SOLVE_CHECK).is_displayed())
-    #     # self.status_comment_in_history(*self.COMMENT_3_NO_SOLVE_CHECK)
-    #     self.status_comment_in_history(self.browser.find_element(*self.COMMENT_3_NO_SOLVE_CHECK))
-    #     self.text_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK, 'Тестовый комментарий 3')
-    #     # # # print(self.element_is_visible(self.COMMENT_2_NO_SOLVE_CHECK).is_displayed())
-    #     # self.status_comment_in_history(*self.COMMENT_2_NO_SOLVE_CHECK)
-    #     self.status_comment_in_history(self.browser.find_element(*self.COMMENT_2_NO_SOLVE_CHECK))
-    #     self.text_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK, 'Тестовый комментарий 2')
-    #     # # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
-    #     # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
-    #     self.status_comment_in_history(self.browser.find_element(*self.COMMENT_1_SOLVE_CHECK))
-    #     # # self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
-    #     self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
-
     def new_article_history_check(self):
         """Проверка, комментов в истории по новой статье"""
+        time.sleep(1)
         self.text_comment_in_history(self.GRAY_COMMENT_CHECK, 'Серый комментарий')
+        # print(self.element_is_visible(self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
+        # print(self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
+        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK))
+        # self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed() is True
+        self.text_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK, 'Тестовый комментарий 4')
+        # # print(self.element_is_visible(self.COMMENT_3_NO_SOLVE_CHECK).is_displayed())
+        # self.status_comment_in_history(*self.COMMENT_3_NO_SOLVE_CHECK)
+        time.sleep(3)
+        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_3_NO_SOLVE_CHECK))
+        self.text_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK, 'Тестовый комментарий 3')
+        # # # print(self.element_is_visible(self.COMMENT_2_NO_SOLVE_CHECK).is_displayed())
+        # self.status_comment_in_history(*self.COMMENT_2_NO_SOLVE_CHECK)
+        time.sleep(3)
+        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_2_NO_SOLVE_CHECK))
+        self.text_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK, 'Тестовый комментарий 2')
+        # # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
+        # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
+        time.sleep(3)
         self.status_comment_in_history(self.browser.find_element(*self.COMMENT_1_SOLVE_CHECK))
+        # # self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
+
+    # def new_article_history_check(self):
+    #     """Проверка, комментов в истории по новой статье"""
+    #     self.text_comment_in_history(self.GRAY_COMMENT_CHECK, 'Серый комментарий')
+    #     self.status_comment_in_history(self.browser.find_element(*self.COMMENT_1_SOLVE_CHECK))
+    #     self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
 
     def minor_edit_article_history_check(self):
         """Проверка, комментов в истории по минорному редактированию статье"""
+        time.sleep(1)
         self.status_comment_in_history(self.browser.find_element(*self.COMMENT_2_SOLVE_CHECK))
         self.text_comment_in_history(self.COMMENT_2_SOLVE_CHECK, 'Тестовый комментарий 2')
 

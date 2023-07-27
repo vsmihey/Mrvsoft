@@ -19,6 +19,14 @@ class ContentOptions(MainPage):
         """Кнопка Редактировать"""
         self.element_is_visible(locators.FormPagesLocators.EDIT_ARTICLE).click()
 
+    def three_dots_button(self):
+        """Кнопка Троеточие"""
+        self.element_is_visible(locators.SearchRuEnLocators.MEATBALL_ARTICLE).click()
+
+    def delete_button(self):
+        """Кнопка Троеточие"""
+        self.element_is_visible(locators.SearchRuEnLocators.SVG_DEL).click()
+
 
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions):
     """Создание и наполнение Базовой статьи"""
@@ -75,6 +83,14 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.redaction()
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Rick and Morty was here')
         self.save_major_edit()
+
+    def delete_base_article(self, url):
+        """Удаление статьи"""
+        self.get_authorisation_in_url(url)
+        self.three_dots_button()
+        self.delete_button()
+        self.notification_text_area('Удаление')
+        self.execute_button_click()
 
 
 class DataParser:
