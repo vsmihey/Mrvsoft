@@ -62,11 +62,19 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         time.sleep(0.5)
         self.save_data_in_file()
 
-    def edit_base_article(self, url):
+    def minor_edit_base_article(self, url):
+        """Редактирование статьи и минорное сохранение"""
         self.get_authorisation_in_url(url)
         self.redaction()
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('HeyHey')
         self.save_minor_edit()
+
+    def major_edit_base_article(self, url):
+        """Редактирование статьи и мажорное сохранение"""
+        self.get_authorisation_in_url(url)
+        self.redaction()
+        self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Rick and Morty was here')
+        self.save_major_edit()
 
 
 class DataParser:
@@ -123,7 +131,7 @@ class Comments(Authorisation):
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
         page.element_is_visible(locators.Comments.TO_ANSWER_COMMENT_1).click()
-        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
+        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 1')
         page.element_is_visible(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
         page.element_is_visible(locators.Comments.CLOSE_COMMENT).click()
 
@@ -133,6 +141,16 @@ class Comments(Authorisation):
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
         page.element_is_visible(locators.Comments.TO_ANSWER_COMMENT_2).click()
-        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Тест')
+        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 2')
+        page.element_is_visible(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
+        page.element_is_visible(locators.Comments.CLOSE_COMMENT).click()
+
+    @staticmethod
+    def close_third_comment(driver, url, user=minervakms):
+        """Закрытие первого комментария"""
+        page = Comments(driver)
+        page.get_authorisation_in_url(url, user)
+        page.element_is_visible(locators.Comments.TO_ANSWER_COMMENT_3).click()
+        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
         page.element_is_visible(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
         page.element_is_visible(locators.Comments.CLOSE_COMMENT).click()

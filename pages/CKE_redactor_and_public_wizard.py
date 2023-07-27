@@ -76,6 +76,12 @@ class PublicWizard(MainPage):
     def save_minor_edit(self):
         """Сохранение статьи с незначительными изменениями"""
         self.publish_button_click()
-        self.notification_text_area('Минорное редактирование')
         self.minor_type()
+        self.notification_text_area('Минорное редактирование')
+        self.next_and_finish_button_click()
+
+    def save_major_edit(self):
+        """Сохранение статьи со значительными изменениями"""
+        self.publish_button_click()
+        self.notification_text_area('Мажорное редактирование')
         self.next_and_finish_button_click()
