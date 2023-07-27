@@ -346,20 +346,20 @@ class ArticlePage(Authorisation, BasePage):
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         # скрол
-        locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
+        # locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
         # modal_scroller = self.element_is_visible(Locators.MODAL_WIZARD_SCROLLER_TEMPLATE, timeout=3)
-
-        n = 0
-        while True:
-            if n == 7:
-                break
-            try:
-                name_of_templates = driver.find_element(By.XPATH, f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
-                name_of_templates.click()
-                break
-            except (InvalidSelectorException, NoSuchElementException):
-                self.scroll_wizard_template(locator_scroller, driver)  # Функуия скролинга
-                n += 1
+        self.scroll_wizard_template(name, driver)
+        # n = 0
+        # while True:
+        #     if n == 7:
+        #         break
+        #     try:
+        #         name_of_templates = driver.find_element(By.XPATH, f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
+        #         name_of_templates.click()
+        #         break
+        #     except (InvalidSelectorException, NoSuchElementException):
+        #         self.scroll_wizard_template(driver)  # Функция скролинга
+        #         n += 1
 
                 # прокрутка окна вниз на 100 пикселей
                 # action = ActionChains(driver)
@@ -1129,9 +1129,15 @@ class CreateDraftPage(Authorisation, BasePage):
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name_templates)
         self.element_is_visible(Locators.SAVE_TEMPLATES_CHANGE).click()
         self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
-        time.sleep(2)
-        templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
-        templates_download.click()
+        time.sleep(1)
+        # locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
+        self.scroll_wizard_template(name_templates, driver)
+        # try:
+        #     templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        # except NoSuchElementException:
+        #     time.sleep(3)
+        #     templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        # templates_download.click()
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys("Template_Name2")
         time.sleep(1)
         self.browser.switch_to.window(tab3)
@@ -1310,14 +1316,18 @@ class FilesPages(Authorisation, BasePage):
         self.element_is_visible(self.Locators.NEW_TEMPLATE).click()
         self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
         self.element_is_visible(Locators.LIST_OF_FIELDS_1).click()
-        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(1111, 99999)))
         self.element_is_visible(Locators.SAVE_TEMPLATES).click()
-        name_templates = "for download file testing" + str(random.randint(999, 99999))
+        name_templates = "for download file testing" + str(random.randint(1111, 99999))
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name_templates)
         self.element_is_visible(Locators.SAVE_TEMPLATES_CHANGE).click()
         self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
         time.sleep(2)
-        templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        try:
+            templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        except NoSuchElementException:
+            time.sleep(3)
+            templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
         templates_download.click()
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
@@ -1364,7 +1374,11 @@ class FilesPages(Authorisation, BasePage):
         self.element_is_visible(Locators.SAVE_TEMPLATES_CHANGE).click()
         self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
         time.sleep(2)
-        templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        try:
+            templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        except NoSuchElementException:
+            time.sleep(3)
+            templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
         templates_download.click()
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()

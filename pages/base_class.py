@@ -1,7 +1,11 @@
+from selenium.common import InvalidSelectorException, NoSuchElementException
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
+
+from locators.all_locators import FormPagesLocators
 from pages import data_login_password
 import pathlib
 # Настройки браузера
@@ -85,12 +89,26 @@ class MainPage:
         """Переход к нужному едлементу (на вход принимает необходимый элемент)"""
         self.browser.execute_script("arguments[0].scrollIntoView(true);", element)
 
-    def scroll_wizard_template(self, locator_scroller, driver):
-        """Скролл визарда шаблонов на величину в пикселях (x, y)"""
+    def scroll_wizard_template(self, name, driver):
+        """Скролл визарда шаблонов на величину в пикселях (x, y),
+        name - название шаблона, которое ищем,
+        locator_scroller - локатор ползунка прокрутки окна визарда,
+        n - количество прокруток ползунка"""
+        Locators = FormPagesLocators()
         action = ActionChains(driver)
-        scroller = locator_scroller
-        action.drag_and_drop_by_offset(scroller, "0", "200")
-        action.perform()
+        n = 0
+        while True:
+            if n == 10:
+                break
+            try:
+                name_of_templates = driver.find_element(By.XPATH,
+                                                        f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
+                name_of_templates.click()
+                break
+            except (InvalidSelectorException, NoSuchElementException):
+                locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
+                action.drag_and_drop_by_offset(locator_scroller, "0", "200")
+                action.perform()
 
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)

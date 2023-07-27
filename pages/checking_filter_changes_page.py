@@ -173,25 +173,23 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         # скролл
-        locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
-        # self.scroll_wizard_template(locator_scroller, driver)
-        n = 0
-        while True:
-            if n == 7:
-                break
-            try:
-                name_of_templates = self.browser.find_element(By.XPATH, f"//span[contains(text(),'{name}')]")
-                name_of_templates.click()
-                break
-            except NoSuchElementException:
-                self.scroll_wizard_template(locator_scroller, driver)
-                n += 1
+        # locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
 
-        # name_of_templates.click()
+        self.scroll_wizard_template(name, driver)
+        # n = 0
+        # while True:
+        #     if n == 7:
+        #         break
+        #     try:
+        #         name_of_templates = self.browser.find_element(By.XPATH, f"//span[contains(text(),'{name}')]")
+        #         name_of_templates.click()
+        #         break
+        #     except NoSuchElementException:
+        #         self.scroll_wizard_template(name, driver)
+        #         n += 1
 
         time.sleep(1)
         # name_of_templates.click()
-
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
         # print(name_content)
         time.sleep(3)
