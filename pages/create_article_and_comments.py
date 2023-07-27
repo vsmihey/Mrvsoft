@@ -90,6 +90,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.three_dots_button()
         self.delete_button()
         self.notification_text_area('Удаление')
+        time.sleep(1)
         self.execute_button_click()
 
 
