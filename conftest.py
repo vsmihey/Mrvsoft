@@ -1,3 +1,6 @@
+from urllib import request
+
+import allure
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -52,4 +55,5 @@ def driver():
     # driver = webdriver.Chrome(service=driver_service)
     # driver.maximize_window()
     yield driver
+
     driver.quit()

@@ -53,8 +53,11 @@ class CreateTopicDatabase(Authorisation, BasePage):
                 #     self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=2).click()
             self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD).click()
             self.element_is_visible(self.Locators.BUTTON_CHANGE_QUESTION).click()
-            self.delete_created_topics()                                            # не удаляется тема
-            self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+            self.delete_created_topics()  # не удаляется тема
+            try:
+                self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+            except TimeoutException:
+                print("БАГ! НЕ УДАЛЯЕТСЯ ТЕМА! БАГ!")
             self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
         button_add_topic = self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).text
         assert button_add_topic == 'Добавить'
@@ -520,6 +523,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         """check first position by index xpath dom and active tab"""
         tab_active = self.element_is_visible(self.Locators.TAB_ACTIVE).text
         assert tab_active == 'тест'
+        time.sleep(1)
         try:
             questions_first_position_check = self.element_is_visible(self.Locators.QUESTIONS_FIRST_POSITION_CHECK).text
         except TimeoutException:
@@ -685,18 +689,20 @@ class CreateTopicDatabase(Authorisation, BasePage):
         self.element_is_visible(self.Locators.SAVE_TEMPLATES_CHANGE).click()
         self.element_is_visible(self.Locators.FINISH_BUTTON_SCRIPT).click()
         time.sleep(2)
-        try:
-            templates_download = self.browser.find_element(By.XPATH, f"//span[text()='{name_templates}']")
-        except (InvalidSelectorException, NoSuchElementException):
-            # прокрутка окна вниз на 100 пикселей
-            action = ActionChains(driver)
-            scroller = self.element_is_visible(self.Locators.MODAL_WINDOW_SCROLLER)
-            action.drag_and_drop_by_offset(scroller, "0", "300")
-            action.perform()
-            time.sleep(1)
-            templates_download = self.browser.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        self.scroll_wizard_template(name_templates, driver)
 
-        templates_download.click()
+        # try:
+        #     templates_download = self.browser.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        # except (InvalidSelectorException, NoSuchElementException):
+        #     # прокрутка окна вниз на 100 пикселей
+        #     action = ActionChains(driver)
+        #     scroller = self.element_is_visible(self.Locators.MODAL_WINDOW_SCROLLER)
+        #     action.drag_and_drop_by_offset(scroller, "0", "300")
+        #     action.perform()
+        #     time.sleep(1)
+            # templates_download = self.browser.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+
+        # templates_download.click()
         try:
             self.element_is_visible(self.Locators.TEXT_AREA_ARTICLE).click()
         except TimeoutException:

@@ -1,14 +1,19 @@
 import time
+
+import allure
 import pytest
 from pages.files_format_page import FilesFormatPage, UnformatFilePage
 from pages.data_login_password import *
 
 
 @pytest.mark.order(2)
+# @allure.suite("Тест загрузки файлов")
 class TestFilesFormat:
 
+    @allure.feature("Проверка и загрузка разных форматов")
     class TestCheckFormat:
 
+        @allure.title("Проверка загрузки изображения")
         def test_add_pic_files(self, driver):
             files_format_page = FilesFormatPage(driver)
             # files_format_page.open()
@@ -51,8 +56,10 @@ class TestFilesFormat:
             files_format_page.get_authorisation_in_selen()
             files_format_page.file_check_replacement_pic(driver)
 
+    @allure.step("Тест неформатного файла")
     class TestUnformatFile:
 
+        @allure.step("Проверка загрузки файлов разных форматов")
         def test_add_unformat_file(self, driver):
             files_format_page = UnformatFilePage(driver)
             # files_format_page.open()

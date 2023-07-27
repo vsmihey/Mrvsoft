@@ -1322,13 +1322,14 @@ class FilesPages(Authorisation, BasePage):
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name_templates)
         self.element_is_visible(Locators.SAVE_TEMPLATES_CHANGE).click()
         self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
-        time.sleep(2)
-        try:
-            templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
-        except NoSuchElementException:
-            time.sleep(3)
-            templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
-        templates_download.click()
+        time.sleep(1)
+        self.scroll_wizard_template(name_templates, driver)
+        # try:
+        #     templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        # except NoSuchElementException:
+        #     time.sleep(3)
+        #     templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        # templates_download.click()
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
         except TimeoutException:
@@ -1374,12 +1375,13 @@ class FilesPages(Authorisation, BasePage):
         self.element_is_visible(Locators.SAVE_TEMPLATES_CHANGE).click()
         self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
         time.sleep(2)
-        try:
-            templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
-        except NoSuchElementException:
-            time.sleep(3)
-            templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
-        templates_download.click()
+        self.scroll_wizard_template(name_templates, driver)
+        # try:
+        #     templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        # except NoSuchElementException:
+        #     time.sleep(3)
+        #     templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        # templates_download.click()
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).click()
         except TimeoutException:

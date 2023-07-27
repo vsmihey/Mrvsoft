@@ -12,6 +12,7 @@ from pages.users import DataLoginPassword
 
 
 @pytest.mark.order(1)
+@allure.suite("Тест лого, тайтлы, авторизация, статья, пользователи")
 class TestFormPage:
 
     @allure.title("Проверка логотипа")

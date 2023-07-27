@@ -174,7 +174,6 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         # скролл
         # locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
-
         self.scroll_wizard_template(name, driver)
         # n = 0
         # while True:
@@ -246,8 +245,8 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        print(name, name_content, name_of_templates, requests_name)
-        return name, name_content, name_of_templates, requests_name
+        print(name, name_content, requests_name)
+        return name, name_content, requests_name
 
     def add_script_mass_change(self, driver):
         # self.input_in_my_project(self.driver)
@@ -473,7 +472,7 @@ class AddFilterChanges(Authorisation, BasePage):
         assert text_request_article == name_request
 
     def check_mass_change_filters_template(self, driver):
-        name, name_content, name_of_templates, requests_name = self.add_article_by_template_mass_change(driver)
+        name, name_content, requests_name = self.add_article_by_template_mass_change(driver)
         # self.input_in_my_project(self.driver)
         action = ActionChains(driver)
         self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
@@ -556,7 +555,7 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(self.Locators.CREATED_CONTENT_FOR_FILTERS).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
         self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        print(name, requests_name, name_of_templates, name_content)
+        print(name, requests_name, name_content)
         """check article after add filters"""
         time.sleep(5)
         try:

@@ -91,9 +91,7 @@ class MainPage:
 
     def scroll_wizard_template(self, name, driver):
         """Скролл визарда шаблонов на величину в пикселях (x, y),
-        name - название шаблона, которое ищем,
-        locator_scroller - локатор ползунка прокрутки окна визарда,
-        n - количество прокруток ползунка"""
+        name - название шаблона, которое ищем"""
         Locators = FormPagesLocators()
         action = ActionChains(driver)
         n = 0
@@ -106,7 +104,7 @@ class MainPage:
                 name_of_templates.click()
                 break
             except (InvalidSelectorException, NoSuchElementException):
-                locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
+                locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)  # ползунок
                 action.drag_and_drop_by_offset(locator_scroller, "0", "200")
                 action.perform()
 
