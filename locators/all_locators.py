@@ -1172,3 +1172,20 @@ class OpenArticle:
     # через .text  получаем название
     ARTICLE_TITLE = (By.CSS_SELECTOR, "div[class='article-modal__header-wrapper'] span")
 
+class CheckBellComments:
+    # Колокольчик
+    BELL_ALERT = (By.CSS_SELECTOR, ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification--collapsed.m-dashboard-top-right-side__notifications")
+    RED_NEW = (By.CSS_SELECTOR, "button[class='m-ui-button-text']")
+    #  Проверка Персоном 2
+    BELL_CHECK_TEST_COMMENT_1 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 1']")
+    BELL_CHECK_TEST_COMMENT_2 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 2']")
+    BELL_CHECK_TEST_COMMENT_3 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 3']")
+    BELL_CHECK_TEST_COMMENT_4 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 4']")
+    BELL_CHECK_TEST_COMMENT_GRAY = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Серый комментарий']")
+    BELL_CHECK_TEST_CREATE_ARTICLE = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Создание статьи']")
+    BELL_CHECK_TEST_MAJOR_EDIT = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Мажорное редактирование']")
+    BELL_CHECK_TEST_CLOSE_3 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Закрытие 3']")
+    #  Проверка Персоном 3 (остальные локаторы как из персона 2)
+    BELL_CREATE_ARTICLE_CONFIRM = (By.XPATH, f"//div[text()='подтвердите']/../..//div[text()='Название статьи 9881']/../..//div[text()='Создание статьи']")
+
+

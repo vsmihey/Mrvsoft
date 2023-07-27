@@ -472,12 +472,18 @@ class CreateTopicDatabase(Authorisation, BasePage):
         path2 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
         data_path = [path1, path2]
         for n in data_path:
+            time.sleep(1)
             self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(n)
-        time.sleep(5)
-        checkbox_insert_files = self.elements_are_visible(self.Locators.CHECKBOX_INSERT_FILES)
+        time.sleep(2)
+        try:
+            checkbox_insert_files = self.elements_are_visible(self.Locators.CHECKBOX_INSERT_FILES)
+        except TimeoutException:
+            time.sleep(1)
+            checkbox_insert_files = self.elements_are_visible(self.Locators.CHECKBOX_INSERT_FILES)
         for n in checkbox_insert_files:
-            time.sleep(0.5)
+            time.sleep(2)
             n.click()
+        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.INPUT_SELECTED).click()
         except ElementClickInterceptedException:
@@ -690,7 +696,6 @@ class CreateTopicDatabase(Authorisation, BasePage):
         self.element_is_visible(self.Locators.FINISH_BUTTON_SCRIPT).click()
         time.sleep(2)
         self.scroll_wizard_template(name_templates, driver)
-
         # try:
         #     templates_download = self.browser.find_element(By.XPATH, f"//span[text()='{name_templates}']")
         # except (InvalidSelectorException, NoSuchElementException):

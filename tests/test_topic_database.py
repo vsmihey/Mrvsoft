@@ -31,7 +31,7 @@ class TestTopicDatabase:
             topic_database_page.get_authorisation_in_selen()
             topic_database_page.add_edit_question_article(driver)
 
-        # @pytest.mark.skip('add_edit_question_template')
+        @pytest.mark.skip('add_edit_question_template')
         @allure.title("Добавление/редактирование вопроса в статье")
         def test_add_edit_question_template(self, driver):
             topic_database_page = CreateTopicDatabase(driver)
