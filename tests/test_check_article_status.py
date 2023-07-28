@@ -76,8 +76,6 @@ class TestCheckNewArticleStatus:
             person.get_check_bell()
             person.check_no_article_notifications()
 
-    # не влияет на историю и колокольчик
-
     class TestMinorArticle:
 
         def test_article_minor_edit_base(self, driver):
