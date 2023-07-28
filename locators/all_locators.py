@@ -355,7 +355,10 @@ class FormPagesLocators:
     EDIT_TEMPLATE_1 = (By.XPATH, "//div[@class='m-popup__root']//a[1]")
     NEW_TEMPLATE = (By.XPATH, "//div[@class='m-lms-action-tooltip m-modal-templates__template-card']")
     SECOND_FOLDER_IN_LIST_FOR_DEL = (By.XPATH, "(//li[@class='m-tree-item m-tree-item__wrapper'])[2]")
-    MODAL_WINDOW_SCROLLER = (By.XPATH, "//div[@class='scroller m-modal-templates__scroller']//div[@class='scroller__thumb scroller__thumb--Y']")
+    MODAL_WINDOW_SCROLLER = (
+        By.XPATH,
+        "//div[@class='scroller m-modal-templates__scroller']//div[@class='scroller__thumb scroller__thumb--Y']")
+
 
 class StepByScriptLocators:
     ADD_SCRIPT = (By.XPATH, "//div[text()='Пошаговый сценарий']")
@@ -1066,7 +1069,7 @@ class Comments:
     ADD_COMMENT = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст комментария']")
     SEND_COMMENT = (By.XPATH, "//p[text()='Отправить']")
     SEND_COMMENT_FOR_CLOSE = (
-    By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
+        By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
 
     TEST_COMMENT_1 = (
         By.XPATH, "//pre[@class='m-discuss-text discuss-comment__text'][contains(text(),'Тестовый комментарий 1')]")
@@ -1085,7 +1088,8 @@ class Comments:
     CHECK_BOX_TICK_SOLVED = (By.CSS_SELECTOR,
                              "label[class='m-ui-paper checkbox discuss-form__tag-item m-ui-paper--hoverable m-ui-paper--shadowed'] span[class='checkbox__label']")
 
-    CLOSE_COMMENT = (By.CSS_SELECTOR, 'button[class="m-button m-button--default m-button--medium discuss-form__button-send"]')
+    CLOSE_COMMENT = (
+        By.CSS_SELECTOR, 'button[class="m-button m-button--default m-button--medium discuss-form__button-send"]')
 
 
 class WizardPublic:
@@ -1171,21 +1175,31 @@ class OpenArticle:
     # ARTICLE_TITLE = (By.XPATH, '//*[@id="article-content-modal-header"]/div/h2/span')
     # через .text  получаем название
     ARTICLE_TITLE = (By.CSS_SELECTOR, "div[class='article-modal__header-wrapper'] span")
+    CHECK_ARTICLE_IS_DELETED = (By.CLASS_NAME, 'warning-block-router')
+    RESTORE_BUTTON = (By.CLASS_NAME, "warning-block__action")
+
 
 class CheckBellComments:
     # Колокольчик
-    BELL_ALERT = (By.CSS_SELECTOR, ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification--collapsed.m-dashboard-top-right-side__notifications")
+    BELL_ALERT = (By.CSS_SELECTOR,
+                  ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification--collapsed.m-dashboard-top-right-side__notifications")
     RED_NEW = (By.CSS_SELECTOR, "button[class='m-ui-button-text']")
     #  Проверка Персоном 2
-    BELL_CHECK_TEST_COMMENT_1 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 1']")
-    BELL_CHECK_TEST_COMMENT_2 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 2']")
-    BELL_CHECK_TEST_COMMENT_3 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 3']")
-    BELL_CHECK_TEST_COMMENT_4 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 4']")
-    BELL_CHECK_TEST_COMMENT_GRAY = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Серый комментарий']")
-    BELL_CHECK_TEST_CREATE_ARTICLE = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Создание статьи']")
-    BELL_CHECK_TEST_MAJOR_EDIT = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Мажорное редактирование']")
+    BELL_CHECK_TEST_COMMENT_1 = (
+        By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 1']")
+    BELL_CHECK_TEST_COMMENT_2 = (
+        By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 2']")
+    BELL_CHECK_TEST_COMMENT_3 = (
+        By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 3']")
+    BELL_CHECK_TEST_COMMENT_4 = (
+        By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Тестовый комментарий 4']")
+    BELL_CHECK_TEST_COMMENT_GRAY = (
+        By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Серый комментарий']")
+    BELL_CHECK_TEST_CREATE_ARTICLE = (
+        By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Создание статьи']")
+    BELL_CHECK_TEST_MAJOR_EDIT = (
+        By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Мажорное редактирование']")
     BELL_CHECK_TEST_CLOSE_3 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Закрытие 3']")
     #  Проверка Персоном 3 (остальные локаторы как из персона 2)
-    BELL_CREATE_ARTICLE_CONFIRM = (By.XPATH, f"//div[text()='подтвердите']/../..//div[text()='Название статьи 9881']/../..//div[text()='Создание статьи']")
-
-
+    BELL_CREATE_ARTICLE_CONFIRM = (By.XPATH,
+                                   f"//div[text()='подтвердите']/../..//div[text()='Название статьи 9881']/../..//div[text()='Создание статьи']")

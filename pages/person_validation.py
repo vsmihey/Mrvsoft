@@ -6,6 +6,7 @@ from pages.base_class import MainPage
 from pages.users import person1, person2, person3, person4
 from pages.menu_navigation import MenuNavigation
 from pages.create_article_and_comments import DataParser
+from pages.create_article_and_comments import BaseArticleEditor
 import locators.all_locators as locators
 
 
@@ -33,71 +34,71 @@ class History(MainPage):
 
     def status_comment_in_history(self, locator):
         """Проверка, что комментарий в верном статусе"""
-        assert locator.is_displayed() is True
+        assert self.elements_is_present(locator).is_displayed() is True
 
     def text_comment_in_history(self, locator, text_comment):
         """Проверка текста комментария"""
-        assert self.element_is_visible(locator).text == text_comment
-
-    def go_to_new_article_from_history(self):
-        """Проверка перехода в новую статью из истории"""
-        self.element_is_visible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK).click()
-
-    def go_to_major_edit_article_from_history(self):
-        """Проверка перехода в статью с мажорным редактированием из истории"""
-        self.element_is_visible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK).click()
-
-    def go_to_delete_article_from_history(self):
-        """Проверка перехода в удаленную статью из истории"""
-        self.element_is_visible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK).click()
-
-    def check_open_valid_article(self):
-        """Проверка, что из истории открылась нужная статья"""
-        assert DataParser.get_article_name_from_data_file() == self.element_is_visible(
-            locators.OpenArticle.ARTICLE_TITLE).text
-
-    def new_article_history_check(self):
-        """Проверка, комментов в истории по новой статье"""
-        time.sleep(1)
-        self.text_comment_in_history(self.GRAY_COMMENT_CHECK, 'Серый комментарий')
-        # print(self.element_is_visible(self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
-        # print(self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
-        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK))
-        # self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed() is True
-        self.text_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK, 'Тестовый комментарий 4')
-        # # print(self.element_is_visible(self.COMMENT_3_NO_SOLVE_CHECK).is_displayed())
-        # self.status_comment_in_history(*self.COMMENT_3_NO_SOLVE_CHECK)
-        time.sleep(3)
-        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_3_NO_SOLVE_CHECK))
-        self.text_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK, 'Тестовый комментарий 3')
-        # # # print(self.element_is_visible(self.COMMENT_2_NO_SOLVE_CHECK).is_displayed())
-        # self.status_comment_in_history(*self.COMMENT_2_NO_SOLVE_CHECK)
-        time.sleep(3)
-        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_2_NO_SOLVE_CHECK))
-        self.text_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK, 'Тестовый комментарий 2')
-        # # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
-        # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
-        time.sleep(3)
-        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_1_SOLVE_CHECK))
-        # # self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
-        self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
+        assert self.elements_is_present(locator).text == text_comment
 
     # def new_article_history_check(self):
     #     """Проверка, комментов в истории по новой статье"""
+    #     time.sleep(1)
     #     self.text_comment_in_history(self.GRAY_COMMENT_CHECK, 'Серый комментарий')
+    #     # print(self.element_is_visible(self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
+    #     # print(self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed())
+    #     self.status_comment_in_history(self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK))
+    #     # self.browser.find_element(*self.COMMENT_4_NO_SOLVE_CHECK).is_displayed() is True
+    #     self.text_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK, 'Тестовый комментарий 4')
+    #     # # print(self.element_is_visible(self.COMMENT_3_NO_SOLVE_CHECK).is_displayed())
+    #     # self.status_comment_in_history(*self.COMMENT_3_NO_SOLVE_CHECK)
+    #     time.sleep(3)
+    #     self.status_comment_in_history(self.browser.find_element(*self.COMMENT_3_NO_SOLVE_CHECK))
+    #     self.text_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK, 'Тестовый комментарий 3')
+    #     # # # print(self.element_is_visible(self.COMMENT_2_NO_SOLVE_CHECK).is_displayed())
+    #     # self.status_comment_in_history(*self.COMMENT_2_NO_SOLVE_CHECK)
+    #     time.sleep(3)
+    #     self.status_comment_in_history(self.browser.find_element(*self.COMMENT_2_NO_SOLVE_CHECK))
+    #     self.text_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK, 'Тестовый комментарий 2')
+    #     # # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
+    #     # # print(self.element_is_visible(self.COMMENT_1_SOLVE_CHECK).is_displayed())
+    #     time.sleep(3)
     #     self.status_comment_in_history(self.browser.find_element(*self.COMMENT_1_SOLVE_CHECK))
+    #     # # self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
     #     self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
 
-    def minor_edit_article_history_check(self):
-        """Проверка, комментов в истории по минорному редактированию статье"""
-        time.sleep(1)
-        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_2_SOLVE_CHECK))
+    def gray_comment_check(self):
+        """Проверка, наличия серого комментария в истории"""
+        self.text_comment_in_history(self.GRAY_COMMENT_CHECK, 'Серый комментарий')
+
+    def first_solve_comment_check(self):
+        """Проверка, наличия 1 ЗАКРЫТОГО комментария в истории"""
+        self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
+        self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
+
+    def second_no_solve_comment_check(self):
+        """Проверка, наличия 2 НЕ ЗАКРЫТОГО комментария в истории"""
+        self.status_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK)
+        self.text_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK, 'Тестовый комментарий 2')
+
+    def second_solve_comment_check(self):
+        """Проверка, наличия 2 ЗАКРЫТОГО комментария в истории"""
+        self.status_comment_in_history(self.COMMENT_2_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_2_SOLVE_CHECK, 'Тестовый комментарий 2')
 
-    def major_edit_article_history_check(self):
-        """Проверка, комментов в истории по мажорному редактированию статье"""
-        self.status_comment_in_history(self.browser.find_element(*self.COMMENT_3_SOLVE_CHECK))
+    def third_no_solve_comment_check(self):
+        """Проверка, наличия 3 НЕ ЗАКРЫТОГО комментария в истории"""
+        self.status_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK)
+        self.text_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK, 'Тестовый комментарий 3')
+
+    def third_solve_comment_check(self):
+        """Проверка, наличия 3 ЗАКРЫТОГО комментария в истории"""
+        self.status_comment_in_history(self.COMMENT_3_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_3_SOLVE_CHECK, 'Тестовый комментарий 3')
+
+    def four_no_solve_comment_check(self):
+        """Проверка, наличия 4 НЕ ЗАКРЫТОГО комментария в истории"""
+        self.status_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK)
+        self.text_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK, 'Тестовый комментарий 4')
 
 
 class BellAlert(MainPage):
@@ -112,8 +113,33 @@ class BellAlert(MainPage):
         return self.element_is_visible(locators.CheckCommentsPersons.EMPTY_BELL__CHECK).text
 
 
-class PersonValidation(Authorisation, History, BellAlert, MenuNavigation):
+class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
     """Класс проверки функционала пользователями из эталона"""
+
+    def check_open_valid_article(self):
+        """Проверка, что открылась нужная статья"""
+        assert DataParser.get_article_name_from_data_file() == self.element_is_visible(
+            locators.OpenArticle.ARTICLE_TITLE).text
+
+    def check_article_is_deleted(self):
+        """Проверка, что в удаленной статье внизу отображается красный банер"""
+        assert self.element_is_visible(locators.OpenArticle.CHECK_ARTICLE_IS_DELETED)
+
+    def check_restore_button(self):
+        """Проверка, что в удаленной статье внизу есть кнопка 'восстановить'"""
+        assert self.element_is_visible(locators.OpenArticle.RESTORE_BUTTON)
+
+    def go_to_new_article_from_history(self):
+        """Проверка перехода в новую статью из истории"""
+        self.element_is_visible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK).click()
+
+    def go_to_major_edit_article_from_history(self):
+        """Проверка перехода в статью с мажорным редактированием из истории"""
+        self.element_is_visible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK).click()
+
+    def go_to_deleted_article_from_history(self):
+        """Проверка перехода в удаленную статью из истории"""
+        self.element_is_visible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK).click()
 
     def empty_history_check(self):
         """Проверка, что в истории пусто"""
