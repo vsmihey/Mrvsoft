@@ -46,6 +46,10 @@ class MainPage:
         """Ожидает появления элемента"""
         return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
 
+    def element_is_invisible(self, locator, timeout=3):
+        """Проверяет, что элемент не появился"""
+        return Wait(self.browser, timeout).until(EC.invisibility_of_element_located(locator))
+
     def elements_are_visible(self, locator, timeout=10):
         """Работа с несколькоми элементами (например: список элементов)"""
         return Wait(self.browser, timeout).until(EC.visibility_of_all_elements_located(locator))
