@@ -13,6 +13,7 @@ from generator.generator import generated_person
 from locators.locator_wizard_and_search_ru_en import AddViewContentWizardLocators, SearchRuEnLocators
 from locators.locators_topic_database import CreateTopicDatabaseLocators
 from pages import checking_filter_changes_page
+from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
 from pages.checking_filter_changes_page import AddFilterChanges
 # from pages.data_login_password import url, text_ru, text_en
@@ -20,7 +21,7 @@ from pages.users import text_ru, text_en
 from pages.repeat_function import RepeatFunction
 
 
-class AddViewContentWizard(BasePage):
+class AddViewContentWizard(Authorisation, BasePage):
 
     Locators = AddViewContentWizardLocators()
 
@@ -35,7 +36,7 @@ class AddViewContentWizard(BasePage):
         to_get_name_request = self.element_is_visible(self.Locators.TO_GET_NAME_REQUEST).text
         for i in range(20):
             self.element_is_visible(self.Locators.INPUT_NAME_REQUEST).send_keys(
-                "request " + str(random.randint(999, 9999)))
+                "request " + str(random.randint(1111, 99999)))
             self.element_is_visible(self.Locators.BUTTON_ADD_REQUEST).click()
             try:
                 to_get_name_added_request = self.element_is_visible(self.Locators.TO_GET_NAME_ADDED_REQUEST).text
@@ -48,7 +49,7 @@ class AddViewContentWizard(BasePage):
         return data_request
 
     def check_article(self, driver):
-        self.input_in_my_project(self.driver)
+        # self.input_in_my_project(self.driver)
         first_name, name_request, text_alert = self.create_article_base()
         # self.implicitly_wait()
         # actions = ActionChains(self.driver)
@@ -76,7 +77,7 @@ class AddViewContentWizard(BasePage):
         self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
         """search"""
         time.sleep(3)
-        actions = ActionChains(self.driver)
+        actions = ActionChains(driver)
         search = self.element_is_visible(self.Locators.SEARCH)
         actions.click(search)
         actions.send_keys(name_request)
@@ -126,6 +127,7 @@ class AddViewContentWizard(BasePage):
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_BACK).click()
+        time.sleep(1)
         list_added_request = self.elements_are_present(self.Locators.LIST_ADDED_REQUEST)
         data_added_requests = []
         for n in list_added_request:
@@ -155,10 +157,10 @@ class AddViewContentWizard(BasePage):
         assert text_fixing_by_expert == "Закреплено экспертом"
 
     def check_template(self, driver):
-        self.input_in_my_project(driver)
-        name, name_content, name_of_templates, name_request = self.create_article_by_template_base(driver)
-        print(name, name_content, name_of_templates, name_request)
-        actions = ActionChains(self.driver)
+        # self.input_in_my_project(driver)
+        name, name_content, name_request = self.create_article_by_template_base(driver)
+        print(name, name_content, name_request)
+        actions = ActionChains(driver)
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.INPUT_NAME_REQUEST).send_keys(name_request)
@@ -260,9 +262,9 @@ class AddViewContentWizard(BasePage):
         assert text_fixing_by_expert == "Закреплено экспертом"
 
     def check_script(self, driver):
-        self.input_in_my_project(driver)
-        name_request_script, name_script = self.create_script_base()
-        actions = ActionChains(self.driver)
+        # self.input_in_my_project(driver)
+        name_request_script, name_script = self.create_script_base(driver)
+        actions = ActionChains(driver)
         button_typography = self.elements_is_present(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
         actions.click(button_typography).perform()
         self.element_is_visible(self.Locators.INPUT_NAME_REQUEST).send_keys(name_request_script)

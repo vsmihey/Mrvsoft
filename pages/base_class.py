@@ -56,6 +56,10 @@ class MainPage:
         """Поиск элемента даже если он не виден"""
         return Wait(self.browser, timeout).until(EC.presence_of_element_located(locator))
 
+    def elements_are_present(self, locator, timeout=10):
+        """Поиск элементов (спика элементов) даже если они не видны"""
+        return Wait(self.browser, timeout).until(EC.presence_of_all_elements_located(locator))
+
     def element_is_clickable(self, locator, timeout=2):
         """Элемент кликабельный"""
         return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator))
@@ -105,8 +109,9 @@ class MainPage:
                 break
             except (InvalidSelectorException, NoSuchElementException):
                 locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)  # ползунок
-                action.drag_and_drop_by_offset(locator_scroller, "0", "200")
-                action.perform()
+                action.drag_and_drop_by_offset(locator_scroller, "0", "200").perform()
+                action.drag_and_drop_by_offset(locator_scroller, "0", "-20").perform()
+                # action.perform()
 
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)

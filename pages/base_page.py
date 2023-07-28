@@ -7,7 +7,7 @@ from pathlib import Path
 from random import choice
 from string import ascii_uppercase
 from selenium.common import TimeoutException, ElementClickInterceptedException, StaleElementReferenceException, \
-    ElementNotInteractableException, JavascriptException
+    ElementNotInteractableException, JavascriptException, InvalidSelectorException, NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
@@ -17,6 +17,7 @@ from locators.locators_files_format import FilesFormatPageLocators
 from locators.locators_form_pages import *
 from locators.locators_topic_database import CreateTopicDatabaseLocators
 from pages.data_login_password import *
+
 
 
 # from locators.form_pages_locators import FormPagesLocators as Locators
@@ -261,10 +262,11 @@ class BasePage:
             time.sleep(5)
             self.elements_is_present(Locators.UPLOAD_MEDIA).click()
         """input is visible for load files"""
-        self.driver.execute_script(
-            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        self.driver.execute_script(
-            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        self.download_files_is_visible()
+        # self.driver.execute_script(
+        #     """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        # self.driver.execute_script(
+        #     """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
         path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
         data_path = [path1, path2]
@@ -293,6 +295,29 @@ class BasePage:
         # self.element_is_visible(Locators.GO_TO_CONTENT).click()
         return first_name, name_request, text_alert
 
+    def scroll_wizard_template(self, name, driver):
+        """Скролл визарда шаблонов на величину в пикселях (x, y),
+        name - название шаблона, которое ищем"""
+        Locators = FormPagesLocators()
+        action = ActionChains(driver)
+        n = 0
+        while True:
+            if n == 10:
+                break
+            try:
+                name_of_templates = driver.find_element(By.XPATH,
+                                                        f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
+                name_of_templates.click()
+                break
+            except (InvalidSelectorException, NoSuchElementException):
+                locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)  # ползунок
+                action.drag_and_drop_by_offset(locator_scroller, "0", "200").perform()
+                action.drag_and_drop_by_offset(locator_scroller, "0", "-20").perform()
+                # action.perform()
+
+    def scroll(self, driver):
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
     def create_article_by_template_base(self, driver):
         """Создание статьи по шаблону"""
         # self.input_in_my_project(self.driver)
@@ -300,7 +325,7 @@ class BasePage:
         actions = ActionChains(driver)
         driver.implicitly_wait(10)
         person = generated_person()
-        name = "Templates" + str(random.randint(999, 99999))
+        name = "1_Templates" + str(random.randint(999, 99999))
         name_content = "Content" + str(random.randint(999, 99999))
         name_request = "как помыть крота" + str(random.randint(999, 99999))
         try:
@@ -339,8 +364,14 @@ class BasePage:
         # print(name)
         self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
         self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
-        name_of_templates = driver.find_element(By.XPATH, f"//div[contains(text(),'{name}')]")
-        name_of_templates.click()
+
+        self.scroll_wizard_template(name, driver)
+        # frame = self.element_is_visible(Locators.WINDOW_POPUP_TEMPLATE)
+        # self.switch_to_frame_(frame)
+        # self.scroll(driver)
+        time.sleep(1)
+        # name_of_templates = driver.find_element(By.XPATH, f"//div[contains(text(),'{name}')]")
+        # name_of_templates.click()
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
         # print(name_content)
         time.sleep(3)
@@ -397,12 +428,12 @@ class BasePage:
         # self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         # self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
         # print(name, name_content, name_of_templates, name_request)
-        return name, name_content, name_of_templates, name_request
+        return name, name_content, name_request
 
-    def create_script_base(self):
+    def create_script_base(self, driver):
         """Создание пошагового сценария"""
         # self.input_in_my_project(self.driver)
-        action = ActionChains(self.driver)
+        action = ActionChains(driver)
         Locators = CreateTopicDatabaseLocators
         name_request_script = "request_script " + str(random.randint(999, 9999))
         name_script = "NAME_SCRIPT-" + str(random.randint(99, 999))

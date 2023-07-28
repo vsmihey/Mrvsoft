@@ -1131,7 +1131,11 @@ class CreateDraftPage(Authorisation, BasePage):
         self.element_is_visible(Locators.FINISH_BUTTON_SCRIPT).click()
         time.sleep(1)
         # locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
+        # frame = self.element_is_visible(Locators.WINDOW_POPUP_TEMPLATE)
+        # self.switch_to_frame(frame)
         self.scroll_wizard_template(name_templates, driver)
+        # templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
+        # templates_download.click()
         # try:
         #     templates_download = driver.find_element(By.XPATH, f"//span[text()='{name_templates}']")
         # except NoSuchElementException:

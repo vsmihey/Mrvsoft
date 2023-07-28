@@ -243,6 +243,7 @@ class FormPagesLocators:
     # SAVE_CREATED_TEMPLATES = (By.XPATH, "//p[contains(text(),'сохранить')]")
     SAVE_CREATED_TEMPLATES = (By.XPATH, "//p[contains(text(),'Сохранить')]")
     SUBMIT_TEMPLATES = (By.XPATH, "//button[@type='submit']")
+    WINDOW_POPUP_TEMPLATE = (By.CSS_SELECTOR, ".m-popup__container")
     MODAL_WINDOW_FOR_TEMPLATE = (By.XPATH, "//div[@role='dialog']")
     MODAL_WINDOW_SCROLLER = (By.XPATH, "//div[@class='scroller m-modal-templates__scroller']//div[@class='scroller__thumb scroller__thumb--Y']")
     MODAL_WIZARD_SCROLLER_TEMPLATE = (By.XPATH, "//div[@class='scroller m-modal-templates__scroller']//div[@class='scroller__track scroller__track--y']")

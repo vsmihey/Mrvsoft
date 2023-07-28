@@ -9,14 +9,16 @@ class AddViewContentWizardLocators:
     BUTTON_FINISH = (By.XPATH, "//p[contains(text(),'Завершить')]")
     BUTTON_SUBMIT = (By.CSS_SELECTOR, "button[type='submit']")
     INPUT_TEXTAREA_FIELD = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
-    GO_TO_CONTENT = (By.XPATH, "(//div[text()='Контент 1'])[2]")
+    # GO_TO_CONTENT = (By.XPATH, "(//div[text()='Контент 1'])[2]")
+    GO_TO_CONTENT = (By.XPATH, "//section[@class='m-bread-crumbs']/.//div[@class='m-bread-crumbs__link']")
     BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
     """tooltip"""
     SVG_TOOLTIP_REQUEST_FIELD = (By.XPATH, "//h4[contains(text(),'Закрепление контента в поисковой выдаче')]//*[local-name()='svg']")
     """check radio request"""
     RADIO_LINK_TO_CONTENT = (By.XPATH, "//span[contains(text(),'Ссылка на контент')]/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
     CHECK_REQUEST = (By.CSS_SELECTOR, ".m-content-fix-wizard__content-wrapper")
-    FOLDER_CONTENT = (By.XPATH, "//p[text()='Контент 1']")
+    # FOLDER_CONTENT = (By.XPATH, "//p[text()='Контент 1']")
+    FOLDER_CONTENT = (By.CSS_SELECTOR, ".m-content-fix-wizard__meta-wrapper .m-content-fix-wizard__meta")
     NAME_ARTICLE = (By.CSS_SELECTOR, ".m-content-fix-wizard__article-name")
     BUTTON_FINISH_1 = (By.XPATH, "//p[contains(text(),'Завершить')]")
     TEXT_LINK_TO_CONTENT = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__bottom-text")

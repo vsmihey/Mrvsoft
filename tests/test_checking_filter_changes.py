@@ -9,7 +9,7 @@ class TestCheckingFilterChanges:
 
     class TestAddFilterChanges:
 
-        @allure.title("добавить фильтр")
+        # @allure.title("Проверка изменения фильтров через массовые изменения")
         def test_add_filters_changes(self, driver):
             checking_filters_changes_page = AddFilterChanges(driver)
             # checking_filters_changes_page.open()
