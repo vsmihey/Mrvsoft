@@ -395,7 +395,11 @@ class CreateTopicDatabase(Authorisation, BasePage):
         # assert text_choose_question_for_test == "Выберите вопросы для теста"
         self.element_is_visible(self.Locators.ON_CHECKBOX_ALL_QUESTIONS).click()
         time.sleep(1)
-        self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+        try:
+            self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
         """check first position by index xpath dom and active tab"""
         tab_active = self.element_is_visible(self.Locators.TAB_ACTIVE).text
         assert tab_active == 'тест'
@@ -743,7 +747,11 @@ class CreateTopicDatabase(Authorisation, BasePage):
                 "NAME_SCRIPT-" + str(random.randint(99, 999)))
             self.element_is_visible(self.Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
         self.element_is_visible(self.Locators.ADD_STEP).click()
-        self.element_is_visible(self.Locators.INPUT_NAME_STEP).send_keys("name_step-"+str(random.randint(99, 999)))
+        try:
+            self.element_is_visible(self.Locators.INPUT_NAME_STEP).send_keys("name_step-"+str(random.randint(99, 999)))
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.INPUT_NAME_STEP).send_keys("name_step-"+str(random.randint(99, 999)))
         self.element_is_visible(self.Locators.DROPDOWN_STEP).send_keys("Сценарий завершён")
         try:
             self.element_is_visible(self.Locators.TEXT_AREA).click()
