@@ -356,8 +356,6 @@ class FormPagesLocators:
     NEW_TEMPLATE = (By.XPATH, "//div[@class='m-lms-action-tooltip m-modal-templates__template-card']")
     SECOND_FOLDER_IN_LIST_FOR_DEL = (By.XPATH, "(//li[@class='m-tree-item m-tree-item__wrapper'])[2]")
     MODAL_WINDOW_SCROLLER = (By.XPATH, "//div[@class='scroller m-modal-templates__scroller']//div[@class='scroller__thumb scroller__thumb--Y']")
-    WINDOW_POPUP_TEMPLATE = (By.CSS_SELECTOR, ".m-popup__container")
-    WINDOW_SCROLLER_TEMPLATE = (By.CSS_SELECTOR, ".scroller.m-modal-templates__scroller")
 
 class StepByScriptLocators:
     ADD_SCRIPT = (By.XPATH, "//div[text()='Пошаговый сценарий']")
@@ -981,8 +979,6 @@ class AddFilterChangesLocators:
     FIELD_TEXT_MAIL = (By.XPATH,
                        "(//a[@class='m-article-editor-templated__field-value m-article-editor-templated__field-value--link'])[2]")
     FIELD_TEXT_NAME = (By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'])[3]")
-    WINDOW_POPUP_TEMPLATE = (By.CSS_SELECTOR, ".m-popup__container")
-    WINDOW_SCROLLER_TEMPLATE = (By.CSS_SELECTOR, ".scroller.m-modal-templates__scroller")
 
 
 class AddViewContentWizardLocators:
@@ -1189,7 +1185,7 @@ class CheckBellComments:
     BELL_CHECK_TEST_CREATE_ARTICLE = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Создание статьи']")
     BELL_CHECK_TEST_MAJOR_EDIT = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Мажорное редактирование']")
     BELL_CHECK_TEST_CLOSE_3 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Закрытие 3']")
-    #  Проверка Персоном 3 (остальные локаторы как из Персона 2)
-    BELL_CREATE_ARTICLE_CONFIRM = (By.XPATH, f"//div[text()='подтвердите']/../..//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Создание статьи']")
+    #  Проверка Персоном 3 (остальные локаторы как из персона 2)
+    BELL_CREATE_ARTICLE_CONFIRM = (By.XPATH, f"//div[text()='подтвердите']/../..//div[text()='Название статьи 9881']/../..//div[text()='Создание статьи']")
 
 

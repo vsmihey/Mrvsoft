@@ -92,6 +92,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.notification_text_area('Удаление')
         time.sleep(1)
         self.execute_button_click()
+        time.sleep(1)
 
 
 class DataParser:
