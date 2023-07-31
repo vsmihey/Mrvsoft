@@ -161,7 +161,7 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
 
     def check_article_confirm_reading_notification(self):
         """Проверка, что у пользователя отображается банер о подтверждении прочтения уведомления"""
-        self.element_is_visible(locators.CheckBellComments.BELL_CREATE_ARTICLE_CONFIRM).click()
+        self.element_is_clickable(locators.CheckBellComments.BELL_CREATE_ARTICLE_CONFIRM).click()
 
     def check_restore_button(self):
         """Проверка, что в удаленной статье внизу есть кнопка 'восстановить'"""
@@ -169,27 +169,27 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
 
     def bottom_banner_button_click(self):
         """Нажатие на кнопку в красном банере внизу статьи"""
-        self.element_is_visible(locators.OpenArticle.BOTTOM_BANNER_BUTTON).click()
+        self.element_is_clickable(locators.OpenArticle.BOTTOM_BANNER_BUTTON).click()
 
     def go_to_new_article_from_history_or_bell(self):
         """Проверка перехода в новую статью из истории или колокольчика без подтверждения прочтения"""
-        self.element_is_visible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK).click()
+        self.element_is_clickable(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK).click()
 
     def go_to_new_article_from_bell_with_confirm(self):
         """Проверка перехода в новую статью из истории или колокольчика c подтверждением прочтения"""
-        self.element_is_visible(self.BELL_CREATE_ARTICLE_CONFIRM).click()
+        self.element_is_clickable(self.BELL_CREATE_ARTICLE_CONFIRM).click()
 
     def go_to_major_edit_article_from_history_or_bell(self):
         """Проверка перехода в статью с мажорным редактированием из истории или колокольчика"""
-        self.element_is_visible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK).click()
+        self.element_is_clickable(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK).click()
 
     def go_to_deleted_article_from_history_or_bell(self):
         """Проверка перехода в удаленную статью из истории или колокольчика"""
-        self.element_is_visible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK).click()
+        self.element_is_clickable(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK).click()
 
     def go_to_restored_article_from_history_or_bell(self):
         """Проверка перехода в восстановленную статью из истории или колокольчика"""
-        self.element_is_visible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK).click()
+        self.element_is_clickable(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK).click()
 
     def empty_history_check(self):
         """Проверка, что в истории пусто"""

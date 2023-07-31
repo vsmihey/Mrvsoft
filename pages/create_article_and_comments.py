@@ -17,19 +17,19 @@ class ContentOptions(MainPage):
 
     def redaction(self):
         """Кнопка Редактировать"""
-        self.element_is_visible(locators.FormPagesLocators.EDIT_ARTICLE).click()
+        self.element_is_clickable(locators.FormPagesLocators.EDIT_ARTICLE).click()
 
     def three_dots_button(self):
         """Кнопка Троеточие"""
-        self.element_is_visible(locators.SearchRuEnLocators.MEATBALL_ARTICLE).click()
+        self.element_is_clickable(locators.SearchRuEnLocators.MEATBALL_ARTICLE).click()
 
     def delete_button(self):
         """Кнопка Троеточие"""
-        self.element_is_visible(locators.SearchRuEnLocators.SVG_DEL).click()
+        self.element_is_clickable(locators.SearchRuEnLocators.SVG_DEL).click()
 
     def restore_button(self):
         """Кнопка 'восстановить'"""
-        self.element_is_visible(locators.OpenArticle.BOTTOM_BANNER_BUTTON).click()
+        self.element_is_clickable(locators.OpenArticle.BOTTOM_BANNER_BUTTON).click()
 
 
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions):
@@ -132,11 +132,11 @@ class Comments(Authorisation):
 
     def send_comment(self):
         """Подтверждение отправки комментария"""
-        self.element_is_visible(locators.Comments.SEND_COMMENT).click()
+        self.element_is_clickable(locators.Comments.SEND_COMMENT).click()
 
     def disable_the_question_to_the_expert_option(self):
         """Отключение галочки 'с вопросом к эксперту'"""
-        self.element_is_visible(locators.Comments.EXPERT_QUESTION).click()
+        self.element_is_clickable(locators.Comments.EXPERT_QUESTION).click()
 
     @staticmethod
     def create_comments(driver, url, user=minervakms):
