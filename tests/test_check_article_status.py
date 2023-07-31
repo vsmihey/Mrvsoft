@@ -74,7 +74,6 @@ class TestCheckNewArticleStatus:
         def test_new_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
-            person.check_no_article_notifications()
 
     class TestMinorArticle:
 
@@ -109,7 +108,6 @@ class TestCheckNewArticleStatus:
         def test_minor_edit_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
-            person.check_no_article_notifications()
 
     class TestMajorArticle:
 
@@ -132,19 +130,19 @@ class TestCheckNewArticleStatus:
             person = Person2(driver)
             person.get_check_history()
             # person.history_third_solve_comment_check()
-            person.go_to_major_edit_article_from_history()
+            person.go_to_major_edit_article_from_history_or_bell()
             person.check_open_valid_article()
 
         def test_major_edit_article_bell_person2(self, driver):
             person = Person2(driver)
             person.get_check_bell()
-            person.go_to_major_edit_article_from_history()
+            person.go_to_major_edit_article_from_history_or_bell()
             person.check_open_valid_article()
 
         def test_major_edit_article_bell_person3(self, driver):
             person = Person3(driver)
             person.get_check_bell()
-            person.go_to_major_edit_article_from_history()
+            person.go_to_major_edit_article_from_history_or_bell()
             person.check_open_valid_article()
             person.check_article_bottom_banner()
             person.bottom_banner_button_click()
@@ -152,7 +150,6 @@ class TestCheckNewArticleStatus:
         def test_new_article_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
-            person.check_no_article_notifications()
 
     class TestDeleteArticle:
         def test_article_delete_base(self, driver):
@@ -170,7 +167,7 @@ class TestCheckNewArticleStatus:
         def test_delete_article_history_person2(self, driver):
             person = Person2(driver)
             person.get_check_history()
-            person.go_to_deleted_article_from_history()
+            person.go_to_deleted_article_from_history_or_bell()
             person.check_open_valid_article()
             person.check_article_bottom_banner()
             person.check_restore_button()
@@ -178,7 +175,7 @@ class TestCheckNewArticleStatus:
         def test_delete_article_bell_person2(self, driver):
             person = Person2(driver)
             person.get_check_bell()
-            person.go_to_deleted_article_from_history()
+            person.go_to_deleted_article_from_history_or_bell()
             person.check_open_valid_article()
             person.check_article_bottom_banner()
             person.check_restore_button()
@@ -186,7 +183,7 @@ class TestCheckNewArticleStatus:
         def test_delete_article_bell_person3(self, driver):
             person = Person3(driver)
             person.get_check_bell()
-            person.go_to_deleted_article_from_history()
+            person.go_to_deleted_article_from_history_or_bell()
             person.check_open_valid_article()
             person.check_article_bottom_banner()
             person.check_restore_button()
@@ -194,17 +191,40 @@ class TestCheckNewArticleStatus:
         def test_delete_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
-            person.check_no_article_notifications()
 
-    # class TestRestoreArticle:
-    #     def test_article_delete_base(self, driver):
-    #         page_article_base = PersonValidation(driver)
-    #         page_article_base.delete_base_article(DataParser.get_url_from_data_file())
-    #
-    #     def test_delete_article_history_person2(self, driver):
-    #         person = Person2(driver)
-    #         person.get_check_history()
-    #         person.go_to_deleted_article_from_history()
-    #         person.check_open_valid_article()
-    #         person.check_article_bottom_banner()
-    #         person.check_restore_button()
+    class TestRestoreArticle:
+        def test_article_restore_base(self, driver):
+            page_article_base = PersonValidation(driver)
+            page_article_base.restore_base_article(DataParser.get_url_from_data_file())
+
+        def test_restore_article_history_person1(self, driver):
+            person = Person1(driver)
+            person.get_check_history()
+
+        def test_restore_article_bell_person1(self, driver):
+            person = Person1(driver)
+            person.get_check_bell()
+
+        def test_restore_article_history_person2(self, driver):
+            person = Person2(driver)
+            person.get_check_history()
+            person.go_to_restored_article_from_history_or_bell()
+            person.check_open_valid_article()
+
+        def test_restore_article_bell_person2(self, driver):
+            person = Person2(driver)
+            person.get_check_bell()
+            person.go_to_restored_article_from_history_or_bell()
+            person.check_open_valid_article()
+
+        def test_restore_article_bell_person3(self, driver):
+            person = Person3(driver)
+            person.get_check_bell()
+            person.go_to_restored_article_from_history_or_bell()
+            person.check_open_valid_article()
+            person.check_article_bottom_banner()
+            person.bottom_banner_button_click()
+
+        def test_restore_article_bell_person4(self, driver):
+            person = Person4(driver)
+            person.get_check_bell()

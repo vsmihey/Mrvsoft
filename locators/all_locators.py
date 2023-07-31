@@ -1141,11 +1141,13 @@ class CheckCommentsPersons:
     EMPTY_HISTORY_CHECK = (By.CSS_SELECTOR, ".m-news-empty__title")
     # через get_attribute("data-tip") получаем количество уведомлений
     BELL_ALERT = (By.CSS_SELECTOR,
-                  ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification--collapsed.m-dashboard-top-right-side__notifications")
+                  ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification"
+                  "--collapsed.m-dashboard-top-right-side__notifications")
     EMPTY_BELL__CHECK = (By.CSS_SELECTOR, '.dashboard-notification-empty-layout__title')
     CREATE_ARTICLE_CHECK = (By.XPATH, "(//div[contains(text(),'Создание статьи')])[1]")
     MAJOR_EDIT_ARTICLE_CHECK = (By.XPATH, "(//div[contains(text(),'Мажорное редактирование')])[1]")
     DELETE_ARTICLE_CHECK = (By.XPATH, "(//div[contains(text(),'Удаление')])[1]")
+    RESTORE_ARTICLE_CHECK = (By.XPATH, "(//div[contains(text(),'Восстановление')])[1]")
     # здесь проверка тестового комментария 1 и статуса не решено через is_displayed()
     CHECK_TEST_COMMENT_1 = (By.XPATH,
                             f"//h3[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 1']")
@@ -1200,4 +1202,4 @@ class CheckBellComments:
     BELL_CHECK_TEST_CLOSE_3 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Закрытие 3']")
     #  Проверка Персоном 3 (остальные локаторы как из персона 2)
     BELL_CREATE_ARTICLE_CONFIRM = (By.XPATH,
-    f"//div[text()='подтвердите']/../..//div[text()='Название статьи 9881']/../..//div[text()='Создание статьи']")
+                                   f"//div[text()='подтвердите']/../..//div[text()='Название статьи 9881']/../..//div[text()='Создание статьи']")
