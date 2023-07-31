@@ -10,7 +10,8 @@ class AddViewContentWizardLocators:
     BUTTON_SUBMIT = (By.CSS_SELECTOR, "button[type='submit']")
     INPUT_TEXTAREA_FIELD = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
     # GO_TO_CONTENT = (By.XPATH, "(//div[text()='Контент 1'])[2]")
-    GO_TO_CONTENT = (By.XPATH, "//section[@class='m-bread-crumbs']/.//div[@class='m-bread-crumbs__link']")
+    # GO_TO_CONTENT = (By.XPATH, "//section[@class='m-bread-crumbs']/.//div[@class='m-bread-crumbs__link']")
+    GO_TO_CONTENT = (By.XPATH, "//section[@class='m-bread-crumbs']/..//p[@class='m-ui-typography m-bread-crumbs__link__title-text']")
     BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
     """tooltip"""
     SVG_TOOLTIP_REQUEST_FIELD = (By.XPATH, "//h4[contains(text(),'Закрепление контента в поисковой выдаче')]//*[local-name()='svg']")

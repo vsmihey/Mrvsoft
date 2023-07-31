@@ -9,7 +9,8 @@ class LocatorsCheckNewsHistory:
     INPUT_TEXTAREA_FIELD = (By.XPATH, "//textarea[@placeholder='Введите текст сообщения']")
     """change article"""
     ARTICLE_CHANGE = (By.XPATH, "//div[text()='изменить']")
-    ARTICLE_NAME_CHANGE = (By.CSS_SELECTOR, "input[placeholder='Введите название контента']")
+    ARTICLE_NAME_CHANGE = (By.CSS_SELECTOR, "input[class='m-ui-text-input__input']")
+    # ARTICLE_NAME_CHANGE = (By.CSS_SELECTOR, "input[placeholder='Введите название контента']")
     CHECKBOX_ADD_ALL_ROLE_FOR_ARTICLE = (By.CSS_SELECTOR, "div[class='access-wrapper__header-block'] svg")
     """add comment"""
     ADD_COMMENT = (By.CSS_SELECTOR, "textarea[placeholder='Введите текст комментария']")
@@ -67,6 +68,10 @@ class LocatorsCheckNewsHistory:
     FIRST_DELETED_CONTENT = (By.XPATH, "(//div[normalize-space()='deleted 2'])[1]")
     TEXT_CHECK_CANT_COMMENT = (By.XPATH, "//span[text()='Комментирование в этом контенте запрещено']")
     SVG_CLOSE_ARTICLE_ALERT = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg")
+    GO_TO_CONTENT = (By.XPATH, "//section[@class='m-bread-crumbs']/..//p[@class='m-ui-typography m-bread-crumbs__link__title-text']")
+    AVATAR_MENU = (By.CSS_SELECTOR, "article[class='m-ui-avatar-default m-ui-avatar-default--small m-ui-avatar-default--pic']")
+    EXIT_PERSON = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium user-profile__footer__last_button'] p[class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text']")
+
 
 
 

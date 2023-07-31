@@ -365,7 +365,7 @@ class AddViewContentWizard(Authorisation, BasePage):
         assert text_fixing_by_expert == "Закреплено экспертом"
 
     def check_files(self, driver):
-        self.input_in_my_project(driver)
+        # self.input_in_my_project(driver)
         actions = ActionChains(driver)
         path = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
         # name_script = "media.jpg"
@@ -477,14 +477,14 @@ class AddViewContentWizard(Authorisation, BasePage):
         assert text_fixing_by_expert == "Закреплено экспертом"
 
 
-class SearchRuEn(BasePage):
+class SearchRuEn(Authorisation, BasePage):
 
     Locators = SearchRuEnLocators()
 
-    def create_article_ru(self):
+    def create_article_ru(self, driver):
         """CREATE ARTICLE RU"""
-        self.input_in_my_project(self.driver)
-        actions = ActionChains(self.driver)
+        # self.input_in_my_project(self.driver)
+        actions = ActionChains(driver)
         Locators = CreateTopicDatabaseLocators
         # person = generated_person()
         first_name_ru = "Статья " + str(random.randint(999, 9999))
@@ -575,10 +575,10 @@ class SearchRuEn(BasePage):
             assert t == "Соображения"
         return first_name_ru, text_article_ru, list_split_ru
 
-    def create_article_en(self):
+    def create_article_en(self, driver):
         """CREATE ARTICLE EN"""
-        self.input_in_my_project(self.driver)
-        actions = ActionChains(self.driver)
+        # self.input_in_my_project(self.driver)
+        actions = ActionChains(driver)
         Locators = CreateTopicDatabaseLocators
         # person = generated_person()
         first_name_en = "Article " + str(random.randint(999, 9999))

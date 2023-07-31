@@ -1,6 +1,7 @@
 import random
 import time
 
+import allure
 from selenium.common import TimeoutException, NoSuchElementException, StaleElementReferenceException, \
     InvalidSelectorException, ElementNotInteractableException, ElementClickInterceptedException
 from selenium.webdriver.common.by import By
@@ -8,12 +9,13 @@ from selenium.webdriver.common.by import By
 import pages
 from locators.locators_form_pages import FormPagesLocators
 from locators.locators_news_history import LocatorsCheckNewsHistory
+from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
 from pages.data_login_password import login_person1, password_person1
 from pages.form_page import FormPage
 
 
-class CheckNewsHistoryPage(BasePage):
+class CheckNewsHistoryPage(Authorisation, BasePage):
 
     Locators = LocatorsCheckNewsHistory()
 
@@ -68,11 +70,11 @@ class CheckNewsHistoryPage(BasePage):
         print(changed_name_1)
         time.sleep(2)
         try:
-            deleted_article_search = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{first_name + changed_name_1}']")
+            deleted_article_search = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name + changed_name_1}']")
         except (TimeoutException, NoSuchElementException):
             time.sleep(3)
             # self.element_is_visible(self.Locators.BUTTON_HISTORY).click()
-            deleted_article_search = self.driver.find_element(By.XPATH, f"//p[normalize-space()='{first_name + changed_name_1}']")
+            deleted_article_search = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name + changed_name_1}']")
         deleted_article_search.click()
         self.element_is_visible(self.Locators.BUTTON_RESTORED).click()
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
@@ -119,19 +121,24 @@ class CheckNewsHistoryPage(BasePage):
         time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_CONFIRM_DEL).click()
         time.sleep(1)
-
         self.element_is_visible(self.Locators.LABEL_ADMINISTRATOR_PERSON).click()
         self.element_is_visible(self.Locators.LABEL_ADMINISTRATOR_PERSON_OUT).click()
         time.sleep(2)
+        # """выход пользователя"""
+        # self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
+        # self.element_is_visible(self.Locators.AVATAR_MENU).click()
+        # self.element_is_visible(self.Locators.EXIT_PERSON).click()
         return first_name_2, changed_name_2
 
     def persons_auth(self, login, password):
-        # self.input_in_my_project(self.driver)
+        # self.input_in_my_project(driver)
+        # self.open()
         Locators = FormPagesLocators()
+        time.sleep(1)
         try:
             self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
         except TimeoutException:
-            time.sleep(2)
+            time.sleep(5)
             self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
         self.element_is_visible(Locators.LOGIN).send_keys(login)
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
@@ -166,11 +173,11 @@ class CheckNewsHistoryPage(BasePage):
         self.element_is_visible(self.Locators.BUTTON_CREATE_ROLE).click()
         return name_role_no_content
 
-    def create_person1(self):
-        self.input_in_my_project(self.driver)
+    def create_person1(self, driver):
+        # self.input_in_my_project(self.driver)
         password_person1 = "97718d75"
         name_role_content = self.add_role_content()
-        login1 = self.add_new_person_base(self.driver)
+        login1 = self.add_new_person_base(driver)
         try:
             self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
         except TimeoutException:
@@ -179,10 +186,10 @@ class CheckNewsHistoryPage(BasePage):
             self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
         time.sleep(1)
         try:
-            choose_name_role_content = self.driver.find_element(By.XPATH, f"//span[normalize-space()='{name_role_content}']")
+            choose_name_role_content = self.browser.find_element(By.XPATH, f"//span[normalize-space()='{name_role_content}']")
         except TimeoutException:
             time.sleep(3)
-            choose_name_role_content = self.driver.find_element(By.XPATH, f"//span[normalize-space()='{name_role_content}']")
+            choose_name_role_content = self.browser.find_element(By.XPATH, f"//span[normalize-space()='{name_role_content}']")
         try:
             choose_name_role_content.click()
         except ElementNotInteractableException:
@@ -202,22 +209,22 @@ class CheckNewsHistoryPage(BasePage):
         print(login1, password_person1)
         return login1, password_person1
 
-    def create_person2(self):
+    def create_person2(self, driver):
         # self.input_in_my_project(self.driver)
         password_person2 = "97718d75"
         # name_role_content = self.add_role_content()
         self.element_is_visible(self.Locators.SVG_POPUP_CLOSE_CREATED_PERSON).click()
         self.element_is_visible(self.Locators.PERSONS_AND_ROLES).click()
         name_role_no_content = self.add_role_no_content()
-        login2 = self.add_new_person_base(self.driver)
+        login2 = self.add_new_person_base(driver)
         self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
         time.sleep(1)
         try:
-            choose_name_role_content = self.driver.find_element(By.XPATH,
+            choose_name_role_content = self.browser.find_element(By.XPATH,
                                                                 f"//span[normalize-space()='{name_role_no_content}']")
         except TimeoutException:
             time.sleep(3)
-            choose_name_role_content = self.driver.find_element(By.XPATH,
+            choose_name_role_content = self.browser.find_element(By.XPATH,
                                                                 f"//span[normalize-space()='{name_role_no_content}']")
         choose_name_role_content.click()
         self.element_is_visible(self.Locators.BUTTON_SAVE_CHANGES).click()
@@ -238,6 +245,7 @@ class CheckNewsHistoryPage(BasePage):
     def check_restored_1(self):
         """check restored article for person 1: can restore article"""
         self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
+        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.RESTORED_ARTICLE_1).click()
         except TimeoutException:
@@ -260,12 +268,17 @@ class CheckNewsHistoryPage(BasePage):
 
     def check_comment_1(self):
         """check comment"""
-        self.element_is_visible(self.Locators.COMMENT_CREATED).click()
-        self.element_is_visible(self.Locators.TEXT_COMMENT_CHECK).click()
-        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_CREATED_PERSON).click()
-        """check del comment"""
-        self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
-        self.element_is_visible(self.Locators.TEXT_CHECK_CANT_COMMENT).is_displayed()
+        with allure.step("Проверка новостей о комментариях в Истории - person1"):
+            self.element_is_visible(self.Locators.COMMENT_CREATED).click()
+            self.element_is_visible(self.Locators.TEXT_COMMENT_CHECK).click()
+            self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_CREATED_PERSON).click()
+            """check del comment"""
+            self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
+            self.element_is_visible(self.Locators.TEXT_CHECK_CANT_COMMENT).is_displayed()
+            """выход пользователя"""
+            self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
+            self.element_is_visible(self.Locators.AVATAR_MENU).click()
+            self.element_is_visible(self.Locators.EXIT_PERSON).click()
 
     def check_restored_1_person2(self):
         """check restored article for person 2: can not restore article"""
@@ -292,17 +305,18 @@ class CheckNewsHistoryPage(BasePage):
 
     def check_comment_1_person2(self):
         """check comment"""
-        self.element_is_visible(self.Locators.COMMENT_CREATED).click()
-        self.element_is_visible(self.Locators.TEXT_COMMENT_CHECK).click()
-        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_CREATED_PERSON).click()
-        """check del comment"""
-        try:
-            self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
-            warning = True
-        except TimeoutException:
-            warning = False
-            print("Нет удаленной статьи для проверки комментария")
-        assert warning == False
+        with allure.step("Проверка новостей о комментариях в Истории - person2"):
+            self.element_is_visible(self.Locators.COMMENT_CREATED).click()
+            self.element_is_visible(self.Locators.TEXT_COMMENT_CHECK).click()
+            self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW_CREATED_PERSON).click()
+            """check del comment"""
+            try:
+                self.element_is_visible(self.Locators.DEL_ARTICLE_2).click()
+                warning = True
+            except TimeoutException:
+                warning = False
+                print("Нет удаленной статьи для проверки комментария")
+            assert warning == False
 
     def create_person1_2(self):
         """create person for check  Alert"""
@@ -319,11 +333,11 @@ class CheckNewsHistoryPage(BasePage):
             self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
         time.sleep(1)
         try:
-            choose_name_role_content = self.driver.find_element(By.XPATH,
+            choose_name_role_content = self.browser.find_element(By.XPATH,
                                                                 f"//span[normalize-space()='{name_role_content}']")
         except TimeoutException:
             time.sleep(3)
-            choose_name_role_content = self.driver.find_element(By.XPATH,
+            choose_name_role_content = self.browser.find_element(By.XPATH,
                                                                 f"//span[normalize-space()='{name_role_content}']")
         try:
             choose_name_role_content.click()
