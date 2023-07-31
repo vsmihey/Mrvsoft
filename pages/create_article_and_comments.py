@@ -27,6 +27,10 @@ class ContentOptions(MainPage):
         """Кнопка Троеточие"""
         self.element_is_visible(locators.SearchRuEnLocators.SVG_DEL).click()
 
+    def restore_button(self):
+        """Кнопка 'восстановить'"""
+        self.element_is_visible(locators.OpenArticle.BOTTOM_BANNER_BUTTON).click()
+
 
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions):
     """Создание и наполнение Базовой статьи"""
@@ -93,6 +97,12 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         time.sleep(1)
         self.execute_button_click()
         time.sleep(1)
+
+    def restore_base_article(self, url):
+        """Восстановление статьи"""
+        self.get_authorisation_in_url(url)
+        self.restore_button()
+        self.save_major_edit('Восстановление')
 
 
 class DataParser:

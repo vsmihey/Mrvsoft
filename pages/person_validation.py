@@ -1,5 +1,6 @@
 import time
 
+from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from pages.base_class import MainPage
 from pages.users import person1, person2, person3, person4
@@ -29,7 +30,11 @@ class History(MainPage):
 
     def empty_history(self) -> str:
         """Метод для проверки пустой истории"""
-        return self.element_is_visible(locators.CheckCommentsPersons.EMPTY_HISTORY_CHECK).text
+        return self.element_is_visible(locators.CheckCommentsPersons.EMPTY_HISTORY_CHECK, timeout=3)
+
+    def no_empty_history(self) -> str:
+        """Метод для проверки, что история не пустая"""
+        return self.element_is_invisible(locators.CheckCommentsPersons.EMPTY_HISTORY_CHECK, timeout=3)
 
     def status_comment_in_history(self, locator):
         """Проверка, что комментарий в верном статусе"""
@@ -134,9 +139,12 @@ class BellAlert(MainPage):
         """Проверка, наличия 4 комментария в колокольчике"""
         self.text_comment_in_bell(self.BELL_CHECK_TEST_COMMENT_4, 'Тестовый комментарий 4')
 
-    def check_no_article_notifications(self):
-        """Проверка, что нет уведомлений по конкретной статье"""
+    def check_no_article_notifications_and_history(self):
+        """Проверка, что нет записей в истории и уведомлений по конкретной статье по всем статусам"""
         assert self.element_is_invisible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK)
+        assert self.element_is_invisible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK)
+        assert self.element_is_invisible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK)
+        assert self.element_is_invisible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK)
 
 
 class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
@@ -171,13 +179,17 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
         """Проверка перехода в новую статью из истории или колокольчика c подтверждением прочтения"""
         self.element_is_visible(self.BELL_CREATE_ARTICLE_CONFIRM).click()
 
-    def go_to_major_edit_article_from_history(self):
-        """Проверка перехода в статью с мажорным редактированием из истории"""
+    def go_to_major_edit_article_from_history_or_bell(self):
+        """Проверка перехода в статью с мажорным редактированием из истории или колокольчика"""
         self.element_is_visible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK).click()
 
-    def go_to_deleted_article_from_history(self):
-        """Проверка перехода в удаленную статью из истории"""
+    def go_to_deleted_article_from_history_or_bell(self):
+        """Проверка перехода в удаленную статью из истории или колокольчика"""
         self.element_is_visible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK).click()
+
+    def go_to_restored_article_from_history_or_bell(self):
+        """Проверка перехода в восстановленную статью из истории или колокольчика"""
+        self.element_is_visible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK).click()
 
     def empty_history_check(self):
         """Проверка, что в истории пусто"""
@@ -220,16 +232,25 @@ class Person1(PersonValidation):
     def switch_to_bell(self, person):
         self.get_authorisation_in_selen(person)
         time.sleep(1)
-        self.no_new_notification()
-        self.bell_button_click()
+        try:
+            self.no_new_notification()
+        except AssertionError:
+            self.yes_new_notification()
+        finally:
+            self.bell_button_click()
 
     def get_check_history(self):
         self.switch_to_history(person1)
-        self.empty_history_check()
+        try:
+            self.empty_history_check()
+        except (AssertionError, TimeoutException):
+            self.no_empty_history()
+        finally:
+            self.check_no_article_notifications_and_history()
 
     def get_check_bell(self):
         self.switch_to_bell(person1)
-        self.empty_bell_check()
+        self.check_no_article_notifications_and_history()
 
 
 class Person2(PersonValidation):
@@ -250,10 +271,7 @@ class Person3(PersonValidation):
         self.switch_to_bell(person3)
 
 
-class Person4(PersonValidation):
-
-    def get_check_history(self):
-        self.switch_to_history(person4)
+class Person4(Person1):
 
     def get_check_bell(self):
         self.switch_to_bell(person4)

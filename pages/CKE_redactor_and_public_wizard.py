@@ -84,8 +84,8 @@ class PublicWizard(MainPage):
         self.notification_text_area('Минорное редактирование')
         self.next_and_finish_button_click()
 
-    def save_major_edit(self):
+    def save_major_edit(self, text='Мажорное редактирование'):
         """Сохранение статьи со значительными изменениями"""
         self.publish_button_click()
-        self.notification_text_area('Мажорное редактирование')
+        self.notification_text_area(text)
         self.next_and_finish_button_click()
