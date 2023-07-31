@@ -16,6 +16,7 @@ from locators.locators_form_pages import FormPagesLocators as Locators
 from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
 from pages.authorisation_page import Authorisation
+from pages.users import DataLoginPassword
 
 
 class FormPage(Authorisation, BasePage):
@@ -104,6 +105,7 @@ class FormPage(Authorisation, BasePage):
 
     def restore_incorrect(self):
         """RESTORE INPUT INCORRECT LOGIN"""
+        login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
         login = login_incorrect
         self.element_is_visible(Locators.RESTORE).click()
         self.element_is_visible(Locators.RESTORE_LOGIN).send_keys(login)

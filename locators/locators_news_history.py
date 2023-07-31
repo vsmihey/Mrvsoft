@@ -27,6 +27,7 @@ class LocatorsCheckNewsHistory:
     BUTTON_ALL_DELETED = (By.CSS_SELECTOR, "#all-trashed-folders-item")
     BUTTON_RESTORED = (By.CSS_SELECTOR, ".warning-block__action")
     SHOW_ALL_DELETED = (By.XPATH, "//span[contains(text(),'показать')]")
+    HIDDEN_ALL_DELETED = (By.XPATH, "//span[contains(text(),'свернуть')]")
     SVG_CLOSE_RESTORED_ARTICLE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close'])[1]")
     """add new role"""
     PERSONS = (By.XPATH, "//a[@data-tip='Участники']")

@@ -17,7 +17,6 @@ person3 = StableUsers('person3', '777qwerty')
 person4 = StableUsers('person4', '777qwerty')
 
 
-
 class DataLoginPassword:
 
     @staticmethod
@@ -31,10 +30,10 @@ class DataLoginPassword:
         password_incorrect = '395a5555'
         return login_incorrect, password_incorrect
 
-
 """title"""
 name_project ='selen'
 name_ = 'Весь контент'
+base_url = "https://test6.minervasoft.ru/"
 
 
 """текст для поиска на английском и русском"""

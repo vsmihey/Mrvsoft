@@ -25,6 +25,8 @@ from locators.locators_form_pages import FormPagesLocators as Locators, StepBySc
 from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
 
+from pages.users import base_url
+
 
 class ArticlePage(Authorisation, BasePage):
 
