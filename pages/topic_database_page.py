@@ -315,6 +315,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         # self.input_in_my_project(driver)
         # data_files = generated_file()
         """upload media"""
+        time.sleep(2)
         try:
             self.element_is_visible(self.Locators.CREATE_BUTTON, timeout=1).click()
         except StaleElementReferenceException:

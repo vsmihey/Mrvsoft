@@ -52,7 +52,7 @@ class TestFormPage:
             form_page.fill_fields(login_incorrect, password_incorrect)
         with allure.step("Верный логин, неверный пароль"):
             login, password = DataLoginPassword.correct_data()
-            password_incorrect = DataLoginPassword.incorrect_data()
+            login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
             form_page.fill_fields(login, password_incorrect)
         form_page.check_auth_text()
         form_page.restore_incorrect()
@@ -72,6 +72,7 @@ class TestFormPage:
     def test_form_restore(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
+        login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
         password = password_incorrect
         form_page.authorization(login, password)
         form_page.restore_correct()

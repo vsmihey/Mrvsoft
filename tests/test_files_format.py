@@ -20,12 +20,14 @@ class TestFilesFormat:
             files_format_page.get_authorisation_in_selen()
             files_format_page.add_files_pict(driver)
 
+        @allure.title("Проверка загрузки аудио")
         def test_audio_files(self, driver):
             files_format_page = FilesFormatPage(driver)
             # files_format_page.open()
             files_format_page.get_authorisation_in_selen()
             files_format_page.check_audio_files(driver)
 
+        @allure.title("Проверка загрузки видео")
         def test_video_files(self, driver):
             files_format_page = FilesFormatPage(driver)
             # files_format_page.open()
@@ -38,28 +40,31 @@ class TestFilesFormat:
             files_format_page.get_authorisation_in_selen()
             files_format_page.create_pic_video_audio_files(driver)
 
+        @allure.title("Замена в тип контента Файл - видео")
         def test_file_check_replacement_video(self, driver):
             files_format_page = FilesFormatPage(driver)
             # files_format_page.open()
             files_format_page.get_authorisation_in_selen()
             files_format_page.check_replacement_files_video(driver)
 
+        @allure.title("Замена в тип контента Файл - аудио")
         def test_file_check_replacement_audio(self, driver):
             files_format_page = FilesFormatPage(driver)
             # files_format_page.open()
             files_format_page.get_authorisation_in_selen()
             files_format_page.file_check_replacement_audio(driver)
 
+        @allure.title("Замена в тип контента Файл - картинка")
         def test_file_check_replacement_pic(self, driver):
             files_format_page = FilesFormatPage(driver)
             # files_format_page.open()
             files_format_page.get_authorisation_in_selen()
             files_format_page.file_check_replacement_pic(driver)
 
-    @allure.step("Тест неформатного файла")
+    # @allure.step("Тест неформатного файла")
     class TestUnformatFile:
 
-        @allure.step("Проверка загрузки файлов разных форматов")
+        @allure.step("Добавление неформатного файла в тип контента Файл")
         def test_add_unformat_file(self, driver):
             files_format_page = UnformatFilePage(driver)
             # files_format_page.open()

@@ -13,23 +13,23 @@ login = 'minervakms'
 password = 'minervakms'
 
 # неверные данные
-login_incorrect = 'm.andreyq'
-password_incorrect = '395a5555'
+# login_incorrect = 'm.andreyq'
+# password_incorrect = '395a5555'
 # url
 url = 'https://test6.minervasoft.ru'
 # url = 'https://test2.minervasoft.ru/login?from=%2F'
 #url = input("введите url адрес (без кавычек): ")
 
 # url = 'https://dev-5811.t5.minervasoft.ru/login?from=%2F'
-base_url = "https://test6.minervasoft.ru/"
+# base_url = "https://test6.minervasoft.ru/"
 
 # url = 'https://test2.minervasoft.ru/login?from=%2F'
 # base_url = "https://test2.minervasoft.ru/"
-article_url = "news/space/75?popup=article-editor&chosenSpaceId=75&articleId=new&article-type=ARTICLE"
+# article_url = "news/space/75?popup=article-editor&chosenSpaceId=75&articleId=new&article-type=ARTICLE"
 # url = 'https://test1.minervasoft.ru/login?from=%2F'
-"""title"""
-name_project ='selen'
-name_ = 'Весь контент'
+# """title"""
+# name_project ='selen'
+# name_ = 'Весь контент'
 
 #
 # text_ru = "С другой стороны курс на социально-ориентированный национальный проект обеспечивает актуальность " \
