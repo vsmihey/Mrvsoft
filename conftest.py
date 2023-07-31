@@ -1,3 +1,4 @@
+from datetime import datetime
 from urllib import request
 
 import allure
@@ -55,5 +56,7 @@ def driver():
     # driver = webdriver.Chrome(service=driver_service)
     # driver.maximize_window()
     yield driver
-
+    """allure - прикрепление скриншота в отчете"""
+    attach = driver.get_screenshot_as_png()
+    allure.attach(attach, name=f"Screenshot {datetime.today()}", attachment_type=allure.attachment_type.PNG)
     driver.quit()
