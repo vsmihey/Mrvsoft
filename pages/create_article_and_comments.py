@@ -148,6 +148,7 @@ class Comments(Authorisation):
         for i in range(4):
             time.sleep(1)
             page.comment_text_area(f'Тестовый комментарий {i + 1}')
+            time.sleep(1)
             page.send_comment()
 
         page.disable_the_question_to_the_expert_option()
