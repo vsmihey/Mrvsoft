@@ -77,6 +77,7 @@ class AddFilterChanges(Authorisation, BasePage):
         except ElementNotInteractableException:
             time.sleep(2)
             self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+        time.sleep(1)
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE, timeout=2).send_keys(text)
         except TimeoutException:
@@ -294,8 +295,6 @@ class AddFilterChanges(Authorisation, BasePage):
         except ElementClickInterceptedException:
             time.sleep(5)
             self.element_is_visible(Locators.INPUT_SELECTED).click()
-
-
         time.sleep(1)
         button_typography = self.elements_is_present(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
         button_typography.click()
@@ -454,12 +453,14 @@ class AddFilterChanges(Authorisation, BasePage):
         except (TimeoutException, StaleElementReferenceException):
             pass
         self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
+        time.sleep(2)
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
-        time.sleep(10)
+        time.sleep(3)
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=20).click()
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
         except TimeoutException:
-            time.sleep(10)
+            time.sleep(3)
+            self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()

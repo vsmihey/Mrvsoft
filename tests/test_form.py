@@ -69,6 +69,7 @@ class TestFormPage:
         # form_page.browser.quit()
 
     @pytest.mark.skip('restore password')
+    @allure.title("Тест восстановление пароля")
     def test_form_restore(self, driver):
         form_page = FormPage(driver, url)
         form_page.open()
