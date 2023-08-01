@@ -159,6 +159,8 @@ class Comments(Authorisation):
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
 
+        page.screenshot()
+
         try:
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
         except TimeoutException:
