@@ -159,13 +159,15 @@ class Comments(Authorisation):
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
 
-        page.screenshot()
+
 
         try:
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
         except TimeoutException:
             time.sleep(5)
+            page.screenshot()
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
+
 
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 1')
         page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
