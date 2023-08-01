@@ -1,7 +1,7 @@
 import random
 import time
 
-from selenium.common import StaleElementReferenceException, ElementClickInterceptedException
+from selenium.common import StaleElementReferenceException, ElementClickInterceptedException, TimeoutException
 
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
@@ -158,19 +158,30 @@ class Comments(Authorisation):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
-        time.sleep(3)
-        page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
+
+        try:
+            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
+        except TimeoutException:
+            time.sleep(5)
+            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
+
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 1')
         page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
         page.element_is_clickable(locators.Comments.CLOSE_COMMENT).click()
+
 
     @staticmethod
     def close_second_comment(driver, url, user=minervakms):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
-        time.sleep(3)
-        page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_2).click()
+
+        try:
+            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_2).click()
+        except TimeoutException:
+            time.sleep(5)
+            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_2).click()
+
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 2')
         page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
         page.element_is_clickable(locators.Comments.CLOSE_COMMENT).click()
@@ -180,8 +191,13 @@ class Comments(Authorisation):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
-        time.sleep(3)
-        page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_3).click()
+
+        try:
+            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_3).click()
+        except TimeoutException:
+            time.sleep(5)
+            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_3).click()
+
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
         page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
         page.element_is_clickable(locators.Comments.CLOSE_COMMENT).click()
