@@ -19,7 +19,7 @@ from selenium.webdriver.chrome.options import Options
 def driver():
     # driver_service = Service(ChromeDriverManager().install())  # вкючить для загрузки новой версии дров
     chrome_options = Options()
-    chrome_options.add_argument("--headless")   # запуск в скрытом режиме (без браузера)
+    # chrome_options.add_argument("--headless")   # запуск в скрытом режиме (без браузера)
     # chrome_options.headless = True
     chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
     # prefs = {"profile.default_content_setting_values.notifications": 1}  # принять уведомление всплывающее
@@ -49,6 +49,7 @@ def driver():
     driver = webdriver.Chrome(
         options=chrome_options)  # добавить service=driver_service для загрузки новых дров браузера
     driver.maximize_window()
+    driver.implicitly_wait(1)
     # driver.get(url)
     # # chrome_options.add_experimental_option("detach", True)
     # driver.minimize_window() # свернуть браузер

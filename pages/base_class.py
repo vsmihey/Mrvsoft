@@ -64,7 +64,7 @@ class MainPage:
         """Поиск элементов (спика элементов) даже если они не видны"""
         return Wait(self.browser, timeout).until(EC.presence_of_all_elements_located(locator))
 
-    def element_is_clickable(self, locator, timeout=2):
+    def element_is_clickable(self, locator, timeout=10):
         """Элемент кликабельный"""
         return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator))
 
