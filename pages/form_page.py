@@ -161,7 +161,9 @@ class FormPage(Authorisation, BasePage):
         """ASSERT"""
         time.sleep(1)
         title = driver.title
+        time.sleep(1)
         result = f'{name_} / {name_project} — Minervasoft'
+        time.sleep(1)
         assert title == result
         # print(result)
 
