@@ -7,6 +7,7 @@ from pages.checking_filter_changes_page import AddFilterChanges
 @pytest.mark.order(4)
 class TestCheckingFilterChanges:
 
+    @allure.title("Проверка изменения фильтров через массовые изменения")
     class TestAddFilterChanges:
 
         # @allure.title("Проверка изменения фильтров через массовые изменения")
