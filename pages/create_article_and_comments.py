@@ -158,7 +158,7 @@ class Comments(Authorisation):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
-        time.sleep(1)
+        time.sleep(3)
         page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 1')
         page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
@@ -169,7 +169,7 @@ class Comments(Authorisation):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
-        time.sleep(1)
+        time.sleep(3)
         page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_2).click()
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 2')
         page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
@@ -180,7 +180,7 @@ class Comments(Authorisation):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
-        time.sleep(1)
+        time.sleep(3)
         page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_3).click()
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
         page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
