@@ -186,6 +186,7 @@ class Comments(Authorisation):
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_2).click()
         except TimeoutException:
             time.sleep(5)
+            page.screenshot()
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_2).click()
 
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 2')
@@ -202,6 +203,7 @@ class Comments(Authorisation):
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_3).click()
         except TimeoutException:
             time.sleep(5)
+            page.screenshot()
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_3).click()
 
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
