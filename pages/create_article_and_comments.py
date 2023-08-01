@@ -146,6 +146,7 @@ class Comments(Authorisation):
         page.get_authorisation_in_url(url, user)
 
         for i in range(4):
+            time.sleep(1)
             page.comment_text_area(f'Тестовый комментарий {i + 1}')
             page.send_comment()
 
