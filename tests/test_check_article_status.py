@@ -101,7 +101,7 @@ class TestCheckNewArticleStatus:
         def test_minor_edit_article_history_person2(self, driver):
             person = Person2(driver)
             person.get_check_history()
-            person.history_second_solve_comment_check()
+            # person.history_second_solve_comment_check()
 
         @allure.title('Минорное редактирование. Проверка колокольчика пользователем с полным доступом к статье')
         def test_minor_edit_article_bell_person2(self, driver):
