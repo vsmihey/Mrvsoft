@@ -73,6 +73,7 @@ class PublicWizard(MainPage):
         self.next_and_finish_button_click()
         self.next_and_finish_button_click()
         self.role_access()
+        self.element_is_visible(locators.WizardPublic.ROLE_1).click()
         self.next_and_finish_button_click()
         self.notification_text_area()
         self.notification_type()

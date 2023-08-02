@@ -1099,6 +1099,7 @@ class WizardPublic:
     CHECKBOX_ALL_ROLES = (
         By.CLASS_NAME, "access-wrapper__check-all")
     ROLE_2 = (By.XPATH, "//p[contains(text(),'2 роль - редактор')]")
+    ROLE_1 = (By.XPATH, "//p[contains(text(),'1 роль - нет права создания и редактирования контента')]")
     ROLE_2_NOTIFICATION = (
         By.XPATH, "//p[contains(text(),'2 роль - редактор')]/../..//span[text()='только оповестить']")
     ROLE_3 = (By.XPATH, "//p[contains(text(),'3 роль - редактор')]")
