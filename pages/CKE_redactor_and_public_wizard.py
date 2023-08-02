@@ -72,11 +72,10 @@ class PublicWizard(MainPage):
         self.publish_button_click()
         self.next_and_finish_button_click()
         self.next_and_finish_button_click()
+        self.role_access()
         self.next_and_finish_button_click()
         self.notification_text_area()
-        self.screenshot()
         self.notification_type()
-
         self.next_and_finish_button_click()
 
     def save_minor_edit(self):

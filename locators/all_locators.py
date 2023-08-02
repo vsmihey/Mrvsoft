@@ -1097,7 +1097,7 @@ class WizardPublic:
     BUTTON_NEXT = (By.CLASS_NAME,
                    'm-button.m-button--success.m-button--medium.wizard-wrapper__action')
     CHECKBOX_ALL_ROLES = (
-        By.CSS_SELECTOR, "div[class='versioning-wrapper__header-block versioning-wrapper__header-role'] svg")
+        By.CLASS_NAME, "access-wrapper__check-all")
     ROLE_2 = (By.XPATH, "//p[contains(text(),'2 роль - редактор')]")
     ROLE_2_NOTIFICATION = (
         By.XPATH, "//p[contains(text(),'2 роль - редактор')]/../..//span[text()='только оповестить']")
