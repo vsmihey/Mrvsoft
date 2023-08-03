@@ -93,6 +93,17 @@ class FormPage(Authorisation, BasePage):
         self.element_is_visible(Locators.PASSWORD).clear()
         time.sleep(1)
 
+    def fill_fields_(self, login, password):
+        self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
+        self.element_is_visible(Locators.LOGIN).send_keys(login)
+        self.element_is_visible(Locators.PASSWORD).send_keys(password)
+        self.element_is_visible(Locators.INPUT_BUTTON).click()
+
+    def check_input_text(self):
+        check_text_input_in_system = self.element_is_visible(Locators.CHECK_TEXT_INPUT_IN_SYSTEM).text
+        print(check_text_input_in_system)
+        return check_text_input_in_system
+
     def check_auth_text(self):
         """CHECK TEXT INCORRECT LOGIN AND PASSWORD"""
         check_logit_text = self.element_is_visible(Locators.INCORRECT_LOGIN_TEXT)
@@ -116,7 +127,13 @@ class FormPage(Authorisation, BasePage):
         check_logit_text = self.element_is_visible(Locators.INCORRECT_LOGIN_TEXT)
         check_logit_text_value = check_logit_text.text
         assert check_logit_text_value == 'Неверный логин'
-        # print(f'Текст: <{check_logit_text_value}> на странице восстановления УСПЕШНО')
+        """я помню пароль"""
+        self.element_is_visible(Locators.I_REMEMBER_PASSWD).click()
+        # """fill fields page of authorization"""
+        # self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
+        # self.element_is_visible(Locators.LOGIN).send_keys(login)
+        # self.element_is_visible(Locators.PASSWORD).send_keys(password)
+        # self.element_is_visible(Locators.INPUT_BUTTON).click()
 
     def restore_correct(self):
         """RESTORE PASSWORD BY CORRECT LOGIN END PUSH REMEMBER PASSWORD"""
@@ -338,7 +355,10 @@ class FormPage(Authorisation, BasePage):
         text_check_created_new_role_value = text_check_created_new_role.text
         assert text_check_created_new_role_value == check_role
         # print(text_check_created_new_role_value)
-        self.element_is_visible(Locators.EDIT_NEW_ROLE).click()
+        # self.element_is_visible(Locators.EDIT_NEW_ROLE).click()
+        time.sleep(1)
+        edit_new_role = driver.find_element(By.XPATH, f"//span[text()='{first_name}']/..//div[@class='item-role__icon-edit']")
+        edit_new_role.click()
         self.element_is_clickable(Locators.DEACTIVATE_ROLE)
         for x in range(1, 14):
             self.element_is_visible(Locators.SWITCH_BOX_CHECKED).is_displayed()

@@ -33,7 +33,7 @@ class DataLoginPassword:
 """title"""
 name_project ='selen'
 name_ = 'Весь контент'
-base_url = "https://test6.minervasoft.ru/"
+# base_url = "https://test6.minervasoft.ru/"
 
 
 """текст для поиска на английском и русском"""

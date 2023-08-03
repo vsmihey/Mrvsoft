@@ -28,6 +28,8 @@ class FormPagesLocators:
     INCORRECT_LOGIN_TEXT = (By.XPATH, "//div[text()='Неверный логин']")
     INCORRECT_PASSWORD_TEXT = (By.XPATH, "//div[text()='Неверный пароль']")
     CHANGE_PROJECT = (By.XPATH, "//h1[text()='Выберите проект']")
+    I_REMEMBER_PASSWD = (By.CSS_SELECTOR, "button[class='m-ui-button-text login__restore-password']")
+    CHECK_TEXT_INPUT_IN_SYSTEM = (By.CSS_SELECTOR, "h1[class='m-ui-typography m-ui-typography--bold m-ui-typography--22x26 m-titled-group__title']")
     """logo"""
     LOGO_HEAD = (By.CLASS_NAME, 'm-main-menu-logo__icon')
     LOGO_FAVICO = (By.ID, 'favicon')

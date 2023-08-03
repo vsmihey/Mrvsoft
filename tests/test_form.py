@@ -41,7 +41,7 @@ class TestFormPage:
         # self.login = login_incorrect
         with allure.step("Неверный логин, верный пароль"):
             login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
-            print(login_incorrect)
+            # print(login_incorrect)
             # self.password = password
             login, password = DataLoginPassword.correct_data()
             form_page.fill_fields(login_incorrect, password)
@@ -57,6 +57,12 @@ class TestFormPage:
         form_page.check_auth_text()
         form_page.restore_incorrect()
         form_page.check_restore_text()
+        with allure.step("Верный логин, Верный пароль"):
+            login, password = DataLoginPassword.correct_data()
+            form_page.fill_fields_(login, password)
+        time.sleep(1)
+        check_text_input_in_system = form_page.check_input_text()
+        assert check_text_input_in_system == "Выберите проект"
 
     @allure.title("Тест тайтлы")
     def test_title(self, driver):
@@ -102,6 +108,7 @@ class TestFormPage:
         form_page.delete_some_folder(count_folders=8)
 
     # @pytest.mark.skip('test_folder1_folder2')
+    @allure.title("Создание папка 1 и папка 2")
     def test_folder1_folder2(self, driver):
         form_page = FormPage(driver)
         # form_page.open()
@@ -117,19 +124,21 @@ class TestFormPage:
     #     form_page.check_folder1_folder2(driver)
 
     # @pytest.mark.skip('delete folders')
+    @allure.title("Удаление папок")
     def test_del_some_folders(self, driver):
         form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
         form_page.delete_some_folder(count_folders=15)  # ставить на 1 папку больше
 
+    @allure.title("Избранное")
     def test_favourites(self, driver):
         form_page = FormPage(driver)
         # form_page.open()
         form_page.get_authorisation_in_selen()
         form_page.favourites(driver)
 
-    @allure.title("Избранное")
+    @allure.title("Добавление в Избранное")
     def test_add_to_favourites(self, driver):
         form_page = FormPage(driver)
         # form_page.open()
@@ -159,7 +168,8 @@ class TestFormPage:
         # time.sleep(3)
         article_page.add_article_by_templates(driver)
 
-    @pytest.mark.skip('check_text_link')
+    @pytest.mark.skip('Проверка добавления ссылки')
+    @allure.title("Проверка добавления ссылки")
     def test_check_text_link(self, driver):
         article_page = ArticlePage(driver, url)
         article_page.open()
@@ -189,7 +199,8 @@ class TestFormPage:
             article_page.add_script()
             article_page.check_step_fixing(driver)
 
-    @pytest.mark.skip('copy_paste')
+    @pytest.mark.skip('Тест copy paste')
+    @allure.title("Тест copy paste")
     class TestCopyPastePage:
 
         def test_copy_paste(self, driver):
@@ -241,6 +252,7 @@ class TestFormPage:
             article_pages.template_download_bigfile(driver)
 
         # @pytest.mark.skip('download_files_from_files')
+        @allure.title("Загрузка файлов в Файлы")
         def test_download_files_from_files(self, driver):
             article_pages = FilesPages(driver)
             # article_pages.open()

@@ -25,7 +25,6 @@ from locators.locators_form_pages import FormPagesLocators as Locators, StepBySc
 from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
 
-from pages.users import base_url
 
 
 class ArticlePage(Authorisation, BasePage):
@@ -1089,7 +1088,7 @@ class CreateDraftPage(Authorisation, BasePage):
         self.element_is_visible(self.Locators.FIELD_DRAFT).click()
         """open 4 tab"""
         for n in range(4):
-            driver.execute_script(f"window.open('{base_url}')")
+            driver.execute_script(f"window.open('{url}')")
             time.sleep(0.5)
         time.sleep(10)
         """open tab and fill name article"""
