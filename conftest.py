@@ -1,3 +1,4 @@
+import time
 from datetime import datetime
 from urllib import request
 
@@ -7,6 +8,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from allure_commons.types import AttachmentType
 
 
 # from pages.data_login_password import *
@@ -57,7 +59,27 @@ def driver():
     # driver = webdriver.Chrome(service=driver_service)
     # driver.maximize_window()
     yield driver
-    """allure - прикрепление скриншота в отчете"""
-    attach = driver.get_screenshot_as_png()
-    allure.attach(attach, name=f"Screenshot {datetime.today()}", attachment_type=allure.attachment_type.PNG)
+
+    # """allure - прикрепление скриншота в отчете"""
+    # attach = driver.get_screenshot_as_png()
+    # allure.attach(attach, name=f"Screenshot {datetime.today()}", attachment_type=allure.attachment_type.PNG)
     driver.quit()
+
+"""allure - прикрепление скриншота в отчете"""
+# Добавляем хук pytest_exception_interact, который вызывается при возникновении ошибки в тесте
+def pytest_exception_interact(node, call, report):
+    if report.failed:
+        # Получаем доступ к драйверу (предполагая, что используется фикстура 'driver')
+        driver = node.funcargs['driver']
+        # Создаем скриншот и прикрепляем его к отчету Allure
+        allure.attach(
+            driver.get_screenshot_as_png(),
+            # name="screenshot",
+            name=f"Screenshot {datetime.today()}",
+            attachment_type=AttachmentType.PNG
+        )
+
+
+
+
+

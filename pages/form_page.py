@@ -224,7 +224,7 @@ class FormPage(Authorisation, BasePage):
         time.sleep(1)
         self.assert_title(driver, name_project='selen', name_='Обратная связь по контенту')
         self.element_is_visible(Locators.PEOPLE_BUTTON).click()
-        time.sleep(1)
+        time.sleep(2)
         self.assert_title(driver, name_project='selen', name_='Все участники')
         self.element_is_visible(Locators.SETTINGS).click()
         time.sleep(3)

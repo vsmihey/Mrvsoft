@@ -7,10 +7,10 @@ from pages.data_login_password import *
 
 
 @pytest.mark.order(2)
-# @allure.suite("Тест загрузки файлов")
+@allure.suite("Проверка и загрузка разных форматов")
 class TestFilesFormat:
 
-    @allure.feature("Проверка и загрузка разных форматов")
+    # @allure.feature("Проверка и загрузка разных форматов")
     class TestCheckFormat:
 
         @allure.title("Проверка загрузки изображения")

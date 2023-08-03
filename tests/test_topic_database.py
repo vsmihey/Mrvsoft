@@ -5,6 +5,7 @@ from pages.topic_database_page import CreateTopicDatabase
 
 
 @pytest.mark.order(3)
+@allure.suite("Создание темы в Базе вопросов")
 class TestTopicDatabase:
     class TestCreateTopicDatabase:
 

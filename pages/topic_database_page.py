@@ -2,12 +2,10 @@ import pathlib
 import random
 import time
 from pathlib import Path
-
 from selenium.common import TimeoutException, StaleElementReferenceException, ElementClickInterceptedException, \
     ElementNotInteractableException, WebDriverException, InvalidSelectorException, NoSuchElementException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
-
 from conftest import driver
 from generator.generator import generated_person, generated_file
 from locators.locators_topic_database import CreateTopicDatabaseLocators
