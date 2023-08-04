@@ -580,10 +580,11 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(self.Locators.FIELD_TEXT_MAIL).is_displayed()
         self.element_is_visible(self.Locators.FIELD_TEXT_NAME).is_displayed()
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=20).click()
         except (ElementClickInterceptedException, TimeoutException):
-            time.sleep(15)
+            time.sleep(5)
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
