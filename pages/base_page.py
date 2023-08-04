@@ -275,7 +275,7 @@ class BasePage:
         time.sleep(5)
         checkbox_insert_files = self.elements_are_visible(Locators.CHECKBOX_INSERT_FILES)
         for n in checkbox_insert_files:
-            time.sleep(0.5)
+            time.sleep(1)
             n.click()
         try:
             self.element_is_visible(Locators.INPUT_SELECTED, timeout=2).click()
@@ -563,7 +563,8 @@ class BasePage:
         self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login)
         self.element_is_visible(Locators.EMAIL).send_keys(email)
         self.element_is_visible(Locators.SAVE_PERSON).click()
-        self.element_is_visible(Locators.FRAME_PERSON_CLOSE).click()
+        time.sleep(1)
+        # self.element_is_visible(Locators.FRAME_PERSON_CLOSE).click()
         return login
 
 

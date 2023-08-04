@@ -8,10 +8,10 @@ from pages.repeat_function import RepeatFunction
 
 
 @pytest.mark.order(5)
-# @allure.suite("Добавление и просмотр закрепления контента в визарде публикации")
+@allure.suite("Добавление и просмотр закрепления контента в визарде публикации")
 class TestWizardAndSearchRuEen:
 
-    @allure.suite("Добавление и просмотр закрепления контента в визарде публикации")
+    # @allure.suite("Добавление и просмотр закрепления контента в визарде публикации")
     class TestAddViewContentWizard:
 
         @allure.title("Добавление и просмотр закрепления контента в визарде публикации - Статья")

@@ -24,12 +24,14 @@ class CreateTopicDatabase(Authorisation, BasePage):
         self.element_is_visible(self.Locators.LEARNING_BUTTON).click()
         self.element_is_visible(self.Locators.TAB_ALL_COURSES).click()
         self.element_is_visible(self.Locators.DATABASE_OF_QUESTIONS).click()
-        """check text open form"""
+        """проверка текста названия открытого окна"""
         text_database_of_questions = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTIONS).text
         assert text_database_of_questions == "База вопросов"
+
+        time.sleep(10)
         try:
             text_not_questions_now = self.element_is_visible(self.Locators.TEXT_NOT_QUESTIONS_NOW, timeout=2).text
-            assert text_not_questions_now == "В этом проекте пока нет вопросов. Вы можете это исправить"
+            assert text_not_questions_now == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
         except TimeoutException:
             try:
                 self.element_is_visible(self.Locators.BUTTON_QUESTION_ADD, timeout=2).click()
@@ -53,12 +55,12 @@ class CreateTopicDatabase(Authorisation, BasePage):
             self.element_is_visible(self.Locators.BUTTON_CHANGE_QUESTION).click()
             self.delete_created_topics()  # не удаляется тема
             try:
-                self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+                self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW, timeout=5).click()
             except TimeoutException:
                 print("БАГ! НЕ УДАЛЯЕТСЯ ТЕМА! БАГ!")
             self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
         button_add_topic = self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).text
-        assert button_add_topic == 'Добавить'
+        assert button_add_topic == 'Создать темы'
         self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).click()
         """input name topic and check len"""
         try:
@@ -216,7 +218,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         """check text and button"""
         try:
             text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION, timeout=3).text
-            assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
+            assert text_database_of_question == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
         except TimeoutException:
             try:
                 list_delete = self.elements_are_visible(self.Locators.SVG_DEL_QUESTION)
@@ -226,17 +228,17 @@ class CreateTopicDatabase(Authorisation, BasePage):
                     time.sleep(0.5)
                     self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
                 text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
-                assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
+                assert text_database_of_question == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
             except TimeoutException:
                 time.sleep(5)
                 text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
-                assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
+                assert text_database_of_question == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
         button_question_add = self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).text
-        assert button_question_add == "Добавить"
+        assert button_question_add == "Создать темы"
         self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).click()
         """check add new question"""
         text_new_question = self.element_is_visible(self.Locators.TEXT_NEW_QUESTION).text
-        assert text_new_question == "Новый вопрос"
+        assert text_new_question == "Новая тема"
         """check function text"""
         self.check_text_questions()
         """dropdown topic"""

@@ -99,7 +99,11 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         """change article"""
         self.element_is_visible(self.Locators.ARTICLE_CHANGE).click()
-        self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).clear()
+        try:
+            self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).clear()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).clear()
         self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).send_keys(changed_name_2)
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("changed 2")
@@ -122,7 +126,11 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_CONFIRM_DEL).click()
         time.sleep(1)
-        self.element_is_visible(self.Locators.LABEL_ADMINISTRATOR_PERSON).click()
+        try:
+            self.element_is_visible(self.Locators.LABEL_ADMINISTRATOR_PERSON).click()
+        except StaleElementReferenceException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.LABEL_ADMINISTRATOR_PERSON).click()
         self.element_is_visible(self.Locators.LABEL_ADMINISTRATOR_PERSON_OUT).click()
         time.sleep(2)
         # """выход пользователя"""
@@ -135,7 +143,6 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         # self.input_in_my_project(driver)
         # self.open()
         Locators = FormPagesLocators()
-        time.sleep(1)
         try:
             self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
         except TimeoutException:
@@ -143,6 +150,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
             self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
         self.element_is_visible(Locators.LOGIN).send_keys(login)
         self.element_is_visible(Locators.PASSWORD).send_keys(password)
+        time.sleep(1)
         self.element_is_visible(Locators.INPUT_BUTTON).click()
         # self.element_is_visible(self.Locators.TEST_PROJECT).click()
         # time.sleep(6)
@@ -183,7 +191,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
             self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
         except TimeoutException:
             time.sleep(3)
-            self.element_is_visible(self.Locators.FRAME_PERSON_CLOSE).click()
+            # self.element_is_visible(self.Locators.FRAME_PERSON_CLOSE).click()
             self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()
         time.sleep(1)
         try:
@@ -278,7 +286,11 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
             self.element_is_visible(self.Locators.TEXT_CHECK_CANT_COMMENT).is_displayed()
             """выход пользователя"""
             self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
-            self.element_is_visible(self.Locators.AVATAR_MENU).click()
+            try:
+                self.element_is_visible(self.Locators.AVATAR_MENU).click()
+            except StaleElementReferenceException:
+                time.sleep(3)
+                self.element_is_visible(self.Locators.AVATAR_MENU).click()
             self.element_is_visible(self.Locators.EXIT_PERSON).click()
 
     def check_restored_1_person2(self):

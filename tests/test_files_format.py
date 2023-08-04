@@ -34,6 +34,7 @@ class TestFilesFormat:
             files_format_page.get_authorisation_in_selen()
             files_format_page.check_video_files(driver)
 
+        @allure.title("Подготовка фалов для загрузки ")
         def test_create_pic_video_audio_files(self, driver):
             files_format_page = FilesFormatPage(driver)
             # files_format_page.open()
@@ -64,7 +65,7 @@ class TestFilesFormat:
     # @allure.step("Тест неформатного файла")
     class TestUnformatFile:
 
-        @allure.step("Добавление неформатного файла в тип контента Файл")
+        @allure.title("Добавление неформатного файла в тип контента Файл")
         def test_add_unformat_file(self, driver):
             files_format_page = UnformatFilePage(driver)
             # files_format_page.open()

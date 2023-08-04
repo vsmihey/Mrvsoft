@@ -7,11 +7,12 @@ from pages.news_history_page import CheckNewsHistoryPage
 
 
 @pytest.mark.order(6)
+@allure.suite("Проверка новостей о статье и новостей о комментариях в История")
 class TestNewsHistory:
 
     class TestCheckNewsHistory:
 
-        @allure.suite("Проверка новостей о статье и новостей о комментариях в История")
+        @allure.title("Проверка новостей о статье и новостей о комментариях в История")
         def test_check_persons_article_news(self, driver):
             news_history_page = CheckNewsHistoryPage(driver)
             # news_history_page.open()
@@ -30,6 +31,7 @@ class TestNewsHistory:
             news_history_page.check_comment_1()
             # news_history_page.open()
             """check person2"""
+            time.sleep(2)
             news_history_page.persons_auth(login=login2, password=password_person2)
             news_history_page.check_restored_1_person2()
             news_history_page.check_del_article_2_person2()

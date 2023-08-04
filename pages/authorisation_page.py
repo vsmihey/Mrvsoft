@@ -1,4 +1,7 @@
 import time
+
+from selenium.common import TimeoutException, StaleElementReferenceException
+
 from pages import data_login_password
 from pages import users
 import locators.all_locators as locators
@@ -31,7 +34,11 @@ class Authorisation(MainPage):
 
     def select_project_selen(self):
         """Выбор проекта Selen"""
-        self.element_is_visible(locators.AuthorisationPage.TEST_PROJECT).click()
+        try:
+            self.element_is_visible(locators.AuthorisationPage.TEST_PROJECT).click()
+        except (TimeoutException, StaleElementReferenceException):
+            time.sleep(3)
+            self.element_is_visible(locators.AuthorisationPage.TEST_PROJECT).click()
 
     def checking_the_authorization_page(self) -> str:
         """Проверка, что открыта страница авторизации"""

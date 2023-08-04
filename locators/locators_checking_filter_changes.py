@@ -40,6 +40,7 @@ class AddFilterChangesLocators:
     # BUTTON_TYPOGRAPHY = (By.XPATH, "//p[contains(text(),'опубликовать')]")
     BUTTON_TYPOGRAPHY_SCRIPT = (By.XPATH, "//p[contains(text(),'Опубликовать')]")
     BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    BUTTON_DELETE_DRAFT = (By.XPATH, "//p[text()='Удалить черновик']")
     # DIRECT_FOLDER = (By.XPATH, "//div[@class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled']//select[@class='m-ui-select__select']")
     DIRECT_FOLDER = (By.CSS_SELECTOR, ".m-ui-select__select")
     BUTTON_FINISH_CONFIRM = (By.XPATH, "//p[contains(text(),'Продолжить')]")

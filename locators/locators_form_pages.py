@@ -9,7 +9,7 @@ class FormPagesLocators:
     ADD_DESCRIPTION_PROJECT = (By.XPATH, "//input[@placeholder='Введите описание проекта']")
     # ADD_PROJECT_BUTTON = (By.XPATH, "//button[@type='button']")
     ADD_PROJECT_BUTTON = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium']")
-    TYPE_AUTHOR = (By.CSS_SELECTOR, '.m-ui-select__select')  # type author
+    TYPE_AUTHOR = (By.CSS_SELECTOR, "select[class='m-ui-select__select']")  # type author
     TYPE_AUTHOR_CHANGE = (By.XPATH, "//option[@type='EMBEDDED']")  # new type auth
     LOGIN = (By.NAME, "username")
     PASSWORD = (By.NAME, "password")
@@ -204,7 +204,8 @@ class FormPagesLocators:
     CHECK_RADIOBUTTON_TYPOGRAPHY_NOW = (By.XPATH, "//span[text()='Опубликовать сейчас']/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
     CHECK_RADIOBUTTON_NO_DELETE = (By.XPATH, "//span[text()='Не удалять']/../div[@class='radio-wrapper__icon radio-wrapper__icon--checked']")
     CHECK_TEXT_ROLE = (By.XPATH, "//span[contains(text(),'роль')]")
-    FRAME_PERSON_CLOSE = (By.XPATH, "//div[@role='presentation']")
+    # FRAME_PERSON_CLOSE = (By.XPATH, "//div[@role='presentation']")
+    FRAME_PERSON_CLOSE = (By.CSS_SELECTOR, ".popup__close svg")
     """FIXING ARTICLE"""
     # SEARCH_HEAD_PAGE = (By.XPATH, "//p[contains(text(),'Поиск')]")
     SEARCH_HEAD_PAGE = (By.XPATH, "//div[contains(text(),'Поиск')]")

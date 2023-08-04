@@ -7,17 +7,17 @@ class CreateTopicDatabaseLocators:
     DATABASE_OF_QUESTIONS = (By.XPATH, "//p[contains(text(),'База вопросов')]")
     """check text open form"""
     TEXT_DATABASE_OF_QUESTIONS = (By.XPATH, "//p[contains(text(),'База вопросов')]")
-    # TEXT_NOT_QUESTIONS_NOW = (By.XPATH, "//p[text()='В этом проекте пока нет вопросов. Создайте структуру тем для его размещения']")
-    TEXT_NOT_QUESTIONS_NOW = (By.XPATH, "//p[text()='В этом проекте пока нет вопросов. Вы можете это исправить']")
-    BUTTON_ADD_TOPIC = (By.XPATH, "//p[contains(text(),'Добавить')]")
-    # BUTTON_ADD_TOPIC = (By.XPATH, "//p[contains(text(),'Создать темы')]")
+    TEXT_NOT_QUESTIONS_NOW = (By.XPATH, "//p[text()='В этом проекте пока нет вопросов. Создайте структуру тем для его размещения']")
+    # TEXT_NOT_QUESTIONS_NOW = (By.XPATH, "//p[text()='В этом проекте пока нет вопросов. Вы можете это исправить']")
+    # BUTTON_ADD_TOPIC = (By.XPATH, "//p[contains(text(),'Добавить')]")
+    BUTTON_ADD_TOPIC = (By.XPATH, "//p[contains(text(),'Создать темы')]")
     """check text open form new topic"""
     TEXT_NEW_QUESTION_TOPIC_WINDOW = (By.XPATH, "//h3[contains(text(),'Новая тема')]")
     TEXT_NAME = (By.XPATH, "//div[text()= 'название']")
     TEXT_PLACEHOLDER_INPUT_NAME_TOPIC = (By.XPATH, "//input[@placeholder='Введите название темы']")
     TEXT_PARENT_TOPIC = (By.XPATH, "//div[text()='родительская тема']")
     TEXT_DROPDOWN_DEFAULT = (By.XPATH, "//select[@class='m-ui-select__select']//option[text()='Нет']") # ПРОВЕРИТЬ
-    BUTTON_CREATE_TOPIC = (By.XPATH, "//footer[@class='m-popup__footer lms-edit-theme-popup__footer']//p[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text'][contains(text(),'Создать тему')]") # ПРОВЕРИТЬ
+    BUTTON_CREATE_TOPIC = (By.CSS_SELECTOR, "footer[class='m-popup__footer lms-edit-theme-popup__footer'] button[type='button']") # ПРОВЕРИТЬ
     """input name topic and check len"""
     INPUT_NAME_TOPIC = (By.XPATH, "//input[@placeholder='Введите название темы']")
     """check text structure"""
@@ -30,15 +30,20 @@ class CreateTopicDatabaseLocators:
     BUTTON_DELETE_TOPIC = (By.XPATH, "//button[@class='m-button m-button--danger m-button--medium lms-edit-theme-popup__delete']")
     # BUTTON_CONFIRM_DELETE_TOPIC = (By.XPATH, "//button[@class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
     BUTTON_CONFIRM_DELETE_TOPIC = (By.XPATH, "//p[text()='Удалить тему']")
-    SVG_CLOSE_DELETED_WINDOW = (By.XPATH, "//div[@class='ReactModal__Content ReactModal__Content--after-open lms-questions-lib m-popup__window']//div[@class='m-popup__close']")
+    # SVG_CLOSE_DELETED_WINDOW = (By.XPATH, "//div[@class='ReactModal__Content ReactModal__Content--after-open lms-questions-lib m-popup__window']//div[@class='m-popup__close']")
+    SVG_CLOSE_DELETED_WINDOW = (By.CSS_SELECTOR, "div[class='m-popup__close']")
     # SVG_CLOSE_DELETED_WINDOW = (By.XPATH, "//div[@class='m-popup__close']")
     """question add"""
     BUTTON_QUESTION_ADD = (By.XPATH, "//p[contains(text(),'Добавить')]")
+    # BUTTON_QUESTION_ADD = (By.XPATH, "//p[contains(text(),'Создать темы')]")
     BUTTON_CHANGE_QUESTION = (By.XPATH, "//p[contains(text(),'Изменить тему')]")
+    # TEXT_DATABASE_OF_QUESTION = (By.XPATH, "//p[text()='В этом проекте пока нет вопросов. Вы можете это исправить']")
+    # TEXT_DATABASE_OF_QUESTION = (By.XPATH, "//p[text()='В этом проекте пока нет вопросов. Создайте структуру тем для его размещения']")
     TEXT_DATABASE_OF_QUESTION = (By.XPATH, "//p[text()='В этом проекте пока нет вопросов. Вы можете это исправить']")
     TEXT_DATABASE_OF_QUESTION_HEAD = (By.XPATH, "//h3[contains(text(),'База вопросов')]")
     """new question form"""
     TEXT_NEW_QUESTION = (By.XPATH, "//h3[contains(text(),'Новый вопрос')]")
+    # TEXT_NEW_QUESTION = (By.XPATH, "//h3[contains(text(),'Новая тема')]")
     TEXTAREA_PLACEHOLDER_INPUT_NAME_QUESTION = (By.XPATH, "//textarea[@placeholder='Введите текст вопроса']")
     DROPDOWN_TIPE_OF_QUESTION = (By.XPATH, "//div[@class='lms-question-editor__field m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")
     DROPDOWN_TOPIC = (By.XPATH, "//div[@class='lms-question-editor__input m-ui-select m-ui-input-wrapper-2']//select[@class='m-ui-select__select']")

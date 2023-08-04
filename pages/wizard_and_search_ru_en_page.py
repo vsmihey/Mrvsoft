@@ -100,7 +100,17 @@ class AddViewContentWizard(Authorisation, BasePage):
         search_by_name = driver.find_element(By.XPATH, f'//h3[normalize-space()="{first_name}"]')
         search_by_name.click()
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
-        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        time.sleep(3)
+        try:
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        except TimeoutException:
+            time.sleep(1)
+            self.element_is_visible(self.Locators.BUTTON_DELETE_DRAFT_WIZARD_SEARCH).click()
+            try:
+                self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+            except (TimeoutException, ElementClickInterceptedException, StaleElementReferenceException):
+                time.sleep(5)
+                self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_BACK).click()
         data_request = self.add_more_requests()

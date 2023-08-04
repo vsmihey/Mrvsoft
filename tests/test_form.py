@@ -74,7 +74,7 @@ class TestFormPage:
         form_page.all_title(driver)
         # form_page.browser.quit()
 
-    @pytest.mark.skip('restore password')
+    @pytest.mark.skip("Тест восстановление пароля")
     @allure.title("Тест восстановление пароля")
     def test_form_restore(self, driver):
         form_page = FormPage(driver, url)
@@ -200,9 +200,9 @@ class TestFormPage:
             article_page.check_step_fixing(driver)
 
     @pytest.mark.skip('Тест copy paste')
-    @allure.title("Тест copy paste")
     class TestCopyPastePage:
 
+        @allure.title("Тест copy paste")
         def test_copy_paste(self, driver):
             copy_paste_page = CopyPastePage(driver, url)
             copy_paste_page.open()

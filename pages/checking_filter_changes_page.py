@@ -321,6 +321,7 @@ class AddFilterChanges(Authorisation, BasePage):
         except (StaleElementReferenceException, WebDriverException):
             time.sleep(3)
             self.element_is_visible(self.Locators.MEATBALL_MENU).click()
+        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.MASS_CHANGE).click()
         except TimeoutException:
@@ -414,12 +415,17 @@ class AddFilterChanges(Authorisation, BasePage):
             time.sleep(3)
             self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
-        time.sleep(1)
+        time.sleep(3)
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=20).click()
+            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
         except (ElementClickInterceptedException, TimeoutException):
-            time.sleep(15)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+            time.sleep(5)
+            self.element_is_visible(self.Locators.BUTTON_DELETE_DRAFT).click()
+            try:
+                self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
+            except (TimeoutException, ElementClickInterceptedException, StaleElementReferenceException):
+                time.sleep(5)
+                self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text

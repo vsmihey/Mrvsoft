@@ -13,6 +13,7 @@ class AddViewContentWizardLocators:
     # GO_TO_CONTENT = (By.XPATH, "//section[@class='m-bread-crumbs']/.//div[@class='m-bread-crumbs__link']")
     GO_TO_CONTENT = (By.XPATH, "//section[@class='m-bread-crumbs']/..//p[@class='m-ui-typography m-bread-crumbs__link__title-text']")
     BUTTON_TYPOGRAPHY = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
+    BUTTON_DELETE_DRAFT_WIZARD_SEARCH = (By.XPATH, "//p[text()='Удалить черновик']")
     """tooltip"""
     SVG_TOOLTIP_REQUEST_FIELD = (By.XPATH, "//h4[contains(text(),'Закрепление контента в поисковой выдаче')]//*[local-name()='svg']")
     """check radio request"""
