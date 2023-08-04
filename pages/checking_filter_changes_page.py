@@ -420,12 +420,8 @@ class AddFilterChanges(Authorisation, BasePage):
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
         except (ElementClickInterceptedException, TimeoutException):
             time.sleep(5)
-            self.element_is_visible(self.Locators.BUTTON_DELETE_DRAFT).click()
-            try:
-                self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
-            except (TimeoutException, ElementClickInterceptedException, StaleElementReferenceException):
-                time.sleep(5)
-                self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
+            self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
+            # self.element_is_visible(self.Locators.BUTTON_DELETE_DRAFT).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text

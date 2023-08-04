@@ -381,7 +381,11 @@ class AddViewContentWizard(Authorisation, BasePage):
         # name_script = "media.jpg"
         name_request_script = "reuest " + str(random.randint(999, 9999))
         name_script = self.add_files_base(path)
-        self.element_is_visible(self.Locators.TYPOGRAPHY_TEMPLATE).click()
+        try:
+            self.element_is_visible(self.Locators.TYPOGRAPHY_TEMPLATE).click()
+        except (TimeoutException, ElementClickInterceptedException):
+            time.sleep(3)
+            self.element_is_visible(self.Locators.TYPOGRAPHY_TEMPLATE).click()
         self.element_is_visible(self.Locators.INPUT_NAME_REQUEST).send_keys(name_request_script)
         svg_tooltip_request_field = self.element_is_visible(self.Locators.SVG_TOOLTIP_REQUEST_FIELD)
         svg_tooltip_request_field_value = svg_tooltip_request_field.get_attribute("data-tip")
@@ -431,7 +435,7 @@ class AddViewContentWizard(Authorisation, BasePage):
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT, timeout=2).click()
         except TimeoutException:
             time.sleep(2)
-            self.element_is_visible(self.Locators.BUTTON_CONTINUE_DRAFT).click()
+            self.element_is_visible(self.Locators.BUTTON_DEL_DRAFT).click()
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
         self.element_is_visible(self.Locators.BUTTON_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_BACK).click()

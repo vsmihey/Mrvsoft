@@ -296,6 +296,7 @@ class FormPagesLocators:
     CLOSE_LINK_OF_CONTENT = (By.XPATH, "//span[@class='both-sides-alignment-card-line__container']")
     # TEXT_FIELD_ONE_MORE = (By.XPATH, "//pre[text()='one more some text']")
     TEXT_FIELD_ONE_MORE = (By.XPATH, "//pre[text()='one more some text']/../../div[@class='form-input-wrapper__field form-input-wrapper__field-arrow']")
+    BUTTON_DELETE_DRAFT = (By.XPATH, "//p[text()='Удалить черновик']")
     LINK_FIELD_FOR_CLEAR_1 = (By.XPATH, "//pre[text()='https://www.something.com']")
     EMAIL_FIELD_FOR_CLEAR_1 = (By.XPATH, "//pre[text()='gdyer@example.org']")
     FIELD_FOR_DEL = (By.XPATH, "//div[@class='m-template-field__type'][contains(text(),'Любой контент')]")

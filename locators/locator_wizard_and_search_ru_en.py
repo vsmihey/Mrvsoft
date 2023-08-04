@@ -43,7 +43,7 @@ class AddViewContentWizardLocators:
     TO_GET_NAME_REQUEST = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__text")
     BUTTON_ADD_REQUEST = (By.CSS_SELECTOR, "div[class='search-wrapper__form-field'] button[type='button']")
     LIST_ADDED_REQUEST = (By.CSS_SELECTOR, "span[class='both-sides-alignment-card-line__text']")
-    BUTTON_CONTINUE_DRAFT = (By.XPATH, "//p[text()='Продолжить']")
+    BUTTON_DEL_DRAFT = (By.XPATH, "//p[text()='Удалить черновик']")
     SVG_CLOSE_WINDOW_REQUEST = (By.CSS_SELECTOR, "div[class='popup__close']")
     SVG_CLOSE_WINDOW_ARTICLE = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg path")
     """check template"""

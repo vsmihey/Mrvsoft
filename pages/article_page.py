@@ -515,6 +515,8 @@ class ArticlePage(Authorisation, BasePage):
                 field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
             except TimeoutException:
                 time.sleep(3)
+                self.element_is_visible(Locators.BUTTON_DELETE_DRAFT).click()
+                time.sleep(1)
                 field4 = self.element_is_visible(Locators.TEXT_FIELD_ONE_MORE)
             field5 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR_1)
             field6 = driver.find_element(By.XPATH, f"//pre[text()='{mail}']")
