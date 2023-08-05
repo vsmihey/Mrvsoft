@@ -59,7 +59,7 @@ class UnformatFilePageLocators:
     """input file"""
     CREATE_BUTTON = (By.XPATH, "//div[text()='Создать']")
     BUTTON_FILE = (By.XPATH, "//div[contains(text(),'Файл')]")
-    DIRECT_FOLDER = (By.XPATH, "//select[@class='m-ui-select__select']")
+    DIRECT_FOLDER = (By.CSS_SELECTOR, "select[class='m-ui-select__select']")
     # DIRECT_FOLDER = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
     INPUT_FIELD_SELECT_FILE = (By.CSS_SELECTOR, "input[type='file']")
     SVG_CLOSE_DOWNLOADED_FILE = (By.XPATH, "(//*[local-name()='svg'][@class='article-modal__close article-modal__close--white'])[1]")

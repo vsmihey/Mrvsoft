@@ -287,6 +287,7 @@ class UnformatFilePage(Authorisation, BasePage):
             self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.BUTTON_FILE).click()
         """direct folder save"""
+        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         except (TimeoutException, ElementNotInteractableException):

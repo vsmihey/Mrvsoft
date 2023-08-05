@@ -65,9 +65,9 @@ def driver():
     # allure.attach(attach, name=f"Screenshot {datetime.today()}", attachment_type=allure.attachment_type.PNG)
     driver.quit()
 
-"""allure - прикрепление скриншота в отчете"""
+
 # Добавляем хук pytest_exception_interact, который вызывается при возникновении ошибки в тесте
-def pytest_exception_interact(node, call, report):
+def pytest_exception_interact(node, report):
     if report.failed:
         # Получаем доступ к драйверу (предполагая, что используется фикстура 'driver')
         driver = node.funcargs['driver']
