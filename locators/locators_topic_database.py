@@ -31,7 +31,8 @@ class CreateTopicDatabaseLocators:
     # BUTTON_CONFIRM_DELETE_TOPIC = (By.XPATH, "//button[@class='m-button m-button--danger m-button--medium popup-confirm__action popup-confirm__danger']")
     BUTTON_CONFIRM_DELETE_TOPIC = (By.XPATH, "//p[text()='Удалить тему']")
     # SVG_CLOSE_DELETED_WINDOW = (By.XPATH, "//div[@class='ReactModal__Content ReactModal__Content--after-open lms-questions-lib m-popup__window']//div[@class='m-popup__close']")
-    SVG_CLOSE_DELETED_WINDOW = (By.CSS_SELECTOR, "div[class='m-popup__close']")
+    SVG_CLOSE_DELETED_WINDOW = (By.CSS_SELECTOR, "div[class='ReactModal__Content ReactModal__Content--after-open lms-questions-lib m-popup__window'] div[class='m-popup__close']")
+    # SVG_CLOSE_DELETED_WINDOW = (By.CSS_SELECTOR, "div[class='m-popup__close']")
     # SVG_CLOSE_DELETED_WINDOW = (By.XPATH, "//div[@class='m-popup__close']")
     """question add"""
     BUTTON_QUESTION_ADD = (By.XPATH, "//p[contains(text(),'Добавить')]")
@@ -99,7 +100,7 @@ class CreateTopicDatabaseLocators:
     # FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR, "select[class='m-ui-select__select']")
     # FOLDER_SAVE_ARTICLE = (By.XPATH, "(//select[@class='m-ui-select__select'])[3]")
     FOLDER_SAVE_ARTICLE = (By.CSS_SELECTOR, "div[class='m-ui-paper m-ui-select__paper m-ui-paper--hoverable m-ui-paper--shadowed m-ui-paper--filled'] select[class='m-ui-select__select']")
-    TEXT_AREA_ARTICLE = (By.XPATH, "//div[@aria-label='false']")
+    TEXT_AREA_ARTICLE = (By.CSS_SELECTOR, "div[aria-label='false']")
     # CHECKBOX_INSERT_FILES = (By.XPATH, "//section[@class='m-file-view__content-block']")
     CHECKBOX_INSERT_FILES = (By.CSS_SELECTOR, ".m-file-view__content-block")
     INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")

@@ -415,12 +415,16 @@ class AddFilterChanges(Authorisation, BasePage):
             time.sleep(3)
             self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
-        time.sleep(3)
+        time.sleep(5)
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
         except (ElementClickInterceptedException, TimeoutException):
-            time.sleep(5)
-            self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
+            time.sleep(3)
+            try:
+                self.delete_draft()
+            except TimeoutException:
+                time.sleep(3)
+                self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
             # self.element_is_visible(self.Locators.BUTTON_DELETE_DRAFT).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()

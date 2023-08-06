@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 
-from locators.all_locators import FormPagesLocators
+from locators.all_locators import FormPagesLocators, FilesFormatPageLocators
 from pages import data_login_password
 import pathlib
 # Настройки браузера
@@ -116,6 +116,11 @@ class MainPage:
                 action.drag_and_drop_by_offset(locator_scroller, "0", "200").perform()
                 action.drag_and_drop_by_offset(locator_scroller, "0", "-20").perform()
                 # action.perform()
+
+    def delete_draft(self):
+        """Нажимает 'Удалить черновик', если всплывает оповещение о наличии черновика"""
+        locators = FilesFormatPageLocators
+        self.element_is_visible(locators.DELETE_DRAFT).click()
 
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)

@@ -218,7 +218,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         """check text and button"""
         try:
             text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION, timeout=3).text
-            assert text_database_of_question == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
+            assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
         except TimeoutException:
             try:
                 list_delete = self.elements_are_visible(self.Locators.SVG_DEL_QUESTION)
@@ -228,17 +228,17 @@ class CreateTopicDatabase(Authorisation, BasePage):
                     time.sleep(0.5)
                     self.element_is_visible(self.Locators.SVG_DEL_QUESTION_CONFIRM).click()
                 text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
-                assert text_database_of_question == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
+                assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
             except TimeoutException:
                 time.sleep(5)
                 text_database_of_question = self.element_is_visible(self.Locators.TEXT_DATABASE_OF_QUESTION).text
-                assert text_database_of_question == "В этом проекте пока нет вопросов. Создайте структуру тем для его размещения"
+                assert text_database_of_question == "В этом проекте пока нет вопросов. Вы можете это исправить"
         button_question_add = self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).text
-        assert button_question_add == "Создать темы"
+        assert button_question_add == "Добавить"
         self.element_is_clickable(self.Locators.BUTTON_QUESTION_ADD).click()
         """check add new question"""
         text_new_question = self.element_is_visible(self.Locators.TEXT_NEW_QUESTION).text
-        assert text_new_question == "Новая тема"
+        assert text_new_question == "Новый вопрос"
         """check function text"""
         self.check_text_questions()
         """dropdown topic"""
@@ -332,6 +332,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
             time.sleep(5)
             self.element_is_visible(self.Locators.NAME_OF_ARTICLE).send_keys(first_name)
             self.element_is_visible(self.Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+            time.sleep(3)
         try:
             self.element_is_visible(self.Locators.TEXT_AREA_ARTICLE).send_keys(text)
         except TimeoutException:
@@ -531,8 +532,12 @@ class CreateTopicDatabase(Authorisation, BasePage):
             assert attribute_class == "m-switch-box lms-question-bar__switch"
         time.sleep(1)
         self.element_is_visible(self.Locators.ON_CHECKBOX_ALL_QUESTIONS).click()
-        time.sleep(1)
-        self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+        time.sleep(3)
+        try:
+            self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
+        except TimeoutException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.SVG_CLOSE_DELETED_WINDOW).click()
         """check first position by index xpath dom and active tab"""
         tab_active = self.element_is_visible(self.Locators.TAB_ACTIVE).text
         assert tab_active == 'тест'
