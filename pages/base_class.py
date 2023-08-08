@@ -8,6 +8,8 @@ from selenium import webdriver
 from locators.all_locators import FormPagesLocators, FilesFormatPageLocators
 from pages import data_login_password
 import pathlib
+
+
 # Настройки браузера
 # chrome_options = webdriver.ChromeOptions()
 # chrome_options.add_argument("--disable-notifications")
@@ -44,7 +46,10 @@ class MainPage:
 
     def element_is_visible(self, locator, timeout=10):
         """Ожидает появления элемента"""
-        return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        try:
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except:
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
 
     def element_is_invisible(self, locator, timeout=3):
         """Проверяет, что элемент не появился"""
@@ -127,8 +132,7 @@ class MainPage:
         # now_date = datetime.datetime.now(offset)
         # now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
         # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-        name_screenshot = 'screenshot'+'.png'
+        name_screenshot = 'screenshot' + '.png'
         path = pathlib.Path(pathlib.Path.cwd(), 'avatars', name_screenshot)
         path = str(path)
         self.browser.save_screenshot(path)
-

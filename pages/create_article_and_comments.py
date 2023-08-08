@@ -55,9 +55,9 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
             file.write(self.get_actual_url() + '\n')
             file.write(self.BASE_ARTICLE_TITLE)
 
-    def creating_base_article(self, user=minervakms):
+    def creating_base_article(self):
         """Создание обычной статьи с наполнением"""
-        self.get_authorisation_in_selen(user)
+        self.get_authorisation_in_selen()
         time.sleep(1)
         try:
             self.create_button()
@@ -139,16 +139,16 @@ class Comments(Authorisation):
         self.element_is_clickable(locators.Comments.EXPERT_QUESTION).click()
 
     @staticmethod
-    def create_comments(driver, url, user=minervakms):
+    def create_comments(driver, url):
         """Создание тестового набора комментариев в статье по переданной ссылке, с прохождением авторизации"""
         page = Comments(driver)
 
-        page.get_authorisation_in_url(url, user)
+        page.get_authorisation_in_url(url)
 
         for i in range(4):
-            time.sleep(1)
+            time.sleep(0.5)
             page.comment_text_area(f'Тестовый комментарий {i + 1}')
-            time.sleep(1)
+            time.sleep(0.5)
             page.send_comment()
 
         page.disable_the_question_to_the_expert_option()
@@ -156,12 +156,10 @@ class Comments(Authorisation):
         page.send_comment()
 
     @staticmethod
-    def close_first_comment(driver, url, user=minervakms):
+    def close_first_comment(driver, url):
         """Закрытие первого комментария"""
         page = Comments(driver)
-        page.get_authorisation_in_url(url, user)
-
-
+        page.get_authorisation_in_url(url)
 
         try:
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
@@ -177,10 +175,10 @@ class Comments(Authorisation):
 
 
     @staticmethod
-    def close_second_comment(driver, url, user=minervakms):
+    def close_second_comment(driver, url):
         """Закрытие первого комментария"""
         page = Comments(driver)
-        page.get_authorisation_in_url(url, user)
+        page.get_authorisation_in_url(url)
 
         try:
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_2).click()
@@ -194,10 +192,10 @@ class Comments(Authorisation):
         page.element_is_clickable(locators.Comments.CLOSE_COMMENT).click()
 
     @staticmethod
-    def close_third_comment(driver, url, user=minervakms):
+    def close_third_comment(driver, url):
         """Закрытие первого комментария"""
         page = Comments(driver)
-        page.get_authorisation_in_url(url, user)
+        page.get_authorisation_in_url(url)
 
         try:
             page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_3).click()

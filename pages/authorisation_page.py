@@ -1,12 +1,10 @@
 import time
 
 from selenium.common import TimeoutException, StaleElementReferenceException
-
 from pages import data_login_password
-from pages import users
 import locators.all_locators as locators
 from pages.base_class import MainPage
-from pages.users import minervakms
+from pages.data_login_password import user
 
 
 class Authorisation(MainPage):
@@ -44,7 +42,7 @@ class Authorisation(MainPage):
         """Проверка, что открыта страница авторизации"""
         return self.element_is_visible(locators.AuthorisationPage.INPUT_IN_SYSTEM_TEXT).text
 
-    def get_authorisation_in_superbank(self, user=minervakms):
+    def get_authorisation_in_superbank(self, user=user):
         """Метод для прохождения авторизации в проект СуперБанка"""
         self.browser.delete_all_cookies()
         self.open()
@@ -54,7 +52,7 @@ class Authorisation(MainPage):
         self.confirm_button()
         self.select_project_superbank()
 
-    def get_authorisation_in_selen(self, user=users.andrey):
+    def get_authorisation_in_selen(self, user=user):
         """Метод для прохождения авторизации в проект Selen"""
         self.browser.delete_all_cookies()
         self.open()
@@ -65,7 +63,7 @@ class Authorisation(MainPage):
         time.sleep(1)
         self.select_project_selen()
 
-    def get_authorisation_in_url(self, url, user=minervakms):
+    def get_authorisation_in_url(self, url, user=user):
         """Метод для прохождения авторизации и перехода по переданной ссылке"""
         self.browser.delete_all_cookies()
         self.open(url=url)
@@ -73,4 +71,3 @@ class Authorisation(MainPage):
         self.input_login(user.login)
         self.input_password(user.password)
         self.confirm_button()
-
