@@ -1,3 +1,5 @@
+import time
+
 import allure
 import pytest
 from pages.create_article_and_comments import Comments, DataParser

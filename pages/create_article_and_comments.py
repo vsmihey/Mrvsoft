@@ -2,6 +2,7 @@ import random
 import time
 
 from selenium.common import StaleElementReferenceException, ElementClickInterceptedException, TimeoutException
+from selenium.webdriver.common.by import By
 
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
@@ -145,15 +146,26 @@ class Comments(Authorisation):
 
         page.get_authorisation_in_url(url, user)
 
-        for i in range(4):
-            time.sleep(1)
-            page.comment_text_area(f'Тестовый комментарий {i + 1}')
-            time.sleep(1)
-            page.send_comment()
+        while True:
+            for i in range(4):
+                time.sleep(1)
+                page.comment_text_area(f'Тестовый комментарий {i + 1}')
+                time.sleep(1)
+                page.send_comment()
 
-        page.disable_the_question_to_the_expert_option()
-        page.comment_text_area('Серый комментарий')
-        page.send_comment()
+            page.disable_the_question_to_the_expert_option()
+            page.comment_text_area('Серый комментарий')
+            page.send_comment()
+            # проверка создания 5 комментариев
+            try:
+                time.sleep(1)
+                check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
+                # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
+                assert check_count_comment == "5 комментариев"
+            except AssertionError:
+                continue
+            break
+
 
     @staticmethod
     def close_first_comment(driver, url, user=minervakms):
