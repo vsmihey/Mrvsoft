@@ -567,7 +567,12 @@ class SearchRuEn(Authorisation, BasePage):
         actions.send_keys(search_request_new)
         actions.send_keys(Keys.RETURN)
         actions.perform()
-        list_article_ru = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_INVERSION)
+        time.sleep(1)
+        try:
+            list_article_ru = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_INVERSION)
+        except TimeoutException:
+            time.sleep(3)
+            list_article_ru = self.elements_are_visible(self.Locators.LIST_RESULT_SEARCH_INVERSION)
         for n in list_article_ru:
             # time.sleep(1)
             t = n.text

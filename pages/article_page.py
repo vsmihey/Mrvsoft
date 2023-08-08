@@ -533,6 +533,7 @@ class ArticlePage(Authorisation, BasePage):
             for n in range(1, 35):
                 actions.send_keys(Keys.BACKSPACE)
             actions.click(for_click)
+            time.sleep(2)
             actions.perform()
             time.sleep(5)
             self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
@@ -1165,7 +1166,11 @@ class CreateDraftPage(Authorisation, BasePage):
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_FILE).click()
         self.element_is_visible(self.Locators.INPUT_NAME_FILE).send_keys("File_Name4")
-        self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        try:
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
+        except ElementNotInteractableException:
+            time.sleep(3)
+            self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         """close article tab1"""
         self.browser.switch_to.window(tab2)
         time.sleep(3)

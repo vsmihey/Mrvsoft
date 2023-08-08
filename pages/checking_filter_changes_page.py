@@ -443,8 +443,13 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
         """check article after add filters"""
         time.sleep(5)
-        filters = self.elements_are_visible(self.Locators.FILTERS)
+        try:
+            filters = self.elements_are_visible(self.Locators.FILTERS)
+        except TimeoutException:
+            time.sleep(3)
+            filters = self.elements_are_visible(self.Locators.FILTERS)
         for n in filters:
+            time.sleep(1)
             n.click()
         try:
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")

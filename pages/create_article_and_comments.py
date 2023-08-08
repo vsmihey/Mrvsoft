@@ -2,6 +2,7 @@ import random
 import time
 
 from selenium.common import StaleElementReferenceException, ElementClickInterceptedException, TimeoutException
+from selenium.webdriver.common.by import By
 
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
@@ -55,9 +56,9 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
             file.write(self.get_actual_url() + '\n')
             file.write(self.BASE_ARTICLE_TITLE)
 
-    def creating_base_article(self):
+    def creating_base_article(self, user=minervakms):
         """Создание обычной статьи с наполнением"""
-        self.get_authorisation_in_selen()
+        self.get_authorisation_in_selen(user)
         time.sleep(1)
         try:
             self.create_button()
@@ -146,14 +147,24 @@ class Comments(Authorisation):
         page.get_authorisation_in_url(url)
 
         for i in range(4):
-            time.sleep(0.5)
+            time.sleep(1)
             page.comment_text_area(f'Тестовый комментарий {i + 1}')
-            time.sleep(0.5)
+            time.sleep(1)
             page.send_comment()
 
-        page.disable_the_question_to_the_expert_option()
-        page.comment_text_area('Серый комментарий')
-        page.send_comment()
+            page.disable_the_question_to_the_expert_option()
+            page.comment_text_area('Серый комментарий')
+            page.send_comment()
+            # проверка создания 5 комментариев
+            try:
+                time.sleep(1)
+                check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
+                # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
+                assert check_count_comment == "5 комментариев"
+            except AssertionError:
+                continue
+            break
+
 
     @staticmethod
     def close_first_comment(driver, url):
