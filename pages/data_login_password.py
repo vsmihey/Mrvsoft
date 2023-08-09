@@ -9,7 +9,7 @@ import os
 # Учетка Бориса
 # login = 'b.pogodin'
 # password = '68f1d85b'
-login = 'minervakms'
+login = 'ricksanchez'
 password = 'minervakms'
 
 # неверные данные
