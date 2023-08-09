@@ -135,6 +135,10 @@ class ArticlePage(Authorisation, BasePage):
         self.element_is_visible(Locators.ADD_SEARCH_BUTTON).click()
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+        """проверка чекбоксов"""
+        self.element_is_visible(Locators.CHECKBOX_SETTINGS_COMMENTS).is_displayed()
+        self.element_is_visible(Locators.CHECKBOX_SETTINGS_DOWNLOADS).is_displayed()
+        self.element_is_visible(Locators.CHECKBOX_SETTINGS_PRINTING).is_displayed()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         check_text_role = self.element_is_visible(Locators.CHECK_TEXT_ROLE)
         check_text_role_value = check_text_role.text
