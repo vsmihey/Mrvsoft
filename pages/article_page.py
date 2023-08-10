@@ -6,7 +6,6 @@ import time
 from random import choice
 from string import ascii_uppercase
 from pathlib import Path
-
 import allure
 import selenium
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException, \
@@ -16,6 +15,7 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from generator.generator import generated_person, generated_file, generated_big_file
+from pages import users
 from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
 from locators.locators_form_pages import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
@@ -24,7 +24,6 @@ from locators.locators_form_pages import FormPagesLocators as Locators, StepBySc
 # from locators.form_pages_locators import FixingArticle as Locators
 from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
-
 
 
 class ArticlePage(Authorisation, BasePage):
@@ -135,6 +134,10 @@ class ArticlePage(Authorisation, BasePage):
         self.element_is_visible(Locators.ADD_SEARCH_BUTTON).click()
         self.element_is_visible(Locators.FINISH_BUTTON).click()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
+        """проверка чекбоксов"""
+        self.element_is_visible(Locators.CHECKBOX_SETTINGS_COMMENTS).is_displayed()
+        self.element_is_visible(Locators.CHECKBOX_SETTINGS_DOWNLOADS).is_displayed()
+        self.element_is_visible(Locators.CHECKBOX_SETTINGS_PRINTING).is_displayed()
         self.element_is_visible(Locators.SUBMIT_ARTICLE).click()
         check_text_role = self.element_is_visible(Locators.CHECK_TEXT_ROLE)
         check_text_role_value = check_text_role.text

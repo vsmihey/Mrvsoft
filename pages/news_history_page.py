@@ -254,12 +254,12 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
     def check_restored_1(self):
         """check restored article for person 1: can restore article"""
         self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
-        time.sleep(1)
         try:
             self.element_is_visible(self.Locators.RESTORED_ARTICLE_1).click()
         except TimeoutException:
             time.sleep(3)
-            self.element_is_visible(self.Locators.RESTORED_ARTICLE_1).click()
+            self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_).click()
+            # self.element_is_visible(self.Locators.RESTORED_ARTICLE_1).click()
         self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE).is_displayed()
         comment = self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_ADDED_COMMENT).is_displayed()
         print(comment)

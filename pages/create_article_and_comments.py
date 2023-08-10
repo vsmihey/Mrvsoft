@@ -165,7 +165,6 @@ class Comments(Authorisation):
                 continue
             break
 
-
     @staticmethod
     def close_first_comment(driver, url):
         """Закрытие первого комментария"""

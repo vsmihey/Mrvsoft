@@ -147,10 +147,11 @@ class TestFormPage:
 
     @allure.title("Добавление обычной статьи")
     def test_add_normal_article(self, driver):
-        article_page = BaseArticleEditor(driver)
-        article_page.creating_base_article()
-        # article_page.get_authorisation_in_selen()
-        # article_page.add_normal_article(driver)
+        # article_page = BaseArticleEditor(driver)
+        article_page = ArticlePage(driver)
+        # article_page.creating_base_article()
+        article_page.get_authorisation_in_selen()
+        article_page.add_normal_article(driver)
 
     @allure.title("Способ закрепления для обычной статьи")
     def test_fixing_article(self, driver):

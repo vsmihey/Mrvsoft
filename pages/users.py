@@ -9,8 +9,8 @@ class StableUsers:
 
 
 admin = StableUsers('b.pogodin', '68f1d85b')
-minervakms = StableUsers('minervakms', 'minervakms')
-andrey = StableUsers('andrey', '004e9f86')
+minervakms = StableUsers('ricksanchez', 'minervakms') # при смене - заменить в data_login_password
+andrey = StableUsers('andrey', '10f0b265')  # при смене - заменить в DataLoginPassword
 person1 = StableUsers('person1', '777qwerty')
 person2 = StableUsers('person2', '777qwerty')
 person3 = StableUsers('person3', '777qwerty')
@@ -21,8 +21,8 @@ class DataLoginPassword:
 
     @staticmethod
     def correct_data():
-        login = 'minervakms'
-        password = 'minervakms'
+        login = 'andrey'
+        password = '10f0b265'
         return login, password
     @staticmethod
     def incorrect_data():

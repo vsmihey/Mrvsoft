@@ -71,6 +71,7 @@ def pytest_exception_interact(node, report):
     if report.failed:
         # Получаем доступ к драйверу (предполагая, что используется фикстура 'driver')
         driver = node.funcargs['driver']
+        time.sleep(1)
         # Создаем скриншот и прикрепляем его к отчету Allure
         allure.attach(
             driver.get_screenshot_as_png(),
