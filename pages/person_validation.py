@@ -30,11 +30,11 @@ class History(MainPage):
 
     def empty_history(self) -> str:
         """Метод для проверки пустой истории"""
-        return self.element_is_visible(locators.CheckCommentsPersons.EMPTY_HISTORY_CHECK, timeout=3)
+        return self.element_is_visible(locators.CheckCommentsPersons.EMPTY_HISTORY_CHECK).text
 
     def no_empty_history(self) -> str:
         """Метод для проверки, что история не пустая"""
-        return self.element_is_invisible(locators.CheckCommentsPersons.EMPTY_HISTORY_CHECK, timeout=3)
+        return self.element_is_invisible(locators.CheckCommentsPersons.EMPTY_HISTORY_CHECK, timeout=1).text
 
     def status_comment_in_history(self, locator):
         """Проверка, что комментарий в верном статусе"""
@@ -141,10 +141,10 @@ class BellAlert(MainPage):
 
     def check_no_article_notifications_and_history(self):
         """Проверка, что нет записей в истории и уведомлений по конкретной статье по всем статусам"""
-        assert self.element_is_invisible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK)
-        assert self.element_is_invisible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK)
-        assert self.element_is_invisible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK)
-        assert self.element_is_invisible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK)
+        assert self.element_is_invisible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK, timeout=0.2)
+        assert self.element_is_invisible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK, timeout=0.2)
+        assert self.element_is_invisible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK, timeout=0.2)
+        assert self.element_is_invisible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK, timeout=0.2)
 
 
 class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
@@ -161,7 +161,7 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
 
     def check_article_confirm_reading_notification(self):
         """Проверка, что у пользователя отображается банер о подтверждении прочтения уведомления"""
-        self.element_is_clickable(locators.CheckBellComments.BELL_CREATE_ARTICLE_CONFIRM).click()
+        self.click_to_element(locators.CheckBellComments.BELL_CREATE_ARTICLE_CONFIRM)
 
     def check_restore_button(self):
         """Проверка, что в удаленной статье внизу есть кнопка 'восстановить'"""
@@ -169,27 +169,27 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
 
     def bottom_banner_button_click(self):
         """Нажатие на кнопку в красном банере внизу статьи"""
-        self.element_is_clickable(locators.OpenArticle.BOTTOM_BANNER_BUTTON).click()
+        self.click_to_element(locators.OpenArticle.BOTTOM_BANNER_BUTTON)
 
     def go_to_new_article_from_history_or_bell(self):
         """Проверка перехода в новую статью из истории или колокольчика без подтверждения прочтения"""
-        self.element_is_clickable(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK).click()
+        self.click_to_element(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK)
 
     def go_to_new_article_from_bell_with_confirm(self):
         """Проверка перехода в новую статью из истории или колокольчика c подтверждением прочтения"""
-        self.element_is_clickable(self.BELL_CREATE_ARTICLE_CONFIRM).click()
+        self.click_to_element(self.BELL_CREATE_ARTICLE_CONFIRM)
 
     def go_to_major_edit_article_from_history_or_bell(self):
         """Проверка перехода в статью с мажорным редактированием из истории или колокольчика"""
-        self.element_is_clickable(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK).click()
+        self.click_to_element(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK)
 
     def go_to_deleted_article_from_history_or_bell(self):
         """Проверка перехода в удаленную статью из истории или колокольчика"""
-        self.element_is_clickable(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK).click()
+        self.click_to_element(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK)
 
     def go_to_restored_article_from_history_or_bell(self):
         """Проверка перехода в восстановленную статью из истории или колокольчика"""
-        self.element_is_clickable(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK).click()
+        self.click_to_element(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK)
 
     def empty_history_check(self):
         """Проверка, что в истории пусто"""
@@ -219,7 +219,6 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
     def switch_to_bell(self, person):
         """Метод переходна на страницу истории, с прохождением авторизации"""
         self.get_authorisation_in_selen(person)
-        time.sleep(1)
         self.yes_new_notification()
         self.bell_button_click()
 
@@ -231,22 +230,22 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
 class Person1(PersonValidation):
     def switch_to_bell(self, person):
         self.get_authorisation_in_selen(person)
-        time.sleep(1)
-        try:
-            self.no_new_notification()
-        except AssertionError:
-            self.yes_new_notification()
-        finally:
-            self.bell_button_click()
+        # try:
+        #     self.no_new_notification()
+        # except AssertionError:
+        #     self.yes_new_notification()
+        # finally:
+        self.bell_button_click()
+        self.check_no_article_notifications_and_history()
 
     def get_check_history(self):
         self.switch_to_history(person1)
-        try:
-            self.empty_history_check()
-        except (AssertionError, TimeoutException):
-            self.no_empty_history()
-        finally:
-            self.check_no_article_notifications_and_history()
+        # try:
+        #     self.empty_history_check()
+        # except (AssertionError, TimeoutException):
+        #     self.no_empty_history()
+        # finally:
+        self.check_no_article_notifications_and_history()
 
     def get_check_bell(self):
         self.switch_to_bell(person1)
