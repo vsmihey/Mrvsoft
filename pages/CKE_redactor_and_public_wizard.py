@@ -40,15 +40,15 @@ class PublicWizard(MainPage):
 
     def publish_button_click(self):
         """Кнопка 'опубликовать' в редакторе"""
-        self.element_is_clickable(locators.WizardPublic.BUTTON_TYPOGRAPHY).click()
+        self.click_to_element(locators.WizardPublic.BUTTON_TYPOGRAPHY)
 
     def next_and_finish_button_click(self):
         """Кнопка 'продолжить' и 'завершить' в визадре"""
-        self.element_is_clickable(locators.WizardPublic.BUTTON_FINISH).click()
+        self.click_to_element(locators.WizardPublic.BUTTON_FINISH)
 
     def execute_button_click(self):
         """Кнопка 'выполнить' при удалении статьи в визадре"""
-        self.element_is_clickable(locators.WizardPublic.BUTTON_EXECUTE).click()
+        self.click_to_element(locators.WizardPublic.BUTTON_EXECUTE)
 
     def notification_text_area(self, text='Создание статьи'):
         """Заполнение поля уведомления"""
@@ -56,16 +56,16 @@ class PublicWizard(MainPage):
 
     def notification_type(self):
         """Настройка типа оповещения для ранее созданных ролей"""
-        self.element_is_clickable(locators.WizardPublic.ROLE_3_NOTIFICATION).click()
-        self.element_is_clickable(locators.WizardPublic.ROLE_4).click()
+        self.click_to_element(locators.WizardPublic.ROLE_3_NOTIFICATION)
+        self.click_to_element(locators.WizardPublic.ROLE_4)
 
     def role_access(self):
         """Доступ к статье"""
-        self.element_is_clickable(locators.WizardPublic.CHECKBOX_ALL_ROLES).click()
+        self.click_to_element(locators.WizardPublic.CHECKBOX_ALL_ROLES)
 
     def minor_type(self):
         """Выбор минорных изменений"""
-        self.element_is_clickable(locators.WizardPublic.CHECKBOX_MINOR_EDIT).click()
+        self.click_to_element(locators.WizardPublic.CHECKBOX_MINOR_EDIT)
 
     def save_base_article(self):
         """Сохранение статьи"""
@@ -73,11 +73,12 @@ class PublicWizard(MainPage):
         self.next_and_finish_button_click()
         self.next_and_finish_button_click()
         self.role_access()
-        self.element_is_visible(locators.WizardPublic.ROLE_1).click()
+        self.click_to_element(locators.WizardPublic.ROLE_1)
         self.next_and_finish_button_click()
         self.notification_text_area()
         self.notification_type()
         self.next_and_finish_button_click()
+        time.sleep(1)
 
     def save_minor_edit(self):
         """Сохранение статьи с незначительными изменениями"""
@@ -85,9 +86,11 @@ class PublicWizard(MainPage):
         self.minor_type()
         self.notification_text_area('Минорное редактирование')
         self.next_and_finish_button_click()
+        time.sleep(1)
 
     def save_major_edit(self, text='Мажорное редактирование'):
         """Сохранение статьи со значительными изменениями"""
         self.publish_button_click()
         self.notification_text_area(text)
         self.next_and_finish_button_click()
+        time.sleep(1)
