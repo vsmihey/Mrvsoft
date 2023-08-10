@@ -56,7 +56,6 @@ class MainPage:
         try:
             return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
         except StaleElementReferenceException:
-            # self.browser.refresh()
             return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
         except TimeoutException:
             self.browser.refresh()
