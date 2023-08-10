@@ -1141,7 +1141,7 @@ class AuthorisationPage:
 
 class CheckCommentsPersons:
     """Комментарии и уведомления"""
-    EMPTY_HISTORY_CHECK = (By.CSS_SELECTOR, ".m-news-empty__title")
+    EMPTY_HISTORY_CHECK = (By.CLASS_NAME, "m-news-empty__title")
     # через get_attribute("data-tip") получаем количество уведомлений
     BELL_ALERT = (By.CSS_SELECTOR,
                   ".m-button-main-menu.m-button-main-menu--collapsed.m-button-notification.m-button-notification"

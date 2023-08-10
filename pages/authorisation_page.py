@@ -4,7 +4,7 @@ from selenium.common import TimeoutException, StaleElementReferenceException
 from pages import data_login_password
 import locators.all_locators as locators
 from pages.base_class import MainPage
-from pages.data_login_password import user
+from pages.users import minervakms
 
 
 class Authorisation(MainPage):
@@ -24,25 +24,22 @@ class Authorisation(MainPage):
 
     def confirm_button(self):
         """Нажимаем кнопку войти"""
-        self.element_is_visible(locators.AuthorisationPage.INPUT_BUTTON).click()
+        self.click_to_element(locators.AuthorisationPage.INPUT_BUTTON)
 
     def select_project_superbank(self):
         """Выбор проекта СуперБанка"""
-        self.element_is_visible(locators.AuthorisationPage.SUPER_BANK_PROJECT).click()
+        self.click_to_element(locators.AuthorisationPage.SUPER_BANK_PROJECT)
 
     def select_project_selen(self):
         """Выбор проекта Selen"""
-        try:
-            self.element_is_visible(locators.AuthorisationPage.TEST_PROJECT).click()
-        except (TimeoutException, StaleElementReferenceException):
-            time.sleep(3)
-            self.element_is_visible(locators.AuthorisationPage.TEST_PROJECT).click()
+        self.click_to_element(locators.AuthorisationPage.TEST_PROJECT)
+
 
     def checking_the_authorization_page(self) -> str:
         """Проверка, что открыта страница авторизации"""
         return self.element_is_visible(locators.AuthorisationPage.INPUT_IN_SYSTEM_TEXT).text
 
-    def get_authorisation_in_superbank(self, user=user):
+    def get_authorisation_in_superbank(self, user=minervakms):
         """Метод для прохождения авторизации в проект СуперБанка"""
         self.browser.delete_all_cookies()
         self.open()
@@ -52,7 +49,7 @@ class Authorisation(MainPage):
         self.confirm_button()
         self.select_project_superbank()
 
-    def get_authorisation_in_selen(self, user=user):
+    def get_authorisation_in_selen(self, user=minervakms):
         """Метод для прохождения авторизации в проект Selen"""
         self.browser.delete_all_cookies()
         self.open()
@@ -63,7 +60,7 @@ class Authorisation(MainPage):
         time.sleep(1)
         self.select_project_selen()
 
-    def get_authorisation_in_url(self, url, user=user):
+    def get_authorisation_in_url(self, url, user=minervakms):
         """Метод для прохождения авторизации и перехода по переданной ссылке"""
         self.browser.delete_all_cookies()
         self.open(url=url)

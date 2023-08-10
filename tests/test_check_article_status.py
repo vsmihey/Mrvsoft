@@ -171,7 +171,7 @@ class TestCheckNewArticleStatus:
         @allure.title(
             'Мажорное редактирование. Проверка колокольчика пользователем с доступом к статье но с выключенными '
             'уведомлениями')
-        def test_new_article_article_bell_person4(self, driver):
+        def test_major_article_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
 

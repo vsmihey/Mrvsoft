@@ -9,7 +9,7 @@ class StableUsers:
 
 
 admin = StableUsers('b.pogodin', '68f1d85b')
-minervakms = StableUsers('minervakms', 'minervakms')
+minervakms = StableUsers('ricksanchez', 'minervakms')
 andrey = StableUsers('andrey', '004e9f86')
 person1 = StableUsers('person1', '777qwerty')
 person2 = StableUsers('person2', '777qwerty')

@@ -18,19 +18,19 @@ class ContentOptions(MainPage):
 
     def redaction(self):
         """Кнопка Редактировать"""
-        self.element_is_clickable(locators.FormPagesLocators.EDIT_ARTICLE).click()
+        self.click_to_element(locators.FormPagesLocators.EDIT_ARTICLE)
 
     def three_dots_button(self):
         """Кнопка Троеточие"""
-        self.element_is_clickable(locators.SearchRuEnLocators.MEATBALL_ARTICLE).click()
+        self.click_to_element(locators.SearchRuEnLocators.MEATBALL_ARTICLE)
 
     def delete_button(self):
         """Кнопка Троеточие"""
-        self.element_is_clickable(locators.SearchRuEnLocators.SVG_DEL).click()
+        self.click_to_element(locators.SearchRuEnLocators.SVG_DEL)
 
     def restore_button(self):
         """Кнопка 'восстановить'"""
-        self.element_is_clickable(locators.OpenArticle.BOTTOM_BANNER_BUTTON).click()
+        self.click_to_element(locators.OpenArticle.BOTTOM_BANNER_BUTTON)
 
 
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions):
@@ -56,23 +56,15 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
             file.write(self.get_actual_url() + '\n')
             file.write(self.BASE_ARTICLE_TITLE)
 
-    def creating_base_article(self, user=minervakms):
+    def creating_base_article(self):
         """Создание обычной статьи с наполнением"""
-        self.get_authorisation_in_selen(user)
-        time.sleep(1)
-        try:
-            self.create_button()
-        except (StaleElementReferenceException):
-            time.sleep(5)
-            self.create_button()
+        self.get_authorisation_in_selen()
+        self.create_button()
         self.create_base_article_button()
-        time.sleep(1)
         self.title_article()
-        time.sleep(1)
         self.change_folder()
         self.text_area_article()
         self.save_base_article()
-        time.sleep(0.5)
         self.save_data_in_file()
 
     def minor_edit_base_article(self, url):
@@ -95,7 +87,6 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.three_dots_button()
         self.delete_button()
         self.notification_text_area('Удаление')
-        time.sleep(1)
         self.execute_button_click()
         time.sleep(1)
 
@@ -133,11 +124,11 @@ class Comments(Authorisation):
 
     def send_comment(self):
         """Подтверждение отправки комментария"""
-        self.element_is_clickable(locators.Comments.SEND_COMMENT).click()
+        self.click_to_element(locators.Comments.SEND_COMMENT)
 
     def disable_the_question_to_the_expert_option(self):
         """Отключение галочки 'с вопросом к эксперту'"""
-        self.element_is_clickable(locators.Comments.EXPERT_QUESTION).click()
+        self.click_to_element(locators.Comments.EXPERT_QUESTION)
 
     @staticmethod
     def create_comments(driver, url):
@@ -147,74 +138,48 @@ class Comments(Authorisation):
         page.get_authorisation_in_url(url)
 
         for i in range(4):
-            time.sleep(1)
             page.comment_text_area(f'Тестовый комментарий {i + 1}')
-            time.sleep(1)
             page.send_comment()
 
-            page.disable_the_question_to_the_expert_option()
-            page.comment_text_area('Серый комментарий')
-            page.send_comment()
+        page.disable_the_question_to_the_expert_option()
+        page.comment_text_area('Серый комментарий')
+        page.send_comment()
             # проверка создания 5 комментариев
-            try:
-                time.sleep(1)
-                check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
-                # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
-                assert check_count_comment == "5 комментариев"
-            except AssertionError:
-                continue
-            break
-
+            # try:
+            #     time.sleep(1)
+            #     check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
+            #     # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
+            #     assert check_count_comment == "5 комментариев"
+            # except AssertionError:
+            #     continue
+            # break
 
     @staticmethod
     def close_first_comment(driver, url):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url)
-
-        try:
-            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
-        except TimeoutException:
-            time.sleep(5)
-            page.screenshot()
-            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_1).click()
-
-
+        page.click_to_element(locators.Comments.TO_ANSWER_COMMENT_1)
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 1')
-        page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
-        page.element_is_clickable(locators.Comments.CLOSE_COMMENT).click()
-
+        page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
+        page.click_to_element(locators.Comments.CLOSE_COMMENT)
 
     @staticmethod
     def close_second_comment(driver, url):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url)
-
-        try:
-            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_2).click()
-        except TimeoutException:
-            time.sleep(5)
-            page.screenshot()
-            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_2).click()
-
+        page.click_to_element(locators.Comments.TO_ANSWER_COMMENT_2)
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 2')
-        page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
-        page.element_is_clickable(locators.Comments.CLOSE_COMMENT).click()
+        page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
+        page.click_to_element(locators.Comments.CLOSE_COMMENT)
 
     @staticmethod
     def close_third_comment(driver, url):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url)
-
-        try:
-            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_3).click()
-        except TimeoutException:
-            time.sleep(5)
-            page.screenshot()
-            page.element_is_clickable(locators.Comments.TO_ANSWER_COMMENT_3).click()
-
+        page.click_to_element(locators.Comments.TO_ANSWER_COMMENT_3)
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
-        page.element_is_clickable(locators.Comments.CHECK_BOX_TICK_SOLVED).click()
-        page.element_is_clickable(locators.Comments.CLOSE_COMMENT).click()
+        page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
+        page.click_to_element(locators.Comments.CLOSE_COMMENT)

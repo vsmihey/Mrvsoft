@@ -1,23 +1,12 @@
-from selenium.common import InvalidSelectorException, NoSuchElementException
+from selenium.common import InvalidSelectorException, NoSuchElementException, StaleElementReferenceException, \
+    TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
-
 from locators.all_locators import FormPagesLocators, FilesFormatPageLocators
 from pages import data_login_password
 import pathlib
-
-
-# Настройки браузера
-# chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument("--disable-notifications")
-# chrome_options.add_argument("--window-size=1920,1080")
-# # chrome_options.add_argument("--no-sandbox")
-# # chrome_options.add_argument("--headless")
-# driver = webdriver.Chrome(options=chrome_options)
-# driver.implicitly_wait(12)
 
 
 class MainPage:
@@ -35,23 +24,12 @@ class MainPage:
     def get_actual_url(self):
         return self.browser.current_url
 
-    # def element_is_visible(self, locator, timeout=10):
-    #     return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
-    #
-    # def elements_is_present(self, locator, timeout=10):
-    #     return Wait(self.browser, timeout).until(EC.presence_of_element_located(locator))
-    #
-    # def elements_are_visible(self, locator, timeout=10):
-    #     return Wait(self.browser, timeout).until(EC.visibility_of_all_elements_located(locator))
-
     def element_is_visible(self, locator, timeout=10):
         """Ожидает появления элемента"""
-        try:
-            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
-        except:
-            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
 
-    def element_is_invisible(self, locator, timeout=3):
+
+    def element_is_invisible(self, locator, timeout=1):
         """Проверяет, что элемент не появился"""
         return Wait(self.browser, timeout).until(EC.invisibility_of_element_located(locator))
 
@@ -72,6 +50,17 @@ class MainPage:
     def element_is_clickable(self, locator, timeout=10):
         """Элемент кликабельный"""
         return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator))
+
+    def click_to_element(self, locator, timeout=10):
+        """Клик по элементу и обработка возможных ошибок"""
+        try:
+            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
+        except StaleElementReferenceException:
+            # self.browser.refresh()
+            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
+        except TimeoutException:
+            self.browser.refresh()
+            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
 
     def remove_class_script(self):
         """Удаление класса элемента, что бы он стал видимым и с ним можно совершить действие"""
