@@ -470,8 +470,9 @@ class AddFilterChanges(Authorisation, BasePage):
         try:
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
         except TimeoutException:
-            time.sleep(3)
-            self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+            time.sleep(10)
+            # driver.refresh()
+            # self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
             self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
