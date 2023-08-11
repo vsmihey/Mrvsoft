@@ -21,8 +21,8 @@ class DataLoginPassword:
 
     @staticmethod
     def correct_data():
-        login = 'andrey'
-        password = '10f0b265'
+        login = 'ricksanchez'
+        password = 'minervakms'
         return login, password
     @staticmethod
     def incorrect_data():
