@@ -1,7 +1,6 @@
 import time
 from datetime import datetime
 from urllib import request
-
 import allure
 import pytest
 from selenium import webdriver
