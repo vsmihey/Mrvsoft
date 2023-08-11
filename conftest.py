@@ -81,6 +81,10 @@ def pytest_exception_interact(node, report):
 
 
 
+вввввввввввввввввввв = "fffff"
+
+
+
 
 
 
