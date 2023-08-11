@@ -79,10 +79,3 @@ def pytest_exception_interact(node, call, report):
             attachment_type=AttachmentType.PNG
         )
 
-
-
-
-
-
-
-

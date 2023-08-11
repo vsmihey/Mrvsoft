@@ -3,16 +3,12 @@ import random
 import time
 from pathlib import Path
 from selenium.common import TimeoutException, StaleElementReferenceException, ElementClickInterceptedException, \
-    ElementNotInteractableException, WebDriverException, InvalidSelectorException, NoSuchElementException
+    ElementNotInteractableException
 from selenium.webdriver import Keys, ActionChains
-from selenium.webdriver.common.by import By
-from conftest import driver
-from generator.generator import generated_person, generated_file
+from generator.generator import generated_person
 from locators.locators_topic_database import CreateTopicDatabaseLocators
-from pages import article_page
 from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
-from pages.data_login_password import url
 
 
 class CreateTopicDatabase(Authorisation, BasePage):

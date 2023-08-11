@@ -9,16 +9,12 @@ from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 
 from conftest import driver
-from generator.generator import generated_person
 from locators.locator_wizard_and_search_ru_en import AddViewContentWizardLocators, SearchRuEnLocators
 from locators.locators_topic_database import CreateTopicDatabaseLocators
-from pages import checking_filter_changes_page
 from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
-from pages.checking_filter_changes_page import AddFilterChanges
 # from pages.data_login_password import url, text_ru, text_en
 from pages.users import text_ru, text_en
-from pages.repeat_function import RepeatFunction
 
 
 class AddViewContentWizard(Authorisation, BasePage):

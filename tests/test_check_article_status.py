@@ -2,9 +2,9 @@ import allure
 import pytest
 from pages.create_article_and_comments import Comments, DataParser
 from pages.person_validation import Person1, Person2, Person3, Person4, PersonValidation
-from pages.users import morty, admin
+from pages.users import morty
 
-user_for_test = admin
+user_for_test = morty
 
 
 @allure.suite(
