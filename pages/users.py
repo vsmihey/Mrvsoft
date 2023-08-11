@@ -9,8 +9,16 @@ class StableUsers:
 
 
 admin = StableUsers('b.pogodin', '3678vg')
-minervakms = StableUsers('ricksanchez', 'minervakms') # при смене - заменить в data_login_password
-andrey = StableUsers('andrey', '10f0b265')  # при смене - заменить в DataLoginPassword
+
+minervakms = StableUsers('ricksanchez', 'minervakms')  # при смене - заменить в data_login_password
+morty = StableUsers('morty', 'minervakms') # 7 тестовый файл
+jerry = StableUsers('jerry', 'minervakms')
+summer = StableUsers('summer', 'minervakms')
+beth = StableUsers('beth', 'minervakms')
+birdperson = StableUsers('birdperson', 'minervakms')
+gary = StableUsers('gary', 'minervakms')
+
+andrey = StableUsers('andrey', '10f0b265')
 person1 = StableUsers('person1', '777qwerty')
 person2 = StableUsers('person2', '777qwerty')
 person3 = StableUsers('person3', '777qwerty')
@@ -24,14 +32,16 @@ class DataLoginPassword:
         login = 'ricksanchez'
         password = 'minervakms'
         return login, password
+
     @staticmethod
     def incorrect_data():
         login_incorrect = 'm.andreyq'
         password_incorrect = '395a5555'
         return login_incorrect, password_incorrect
 
+
 """title"""
-name_project ='selen'
+name_project = 'selen'
 name_ = 'Весь контент'
 # base_url = "https://test6.minervasoft.ru/"
 
