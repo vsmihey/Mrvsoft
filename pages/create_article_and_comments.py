@@ -56,9 +56,9 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
             file.write(self.get_actual_url() + '\n')
             file.write(self.BASE_ARTICLE_TITLE)
 
-    def creating_base_article(self):
+    def creating_base_article(self, user=minervakms):
         """Создание обычной статьи с наполнением"""
-        self.get_authorisation_in_selen()
+        self.get_authorisation_in_selen(user)
         self.create_button()
         self.create_base_article_button()
         self.title_article()
@@ -67,32 +67,32 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.save_base_article()
         self.save_data_in_file()
 
-    def minor_edit_base_article(self, url):
+    def minor_edit_base_article(self, url, user=minervakms):
         """Редактирование статьи и минорное сохранение"""
-        self.get_authorisation_in_url(url)
+        self.get_authorisation_in_url(url, user)
         self.redaction()
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('HeyHey')
         self.save_minor_edit()
 
-    def major_edit_base_article(self, url):
+    def major_edit_base_article(self, url, user=minervakms):
         """Редактирование статьи и мажорное сохранение"""
-        self.get_authorisation_in_url(url)
+        self.get_authorisation_in_url(url, user)
         self.redaction()
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Rick and Morty was here')
         self.save_major_edit()
 
-    def delete_base_article(self, url):
+    def delete_base_article(self, url, user=minervakms):
         """Удаление статьи"""
-        self.get_authorisation_in_url(url)
+        self.get_authorisation_in_url(url, user)
         self.three_dots_button()
         self.delete_button()
         self.notification_text_area('Удаление')
         self.execute_button_click()
         time.sleep(1)
 
-    def restore_base_article(self, url):
+    def restore_base_article(self, url, user=minervakms):
         """Восстановление статьи"""
-        self.get_authorisation_in_url(url)
+        self.get_authorisation_in_url(url, user)
         self.restore_button()
         self.save_major_edit('Восстановление')
 
@@ -131,11 +131,11 @@ class Comments(Authorisation):
         self.click_to_element(locators.Comments.EXPERT_QUESTION)
 
     @staticmethod
-    def create_comments(driver, url):
+    def create_comments(driver, url, user=minervakms):
         """Создание тестового набора комментариев в статье по переданной ссылке, с прохождением авторизации"""
         page = Comments(driver)
 
-        page.get_authorisation_in_url(url)
+        page.get_authorisation_in_url(url, user)
 
         for i in range(4):
             page.comment_text_area(f'Тестовый комментарий {i + 1}')
@@ -144,41 +144,41 @@ class Comments(Authorisation):
         page.disable_the_question_to_the_expert_option()
         page.comment_text_area('Серый комментарий')
         page.send_comment()
-            # проверка создания 5 комментариев
-            # try:
-            #     time.sleep(1)
-            #     check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
-            #     # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
-            #     assert check_count_comment == "5 комментариев"
-            # except AssertionError:
-            #     continue
-            # break
+        # проверка создания 5 комментариев
+        # try:
+        #     time.sleep(1)
+        #     check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
+        #     # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
+        #     assert check_count_comment == "5 комментариев"
+        # except AssertionError:
+        #     continue
+        # break
 
     @staticmethod
-    def close_first_comment(driver, url):
+    def close_first_comment(driver, url, user=minervakms):
         """Закрытие первого комментария"""
         page = Comments(driver)
-        page.get_authorisation_in_url(url)
+        page.get_authorisation_in_url(url, user)
         page.click_to_element(locators.Comments.TO_ANSWER_COMMENT_1)
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 1')
         page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
         page.click_to_element(locators.Comments.CLOSE_COMMENT)
 
     @staticmethod
-    def close_second_comment(driver, url):
+    def close_second_comment(driver, url, user=minervakms):
         """Закрытие первого комментария"""
         page = Comments(driver)
-        page.get_authorisation_in_url(url)
+        page.get_authorisation_in_url(url, user)
         page.click_to_element(locators.Comments.TO_ANSWER_COMMENT_2)
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 2')
         page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
         page.click_to_element(locators.Comments.CLOSE_COMMENT)
 
     @staticmethod
-    def close_third_comment(driver, url):
+    def close_third_comment(driver, url, user=minervakms):
         """Закрытие первого комментария"""
         page = Comments(driver)
-        page.get_authorisation_in_url(url)
+        page.get_authorisation_in_url(url, user)
         page.click_to_element(locators.Comments.TO_ANSWER_COMMENT_3)
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
         page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
