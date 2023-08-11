@@ -1,7 +1,6 @@
 import time
 from datetime import datetime
 from urllib import request
-
 import allure
 import pytest
 from selenium import webdriver
@@ -20,7 +19,7 @@ from allure_commons.types import AttachmentType
 def driver():
     # driver_service = Service(ChromeDriverManager().install())  # вкючить для загрузки новой версии дров
     chrome_options = Options()
-    # chrome_options.add_argument("--headless")   # запуск в скрытом режиме (без браузера)
+    chrome_options.add_argument("--headless")   # запуск в скрытом режиме (без браузера)
     # chrome_options.headless = True
     chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
     # prefs = {"profile.default_content_setting_values.notifications": 1}  # принять уведомление всплывающее
