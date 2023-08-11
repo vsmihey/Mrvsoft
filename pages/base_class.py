@@ -39,7 +39,6 @@ class MainPage:
         return Wait(self.browser, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     """поиск по тексту в DOM дереве даже если элемент не виден"""
-
     def elements_is_present(self, locator, timeout=10):
         """Поиск элемента даже если он не виден"""
         return Wait(self.browser, timeout).until(EC.presence_of_element_located(locator))

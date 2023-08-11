@@ -10,7 +10,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from allure_commons.types import AttachmentType
 
-
 # from pages.data_login_password import *
 
 # scope='session'
