@@ -1,24 +1,19 @@
 import pathlib
 import random
-import sys
 import time
 from pathlib import Path
 
 from selenium.common import TimeoutException, StaleElementReferenceException, ElementClickInterceptedException, \
-    ElementNotInteractableException, NoSuchElementException, WebDriverException, JavascriptException
+    ElementNotInteractableException, NoSuchElementException, WebDriverException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 
-from conftest import driver
 from generator.generator import generated_person
 from locators.locators_checking_filter_changes import AddFilterChangesLocators
 from locators.locators_form_pages import FormPagesLocators
 from locators.locators_topic_database import CreateTopicDatabaseLocators
-from pages import repeat_function
 from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
-from pages.data_login_password import url
-from pages.repeat_function import RepeatFunction
 
 
 class AddFilterChanges(Authorisation, BasePage):
