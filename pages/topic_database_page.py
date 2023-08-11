@@ -318,7 +318,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         time.sleep(2)
         try:
             self.element_is_visible(self.Locators.CREATE_BUTTON, timeout=1).click()
-        except StaleElementReferenceException:
+        except (TimeoutException, StaleElementReferenceException):
             time.sleep(2)
             self.element_is_visible(self.Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_ARTICLE).click()

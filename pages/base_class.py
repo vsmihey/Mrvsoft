@@ -127,7 +127,8 @@ class MainPage:
         # now_date = datetime.datetime.now(offset)
         # now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
         # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-        name_screenshot = 'screenshot' + '.png'
+        name_screenshot = 'screenshot'+'.png'
         path = pathlib.Path(pathlib.Path.cwd(), 'avatars', name_screenshot)
         path = str(path)
         self.browser.save_screenshot(path)
+
