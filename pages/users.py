@@ -8,7 +8,7 @@ class StableUsers:
     password: str
 
 
-admin = StableUsers('b.pogodin', '68f1d85b')
+admin = StableUsers('b.pogodin', '3678vg')
 minervakms = StableUsers('ricksanchez', 'minervakms') # при смене - заменить в data_login_password
 andrey = StableUsers('andrey', '10f0b265')  # при смене - заменить в DataLoginPassword
 person1 = StableUsers('person1', '777qwerty')

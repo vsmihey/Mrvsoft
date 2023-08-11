@@ -4,6 +4,7 @@ import allure
 import pytest
 from pages.create_article_and_comments import Comments, DataParser
 from pages.person_validation import Person1, Person2, Person3, Person4, PersonValidation
+from pages.users import admin
 
 
 @allure.suite(
@@ -18,15 +19,15 @@ class TestCheckNewArticleStatus:
         @allure.title('Создание новой статьи')
         def test_article_create_base(self, driver):
             page_article_base = PersonValidation(driver)
-            page_article_base.creating_base_article()
+            page_article_base.creating_base_article(admin)
 
         @allure.title('Создание тестового набора комментов')
         def test_create_comments(self, driver):
-            Comments.create_comments(driver, DataParser.get_url_from_data_file())
+            Comments.create_comments(driver, DataParser.get_url_from_data_file(), admin)
 
         @allure.title('Закрытие первого тестового комментария')
         def test_close_first_comment(self, driver):
-            Comments.close_first_comment(driver, DataParser.get_url_from_data_file())
+            Comments.close_first_comment(driver, DataParser.get_url_from_data_file(), admin)
 
         @allure.title('Новая статья. Проверка истории пользователем без доступом к статье')
         def test_new_article_history_person1(self, driver):
@@ -83,11 +84,11 @@ class TestCheckNewArticleStatus:
         @allure.title('Минорное редактирование статьи')
         def test_article_minor_edit_base(self, driver):
             page_article_base = PersonValidation(driver)
-            page_article_base.minor_edit_base_article(DataParser.get_url_from_data_file())
+            page_article_base.minor_edit_base_article(DataParser.get_url_from_data_file(), admin)
 
         @allure.title('Закрытие второго тестового комментария')
         def test_close_second_comment(self, driver):
-            Comments.close_second_comment(driver, DataParser.get_url_from_data_file())
+            Comments.close_second_comment(driver, DataParser.get_url_from_data_file(), admin)
 
         @allure.title('Минорное редактирование. Проверка истории пользователем без доступом к статье')
         def test_minor_edit_article_history_person1(self, driver):
@@ -128,11 +129,11 @@ class TestCheckNewArticleStatus:
         @allure.title('Мажорное редактирование статьи')
         def test_article_major_edit_base(self, driver):
             page_article_base = PersonValidation(driver)
-            page_article_base.major_edit_base_article(DataParser.get_url_from_data_file())
+            page_article_base.major_edit_base_article(DataParser.get_url_from_data_file(), admin)
 
         @allure.title('Закрытие третьего тестового комментария')
         def test_close_third_comment(self, driver):
-            Comments.close_third_comment(driver, DataParser.get_url_from_data_file())
+            Comments.close_third_comment(driver, DataParser.get_url_from_data_file(), admin)
 
         @allure.title('Мажорное редактирование. Проверка истории пользователем без доступом к статье')
         def test_major_edit_article_history_person1(self, driver):
@@ -180,7 +181,7 @@ class TestCheckNewArticleStatus:
         @allure.title('Удаление статьи')
         def test_article_delete_base(self, driver):
             page_article_base = PersonValidation(driver)
-            page_article_base.delete_base_article(DataParser.get_url_from_data_file())
+            page_article_base.delete_base_article(DataParser.get_url_from_data_file(), admin)
 
         @allure.title('Удаление. Проверка истории пользователем без доступом к статье')
         def test_delete_article_history_person1(self, driver):
@@ -230,7 +231,7 @@ class TestCheckNewArticleStatus:
         @allure.title('Восстановление статьи')
         def test_article_restore_base(self, driver):
             page_article_base = PersonValidation(driver)
-            page_article_base.restore_base_article(DataParser.get_url_from_data_file())
+            page_article_base.restore_base_article(DataParser.get_url_from_data_file(), admin)
 
         @allure.title('Восстановление. Проверка истории пользователем без доступом к статье')
         def test_restore_article_history_person1(self, driver):
