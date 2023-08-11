@@ -57,7 +57,6 @@ class Authorisation(MainPage):
         self.input_login(user.login)
         self.input_password(user.password)
         self.confirm_button()
-        time.sleep(1)
         self.select_project_selen()
 
     def get_authorisation_in_url(self, url, user=minervakms):
