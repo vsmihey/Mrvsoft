@@ -579,7 +579,7 @@ class AddFilterChanges(Authorisation, BasePage):
             self.element_is_visible(self.Locators.FILTERS).click()
         try:
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
-        except NoSuchElementException:
+        except (TimeoutException, NoSuchElementException, StaleElementReferenceException):
             time.sleep(5)
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
         article_firs_name.click()

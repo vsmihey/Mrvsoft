@@ -89,6 +89,7 @@ class MainPage:
     def action_move_to_element(self, element, driver):
         """Переход к элементу которого не видно"""
         action = ActionChains(driver)
+        time.sleep(1)
         action.move_to_element(element).perform()
         # action.perform()
 
