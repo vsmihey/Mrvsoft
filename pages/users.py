@@ -10,13 +10,13 @@ class StableUsers:
 
 admin = StableUsers('b.pogodin', '3678vg')
 
-minervakms = StableUsers('ricksanchez', 'minervakms')  # при смене - заменить в data_login_password
+minervakms = StableUsers('ricksanchez', 'minervakms')  # 6 test_news_history, при смене - заменить в data_login_password
 morty = StableUsers('morty', 'minervakms') # 7 тестовый файл
-jerry = StableUsers('jerry', 'minervakms')
-summer = StableUsers('summer', 'minervakms')
-beth = StableUsers('beth', 'minervakms')
-birdperson = StableUsers('birdperson', 'minervakms')
-gary = StableUsers('gary', 'minervakms')
+jerry = StableUsers('jerry', 'minervakms') # 1 test_form
+summer = StableUsers('summer', 'minervakms') # 2 test_files_format
+beth = StableUsers('beth', 'minervakms') # 3 test_topic_database
+birdperson = StableUsers('birdperson', 'minervakms') # 4 test_checking_filter_changes
+gary = StableUsers('gary', 'minervakms') # 5 test_wizard_and_search_ru_en
 
 andrey = StableUsers('andrey', '10f0b265')
 person1 = StableUsers('person1', '777qwerty')
