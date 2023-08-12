@@ -37,7 +37,8 @@ class FormPagesLocators:
     """title"""
     CONTENT = (By.XPATH, "//a[@data-tip='Контент']")  # content of page
     ALL_CONTENT = (By.CLASS_NAME, "folder-list-item__total")
-    CONTENT1 = (By.XPATH, "(//a[@class='folder-list-item__head'])[2]")
+    # CONTENT1 = (By.XPATH, "(//a[@class='folder-list-item__head'])[2]")
+    CONTENT1 = (By.XPATH, "//div[@title='Контент 1']")
     # CONTENT1_NAME = (By.XPATH, "//p[contains(text(),'Контент 1')]")  # check name of content
     NAME_CONTENT = (By.XPATH, "//section[2]//article[1]//a[1]//section[1]")
     EDIT = (By.XPATH, "//body/div[@class='article-modal__portal']/div[@class='ReactModal__Overlay ReactModal__Overlay--after-open article-modal__overlay']/div[@role='dialog']/article[@class='article-modal']/div[@class='article-modal__main']/div[@class='scroller article-modal__scroller']/div[@class='scroller__wrap']/div[@class='scroller__body']/div[@class='scroller__content article-modal__scroller-content']/div[@class='article-modal__container']/header[@id='article-content-modal-header']/div[@class='article-modal__controls']/button[2]")

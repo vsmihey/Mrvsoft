@@ -19,7 +19,6 @@ from locators.locators_topic_database import CreateTopicDatabaseLocators
 from pages.data_login_password import *
 
 
-
 # from locators.form_pages_locators import FormPagesLocators as Locators
 # from pages.data_login_password import *
 

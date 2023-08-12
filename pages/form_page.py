@@ -704,7 +704,8 @@ class FormPage(Authorisation, BasePage):
         check_text_favourites_value = check_text_favourites
         assert check_text_favourites_value == 'избранное'
         # print("избранное")
-        self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
+        self.click_to_element(Locators.CREATE_FOLDER_BUTTON)
+        # self.element_is_visible(Locators.CREATE_FOLDER_BUTTON).click()
         text_new_folder_check = self.element_is_visible(Locators.TEXT_NEW_FOLDER_CHECK).text
         text_new_folder_check_value = text_new_folder_check
         assert text_new_folder_check_value == "Новая папка"

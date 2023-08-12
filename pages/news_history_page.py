@@ -1,18 +1,13 @@
 import random
 import time
-
 import allure
 from selenium.common import TimeoutException, NoSuchElementException, StaleElementReferenceException, \
     InvalidSelectorException, ElementNotInteractableException, ElementClickInterceptedException
 from selenium.webdriver.common.by import By
-
-import pages
 from locators.locators_form_pages import FormPagesLocators
 from locators.locators_news_history import LocatorsCheckNewsHistory
 from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
-from pages.data_login_password import login_person1, password_person1
-from pages.form_page import FormPage
 
 
 class CheckNewsHistoryPage(Authorisation, BasePage):
@@ -297,10 +292,10 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         """check restored article for person 2: can not restore article"""
         self.element_is_visible(self.Locators.HISTORY_BUTTON).click()
         try:
-            self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2).click()
+            self.click_to_element(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2)
         except TimeoutException:
             time.sleep(3)
-            self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2).click()
+            self.click_to_element(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2)
         self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_CHANGE).is_displayed()
         comment = self.element_is_visible(self.Locators.RESTORED_ARTICLE_1_CHECK_ADDED_COMMENT).is_displayed()
         print(comment)
