@@ -53,7 +53,7 @@ class MainPage:
 
     def click_to_element(self, locator, timeout=10):
         """Клик по элементу и обработка возможных ошибок"""
-        time.sleep(0.5)
+        time.sleep(0.3)
         try:
             return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
         except StaleElementReferenceException:
