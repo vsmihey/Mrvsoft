@@ -367,7 +367,6 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         print(login1_2, password_person1_2)
         return login1_2, password_person1_2
 
-
     def create_and_add_comment(self):
         name = "name " + str(random.randint(999, 9999))
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
