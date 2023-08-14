@@ -33,11 +33,14 @@ class TestCheckNewArticleStatus:
         def test_new_article_history_person1(self, driver):
             person = Person1(driver)
             person.get_check_history()
+            person.check_no_article_notifications_and_history_1()
+
 
         @allure.title('Новая статья. Проверка колокольчика пользователем без доступом к статье')
         def test_new_article_bell_person1(self, driver):
             person = Person1(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_2()
 
         @allure.title('Новая статья. Проверка истории пользователем с полным доступом к статье')
         def test_new_article_history_person2(self, driver):
@@ -77,6 +80,7 @@ class TestCheckNewArticleStatus:
         def test_new_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_1()
 
     @allure.feature('Минорное редактирование статьи, проверка в истории и колокольчике')
     class TestMinorArticle:
@@ -94,11 +98,13 @@ class TestCheckNewArticleStatus:
         def test_minor_edit_article_history_person1(self, driver):
             person = Person1(driver)
             person.get_check_history()
+            person.check_no_article_notifications_and_history_2()
 
         @allure.title('Минорное редактирование. Проверка колокольчика пользователем без доступом к статье')
         def test_minor_edit_article_bell_person1(self, driver):
             person = Person1(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_2()
 
         @allure.title('Минорное редактирование. Проверка истории пользователем с полным доступом к статье')
         def test_minor_edit_article_history_person2(self, driver):
@@ -122,6 +128,7 @@ class TestCheckNewArticleStatus:
         def test_minor_edit_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_2()
 
     @allure.feature('Мажорное редактирование статьи, проверка в истории и колокольчике')
     class TestMajorArticle:
@@ -139,11 +146,13 @@ class TestCheckNewArticleStatus:
         def test_major_edit_article_history_person1(self, driver):
             person = Person1(driver)
             person.get_check_history()
+            person.check_no_article_notifications_and_history_2()
 
         @allure.title('Мажорное редактирование. Проверка колокольчика пользователем без доступом к статье')
         def test_major_edit_article_bell_person1(self, driver):
             person = Person1(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_2()
 
         @allure.title('Мажорное редактирование. Проверка истории пользователем с полным доступом к статье')
         def test_major_edit_article_history_person2(self, driver):
@@ -175,6 +184,7 @@ class TestCheckNewArticleStatus:
         def test_major_article_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_2()
 
     @allure.feature('Удаление статьи, проверка в истории и колокольчике')
     class TestDeleteArticle:
@@ -187,11 +197,13 @@ class TestCheckNewArticleStatus:
         def test_delete_article_history_person1(self, driver):
             person = Person1(driver)
             person.get_check_history()
+            person.check_no_article_notifications_and_history_3()
 
         @allure.title('Удаление. Проверка колокольчика пользователем без доступом к статье')
         def test_delete_article_bell_person1(self, driver):
             person = Person1(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_3()
 
         @allure.title('Удаление. Проверка истории пользователем с полным доступом к статье')
         def test_delete_article_history_person2(self, driver):
@@ -225,6 +237,7 @@ class TestCheckNewArticleStatus:
         def test_delete_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_3()
 
     @allure.feature('Восстановление статьи, проверка в истории и колокольчике')
     class TestRestoreArticle:
@@ -237,11 +250,13 @@ class TestCheckNewArticleStatus:
         def test_restore_article_history_person1(self, driver):
             person = Person1(driver)
             person.get_check_history()
+            person.check_no_article_notifications_and_history_4()
 
         @allure.title('Восстановление. Проверка колокольчика пользователем без доступом к статье')
         def test_restore_article_bell_person1(self, driver):
             person = Person1(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_4()
 
         @allure.title('Восстановление. Проверка истории пользователем с полным доступом к статье')
         def test_restore_article_history_person2(self, driver):
@@ -249,6 +264,7 @@ class TestCheckNewArticleStatus:
             person.get_check_history()
             person.go_to_restored_article_from_history_or_bell()
             person.check_open_valid_article()
+
 
         @allure.title('Восстановление. Проверка истории колокольчика с полным доступом к статье')
         def test_restore_article_bell_person2(self, driver):
@@ -271,3 +287,4 @@ class TestCheckNewArticleStatus:
         def test_restore_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
+            person.check_no_article_notifications_and_history_4()

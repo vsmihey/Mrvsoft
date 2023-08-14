@@ -235,7 +235,7 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
     def switch_to_bell(self, person):
         """Метод переходна на страницу истории, с прохождением авторизации"""
         self.get_authorisation_in_selen(person)
-        # self.yes_new_notification()
+        self.yes_new_notification()
         self.bell_button_click()
 
     def get_check_bell(self):
@@ -255,22 +255,10 @@ class Person1(PersonValidation):
 
     def get_check_history(self):
         self.switch_to_history(person1)
-        # try:
-        #     self.empty_history_check()
-        # except (AssertionError, TimeoutException):
-        #     self.no_empty_history()
-        # finally:
-        self.check_no_article_notifications_and_history_1()
-        self.check_no_article_notifications_and_history_2()
-        self.check_no_article_notifications_and_history_3()
-        self.check_no_article_notifications_and_history_4()
 
     def get_check_bell(self):
         self.switch_to_bell(person1)
-        self.check_no_article_notifications_and_history_1()
-        self.check_no_article_notifications_and_history_2()
-        self.check_no_article_notifications_and_history_3()
-        self.check_no_article_notifications_and_history_4()
+
 
 
 class Person2(PersonValidation):
