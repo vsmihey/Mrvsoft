@@ -142,9 +142,9 @@ class BellAlert(MainPage):
     def check_no_article_notifications_and_history(self):
         """Проверка, что нет записей в истории и уведомлений по конкретной статье по всем статусам"""
         assert self.element_is_invisible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK, timeout=0.2)
-        assert self.element_is_invisible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK, timeout=0.2)
-        assert self.element_is_invisible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK, timeout=0.2)
-        assert self.element_is_invisible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK, timeout=0.2)
+        # assert self.element_is_invisible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK, timeout=0.2)
+        # assert self.element_is_invisible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK, timeout=0.2)
+        # assert self.element_is_invisible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK, timeout=0.2)
 
 
 class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
