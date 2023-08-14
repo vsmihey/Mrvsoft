@@ -61,7 +61,7 @@ class MainPage:
             return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
         except TimeoutException:
             print('Поймал TimeoutException')
-            self.browser.refresh()
+            # self.browser.refresh()
             return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
         except Exception as e:
             print(f'Поймал  {e}')
