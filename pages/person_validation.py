@@ -146,6 +146,22 @@ class BellAlert(MainPage):
         assert self.element_is_invisible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK, timeout=0.2)
         assert self.element_is_invisible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK, timeout=0.2)
 
+    def check_no_article_notifications_and_history_1(self):
+        """Проверка, что нет записей в истории и уведомлений по конкретной статье по всем статусам"""
+        assert self.element_is_invisible(locators.CheckCommentsPersons.CREATE_ARTICLE_CHECK, timeout=0.2)
+
+    def check_no_article_notifications_and_history_2(self):
+        """Проверка, что нет записей в истории и уведомлений по конкретной статье по всем статусам"""
+        assert self.element_is_invisible(locators.CheckCommentsPersons.MAJOR_EDIT_ARTICLE_CHECK, timeout=0.2)
+
+    def check_no_article_notifications_and_history_3(self):
+        """Проверка, что нет записей в истории и уведомлений по конкретной статье по всем статусам"""
+        assert self.element_is_invisible(locators.CheckCommentsPersons.DELETE_ARTICLE_CHECK, timeout=0.2)
+
+    def check_no_article_notifications_and_history_4(self):
+        """Проверка, что нет записей в истории и уведомлений по конкретной статье по всем статусам"""
+        assert self.element_is_invisible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK, timeout=0.2)
+
 
 class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
     """Класс проверки функционала пользователями из эталона"""
@@ -236,20 +252,13 @@ class Person1(PersonValidation):
         #     self.yes_new_notification()
         # finally:
         self.bell_button_click()
-        self.check_no_article_notifications_and_history()
 
     def get_check_history(self):
         self.switch_to_history(person1)
-        # try:
-        #     self.empty_history_check()
-        # except (AssertionError, TimeoutException):
-        #     self.no_empty_history()
-        # finally:
-        self.check_no_article_notifications_and_history()
 
     def get_check_bell(self):
         self.switch_to_bell(person1)
-        self.check_no_article_notifications_and_history()
+
 
 
 class Person2(PersonValidation):
@@ -274,3 +283,4 @@ class Person4(Person1):
 
     def get_check_bell(self):
         self.switch_to_bell(person4)
+

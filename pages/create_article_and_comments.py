@@ -144,15 +144,22 @@ class Comments(Authorisation):
         page.disable_the_question_to_the_expert_option()
         page.comment_text_area('Серый комментарий')
         page.send_comment()
+
         # проверка создания 5 комментариев
-        # try:
-        #     time.sleep(1)
-        #     check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
-        #     # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
-        #     assert check_count_comment == "5 комментариев"
-        # except AssertionError:
-        #     continue
-        # break
+        try:
+            time.sleep(1)
+            check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
+            # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
+            assert check_count_comment == "5 комментариев"
+        except AssertionError:
+            driver.refresh()
+            for i in range(4):
+                page.comment_text_area(f'Тестовый комментарий {i + 1}')
+                page.send_comment()
+
+            page.disable_the_question_to_the_expert_option()
+            page.comment_text_area('Серый комментарий')
+            page.send_comment()
 
     @staticmethod
     def close_first_comment(driver, url, user=minervakms):
