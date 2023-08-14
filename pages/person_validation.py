@@ -260,11 +260,17 @@ class Person1(PersonValidation):
         # except (AssertionError, TimeoutException):
         #     self.no_empty_history()
         # finally:
-        self.check_no_article_notifications_and_history()
+        self.check_no_article_notifications_and_history_1()
+        self.check_no_article_notifications_and_history_2()
+        self.check_no_article_notifications_and_history_3()
+        self.check_no_article_notifications_and_history_4()
 
     def get_check_bell(self):
         self.switch_to_bell(person1)
-        self.check_no_article_notifications_and_history()
+        self.check_no_article_notifications_and_history_1()
+        self.check_no_article_notifications_and_history_2()
+        self.check_no_article_notifications_and_history_3()
+        self.check_no_article_notifications_and_history_4()
 
 
 class Person2(PersonValidation):
@@ -289,4 +295,7 @@ class Person4(Person1):
 
     def get_check_bell(self):
         self.switch_to_bell(person4)
-        self.check_no_article_notifications_and_history()
+        self.check_no_article_notifications_and_history_1()
+        self.check_no_article_notifications_and_history_2()
+        self.check_no_article_notifications_and_history_3()
+        self.check_no_article_notifications_and_history_4()
