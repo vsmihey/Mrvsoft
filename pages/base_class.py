@@ -11,6 +11,7 @@ from pages import data_login_password
 import pathlib
 
 
+
 class MainPage:
 
     def __init__(self, browser, url=data_login_password.url):
