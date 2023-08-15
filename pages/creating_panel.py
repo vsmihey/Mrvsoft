@@ -1,6 +1,7 @@
 
 from pages.authorisation_page import Authorisation
 from locators.locators_form_pages import FormPagesLocators
+import locators.all_locators as locators
 
 
 class CreatingPanel(Authorisation):
@@ -16,18 +17,20 @@ class CreatingPanel(Authorisation):
 
     def create_sample_article_button(self):
         """Кнопка для создания шаблонной статьи"""
-        pass
+        self.click_to_element(FormPagesLocators.CREATE_ARTICLE)
 
     def create_stepping_article_button(self):
         """Кнопка для создания пошагового сценария"""
         pass
 
+    def create_test_button(self):
+        """Кнопка для создания теста"""
+        self.click_to_element(locators.Test.CREATING_TEST_BUTTON)
 
-# if __name__ == '__main__':
-#     try:
-#         page = CreatingPanel()
-#         page.get_authorisation_in_superbank()
-#         page.create_button()
-#         page.create_base_article_button()
-#     except Exception as e:
-#         print(e)
+    def create_course_button(self):
+        """Кнопка для создания курса"""
+        pass
+
+    def create_quiz_button(self):
+        """Кнопка для создания опроса"""
+        pass

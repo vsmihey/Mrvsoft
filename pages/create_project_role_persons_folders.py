@@ -17,7 +17,8 @@ class NewProject(Authorisation, MenuNavigation):
     """Класс для создания нового проекта в системе"""
     PROJECT_NAME = 'Название проекта ' + str(random.randint(999, 9999))
     TEST_PROJECT = (By.XPATH,
-                    f"//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='{PROJECT_NAME}']")
+                    f"//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-"
+                    f"item__title'][normalize-space()='{PROJECT_NAME}']")
 
     def add_new_project_button(self):
         """Кнопка создания нового проекта"""

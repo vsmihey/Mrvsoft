@@ -1206,3 +1206,10 @@ class CheckBellComments:
     #  Проверка Персоном 3 (остальные локаторы как из персона 2)
     BELL_CREATE_ARTICLE_CONFIRM = (By.XPATH,
                                    f"//div[text()='подтвердите']/../..//div[text()='Название статьи 9881']/../..//div[text()='Создание статьи']")
+
+
+class Test:
+    CREATING_TEST_BUTTON = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[5]")
+    TEST_NAME = (By.NAME, "name")
+    TEST_DESCRIPTION = (By.NAME, "description")
+
