@@ -12,3 +12,7 @@ class MenuNavigation(MainPage):
     def bell_button_click(self):
         """Переход в уведомления (колокольчик)"""
         self.click_to_element(locators.CheckCommentsPersons.BELL_ALERT)
+
+    def create_folder_button(self):
+        """Кнопка создания новой папки"""
+        self.click_to_element(locators.FormPagesLocators.CREATE_FOLDER_BUTTON)

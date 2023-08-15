@@ -34,10 +34,18 @@ class Authorisation(MainPage):
         """Выбор проекта Selen"""
         self.click_to_element(locators.AuthorisationPage.TEST_PROJECT)
 
-
     def checking_the_authorization_page(self) -> str:
         """Проверка, что открыта страница авторизации"""
         return self.element_is_visible(locators.AuthorisationPage.INPUT_IN_SYSTEM_TEXT).text
+
+    def get_authorisation_no_project_selection(self, user=minervakms):
+        """Метод для прохождения авторизации без выбора проекта"""
+        self.browser.delete_all_cookies()
+        self.open()
+        self.select_authorisation_type()
+        self.input_login(user.login)
+        self.input_password(user.password)
+        self.confirm_button()
 
     def get_authorisation_in_superbank(self, user=minervakms):
         """Метод для прохождения авторизации в проект СуперБанка"""
