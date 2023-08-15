@@ -35,7 +35,6 @@ class TestCheckNewArticleStatus:
             person.get_check_history()
             person.check_no_article_notifications_and_history_1()
 
-
         @allure.title('Новая статья. Проверка колокольчика пользователем без доступом к статье')
         def test_new_article_bell_person1(self, driver):
             person = Person1(driver)
@@ -70,6 +69,8 @@ class TestCheckNewArticleStatus:
         def test_new_article_bell_person3(self, driver):
             person = Person3(driver)
             person.get_check_bell()
+            # person.bell_gray_comment_check()
+            # person.bell_first_comment_check()
             person.go_to_new_article_from_history_or_bell()
             person.check_open_valid_article()
             person.check_article_bottom_banner()
@@ -81,6 +82,8 @@ class TestCheckNewArticleStatus:
             person = Person4(driver)
             person.get_check_bell()
             person.check_no_article_notifications_and_history_1()
+            # person.bell_gray_comment_check()
+            # person.bell_first_comment_check()
 
     @allure.feature('Минорное редактирование статьи, проверка в истории и колокольчике')
     class TestMinorArticle:
@@ -111,16 +114,21 @@ class TestCheckNewArticleStatus:
             person = Person2(driver)
             person.get_check_history()
             # person.history_second_solve_comment_check()
+            person.check_no_article_notifications_and_history_2()
 
         @allure.title('Минорное редактирование. Проверка колокольчика пользователем с полным доступом к статье')
         def test_minor_edit_article_bell_person2(self, driver):
             person = Person2(driver)
             person.get_check_bell()
+            # person.bell_second_comment_check()
+            person.check_no_article_notifications_and_history_2()
 
         @allure.title('Минорное редактирование. Проверка колокольчика пользователем с подтверждением прочтения')
         def test_minor_edit_article_bell_person3(self, driver):
             person = Person3(driver)
             person.get_check_bell()
+            # person.bell_second_comment_check()
+            person.check_no_article_notifications_and_history_2()
 
         @allure.title(
             'Минорное редактирование. Проверка колокольчика пользователем с доступом к статье но с выключенными '
@@ -128,6 +136,7 @@ class TestCheckNewArticleStatus:
         def test_minor_edit_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
+            # person.bell_second_comment_check()
             person.check_no_article_notifications_and_history_2()
 
     @allure.feature('Мажорное редактирование статьи, проверка в истории и колокольчике')
@@ -166,6 +175,7 @@ class TestCheckNewArticleStatus:
         def test_major_edit_article_bell_person2(self, driver):
             person = Person2(driver)
             person.get_check_bell()
+            # person.bell_third_comment_check()
             person.go_to_major_edit_article_from_history_or_bell()
             person.check_open_valid_article()
 
@@ -173,6 +183,7 @@ class TestCheckNewArticleStatus:
         def test_major_edit_article_bell_person3(self, driver):
             person = Person3(driver)
             person.get_check_bell()
+            # person.bell_third_comment_check()
             person.go_to_major_edit_article_from_history_or_bell()
             person.check_open_valid_article()
             person.check_article_bottom_banner()
@@ -184,6 +195,7 @@ class TestCheckNewArticleStatus:
         def test_major_article_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
+            # person.bell_third_comment_check()
             person.check_no_article_notifications_and_history_2()
 
     @allure.feature('Удаление статьи, проверка в истории и колокольчике')
@@ -264,7 +276,6 @@ class TestCheckNewArticleStatus:
             person.get_check_history()
             person.go_to_restored_article_from_history_or_bell()
             person.check_open_valid_article()
-
 
         @allure.title('Восстановление. Проверка истории колокольчика с полным доступом к статье')
         def test_restore_article_bell_person2(self, driver):

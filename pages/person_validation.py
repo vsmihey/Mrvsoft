@@ -38,11 +38,11 @@ class History(MainPage):
 
     def status_comment_in_history(self, locator):
         """Проверка, что комментарий в верном статусе"""
-        assert self.elements_is_present(locator).is_displayed() is True
+        assert self.element_is_visible(locator).is_displayed() is True
 
     def text_comment_in_history(self, locator, text_comment):
         """Проверка текста комментария"""
-        assert self.elements_is_present(locator).text == text_comment
+        assert self.element_is_visible(locator).text == text_comment
 
     def history_gray_comment_check(self):
         """Проверка, наличия серого комментария в истории"""
@@ -260,7 +260,6 @@ class Person1(PersonValidation):
         self.switch_to_bell(person1)
 
 
-
 class Person2(PersonValidation):
 
     def get_check_history(self):
@@ -283,4 +282,3 @@ class Person4(Person1):
 
     def get_check_bell(self):
         self.switch_to_bell(person4)
-
