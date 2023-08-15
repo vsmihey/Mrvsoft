@@ -727,9 +727,9 @@ class FormPage(Authorisation, BasePage):
         time.sleep(2)
         edit_new_folder = driver.find_element(By.XPATH, f"//div[text()='{edit_name}']")
         edit_new_folder.click()
-        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        self.click_to_element(Locators.DELETE_FOLDER_BUTTON)
         time.sleep(1)
-        self.element_is_visible(Locators.DELETE_FOLDER_BUTTON).click()
+        self.click_to_element(Locators.DELETE_FOLDER_BUTTON)
         time.sleep(1)
         text_not_folders = self.element_is_visible(Locators.TEXT_NOT_FOLDERS)
         text_not_folders_value = text_not_folders.text

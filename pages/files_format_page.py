@@ -77,10 +77,10 @@ class FilesFormatPage(Authorisation, BasePage):
                 i = "gomer"
             """input file"""
             try:
-                self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+                self.click_to_element(self.Locators.CREATE_BUTTON)
             except StaleElementReferenceException:
                 time.sleep(5)
-                self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+                self.click_to_element(self.Locators.CREATE_BUTTON)
             self.element_is_visible(self.Locators.BUTTON_FILE).click()
             try:
                 self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
@@ -223,7 +223,13 @@ class FilesFormatPage(Authorisation, BasePage):
         """edit avi file"""
         # здесь нужно найти ранее созданный файл
         self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
-        element = self.elements_is_present(self.Locators.MP3_FILE_CREATED)
+        try:
+            element = self.elements_is_present(self.Locators.MP3_FILE_CREATED, timeout=3)
+        except TimeoutException:
+            time.sleep(1)
+            # создаем файл mp3 если не доступен
+            self.create_pic_video_audio_files(self)
+            element = self.elements_is_present(self.Locators.MP3_FILE_CREATED)
         self.action_move_to_element(element, driver)
         self.elements_is_present(self.Locators.MP3_FILE_CREATED).click()
         self.check_replacement_files_text(driver)

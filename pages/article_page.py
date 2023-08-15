@@ -211,11 +211,7 @@ class ArticlePage(Authorisation, BasePage):
         time.sleep(1)
         self.element_is_visible(Locators.INPUT_REQUEST).send_keys(text_fixing)
         time.sleep(2)
-        try:
-            self.element_is_visible(Locators.BUTTON_FIXING_CONTENT_CHANGE).click()
-        except TimeoutException:
-            time.sleep(3)
-            self.element_is_visible(Locators.BUTTON_FIXING_CONTENT_CHANGE).click()
+        self.click_to_element(Locators.BUTTON_FIXING_CONTENT_CHANGE)
         check_add_fixing_content = self.element_is_visible(Locators.CHECK_ADD_FIXING_CONTENT)
         check_add_fixing_content_value = check_add_fixing_content.text
         assert check_add_fixing_content_value == "Добавление закрепленного контента"
@@ -243,16 +239,18 @@ class ArticlePage(Authorisation, BasePage):
         included_content_value = included_content.text
         assert included_content_value == text_area
         # print(included_content_value)
-        self.element_is_visible(Locators.FIXING).click()
+        self.click_to_element(Locators.FIXING)
+        time.sleep(1)
         try:
             check_number_1_of_list = self.element_is_visible(Locators.LIST_OF_ARTICLES)
         except TimeoutException:
             time.sleep(2)
-            self.element_is_visible(Locators.FIXING).click()
+            # self.element_is_visible(Locators.FIXING).click()
             check_number_1_of_list = self.element_is_visible(Locators.LIST_OF_ARTICLES)
         check_number_1_of_list_value = check_number_1_of_list.text
         assert check_number_1_of_list_value == text_test
         # print(check_number_1_of_list_value)
+        time.sleep(1)
         self.element_is_visible(Locators.POPUP_CLOSE_SVG).click()
         time.sleep(1)
         search = self.element_is_visible(Locators.SEARCH_OF_CONTENTS)
@@ -353,28 +351,6 @@ class ArticlePage(Authorisation, BasePage):
         # locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
         # modal_scroller = self.element_is_visible(Locators.MODAL_WIZARD_SCROLLER_TEMPLATE, timeout=3)
         self.scroll_wizard_template(name, driver)
-        # n = 0
-        # while True:
-        #     if n == 7:
-        #         break
-        #     try:
-        #         name_of_templates = driver.find_element(By.XPATH, f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
-        #         name_of_templates.click()
-        #         break
-        #     except (InvalidSelectorException, NoSuchElementException):
-        #         self.scroll_wizard_template(driver)  # Функция скролинга
-        #         n += 1
-
-                # прокрутка окна вниз на 100 пикселей
-                # action = ActionChains(driver)
-                # scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER)
-                # action.drag_and_drop_by_offset(scroller, "0", "100")
-                # action.perform()
-                # name_of_templates = driver.find_element(By.XPATH,
-                #                                         f"//div[@class='m-lms-action-tooltip__text']//span[text()='{name}']")
-        # for x in range(5):
-        #     ActionChains(driver).move_to_element(modal_scroller).scroll_by_amount(1, 500).perform()
-        # name_of_templates.click()
         time.sleep(1)
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
         # print(name_content)
@@ -470,7 +446,7 @@ class ArticlePage(Authorisation, BasePage):
             field1 = self.element_is_visible(Locators.NUMBER_FIELD_FOR_CLEAR)
             field2 = self.element_is_visible(Locators.LINK_FIELD_FOR_CLEAR)
             actions.click(field)
-            for n in range(1, 10):
+            for n in range(1, 11):
                 actions.send_keys(Keys.BACKSPACE)
             actions.click(field1)
             actions.click(field1)
@@ -512,6 +488,7 @@ class ArticlePage(Authorisation, BasePage):
             name_of_content = driver.find_element(By.XPATH, f"//p[text()='{name_content}']")
             name_of_content.click()
             time.sleep(1)
+            """step 7"""
             self.element_is_visible(Locators.EDIT_ARTICLE).click()
             time.sleep(1)
             try:
@@ -563,11 +540,12 @@ class ArticlePage(Authorisation, BasePage):
             name_of_content = driver.find_element(By.XPATH, "//section[@class='article-preview__header']")
             name_of_content.click()
             time.sleep(1)
-            self.element_is_visible(Locators.EDIT_ARTICLE).click()
-            time.sleep(3)
-            self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
+            self.click_to_element(Locators.EDIT_ARTICLE)
             time.sleep(1)
-            self.element_is_visible(Locators.BUTTON_BACK).click()
+            self.click_to_element(Locators.TYPOGRAPHY_TEMPLATE)
+            time.sleep(1)
+            self.click_to_element(Locators.BUTTON_BACK)
+            time.sleep(1)
             text_check_link_of_content = self.element_is_visible(Locators.CHECK_LINK_OF_CONTENT)
             text_check_link_of_content_value = text_check_link_of_content.text
             assert text_check_link_of_content_value == 'Ссылка на контент', "не закреплена как ссылка на контент"
@@ -1458,8 +1436,8 @@ class FilesPages(Authorisation, BasePage):
         except StaleElementReferenceException:
             time.sleep(2)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
-        self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
-        self.element_is_visible(self.Locators.ADD_STEP).click()
+        self.click_to_element(self.Locators.CREATE_SCRIPT)
+        self.click_to_element(self.Locators.ADD_STEP)
         time.sleep(1)
         try:
             self.element_is_visible(self.Locators.TEXT_AREA).click()
@@ -1493,15 +1471,15 @@ class FilesPages(Authorisation, BasePage):
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(self.Locators.CREATE_SCRIPT).click()
         try:
-            self.element_is_visible(self.Locators.ADD_STEP).click()
+            self.click_to_element(self.Locators.ADD_STEP)
         except (TimeoutException, ElementClickInterceptedException):
             time.sleep(3)
-            self.element_is_visible(self.Locators.ADD_STEP).click()
+            self.click_to_element(self.Locators.ADD_STEP)
         try:
-            self.element_is_visible(self.Locators.TEXT_AREA).click()
+            self.click_to_element(self.Locators.TEXT_AREA)
         except TimeoutException:
             time.sleep(3)
-            self.element_is_visible(self.Locators.TEXT_AREA).click()
+            self.click_to_element(self.Locators.TEXT_AREA)
         self.element_is_visible(self.Locators.DROPDOWN).click()
         frame = self.elements_is_present(self.Locators.FRAME)
         self.switch_to_frame(frame)

@@ -397,6 +397,8 @@ class AddFilterChanges(Authorisation, BasePage):
         except NoSuchElementException:
             time.sleep(5)
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
+            # article_firs_name = self.browser.find_element(By.XPATH, f"//p[text()='{first_name}']")
+        time.sleep(2)
         article_firs_name.click()
         """check content"""
         self.element_is_visible(self.Locators.TEXT_ARTICLE).is_displayed()
@@ -410,17 +412,19 @@ class AddFilterChanges(Authorisation, BasePage):
             time.sleep(3)
             self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
-        time.sleep(5)
+        time.sleep(1)
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         except (ElementClickInterceptedException, TimeoutException):
-            time.sleep(10)
-            try:
-                self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
-            except TimeoutException:
-                time.sleep(3)
-                self.delete_draft()
-                self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
+            time.sleep(3)
+            self.delete_draft()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+            # try:
+            #     self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
+            # except TimeoutException:
+            #     time.sleep(3)
+            #     self.delete_draft()
+            #     self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
             # self.element_is_visible(self.Locators.BUTTON_DELETE_DRAFT).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
@@ -577,6 +581,7 @@ class AddFilterChanges(Authorisation, BasePage):
         except (TimeoutException, NoSuchElementException, StaleElementReferenceException):
             time.sleep(5)
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
+        time.sleep(2)
         article_firs_name.click()
         """check content"""
         self.element_is_visible(self.Locators.FIELD_TEXT).is_displayed()

@@ -1206,3 +1206,7 @@ class CheckBellComments:
     #  Проверка Персоном 3 (остальные локаторы как из персона 2)
     BELL_CREATE_ARTICLE_CONFIRM = (By.XPATH,
                                    f"//div[text()='подтвердите']/../..//div[text()='Название статьи 9881']/../..//div[text()='Создание статьи']")
+
+
+class CheckAfterUpdating:
+    SUPERBANK_ARTICLE = (By.XPATH, "//p[text()='Обычная статья']")

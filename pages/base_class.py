@@ -1,7 +1,7 @@
 import time
 
 from selenium.common import InvalidSelectorException, NoSuchElementException, StaleElementReferenceException, \
-    TimeoutException
+    TimeoutException, ElementClickInterceptedException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as Wait
@@ -89,7 +89,7 @@ class MainPage:
     def action_move_to_element(self, element, driver):
         """Переход к элементу которого не видно"""
         action = ActionChains(driver)
-        time.sleep(1)
+        time.sleep(3)
         action.move_to_element(element).perform()
         # action.perform()
 

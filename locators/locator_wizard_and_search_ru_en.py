@@ -32,7 +32,9 @@ class AddViewContentWizardLocators:
     TEXT_FIXING_BY_EXPERT = (By.XPATH, "//p[text()='Закреплено экспертом']")
     CHANGE_FIXING_CONTENT = (By.XPATH, "//span[contains(text(),'изменить')]")
     INPUT_FIELD_NAME_REQUEST = (By.XPATH, "(//input[@placeholder='Введите запрос'])[1]")
-    SVG_CLOSE_WINDOWS_CHECK = (By.XPATH, "(//div[@role='presentation'])[2]")
+    # SVG_CLOSE_WINDOWS_CHECK = (By.XPATH, "(//div[@role='presentation'])[2]")
+    SVG_CLOSE_WINDOWS_CHECK = (By.XPATH, "(//div[@class='m-popup__close'])[2]")
+    # SVG_CLOSE_WINDOWS_CHECK = (By.CSS_SELECTOR, "div[data-testid='testModalClose']")
     """create more requests"""
     HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
     CHANGE_ARTICLE = (By.XPATH, "//div[contains(text(),'изменить')]")

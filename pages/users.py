@@ -18,7 +18,7 @@ beth = StableUsers('beth', 'minervakms') # 3 test_topic_database
 birdperson = StableUsers('birdperson', 'minervakms') # 4 test_checking_filter_changes
 gary = StableUsers('gary', 'minervakms') # 5 test_wizard_and_search_ru_en
 
-andrey = StableUsers('andrey', '10f0b265')
+andrey = StableUsers('andrey', '777qwerty')
 person1 = StableUsers('person1', '777qwerty')
 person2 = StableUsers('person2', '777qwerty')
 person3 = StableUsers('person3', '777qwerty')
