@@ -1210,3 +1210,10 @@ class CheckBellComments:
 
 class CheckAfterUpdating:
     SUPERBANK_ARTICLE = (By.XPATH, "//p[text()='Обычная статья']")
+
+
+class Test:
+    """Локаторы для работы с тестами"""
+    CREATING_TEST_BUTTON = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[5]")
+    TEST_NAME = (By.NAME, "name")
+    TEST_DESCRIPTION = (By.NAME, "description")
