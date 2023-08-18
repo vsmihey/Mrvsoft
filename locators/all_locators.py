@@ -1213,6 +1213,9 @@ class CheckBellComments:
 
 class CheckAfterUpdating:
     """Локаторы проверки контента в статье после обновления"""
+    CHECK_NAME_ARTICLE = (By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'Обычная статья')]")
+    VERSION_CHECK = (By.CSS_SELECTOR, "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
+    NUMBER_VERSION_CHECK = (By.CSS_SELECTOR, "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
     "Локаторы изображений"
     IMG1_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='girl-ga8f2187eb_640']")
     IMG2_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='122']")

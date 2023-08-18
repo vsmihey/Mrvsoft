@@ -13,52 +13,51 @@ from pages.users import minervakms
 @pytest.mark.order(8)
 class TestCheckingAfterUpdate:
 
-    @allure.feature("Проверка обычной статьи после установки обновления")
-    class TestCheckingArticleAfterUpdate:
+    # @allure.feature("Проверка обычной статьи после установки обновления")
+    # class TestCheckingArticleAfterUpdate:
+    TEXT = "Новая версия" + str(random.randint(999, 9999))
 
-        TEXT = "Новая версия" + str(random.randint(999, 9999))
+    def check_all_content_in_article(self, driver):
+        """Проверка контента в статье"""
+        checking_after_updating = BaseArticleEditor(driver)
+        checking_after_updating.check_name_in_article()
+        checking_after_updating.check_images_in_article()
+        checking_after_updating.check_videos_in_article()
+        checking_after_updating.check_audio_in_article()
+        checking_after_updating.check_table_in_article()
+        checking_after_updating.check_h_text_in_article()
+        checking_after_updating.check_styles_text_in_article()
+        checking_after_updating.check_color_text_in_article()
+        checking_after_updating.important_block_red()
+        checking_after_updating.check_spoiler()
+        checking_after_updating.check_align_text_in_article()
+        # checking_after_updating.major_edit_in_article(self.TEXT)
 
-        def check_all_content_in_article(self, driver):
-            """Проверка контента в статье"""
-            checking_after_updating = BaseArticleEditor(driver)
-            checking_after_updating.check_images_in_article()
-            checking_after_updating.check_videos_in_article()
-            checking_after_updating.check_audio_in_article()
-            checking_after_updating.check_table_in_article()
-            checking_after_updating.check_h_text_in_article()
-            checking_after_updating.check_styles_text_in_article()
-            checking_after_updating.check_color_text_in_article()
-            checking_after_updating.important_block_red()
-            checking_after_updating.check_spoiler()
-            checking_after_updating.check_align_text_in_article()
-            # checking_after_updating.major_edit_in_article(self.TEXT)
-
-        @allure.title("Проверка обычной статьи после установки обновления")
-        def test_check_article_after_updating(self, driver):
-            checking_after_updating = BaseArticleEditor(driver)
-            checking_after_updating.get_authorisation_in_url(base_article)
-            self.check_all_content_in_article(driver)
-            checking_after_updating.major_edit_in_article(self.TEXT)
-            # self.check_all_content_in_article(driver)
-            time.sleep(5)
-
-
-
+    @allure.title("Проверка обычной статьи после установки обновления")
+    def test_check_article_after_updating(self, driver):
+        checking_after_updating = BaseArticleEditor(driver)
+        checking_after_updating.get_authorisation_in_url(base_article)
+        self.check_all_content_in_article(driver)
+        checking_after_updating.major_edit_in_article(self.TEXT)
+        checking_after_updating.check_version()
+        # self.check_all_content_in_article(driver)
+        time.sleep(5)
 
 
+    @allure.title("Проверка статьи по шаблону после установки обновления")
+    def test_check_template_after_updating(self, driver):
 
-
-
-
-
-
-
-
-    @allure.feature("Проверка статьи по шаблону после установки обновления")
-    class CheckingTemplateAfterUpdate:
         pass
 
-    @allure.feature("Проверка пошагового сценария после установки обновления")
-    class CheckingScriptAfterUpdate:
+
+
+
+    @allure.title("Проверка пошагового сценария после установки обновления")
+    def test_check_script_after_updating(self, driver):
         pass
+
+
+
+
+
 

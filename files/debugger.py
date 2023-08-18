@@ -161,5 +161,9 @@ from requests.auth import HTTPBasicAuth
 #
 # print(path1, path2)
 
+text_version = list("Версия 23.0")
+print(text_version[-1])
+
+
 
 
