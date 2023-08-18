@@ -16,7 +16,7 @@ from allure_commons.types import AttachmentType
 
 @pytest.fixture(scope='session')
 def driver():
-    driver_service = Service(ChromeDriverManager().install())  # вкючить для загрузки новой версии дров
+    # driver_service = Service(ChromeDriverManager("116").install())  # вкючить для загрузки новой версии дров
     chrome_options = Options()
     chrome_options.add_argument("--headless")   # запуск в скрытом режиме (без браузера)
     # chrome_options.headless = True
@@ -45,7 +45,7 @@ def driver():
     # chrome_options.add_argument('--allow-running-insecure-content')
     # chrome_options.add_argument('--disable-blink-features=AutomationControlled') # отключения режима автоматизации ПО
     # chrome_options.add_argument = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36'
-    driver = webdriver.Chrome(options=chrome_options, service=driver_service)  # добавить service=driver_service для загрузки новых дров браузера
+    driver = webdriver.Chrome(options=chrome_options)  # добавить service=driver_service для загрузки новых дров браузера
     driver.maximize_window()
     # driver.implicitly_wait(1)
     # driver.get(url)
