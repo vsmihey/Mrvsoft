@@ -60,3 +60,5 @@ name_2 = "name1"
 mail_2 = "testperson0001@mail.ru"
 login_person2 = "login112"
 password_person2 = "63a45e26"
+
+base_article = url + "/content/space/54/article/1938"

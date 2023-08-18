@@ -16,3 +16,7 @@ class MenuNavigation(MainPage):
     def create_folder_button(self):
         """Кнопка создания новой папки"""
         self.click_to_element(locators.FormPagesLocators.CREATE_FOLDER_BUTTON)
+
+    def content_button_click(self):
+        """Переход в Контент"""
+        self.click_to_element(locators.MenuNavigation.CONTENT)

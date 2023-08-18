@@ -34,6 +34,10 @@ class Authorisation(MainPage):
         """Выбор проекта Selen"""
         self.click_to_element(locators.AuthorisationPage.TEST_PROJECT)
 
+    def select_project_testing(self):
+        """Выбор проекта Тестовый"""
+        self.click_to_element(locators.AuthorisationPage.TESTING_PROJECT)
+
     def checking_the_authorization_page(self) -> str:
         """Проверка, что открыта страница авторизации"""
         return self.element_is_visible(locators.AuthorisationPage.INPUT_IN_SYSTEM_TEXT).text
@@ -66,6 +70,16 @@ class Authorisation(MainPage):
         self.input_password(user.password)
         self.confirm_button()
         self.select_project_selen()
+
+    def get_authorisation_in_testing(self, user=minervakms):
+        """Метод для прохождения авторизации в проект Selen"""
+        self.browser.delete_all_cookies()
+        self.open()
+        self.select_authorisation_type()
+        self.input_login(user.login)
+        self.input_password(user.password)
+        self.confirm_button()
+        self.select_project_testing()
 
     def get_authorisation_in_url(self, url, user=minervakms):
         """Метод для прохождения авторизации и перехода по переданной ссылке"""
