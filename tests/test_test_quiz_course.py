@@ -2,7 +2,7 @@ import time
 
 import allure
 import pytest
-from pages.test_quiz_course import Test, Quiz
+from pages.quiz_course_test import Test, Quiz
 from pages.users import admin
 
 user_for_test = admin
