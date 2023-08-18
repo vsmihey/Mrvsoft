@@ -42,6 +42,10 @@ class PublicWizard(MainPage):
         """Кнопка 'опубликовать' в редакторе"""
         self.click_to_element(locators.WizardPublic.BUTTON_TYPOGRAPHY)
 
+    def save_button_click(self):
+        """Кнопка 'сохранить' в редакторе"""
+        self.click_to_element(locators.WizardPublic.BUTTON_TYPOGRAPHY)
+
     def next_and_finish_button_click(self):
         """Кнопка 'продолжить' и 'завершить' в визадре"""
         self.click_to_element(locators.WizardPublic.BUTTON_FINISH)

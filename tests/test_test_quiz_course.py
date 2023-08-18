@@ -2,7 +2,7 @@ import time
 
 import allure
 import pytest
-from pages.quiz_course_test import Test, Quiz
+from pages.quiz_course import Test, Quiz
 from pages.users import admin
 
 user_for_test = admin
@@ -17,17 +17,27 @@ class TestCreateNewProject:
         page.get_authorisation_in_superbank(user_for_test)
         page.create_button()
         page.create_test_button()
-        # page.input_test_name()
-        # page.check_test_name_length()
-        # page.check_save_button_status()
-        # page.input_test_description()
-        # page.check_test_description_length()
-        # page.check_save_button_status()
+        page.input_test_name()
+        page.check_test_name_length()
+        page.check_save_button_status_no_active()
+        page.input_test_description()
+        page.check_test_description_length()
+        page.check_save_button_status_no_active()
         page.add_new_question_button()
-        page.check_name_model_window()
+        page.check_name_modal_window()
         page.select_questions()
+        page.close_modal_window()
+        page.check_save_button_status_no_active()
+        page.check_empty_questions_limit()
+        page.select_questions_limit()
+        page.check_one_questions_limit()
+        page.check_save_button_status_active()
+        page.clear_test_name()
+        page.check_save_button_status_no_active()
+        page.input_test_name('Название теста')
+        page.save_test()
 
-        time.sleep(1)
+        time.sleep(10)
 
     @allure.title('Создание нового опроса')
     def test_create_new_quiz(self, driver):
@@ -37,8 +47,8 @@ class TestCreateNewProject:
         page.create_quiz_button()
         page.input_quiz_name()
         page.check_quiz_name_length()
-        page.check_save_button_status()
+        page.check_save_button_status_no_active()
         page.input_quiz_description()
         page.check_quiz_description_length()
-        page.check_save_button_status()
+        page.check_save_button_status_no_active()
         time.sleep(1)

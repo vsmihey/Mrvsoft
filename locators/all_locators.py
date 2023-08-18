@@ -1134,9 +1134,9 @@ class AuthorisationPage:
     TEST_PROJECT = (By.XPATH,
                     "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
     SUPER_BANK_PROJECT = (By.XPATH,
-                          "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']") # name project
+                          "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']")  # name project
     TESTING_PROJECT = (By.XPATH,
-                          "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']") # name project
+                       "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']")  # name project
     INPUT_IN_SYSTEM_TEXT = (
         By.CSS_SELECTOR, '.m-ui-typography.m-ui-typography--bold.m-ui-typography--22x26.login__header')
 
@@ -1217,44 +1217,65 @@ class CheckAfterUpdating:
     VERSION_CHECK = (By.CSS_SELECTOR, "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
     NUMBER_VERSION_CHECK = (By.CSS_SELECTOR, "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
     "Локаторы изображений"
-    IMG1_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='girl-ga8f2187eb_640']")
-    IMG2_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='122']")
+    IMG1_IN_ARTICLE = (By.XPATH,
+                       "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='girl-ga8f2187eb_640']")
+    IMG2_IN_ARTICLE = (By.XPATH,
+                       "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='122']")
     "Локаторы видео"
-    VIDEO1_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//video[@title='загруженное']")
-    VIDEO2_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//video[@title='Sunset - 86879']")
+    VIDEO1_IN_ARTICLE = (By.XPATH,
+                         "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//video[@title='загруженное']")
+    VIDEO2_IN_ARTICLE = (By.XPATH,
+                         "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//video[@title='Sunset - 86879']")
     "Локаторы аудио"
-    AUDIO_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//audio[@title='perry-como-magic-moments-mp3']")
+    AUDIO_IN_ARTICLE = (By.XPATH,
+                        "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//audio[@title='perry-como-magic-moments-mp3']")
     "Локаторы таблица и текст стили"
     # TABLE_IN_ARTICLE = (By.XPATH, "//div[@class='m-table-widget__wrapper m-table-widget__wrapper--extendable']//table[@class='m-cke-table']")
-    TABLE_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']")
+    TABLE_IN_ARTICLE = (By.XPATH,
+                        "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']")
     # CHECK_TEXT_IN_TABLE = (By.XPATH, "//div[@class='m-table-widget__wrapper m-table-widget__wrapper--extendable']//table[@class='m-cke-table']//td[@data-cell='1_0']")
-    CHECK_TEXT_IN_TABLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']//p[text()='Строка']")
-    CHECK_H1_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h1[@id='chapter_1']")
-    CHECK_H2_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h2[@id='chapter_2']")
-    CHECK_H3_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h3[@id='chapter_3']")
-    CHECK_P_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Обычный текст')]")
-    CHECK_STRONG_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//strong[contains(text(),'Жирный')]")
-    CHECK_ITALICS_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//em[contains(text(),'Курсив')]")
-    CHECK_UNDERLINED_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//u[contains(text(),'Подчеркнутый')]")
-    CHECK_SUPERSCRIPT_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//sup[contains(text(),'Надстрочный')]")
-    CHECK_SUBSCRIPT_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//s//sub[contains(text(),'Подстрочный')]")
-    CHECK_CROSSED_OUT_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//s[contains(text(),'Перечеркнутый')]")
+    CHECK_TEXT_IN_TABLE = (By.XPATH,
+                           "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']//p[text()='Строка']")
+    CHECK_H1_TEXT = (By.XPATH,
+                     "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h1[@id='chapter_1']")
+    CHECK_H2_TEXT = (By.XPATH,
+                     "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h2[@id='chapter_2']")
+    CHECK_H3_TEXT = (By.XPATH,
+                     "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h3[@id='chapter_3']")
+    CHECK_P_TEXT = (By.XPATH,
+                    "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Обычный текст')]")
+    CHECK_STRONG_TEXT = (By.XPATH,
+                         "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//strong[contains(text(),'Жирный')]")
+    CHECK_ITALICS_TEXT = (By.XPATH,
+                          "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//em[contains(text(),'Курсив')]")
+    CHECK_UNDERLINED_TEXT = (By.XPATH,
+                             "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//u[contains(text(),'Подчеркнутый')]")
+    CHECK_SUPERSCRIPT_TEXT = (By.XPATH,
+                              "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//sup[contains(text(),'Надстрочный')]")
+    CHECK_SUBSCRIPT_TEXT = (By.XPATH,
+                            "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//s//sub[contains(text(),'Подстрочный')]")
+    CHECK_CROSSED_OUT_TEXT = (By.XPATH,
+                              "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//s[contains(text(),'Перечеркнутый')]")
     "Локаторы выравнивания текста"
-    CHECK_ALIGN_CENTER_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание по центру')]")
-    CHECK_ALIGN_RIGHT_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание справа')]")
-    CHECK_ALIGN_JUSTIFY_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание по ширине текст текст текст')]")
+    CHECK_ALIGN_CENTER_TEXT = (By.XPATH,
+                               "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание по центру')]")
+    CHECK_ALIGN_RIGHT_TEXT = (By.XPATH,
+                              "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание справа')]")
+    CHECK_ALIGN_JUSTIFY_TEXT = (By.XPATH,
+                                "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание по ширине текст текст текст')]")
     "Локаторы цвета текста"
-    CHECK_COLOR_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//span[contains(text(),'Цвет шрифта')]")
-    CHECK_HIGHLIGHT_COLOR_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//span[contains(text(),'Выделение текста')]")
+    CHECK_COLOR_TEXT = (By.XPATH,
+                        "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//span[contains(text(),'Цвет шрифта')]")
+    CHECK_HIGHLIGHT_COLOR_TEXT = (By.XPATH,
+                                  "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//span[contains(text(),'Выделение текста')]")
     "Важное"
-    CHECK_IMPORTANT_BLOCK_RED = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-important-info']")
+    CHECK_IMPORTANT_BLOCK_RED = (By.XPATH,
+                                 "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-important-info']")
     "Спойлер"
-    CHECK_SPOILER = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-spoiler__header'][contains(text(),'Спойлер')]")
-    CHECK_SPOILER_SHOW = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-spoiler m-spoiler--show']")
-
-
-
-
+    CHECK_SPOILER = (By.XPATH,
+                     "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-spoiler__header'][contains(text(),'Спойлер')]")
+    CHECK_SPOILER_SHOW = (By.XPATH,
+                          "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-spoiler m-spoiler--show']")
 
 
 class Test:
@@ -1267,9 +1288,10 @@ class Test:
                    "//button[@class='m-button m-button--default m-button--small lms-quiz-editor__save lms-quiz-editor__control-button']")
     NEW_QUESTION_BUTTON = (By.XPATH, "//p[contains(text(),'Добавить вопрос')]")
     MODAL_WINDOW_NAME = (By.XPATH, "//h3[@class='title-block']")
-    ALL_QUESTIONS_SELECT = (
-        By.XPATH,
-        "//label[@class='m-switch-box m-switch-box--checked lms-questions-lib__header-switch']//div[@class='m-switch-box__thumb']//*[name()='svg']")
+    ALL_QUESTIONS_SELECT = (By.CSS_SELECTOR, ".m-switch-box.lms-questions-lib__header-switch")
+    QUESTIONS_LIMIT_STATUS = (By.CSS_SELECTOR, ".m-ui-typography.m-ui-typography--16x18.m-ui-slider__text")
+    QUESTIONS_LIMIT_VALUE = (By.NAME, "randomQuestionCount")
+    COUNT_OF_CORRECT_ANSWERS = (By.CSS_SELECTOR, ".m-ui-select__select")
 
 
 class Quiz:
