@@ -1,4 +1,3 @@
-
 from pages.authorisation_page import Authorisation
 from locators.locators_form_pages import FormPagesLocators
 import locators.all_locators as locators
@@ -33,4 +32,4 @@ class CreatingPanel(Authorisation):
 
     def create_quiz_button(self):
         """Кнопка для создания опроса"""
-        pass
+        self.click_to_element(locators.Test.CREATING_QUIZ_BUTTON)

@@ -1215,5 +1215,21 @@ class CheckAfterUpdating:
 class Test:
     """Локаторы для работы с тестами"""
     CREATING_TEST_BUTTON = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[5]")
+    CREATING_QUIZ_BUTTON = (By.XPATH, "//div[contains(text(),'Опрос')]")
     TEST_NAME = (By.NAME, "name")
     TEST_DESCRIPTION = (By.NAME, "description")
+    SAVE_BUTTON = (By.XPATH,
+                   "//button[@class='m-button m-button--default m-button--small lms-quiz-editor__save lms-quiz-editor__control-button']")
+    NEW_QUESTION_BUTTON = (By.XPATH, "//p[contains(text(),'Добавить вопрос')]")
+    MODAL_WINDOW_NAME = (By.XPATH, "//h3[@class='title-block']")
+    ALL_QUESTIONS_SELECT = (
+        By.XPATH,
+        "//label[@class='m-switch-box m-switch-box--checked lms-questions-lib__header-switch']//div[@class='m-switch-box__thumb']//*[name()='svg']")
+
+
+class Quiz:
+    """Локаторы для работы с опросами"""
+    CREATING_QUIZ_BUTTON = (By.XPATH, "//div[contains(text(),'Опрос')]")
+    QUIZ_NAME = (By.XPATH, "//input[@placeholder='Введите название опроса']")
+    QUIZ_DESCRIPTION = (By.XPATH, "//input[@placeholder='Введите описание опроса']")
+    SAVE_BUTTON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium m-lms-quiz-editor__save']")
