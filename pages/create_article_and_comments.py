@@ -118,11 +118,6 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         assert number_version[-1] == "0"
 
 
-
-
-
-
-
     def check_images_in_article(self):
         """Проверка двух изображений в статье"""
         locator = locators.CheckAfterUpdating()
