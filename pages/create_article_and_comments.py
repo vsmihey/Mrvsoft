@@ -103,6 +103,21 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.restore_button()
         self.save_major_edit('Восстановление')
 
+    def check_name_in_article(self):
+        """Проверка двух изображений в статье"""
+        locator = locators.CheckAfterUpdating()
+        self.element_is_displayed(locator.CHECK_NAME_ARTICLE)
+
+    def check_version(self):
+        """Проверка версии статьи после редактирования"""
+        locator = locators.CheckAfterUpdating()
+        self.click_to_element(locator.VERSION_CHECK)
+        "Проверка что версия статьи заканчивается на '0' "
+        number_version_check = self.element_is_visible(locator.NUMBER_VERSION_CHECK).text
+        number_version = list(number_version_check)
+        assert number_version[-1] == "0"
+
+
     def check_images_in_article(self):
         """Проверка двух изображений в статье"""
         locator = locators.CheckAfterUpdating()
@@ -203,6 +218,9 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.click_to_element(locator.CHECK_SPOILER)
         spoiler_show = self.element_is_visible(locator.CHECK_SPOILER_SHOW).get_attribute("class")
         assert spoiler_show == "m-spoiler m-spoiler--show"
+
+
+
 
 
 class DataParser:
