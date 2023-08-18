@@ -263,10 +263,10 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(Locators.INPUT_NAME_STEP).send_keys("name_step-" + str(random.randint(99, 999)))
         self.element_is_visible(Locators.DROPDOWN_STEP).send_keys("Сценарий завершён")
         try:
-            self.element_is_visible(Locators.TEXT_AREA).click()
+            self.click_to_element(Locators.TEXT_AREA)
         except TimeoutException:
             time.sleep(5)
-            self.element_is_visible(Locators.TEXT_AREA).click()
+            self.click_to_element(Locators.TEXT_AREA)
         self.element_is_visible(Locators.DROPDOWN).click()
         frame = self.elements_is_present(Locators.FRAME)
         self.switch_to_frame(frame)

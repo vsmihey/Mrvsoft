@@ -81,6 +81,13 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Rick and Morty was here')
         self.save_major_edit()
 
+    def major_edit_in_article(self, text="123"):
+        """Редактирование в статье и мажорное сохранение"""
+        self.redaction()
+        time.sleep(5)
+        # self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Rick and Morty was here')
+        self.save_major_edit(text)
+
     def delete_base_article(self, url, user=minervakms):
         """Удаление статьи"""
         self.get_authorisation_in_url(url, user)
@@ -95,6 +102,107 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.get_authorisation_in_url(url, user)
         self.restore_button()
         self.save_major_edit('Восстановление')
+
+    def check_images_in_article(self):
+        """Проверка двух изображений в статье"""
+        locator = locators.CheckAfterUpdating()
+        time.sleep(1)
+        self.element_is_displayed(locator.IMG1_IN_ARTICLE)
+        self.element_is_displayed(locator.IMG2_IN_ARTICLE)
+
+    def check_videos_in_article(self):
+        """"Проверка двух видео в статье"""
+        locator = locators.CheckAfterUpdating()
+        self.element_is_visible(locator.VIDEO1_IN_ARTICLE).is_displayed()
+        self.element_is_visible(locator.VIDEO2_IN_ARTICLE).is_displayed()
+
+    def check_audio_in_article(self):
+        """Проверка аудио в статье"""
+        locator = locators.CheckAfterUpdating()
+        self.element_is_visible(locator.AUDIO_IN_ARTICLE).is_displayed()
+
+    def check_table_in_article(self):
+        """Проверка таблицы в статье"""
+        locator = locators.CheckAfterUpdating()
+        self.element_is_visible(locator.TABLE_IN_ARTICLE).is_displayed()
+        "Проверка текста в таблице"
+        check_text_in_table = self.element_is_visible(locator.CHECK_TEXT_IN_TABLE).text
+        assert check_text_in_table == "Строка"
+
+    def check_h_text_in_article(self):
+        """Проверка заголовков в статье"""
+        locator = locators.CheckAfterUpdating()
+        "Проверка h1"
+        check_h1_text = self.element_is_visible(locator.CHECK_H1_TEXT).tag_name
+        assert check_h1_text == "h1"
+        "Проверка h2"
+        check_h2_text = self.element_is_visible(locator.CHECK_H2_TEXT).tag_name
+        assert check_h2_text == "h2"
+        "Проверка h3"
+        check_h3_text = self.element_is_visible(locator.CHECK_H3_TEXT).tag_name
+        assert check_h3_text == "h3"
+        "Проверка обычного текста"
+        check_p_text = self.element_is_visible(locator.CHECK_P_TEXT).tag_name
+        assert check_p_text == "p"
+
+    def check_styles_text_in_article(self):
+        """Проверка стилей текста в статье"""
+        locator = locators.CheckAfterUpdating()
+        "Проверка strong"
+        check_strong_text = self.element_is_visible(locator.CHECK_STRONG_TEXT).tag_name
+        assert check_strong_text == "strong"
+        "Проверка курсив"
+        check_italics_text = self.element_is_visible(locator.CHECK_ITALICS_TEXT).tag_name
+        assert check_italics_text == "em"
+        "Подчеркнутый"
+        check_underlined_text = self.element_is_visible(locator.CHECK_UNDERLINED_TEXT).tag_name
+        assert check_underlined_text == "u"
+        "Надстрочный"
+        check_superscript_text = self.element_is_visible(locator.CHECK_SUPERSCRIPT_TEXT).tag_name
+        assert check_superscript_text == "sup"
+        "Подстрочный"
+        check_superscript_text = self.element_is_visible(locator.CHECK_SUBSCRIPT_TEXT).tag_name
+        assert check_superscript_text == "sub"
+        "Перечеркнутый"
+        check_crossed_out_text = self.element_is_visible(locator.CHECK_CROSSED_OUT_TEXT).tag_name
+        assert check_crossed_out_text == "s"
+
+    def check_align_text_in_article(self):
+        """Проверка выравнивания текста в статье"""
+        locator = locators.CheckAfterUpdating()
+        "Выравнивание по центру"
+        check_align_center_text = self.element_is_visible(locator.CHECK_ALIGN_CENTER_TEXT).get_attribute("style")
+        assert check_align_center_text == "text-align: center;"
+        "Выравнивание справа"
+        check_align_center_text = self.element_is_visible(locator.CHECK_ALIGN_RIGHT_TEXT).get_attribute("style")
+        assert check_align_center_text == "text-align: right;"
+        "Выравнивание по центру"
+        check_align_center_text = self.element_is_visible(locator.CHECK_ALIGN_JUSTIFY_TEXT).get_attribute("style")
+        assert check_align_center_text == "text-align: justify;"
+
+    def check_color_text_in_article(self):
+        """Проверка цвета текста в статье"""
+        locator = locators.CheckAfterUpdating()
+        check_color_text = self.element_is_visible(locator.CHECK_COLOR_TEXT).get_attribute("style")
+        assert check_color_text == "color: rgb(235, 51, 35);"
+        """Проверка выделения цветом текста в статье"""
+        check_highlight_color_text = self.element_is_visible(locator.CHECK_HIGHLIGHT_COLOR_TEXT).get_attribute("style")
+        assert check_highlight_color_text == "background-color: rgb(255, 254, 85);"
+
+    def important_block_red(self):
+        """Проверка Важное! на красном фоне в статье"""
+        locator = locators.CheckAfterUpdating()
+        check_important_block_red = self.element_is_visible(locator.CHECK_IMPORTANT_BLOCK_RED).get_attribute("style")
+        assert check_important_block_red == '--color: #eb3323; --icon: url("/assets/images/icons/important-info.svg"); background-color: rgba(235, 51, 35, 0.15);'
+
+    def check_spoiler(self):
+        """Проверка спойлера в статье"""
+        locator = locators.CheckAfterUpdating()
+        spoiler = self.element_is_visible(locator.CHECK_SPOILER).text
+        assert spoiler == "Спойлер"
+        self.click_to_element(locator.CHECK_SPOILER)
+        spoiler_show = self.element_is_visible(locator.CHECK_SPOILER_SHOW).get_attribute("class")
+        assert spoiler_show == "m-spoiler m-spoiler--show"
 
 
 class DataParser:
@@ -190,3 +298,5 @@ class Comments(Authorisation):
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
         page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
         page.click_to_element(locators.Comments.CLOSE_COMMENT)
+
+

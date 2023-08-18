@@ -1134,7 +1134,9 @@ class AuthorisationPage:
     TEST_PROJECT = (By.XPATH,
                     "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
     SUPER_BANK_PROJECT = (By.XPATH,
-                          "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']")  # name project
+                          "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']") # name project
+    TESTING_PROJECT = (By.XPATH,
+                          "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='СуперБанк']") # name project
     INPUT_IN_SYSTEM_TEXT = (
         By.CSS_SELECTOR, '.m-ui-typography.m-ui-typography--bold.m-ui-typography--22x26.login__header')
 
@@ -1174,6 +1176,7 @@ class MenuNavigation:
     # TODO: написать нормальные локаторы для навигации по левому меню
     """Навигация по левому меню"""
     HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    CONTENT = (By.XPATH, "//a[@data-tip='Контент']")  # content of page
 
 
 class OpenArticle:
@@ -1209,7 +1212,46 @@ class CheckBellComments:
 
 
 class CheckAfterUpdating:
-    SUPERBANK_ARTICLE = (By.XPATH, "//p[text()='Обычная статья']")
+    """Локаторы проверки контента в статье после обновления"""
+    "Локаторы изображений"
+    IMG1_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='girl-ga8f2187eb_640']")
+    IMG2_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='122']")
+    "Локаторы видео"
+    VIDEO1_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//video[@title='загруженное']")
+    VIDEO2_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//video[@title='Sunset - 86879']")
+    "Локаторы аудио"
+    AUDIO_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//audio[@title='perry-como-magic-moments-mp3']")
+    "Локаторы таблица и текст стили"
+    # TABLE_IN_ARTICLE = (By.XPATH, "//div[@class='m-table-widget__wrapper m-table-widget__wrapper--extendable']//table[@class='m-cke-table']")
+    TABLE_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']")
+    # CHECK_TEXT_IN_TABLE = (By.XPATH, "//div[@class='m-table-widget__wrapper m-table-widget__wrapper--extendable']//table[@class='m-cke-table']//td[@data-cell='1_0']")
+    CHECK_TEXT_IN_TABLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']//p[text()='Строка']")
+    CHECK_H1_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h1[@id='chapter_1']")
+    CHECK_H2_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h2[@id='chapter_2']")
+    CHECK_H3_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h3[@id='chapter_3']")
+    CHECK_P_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Обычный текст')]")
+    CHECK_STRONG_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//strong[contains(text(),'Жирный')]")
+    CHECK_ITALICS_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//em[contains(text(),'Курсив')]")
+    CHECK_UNDERLINED_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//u[contains(text(),'Подчеркнутый')]")
+    CHECK_SUPERSCRIPT_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//sup[contains(text(),'Надстрочный')]")
+    CHECK_SUBSCRIPT_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//s//sub[contains(text(),'Подстрочный')]")
+    CHECK_CROSSED_OUT_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//s[contains(text(),'Перечеркнутый')]")
+    "Локаторы выравнивания текста"
+    CHECK_ALIGN_CENTER_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание по центру')]")
+    CHECK_ALIGN_RIGHT_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание справа')]")
+    CHECK_ALIGN_JUSTIFY_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание по ширине текст текст текст')]")
+    "Локаторы цвета текста"
+    CHECK_COLOR_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//span[contains(text(),'Цвет шрифта')]")
+    CHECK_HIGHLIGHT_COLOR_TEXT = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//span[contains(text(),'Выделение текста')]")
+    "Важное"
+    CHECK_IMPORTANT_BLOCK_RED = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-important-info']")
+    "Спойлер"
+    CHECK_SPOILER = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-spoiler__header'][contains(text(),'Спойлер')]")
+    CHECK_SPOILER_SHOW = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-spoiler m-spoiler--show']")
+
+
+
+
 
 
 class Test:

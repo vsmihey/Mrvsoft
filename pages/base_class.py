@@ -68,6 +68,24 @@ class MainPage:
             print(f'Поймал  {e}')
             return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
 
+    def element_is_displayed(self, locator, timeout=10):
+        """Клик по элементу и обработка возможных ошибок"""
+        time.sleep(0.3)
+        try:
+            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).is_displayed()
+        except StaleElementReferenceException:
+            print('Поймал StaleElementReferenceException')
+            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).is_displayed()
+        except TimeoutException:
+            print('Поймал TimeoutException')
+            # self.browser.refresh()
+            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).is_displayed()
+        except Exception as e:
+            print(f'Поймал  {e}')
+            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).is_displayed()
+
+
+
     def remove_class_script(self):
         """Удаление класса элемента, что бы он стал видимым и с ним можно совершить действие"""
         self.browser.execute_script("""document.querySelector("input[type='file']").removeAttribute('class')""")
