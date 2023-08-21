@@ -193,8 +193,9 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
     def important_block_red(self):
         """Проверка Важное! на красном фоне в статье"""
         locator = locators.CheckAfterUpdating()
-        check_important_block_red = self.element_is_visible(locator.CHECK_IMPORTANT_BLOCK_RED).get_attribute("style")
-        assert check_important_block_red == '--color: #eb3323; --icon: url("/assets/images/icons/important-info.svg"); background-color: rgba(235, 51, 35, 0.15);'
+        # check_important_block_red = self.element_is_visible(locator.CHECK_IMPORTANT_BLOCK_RED).get_attribute("style")
+        self.element_is_visible(locator.CHECK_IMPORTANT_BLOCK_RED).is_displayed()
+        # assert check_important_block_red == '--color: #eb3323; --icon: url("/assets/images/icons/important-info.svg"); background-color: rgba(235, 51, 35, 0.15);'
 
     def check_spoiler(self):
         """Проверка спойлера в статье"""

@@ -1264,9 +1264,9 @@ class CheckAfterUpdating:
                                  "(//div[@class='m-important-info'])[1]")
     "Спойлер"
     CHECK_SPOILER = (By.XPATH,
-                     "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-spoiler__header'][contains(text(),'Спойлер')]")
+                     "(//div[@class='m-spoiler__header'][contains(text(),'Спойлер')])[1]")
     CHECK_SPOILER_SHOW = (By.XPATH,
-                          "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-spoiler m-spoiler--show']")
+                          "(//div[@class='m-spoiler m-spoiler--show'])[1]")
 
 
 class Test:
