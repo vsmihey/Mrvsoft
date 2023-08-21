@@ -9,7 +9,7 @@ from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_
 import locators.all_locators as locators
 
 
-class Test(CreatingPanel, PublicWizard, CKERedactor):
+class UUU(CreatingPanel, PublicWizard, CKERedactor):
     TEST_STRING = ''.join([str(random.randint(1, 9)) for _ in range(1, 515)])
     TITLE = 'Название теста ' + str(random.randint(99, 9999))
 
