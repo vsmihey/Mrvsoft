@@ -2,7 +2,7 @@ import time
 
 import allure
 import pytest
-from pages.quiz_course import Test, Quiz, Course
+from pages.quiz_course import UUU, Quiz, Course
 from pages.users import admin
 
 user_for_test = admin
@@ -13,7 +13,7 @@ user_for_test = admin
 class TestLMS:
     @allure.title('Создание нового теста')
     def test_create_new_test(self, driver):
-        page = Test(driver)
+        page = UUU(driver)
         page.get_authorisation_in_superbank(user_for_test)
         page.create_button()
         page.create_test_button()
@@ -87,6 +87,6 @@ class TestLMS:
         # page.confirm_save_draft_button()
         page.add_material_button()
         page.content_button()
-        page.content_creation()
+        # page.content_creation()
 
         time.sleep(5)

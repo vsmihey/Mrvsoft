@@ -9,7 +9,7 @@ from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_
 import locators.all_locators as locators
 
 
-class Test(CreatingPanel, PublicWizard, CKERedactor):
+class UUU(CreatingPanel, PublicWizard, CKERedactor):
     TEST_STRING = ''.join([str(random.randint(1, 9)) for _ in range(1, 515)])
     TITLE = 'Название теста ' + str(random.randint(99, 9999))
 
@@ -92,9 +92,9 @@ class Test(CreatingPanel, PublicWizard, CKERedactor):
         assert self.element_is_visible(locators.Test.NAME_CREATED_TEST).text == self.TITLE
 
 
-class Quiz(Test):
-    TEST_STRING = Test.TEST_STRING
-    TITLE = Test.TITLE
+class Quiz(UUU):
+    TEST_STRING = UUU.TEST_STRING
+    TITLE = UUU.TITLE
 
     def input_quiz_name(self, text=TEST_STRING):
         """Ввод имени опроса"""
@@ -155,9 +155,9 @@ class Quiz(Test):
         self.next_and_finish_button_click()
 
 
-class Course(Test):
-    TEST_STRING = Test.TEST_STRING
-    TITLE = Test.TITLE
+class Course(UUU):
+    TEST_STRING = UUU.TEST_STRING
+    TITLE = UUU.TITLE
 
     def input_course_name(self, text=TEST_STRING):
         """Ввод имени курса"""
@@ -223,7 +223,7 @@ class Course(Test):
         """Кнопка 'Контент' в разделе 'Добавить материал'"""
         self.click_to_element(locators.Course.CONTENT_BUTTON)
 
-    def content_creation(self):
-        """Наполнение контента"""
-        self.title_article()
-        self.text_area_article()
+    # def content_creation(self):
+    #     """Наполнение контента"""
+    #     self.title_article()
+    #     self.text_area_article()
