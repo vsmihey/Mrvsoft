@@ -36,8 +36,6 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
     """Создание и наполнение Базовой статьи"""
     BASE_ARTICLE_TITLE = 'Название статьи ' + str(random.randint(999, 9999))
 
-
-
     def save_data_in_file(self):
         """Метод сохранения ссылки и названия статьи, данные перезаписываются при каждом вызове"""
         with open(r'data.txt', 'w', encoding='utf8') as file:
@@ -104,7 +102,6 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         number_version_check = self.element_is_visible(locator.NUMBER_VERSION_CHECK).text
         number_version = list(number_version_check)
         assert number_version[-1] == "0"
-
 
     def check_images_in_article(self):
         """Проверка двух изображений в статье"""
@@ -208,9 +205,6 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         assert spoiler_show == "m-spoiler m-spoiler--show"
 
 
-
-
-
 class DataParser:
     """Класс получения данных из файла"""
 
@@ -304,5 +298,3 @@ class Comments(Authorisation):
         page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
         page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
         page.click_to_element(locators.Comments.CLOSE_COMMENT)
-
-

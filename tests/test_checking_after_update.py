@@ -46,7 +46,6 @@ class TestCheckingAfterUpdate:
 
     @allure.title("Проверка статьи по шаблону после установки обновления")
     def test_check_template_after_updating(self, driver):
-
         pass
 
 
