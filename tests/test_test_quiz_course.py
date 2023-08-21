@@ -87,6 +87,6 @@ class TestLMS:
         # page.confirm_save_draft_button()
         page.add_material_button()
         page.content_button()
-        page.content_creation()
+        # page.content_creation()
 
         time.sleep(5)

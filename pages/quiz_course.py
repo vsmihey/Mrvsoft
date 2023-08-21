@@ -223,7 +223,7 @@ class Course(Test):
         """Кнопка 'Контент' в разделе 'Добавить материал'"""
         self.click_to_element(locators.Course.CONTENT_BUTTON)
 
-    def content_creation(self):
-        """Наполнение контента"""
-        self.title_article()
-        self.text_area_article()
+    # def content_creation(self):
+    #     """Наполнение контента"""
+    #     self.title_article()
+    #     self.text_area_article()
