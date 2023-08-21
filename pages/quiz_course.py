@@ -92,9 +92,9 @@ class UUU(CreatingPanel, PublicWizard, CKERedactor):
         assert self.element_is_visible(locators.Test.NAME_CREATED_TEST).text == self.TITLE
 
 
-class Quiz(Test):
-    TEST_STRING = Test.TEST_STRING
-    TITLE = Test.TITLE
+class Quiz(UUU):
+    TEST_STRING = UUU.TEST_STRING
+    TITLE = UUU.TITLE
 
     def input_quiz_name(self, text=TEST_STRING):
         """Ввод имени опроса"""
@@ -155,9 +155,9 @@ class Quiz(Test):
         self.next_and_finish_button_click()
 
 
-class Course(Test):
-    TEST_STRING = Test.TEST_STRING
-    TITLE = Test.TITLE
+class Course(UUU):
+    TEST_STRING = UUU.TEST_STRING
+    TITLE = UUU.TITLE
 
     def input_course_name(self, text=TEST_STRING):
         """Ввод имени курса"""
