@@ -3,6 +3,8 @@ import pathlib
 from pathlib import Path
 from pages.base_class import MainPage
 import locators.all_locators as locators
+from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
+
 
 
 class CKERedactor(MainPage):
@@ -33,6 +35,19 @@ class CKERedactor(MainPage):
             n.click()
 
         self.element_is_visible(locators.CKERedactor.INPUT_SELECTED).click()
+
+    def title_article(self):
+        """Заголовок статьи"""
+        self.element_is_visible(locators_topic_database.NAME_OF_ARTICLE).send_keys(self.BASE_ARTICLE_TITLE)
+
+    def change_folder(self):
+        """Выбор папки сохранения"""
+        self.element_is_visible(locators_topic_database.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+
+    def text_area_article(self):
+        """Наполнение тела статьи"""
+        self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Hello')
+        self.input_files()
 
 
 class PublicWizard(MainPage):

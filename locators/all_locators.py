@@ -1213,9 +1213,12 @@ class CheckBellComments:
 
 class CheckAfterUpdating:
     """Локаторы проверки контента в статье после обновления"""
-    CHECK_NAME_ARTICLE = (By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'Обычная статья')]")
-    VERSION_CHECK = (By.CSS_SELECTOR, "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
-    NUMBER_VERSION_CHECK = (By.CSS_SELECTOR, "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
+    CHECK_NAME_ARTICLE = (
+        By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'Обычная статья')]")
+    VERSION_CHECK = (By.CSS_SELECTOR,
+                     "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
+    NUMBER_VERSION_CHECK = (By.CSS_SELECTOR,
+                            "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
     "Локаторы изображений"
     IMG1_IN_ARTICLE = (By.XPATH,
                        "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='girl-ga8f2187eb_640']")
@@ -1281,7 +1284,6 @@ class CheckAfterUpdating:
 class Test:
     """Локаторы для работы с тестами"""
     CREATING_TEST_BUTTON = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[5]")
-    CREATING_QUIZ_BUTTON = (By.XPATH, "//div[contains(text(),'Опрос')]")
     TEST_NAME = (By.NAME, "name")
     TEST_DESCRIPTION = (By.NAME, "description")
     SAVE_BUTTON = (By.XPATH,
@@ -1292,6 +1294,7 @@ class Test:
     QUESTIONS_LIMIT_STATUS = (By.CSS_SELECTOR, ".m-ui-typography.m-ui-typography--16x18.m-ui-slider__text")
     QUESTIONS_LIMIT_VALUE = (By.NAME, "randomQuestionCount")
     COUNT_OF_CORRECT_ANSWERS = (By.CSS_SELECTOR, ".m-ui-select__select")
+    NAME_CREATED_TEST = (By.CSS_SELECTOR, ".popup__title.title-block")
 
 
 class Quiz:
@@ -1300,3 +1303,34 @@ class Quiz:
     QUIZ_NAME = (By.XPATH, "//input[@placeholder='Введите название опроса']")
     QUIZ_DESCRIPTION = (By.XPATH, "//input[@placeholder='Введите описание опроса']")
     SAVE_BUTTON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium m-lms-quiz-editor__save']")
+    NEW_QUESTION_BUTTON = (By.CLASS_NAME, "button-transparent")
+    TEXT_QUESTION = (By.XPATH, "//textarea[@placeholder='Введите текст вопроса']")
+    TEXT_ANSWER = (By.XPATH, "//textarea[@placeholder='Введите текст ответа']")
+    ADD_ANSWER_BUTTON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
+    CREATE_QUESTION_BUTTON = (
+        By.XPATH, "//button[@class='m-button m-button--success m-button--medium m-lms-question-editor__footer-button']")
+
+
+class Course:
+    """Локаторы для работы с курсами"""
+    CREATING_COURSE_BUTTON = (By.XPATH, "//div[contains(text(),'Курс')]")
+
+    COURSE_NAME = (
+        By.XPATH,
+        "//div[@class='textarea-wrapper-form m-lms-course-cover__name']//textarea[@class='textarea-wrapper-form__textarea']")
+    COURSE_DESCRIPTION = (
+        By.XPATH,
+        "//div[@class='textarea-wrapper-form m-lms-course-cover__description']//textarea[@class='textarea-wrapper-form__textarea']")
+
+    ADD_MATERIAL_BUTTON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
+
+    SAVE_BUTTON = (
+        By.XPATH,
+        "//button[@class='m-button m-button--success m-button--medium lms-course-editor-sidebar__save-button']")
+
+    CLOSE_WINDOW = (By.XPATH, "//*[name()='path' and contains(@d,'M19.5327 1')]")
+
+    DRAFT_SAVE_CONFIRM_BUTTON = (
+        By.XPATH, "//button[@class='m-button m-button--success m-button--medium lms-save-draft-confirm__left-btn']")
+    DRAFT_SAVE_ABORT_BUTTON = (By.XPATH, "//p[contains(text(),'не сохранять')]")
+    CONTENT_BUTTON = (By.XPATH, "//div[@class='m-lms-action-tooltip']")

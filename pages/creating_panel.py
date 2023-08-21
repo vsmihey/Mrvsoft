@@ -28,8 +28,8 @@ class CreatingPanel(Authorisation):
 
     def create_course_button(self):
         """Кнопка для создания курса"""
-        pass
+        self.click_to_element(locators.Course.CREATING_COURSE_BUTTON)
 
     def create_quiz_button(self):
         """Кнопка для создания опроса"""
-        self.click_to_element(locators.Test.CREATING_QUIZ_BUTTON)
+        self.click_to_element(locators.Quiz.CREATING_QUIZ_BUTTON)

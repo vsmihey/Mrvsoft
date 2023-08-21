@@ -1,7 +1,6 @@
 import random
 import time
 
-from selenium.common import StaleElementReferenceException, ElementClickInterceptedException, TimeoutException
 from selenium.webdriver.common.by import By
 
 from pages.creating_panel import CreatingPanel
@@ -37,18 +36,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
     """Создание и наполнение Базовой статьи"""
     BASE_ARTICLE_TITLE = 'Название статьи ' + str(random.randint(999, 9999))
 
-    def title_article(self):
-        """Заголовок статьи"""
-        self.element_is_visible(locators_topic_database.NAME_OF_ARTICLE).send_keys(self.BASE_ARTICLE_TITLE)
 
-    def change_folder(self):
-        """Выбор папки сохранения"""
-        self.element_is_visible(locators_topic_database.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
-
-    def text_area_article(self):
-        """Наполнение тела статьи"""
-        self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Hello')
-        self.input_files()
 
     def save_data_in_file(self):
         """Метод сохранения ссылки и названия статьи, данные перезаписываются при каждом вызове"""
