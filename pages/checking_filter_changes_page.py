@@ -398,8 +398,13 @@ class AddFilterChanges(Authorisation, BasePage):
             time.sleep(5)
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
             # article_firs_name = self.browser.find_element(By.XPATH, f"//p[text()='{first_name}']")
-        time.sleep(2)
-        article_firs_name.click()
+        self.element_is_visible(self.Locators.FILTERS_FIRST_NAME).click()
+        time.sleep(1)
+        # try:
+        #     article_firs_name.click()
+        # except StaleElementReferenceException:
+        #     time.sleep(3)
+        #     article_firs_name.click()
         """check content"""
         self.element_is_visible(self.Locators.TEXT_ARTICLE).is_displayed()
         try:
@@ -414,7 +419,7 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
         time.sleep(1)
         try:
-            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY, timeout=3)
         except (ElementClickInterceptedException, TimeoutException):
             time.sleep(3)
             self.delete_draft()
@@ -427,7 +432,11 @@ class AddFilterChanges(Authorisation, BasePage):
             #     self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
             # self.element_is_visible(self.Locators.BUTTON_DELETE_DRAFT).click()
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+        time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+
+
+        time.sleep(1)
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
         assert text_request_article == name_request
         """change filters"""
@@ -456,7 +465,12 @@ class AddFilterChanges(Authorisation, BasePage):
         except NoSuchElementException:
             time.sleep(5)
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
-        article_firs_name.click()
+        time.sleep(1)
+        try:
+            article_firs_name.click()
+        except StaleElementReferenceException:
+            time.sleep(3)
+            article_firs_name.click()
         """check content"""
         self.element_is_visible(self.Locators.TEXT_ARTICLE).is_displayed()
         try:

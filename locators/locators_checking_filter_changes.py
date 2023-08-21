@@ -72,6 +72,7 @@ class AddFilterChangesLocators:
     CREATED_CONTENT_FOR_FILTERS = (By.CSS_SELECTOR, ".massive-change__check-all-wrapper")
     # FILTERS = (By.CSS_SELECTOR, ".action-button__icon")
     FILTERS = (By.XPATH, "//div[@class='m-ui-paper tag-item button-sort__item action-button m-ui-paper--hoverable m-ui-paper--shadowed']")
+    FILTERS_FIRST_NAME = (By.XPATH, "(//section[@class='article-preview'])[1]")
     ARTICLE_BY_FILTERS = (By.CSS_SELECTOR, ".m-ui-paper.article-preview__body.m-ui-paper--shadowed")
     """check article"""
     TEXT_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader']//p[contains(text(),'Hello')]")
