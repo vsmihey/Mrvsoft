@@ -58,7 +58,7 @@ class TestFilesFormat:
         @allure.title("Замена в тип контента Файл - картинка")
         def test_file_check_replacement_pic(self, driver):
             files_format_page = FilesFormatPage(driver)
-            # files_format_page.open()
+            files_format_page.open()
             files_format_page.get_authorisation_in_selen(user_for_test)
             files_format_page.file_check_replacement_pic(driver)
 

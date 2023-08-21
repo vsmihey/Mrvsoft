@@ -152,6 +152,21 @@ class FilesFormatPage(Authorisation, BasePage):
             self.add_all_files(path=n)
         return path1, path2, path3, path4, path5, path6
 
+    def create_pic_file(self, ):
+        path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
+        self.add_all_files(path=path2)
+        return path2
+
+    def create_mp3_file(self, ):
+        path3 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
+        self.add_all_files(path=path3)
+        return path3
+
+    def create_video_file(self, ):
+        path5 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
+        self.add_all_files(path=path5)
+        return path5
+
     def check_replacement_files_text(self, driver):
         self.element_is_visible(self.Locators.CHANGE_FILE).click()
         try:
@@ -198,10 +213,17 @@ class FilesFormatPage(Authorisation, BasePage):
         time.sleep(1)
         self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
         time.sleep(1)
-        element = self.elements_is_present(self.Locators.AVI_FILE_CREATED)
+        # element = self.elements_is_present(self.Locators.AVI_FILE_CREATED)
+        try:
+            self.elements_is_present(self.Locators.AVI_FILE_CREATED, timeout=3).click()
+        except TimeoutException:
+            time.sleep(1)
+            # создаем файл avi если не доступен
+            self.create_video_file()
+            self.elements_is_present(self.Locators.AVI_FILE_CREATED).click()
         time.sleep(1)
-        self.action_move_to_element(element, driver)
-        self.elements_is_present(self.Locators.AVI_FILE_CREATED).click()
+        # self.action_move_to_element(element, driver)
+        # self.elements_is_present(self.Locators.AVI_FILE_CREATED).click()
         time.sleep(1)
         self.check_replacement_files_text(driver)
         """change files """
@@ -214,24 +236,25 @@ class FilesFormatPage(Authorisation, BasePage):
 
     def file_check_replacement_audio(self, driver):
         # self.input_in_my_project(driver)
-        path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
+        # path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "media.jpg"))
-        path3 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
+        # path3 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
         path4 = str(Path(pathlib.Path.cwd(), "files", "aac.aac"))
-        path5 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
-        path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
+        # path5 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
+        # path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         """edit avi file"""
         # здесь нужно найти ранее созданный файл
         self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
         try:
-            element = self.elements_is_present(self.Locators.MP3_FILE_CREATED, timeout=3)
-        except TimeoutException:
+            self.elements_is_present(self.Locators.MP3_FILE_CREATED, timeout=3).click()
+        except (TimeoutException, ElementNotInteractableException):
             time.sleep(1)
             # создаем файл mp3 если не доступен
-            self.create_pic_video_audio_files(self)
-            element = self.elements_is_present(self.Locators.MP3_FILE_CREATED)
-        self.action_move_to_element(element, driver)
-        self.elements_is_present(self.Locators.MP3_FILE_CREATED).click()
+            self.create_mp3_file()
+            time.sleep(1)
+            self.elements_is_present(self.Locators.MP3_FILE_CREATED).click()
+        # self.action_move_to_element(element, driver)
+        time.sleep(1)
         self.check_replacement_files_text(driver)
         """replacement check"""
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path4)
@@ -254,15 +277,14 @@ class FilesFormatPage(Authorisation, BasePage):
         # здесь нужно найти ранее созданный файл
         time.sleep(1)
         self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
-        time.sleep(1)
-        element = self.elements_is_present(self.Locators.JPEG_FILE_CREATED)
-        time.sleep(1)
-        self.action_move_to_element(element, driver)
         try:
+            # element = self.elements_is_present(self.Locators.JPEG_FILE_CREATED)
+            self.elements_is_present(self.Locators.JPEG_FILE_CREATED, timeout=3).click()
+        except TimeoutException:
+            time.sleep(1)
+            self.create_pic_file()
             self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
-        except ElementClickInterceptedException:
-            time.sleep(3)
-            self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
+        # self.action_move_to_element(element, driver)
         self.check_replacement_files_text(driver)
         """replacement check"""
         self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(path1)
