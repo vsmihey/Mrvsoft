@@ -104,6 +104,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         number_version_check = self.element_is_visible(locator.NUMBER_VERSION_CHECK).text
         number_version = list(number_version_check)
         assert number_version[-1] == "0"
+        self.click_to_element(locator.SVG_VERSION_WINDOW_CLOSE)
 
 
     def check_images_in_article(self):

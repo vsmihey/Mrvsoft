@@ -7,6 +7,9 @@ from pages.checking_after_update import CheckingArticleAfterUpdatePage
 from pages.create_article_and_comments import BaseArticleEditor
 from pages.data_login_password import base_article
 from pages.users import minervakms
+from pages.users import andrey
+
+user_for_test = andrey
 
 
 @allure.suite("Проверка обычной статьи, статьи по шаблону, пошагового сценария после установки обновления")
@@ -40,7 +43,7 @@ class TestCheckingAfterUpdate:
         self.check_all_content_in_article(driver)
         checking_after_updating.major_edit_in_article(self.TEXT)
         checking_after_updating.check_version()
-        # self.check_all_content_in_article(driver)
+        self.check_all_content_in_article(driver)
         time.sleep(5)
 
 

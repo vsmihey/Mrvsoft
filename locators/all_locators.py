@@ -1213,67 +1213,55 @@ class CheckBellComments:
 
 class CheckAfterUpdating:
     """Локаторы проверки контента в статье после обновления"""
-    CHECK_NAME_ARTICLE = (
-        By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'Обычная статья')]")
-    VERSION_CHECK = (By.CSS_SELECTOR,
-                     "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
-    NUMBER_VERSION_CHECK = (By.CSS_SELECTOR,
-                            "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
+    CHECK_NAME_ARTICLE = (By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'Обычная статья')]")
+    VERSION_CHECK = (By.CSS_SELECTOR, "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
+    SVG_VERSION_WINDOW_CLOSE = (By.XPATH, "//div[@class='m-popup__close']")
+    NUMBER_VERSION_CHECK = (By.CSS_SELECTOR, "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
     "Локаторы изображений"
     IMG1_IN_ARTICLE = (By.XPATH,
-                       "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='girl-ga8f2187eb_640']")
+                       "(//img[@alt='girl-ga8f2187eb_640'])[1]")
     IMG2_IN_ARTICLE = (By.XPATH,
-                       "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//img[@alt='122']")
+                       "(//img[@alt='122'])[1]")
     "Локаторы видео"
     VIDEO1_IN_ARTICLE = (By.XPATH,
-                         "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//video[@title='загруженное']")
+                         "(//video[@title='загруженное'])[1]")
     VIDEO2_IN_ARTICLE = (By.XPATH,
-                         "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//video[@title='Sunset - 86879']")
+                         "(//video[@title='Sunset - 86879'])[1]")
     "Локаторы аудио"
     AUDIO_IN_ARTICLE = (By.XPATH,
-                        "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//audio[@title='perry-como-magic-moments-mp3']")
+                        "(//audio[@title='perry-como-magic-moments-mp3'])[1]")
     "Локаторы таблица и текст стили"
     # TABLE_IN_ARTICLE = (By.XPATH, "//div[@class='m-table-widget__wrapper m-table-widget__wrapper--extendable']//table[@class='m-cke-table']")
-    TABLE_IN_ARTICLE = (By.XPATH,
-                        "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']")
+    # TABLE_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']")
+    TABLE_IN_ARTICLE = (By.XPATH, "(//div[@class='os-viewport os-viewport-scrollbar-hidden'])[3]")
     # CHECK_TEXT_IN_TABLE = (By.XPATH, "//div[@class='m-table-widget__wrapper m-table-widget__wrapper--extendable']//table[@class='m-cke-table']//td[@data-cell='1_0']")
-    CHECK_TEXT_IN_TABLE = (By.XPATH,
-                           "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']//p[text()='Строка']")
-    CHECK_H1_TEXT = (By.XPATH,
-                     "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h1[@id='chapter_1']")
-    CHECK_H2_TEXT = (By.XPATH,
-                     "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h2[@id='chapter_2']")
-    CHECK_H3_TEXT = (By.XPATH,
-                     "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//h3[@id='chapter_3']")
-    CHECK_P_TEXT = (By.XPATH,
-                    "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Обычный текст')]")
-    CHECK_STRONG_TEXT = (By.XPATH,
-                         "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//strong[contains(text(),'Жирный')]")
-    CHECK_ITALICS_TEXT = (By.XPATH,
-                          "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//em[contains(text(),'Курсив')]")
-    CHECK_UNDERLINED_TEXT = (By.XPATH,
-                             "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//u[contains(text(),'Подчеркнутый')]")
-    CHECK_SUPERSCRIPT_TEXT = (By.XPATH,
-                              "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//sup[contains(text(),'Надстрочный')]")
-    CHECK_SUBSCRIPT_TEXT = (By.XPATH,
-                            "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//s//sub[contains(text(),'Подстрочный')]")
-    CHECK_CROSSED_OUT_TEXT = (By.XPATH,
-                              "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//s[contains(text(),'Перечеркнутый')]")
+    # CHECK_TEXT_IN_TABLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']//p[text()='Строка']")
+    CHECK_TEXT_IN_TABLE = (By.XPATH, "(//p[contains(text(),'Строка')])[1]")
+    CHECK_H1_TEXT = (By.XPATH, "(//h1[@id='chapter_1'])[1]")
+    CHECK_H2_TEXT = (By.XPATH, "(//h2[@id='chapter_2'])[1]")
+    CHECK_H3_TEXT = (By.XPATH, "(//h3[@id='chapter_3'])[1]")
+    CHECK_P_TEXT = (By.XPATH,  "(//p[contains(text(),'Обычный текст')])[1]")
+    CHECK_STRONG_TEXT = (By.XPATH, "(//strong[contains(text(),'Жирный')])[1]")
+    CHECK_ITALICS_TEXT = (By.XPATH,"(//em[contains(text(),'Курсив')])[1]")
+    CHECK_UNDERLINED_TEXT = (By.XPATH, "(//u[contains(text(),'Подчеркнутый')])[1]")
+    CHECK_SUPERSCRIPT_TEXT = (By.XPATH, "(//sup[contains(text(),'Надстрочный')])[1]")
+    CHECK_SUBSCRIPT_TEXT = (By.XPATH, "(//sub[contains(text(),'Подстрочный')])[1]")
+    CHECK_CROSSED_OUT_TEXT = (By.XPATH, "(//s[contains(text(),'Перечеркнутый')])[1]")
     "Локаторы выравнивания текста"
     CHECK_ALIGN_CENTER_TEXT = (By.XPATH,
-                               "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание по центру')]")
+                               "(//p[contains(text(),'Выравнивание по центру')])[1]")
     CHECK_ALIGN_RIGHT_TEXT = (By.XPATH,
-                              "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание справа')]")
+                              "(//p[contains(text(),'Выравнивание справа')])[1]")
     CHECK_ALIGN_JUSTIFY_TEXT = (By.XPATH,
-                                "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//p[contains(text(),'Выравнивание по ширине текст текст текст')]")
+                                "(//p[contains(text(),'Выравнивание по ширине текст текст текст текст тек')])[1]")
     "Локаторы цвета текста"
     CHECK_COLOR_TEXT = (By.XPATH,
-                        "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//span[contains(text(),'Цвет шрифта')]")
+                        "(//span[contains(text(),'Цвет шрифта')])[1]")
     CHECK_HIGHLIGHT_COLOR_TEXT = (By.XPATH,
-                                  "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//span[contains(text(),'Выделение текста')]")
+                                  "(//span[contains(text(),'Выделение текста')])[1]")
     "Важное"
     CHECK_IMPORTANT_BLOCK_RED = (By.XPATH,
-                                 "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-important-info']")
+                                 "(//div[@class='m-important-info'])[1]")
     "Спойлер"
     CHECK_SPOILER = (By.XPATH,
                      "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='m-spoiler__header'][contains(text(),'Спойлер')]")
