@@ -1,15 +1,14 @@
 import random
 import time
-
+import pathlib
+from pathlib import Path
 from pages.CKE_redactor_and_public_wizard import PublicWizard, CKERedactor
 from pages.creating_panel import CreatingPanel
 from selenium.webdriver.common.keys import Keys
-from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
-
 import locators.all_locators as locators
 
 
-class UUU(CreatingPanel, PublicWizard, CKERedactor):
+class Exam(CreatingPanel, PublicWizard, CKERedactor):
     TEST_STRING = ''.join([str(random.randint(1, 9)) for _ in range(1, 515)])
     TITLE = 'Название теста ' + str(random.randint(99, 9999))
 
@@ -92,9 +91,9 @@ class UUU(CreatingPanel, PublicWizard, CKERedactor):
         assert self.element_is_visible(locators.Test.NAME_CREATED_TEST).text == self.TITLE
 
 
-class Quiz(UUU):
-    TEST_STRING = UUU.TEST_STRING
-    TITLE = UUU.TITLE
+class Quiz(Exam):
+    TEST_STRING = Exam.TEST_STRING
+    TITLE = Exam.TITLE
 
     def input_quiz_name(self, text=TEST_STRING):
         """Ввод имени опроса"""
@@ -155,13 +154,18 @@ class Quiz(UUU):
         self.next_and_finish_button_click()
 
 
-class Course(UUU):
-    TEST_STRING = UUU.TEST_STRING
-    TITLE = UUU.TITLE
+class Course(Exam):
+    TEST_STRING = Exam.TEST_STRING
+    TITLE = Exam.TITLE
 
     def input_course_name(self, text=TEST_STRING):
         """Ввод имени курса"""
         self.element_is_visible(locators.Course.COURSE_NAME).send_keys(text)
+
+    def clear_course_name(self):
+        """Очистка поля для ввода имени теста"""
+        self.element_is_visible(locators.Course.COURSE_NAME).send_keys(Keys.CONTROL + 'a')
+        self.element_is_visible(locators.Course.COURSE_NAME).send_keys(Keys.BACKSPACE)
 
     def check_course_name_length(self):
         """ Метод проверки корректности названия курса, длина не должна превышать 128 символов, название должно
@@ -188,13 +192,17 @@ class Course(UUU):
         """Проверка, что кнопка 'Добавить материал' активна """
         assert self.element_is_visible(locators.Course.ADD_MATERIAL_BUTTON).is_enabled()
 
+    def save_button_click(self):
+        """Нажатие кнопки 'опубликовать' """
+        self.click_to_element(locators.Course.SAVE_BUTTON)
+
     def add_material_button(self):
         """Кнопка 'Добавить материал'"""
         self.click_to_element(locators.Course.ADD_MATERIAL_BUTTON)
 
-    # def check_save_button_status_active(self):
-    #     """Проверка, что кнопка 'сохранить' активна """
-    #     assert self.element_is_clickable(locators.Course)
+    def add__another_material_button(self):
+        """Кнопка 'добавить' для добавления нового материала в курс"""
+        self.click_to_element(locators.Course.ADD_ANOTHER_MATERIAL_BUTTON)
 
     def check_course_name_field_description(self):
         """Проверка описания поля названия курса"""
@@ -223,7 +231,40 @@ class Course(UUU):
         """Кнопка 'Контент' в разделе 'Добавить материал'"""
         self.click_to_element(locators.Course.CONTENT_BUTTON)
 
-    # def content_creation(self):
-    #     """Наполнение контента"""
-    #     self.title_article()
-    #     self.text_area_article()
+    def content_name(self, text='Название контента'):
+        """ Название контента"""
+        self.element_is_visible(locators.Course.CONTENT_NAME).send_keys(text)
+
+    def content_creation(self):
+        """Наполнение контента"""
+        self.content_button()
+        self.content_name()
+        self.text_area_article()
+
+    def scorm_button(self):
+        """Кнопка 'Scorm/TinCan' в разделе 'Добавить материал'"""
+        self.click_to_element(locators.Course.SCORM_BUTTON)
+        time.sleep(1)
+
+    def scorm_name(self, text='Название Scorm'):
+        """ Название Scorm"""
+        self.element_is_visible(locators.Course.CONTENT_NAME).send_keys(text)
+
+    def load_scorm(self):
+        """Загрузка курса 'Scorm/TinCan'"""
+        path1 = str(Path(pathlib.Path.cwd(), "files", "scorm1.zip"))
+        self.elements_is_present(locators.Course.LOAD_SCORM_BUTTON).send_keys(path1)
+
+    def scorm_creation(self):
+        """Наполнение 'Scorm/TinCan'"""
+        self.scorm_button()
+        self.load_scorm()
+
+    def check_error_message(self):
+        """Проверка сообщения о пустом поле 'Название материала'"""
+        assert self.element_is_visible(locators.Course.ERROR_MESSAGE).text == 'Не должно быть пустым'
+
+    def change_folder(self):
+        """Выбор папки сохранения"""
+        self.element_is_visible(locators.Course.SELECT_FOLDER).send_keys("Продукты")
+

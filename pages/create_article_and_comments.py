@@ -53,6 +53,14 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.save_base_article()
         self.save_data_in_file()
 
+    def title_article(self):
+        """Заголовок статьи"""
+        self.element_is_visible(locators_topic_database.NAME_OF_ARTICLE).send_keys(self.BASE_ARTICLE_TITLE)
+
+    def change_folder(self):
+        """Выбор папки сохранения"""
+        self.element_is_visible(locators_topic_database.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+
     def minor_edit_base_article(self, url, user=minervakms):
         """Редактирование статьи и минорное сохранение"""
         self.get_authorisation_in_url(url, user)
