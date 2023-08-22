@@ -86,15 +86,6 @@ class AddFilterChanges(Authorisation, BasePage):
         """input is visible for load files"""
         time.sleep(1)
         self.download_files_is_visible()
-        # try:
-        #     self.driver.execute_script(
-        #     """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        # except JavascriptException:
-        #     time.sleep(3)
-        #     self.driver.execute_script(
-        #     """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        # self.driver.execute_script(
-        #     """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
         path1 = str(Path(pathlib.Path.cwd(), "files", "mp3.mp3"))
         path2 = str(Path(pathlib.Path.cwd(), "files", "avi.avi"))
         data_path = [path1, path2]
@@ -112,7 +103,9 @@ class AddFilterChanges(Authorisation, BasePage):
             self.element_is_visible(Locators.INPUT_SELECTED).click()
         self.element_is_visible(Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+        time.sleep(1)
         self.element_is_visible(self.Locators.INPUT_NAME_REQUEST).send_keys(name_request)
+        time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_ADD).click()
         self.element_is_visible(self.Locators.RADIOBUTTON_INCLUDED_CONTENT).click()
         self.element_is_visible(self.Locators.BUTTON_FINISH).click()
@@ -416,13 +409,15 @@ class AddFilterChanges(Authorisation, BasePage):
         except TimeoutException:
             time.sleep(3)
             self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
-        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
         time.sleep(1)
+        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        time.sleep(2)
         try:
             self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY, timeout=3)
         except (ElementClickInterceptedException, TimeoutException):
             time.sleep(3)
             self.delete_draft()
+            # self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
             self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
             # try:
             #     self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
@@ -434,8 +429,6 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
         time.sleep(1)
         self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
-
-
         time.sleep(1)
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
         assert text_request_article == name_request

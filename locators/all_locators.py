@@ -1267,6 +1267,14 @@ class CheckAfterUpdating:
                      "(//div[@class='m-spoiler__header'][contains(text(),'Спойлер')])[1]")
     CHECK_SPOILER_SHOW = (By.XPATH,
                           "(//div[@class='m-spoiler m-spoiler--show'])[1]")
+    LINK_HREF = (By.XPATH,
+                          "(//a[contains(text(),'Задача')])[1]")
+    LINK_HREF_ZRJHM = (By.XPATH,
+                 "(//a[@href='#zrjhm'][normalize-space()='#zrjhm'])[1]")
+    LINK_HREF_PHONE = (By.XPATH,
+                       "(//a[contains(text(),'tel:89367776777')])[1]")
+    LINK_HREF_MAIL = (By.XPATH,
+                       "(//a[contains(text(),'admin@minervakms.ru')])[1]")
 
 
 class Test:

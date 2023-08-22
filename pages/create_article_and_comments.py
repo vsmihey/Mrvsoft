@@ -9,6 +9,7 @@ from pages.authorisation_page import Authorisation
 import locators.all_locators as locators
 from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
 from pages.base_class import MainPage
+from pages.data_login_password import url
 from pages.users import minervakms
 
 
@@ -205,6 +206,18 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.click_to_element(locator.CHECK_SPOILER)
         spoiler_show = self.element_is_visible(locator.CHECK_SPOILER_SHOW).get_attribute("class")
         assert spoiler_show == "m-spoiler m-spoiler--show"
+
+    def check_link_href(self):
+        """Проверка ссылок в статье"""
+        locator = locators.CheckAfterUpdating()
+        link_href_1 = self.element_is_visible(locator.LINK_HREF).get_attribute("href")
+        assert link_href_1 == "https://pantheonteam.atlassian.net/browse/QA-1619"
+        link_href_2 = self.element_is_visible(locator.LINK_HREF_ZRJHM).get_attribute("href")
+        assert link_href_2 == url + "/content/space/54/article/1938#zrjhm"
+        link_href_3 = self.element_is_visible(locator.LINK_HREF_PHONE).get_attribute("href")
+        assert link_href_3 == "tel:89367776777"
+        # link_href_4 = self.element_is_visible(locator.LINK_HREF_MAIL).get_attribute("href")
+        # assert link_href_4 == "mailto:admin@minervakms.ru?subject=%D0%9F%D0%BE%D0%B4%D1%82%D0%B2%D0%B5%D1%80%D0%B4%D0%B8%D1%82%D0%B5"
 
 
 class DataParser:

@@ -34,12 +34,13 @@ class TestCheckingAfterUpdate:
         checking_after_updating.important_block_red()
         checking_after_updating.check_spoiler()
         checking_after_updating.check_align_text_in_article()
+        checking_after_updating.check_link_href()
         # checking_after_updating.major_edit_in_article(self.TEXT)
 
     @allure.title("Проверка обычной статьи после установки обновления")
     def test_check_article_after_updating(self, driver):
         checking_after_updating = BaseArticleEditor(driver)
-        checking_after_updating.get_authorisation_in_url(base_article)
+        checking_after_updating.get_authorisation_in_url(base_article, user_for_test)
         self.check_all_content_in_article(driver)
         checking_after_updating.major_edit_in_article(self.TEXT)
         checking_after_updating.check_version()
@@ -49,7 +50,8 @@ class TestCheckingAfterUpdate:
 
     @allure.title("Проверка статьи по шаблону после установки обновления")
     def test_check_template_after_updating(self, driver):
-        pass
+        checking_after_updating = BaseArticleEditor(driver)
+        checking_after_updating.get_authorisation_in_url(base_article, user_for_test)
 
 
 
