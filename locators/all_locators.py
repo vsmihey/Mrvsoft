@@ -1213,10 +1213,13 @@ class CheckBellComments:
 
 class CheckAfterUpdating:
     """Локаторы проверки контента в статье после обновления"""
-    CHECK_NAME_ARTICLE = (By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'Обычная статья')]")
-    VERSION_CHECK = (By.CSS_SELECTOR, "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
+    CHECK_NAME_ARTICLE = (
+        By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'Обычная статья')]")
+    VERSION_CHECK = (By.CSS_SELECTOR,
+                     "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
     SVG_VERSION_WINDOW_CLOSE = (By.XPATH, "//div[@class='m-popup__close']")
-    NUMBER_VERSION_CHECK = (By.CSS_SELECTOR, "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
+    NUMBER_VERSION_CHECK = (By.CSS_SELECTOR,
+                            "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
     "Локаторы изображений"
     IMG1_IN_ARTICLE = (By.XPATH,
                        "(//img[@alt='girl-ga8f2187eb_640'])[1]")
@@ -1240,9 +1243,9 @@ class CheckAfterUpdating:
     CHECK_H1_TEXT = (By.XPATH, "(//h1[@id='chapter_1'])[1]")
     CHECK_H2_TEXT = (By.XPATH, "(//h2[@id='chapter_2'])[1]")
     CHECK_H3_TEXT = (By.XPATH, "(//h3[@id='chapter_3'])[1]")
-    CHECK_P_TEXT = (By.XPATH,  "(//p[contains(text(),'Обычный текст')])[1]")
+    CHECK_P_TEXT = (By.XPATH, "(//p[contains(text(),'Обычный текст')])[1]")
     CHECK_STRONG_TEXT = (By.XPATH, "(//strong[contains(text(),'Жирный')])[1]")
-    CHECK_ITALICS_TEXT = (By.XPATH,"(//em[contains(text(),'Курсив')])[1]")
+    CHECK_ITALICS_TEXT = (By.XPATH, "(//em[contains(text(),'Курсив')])[1]")
     CHECK_UNDERLINED_TEXT = (By.XPATH, "(//u[contains(text(),'Подчеркнутый')])[1]")
     CHECK_SUPERSCRIPT_TEXT = (By.XPATH, "(//sup[contains(text(),'Надстрочный')])[1]")
     CHECK_SUBSCRIPT_TEXT = (By.XPATH, "(//sub[contains(text(),'Подстрочный')])[1]")
@@ -1334,6 +1337,8 @@ class Course:
         "//div[@class='textarea-wrapper-form m-lms-course-cover__description']//textarea[@class='textarea-wrapper-form__textarea']")
 
     ADD_MATERIAL_BUTTON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
+    ADD_ANOTHER_MATERIAL_BUTTON = (
+        By.XPATH, "//button[@class='m-ui-button-text lms-course-editor-sidebar__materials-add']")
 
     SAVE_BUTTON = (
         By.XPATH,
@@ -1345,3 +1350,15 @@ class Course:
         By.XPATH, "//button[@class='m-button m-button--success m-button--medium lms-save-draft-confirm__left-btn']")
     DRAFT_SAVE_ABORT_BUTTON = (By.XPATH, "//p[contains(text(),'не сохранять')]")
     CONTENT_BUTTON = (By.XPATH, "//div[@class='m-lms-action-tooltip']")
+    CONTENT_NAME = (By.XPATH, "//input[@class='m-ui-text-input__input']")
+    SCORM_BUTTON = (By.XPATH, "//*[name()='path' and contains(@d,'M14.6194 1')]")
+    SCORM_NAME = (By.XPATH, "//input[@class='m-ui-text-input__input']")
+    LOAD_SCORM_BUTTON = (By.XPATH, "//input[@type='file']")
+    ERROR_MESSAGE = (By.XPATH, "//div[@class='m-ui-input-wrapper-2__error-message']")
+    SELECT_FOLDER_CLICK = (By.XPATH,
+                           "//div[@class ='m-ui-paper m-ui-select__paper m-lms-course-cover__folder m-ui-paper--hoverable m-ui-paper--shadowed']")
+    SELECT_FOLDER_PRODUCT = (By.XPATH, "//option[@label ='Продукты']")
+
+    SELECT_SCORM_MATERIAL = (By.XPATH, " //p[contains(text(),'Введите название материала')]")
+
+
