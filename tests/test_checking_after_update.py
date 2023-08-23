@@ -6,7 +6,7 @@ import pytest
 from pages.checking_after_update import CheckingArticleAfterUpdatePage
 from pages.create_article_and_comments import BaseArticleEditor
 from pages.data_login_password import base_article
-from pages.users import minervakms
+from pages.users import ricksanchez
 from pages.users import andrey
 
 user_for_test = andrey

@@ -9,7 +9,7 @@ from pages.authorisation_page import Authorisation
 import locators.all_locators as locators
 from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
 from pages.base_class import MainPage
-from pages.users import minervakms
+from pages.users import ricksanchez
 
 
 class ContentOptions(MainPage):
@@ -42,7 +42,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
             file.write(self.get_actual_url() + '\n')
             file.write(self.BASE_ARTICLE_TITLE)
 
-    def creating_base_article(self, user=minervakms):
+    def creating_base_article(self, user=ricksanchez):
         """Создание обычной статьи с наполнением"""
         self.get_authorisation_in_selen(user)
         self.create_button()
@@ -61,14 +61,14 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         """Выбор папки сохранения"""
         self.element_is_visible(locators_topic_database.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
 
-    def minor_edit_base_article(self, url, user=minervakms):
+    def minor_edit_base_article(self, url, user=ricksanchez):
         """Редактирование статьи и минорное сохранение"""
         self.get_authorisation_in_url(url, user)
         self.redaction()
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('HeyHey')
         self.save_minor_edit()
 
-    def major_edit_base_article(self, url, user=minervakms):
+    def major_edit_base_article(self, url, user=ricksanchez):
         """Редактирование статьи и мажорное сохранение"""
         self.get_authorisation_in_url(url, user)
         self.redaction()
@@ -82,7 +82,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         # self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Rick and Morty was here')
         self.save_major_edit(text)
 
-    def delete_base_article(self, url, user=minervakms):
+    def delete_base_article(self, url, user=ricksanchez):
         """Удаление статьи"""
         self.get_authorisation_in_url(url, user)
         self.three_dots_button()
@@ -91,7 +91,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.execute_button_click()
         time.sleep(1)
 
-    def restore_base_article(self, url, user=minervakms):
+    def restore_base_article(self, url, user=ricksanchez):
         """Восстановление статьи"""
         self.get_authorisation_in_url(url, user)
         self.restore_button()
@@ -249,7 +249,7 @@ class Comments(Authorisation):
         self.click_to_element(locators.Comments.EXPERT_QUESTION)
 
     @staticmethod
-    def create_comments(driver, url, user=minervakms):
+    def create_comments(driver, url, user=ricksanchez):
         """Создание тестового набора комментариев в статье по переданной ссылке, с прохождением авторизации"""
         page = Comments(driver)
 
@@ -280,7 +280,7 @@ class Comments(Authorisation):
             page.send_comment()
 
     @staticmethod
-    def close_first_comment(driver, url, user=minervakms):
+    def close_first_comment(driver, url, user=ricksanchez):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
@@ -290,7 +290,7 @@ class Comments(Authorisation):
         page.click_to_element(locators.Comments.CLOSE_COMMENT)
 
     @staticmethod
-    def close_second_comment(driver, url, user=minervakms):
+    def close_second_comment(driver, url, user=ricksanchez):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
@@ -300,7 +300,7 @@ class Comments(Authorisation):
         page.click_to_element(locators.Comments.CLOSE_COMMENT)
 
     @staticmethod
-    def close_third_comment(driver, url, user=minervakms):
+    def close_third_comment(driver, url, user=ricksanchez):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)

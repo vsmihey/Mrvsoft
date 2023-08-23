@@ -1,4 +1,3 @@
-import time
 import random
 from locators import all_locators as locators
 from pages.authorisation_page import Authorisation
@@ -45,9 +44,9 @@ class NewProject(Authorisation, MenuNavigation):
         # TODO: написать метод проверки авторизации в нужный проект
         pass
 
-    def creating_new_project(self):
+    def creating_new_project(self, user):
         """Создание нового проекта"""
-        self.get_authorisation_no_project_selection()
+        self.get_authorisation_no_project_selection(user)
         self.add_new_project_button()
         self.input_project_name()
         self.input_project_description('Тестовое описание')

@@ -6,13 +6,13 @@ from pages.users import StableUsers
 # login = 'andrey'
 # password = '004e9f86'
 # password = input("введите пароль (без кавычек): ")  #'e70a8e89'
-# password = 'minervakms'
+# password = 'ricksanchez'
 
 # Учетка Бориса
 # login = 'b.pogodin'
 # password = '68f1d85b'
 login = 'ricksanchez'
-password = 'minervakms'
+password = 'ricksanchez'
 
 # неверные данные
 # login_incorrect = 'm.andreyq'
