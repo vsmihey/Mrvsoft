@@ -105,6 +105,23 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         assert number_version[-1] == "0"
         self.click_to_element(locator.SVG_VERSION_WINDOW_CLOSE)
 
+    def check_text_artile_heading(self):
+        """Проверка оглавления"""
+        locator = locators.CheckAfterUpdating()
+        heading = self.element_is_displayed(locator.HEADING).text
+        assert heading == "Оглавление"
+
+    def check_text_artile_links(self):
+        """Проверка вкладки с сылкой"""
+        locator = locators.CheckAfterUpdating()
+        link1 = self.element_is_displayed(locator.LINK1).text
+        assert link1 == "1 Ссылка"
+        self.click_to_element(locator.LINK1)
+        task = self.element_is_displayed(locator.TASK).get_attribute("src")
+        'Иконка'
+        assert task == "https://pantheonteam.atlassian.net/favicon.ico"
+
+
     def check_images_in_article(self):
         """Проверка двух изображений в статье"""
         locator = locators.CheckAfterUpdating()
@@ -218,6 +235,32 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         assert link_href_3 == "tel:89367776777"
         # link_href_4 = self.element_is_visible(locator.LINK_HREF_MAIL).get_attribute("href")
         # assert link_href_4 == "mailto:admin@minervakms.ru?subject=%D0%9F%D0%BE%D0%B4%D1%82%D0%B2%D0%B5%D1%80%D0%B4%D0%B8%D1%82%D0%B5"
+
+    def check_name_article_by_template(self):
+        """Проверка ссылок в статье"""
+        locator = locators.CheckAfterUpdating()
+        template_text = self.element_is_visible(locator.TEXT_TEMPLATE).text
+        assert template_text == "Шаблонная статья"
+
+    def check_image_in_template1(self):
+        """Проверка изображения в статье по шаблону"""
+        locator = locators.CheckAfterUpdating()
+        time.sleep(1)
+        # IMG1_IN_TEMPLATE = (By.XPATH, "// img[@ alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
+        self.element_is_displayed(locator.IMG1_IN_TEMPLATE)
+
+    def check_video_in_template(self):
+        """"Проверка видео в статье по шаблону"""
+        locator = locators.CheckAfterUpdating()
+        self.element_is_displayed(locator.VIDEO_IN_TEMPLATE)
+
+
+
+    def check_text_links(self):
+        """Проверка вкладки с сылками"""
+        locator = locators.CheckAfterUpdating()
+        link3 = self.element_is_displayed(locator.LINK3).text
+        assert link3 == "3 Ссылки"
 
 
 class DataParser:

@@ -1275,6 +1275,21 @@ class CheckAfterUpdating:
                        "(//a[contains(text(),'tel:89367776777')])[1]")
     LINK_HREF_MAIL = (By.XPATH,
                        "(//a[contains(text(),'admin@minervakms.ru')])[1]")
+    "Локаторы проверка статьи по шаблону"
+    IMG1_IN_TEMPLATE = (By.XPATH,
+                      "(//img[@alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
+    VIDEO_IN_TEMPLATE = (By.XPATH,
+                        "(//video[@title='Sunset - 86879'])[1]")
+    TEXT_TEMPLATE = (By.XPATH,
+                     "(//span[contains(text(),'Шаблонная статья')])[1]")
+    LINK1 = (By.XPATH,
+             "//p[contains(text(),'1 Ссылка')]")
+    TASK = (By.XPATH,
+             "//li[@title='Задача']")
+    HEADING = (By.XPATH,
+             "//p[contains(text(),'Оглавление')]")
+    LINK3 = (By.XPATH,
+                     "//p[contains(text(),'3 Ссылки')]")
 
 
 class Test:
