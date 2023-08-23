@@ -1,6 +1,7 @@
 import random
 import time
 
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 from pages.creating_panel import CreatingPanel
@@ -113,11 +114,17 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         assert number_version[-1] == "0"
         self.click_to_element(locator.SVG_VERSION_WINDOW_CLOSE)
 
-    def check_text_artile_heading(self):
+    def check_text_artile_heading(self, driver):
         """Проверка оглавления"""
         locator = locators.CheckAfterUpdating()
         heading = self.element_is_visible(locator.HEADING).text
         assert heading == "Оглавление"
+        self.click_to_element(locator.HEADING)
+        element1 = self.element_is_visible_1(locator.HEADING1)
+        self.action_move_to_element(element1, driver)
+        element2 = self.element_is_visible_1(locator.HEADING2)
+        self.action_move_to_element(element2, driver)
+        self.element_is_displayed(locator.HEADING3)
 
     def check_text_artile_links(self):
         """Проверка вкладки с сылкой"""
@@ -173,6 +180,26 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         "Проверка обычного текста"
         check_p_text = self.element_is_visible(locator.CHECK_P_TEXT).tag_name
         assert check_p_text == "p"
+
+    def paragraph_color_check(self):
+        """Проверка цвета Абзацев"""
+        locator = locators.CheckAfterUpdating()
+        "1"
+        paragraph_color_red = self.element_is_visible(locator.PARAGRAPH_COLOR_RED).get_attribute("style")
+        assert paragraph_color_red == "color: rgb(235, 51, 35);"
+        paragraph_color_bg_yellow = self.element_is_visible(locator.PARAGRAPH_COLOR_BG_YELLOW).get_attribute("style")
+        assert paragraph_color_bg_yellow == "background-color: rgb(255, 254, 85);"
+        "2"
+        paragraph_color_purple = self.element_is_visible(locator.PARAGRAPH_COLOR_PURPLE).get_attribute("style")
+        assert paragraph_color_purple == "color: rgb(104, 55, 154);"
+        paragraph_color_bg_green = self.element_is_visible(locator.PARAGRAPH_COLOR_BG_GREEN).get_attribute("style")
+        print(paragraph_color_bg_green)
+        assert paragraph_color_bg_green == "background-color: rgb(160, 205, 99);"
+        "3"
+        paragraph_color_green = self.element_is_visible(locator.PARAGRAPH_COLOR_GREEN).get_attribute("style")
+        assert paragraph_color_green == "color: rgb(78, 172, 91);"
+        paragraph_color_bg_orange = self.element_is_visible(locator.PARAGRAPH_COLOR_BG_ORANGE).get_attribute("style")
+        assert paragraph_color_bg_orange == "background-color: rgb(249, 217, 119);"
 
     def check_styles_text_in_article(self):
         """Проверка стилей текста в статье"""

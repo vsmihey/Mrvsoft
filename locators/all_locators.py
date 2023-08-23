@@ -1234,15 +1234,21 @@ class CheckAfterUpdating:
     AUDIO_IN_ARTICLE = (By.XPATH,
                         "(//audio[@title='perry-como-magic-moments-mp3'])[1]")
     "Локаторы таблица и текст стили"
-    # TABLE_IN_ARTICLE = (By.XPATH, "//div[@class='m-table-widget__wrapper m-table-widget__wrapper--extendable']//table[@class='m-cke-table']")
-    # TABLE_IN_ARTICLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']")
     TABLE_IN_ARTICLE = (By.XPATH, "(//div[@class='os-viewport os-viewport-scrollbar-hidden'])[3]")
-    # CHECK_TEXT_IN_TABLE = (By.XPATH, "//div[@class='m-table-widget__wrapper m-table-widget__wrapper--extendable']//table[@class='m-cke-table']//td[@data-cell='1_0']")
-    # CHECK_TEXT_IN_TABLE = (By.XPATH, "//section[@class='article-modal__content article-modal--unique-class reader reader--narrow']//div[@class='os-viewport os-viewport-scrollbar-hidden']//p[text()='Строка']")
     CHECK_TEXT_IN_TABLE = (By.XPATH, "(//p[contains(text(),'Строка')])[1]")
     CHECK_H1_TEXT = (By.XPATH, "(//h1[@id='chapter_1'])[1]")
     CHECK_H2_TEXT = (By.XPATH, "(//h2[@id='chapter_2'])[1]")
     CHECK_H3_TEXT = (By.XPATH, "(//h3[@id='chapter_3'])[1]")
+    "Локаторы абзац"
+    "1"
+    PARAGRAPH_COLOR_RED = (By.XPATH, "(//span[contains(text(),'Абзац 1 текст текст текст текст текст текст текст ')])[1]")
+    PARAGRAPH_COLOR_BG_YELLOW = (By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[2]")
+    "2"
+    PARAGRAPH_COLOR_PURPLE = (By.XPATH, "(//span[contains(text(),'Абзац 2 текст текст текст текст текст текст текст ')])[1]")
+    PARAGRAPH_COLOR_BG_GREEN = (By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[4]")
+    "3"
+    PARAGRAPH_COLOR_GREEN = (By.XPATH, "(//span[contains(text(),'Абзац 3 текст текст текст текст текст текст текст ')])[1]")
+    PARAGRAPH_COLOR_BG_ORANGE = (By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[6]")
     CHECK_P_TEXT = (By.XPATH, "(//p[contains(text(),'Обычный текст')])[1]")
     CHECK_STRONG_TEXT = (By.XPATH, "(//strong[contains(text(),'Жирный')])[1]")
     CHECK_ITALICS_TEXT = (By.XPATH, "(//em[contains(text(),'Курсив')])[1]")
@@ -1293,6 +1299,12 @@ class CheckAfterUpdating:
             "//img[@alt='text']")
     HEADING = (By.XPATH,
              "//p[contains(text(),'Оглавление')]")
+    HEADING1 = (By.XPATH,
+               "//span[text()='Заголовок 1']")
+    HEADING2 = (By.XPATH,
+                "//span[text()='Заголовок 2']")
+    HEADING3 = (By.XPATH,
+                "//span[text()='Заголовок 3']")
     LINK3 = (By.XPATH,
                      "//p[contains(text(),'3 Ссылки')]")
 
