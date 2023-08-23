@@ -1,5 +1,6 @@
 import time
 
+import requests
 from selenium.common import InvalidSelectorException, NoSuchElementException, StaleElementReferenceException, \
     TimeoutException, ElementClickInterceptedException
 from selenium.webdriver import ActionChains
@@ -150,4 +151,12 @@ class MainPage:
         path = pathlib.Path(pathlib.Path.cwd(), 'avatars', name_screenshot)
         path = str(path)
         self.browser.save_screenshot(path)
+
+    def status_code200_check(self, request_url):
+        """Проверка ссылки по get запросу на статус код 200
+        request_url - ссылка, которую проверяем"""
+        response = requests.get(request_url)
+        code = response.status_code
+        assert code == 200
+        return code
 

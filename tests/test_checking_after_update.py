@@ -45,7 +45,6 @@ class TestCheckingAfterUpdate:
         checking_after_updating.check_image_in_template1()
         checking_after_updating.check_video_in_template()
 
-
     @allure.title("Проверка обычной статьи после установки обновления")
     def test_check_article_after_updating(self, driver):
         checking_after_updating = BaseArticleEditor(driver)

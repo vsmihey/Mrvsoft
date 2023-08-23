@@ -116,19 +116,21 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
     def check_text_artile_heading(self):
         """Проверка оглавления"""
         locator = locators.CheckAfterUpdating()
-        heading = self.element_is_displayed(locator.HEADING).text
+        heading = self.element_is_visible(locator.HEADING).text
         assert heading == "Оглавление"
 
     def check_text_artile_links(self):
         """Проверка вкладки с сылкой"""
         locator = locators.CheckAfterUpdating()
-        link1 = self.element_is_displayed(locator.LINK1).text
+        link1 = self.element_is_visible(locator.LINK1).text
         assert link1 == "1 Ссылка"
         self.click_to_element(locator.LINK1)
-        task = self.element_is_displayed(locator.TASK).get_attribute("src")
-        'Иконка'
+        task = self.element_is_visible(locator.TASK).text
+        assert task == "Задача"
+        task = self.element_is_visible(locator.TASK_INTO).get_attribute("src")
+        'Проверка конки'
         assert task == "https://pantheonteam.atlassian.net/favicon.ico"
-
+        self.status_code200_check("https://pantheonteam.atlassian.net/favicon.ico")
 
     def check_images_in_article(self):
         """Проверка двух изображений в статье"""
@@ -237,8 +239,10 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         locator = locators.CheckAfterUpdating()
         link_href_1 = self.element_is_visible(locator.LINK_HREF).get_attribute("href")
         assert link_href_1 == "https://pantheonteam.atlassian.net/browse/QA-1619"
+        self.status_code200_check("https://pantheonteam.atlassian.net/browse/QA-1619")
         link_href_2 = self.element_is_visible(locator.LINK_HREF_ZRJHM).get_attribute("href")
         assert link_href_2 == url + "/content/space/54/article/1938#zrjhm"
+        self.status_code200_check(url + "/content/space/54/article/1938#zrjhm")
         link_href_3 = self.element_is_visible(locator.LINK_HREF_PHONE).get_attribute("href")
         assert link_href_3 == "tel:89367776777"
         # link_href_4 = self.element_is_visible(locator.LINK_HREF_MAIL).get_attribute("href")
@@ -261,7 +265,6 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         """"Проверка видео в статье по шаблону"""
         locator = locators.CheckAfterUpdating()
         self.element_is_displayed(locator.VIDEO_IN_TEMPLATE)
-
 
 
     def check_text_links(self):

@@ -1289,6 +1289,8 @@ class CheckAfterUpdating:
              "//p[contains(text(),'1 Ссылка')]")
     TASK = (By.XPATH,
              "//li[@title='Задача']")
+    TASK_INTO = (By.XPATH,
+            "//img[@alt='text']")
     HEADING = (By.XPATH,
              "//p[contains(text(),'Оглавление')]")
     LINK3 = (By.XPATH,
