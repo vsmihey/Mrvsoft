@@ -41,7 +41,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).send_keys(changed_name_1)
         self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("changed 1")
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
         """add comment"""
         self.element_is_visible(self.Locators.ADD_COMMENT).send_keys("comment 1")
         self.element_is_visible(self.Locators.SEND_COMMENT).click()

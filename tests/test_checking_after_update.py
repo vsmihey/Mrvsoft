@@ -24,6 +24,7 @@ class TestCheckingAfterUpdate:
         """Проверка контента в статье"""
         checking_after_updating = BaseArticleEditor(driver)
         checking_after_updating.check_name_in_article()
+        checking_after_updating.check_text_artile_heading()
         checking_after_updating.check_text_artile_links()
         checking_after_updating.check_images_in_article()
         checking_after_updating.check_videos_in_article()
