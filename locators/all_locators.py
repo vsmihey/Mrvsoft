@@ -1331,5 +1331,11 @@ class Course:
     SCORM_BUTTON = (By.XPATH, "//*[name()='path' and contains(@d,'M14.6194 1')]")
     SCORM_NAME = (By.XPATH, "//input[@class='m-ui-text-input__input']")
     LOAD_SCORM_BUTTON = (By.XPATH, "//input[@type='file']")
-    ERROR_MESSAGE = (By.XPATH, "m-ui-typography m-ui-typography--14x14")
-    SELECT_FOLDER = (By.CSS_SELECTOR, '.m-ui-select__select')
+    ERROR_MESSAGE = (By.XPATH, "//div[@class='m-ui-input-wrapper-2__error-message']")
+    SELECT_FOLDER_CLICK = (By.XPATH,
+                           "//div[@class ='m-ui-paper m-ui-select__paper m-lms-course-cover__folder m-ui-paper--hoverable m-ui-paper--shadowed']")
+    SELECT_FOLDER_PRODUCT = (By.XPATH, "//option[@label ='Продукты']")
+
+    SELECT_SCORM_MATERIAL = (By.XPATH, " //p[contains(text(),'Введите название материала')]")
+
+

@@ -79,12 +79,13 @@ class TestLMS:
         # TODO Написать метод выбора картинки фона.
         # TODO Написать проверку отображения выбранной картинки фона.
 
+        page.change_folder()
         page.input_course_name()
         page.check_course_name_length()
         page.input_course_description()
         page.check_course_description_length()
         page.clear_course_name()
-        page.change_folder()
+
         page.input_course_name(page.TITLE)
         # page.close_window()
         # page.check_modal_window()
@@ -94,7 +95,7 @@ class TestLMS:
         page.add__another_material_button()
         page.scorm_creation()
         page.save_button_click()
-        time.sleep(20)
+        page.select_scorm_material()
         page.check_error_message()
-
-        time.sleep(5)
+        page.scorm_name()
+        page.save_course()

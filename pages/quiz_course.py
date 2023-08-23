@@ -266,5 +266,16 @@ class Course(Exam):
 
     def change_folder(self):
         """Выбор папки сохранения"""
-        self.element_is_visible(locators.Course.SELECT_FOLDER).send_keys("Продукты")
+        self.click_to_element(locators.Course.SELECT_FOLDER_CLICK)
+        self.click_to_element(locators.Course.SELECT_FOLDER_PRODUCT)
 
+    def select_scorm_material(self):
+        """Выбор ранее созданного материала Scorm"""
+        self.click_to_element(locators.Course.SELECT_SCORM_MATERIAL)
+
+    def save_course(self):
+        """Сохранение курса"""
+        self.save_button_click()
+
+        for _ in range(3):
+            self.next_and_finish_button_click()
