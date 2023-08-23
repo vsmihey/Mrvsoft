@@ -8,7 +8,6 @@ user_for_test = minervakms
 
 
 @pytest.mark.order(6)
-@pytest.mark.users_serve
 @allure.suite("Проверка новостей о статье и новостей о комментариях в История")
 class TestNewsHistory:
 

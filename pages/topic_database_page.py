@@ -428,7 +428,7 @@ class CreateTopicDatabase(Authorisation, BasePage):
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).clear()
         self.element_is_visible(self.Locators.ANSWER_AND_CHECKBOX).send_keys("edit answer")
         self.element_is_visible(self.Locators.BUTTON_EDIT_QUESTION_SAVE).click()
-        self.element_is_visible(self.Locators.BUTTON_GO_BACK).click()
+        self.click_to_element(self.Locators.BUTTON_GO_BACK)
         self.element_is_visible(self.Locators.TEXT_GET_TESTED).click()
         """check tab text"""
         tabs_check = self.element_is_visible(self.Locators.TABS_CHECK_TEXT_ALL).text
