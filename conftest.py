@@ -80,7 +80,7 @@ def pytest_exception_interact(node, call, report):
 
 
 def pytest_configure(config):
-    """Функция по созданию пользовательских меток
+    """Функция по созданию пользовательских меток,
     формат записи: прописывается над нужным тестом @pytest.mark.smoke,
     где smoke имя пользовательской метки"""
     config.addinivalue_line(

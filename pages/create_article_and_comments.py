@@ -193,7 +193,6 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         paragraph_color_purple = self.element_is_visible(locator.PARAGRAPH_COLOR_PURPLE).get_attribute("style")
         assert paragraph_color_purple == "color: rgb(104, 55, 154);"
         paragraph_color_bg_green = self.element_is_visible(locator.PARAGRAPH_COLOR_BG_GREEN).get_attribute("style")
-        print(paragraph_color_bg_green)
         assert paragraph_color_bg_green == "background-color: rgb(160, 205, 99);"
         "3"
         paragraph_color_green = self.element_is_visible(locator.PARAGRAPH_COLOR_GREEN).get_attribute("style")
