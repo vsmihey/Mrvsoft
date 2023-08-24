@@ -120,9 +120,13 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         heading = self.element_is_visible(locator.HEADING).text
         assert heading == "Оглавление"
         self.click_to_element(locator.HEADING)
+        time.sleep(1)
         element1 = self.element_is_visible_1(locator.HEADING1)
+        time.sleep(1)
         self.action_move_to_element(element1, driver)
+        time.sleep(1)
         element2 = self.element_is_visible_1(locator.HEADING2)
+        time.sleep(1)
         self.action_move_to_element(element2, driver)
         self.element_is_displayed(locator.HEADING3)
 
