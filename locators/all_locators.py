@@ -1249,6 +1249,10 @@ class CheckAfterUpdating:
     "3"
     PARAGRAPH_COLOR_GREEN = (By.XPATH, "(//span[contains(text(),'Абзац 3 текст текст текст текст текст текст текст ')])[1]")
     PARAGRAPH_COLOR_BG_ORANGE = (By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[6]")
+    "Локаторы списки"
+    LIST_NUMB = (By.XPATH, "(//li[contains(text(),'Нумерованный список')])[1]")
+    LIST_MARK = (By.XPATH, "(//li[contains(text(),'Маркированный список')])[1]")
+    "Локаторы стили текста"
     CHECK_P_TEXT = (By.XPATH, "(//p[contains(text(),'Обычный текст')])[1]")
     CHECK_STRONG_TEXT = (By.XPATH, "(//strong[contains(text(),'Жирный')])[1]")
     CHECK_ITALICS_TEXT = (By.XPATH, "(//em[contains(text(),'Курсив')])[1]")
@@ -1257,6 +1261,8 @@ class CheckAfterUpdating:
     CHECK_SUBSCRIPT_TEXT = (By.XPATH, "(//sub[contains(text(),'Подстрочный')])[1]")
     CHECK_CROSSED_OUT_TEXT = (By.XPATH, "(//s[contains(text(),'Перечеркнутый')])[1]")
     "Локаторы выравнивания текста"
+    CHECK_ALIGN_LEFT_TEXT = (By.XPATH,
+                               "(//p[contains(text(),'Выравнивание слева')])[1]")
     CHECK_ALIGN_CENTER_TEXT = (By.XPATH,
                                "(//p[contains(text(),'Выравнивание по центру')])[1]")
     CHECK_ALIGN_RIGHT_TEXT = (By.XPATH,

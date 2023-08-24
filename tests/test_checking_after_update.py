@@ -4,7 +4,7 @@ import time
 import allure
 import pytest
 from pages.checking_after_update import CheckingArticleAfterUpdatePage
-from pages.create_article_and_comments import BaseArticleEditor
+from pages.create_article_and_comments import BaseArticleEditor, ArticleByTemplate
 from pages.data_login_password import base_article
 from pages.users import ricksanchez
 from pages.data_login_password import base_article, article_by_template
@@ -34,8 +34,8 @@ class TestCheckingAfterUpdate:
         checking_after_updating.check_table_in_article()
         checking_after_updating.check_h_text_in_article()
         checking_after_updating.paragraph_color_check()
+        checking_after_updating.list_in_article()
         checking_after_updating.check_styles_text_in_article()
-        checking_after_updating.check_color_text_in_article()
         checking_after_updating.important_block_red()
         checking_after_updating.check_spoiler()
         checking_after_updating.check_align_text_in_article()
@@ -43,10 +43,10 @@ class TestCheckingAfterUpdate:
         # checking_after_updating.major_edit_in_article(self.TEXT)
 
     def check_all_content_in_template(self, driver):
-        checking_after_updating = BaseArticleEditor(driver)
-        checking_after_updating.check_name_article_by_template()
-        checking_after_updating.check_image_in_template1()
-        checking_after_updating.check_video_in_template()
+        checking_updating_template = ArticleByTemplate(driver)
+        checking_updating_template.check_name_article_by_template()
+        checking_updating_template.check_image_in_template1()
+        checking_updating_template.check_video_in_template()
 
     @allure.title("Проверка обычной статьи после установки обновления")
     def test_check_article_after_updating(self, driver):

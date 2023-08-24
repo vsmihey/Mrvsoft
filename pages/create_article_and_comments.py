@@ -1,9 +1,7 @@
 import random
 import time
-
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
 from pages.authorisation_page import Authorisation
@@ -101,9 +99,9 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.save_major_edit('Восстановление')
 
     def check_name_in_article(self):
-        """Проверка двух изображений в статье"""
-        locator = locators.CheckAfterUpdating()
-        self.element_is_displayed(locator.CHECK_NAME_ARTICLE)
+        """Проверка имени в статье"""
+        check_name_article = self.element_is_visible(locators.CheckAfterUpdating.CHECK_NAME_ARTICLE).text
+        assert check_name_article == "Обычная статья"
 
     def check_version(self):
         """Проверка версии статьи после редактирования"""
@@ -121,12 +119,9 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         heading = self.element_is_visible(locator.HEADING).text
         assert heading == "Оглавление"
         self.click_to_element(locator.HEADING)
-        time.sleep(1)
-        element1 = self.element_is_visible_1(locator.HEADING1)
-        time.sleep(1)
+        element1 = self.element_is_visible(locator.HEADING1)
         self.action_move_to_element(element1, driver)
-        time.sleep(1)
-        element2 = self.element_is_visible_1(locator.HEADING2)
+        element2 = self.element_is_visible(locator.HEADING2)
         time.sleep(1)
         self.action_move_to_element(element2, driver)
         self.element_is_displayed(locator.HEADING3)
@@ -148,24 +143,24 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         """Проверка двух изображений в статье"""
         locator = locators.CheckAfterUpdating()
         time.sleep(1)
-        self.element_is_displayed(locator.IMG1_IN_ARTICLE)
-        self.element_is_displayed(locator.IMG2_IN_ARTICLE)
+        assert self.element_is_displayed(locator.IMG1_IN_ARTICLE)
+        assert self.element_is_displayed(locator.IMG2_IN_ARTICLE)
 
     def check_videos_in_article(self):
         """"Проверка двух видео в статье"""
         locator = locators.CheckAfterUpdating()
-        self.element_is_visible(locator.VIDEO1_IN_ARTICLE).is_displayed()
-        self.element_is_visible(locator.VIDEO2_IN_ARTICLE).is_displayed()
+        assert self.element_is_displayed(locator.VIDEO1_IN_ARTICLE)
+        assert self.element_is_displayed(locator.VIDEO2_IN_ARTICLE)
 
     def check_audio_in_article(self):
         """Проверка аудио в статье"""
         locator = locators.CheckAfterUpdating()
-        self.element_is_visible(locator.AUDIO_IN_ARTICLE).is_displayed()
+        assert self.element_is_displayed(locator.AUDIO_IN_ARTICLE)
 
     def check_table_in_article(self):
         """Проверка таблицы в статье"""
         locator = locators.CheckAfterUpdating()
-        self.element_is_visible(locator.TABLE_IN_ARTICLE).is_displayed()
+        assert self.element_is_displayed(locator.TABLE_IN_ARTICLE)
         "Проверка текста в таблице"
         check_text_in_table = self.element_is_visible(locator.CHECK_TEXT_IN_TABLE).text
         assert check_text_in_table == "Строка"
@@ -205,6 +200,10 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         paragraph_color_bg_orange = self.element_is_visible(locator.PARAGRAPH_COLOR_BG_ORANGE).get_attribute("style")
         assert paragraph_color_bg_orange == "background-color: rgb(249, 217, 119);"
 
+    def list_in_article(self):
+        self.element_is_displayed(locators.CheckAfterUpdating.LIST_NUMB)
+        self.element_is_displayed(locators.CheckAfterUpdating.LIST_MARK)
+
     def check_styles_text_in_article(self):
         """Проверка стилей текста в статье"""
         locator = locators.CheckAfterUpdating()
@@ -230,6 +229,10 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
     def check_align_text_in_article(self):
         """Проверка выравнивания текста в статье"""
         locator = locators.CheckAfterUpdating()
+        "Выравнивание по левому краю"
+        check_align_left_text = self.element_is_visible(locator.CHECK_ALIGN_LEFT_TEXT).get_attribute("style")
+        # print("atrribute: " + check_align_left_text)
+        # assert check_align_left_text is None
         "Выравнивание по центру"
         check_align_center_text = self.element_is_visible(locator.CHECK_ALIGN_CENTER_TEXT).get_attribute("style")
         assert check_align_center_text == "text-align: center;"
@@ -240,20 +243,10 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         check_align_center_text = self.element_is_visible(locator.CHECK_ALIGN_JUSTIFY_TEXT).get_attribute("style")
         assert check_align_center_text == "text-align: justify;"
 
-    def check_color_text_in_article(self):
-        """Проверка цвета текста в статье"""
-        locator = locators.CheckAfterUpdating()
-        check_color_text = self.element_is_visible(locator.CHECK_COLOR_TEXT).get_attribute("style")
-        assert check_color_text == "color: rgb(235, 51, 35);"
-        """Проверка выделения цветом текста в статье"""
-        check_highlight_color_text = self.element_is_visible(locator.CHECK_HIGHLIGHT_COLOR_TEXT).get_attribute("style")
-        assert check_highlight_color_text == "background-color: rgb(255, 254, 85);"
-
     def important_block_red(self):
         """Проверка Важное! на красном фоне в статье"""
-        locator = locators.CheckAfterUpdating()
         # check_important_block_red = self.element_is_visible(locator.CHECK_IMPORTANT_BLOCK_RED).get_attribute("style")
-        self.element_is_visible(locator.CHECK_IMPORTANT_BLOCK_RED).is_displayed()
+        self.element_is_displayed(locators.CheckAfterUpdating.CHECK_IMPORTANT_BLOCK_RED)
         # assert check_important_block_red == '--color: #eb3323; --icon: url("/assets/images/icons/important-info.svg"); background-color: rgba(235, 51, 35, 0.15);'
 
     def check_spoiler(self):
@@ -276,9 +269,12 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.status_code200_check(url + "/content/space/54/article/1938#zrjhm")
         link_href_3 = self.element_is_visible(locator.LINK_HREF_PHONE).get_attribute("href")
         assert link_href_3 == "tel:89367776777"
-        # link_href_4 = self.element_is_visible(locator.LINK_HREF_MAIL).get_attribute("href")
-        # assert link_href_4 == "mailto:admin@minervakms.ru?subject=%D0%9F%D0%BE%D0%B4%D1%82%D0%B2%D0%B5%D1%80%D0%B4%D0%B8%D1%82%D0%B5"
+        link_href_4 = self.element_is_visible(locator.LINK_HREF_MAIL).get_attribute("href")
+        result_link_4 = link_href_4.split("?")
+        assert result_link_4[0] == "mailto:admin@minervakms.ru"
 
+
+class ArticleByTemplate(BaseArticleEditor):
     def check_name_article_by_template(self):
         """Проверка ссылок в статье"""
         locator = locators.CheckAfterUpdating()
@@ -290,19 +286,22 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         locator = locators.CheckAfterUpdating()
         time.sleep(1)
         # IMG1_IN_TEMPLATE = (By.XPATH, "// img[@ alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
-        self.element_is_displayed(locator.IMG1_IN_TEMPLATE)
+        assert self.element_is_displayed(locator.IMG1_IN_TEMPLATE)
 
     def check_video_in_template(self):
         """"Проверка видео в статье по шаблону"""
         locator = locators.CheckAfterUpdating()
-        self.element_is_displayed(locator.VIDEO_IN_TEMPLATE)
-
+        assert self.element_is_displayed(locator.VIDEO_IN_TEMPLATE)
 
     def check_text_links(self):
         """Проверка вкладки с сылками"""
         locator = locators.CheckAfterUpdating()
         link3 = self.element_is_displayed(locator.LINK3).text
         assert link3 == "3 Ссылки"
+
+
+
+
 
 
 class DataParser:
