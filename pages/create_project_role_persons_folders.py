@@ -9,10 +9,26 @@ from selenium.webdriver.common.by import By
 class Folders(MainPage):
     """Класс для работы с папками"""
 
-    pass
+    def create_folder_button_click(self):
+        """Кнопка 'Создать папку'"""
+        self.click_to_element(locators.FormPagesLocators.CREATE_FOLDER_BUTTON)
+
+    def input_folder_name(self):
+        """Ввод названия папки"""
+        self.element_is_visible(locators.FormPagesLocators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
+
+    def confirm_create_folder_button(self):
+        """Кнопка подтверждения сохранения статьи"""
+        # self.click_to_element(locators.FormPagesLocators.CREATE_FOLDER_BUTTON)
+        # self.element_is_visible(locators.FormPagesLocators.CREATE_FOLDER_BUTTON).click()
+
+        # self.element_is_visible(Locators.CONTENT).click()
+        self.element_is_visible(locators.FormPagesLocators.CREATE_FOLDER_BUTTON).click()
+        self.element_is_visible(locators.FormPagesLocators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
+        self.element_is_visible(locators.FormPagesLocators.CREATE_FOLDER_BUTTON).click()
 
 
-class NewProject(Authorisation, MenuNavigation):
+class NewProject(Authorisation, MenuNavigation, Folders):
     """Класс для создания нового проекта в системе"""
     PROJECT_NAME = 'Название проекта ' + str(random.randint(999, 9999))
     TEST_PROJECT = (By.XPATH,
