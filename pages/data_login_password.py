@@ -62,3 +62,4 @@ login_person2 = "login112"
 password_person2 = "63a45e26"
 
 base_article = url + "/content/space/54/article/1938"
+article_by_template = url + "/content/space/54/article/1942/page/0"

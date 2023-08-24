@@ -1,6 +1,7 @@
 import random
 import time
 
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 from pages.creating_panel import CreatingPanel
@@ -10,6 +11,8 @@ import locators.all_locators as locators
 from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
 from pages.base_class import MainPage
 from pages.users import ricksanchez
+from pages.data_login_password import url
+from pages.users import minervakms
 
 
 class ContentOptions(MainPage):
@@ -112,6 +115,31 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         assert number_version[-1] == "0"
         self.click_to_element(locator.SVG_VERSION_WINDOW_CLOSE)
 
+    def check_text_artile_heading(self, driver):
+        """Проверка оглавления"""
+        locator = locators.CheckAfterUpdating()
+        heading = self.element_is_visible(locator.HEADING).text
+        assert heading == "Оглавление"
+        self.click_to_element(locator.HEADING)
+        element1 = self.element_is_visible_1(locator.HEADING1)
+        self.action_move_to_element(element1, driver)
+        element2 = self.element_is_visible_1(locator.HEADING2)
+        self.action_move_to_element(element2, driver)
+        self.element_is_displayed(locator.HEADING3)
+
+    def check_text_artile_links(self):
+        """Проверка вкладки с сылкой"""
+        locator = locators.CheckAfterUpdating()
+        link1 = self.element_is_visible(locator.LINK1).text
+        assert link1 == "1 Ссылка"
+        self.click_to_element(locator.LINK1)
+        task = self.element_is_visible(locator.TASK).text
+        assert task == "Задача"
+        task = self.element_is_visible(locator.TASK_INTO).get_attribute("src")
+        'Проверка конки'
+        assert task == "https://pantheonteam.atlassian.net/favicon.ico"
+        self.status_code200_check("https://pantheonteam.atlassian.net/favicon.ico")
+
     def check_images_in_article(self):
         """Проверка двух изображений в статье"""
         locator = locators.CheckAfterUpdating()
@@ -153,6 +181,25 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         "Проверка обычного текста"
         check_p_text = self.element_is_visible(locator.CHECK_P_TEXT).tag_name
         assert check_p_text == "p"
+
+    def paragraph_color_check(self):
+        """Проверка цвета Абзацев"""
+        locator = locators.CheckAfterUpdating()
+        "1"
+        paragraph_color_red = self.element_is_visible(locator.PARAGRAPH_COLOR_RED).get_attribute("style")
+        assert paragraph_color_red == "color: rgb(235, 51, 35);"
+        paragraph_color_bg_yellow = self.element_is_visible(locator.PARAGRAPH_COLOR_BG_YELLOW).get_attribute("style")
+        assert paragraph_color_bg_yellow == "background-color: rgb(255, 254, 85);"
+        "2"
+        paragraph_color_purple = self.element_is_visible(locator.PARAGRAPH_COLOR_PURPLE).get_attribute("style")
+        assert paragraph_color_purple == "color: rgb(104, 55, 154);"
+        paragraph_color_bg_green = self.element_is_visible(locator.PARAGRAPH_COLOR_BG_GREEN).get_attribute("style")
+        assert paragraph_color_bg_green == "background-color: rgb(160, 205, 99);"
+        "3"
+        paragraph_color_green = self.element_is_visible(locator.PARAGRAPH_COLOR_GREEN).get_attribute("style")
+        assert paragraph_color_green == "color: rgb(78, 172, 91);"
+        paragraph_color_bg_orange = self.element_is_visible(locator.PARAGRAPH_COLOR_BG_ORANGE).get_attribute("style")
+        assert paragraph_color_bg_orange == "background-color: rgb(249, 217, 119);"
 
     def check_styles_text_in_article(self):
         """Проверка стилей текста в статье"""
@@ -213,6 +260,45 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.click_to_element(locator.CHECK_SPOILER)
         spoiler_show = self.element_is_visible(locator.CHECK_SPOILER_SHOW).get_attribute("class")
         assert spoiler_show == "m-spoiler m-spoiler--show"
+
+    def check_link_href(self):
+        """Проверка ссылок в статье"""
+        locator = locators.CheckAfterUpdating()
+        link_href_1 = self.element_is_visible(locator.LINK_HREF).get_attribute("href")
+        assert link_href_1 == "https://pantheonteam.atlassian.net/browse/QA-1619"
+        self.status_code200_check("https://pantheonteam.atlassian.net/browse/QA-1619")
+        link_href_2 = self.element_is_visible(locator.LINK_HREF_ZRJHM).get_attribute("href")
+        assert link_href_2 == url + "/content/space/54/article/1938#zrjhm"
+        self.status_code200_check(url + "/content/space/54/article/1938#zrjhm")
+        link_href_3 = self.element_is_visible(locator.LINK_HREF_PHONE).get_attribute("href")
+        assert link_href_3 == "tel:89367776777"
+        # link_href_4 = self.element_is_visible(locator.LINK_HREF_MAIL).get_attribute("href")
+        # assert link_href_4 == "mailto:admin@minervakms.ru?subject=%D0%9F%D0%BE%D0%B4%D1%82%D0%B2%D0%B5%D1%80%D0%B4%D0%B8%D1%82%D0%B5"
+
+    def check_name_article_by_template(self):
+        """Проверка ссылок в статье"""
+        locator = locators.CheckAfterUpdating()
+        template_text = self.element_is_visible(locator.TEXT_TEMPLATE).text
+        assert template_text == "Шаблонная статья"
+
+    def check_image_in_template1(self):
+        """Проверка изображения в статье по шаблону"""
+        locator = locators.CheckAfterUpdating()
+        time.sleep(1)
+        # IMG1_IN_TEMPLATE = (By.XPATH, "// img[@ alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
+        self.element_is_displayed(locator.IMG1_IN_TEMPLATE)
+
+    def check_video_in_template(self):
+        """"Проверка видео в статье по шаблону"""
+        locator = locators.CheckAfterUpdating()
+        self.element_is_displayed(locator.VIDEO_IN_TEMPLATE)
+
+
+    def check_text_links(self):
+        """Проверка вкладки с сылками"""
+        locator = locators.CheckAfterUpdating()
+        link3 = self.element_is_displayed(locator.LINK3).text
+        assert link3 == "3 Ссылки"
 
 
 class DataParser:

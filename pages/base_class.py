@@ -1,7 +1,8 @@
 import time
 
+import requests
 from selenium.common import InvalidSelectorException, NoSuchElementException, StaleElementReferenceException, \
-    TimeoutException, ElementClickInterceptedException
+    TimeoutException, ElementClickInterceptedException, ElementNotInteractableException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as Wait
@@ -69,22 +70,36 @@ class MainPage:
             return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
 
     def element_is_displayed(self, locator, timeout=10):
-        """Клик по элементу и обработка возможных ошибок"""
+        """Отображение элемента возвращение True или False и обработка возможных ошибок"""
         time.sleep(0.3)
         try:
-            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).is_displayed()
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator)).is_displayed()
         except StaleElementReferenceException:
             print('Поймал StaleElementReferenceException')
-            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).is_displayed()
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator)).is_displayed()
         except TimeoutException:
             print('Поймал TimeoutException')
             # self.browser.refresh()
-            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).is_displayed()
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator)).is_displayed()
         except Exception as e:
             print(f'Поймал  {e}')
-            return Wait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).is_displayed()
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator)).is_displayed()
 
-
+    def element_is_visible_1(self, locator, timeout=10):
+        """Видимость элемента для совершения действий с ним и обработка возможных ошибок"""
+        time.sleep(0.3)
+        try:
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except StaleElementReferenceException:
+            print('Поймал StaleElementReferenceException')
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except TimeoutException:
+            print('Поймал TimeoutException')
+            # self.browser.refresh()
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except Exception as e:
+            print(f'Поймал  {e}')
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
 
     def remove_class_script(self):
         """Удаление класса элемента, что бы он стал видимым и с ним можно совершить действие"""
@@ -109,8 +124,11 @@ class MainPage:
         """Переход к элементу которого не видно"""
         action = ActionChains(driver)
         time.sleep(3)
-        action.move_to_element(element).perform()
-        # action.perform()
+        try:
+            action.move_to_element(element).perform()
+        except (TimeoutException, ElementNotInteractableException):
+            time.sleep(1)
+            action.move_to_element(element).perform()
 
     def go_to_element(self, element):
         """Переход к нужному едлементу (на вход принимает необходимый элемент)"""
@@ -150,4 +168,12 @@ class MainPage:
         path = pathlib.Path(pathlib.Path.cwd(), 'avatars', name_screenshot)
         path = str(path)
         self.browser.save_screenshot(path)
+
+    def status_code200_check(self, request_url):
+        """Проверка ссылки по get запросу на статус код 200
+        request_url - ссылка, которую проверяем"""
+        response = requests.get(request_url)
+        code = response.status_code
+        assert code == 200
+        return code
 

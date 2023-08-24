@@ -77,3 +77,16 @@ def pytest_exception_interact(node, call, report):
             name=f"Screenshot {datetime.today()}",
             attachment_type=AttachmentType.PNG
         )
+
+
+def pytest_configure(config):
+    """Функция по созданию пользовательских меток,
+    формат записи: прописывается над нужным тестом @pytest.mark.smoke,
+    где smoke имя пользовательской метки"""
+    config.addinivalue_line(
+        # сюда добавляем метки:
+        # пример: "markers", "имя_метки: описание метки"
+        "markers", "smoke: метка для смок тестов"
+
+
+    )

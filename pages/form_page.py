@@ -6,7 +6,8 @@ from pathlib import Path
 
 import allure
 import selenium
-from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException, \
+    StaleElementReferenceException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
@@ -317,9 +318,10 @@ class FormPage(Authorisation, BasePage):
     def button_invisible_check(self, driver):
         """CHECK INVISIBLE BUTTON"""
         try:
+            time.sleep(1)
             save_person = driver.find_element(By.XPATH, "//p[text()='Сохранить пользователя']")
             save_person.click()
-        except ElementClickInterceptedException:
+        except (ElementClickInterceptedException, StaleElementReferenceException):
             print("Кнопка 'Сохранить пользователя' не активна")
 
     def button_invisible_role_check(self, driver):
