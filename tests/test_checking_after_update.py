@@ -45,8 +45,26 @@ class TestCheckingAfterUpdate:
     def check_all_content_in_template(self, driver):
         checking_updating_template = ArticleByTemplate(driver)
         checking_updating_template.check_name_article_by_template()
+        checking_updating_template.tabs_1()
         checking_updating_template.check_image_in_template1()
         checking_updating_template.check_video_in_template()
+        checking_updating_template.check_text_links()
+        checking_updating_template.check_text_li_template()
+        checking_updating_template.check_text_template()
+        checking_updating_template.check_number_template()
+        checking_updating_template.check_contents_link_template()
+        checking_updating_template.check_color_text_bg_template()
+        checking_updating_template.check_smiles_template()
+        checking_updating_template.tabs_2()
+        checking_updating_template.check_table_tab2_in_template()
+        checking_updating_template.check_audio_tab2_in_template()
+        checking_updating_template.check_link_tab2_template()
+        checking_updating_template.tabs_3()
+        checking_updating_template.check_video_tab3_in_template()
+        checking_updating_template.check_file_download_tab3_in_template()
+        checking_updating_template.tabs_4()
+        checking_updating_template.check_href_tab4_in_template()
+        checking_updating_template.check_li_tab4_in_template()
 
     @allure.title("Проверка обычной статьи после установки обновления")
     def test_check_article_after_updating(self, driver):
@@ -63,6 +81,7 @@ class TestCheckingAfterUpdate:
         checking_after_updating = BaseArticleEditor(driver)
         checking_after_updating.get_authorisation_in_url(article_by_template, user_for_test)
         self.check_all_content_in_template(driver)
+        checking_after_updating.major_edit_in_article(self.TEXT)
 
 
 

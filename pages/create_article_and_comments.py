@@ -286,18 +286,106 @@ class ArticleByTemplate(BaseArticleEditor):
         locator = locators.CheckAfterUpdating()
         time.sleep(1)
         # IMG1_IN_TEMPLATE = (By.XPATH, "// img[@ alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
-        assert self.element_is_displayed(locator.IMG1_IN_TEMPLATE)
+        assert self.element_is_displayed(locator.TABS_1_IMG)
 
     def check_video_in_template(self):
         """"Проверка видео в статье по шаблону"""
-        locator = locators.CheckAfterUpdating()
-        assert self.element_is_displayed(locator.VIDEO_IN_TEMPLATE)
+        assert self.element_is_displayed(locators.CheckAfterUpdating.VIDEO_IN_TEMPLATE)
 
     def check_text_links(self):
         """Проверка вкладки с сылками"""
         locator = locators.CheckAfterUpdating()
-        link3 = self.element_is_displayed(locator.LINK3).text
+        link3 = self.element_is_visible(locator.LINK3).text
         assert link3 == "3 Ссылки"
+        self.click_to_element(locator.LINK3)
+        self.element_is_displayed(locator.TEXT_CONTENT_GOOGLE)
+        google_linc_ico = self.element_is_visible(locator.GOOGLE_LINC_ICO).get_attribute("src")
+        assert google_linc_ico == "http://google.com/favicon.ico"
+        self.status_code200_check("http://google.com/favicon.ico")
+
+    def tabs_1(self):
+        """Первая вкладка"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_1)
+
+    def tabs_2(self):
+        """Клик Вторая вкладка"""
+        self.click_to_element(locators.CheckAfterUpdating.TABS_2)
+
+    def tabs_3(self):
+        """Клик Третья вкладка"""
+        self.click_to_element(locators.CheckAfterUpdating.TABS_3)
+
+    def tabs_4(self):
+        """Клик Четвертая вкладка"""
+        self.click_to_element(locators.CheckAfterUpdating.TABS_4)
+
+    def check_text_li_template(self):
+        """Проверка текста в статье по шаблону список
+        текст содержится в самом локаторе"""
+        self.element_is_displayed(locators.CheckAfterUpdating.TABS_1_LI_TEXT)
+
+    def check_text_template(self):
+        """Проверка текста в статье по шаблону
+        текст содержится в самом локаторе"""
+        self.element_is_displayed(locators.CheckAfterUpdating.TABS_1_TEXT)
+
+    def check_number_template(self):
+        """Проверка числовых значений в статье по шаблону
+        текст содержится в самом локаторе"""
+        self.element_is_displayed(locators.CheckAfterUpdating.TABS_1_ONLY_NUMBERS)
+
+    def check_contents_link_template(self):
+        """Проверка ссылки на контент в статье по шаблону"""
+        tabs_1_contents_link = self.element_is_visible(locators.CheckAfterUpdating.TABS_1_CONTENTS_LINK).get_attribute("href")
+        assert tabs_1_contents_link == "https://pantheonteam.atlassian.net/browse/QA-1619"
+
+    def check_color_text_bg_template(self):
+        """Проверка цвета текста в статье по шаблону"""
+        assert self.element_is_visible(locators.CheckAfterUpdating.TABS_1_COLOR).get_attribute("style") == "background-color: rgb(255, 254, 85);"
+
+    def check_smiles_template(self):
+        """Проверка смайлов в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_1_SMILES)
+
+    def check_link_tab2_template(self):
+        """Проверка ссылки на внешний ресурс в статье по шаблону"""
+        tabs_2_link = self.element_is_visible(locators.CheckAfterUpdating.TABS_2_LINK).get_attribute("href")
+        assert tabs_2_link == "https://dev3.minervakms.ru/content/space/54/folder/234"
+
+    def check_table_tab2_in_template(self):
+        """Проверка таблицы в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_2_TABLE_IN_ARTICLE_TEMPLATE)
+
+    def check_audio_tab2_in_template(self):
+        """Проверка аудио в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_2_AUDIO_IN_ARTICLE_TEMPLATE)
+
+    def check_video_tab3_in_template(self):
+        """Проверка видео в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_3_VIDEO_IN_ARTICLE_TEMPLATE)
+
+    def check_file_download_tab3_in_template(self):
+        """Проверка загрузки файлов в статье по шаблону"""
+        tabs_3_file_in_article_template =  self.element_is_visible(locators.CheckAfterUpdating.TABS_3_FILE_IN_ARTICLE_TEMPLATE).get_attribute("href")
+        print(tabs_3_file_in_article_template)
+        assert tabs_3_file_in_article_template == url + "/api/storage/space/54/file/4439"
+
+    def check_href_tab4_in_template(self):
+        """Проверка ссылки в статье по шаблону"""
+        tabs_4_href_template =  self.element_is_visible(locators.CheckAfterUpdating.TABS_4_HREF_IN_ARTICLE_TEMPLATE).get_attribute("href")
+        print(tabs_4_href_template)
+        assert tabs_4_href_template == "http://google.com/"
+
+    def check_li_tab4_in_template(self):
+        """Проверка списка в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_4_LI_IN_ARTICLE_TEMPLATE)
+
+
+
+
+
+
+
 
 
 
