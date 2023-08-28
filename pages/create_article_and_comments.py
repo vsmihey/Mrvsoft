@@ -420,8 +420,8 @@ class ArticleByScript(BaseArticleEditor):
 
     def check_script_part4(self):
         """Проверка текста в 4 скрипте"""
-        assert self.element_is_visible(
-            locators.CheckAfterUpdating.CHECK_TEXT_SCRIPT_PAST4).text == "Есть ли у вас кредиты в других банках?"
+        check_text_script_past4 = self.element_is_visible(locators.CheckAfterUpdating.CHECK_TEXT_SCRIPT_PAST4).text
+        assert check_text_script_past4 == "Есть ли у вас кредиты в других банках?"
 
     def answer_no_part4(self):
         """Клик по кнопке нет"""
