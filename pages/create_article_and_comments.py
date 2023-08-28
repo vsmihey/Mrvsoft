@@ -276,7 +276,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
 
 class ArticleByTemplate(BaseArticleEditor):
     def check_name_article_by_template(self):
-        """Проверка ссылок в статье"""
+        """Проверка имени статьи"""
         locator = locators.CheckAfterUpdating()
         template_text = self.element_is_visible(locator.TEXT_TEMPLATE).text
         assert template_text == "Шаблонная статья"
@@ -307,15 +307,19 @@ class ArticleByTemplate(BaseArticleEditor):
         """Первая вкладка"""
         assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_1)
 
-    def tabs_2(self):
+    def tabs_1_click(self):
+        """Клик Первая вкладка"""
+        self.click_to_element(locators.CheckAfterUpdating.TABS_1)
+
+    def tabs_2_click(self):
         """Клик Вторая вкладка"""
         self.click_to_element(locators.CheckAfterUpdating.TABS_2)
 
-    def tabs_3(self):
+    def tabs_3_click(self):
         """Клик Третья вкладка"""
         self.click_to_element(locators.CheckAfterUpdating.TABS_3)
 
-    def tabs_4(self):
+    def tabs_4_click(self):
         """Клик Четвертая вкладка"""
         self.click_to_element(locators.CheckAfterUpdating.TABS_4)
 
@@ -367,12 +371,11 @@ class ArticleByTemplate(BaseArticleEditor):
     def check_file_download_tab3_in_template(self):
         """Проверка загрузки файлов в статье по шаблону"""
         tabs_3_file_in_article_template =  self.element_is_visible(locators.CheckAfterUpdating.TABS_3_FILE_IN_ARTICLE_TEMPLATE).get_attribute("href")
-        print(tabs_3_file_in_article_template)
         assert tabs_3_file_in_article_template == url + "/api/storage/space/54/file/4439"
 
     def check_href_tab4_in_template(self):
         """Проверка ссылки в статье по шаблону"""
-        tabs_4_href_template =  self.element_is_visible(locators.CheckAfterUpdating.TABS_4_HREF_IN_ARTICLE_TEMPLATE).get_attribute("href")
+        tabs_4_href_template = self.element_is_visible(locators.CheckAfterUpdating.TABS_4_HREF_IN_ARTICLE_TEMPLATE).get_attribute("href")
         print(tabs_4_href_template)
         assert tabs_4_href_template == "http://google.com/"
 
@@ -381,15 +384,73 @@ class ArticleByTemplate(BaseArticleEditor):
         assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_4_LI_IN_ARTICLE_TEMPLATE)
 
 
+class ArticleByScript(BaseArticleEditor):
 
+    def check_name_article_by_template(self):
+        """Проверка имени статьи по скрипту"""
+        template_text = self.element_is_visible(locators.CheckAfterUpdating.CHECK_NAME_IN_ARTICLE_SCRIPT).text
+        assert template_text == "Запрос на выпуск кредитной карты (БОТ)"
 
+    def check_script_part1(self):
+        """Текст в первой части скрипта"""
+        assert self.element_is_visible(
+            locators.CheckAfterUpdating.TABS_4_LI_IN_ARTICLE_TEMPLATE).text == "Есть ли у вас постоянное место работы ?"
 
+    def answer_yes_part1(self):
+        """Клик по кнопке Да"""
+        self.click_to_element(locators.CheckAfterUpdating.BUTTON_PART1)
 
+    def answer_no_part2(self):
+        """Клик по кнопке нет"""
+        self.click_to_element(locators.CheckAfterUpdating.BUTTON_PART2)
 
+    def check_script_part2(self):
+        """Проверка текста во 2 скрипте"""
+        assert self.element_is_visible(
+            locators.CheckAfterUpdating.CHECK_TEXT_SCRIPT_PAST2).text == "Меняли ли вы место работы за последние 6 месяцев?"
 
+    def answer_yes_part3(self):
+        """Клик по кнопке Да"""
+        self.click_to_element(locators.CheckAfterUpdating.BUTTON_PART3)
 
+    def check_script_part3(self):
+        """Проверка текста в 3 скрипте"""
+        assert self.element_is_visible(
+            locators.CheckAfterUpdating.CHECK_TEXT_SCRIPT_PAST3).text == "Можете ли вы предоставить банку справку о доходах?"
 
+    def check_script_part4(self):
+        """Проверка текста в 4 скрипте"""
+        assert self.element_is_visible(
+            locators.CheckAfterUpdating.CHECK_TEXT_SCRIPT_PAST4).text == "Есть ли у вас кредиты в других банках?"
 
+    def answer_no_part4(self):
+        """Клик по кнопке нет"""
+        self.click_to_element(locators.CheckAfterUpdating.BUTTON_PART4)
+
+    def check_script_end(self):
+        """Проверка текста в конце скрипта """
+        assert self.element_is_visible(
+            locators.CheckAfterUpdating.CHECK_TEXT_ANSWER_END).text == "Сценарий завершен"
+
+    def check_script_button_restart(self):
+        """Клик по кнопке начать заново"""
+        self.click_to_element(locators.CheckAfterUpdating.CHECK_TEXT_ANSWER_RESTART)
+
+    def edit_and_public_article(self, text="123"):
+        """Редактирование и публикация статьи"""
+        self.redaction()
+        self.click_to_element(locators.CheckAfterUpdating.PUBLISH_BUTTON)
+        self.notification_text_area(text)
+        self.next_and_finish_button_click()
+
+    def check_version_script(self):
+        """Проверка версии статьи после редактирования"""
+        self.click_to_element(locators.CheckAfterUpdating.VERSION_CHECK)
+        "Проверка что версия статьи заканчивается на '0' "
+        number_version_check = self.element_is_visible(locators.CheckAfterUpdating.NUMBER_VERSION_CHECK_SCRIPT).text
+        number_version = list(number_version_check)
+        assert number_version[-1] == "0"
+        self.click_to_element(locators.CheckAfterUpdating.CLOSE_SVG_WINDOW_VERSION_SCRIPT)
 
 
 class DataParser:

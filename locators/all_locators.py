@@ -1312,8 +1312,24 @@ class CheckAfterUpdating:
     TABS_3_VIDEO_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//div[@class='form-input-wrapper__field'])[8]")
     TABS_3_FILE_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//a[@class='m-document'][normalize-space()='gamenet.exe'])[1]")
     "таб 4"
-    TABS_4_HREF_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//a[@class='m-document'][normalize-space()='gamenet.exe'])[1]")
+    TABS_4_HREF_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//a[contains(text(),'Был ли полезен этот контент вам?')])[1]")
     TABS_4_LI_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//li[contains(text(),'Был ли полезен этот контент вам?')])[1]")
+    "Локаторы для скрипта"
+    CHECK_NAME_IN_ARTICLE_SCRIPT = (By.XPATH, "//span[contains(text(),'Запрос на выпуск кредитной карты (БОТ)')]")
+    CHECK_TEXT_SCRIPT_PAST1 = (By.XPATH, "//p[contains(text(),'Есть ли у вас постоянное место работы ?')]")
+    BUTTON_PART1 = (By.XPATH, "//p[text()='Да']")
+    BUTTON_PART2 = (By.XPATH, "//p[text()='нет']")
+    BUTTON_PART3 = (By.XPATH, "//div[@class='article-scenario-questionary__questionary']//button[1]")
+    BUTTON_PART4 = (By.XPATH, "//div[@class='article-scenario-questionary__questionary']//button[1]")
+    CHECK_TEXT_SCRIPT_PAST2 = (By.XPATH, "//p[contains(text(),'Меняли ли вы место работы за последние 6 месяцев?')]")
+    CHECK_TEXT_SCRIPT_PAST3 = (By.XPATH, "//p[contains(text(),'Можете ли вы предоставить банку справку о доходах?')]")
+    CHECK_TEXT_SCRIPT_PAST4 = (By.XPATH, "//p[contains(text(),'Есть ли у вас кредиты в других банках?')]")
+    CHECK_TEXT_ANSWER_END = (By.XPATH, "//div[@class='article-scenario-questionary__answer article-scenario-questionary__answer--end']")
+    CHECK_TEXT_ANSWER_RESTART = (By.XPATH, "//p[contains(text(),'Начать заново')]")
+    PUBLISH_BUTTON = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium']")
+    NUMBER_VERSION_CHECK_SCRIPT = (By.XPATH, "//h3[contains(text(),'Версия 6.0')]")
+    CLOSE_SVG_WINDOW_VERSION_SCRIPT = (By.XPATH, "//div[@role='presentation']")
+
 
 
 
