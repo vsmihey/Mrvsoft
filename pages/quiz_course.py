@@ -8,6 +8,7 @@ import locators.all_locators as locators
 
 
 class Exam(CreatingPanel, PublicWizard, CKERedactor):
+    """Класс по работе с Тестами"""
 
     def input_test_name(self, test_string):
         """Ввод имени теста"""
@@ -89,6 +90,7 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor):
 
 
 class Quiz(Exam):
+    """Класс по работе с Опросами"""
 
     def input_quiz_name(self, test_string):
         """Ввод имени опроса"""
@@ -150,6 +152,8 @@ class Quiz(Exam):
 
 
 class Course(Exam):
+    """Класс по работе с Курсами"""
+
     def input_course_name(self, test_string):
         """Ввод имени курса"""
         self.element_is_visible(locators.Course.COURSE_NAME).send_keys(test_string)
@@ -272,3 +276,34 @@ class Course(Exam):
             self.next_and_finish_button_click()
 
         time.sleep(1)
+
+
+class Task(CreatingPanel):
+    """Класс по работе с назначением заданий"""
+
+    def search_field(self, title):
+        """Заполнение поля поиска"""
+        self.element_is_visible(locators.Task.SEARCH_FIELD).send_keys(title)
+
+    def select_questions(self):
+        """Выбор вопросов"""
+        self.click_to_element(locators.Task.SELECT_MATERIALS)
+
+    def next_button_click(self):
+        """Кнопка продолжить"""
+        self.click_to_element(locators.Task.NEXT_BUTTON)
+
+    def select_person(self):
+        """Выбор пользователя для назначения заданий"""
+        self.click_to_element(locators.Task.SELECT_PERSON)
+
+    def check_text_modal_window(self):
+        """Проверка текста модального окна"""
+        assert self.element_is_visible(locators.Test.MODAL_WINDOW_NAME).text == 'Создание заданий'
+        assert self.element_is_visible(
+            locators.Task.MODAL_WINDOW_BODY).text == ('Задания формируются, скоро они отобразятся в запланированных '
+                                                      'заданиях')
+
+    def accessibly_button_modal_window_click(self):
+        """Кнопка подтверждения на модальном окне"""
+        self.click_to_element(locators.Task.ACCESSIBLY_BUTTON)

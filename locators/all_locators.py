@@ -1215,7 +1215,8 @@ class CheckAfterUpdating:
     """Локаторы проверки контента в статье после обновления"""
     CHECK_NAME_ARTICLE = (
         By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'Обычная статья')]")
-    VERSION_CHECK = (By.CSS_SELECTOR,  "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
+    VERSION_CHECK = (By.CSS_SELECTOR,
+                     "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
     SVG_VERSION_WINDOW_CLOSE = (By.XPATH, "//div[@class='m-popup__close']")
     NUMBER_VERSION_CHECK = (By.CSS_SELECTOR,
                             "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
@@ -1239,14 +1240,20 @@ class CheckAfterUpdating:
     CHECK_H3_TEXT = (By.XPATH, "(//h3[@id='chapter_3'])[1]")
     "Локаторы абзац"
     "1"
-    PARAGRAPH_COLOR_RED = (By.XPATH, "(//span[contains(text(),'Абзац 1 текст текст текст текст текст текст текст ')])[1]")
-    PARAGRAPH_COLOR_BG_YELLOW = (By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[2]")
+    PARAGRAPH_COLOR_RED = (
+        By.XPATH, "(//span[contains(text(),'Абзац 1 текст текст текст текст текст текст текст ')])[1]")
+    PARAGRAPH_COLOR_BG_YELLOW = (
+        By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[2]")
     "2"
-    PARAGRAPH_COLOR_PURPLE = (By.XPATH, "(//span[contains(text(),'Абзац 2 текст текст текст текст текст текст текст ')])[1]")
-    PARAGRAPH_COLOR_BG_GREEN = (By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[4]")
+    PARAGRAPH_COLOR_PURPLE = (
+        By.XPATH, "(//span[contains(text(),'Абзац 2 текст текст текст текст текст текст текст ')])[1]")
+    PARAGRAPH_COLOR_BG_GREEN = (
+        By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[4]")
     "3"
-    PARAGRAPH_COLOR_GREEN = (By.XPATH, "(//span[contains(text(),'Абзац 3 текст текст текст текст текст текст текст ')])[1]")
-    PARAGRAPH_COLOR_BG_ORANGE = (By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[6]")
+    PARAGRAPH_COLOR_GREEN = (
+        By.XPATH, "(//span[contains(text(),'Абзац 3 текст текст текст текст текст текст текст ')])[1]")
+    PARAGRAPH_COLOR_BG_ORANGE = (
+        By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[6]")
     "Локаторы списки"
     LIST_NUMB = (By.XPATH, "(//li[contains(text(),'Нумерованный список')])[1]")
     LIST_MARK = (By.XPATH, "(//li[contains(text(),'Маркированный список')])[1]")
@@ -1260,11 +1267,12 @@ class CheckAfterUpdating:
     CHECK_CROSSED_OUT_TEXT = (By.XPATH, "(//s[contains(text(),'Перечеркнутый')])[1]")
     "Локаторы выравнивания текста"
     CHECK_ALIGN_LEFT_TEXT = (By.XPATH,
-                               "(//p[contains(text(),'Выравнивание слева')])[1]")
+                             "(//p[contains(text(),'Выравнивание слева')])[1]")
     CHECK_ALIGN_CENTER_TEXT = (By.XPATH,
                                "(//p[contains(text(),'Выравнивание по центру')])[1]")
     CHECK_ALIGN_RIGHT_TEXT = (By.XPATH, "(//p[contains(text(),'Выравнивание справа')])[1]")
-    CHECK_ALIGN_JUSTIFY_TEXT = (By.XPATH, "(//p[contains(text(),'Выравнивание по ширине текст текст текст текст тек')])[1]")
+    CHECK_ALIGN_JUSTIFY_TEXT = (
+        By.XPATH, "(//p[contains(text(),'Выравнивание по ширине текст текст текст текст тек')])[1]")
     "Локаторы цвета текста"
     CHECK_COLOR_TEXT = (By.XPATH, "(//span[contains(text(),'Цвет шрифта')])[1]")
     CHECK_HIGHLIGHT_COLOR_TEXT = (By.XPATH, "(//span[contains(text(),'Выделение текста')])[1]")
@@ -1300,12 +1308,14 @@ class CheckAfterUpdating:
     TABS_1_IMG = (By.XPATH, "(//img[@alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
     TABS_1_LI_TEXT = (By.XPATH, "(//li[contains(text(),'В европейских странах вопрос о здоровом питании бы')])[1]")
     TABS_1_TEXT = (By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'][contains(text(),'!!!')])[1]")
-    TABS_1_ONLY_NUMBERS = (By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'][normalize-space()='777'])[1]")
+    TABS_1_ONLY_NUMBERS = (
+        By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'][normalize-space()='777'])[1]")
     TABS_1_CONTENTS_LINK = (By.XPATH, "(//a[contains(text(),'https://pantheonteam.atlassian.net/browse/QA-1619')])[1]")
     TABS_1_COLOR = (By.XPATH, "(//span[contains(text(),'«Знойный полдень»')])[1]")
     TABS_1_SMILES = (By.XPATH, "(//h2[@class='wysiwyg__title-2'][contains(text(),'😁🤨')])[1]")
     "таб 2"
-    TABS_2_LINK = (By.XPATH, "(//a[@class='m-article-editor-templated__field-value m-article-editor-templated__field-value--link'])[1]")
+    TABS_2_LINK = (By.XPATH,
+                   "(//a[@class='m-article-editor-templated__field-value m-article-editor-templated__field-value--link'])[1]")
     TABS_2_TABLE_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//div[@class='os-viewport os-viewport-scrollbar-hidden'])[2]")
     TABS_2_AUDIO_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//audio[@title='perry-como-magic-moments-mp3'])[1]")
     "таб 3"
@@ -1324,22 +1334,12 @@ class CheckAfterUpdating:
     CHECK_TEXT_SCRIPT_PAST2 = (By.XPATH, "//p[contains(text(),'Меняли ли вы место работы за последние 6 месяцев?')]")
     CHECK_TEXT_SCRIPT_PAST3 = (By.XPATH, "//p[contains(text(),'Можете ли вы предоставить банку справку о доходах?')]")
     CHECK_TEXT_SCRIPT_PAST4 = (By.XPATH, "//p[contains(text(),'Есть ли у вас кредиты в других банках?')]")
-    CHECK_TEXT_ANSWER_END = (By.XPATH, "//div[@class='article-scenario-questionary__answer article-scenario-questionary__answer--end']")
+    CHECK_TEXT_ANSWER_END = (
+        By.XPATH, "//div[@class='article-scenario-questionary__answer article-scenario-questionary__answer--end']")
     CHECK_TEXT_ANSWER_RESTART = (By.XPATH, "//p[contains(text(),'Начать заново')]")
     PUBLISH_BUTTON = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium']")
     NUMBER_VERSION_CHECK_SCRIPT = (By.XPATH, "//h3[contains(text(),'Версия 6.0')]")
     CLOSE_SVG_WINDOW_VERSION_SCRIPT = (By.XPATH, "//div[@role='presentation']")
-
-
-
-
-
-
-
-
-
-
-
 
 
 class Test:
@@ -1409,3 +1409,14 @@ class Course:
     SELECT_SCORM_MATERIAL = (By.XPATH, " //p[contains(text(),'Введите название материала')]")
 
 
+class Task:
+    """Локаторы для работы с заданиями"""
+    TASK_BUTTON = (By.XPATH, "//div[contains(text(),'Задание')]")
+    SEARCH_FIELD = (By.XPATH, "//input[@class='input-search__input form-input-wrapper__input']")
+    SELECT_MATERIALS = (By.XPATH,
+                        "//div[@class='m-lms-exercise-wizard__block-header m-lms-exercise-wizard__block-header--check-all']//*[name()='svg']")
+    NEXT_BUTTON = (By.XPATH,
+                   "//button[@class='m-button m-button--success m-button--medium m-lms-exercise-wizard__action']")
+    SELECT_PERSON = (By.XPATH, "//div[@class='m-user-card-info m-lms-pupil-preview m-lms-exercise-wizard__item']")
+    ACCESSIBLY_BUTTON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
+    MODAL_WINDOW_BODY = (By.XPATH, "//p[@class='m-lms-exercise-are-creating-alert__text']")

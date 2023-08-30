@@ -1,8 +1,11 @@
 import random
+import time
+
 import allure
 import pytest
-from pages.quiz_course import Exam, Quiz, Course
+from pages.quiz_course import Exam, Quiz, Course, Task
 from pages.users import admin
+from pages.person_validation import Person1
 
 user_for_test = admin
 
@@ -11,7 +14,7 @@ user_for_test = admin
 @pytest.mark.order(9)
 class TestLMS:
     TEST_STRING = ''.join([str(random.randint(1, 9)) for _ in range(1, 515)])
-    TITLE = 'Название ' + str(random.randint(999, 9999))
+    TITLE ='123123' # 'Название ' + str(random.randint(999, 9999))
 
     @allure.title('Создание нового теста')
     def test_create_new_test(self, driver):
@@ -103,6 +106,21 @@ class TestLMS:
 
     @allure.title('Назначение заданий')
     def test_task_assignment(self, driver):
-        page = Course(driver)
+        page = Task(driver)
         page.get_authorisation_in_superbank(user_for_test)
         page.create_button()
+        page.task_button()
+        page.search_field(TestLMS.TITLE)
+        page.select_questions()
+        page.next_button_click()
+        page.select_person()
+        page.next_button_click()
+        page.next_button_click()
+        page.check_text_modal_window()
+        page.accessibly_button_modal_window_click()
+        time.sleep(6)
+
+    @allure.title('Проверка назначенных заданий пользователем')
+    def test_task_person1(self, driver):
+        person = Person1(driver)
+
