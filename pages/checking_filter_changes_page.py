@@ -23,31 +23,31 @@ class AddFilterChanges(Authorisation, BasePage):
     def add_filters_mass_change(self, count_filters=3):
         """ADD 3 FILTERS"""
         # self.input_in_my_project(self.driver)
-        self.element_is_visible(self.Locators.SETTINGS).click()
-        self.element_is_visible(self.Locators.FILTERS_FOR_SEARCHING).click()
+        self.click_to_element(self.Locators.SETTINGS)
+        self.click_to_element(self.Locators.FILTERS_FOR_SEARCHING)
         try:
-            self.element_is_visible(self.Locators.BUTTON_CREATE_GROUP_FILTER, timeout=2).click()
+            self.click_to_element(self.Locators.BUTTON_CREATE_GROUP_FILTER, timeout=2)
         except TimeoutException:
             """del 3 filters and group"""
-            self.element_is_visible(self.Locators.SVG_DEL_1).click()
-            self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
-            self.element_is_visible(self.Locators.SVG_DEL_2).click()
-            self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
-            self.element_is_visible(self.Locators.SVG_DEL_3).click()
-            self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
-            self.element_is_visible(self.Locators.CHANGE_NAME_GROUP).click()
-            self.element_is_visible(self.Locators.BUTTON_DEL_GROUP).click()
-            self.element_is_visible(self.Locators.BUTTON_DEL_GROUP_CONFIRM).click()
-            self.element_is_visible(self.Locators.BUTTON_CREATE_GROUP_FILTER).click()
+            self.click_to_element(self.Locators.SVG_DEL_1)
+            self.click_to_element(self.Locators.SVG_DEL_LIST_CONFIRM)
+            self.click_to_element(self.Locators.SVG_DEL_2)
+            self.click_to_element(self.Locators.SVG_DEL_LIST_CONFIRM)
+            self.click_to_element(self.Locators.SVG_DEL_3)
+            self.click_to_element(self.Locators.SVG_DEL_LIST_CONFIRM)
+            self.click_to_element(self.Locators.CHANGE_NAME_GROUP)
+            self.click_to_element(self.Locators.BUTTON_DEL_GROUP)
+            self.click_to_element(self.Locators.BUTTON_DEL_GROUP_CONFIRM)
+            self.click_to_element(self.Locators.BUTTON_CREATE_GROUP_FILTER)
         self.element_is_visible(self.Locators.INPUT_NAME_GROUP).send_keys("Groupname_1")
-        self.element_is_visible(self.Locators.BUTTON_GROUP_ADD).click()
+        self.click_to_element(self.Locators.BUTTON_GROUP_ADD)
         """add filters"""
         for n in range(count_filters):
-            self.element_is_visible(self.Locators.BUTTON_ADD_FILTER).click()
+            self.click_to_element(self.Locators.BUTTON_ADD_FILTER)
             self.element_is_visible(self.Locators.INPUT_NAME_FILTER).send_keys("Filtername"+str(random.randint(999, 9999)))
-            self.element_is_visible(self.Locators.BUTTON_ADD_FILTER_ADD).click()
+            self.click_to_element(self.Locators.BUTTON_ADD_FILTER_ADD)
             """close window"""
-        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW).click()
+        self.click_to_element(self.Locators.SVG_CLOSE_WINDOW)
 
     def create_article_mass_change(self, driver):
         """CREATE AND OPEN NEW ARTICLE"""
@@ -60,11 +60,11 @@ class AddFilterChanges(Authorisation, BasePage):
         text_alert = "Alert " + str(random.randint(999, 9999))
         """upload media"""
         try:
-            self.element_is_visible(Locators.CREATE_BUTTON, timeout=1).click()
+            self.click_to_element(Locators.CREATE_BUTTON, timeout=1)
         except StaleElementReferenceException:
             time.sleep(2)
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
-        self.element_is_visible(Locators.CREATE_ARTICLE).click()
+            self.click_to_element(Locators.CREATE_BUTTON)
+        self.click_to_element(Locators.CREATE_ARTICLE)
         """input name and text an folder direct"""
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(first_name)
         try:
@@ -79,10 +79,10 @@ class AddFilterChanges(Authorisation, BasePage):
             time.sleep(5)
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text)
         try:
-            self.elements_is_present(Locators.UPLOAD_MEDIA, timeout=2).click()
+            self.click_to_element(Locators.UPLOAD_MEDIA, timeout=2)
         except TimeoutException:
             time.sleep(5)
-            self.elements_is_present(Locators.UPLOAD_MEDIA).click()
+            self.click_to_element(Locators.UPLOAD_MEDIA)
         """input is visible for load files"""
         time.sleep(1)
         self.download_files_is_visible()
@@ -97,23 +97,23 @@ class AddFilterChanges(Authorisation, BasePage):
             time.sleep(0.5)
             n.click()
         try:
-            self.element_is_visible(Locators.INPUT_SELECTED, timeout=2).click()
+            self.click_to_element(Locators.INPUT_SELECTED, timeout=2)
         except ElementClickInterceptedException:
             time.sleep(2)
-            self.element_is_visible(Locators.INPUT_SELECTED).click()
-        self.element_is_visible(Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
+            self.click_to_element(Locators.INPUT_SELECTED)
+        self.click_to_element(Locators.BUTTON_TYPOGRAPHY)
+        self.click_to_element(Locators.BUTTON_SUBMIT)
         time.sleep(1)
         self.element_is_visible(self.Locators.INPUT_NAME_REQUEST).send_keys(name_request)
         time.sleep(1)
-        self.element_is_visible(self.Locators.BUTTON_ADD).click()
-        self.element_is_visible(self.Locators.RADIOBUTTON_INCLUDED_CONTENT).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.click_to_element(self.Locators.BUTTON_ADD)
+        self.click_to_element(self.Locators.RADIOBUTTON_INCLUDED_CONTENT)
+        self.click_to_element(self.Locators.BUTTON_FINISH)
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys(text_alert)
-        self.element_is_visible(Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
+        self.click_to_element(Locators.BUTTON_SUBMIT)
+        self.click_to_element(self.Locators.GO_TO_CONTENT)
         return first_name, name_request, text
 
     # @staticmethod
@@ -126,41 +126,41 @@ class AddFilterChanges(Authorisation, BasePage):
         name = "Templates" + str(random.randint(9999, 99999))
         name_content = "Content" + str(random.randint(9999, 99999))
         try:
-            self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
+            self.click_to_element(Locators.CREATE_BUTTON_ON_HEAD_PAGE)
         except StaleElementReferenceException:
             time.sleep(2)
-            self.element_is_visible(Locators.CREATE_BUTTON_ON_HEAD_PAGE).click()
-        self.element_is_visible(Locators.CREATE_TEMPLATES).click()
-        self.element_is_visible(Locators.CREATE_TEMPLATES_NEW).click()
+            self.click_to_element(Locators.CREATE_BUTTON_ON_HEAD_PAGE)
+        self.click_to_element(Locators.CREATE_TEMPLATES)
+        self.click_to_element(Locators.CREATE_TEMPLATES_NEW)
         for i in range(1, 6):
             time.sleep(1)
-            self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+            self.click_to_element(Locators.ADD_FIELD_BUTTON)
             list_of_fields = self.browser.find_element(By.XPATH,
                                                  f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[{i}]")
             list_of_fields.click()
             self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys(
                 "Name" + str(random.randint(999, 99999)))
-            self.element_is_visible(Locators.SAVE_TEMPLATES).click()
-        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
+            self.click_to_element(Locators.SAVE_TEMPLATES)
+        self.click_to_element(Locators.ADD_FIELD_BUTTON)
         list_of_fields = self.browser.find_element(By.XPATH,
                                              f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[6]")
         list_of_fields.click()
         self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.ANSWER).send_keys("answer 1")
-        self.element_is_visible(Locators.ADD_ANSWER).click()
-        self.element_is_visible(Locators.SAVE_BUTTON).click()
+        self.click_to_element(Locators.ADD_ANSWER)
+        self.click_to_element(Locators.SAVE_BUTTON)
         """step 5"""
-        self.element_is_visible(Locators.ADD_FIELD_BUTTON).click()
-        self.element_is_visible(Locators.LIST_OF_FIELDS_2).click()
+        self.click_to_element(Locators.ADD_FIELD_BUTTON)
+        self.click_to_element(Locators.LIST_OF_FIELDS_2)
         self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
-        self.element_is_visible(Locators.CHECKBOX_VALUE).click()
+        self.click_to_element(Locators.CHECKBOX_VALUE)
         self.element_is_visible(Locators.INPUT_VALUE).send_keys("Name" + str(random.randint(999, 99999)))
-        self.element_is_visible(Locators.SAVE_TEMPLATES).click()
+        self.click_to_element(Locators.SAVE_TEMPLATES)
         """step 6"""
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name)
         # print(name)
-        self.element_is_visible(Locators.SAVE_CREATED_TEMPLATES).click()
-        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        self.click_to_element(Locators.SAVE_CREATED_TEMPLATES)
+        self.click_to_element(Locators.SUBMIT_TEMPLATES)
         # скролл
         # locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)
         self.scroll_wizard_template(name, driver)
@@ -216,13 +216,13 @@ class AddFilterChanges(Authorisation, BasePage):
         check_name_of_templates.is_displayed()
         self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
         time.sleep(1)
-        self.element_is_visible(Locators.TYPOGRAPHY_TEMPLATE).click()
-        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        self.click_to_element(Locators.TYPOGRAPHY_TEMPLATE)
+        self.click_to_element(Locators.SUBMIT_TEMPLATES)
         input_request = self.element_is_visible(Locators.INPUT_REQUEST)
         requests_name = "как помыть крота" + str(random.randint(999, 99999))
         input_request.send_keys(requests_name)
-        self.element_is_visible(Locators.ADD_SEARCH_BUTTON).click()
-        self.element_is_visible(Locators.FIELD_OF_CONTENT_RADIO).click()
+        self.click_to_element(Locators.ADD_SEARCH_BUTTON)
+        self.click_to_element(Locators.FIELD_OF_CONTENT_RADIO)
         """fixing_all_fields"""
         select_field_for_fixing = self.element_is_visible(Locators.SELECT_FIELD_FOR_FIXING)
         for i in range(6):
@@ -230,10 +230,10 @@ class AddFilterChanges(Authorisation, BasePage):
             select_field_for_fixing.click()
             select_field_for_fixing.send_keys(Keys.DOWN)
             select_field_for_fixing.send_keys(Keys.RETURN)
-        self.element_is_visible(Locators.FINISH_BUTTON).click()
-        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        self.click_to_element(Locators.FINISH_BUTTON)
+        self.click_to_element(Locators.SUBMIT_TEMPLATES)
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
-        self.element_is_visible(Locators.SUBMIT_TEMPLATES).click()
+        self.click_to_element(Locators.SUBMIT_TEMPLATES)
         print(name, name_content, requests_name)
         return name, name_content, requests_name
 
@@ -244,15 +244,15 @@ class AddFilterChanges(Authorisation, BasePage):
         name_request_script = "request " + str(random.randint(999, 9999))
         name_script = "NAME_SCRIPT-" + str(random.randint(99, 999))
         try:
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
+            self.click_to_element(Locators.CREATE_BUTTON)
         except StaleElementReferenceException:
             time.sleep(3)
-            self.element_is_visible(Locators.CREATE_BUTTON).click()
-        self.element_is_visible(Locators.CREATE_SCRIPT).click()
+            self.click_to_element(Locators.CREATE_BUTTON)
+        self.click_to_element(Locators.CREATE_SCRIPT)
         self.element_is_visible(Locators.NAME_OF_STEP_SCRIPT).send_keys(name_script)
         time.sleep(2)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
-        self.element_is_visible(Locators.ADD_STEP).click()
+        self.click_to_element(Locators.ADD_STEP)
         self.element_is_visible(Locators.INPUT_NAME_STEP).send_keys("name_step-" + str(random.randint(99, 999)))
         self.element_is_visible(Locators.DROPDOWN_STEP).send_keys("Сценарий завершён")
         try:
@@ -260,10 +260,10 @@ class AddFilterChanges(Authorisation, BasePage):
         except TimeoutException:
             time.sleep(5)
             self.click_to_element(Locators.TEXT_AREA)
-        self.element_is_visible(Locators.DROPDOWN).click()
+        self.click_to_element(Locators.DROPDOWN)
         frame = self.elements_is_present(Locators.FRAME)
         self.switch_to_frame(frame)
-        self.element_is_visible(Locators.DROP_DOWN_FILES).click()
+        self.click_to_element(Locators.DROP_DOWN_FILES)
         self.switch_out_frame()
         time.sleep(1)
         """for visible"""
@@ -279,10 +279,10 @@ class AddFilterChanges(Authorisation, BasePage):
             time.sleep(0.5)
             n.click()
         try:
-            self.element_is_visible(Locators.INPUT_SELECTED).click()
+            self.click_to_element(Locators.INPUT_SELECTED)
         except ElementClickInterceptedException:
             time.sleep(5)
-            self.element_is_visible(Locators.INPUT_SELECTED).click()
+            self.click_to_element(Locators.INPUT_SELECTED)
         time.sleep(1)
         button_typography = self.elements_is_present(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
         button_typography.click()
@@ -290,14 +290,14 @@ class AddFilterChanges(Authorisation, BasePage):
         # actions.click(button_typography)
         # actions.perform()
         # actions.perform()
-        # self.element_is_visible(Locators.BUTTON_TYPOGRAPHY).click()
+        # self.click_to_element(Locators.BUTTON_TYPOGRAPHY)
         self.element_is_visible(self.Locators.INPUT_NAME_REQUEST).send_keys(name_request_script)
-        self.element_is_visible(self.Locators.BUTTON_ADD).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH_CONFIRM).click()
-        self.element_is_visible(self.Locators.BUTTON_FINISH_CONFIRM).click()
+        self.click_to_element(self.Locators.BUTTON_ADD)
+        self.click_to_element(self.Locators.BUTTON_FINISH)
+        self.click_to_element(self.Locators.BUTTON_FINISH_CONFIRM)
+        self.click_to_element(self.Locators.BUTTON_FINISH_CONFIRM)
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(999, 9999)))
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.click_to_element(self.Locators.BUTTON_FINISH)
         print(name_request_script)
         return name_request_script, name_script
 
@@ -305,16 +305,16 @@ class AddFilterChanges(Authorisation, BasePage):
         first_name, name_request, text = self.create_article_mass_change(driver)
         action = ActionChains(driver)
         try:
-            self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=5).click()
+            self.click_to_element(self.Locators.MEATBALL_MENU, timeout=5)
         except (StaleElementReferenceException, WebDriverException):
             time.sleep(3)
-            self.element_is_visible(self.Locators.MEATBALL_MENU).click()
+            self.click_to_element(self.Locators.MEATBALL_MENU)
         time.sleep(1)
         try:
-            self.element_is_visible(self.Locators.MASS_CHANGE).click()
+            self.click_to_element(self.Locators.MASS_CHANGE)
         except TimeoutException:
             time.sleep(3)
-            self.element_is_visible(self.Locators.MASS_CHANGE).click()
+            self.click_to_element(self.Locators.MASS_CHANGE)
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
         """check dropdown"""
         try:
@@ -349,19 +349,19 @@ class AddFilterChanges(Authorisation, BasePage):
         element = self.element_is_visible(self.Locators.BUTTON_CONTINUE, timeout=1)
         self.check_button_not_click(element)
         """---add filter---"""
-        self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+        self.click_to_element(self.Locators.DROPDOWN_FILTERS)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
         try:
             self.element_is_visible(self.Locators.LIST_ADDED_FILTERS).is_displayed()
-        except TimeoutException:
+        except (TimeoutException, ElementClickInterceptedException):
             print("Сначала добавьте фильтры")
         """check button click"""
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.browser.refresh()
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
         """---add filter---"""
-        self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+        self.click_to_element(self.Locators.DROPDOWN_FILTERS)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
         self.element_is_visible(self.Locators.LIST_ADDED_FILTERS).is_displayed()
@@ -371,27 +371,29 @@ class AddFilterChanges(Authorisation, BasePage):
         """---add action---"""
         self.element_is_visible(self.Locators.DROPDOWN_ACTIONS).send_keys("Добавить")
         """check button click"""
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.element_is_visible(self.Locators.INPUT_SEARCH_CONTENT_BY_NAME_FOR_ADD_FILTERS).send_keys(first_name)
         time.sleep(1)
-        self.element_is_visible(self.Locators.CREATED_CONTENT_FOR_FILTERS).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.CREATED_CONTENT_FOR_FILTERS)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         print(first_name, name_request, text)
         """check article after add filters"""
         time.sleep(5)
         try:
-            self.element_is_visible(self.Locators.FILTERS).click()
+            self.click_to_element(self.Locators.FILTERS)
         except (StaleElementReferenceException, TimeoutException):
             time.sleep(5)
-            self.element_is_visible(self.Locators.FILTERS).click()
+            self.click_to_element(self.Locators.FILTERS)
         try:
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
+            article_firs_name.click()
         except NoSuchElementException:
             time.sleep(5)
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name}']")
+            article_firs_name.click()
             # article_firs_name = self.browser.find_element(By.XPATH, f"//p[text()='{first_name}']")
-        self.element_is_visible(self.Locators.FILTERS_FIRST_NAME).click()
+        # self.click_to_element(self.Locators.FILTERS_FIRST_NAME)
         time.sleep(1)
         # try:
         #     article_firs_name.click()
@@ -410,39 +412,41 @@ class AddFilterChanges(Authorisation, BasePage):
             time.sleep(3)
             self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
         time.sleep(1)
-        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        self.click_to_element(self.Locators.CHANGE_ARTICLE)
         time.sleep(2)
         try:
             self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY, timeout=3)
         except (ElementClickInterceptedException, TimeoutException):
-            time.sleep(3)
-            self.delete_draft()
-            # self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
-            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
-            # try:
-            #     self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
+            time.sleep(2)
+            "Если появляется сообщение о черновике"
+            try:
+                self.element_is_visible(self.Locators.ALERT_FOR_DRAFT, timeout=3).is_displayed()
+                self.delete_draft()
+                time.sleep(3)
+                self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
             # except TimeoutException:
-            #     time.sleep(3)
-            #     self.delete_draft()
-            #     self.element_is_clickable(self.Locators.BUTTON_TYPOGRAPHY).click()
-            # self.element_is_visible(self.Locators.BUTTON_DELETE_DRAFT).click()
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+            #     self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+            # self.click_to_element(self.Locators.CHANGE_ARTICLE)
+            except (ElementClickInterceptedException, TimeoutException):
+                self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         time.sleep(1)
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         time.sleep(1)
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
+        print("Запрос-"+text_request_article)
         assert text_request_article == name_request
         """change filters"""
-        self.element_is_visible(self.Locators.SVG_DELETE_FILTER_ADDED).click()
-        self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_CHANGE).click()
+        self.click_to_element(self.Locators.SVG_DELETE_FILTER_ADDED)
+        self.click_to_element(self.Locators.DROPDOWN_FILTERS_FOR_CHANGE)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(9, 99)))
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
+        self.click_to_element(self.Locators.GO_TO_CONTENT)
         """check article after add filters"""
         time.sleep(5)
         try:
@@ -472,17 +476,17 @@ class AddFilterChanges(Authorisation, BasePage):
             pass
         self.element_is_visible(self.Locators.AUDIO_ARTICLE).is_displayed()
         time.sleep(2)
-        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        self.click_to_element(self.Locators.CHANGE_ARTICLE)
         time.sleep(3)
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=10).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY, timeout=10)
         except TimeoutException:
             time.sleep(10)
             # driver.refresh()
-            # self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+            # self.click_to_element(self.Locators.CHANGE_ARTICLE)
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         try:
             text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
         except ElementNotInteractableException:
@@ -495,17 +499,17 @@ class AddFilterChanges(Authorisation, BasePage):
         name, name_content, requests_name = self.add_article_by_template_mass_change(driver)
         # self.input_in_my_project(self.driver)
         action = ActionChains(driver)
-        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
+        self.click_to_element(self.Locators.GO_TO_CONTENT)
         try:
-            self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=5).click()
+            self.click_to_element(self.Locators.MEATBALL_MENU, timeout=5)
         except (StaleElementReferenceException, WebDriverException):
             time.sleep(3)
-            self.element_is_visible(self.Locators.MEATBALL_MENU).click()
+            self.click_to_element(self.Locators.MEATBALL_MENU)
         try:
-            self.element_is_visible(self.Locators.MASS_CHANGE).click()
+            self.click_to_element(self.Locators.MASS_CHANGE)
         except TimeoutException:
             time.sleep(3)
-            self.element_is_visible(self.Locators.MASS_CHANGE).click()
+            self.click_to_element(self.Locators.MASS_CHANGE)
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
         """check dropdown"""
         try:
@@ -541,7 +545,7 @@ class AddFilterChanges(Authorisation, BasePage):
         element = self.element_is_visible(self.Locators.BUTTON_CONTINUE, timeout=1)
         self.check_button_not_click(element)
         """---add filter---"""
-        self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+        self.click_to_element(self.Locators.DROPDOWN_FILTERS)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
         try:
@@ -551,15 +555,15 @@ class AddFilterChanges(Authorisation, BasePage):
         """check button click"""
 
         time.sleep(3)
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.browser.refresh()
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
         """---add filter---"""
         try:
-            self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+            self.click_to_element(self.Locators.DROPDOWN_FILTERS)
         except ElementClickInterceptedException:
             time.sleep(3)
-            self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+            self.click_to_element(self.Locators.DROPDOWN_FILTERS)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
         self.element_is_visible(self.Locators.LIST_ADDED_FILTERS).is_displayed()
@@ -569,20 +573,20 @@ class AddFilterChanges(Authorisation, BasePage):
         """---add action---"""
         self.element_is_visible(self.Locators.DROPDOWN_ACTIONS).send_keys("Добавить")
         """check button click"""
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.element_is_visible(self.Locators.INPUT_SEARCH_CONTENT_BY_NAME_FOR_ADD_FILTERS).send_keys(name_content)
         time.sleep(1)
-        self.element_is_visible(self.Locators.CREATED_CONTENT_FOR_FILTERS).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.CREATED_CONTENT_FOR_FILTERS)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         print(name, requests_name, name_content)
         """check article after add filters"""
         time.sleep(5)
         try:
-            self.element_is_visible(self.Locators.FILTERS).click()
+            self.click_to_element(self.Locators.FILTERS)
         except (StaleElementReferenceException, TimeoutException):
             time.sleep(5)
-            self.element_is_visible(self.Locators.FILTERS).click()
+            self.click_to_element(self.Locators.FILTERS)
         try:
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_content}']")
         except (TimeoutException, NoSuchElementException, StaleElementReferenceException):
@@ -597,27 +601,27 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(self.Locators.FIELD_TEXT_WEBSITE).is_displayed()
         self.element_is_visible(self.Locators.FIELD_TEXT_MAIL).is_displayed()
         self.element_is_visible(self.Locators.FIELD_TEXT_NAME).is_displayed()
-        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        self.click_to_element(self.Locators.CHANGE_ARTICLE)
         time.sleep(1)
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=20).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY, timeout=20)
         except (ElementClickInterceptedException, TimeoutException):
             time.sleep(5)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
         assert text_request_article == requests_name
         """change filters"""
-        self.element_is_visible(self.Locators.SVG_DELETE_FILTER_ADDED).click()
-        self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_CHANGE).click()
+        self.click_to_element(self.Locators.SVG_DELETE_FILTER_ADDED)
+        self.click_to_element(self.Locators.DROPDOWN_FILTERS_FOR_CHANGE)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(9, 99)))
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
+        self.click_to_element(self.Locators.GO_TO_CONTENT)
         """check article after add filters"""
         time.sleep(5)
         filters = self.elements_are_visible(self.Locators.FILTERS)
@@ -636,32 +640,32 @@ class AddFilterChanges(Authorisation, BasePage):
         self.element_is_visible(self.Locators.FIELD_TEXT_WEBSITE).is_displayed()
         self.element_is_visible(self.Locators.FIELD_TEXT_MAIL).is_displayed()
         self.element_is_visible(self.Locators.FIELD_TEXT_NAME).is_displayed()
-        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        self.click_to_element(self.Locators.CHANGE_ARTICLE)
         time.sleep(1)
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY, timeout=20).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY, timeout=20)
         except TimeoutException:
             time.sleep(10)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         time.sleep(6)
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
         assert text_request_article == requests_name
 
     def check_mass_change_filters_script(self, driver):
         name_request_script, name_script = self.add_script_mass_change(driver)
         action = ActionChains(driver)
-        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
+        self.click_to_element(self.Locators.GO_TO_CONTENT)
         try:
-            self.element_is_visible(self.Locators.MEATBALL_MENU, timeout=10).click()
+            self.click_to_element(self.Locators.MEATBALL_MENU, timeout=10)
         except (StaleElementReferenceException, WebDriverException):
             time.sleep(5)
-            self.element_is_visible(self.Locators.MEATBALL_MENU).click()
+            self.click_to_element(self.Locators.MEATBALL_MENU)
         try:
-            self.element_is_visible(self.Locators.MASS_CHANGE).click()
+            self.click_to_element(self.Locators.MASS_CHANGE)
         except TimeoutException:
             time.sleep(3)
-            self.element_is_visible(self.Locators.MASS_CHANGE).click()
+            self.click_to_element(self.Locators.MASS_CHANGE)
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
         """check dropdown"""
         try:
@@ -696,7 +700,7 @@ class AddFilterChanges(Authorisation, BasePage):
         element = self.element_is_visible(self.Locators.BUTTON_CONTINUE, timeout=1)
         self.check_button_not_click(element)
         """---add filter---"""
-        self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+        self.click_to_element(self.Locators.DROPDOWN_FILTERS)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
         try:
@@ -704,15 +708,15 @@ class AddFilterChanges(Authorisation, BasePage):
         except TimeoutException:
             print("Сначала добавьте фильтры")
         """check button click"""
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.browser.refresh()
         self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_SEARCHING).send_keys("Фильтры для поиска")
         """---add filter---"""
         try:
-            self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+            self.click_to_element(self.Locators.DROPDOWN_FILTERS)
         except ElementClickInterceptedException:
             time.sleep(3)
-            self.element_is_visible(self.Locators.DROPDOWN_FILTERS).click()
+            self.click_to_element(self.Locators.DROPDOWN_FILTERS)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
         self.element_is_visible(self.Locators.LIST_ADDED_FILTERS).is_displayed()
@@ -722,20 +726,20 @@ class AddFilterChanges(Authorisation, BasePage):
         """---add action---"""
         self.element_is_visible(self.Locators.DROPDOWN_ACTIONS).send_keys("Добавить")
         """check button click"""
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.element_is_visible(self.Locators.INPUT_SEARCH_CONTENT_BY_NAME_FOR_ADD_FILTERS).send_keys(name_script)
         time.sleep(1)
-        self.element_is_visible(self.Locators.CREATED_CONTENT_FOR_FILTERS).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.CREATED_CONTENT_FOR_FILTERS)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         print(name_script, name_request_script)
         """check article after add filters"""
         time.sleep(5)
         try:
-            self.element_is_visible(self.Locators.FILTERS).click()
+            self.click_to_element(self.Locators.FILTERS)
         except (StaleElementReferenceException, TimeoutException):
             time.sleep(5)
-            self.element_is_visible(self.Locators.FILTERS).click()
+            self.click_to_element(self.Locators.FILTERS)
         time.sleep(1)
         try:
             article_firs_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_script}']")
@@ -749,29 +753,29 @@ class AddFilterChanges(Authorisation, BasePage):
         except (TimeoutException, StaleElementReferenceException):
             pass
         self.element_is_visible(self.Locators.AUDIO_SCRIPT).is_displayed()
-        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        self.click_to_element(self.Locators.CHANGE_ARTICLE)
         time.sleep(1)
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT, timeout=20).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT, timeout=20)
         except (ElementClickInterceptedException, TimeoutException):
             time.sleep(15)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_SCRIPT).text
         print(text_request_article)
         assert text_request_article == name_request_script
         """change filters"""
-        self.element_is_visible(self.Locators.SVG_DELETE_FILTER_ADDED).click()
-        self.element_is_visible(self.Locators.DROPDOWN_FILTERS_FOR_CHANGE).click()
+        self.click_to_element(self.Locators.SVG_DELETE_FILTER_ADDED)
+        self.click_to_element(self.Locators.DROPDOWN_FILTERS_FOR_CHANGE)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.ARROW_DOWN)
         action.send_keys(Keys.RETURN).perform()
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(9, 99)))
-        self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
-        self.element_is_visible(self.Locators.GO_TO_CONTENT).click()
+        self.click_to_element(self.Locators.BUTTON_SUBMIT)
+        self.click_to_element(self.Locators.GO_TO_CONTENT)
         """check article after add filters"""
         time.sleep(5)
         filters = self.elements_are_visible(self.Locators.FILTERS)
@@ -789,33 +793,33 @@ class AddFilterChanges(Authorisation, BasePage):
         except (TimeoutException, StaleElementReferenceException):
             pass
         self.element_is_visible(self.Locators.AUDIO_SCRIPT).is_displayed()
-        self.element_is_visible(self.Locators.CHANGE_ARTICLE).click()
+        self.click_to_element(self.Locators.CHANGE_ARTICLE)
         time.sleep(10)
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT, timeout=20).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT, timeout=20)
         except TimeoutException:
             time.sleep(10)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT).click()
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
-        self.element_is_visible(self.Locators.BUTTON_ARTICLE_BACK).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
+        self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_SCRIPT).text
         assert text_request_article == name_request_script
 
     def delete_all_filters(self, driver):
         self.input_in_my_project(driver)
-        self.element_is_visible(self.Locators.SETTINGS).click()
-        self.element_is_visible(self.Locators.FILTERS_FOR_SEARCHING).click()
+        self.click_to_element(self.Locators.SETTINGS)
+        self.click_to_element(self.Locators.FILTERS_FOR_SEARCHING)
         try:
-            self.element_is_visible(self.Locators.BUTTON_CREATE_GROUP_FILTER, timeout=2).click()
+            self.click_to_element(self.Locators.BUTTON_CREATE_GROUP_FILTER, timeout=2)
         except TimeoutException:
             """del 3 filters and group"""
-            self.element_is_visible(self.Locators.SVG_DEL_1).click()
-            self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
-            self.element_is_visible(self.Locators.SVG_DEL_2).click()
-            self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
-            self.element_is_visible(self.Locators.SVG_DEL_3).click()
-            self.element_is_visible(self.Locators.SVG_DEL_LIST_CONFIRM).click()
-        self.element_is_visible(self.Locators.SVG_CLOSE_WINDOW).click()
+            self.click_to_element(self.Locators.SVG_DEL_1)
+            self.click_to_element(self.Locators.SVG_DEL_LIST_CONFIRM)
+            self.click_to_element(self.Locators.SVG_DEL_2)
+            self.click_to_element(self.Locators.SVG_DEL_LIST_CONFIRM)
+            self.click_to_element(self.Locators.SVG_DEL_3)
+            self.click_to_element(self.Locators.SVG_DEL_LIST_CONFIRM)
+        self.click_to_element(self.Locators.SVG_CLOSE_WINDOW)
 
 
 
