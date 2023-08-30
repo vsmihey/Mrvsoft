@@ -1,4 +1,3 @@
-import random
 import time
 import pathlib
 from pathlib import Path
@@ -9,33 +8,31 @@ import locators.all_locators as locators
 
 
 class Exam(CreatingPanel, PublicWizard, CKERedactor):
-    TEST_STRING = ''.join([str(random.randint(1, 9)) for _ in range(1, 515)])
-    TITLE = 'Название теста ' + str(random.randint(99, 9999))
 
-    def input_test_name(self, text=TEST_STRING):
+    def input_test_name(self, test_string):
         """Ввод имени теста"""
-        self.element_is_visible(locators.Test.TEST_NAME).send_keys(text)
+        self.element_is_visible(locators.Test.TEST_NAME).send_keys(test_string)
 
     def clear_test_name(self):
         """Очистка поля для ввода имени теста"""
         self.element_is_visible(locators.Test.TEST_NAME).send_keys(Keys.CONTROL + 'a')
         self.element_is_visible(locators.Test.TEST_NAME).send_keys(Keys.BACKSPACE)
 
-    def check_test_name_length(self):
+    def check_test_name_length(self, test_string):
         """ Метод проверки корректности названия теста, длина не должна превышать 128 символов, название должно
         соответствовать первым 128 символам из тестовой строки"""
         assert len(str(self.element_is_visible(locators.Test.TEST_NAME).get_attribute('value'))) == 128
-        assert self.element_is_visible(locators.Test.TEST_NAME).get_attribute('value') == self.TEST_STRING[:128]
+        assert self.element_is_visible(locators.Test.TEST_NAME).get_attribute('value') == test_string[:128]
 
-    def input_test_description(self):
+    def input_test_description(self, test_string):
         """Ввод описания теста"""
-        self.element_is_visible(locators.Test.TEST_DESCRIPTION).send_keys(self.TEST_STRING)
+        self.element_is_visible(locators.Test.TEST_DESCRIPTION).send_keys(test_string)
 
-    def check_test_description_length(self):
+    def check_test_description_length(self, test_string):
         """ Метод проверки корректности описания теста, длина не должна превышать 512 символов, название должно
         соответствовать первым 512 символам из тестовой строки"""
         assert len(str(self.element_is_visible(locators.Test.TEST_DESCRIPTION).get_attribute('value'))) == 512
-        assert self.element_is_visible(locators.Test.TEST_DESCRIPTION).get_attribute('value') == self.TEST_STRING[:512]
+        assert self.element_is_visible(locators.Test.TEST_DESCRIPTION).get_attribute('value') == test_string[:512]
 
     def check_save_button_status_no_active(self):
         """Проверка, что кнопка 'сохранить' не активна """
@@ -86,39 +83,37 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor):
         self.next_and_finish_button_click()
         self.next_and_finish_button_click()
 
-    def check_name_created_test(self):
+    def check_name_created_test(self, title):
         """Проверка, карточки созданного теста по совпадению названия теста"""
-        assert self.element_is_visible(locators.Test.NAME_CREATED_TEST).text == self.TITLE
+        assert self.element_is_visible(locators.Test.NAME_CREATED_TEST).text == title
 
 
 class Quiz(Exam):
-    TEST_STRING = Exam.TEST_STRING
-    TITLE = Exam.TITLE
 
-    def input_quiz_name(self, text=TEST_STRING):
+    def input_quiz_name(self, test_string):
         """Ввод имени опроса"""
-        self.element_is_visible(locators.Quiz.QUIZ_NAME).send_keys(text)
+        self.element_is_visible(locators.Quiz.QUIZ_NAME).send_keys(test_string)
 
     def clear_quiz_name(self):
         """Очистка поля для ввода имени теста"""
         self.element_is_visible(locators.Quiz.QUIZ_NAME).send_keys(Keys.CONTROL + 'a')
         self.element_is_visible(locators.Quiz.QUIZ_NAME).send_keys(Keys.BACKSPACE)
 
-    def check_quiz_name_length(self):
+    def check_quiz_name_length(self, test_string):
         """ Метод проверки корректности названия опроса, длина не должна превышать 128 символов, название должно
         соответствовать первым 128 символам из тестовой строки"""
         assert len(str(self.element_is_visible(locators.Quiz.QUIZ_NAME).get_attribute('value'))) == 128
-        assert self.element_is_visible(locators.Quiz.QUIZ_NAME).get_attribute('value') == self.TEST_STRING[:128]
+        assert self.element_is_visible(locators.Quiz.QUIZ_NAME).get_attribute('value') == test_string[:128]
 
-    def input_quiz_description(self):
+    def input_quiz_description(self, test_string):
         """Ввод описания опроса"""
-        self.element_is_visible(locators.Quiz.QUIZ_DESCRIPTION).send_keys(self.TEST_STRING)
+        self.element_is_visible(locators.Quiz.QUIZ_DESCRIPTION).send_keys(test_string)
 
-    def check_quiz_description_length(self):
+    def check_quiz_description_length(self, test_string):
         """ Метод проверки корректности описания опроса, длина не должна превышать 128 символов, описание должно
         соответствовать первым 128 символам из тестовой строки"""
         assert len(str(self.element_is_visible(locators.Quiz.QUIZ_DESCRIPTION).get_attribute('value'))) == 128
-        assert self.element_is_visible(locators.Quiz.QUIZ_DESCRIPTION).get_attribute('value') == self.TEST_STRING[:128]
+        assert self.element_is_visible(locators.Quiz.QUIZ_DESCRIPTION).get_attribute('value') == test_string[:128]
 
     def check_save_button_status_no_active(self):
         """Проверка, что кнопка 'сохранить' не активна """
@@ -155,34 +150,30 @@ class Quiz(Exam):
 
 
 class Course(Exam):
-    TEST_STRING = Exam.TEST_STRING
-    TITLE = Exam.TITLE
-
-    def input_course_name(self, text=TEST_STRING):
+    def input_course_name(self, test_string):
         """Ввод имени курса"""
-        self.element_is_visible(locators.Course.COURSE_NAME).send_keys(text)
+        self.element_is_visible(locators.Course.COURSE_NAME).send_keys(test_string)
 
     def clear_course_name(self):
         """Очистка поля для ввода имени теста"""
         self.element_is_visible(locators.Course.COURSE_NAME).send_keys(Keys.CONTROL + 'a')
         self.element_is_visible(locators.Course.COURSE_NAME).send_keys(Keys.BACKSPACE)
 
-    def check_course_name_length(self):
+    def check_course_name_length(self, test_string):
         """ Метод проверки корректности названия курса, длина не должна превышать 128 символов, название должно
         соответствовать первым 128 символам из тестовой строки"""
         assert len(str(self.element_is_visible(locators.Course.COURSE_NAME).get_attribute('value'))) == 128
-        assert self.element_is_visible(locators.Course.COURSE_NAME).get_attribute('value') == self.TEST_STRING[:128]
+        assert self.element_is_visible(locators.Course.COURSE_NAME).get_attribute('value') == test_string[:128]
 
-    def input_course_description(self):
+    def input_course_description(self, test_string):
         """Ввод описания курса"""
-        self.element_is_visible(locators.Course.COURSE_DESCRIPTION).send_keys(self.TEST_STRING)
+        self.element_is_visible(locators.Course.COURSE_DESCRIPTION).send_keys(test_string)
 
-    def check_course_description_length(self):
+    def check_course_description_length(self, test_string):
         """ Метод проверки корректности описания курса, длина не должна превышать 512 символов, описание должно
         соответствовать первым 512 символам из тестовой строки"""
         assert len(str(self.element_is_visible(locators.Course.COURSE_DESCRIPTION).get_attribute('value'))) == 512
-        assert self.element_is_visible(locators.Course.COURSE_DESCRIPTION).get_attribute('value') == self.TEST_STRING[
-                                                                                                     :512]
+        assert self.element_is_visible(locators.Course.COURSE_DESCRIPTION).get_attribute('value') == test_string[:512]
 
     def check_save_button_status_no_active(self):
         """Проверка, что кнопка 'сохранить' не активна """
@@ -279,3 +270,5 @@ class Course(Exam):
 
         for _ in range(3):
             self.next_and_finish_button_click()
+
+        time.sleep(1)
