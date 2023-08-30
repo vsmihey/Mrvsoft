@@ -158,7 +158,6 @@ class AddFilterChanges(Authorisation, BasePage):
         self.click_to_element(Locators.SAVE_TEMPLATES)
         """step 6"""
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name)
-        # print(name)
         self.click_to_element(Locators.SAVE_CREATED_TEMPLATES)
         self.click_to_element(Locators.SUBMIT_TEMPLATES)
         # скролл
@@ -179,7 +178,6 @@ class AddFilterChanges(Authorisation, BasePage):
         time.sleep(1)
         # name_of_templates.click()
         self.element_is_visible(Locators.check_name_input).send_keys(name_content)
-        # print(name_content)
         time.sleep(3)
         self.element_is_visible(Locators.FOLDER_SAVE).send_keys("Контент 1")
         try:
@@ -234,7 +232,7 @@ class AddFilterChanges(Authorisation, BasePage):
         self.click_to_element(Locators.SUBMIT_TEMPLATES)
         self.element_is_visible(Locators.TEXT_AREA_ALERT).send_keys("Name" + str(random.randint(999, 99999)))
         self.click_to_element(Locators.SUBMIT_TEMPLATES)
-        print(name, name_content, requests_name)
+        # print(name, name_content, requests_name)
         return name, name_content, requests_name
 
     def add_script_mass_change(self, driver):
@@ -298,7 +296,7 @@ class AddFilterChanges(Authorisation, BasePage):
         self.click_to_element(self.Locators.BUTTON_FINISH_CONFIRM)
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("Alert " + str(random.randint(999, 9999)))
         self.click_to_element(self.Locators.BUTTON_FINISH)
-        print(name_request_script)
+        # print(name_request_script)
         return name_request_script, name_script
 
     def check_mass_change_filters_article(self, driver):
@@ -377,7 +375,7 @@ class AddFilterChanges(Authorisation, BasePage):
         self.click_to_element(self.Locators.CREATED_CONTENT_FOR_FILTERS)
         self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.click_to_element(self.Locators.BUTTON_CONTINUE)
-        print(first_name, name_request, text)
+        # print(first_name, name_request, text)
         """check article after add filters"""
         time.sleep(5)
         try:
@@ -434,7 +432,7 @@ class AddFilterChanges(Authorisation, BasePage):
         self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         time.sleep(1)
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_ARTICLE).text
-        print("Запрос-"+text_request_article)
+        # print("Запрос-"+text_request_article)
         assert text_request_article == name_request
         """change filters"""
         self.click_to_element(self.Locators.SVG_DELETE_FILTER_ADDED)
@@ -553,7 +551,6 @@ class AddFilterChanges(Authorisation, BasePage):
         except TimeoutException:
             print("Сначала добавьте фильтры")
         """check button click"""
-
         time.sleep(3)
         self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.browser.refresh()
@@ -579,7 +576,7 @@ class AddFilterChanges(Authorisation, BasePage):
         self.click_to_element(self.Locators.CREATED_CONTENT_FOR_FILTERS)
         self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.click_to_element(self.Locators.BUTTON_CONTINUE)
-        print(name, requests_name, name_content)
+        # print(name, requests_name, name_content)
         """check article after add filters"""
         time.sleep(5)
         try:
@@ -732,7 +729,7 @@ class AddFilterChanges(Authorisation, BasePage):
         self.click_to_element(self.Locators.CREATED_CONTENT_FOR_FILTERS)
         self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.click_to_element(self.Locators.BUTTON_CONTINUE)
-        print(name_script, name_request_script)
+        # print(name_script, name_request_script)
         """check article after add filters"""
         time.sleep(5)
         try:
@@ -763,7 +760,7 @@ class AddFilterChanges(Authorisation, BasePage):
         self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         text_request_article = self.element_is_visible(self.Locators.TEXT_REQUEST_SCRIPT).text
-        print(text_request_article)
+        # print(text_request_article)
         assert text_request_article == name_request_script
         """change filters"""
         self.click_to_element(self.Locators.SVG_DELETE_FILTER_ADDED)
