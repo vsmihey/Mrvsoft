@@ -73,7 +73,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
             deleted_article_search = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{first_name + changed_name_1}']")
         deleted_article_search.click()
         self.element_is_visible(self.Locators.BUTTON_RESTORED).click()
-        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+        self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("restored 1")
         self.element_is_visible(self.Locators.BUTTON_SUBMIT).click()
         self.element_is_visible(self.Locators.SVG_CLOSE_RESTORED_ARTICLE).click()
@@ -218,7 +218,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         password_person2 = "97718d75"
         # name_role_content = self.add_role_content()
         self.element_is_visible(self.Locators.SVG_POPUP_CLOSE_CREATED_PERSON).click()
-        self.element_is_visible(self.Locators.PERSONS_AND_ROLES).click()
+        self.click_to_element(self.Locators.PERSONS_AND_ROLES)
         name_role_no_content = self.add_role_no_content()
         login2 = self.add_new_person_base(driver)
         self.element_is_visible(self.Locators.BUTTON_SETTING_ACCESS).click()

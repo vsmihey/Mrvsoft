@@ -368,8 +368,13 @@ class AddViewContentWizard(Authorisation, BasePage):
         check_search_result = self.element_is_visible(self.Locators.CHECK_SEARCH_RESULT).text
         print(check_search_result)
         assert check_search_result == name_script
-        text_fixing_by_expert = self.element_is_visible(self.Locators.TEXT_FIXING_BY_EXPERT).text
+        try:
+            text_fixing_by_expert = self.element_is_visible(self.Locators.TEXT_FIXING_BY_EXPERT).text
+        except TimeoutException:
+            time.sleep(3)
+            text_fixing_by_expert = self.element_is_visible(self.Locators.TEXT_FIXING_BY_EXPERT).text
         assert text_fixing_by_expert == "Закреплено экспертом"
+
 
     def check_files(self, driver):
         # self.input_in_my_project(driver)
