@@ -1215,8 +1215,7 @@ class CheckAfterUpdating:
     """Локаторы проверки контента в статье после обновления"""
     CHECK_NAME_ARTICLE = (
         By.XPATH, "//div[@class='article-modal__header-wrapper']//span[contains(text(),'Обычная статья')]")
-    VERSION_CHECK = (By.CSS_SELECTOR,
-                     "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
+    VERSION_CHECK = (By.CSS_SELECTOR,  "button[class='m-button-basic-wrapper m-button-basic m-button-date m-button-basic--tertiary m-button-basic--small m-button-basic-wrapper--tertiary m-button-basic-wrapper--small']")
     SVG_VERSION_WINDOW_CLOSE = (By.XPATH, "//div[@class='m-popup__close']")
     NUMBER_VERSION_CHECK = (By.CSS_SELECTOR,
                             "div[class='scroller__content version-select-diff__scroller'] div:nth-child(1) div:nth-child(3) h3:nth-child(1)")
@@ -1231,8 +1230,7 @@ class CheckAfterUpdating:
     VIDEO2_IN_ARTICLE = (By.XPATH,
                          "(//video[@title='Sunset - 86879'])[1]")
     "Локаторы аудио"
-    AUDIO_IN_ARTICLE = (By.XPATH,
-                        "(//audio[@title='perry-como-magic-moments-mp3'])[1]")
+    AUDIO_IN_ARTICLE = (By.XPATH, "(//audio[@title='perry-como-magic-moments-mp3'])[1]")
     "Локаторы таблица и текст стили"
     TABLE_IN_ARTICLE = (By.XPATH, "(//div[@class='os-viewport os-viewport-scrollbar-hidden'])[3]")
     CHECK_TEXT_IN_TABLE = (By.XPATH, "(//p[contains(text(),'Строка')])[1]")
@@ -1249,6 +1247,10 @@ class CheckAfterUpdating:
     "3"
     PARAGRAPH_COLOR_GREEN = (By.XPATH, "(//span[contains(text(),'Абзац 3 текст текст текст текст текст текст текст ')])[1]")
     PARAGRAPH_COLOR_BG_ORANGE = (By.XPATH, "(//span[contains(text(),'текст текст текст текст текст текст текст текст те')])[6]")
+    "Локаторы списки"
+    LIST_NUMB = (By.XPATH, "(//li[contains(text(),'Нумерованный список')])[1]")
+    LIST_MARK = (By.XPATH, "(//li[contains(text(),'Маркированный список')])[1]")
+    "Локаторы стили текста"
     CHECK_P_TEXT = (By.XPATH, "(//p[contains(text(),'Обычный текст')])[1]")
     CHECK_STRONG_TEXT = (By.XPATH, "(//strong[contains(text(),'Жирный')])[1]")
     CHECK_ITALICS_TEXT = (By.XPATH, "(//em[contains(text(),'Курсив')])[1]")
@@ -1257,56 +1259,87 @@ class CheckAfterUpdating:
     CHECK_SUBSCRIPT_TEXT = (By.XPATH, "(//sub[contains(text(),'Подстрочный')])[1]")
     CHECK_CROSSED_OUT_TEXT = (By.XPATH, "(//s[contains(text(),'Перечеркнутый')])[1]")
     "Локаторы выравнивания текста"
+    CHECK_ALIGN_LEFT_TEXT = (By.XPATH,
+                               "(//p[contains(text(),'Выравнивание слева')])[1]")
     CHECK_ALIGN_CENTER_TEXT = (By.XPATH,
                                "(//p[contains(text(),'Выравнивание по центру')])[1]")
-    CHECK_ALIGN_RIGHT_TEXT = (By.XPATH,
-                              "(//p[contains(text(),'Выравнивание справа')])[1]")
-    CHECK_ALIGN_JUSTIFY_TEXT = (By.XPATH,
-                                "(//p[contains(text(),'Выравнивание по ширине текст текст текст текст тек')])[1]")
+    CHECK_ALIGN_RIGHT_TEXT = (By.XPATH, "(//p[contains(text(),'Выравнивание справа')])[1]")
+    CHECK_ALIGN_JUSTIFY_TEXT = (By.XPATH, "(//p[contains(text(),'Выравнивание по ширине текст текст текст текст тек')])[1]")
     "Локаторы цвета текста"
-    CHECK_COLOR_TEXT = (By.XPATH,
-                        "(//span[contains(text(),'Цвет шрифта')])[1]")
-    CHECK_HIGHLIGHT_COLOR_TEXT = (By.XPATH,
-                                  "(//span[contains(text(),'Выделение текста')])[1]")
+    CHECK_COLOR_TEXT = (By.XPATH, "(//span[contains(text(),'Цвет шрифта')])[1]")
+    CHECK_HIGHLIGHT_COLOR_TEXT = (By.XPATH, "(//span[contains(text(),'Выделение текста')])[1]")
     "Важное"
-    CHECK_IMPORTANT_BLOCK_RED = (By.XPATH,
-                                 "(//div[@class='m-important-info'])[1]")
+    CHECK_IMPORTANT_BLOCK_RED = (By.XPATH, "(//div[@class='m-important-info'])[1]")
     "Спойлер"
-    CHECK_SPOILER = (By.XPATH,
-                     "(//div[@class='m-spoiler__header'][contains(text(),'Спойлер')])[1]")
-    CHECK_SPOILER_SHOW = (By.XPATH,
-                          "(//div[@class='m-spoiler m-spoiler--show'])[1]")
-    LINK_HREF = (By.XPATH,
-                          "(//a[contains(text(),'Задача')])[1]")
-    LINK_HREF_ZRJHM = (By.XPATH,
-                 "(//a[@href='#zrjhm'][normalize-space()='#zrjhm'])[1]")
-    LINK_HREF_PHONE = (By.XPATH,
-                       "(//a[contains(text(),'tel:89367776777')])[1]")
-    LINK_HREF_MAIL = (By.XPATH,
-                       "(//a[contains(text(),'admin@minervakms.ru')])[1]")
+    CHECK_SPOILER = (By.XPATH, "(//div[@class='m-spoiler__header'][contains(text(),'Спойлер')])[1]")
+    CHECK_SPOILER_SHOW = (By.XPATH, "(//div[@class='m-spoiler m-spoiler--show'])[1]")
+    LINK_HREF = (By.XPATH, "(//a[contains(text(),'Задача')])[1]")
+    LINK_HREF_ZRJHM = (By.XPATH, "(//a[@href='#zrjhm'][normalize-space()='#zrjhm'])[1]")
+    LINK_HREF_PHONE = (By.XPATH, "(//a[contains(text(),'tel:89367776777')])[1]")
+    LINK_HREF_MAIL = (By.XPATH, "(//a[contains(text(),'admin@minervakms.ru')])[1]")
     "Локаторы проверка статьи по шаблону"
-    IMG1_IN_TEMPLATE = (By.XPATH,
-                      "(//img[@alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
-    VIDEO_IN_TEMPLATE = (By.XPATH,
-                        "(//video[@title='Sunset - 86879'])[1]")
-    TEXT_TEMPLATE = (By.XPATH,
-                     "(//span[contains(text(),'Шаблонная статья')])[1]")
-    LINK1 = (By.XPATH,
-             "//p[contains(text(),'1 Ссылка')]")
-    TASK = (By.XPATH,
-             "//li[@title='Задача']")
-    TASK_INTO = (By.XPATH,
-            "//img[@alt='text']")
-    HEADING = (By.XPATH,
-             "//p[contains(text(),'Оглавление')]")
-    HEADING1 = (By.XPATH,
-               "//span[text()='Заголовок 1']")
-    HEADING2 = (By.XPATH,
-                "//span[text()='Заголовок 2']")
-    HEADING3 = (By.XPATH,
-                "//span[text()='Заголовок 3']")
-    LINK3 = (By.XPATH,
-                     "//p[contains(text(),'3 Ссылки')]")
+    IMG1_IN_TEMPLATE = (By.XPATH, "(//img[@alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
+    VIDEO_IN_TEMPLATE = (By.XPATH, "(//video[@title='Sunset - 86879'])[1]")
+    TEXT_TEMPLATE = (By.XPATH, "(//span[contains(text(),'Шаблонная статья')])[1]")
+    LINK1 = (By.XPATH, "//p[contains(text(),'1 Ссылка')]")
+    TASK = (By.XPATH, "//li[@title='Задача']")
+    TASK_INTO = (By.XPATH, "//img[@alt='text']")
+    HEADING = (By.XPATH, "//p[contains(text(),'Оглавление')]")
+    HEADING1 = (By.XPATH, "//span[text()='Заголовок 1']")
+    HEADING2 = (By.XPATH, "//span[text()='Заголовок 2']")
+    HEADING3 = (By.XPATH, "//span[text()='Заголовок 3']")
+    LINK3 = (By.XPATH, "//p[contains(text(),'3 Ссылки')]")
+    TEXT_CONTENT_GOOGLE = (By.XPATH, "//p[contains(text(),'3 Ссылки')]")
+    GOOGLE_LINC_ICO = (By.XPATH, "//img[@src='http://google.com/favicon.ico']")
+    "Локаторы и контент во вкладках"
+    TABS_1 = (By.XPATH, "//p[contains(text(),'Первая')]")
+    TABS_2 = (By.XPATH, "//p[contains(text(),'Вторая')]")
+    TABS_3 = (By.XPATH, "//p[contains(text(),'Третья')]")
+    TABS_4 = (By.XPATH, "//p[contains(text(),'Четвертая')]")
+    "таб 1"
+    TABS_1_IMG = (By.XPATH, "(//img[@alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
+    TABS_1_LI_TEXT = (By.XPATH, "(//li[contains(text(),'В европейских странах вопрос о здоровом питании бы')])[1]")
+    TABS_1_TEXT = (By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'][contains(text(),'!!!')])[1]")
+    TABS_1_ONLY_NUMBERS = (By.XPATH, "(//pre[@class='m-article-editor-templated__field-value'][normalize-space()='777'])[1]")
+    TABS_1_CONTENTS_LINK = (By.XPATH, "(//a[contains(text(),'https://pantheonteam.atlassian.net/browse/QA-1619')])[1]")
+    TABS_1_COLOR = (By.XPATH, "(//span[contains(text(),'«Знойный полдень»')])[1]")
+    TABS_1_SMILES = (By.XPATH, "(//h2[@class='wysiwyg__title-2'][contains(text(),'😁🤨')])[1]")
+    "таб 2"
+    TABS_2_LINK = (By.XPATH, "(//a[@class='m-article-editor-templated__field-value m-article-editor-templated__field-value--link'])[1]")
+    TABS_2_TABLE_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//div[@class='os-viewport os-viewport-scrollbar-hidden'])[2]")
+    TABS_2_AUDIO_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//audio[@title='perry-como-magic-moments-mp3'])[1]")
+    "таб 3"
+    TABS_3_VIDEO_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//div[@class='form-input-wrapper__field'])[8]")
+    TABS_3_FILE_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//a[@class='m-document'][normalize-space()='gamenet.exe'])[1]")
+    "таб 4"
+    TABS_4_HREF_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//a[contains(text(),'Был ли полезен этот контент вам?')])[1]")
+    TABS_4_LI_IN_ARTICLE_TEMPLATE = (By.XPATH, "(//li[contains(text(),'Был ли полезен этот контент вам?')])[1]")
+    "Локаторы для скрипта"
+    CHECK_NAME_IN_ARTICLE_SCRIPT = (By.XPATH, "//span[contains(text(),'Запрос на выпуск кредитной карты (БОТ)')]")
+    CHECK_TEXT_SCRIPT_PAST1 = (By.XPATH, "//p[contains(text(),'Есть ли у вас постоянное место работы ?')]")
+    BUTTON_PART1 = (By.XPATH, "//p[text()='Да']")
+    BUTTON_PART2 = (By.XPATH, "//p[text()='нет']")
+    BUTTON_PART3 = (By.XPATH, "//div[@class='article-scenario-questionary__questionary']//button[1]")
+    BUTTON_PART4 = (By.XPATH, "//div[@class='article-scenario-questionary__questionary']//button[1]")
+    CHECK_TEXT_SCRIPT_PAST2 = (By.XPATH, "//p[contains(text(),'Меняли ли вы место работы за последние 6 месяцев?')]")
+    CHECK_TEXT_SCRIPT_PAST3 = (By.XPATH, "//p[contains(text(),'Можете ли вы предоставить банку справку о доходах?')]")
+    CHECK_TEXT_SCRIPT_PAST4 = (By.XPATH, "//p[contains(text(),'Есть ли у вас кредиты в других банках?')]")
+    CHECK_TEXT_ANSWER_END = (By.XPATH, "//div[@class='article-scenario-questionary__answer article-scenario-questionary__answer--end']")
+    CHECK_TEXT_ANSWER_RESTART = (By.XPATH, "//p[contains(text(),'Начать заново')]")
+    PUBLISH_BUTTON = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium']")
+    NUMBER_VERSION_CHECK_SCRIPT = (By.XPATH, "//h3[contains(text(),'Версия 6.0')]")
+    CLOSE_SVG_WINDOW_VERSION_SCRIPT = (By.XPATH, "//div[@role='presentation']")
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Test:
