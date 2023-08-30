@@ -418,7 +418,7 @@ class AddFilterChanges(Authorisation, BasePage):
             time.sleep(2)
             "Если появляется сообщение о черновике"
             try:
-                self.element_is_visible(self.Locators.ALERT_FOR_DRAFT, timeout=3).is_displayed()
+                # self.element_is_visible(self.Locators.ALERT_FOR_DRAFT, timeout=3).is_displayed()
                 self.delete_draft()
                 time.sleep(3)
                 self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)

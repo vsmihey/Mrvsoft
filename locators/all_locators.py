@@ -564,6 +564,7 @@ class FilesFormatPageLocators:
     DELETE_DRAFT = (By.XPATH, "//p[contains(text(),'Удалить черновик')]")
     TEXT_FILE_DOWNLOADS = (By.XPATH, "//h2[contains(text(),'Файл загружается')]")
     INPUT_NAME_FILE = (By.CSS_SELECTOR, "input[placeholder='Введите название']")
+    ALERT_FOR_DRAFT = (By.XPATH, "//h3[text()='Оповещение']")
 
 
 class UnformatFilePageLocators:

@@ -139,9 +139,11 @@ class MainPage:
                 # action.perform()
 
     def delete_draft(self):
-        """Нажимает 'Удалить черновик', если всплывает оповещение о наличии черновика"""
+        """Нажимает 'Удалить черновик', если всплывает оповещение о наличии черновика
+        обернуть в try except (ElementClickInterceptedException, TimeoutException) """
         locators = FilesFormatPageLocators
-        self.element_is_visible(locators.DELETE_DRAFT).click()
+        self.element_is_visible(locators.ALERT_FOR_DRAFT).is_displayed()
+        self.click_to_element(locators.DELETE_DRAFT)
 
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
