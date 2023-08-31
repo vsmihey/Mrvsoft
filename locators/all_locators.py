@@ -1178,6 +1178,7 @@ class MenuNavigation:
     """Навигация по левому меню"""
     HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
     CONTENT = (By.XPATH, "//a[@data-tip='Контент']")  # content of page
+    REPORTS = (By.XPATH, "//a[@data-tip='Отчеты']")  # content of page
 
 
 class OpenArticle:
@@ -1331,18 +1332,6 @@ class CheckAfterUpdating:
     NUMBER_VERSION_CHECK_SCRIPT = (By.XPATH, "//h3[contains(text(),'Версия 6.0')]")
     CLOSE_SVG_WINDOW_VERSION_SCRIPT = (By.XPATH, "//div[@role='presentation']")
 
-
-
-
-
-
-
-
-
-
-
-
-
 class Test:
     """Локаторы для работы с тестами"""
     CREATING_TEST_BUTTON = (By.XPATH, "(//div[@class='m-lms-action-tooltip'])[5]")
@@ -1409,4 +1398,7 @@ class Course:
 
     SELECT_SCORM_MATERIAL = (By.XPATH, " //p[contains(text(),'Введите название материала')]")
 
+
+class Reports:
+    REPORTS_BY_CONTENT_LIST = (By.CSS_SELECTOR, "div[class='folder-list-item folder-list-item--no-children']")
 

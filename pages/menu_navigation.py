@@ -20,3 +20,7 @@ class MenuNavigation(MainPage):
     def content_button_click(self):
         """Переход в Контент"""
         self.click_to_element(locators.MenuNavigation.CONTENT)
+
+    def reports_click(self):
+        """Переход в Отчеты"""
+        self.click_to_element(locators.MenuNavigation.REPORTS)
