@@ -132,10 +132,8 @@ class AddViewContentWizard(Authorisation, BasePage):
             self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY, timeout=3)
         except TimeoutException:
             # self.click_to_element(self.Locators.BUTTON_CONTINUE_DRAFT)
-            try:
-                self.delete_draft()
-            except (ElementClickInterceptedException, TimeoutException):
-                self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+            self.delete_draft()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         self.click_to_element(self.Locators.BUTTON_BACK)
         self.click_to_element(self.Locators.BUTTON_BACK)
         time.sleep(1)
@@ -239,10 +237,8 @@ class AddViewContentWizard(Authorisation, BasePage):
         try:
             self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY, timeout=3)
         except TimeoutException:
-            try:
-                self.delete_draft()
-            except (ElementClickInterceptedException, TimeoutException):
-                self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+            self.delete_draft()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         self.click_to_element(self.Locators.BUTTON_BACK)
         list_added_request = self.elements_are_present(self.Locators.LIST_ADDED_REQUEST)
         data_added_requests = []
@@ -339,10 +335,8 @@ class AddViewContentWizard(Authorisation, BasePage):
         try:
             self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT, timeout=3)
         except TimeoutException:
-            try:
-                self.delete_draft()
-            except (ElementClickInterceptedException, TimeoutException):
-                self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
+            self.delete_draft()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
         self.click_to_element(self.Locators.BUTTON_BACK)
         self.click_to_element(self.Locators.BUTTON_BACK)
         list_added_request = self.elements_are_present(self.Locators.LIST_ADDED_REQUEST)
@@ -436,10 +430,8 @@ class AddViewContentWizard(Authorisation, BasePage):
         try:
             self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT, timeout=2)
         except TimeoutException:
-            try:
-                self.delete_draft()
-            except (ElementClickInterceptedException, TimeoutException):
-                self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
+            self.delete_draft()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
         self.click_to_element(self.Locators.BUTTON_BACK)
         self.click_to_element(self.Locators.BUTTON_BACK)
         data_request = self.add_more_requests()
@@ -462,10 +454,8 @@ class AddViewContentWizard(Authorisation, BasePage):
         try:
             self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT, timeout=3)
         except TimeoutException:
-            try:
-                self.delete_draft()
-            except (ElementClickInterceptedException, TimeoutException):
-                self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
+            self.delete_draft()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY_SCRIPT)
         self.click_to_element(self.Locators.BUTTON_BACK)
         self.click_to_element(self.Locators.BUTTON_BACK)
         list_added_request = self.elements_are_present(self.Locators.LIST_ADDED_REQUEST)

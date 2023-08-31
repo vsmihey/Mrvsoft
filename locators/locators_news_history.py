@@ -73,7 +73,8 @@ class LocatorsCheckNewsHistory:
     TEXT_CHECK_CANT_COMMENT = (By.XPATH, "//span[text()='Комментирование в этом контенте запрещено']")
     SVG_CLOSE_ARTICLE_ALERT = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg")
     GO_TO_CONTENT = (By.XPATH, "//section[@class='m-bread-crumbs']/..//p[@class='m-ui-typography m-bread-crumbs__link__title-text']")
-    AVATAR_MENU = (By.CSS_SELECTOR, "article[class='m-ui-avatar-default m-ui-avatar-default--small m-ui-avatar-default--pic']")
+    # AVATAR_MENU = (By.CSS_SELECTOR, "article[class='m-ui-avatar-default m-ui-avatar-default--small m-ui-avatar-default--pic']")
+    AVATAR_MENU = (By.CSS_SELECTOR, ".m-button-main-menu.m-button-main-menu--no-action-type.m-button-main-menu--collapsed.m-dashboard-top-right-side__user-profile")
     EXIT_PERSON = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium user-profile__footer__last_button'] p[class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text']")
 
 

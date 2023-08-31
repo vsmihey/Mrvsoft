@@ -417,16 +417,14 @@ class AddFilterChanges(Authorisation, BasePage):
         except (ElementClickInterceptedException, TimeoutException):
             time.sleep(2)
             "Если появляется сообщение о черновике"
-            try:
-                # self.element_is_visible(self.Locators.ALERT_FOR_DRAFT, timeout=3).is_displayed()
-                self.delete_draft()
-                time.sleep(3)
-                self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+            # self.element_is_visible(self.Locators.ALERT_FOR_DRAFT, timeout=3).is_displayed()
+            self.delete_draft()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
             # except TimeoutException:
             #     self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
             # self.click_to_element(self.Locators.CHANGE_ARTICLE)
-            except (ElementClickInterceptedException, TimeoutException):
-                self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+            # except (ElementClickInterceptedException, TimeoutException):
+            #     self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
         time.sleep(1)
         self.click_to_element(self.Locators.BUTTON_ARTICLE_BACK)
