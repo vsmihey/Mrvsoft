@@ -139,9 +139,15 @@ class MainPage:
                 # action.perform()
 
     def delete_draft(self):
-        """Нажимает 'Удалить черновик', если всплывает оповещение о наличии черновика"""
+        """Нажимает 'Удалить черновик', если всплывает
+        оповещение о наличии черновика """
         locators = FilesFormatPageLocators
-        self.element_is_visible(locators.DELETE_DRAFT).click()
+        try:
+            self.element_is_visible(locators.ALERT_FOR_DRAFT).is_displayed()
+            self.click_to_element(locators.DELETE_DRAFT)
+        except (ElementClickInterceptedException, TimeoutException):
+            time.sleep(3)
+
 
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
@@ -160,4 +166,20 @@ class MainPage:
         code = response.status_code
         assert code == 200
         return code
+
+    def try_except(self, your_action, retries=3):
+        """Функция try except, в your_action передать любое действие
+        если ошибка функция еще раз предпримет попытку"""
+        for attempt in range(retries):
+            try:
+                return your_action
+            except Exception as e:
+                if attempt < retries - 1:
+                    print(f"Ошибка: {e}. Повторная попытка #{attempt + 1}")
+                    continue
+                else:
+                    print(f"Ошибка: {e}. Количество попыток исчерпано")
+                    raise e
+
+
 
