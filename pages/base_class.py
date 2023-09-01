@@ -167,19 +167,10 @@ class MainPage:
         assert code == 200
         return code
 
-    def try_except(self, your_action, retries=3):
-        """Функция try except, в your_action передать любое действие
-        если ошибка функция еще раз предпримет попытку"""
-        for attempt in range(retries):
-            try:
-                return your_action
-            except Exception as e:
-                if attempt < retries - 1:
-                    print(f"Ошибка: {e}. Повторная попытка #{attempt + 1}")
-                    continue
-                else:
-                    print(f"Ошибка: {e}. Количество попыток исчерпано")
-                    raise e
+    def expand_shadow_element(self, element):
+        """Взаимодействие с элементом на странице с теневым DOM"""
+        shadow_root = self.browser.execute_script('return arguments[0].shadowRoot', element)
+        return shadow_root
 
 
 
