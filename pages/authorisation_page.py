@@ -4,7 +4,7 @@ from selenium.common import TimeoutException, StaleElementReferenceException
 from pages import data_login_password
 import locators.all_locators as locators
 from pages.base_class import MainPage
-from pages.users import minervakms
+from pages.users import ricksanchez
 
 
 class Authorisation(MainPage):
@@ -42,7 +42,7 @@ class Authorisation(MainPage):
         """Проверка, что открыта страница авторизации"""
         return self.element_is_visible(locators.AuthorisationPage.INPUT_IN_SYSTEM_TEXT).text
 
-    def get_authorisation_no_project_selection(self, user=minervakms):
+    def get_authorisation_no_project_selection(self, user=ricksanchez):
         """Метод для прохождения авторизации без выбора проекта"""
         self.browser.delete_all_cookies()
         self.open()
@@ -51,7 +51,7 @@ class Authorisation(MainPage):
         self.input_password(user.password)
         self.confirm_button()
 
-    def get_authorisation_in_superbank(self, user=minervakms):
+    def get_authorisation_in_superbank(self, user=ricksanchez):
         """Метод для прохождения авторизации в проект СуперБанка"""
         self.browser.delete_all_cookies()
         self.open()
@@ -61,7 +61,7 @@ class Authorisation(MainPage):
         self.confirm_button()
         self.select_project_superbank()
 
-    def get_authorisation_in_selen(self, user=minervakms):
+    def get_authorisation_in_selen(self, user=ricksanchez):
         """Метод для прохождения авторизации в проект Selen"""
         self.browser.delete_all_cookies()
         self.open()
@@ -71,7 +71,7 @@ class Authorisation(MainPage):
         self.confirm_button()
         self.select_project_selen()
 
-    def get_authorisation_in_testing(self, user=minervakms):
+    def get_authorisation_in_testing(self, user=ricksanchez):
         """Метод для прохождения авторизации в проект Selen"""
         self.browser.delete_all_cookies()
         self.open()
@@ -81,7 +81,7 @@ class Authorisation(MainPage):
         self.confirm_button()
         self.select_project_testing()
 
-    def get_authorisation_in_url(self, url, user=minervakms):
+    def get_authorisation_in_url(self, url, user=ricksanchez):
         """Метод для прохождения авторизации и перехода по переданной ссылке"""
         self.browser.delete_all_cookies()
         self.open(url=url)

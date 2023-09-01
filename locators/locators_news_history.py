@@ -17,7 +17,8 @@ class LocatorsCheckNewsHistory:
     SEND_COMMENT = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium discuss-form__button-send']")
     SVG_CLOSE_ARTICLE = (By.XPATH, "//body/div[@class='article-modal__portal']/div[@class='ReactModal__Overlay ReactModal__Overlay--after-open article-modal__overlay']/div[@role='dialog']/article[@class='article-modal']/div[@class='article-modal__main']/div[@class='article-modal__breadcrumbs-wrapper']/div[2]//*[local-name()='svg']")
     """del article"""
-    HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    # HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    HISTORY_BUTTON = (By.XPATH, "//a[@data-tip='История']")
     ADDED_COMMENT = (By.XPATH, "(//div[@data-title='Добавлен комментарий'])[1]")
     OPEN_ARTICLE_FOR_DEL = (By.CSS_SELECTOR, ".link-iconed__label-text")
     MEATBALL_MENU = (By.CSS_SELECTOR, ".popuper__wrapper")
@@ -44,7 +45,8 @@ class LocatorsCheckNewsHistory:
     INPUT_REPEAT_PASSWORD = (By.CSS_SELECTOR, "#repPass")
     TEST_PROJECT = (By.XPATH, "//div[@class='m-ui-typography m-ui-typography--bold m-ui-typography--16x20 m-space-list-item__title'][normalize-space()='selen']")  # name project
     SVG_POPUP_CLOSE_CREATED_PERSON = (By.XPATH, "//div[@class='popup__close']")
-    PERSONS_AND_ROLES = (By.XPATH, "//span[text()='Участники']")
+    # PERSONS_AND_ROLES = (By.XPATH, "//span[text()='Участники']")
+    PERSONS_AND_ROLES = (By.XPATH, "//a[@data-tip='Участники']")
     BUTTON_HISTORY = (By.XPATH, "//a[@data-tip='История']")
     SVG_CLOSE_WINDOW_CREATED_PERSON = (By.CSS_SELECTOR, "div[role='presentation']")
     """check del article person1"""
@@ -71,7 +73,8 @@ class LocatorsCheckNewsHistory:
     TEXT_CHECK_CANT_COMMENT = (By.XPATH, "//span[text()='Комментирование в этом контенте запрещено']")
     SVG_CLOSE_ARTICLE_ALERT = (By.CSS_SELECTOR, "div[class='article-editor__controls'] svg")
     GO_TO_CONTENT = (By.XPATH, "//section[@class='m-bread-crumbs']/..//p[@class='m-ui-typography m-bread-crumbs__link__title-text']")
-    AVATAR_MENU = (By.CSS_SELECTOR, "article[class='m-ui-avatar-default m-ui-avatar-default--small m-ui-avatar-default--pic']")
+    # AVATAR_MENU = (By.CSS_SELECTOR, "article[class='m-ui-avatar-default m-ui-avatar-default--small m-ui-avatar-default--pic']")
+    AVATAR_MENU = (By.CSS_SELECTOR, ".m-button-main-menu.m-button-main-menu--no-action-type.m-button-main-menu--collapsed.m-dashboard-top-right-side__user-profile")
     EXIT_PERSON = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium user-profile__footer__last_button'] p[class='m-ui-typography m-ui-typography--bold m-ui-typography--16x16 m-button__text']")
 
 

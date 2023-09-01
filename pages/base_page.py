@@ -239,7 +239,7 @@ class BasePage:
         time.sleep(1)
         try:
             self.element_is_visible(Locators.CREATE_BUTTON, timeout=5).click()
-        except (StaleElementReferenceException, TimeoutException):
+        except (NoSuchElementException, StaleElementReferenceException, TimeoutException):
             time.sleep(3)
             self.element_is_visible(Locators.CREATE_BUTTON).click()
         self.element_is_visible(Locators.CREATE_ARTICLE).click()

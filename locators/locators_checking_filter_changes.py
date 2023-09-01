@@ -82,6 +82,7 @@ class AddFilterChangesLocators:
     CHANGE_ARTICLE = (By.XPATH, "//div[text()='изменить']")
     BUTTON_TYPOGRAPHY_ARTICLE = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--small']")
     BUTTON_ARTICLE_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
+    ALERT_FOR_DRAFT = (By.XPATH, "//h3[text()='Оповещение']")
     TEXT_REQUEST_ARTICLE = (By.CSS_SELECTOR, "div[class='both-sides-alignment-card-line__left-side both-sides-alignment-card-line__left-side--bottom-text both-sides-alignment-card-line--black-label-text'] span[class='both-sides-alignment-card-line__text']")
     TEXT_REQUEST_SCRIPT = (By.XPATH, "(//span[@class='both-sides-alignment-card-line__text'])[2]")
     SVG_DELETE_FILTER_ADDED = (By.CSS_SELECTOR, ".both-sides-alignment-card-line__action.search-wrapper__tag-btn--delete.icon-button")

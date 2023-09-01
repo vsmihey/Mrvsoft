@@ -36,7 +36,8 @@ class AddViewContentWizardLocators:
     SVG_CLOSE_WINDOWS_CHECK = (By.XPATH, "(//div[@class='m-popup__close'])[2]")
     # SVG_CLOSE_WINDOWS_CHECK = (By.CSS_SELECTOR, "div[data-testid='testModalClose']")
     """create more requests"""
-    HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    # HISTORY_BUTTON = (By.XPATH, "//span[text()='История']")
+    HISTORY_BUTTON = (By.XPATH, "//a[@data-tip='История']")
     CHANGE_ARTICLE = (By.XPATH, "//div[contains(text(),'изменить')]")
     BUTTON_BACK = (By.CSS_SELECTOR, "button[class='m-button m-button--default m-button--medium wizard-wrapper__action']")
     TO_GET_NAME_ADDED_REQUEST = (By.CSS_SELECTOR, ".m-content-fix-wizard__content-wrapper")

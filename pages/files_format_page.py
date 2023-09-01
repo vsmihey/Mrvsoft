@@ -23,12 +23,12 @@ class FilesFormatPage(Authorisation, BasePage):
         text_area_alert = person.first_name + "-Alert"
         time.sleep(2)
         try:
-            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+            self.click_to_element(self.Locators.CREATE_BUTTON)
         except StaleElementReferenceException:
             # self.screenshot()
             time.sleep(5)
-            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
-        self.element_is_visible(self.Locators.BUTTON_FILE).click()
+            self.click_to_element(self.Locators.CREATE_BUTTON)
+        self.click_to_element(self.Locators.BUTTON_FILE)
         time.sleep(1)
         self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         """del hidden class input file"""
@@ -46,16 +46,16 @@ class FilesFormatPage(Authorisation, BasePage):
         """typography"""
         time.sleep(2)
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         except (ElementClickInterceptedException, TimeoutException):
             # self.screenshot()
             time.sleep(5)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT).send_keys(text_area_alert)
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
-        self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
+        self.click_to_element(self.Locators.BUTTON_FINISH)
+        self.click_to_element(self.Locators.SVG_CLOSE_ARTICLE)
 
     def add_files_pict(self, driver):
         driver.implicitly_wait(5)
@@ -81,7 +81,7 @@ class FilesFormatPage(Authorisation, BasePage):
             except StaleElementReferenceException:
                 time.sleep(5)
                 self.click_to_element(self.Locators.CREATE_BUTTON)
-            self.element_is_visible(self.Locators.BUTTON_FILE).click()
+            self.click_to_element(self.Locators.BUTTON_FILE)
             try:
                 self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
             except ElementNotInteractableException:
@@ -98,11 +98,11 @@ class FilesFormatPage(Authorisation, BasePage):
             check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
             check_file_pictures.is_displayed()
             """typography"""
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-            self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-            self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+            self.click_to_element(self.Locators.BUTTON_CONTINUE)
+            self.click_to_element(self.Locators.BUTTON_CONTINUE)
             self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT).send_keys(text_area_alert)
-            self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+            self.click_to_element(self.Locators.BUTTON_FINISH)
             """check file picture"""
             try:
                 check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
@@ -110,7 +110,7 @@ class FilesFormatPage(Authorisation, BasePage):
                 time.sleep(3)
                 check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
             check_file_pictures.is_displayed()
-            self.element_is_visible(self.Locators.SVG_CLOSE_ARTICLE).click()
+            self.click_to_element(self.Locators.SVG_CLOSE_ARTICLE)
 
     def check_audio_files(self, driver):
         # self.input_in_my_project(driver)
@@ -168,9 +168,9 @@ class FilesFormatPage(Authorisation, BasePage):
         return path5
 
     def check_replacement_files_text(self, driver):
-        self.element_is_visible(self.Locators.CHANGE_FILE).click()
+        self.click_to_element(self.Locators.CHANGE_FILE)
         try:
-            self.elements_is_present(self.Locators.DELETE_DRAFT, timeout=2).click()
+            self.click_to_element(self.Locators.DELETE_DRAFT, timeout=2)
         except TimeoutException:
             print("черновик не сохранен")
         try:
@@ -211,19 +211,19 @@ class FilesFormatPage(Authorisation, BasePage):
         """edit created avi file"""
         # здесь нужно найти ранее созданный файл
         time.sleep(1)
-        self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
+        self.click_to_element(self.Locators.SORT_BY_POPULAR)
         time.sleep(1)
         # element = self.elements_is_present(self.Locators.AVI_FILE_CREATED)
         try:
-            self.elements_is_present(self.Locators.AVI_FILE_CREATED, timeout=3).click()
+            self.click_to_element(self.Locators.AVI_FILE_CREATED, timeout=3)
         except TimeoutException:
             time.sleep(1)
             # создаем файл avi если не доступен
             self.create_video_file()
-            self.elements_is_present(self.Locators.AVI_FILE_CREATED).click()
+            self.click_to_element(self.Locators.AVI_FILE_CREATED)
         time.sleep(1)
         # self.action_move_to_element(element, driver)
-        # self.elements_is_present(self.Locators.AVI_FILE_CREATED).click()
+        # self.click_to_element(self.Locators.AVI_FILE_CREATED)
         time.sleep(1)
         self.check_replacement_files_text(driver)
         """change files """
@@ -232,7 +232,7 @@ class FilesFormatPage(Authorisation, BasePage):
         check_text_incorrect_format_replacement = self.element_is_visible(
             self.Locators.CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT).text
         assert check_text_incorrect_format_replacement == "Неверный формат файла для замены"
-        self.element_is_visible(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE).click()
+        self.click_to_element(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE)
 
     def file_check_replacement_audio(self, driver):
         # self.input_in_my_project(driver)
@@ -244,15 +244,15 @@ class FilesFormatPage(Authorisation, BasePage):
         # path6 = str(Path(pathlib.Path.cwd(), "files", "mp4.mp4"))
         """edit avi file"""
         # здесь нужно найти ранее созданный файл
-        self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
+        self.click_to_element(self.Locators.SORT_BY_POPULAR)
         try:
-            self.elements_is_present(self.Locators.MP3_FILE_CREATED, timeout=3).click()
+            self.click_to_element(self.Locators.MP3_FILE_CREATED, timeout=3)
         except (TimeoutException, ElementNotInteractableException):
             time.sleep(1)
             # создаем файл mp3 если не доступен
             self.create_mp3_file()
             time.sleep(1)
-            self.elements_is_present(self.Locators.MP3_FILE_CREATED).click()
+            self.click_to_element(self.Locators.MP3_FILE_CREATED)
         # self.action_move_to_element(element, driver)
         time.sleep(1)
         self.check_replacement_files_text(driver)
@@ -263,7 +263,7 @@ class FilesFormatPage(Authorisation, BasePage):
         check_text_incorrect_format_replacement = self.element_is_visible(
             self.Locators.CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT).text
         assert check_text_incorrect_format_replacement == "Неверный формат файла для замены"
-        self.element_is_visible(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE).click()
+        self.click_to_element(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE)
 
     def file_check_replacement_pic(self, driver):
         path1 = str(Path(pathlib.Path.cwd(), "files", "png_g.png"))
@@ -276,14 +276,14 @@ class FilesFormatPage(Authorisation, BasePage):
         """edit pic file"""
         # здесь нужно найти ранее созданный файл
         time.sleep(1)
-        self.elements_is_present(self.Locators.SORT_BY_POPULAR).click()
+        self.click_to_element(self.Locators.SORT_BY_POPULAR)
         try:
             # element = self.elements_is_present(self.Locators.JPEG_FILE_CREATED)
-            self.elements_is_present(self.Locators.JPEG_FILE_CREATED, timeout=3).click()
+            self.click_to_element(self.Locators.JPEG_FILE_CREATED, timeout=3)
         except TimeoutException:
             time.sleep(1)
             self.create_pic_file()
-            self.elements_is_present(self.Locators.JPEG_FILE_CREATED).click()
+            self.click_to_element(self.Locators.JPEG_FILE_CREATED)
         # self.action_move_to_element(element, driver)
         self.check_replacement_files_text(driver)
         """replacement check"""
@@ -297,7 +297,7 @@ class FilesFormatPage(Authorisation, BasePage):
             check_text_incorrect_format_replacement = self.element_is_visible(
                 self.Locators.CHECK_TEXT_INCORRECT_FORMAT_REPLACEMENT).text
         assert check_text_incorrect_format_replacement == "Неверный формат файла для замены"
-        self.element_is_visible(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE).click()
+        self.click_to_element(self.Locators.SVG_TEXT_INCORRECT_FORMAT_CLOSE)
 
 
 class UnformatFilePage(Authorisation, BasePage):
@@ -309,11 +309,11 @@ class UnformatFilePage(Authorisation, BasePage):
         text_area_alert = person.first_name + "-Alert"
         time.sleep(1)
         try:
-            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
+            self.click_to_element(self.Locators.CREATE_BUTTON)
         except (TimeoutException, StaleElementReferenceException):
             time.sleep(5)
-            self.element_is_visible(self.Locators.CREATE_BUTTON).click()
-        self.element_is_visible(self.Locators.BUTTON_FILE).click()
+            self.click_to_element(self.Locators.CREATE_BUTTON)
+        self.click_to_element(self.Locators.BUTTON_FILE)
         """direct folder save"""
         time.sleep(1)
         try:
@@ -352,17 +352,17 @@ class UnformatFilePage(Authorisation, BasePage):
         """download file"""
         """typography"""
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         except TimeoutException:
             time.sleep(5)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         except ElementClickInterceptedException:
             time.sleep(5)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT_ALERT).send_keys(text_area_alert)
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.click_to_element(self.Locators.BUTTON_FINISH)
         try:
             text_check_after_typography = self.element_is_visible(self.Locators.TEXT_CHECK_AFTER_TYPOGRAPHY).text
         except TimeoutException:
@@ -372,7 +372,7 @@ class UnformatFilePage(Authorisation, BasePage):
         button_download_check_after_typography = self.element_is_visible(self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
         assert button_download_check_after_typography == "Скачать файл"
         """close"""
-        self.element_is_visible(self.Locators.SVG_CLOSE_DOWNLOADED_FILE).click()
+        self.click_to_element(self.Locators.SVG_CLOSE_DOWNLOADED_FILE)
 
     def add_unformat_file_rar_zip(self, driver):
         # self.input_in_my_project(driver)
@@ -396,8 +396,8 @@ class UnformatFilePage(Authorisation, BasePage):
         person = generated_person()
         text_area_alert = person.first_name + "-Alert"
         time.sleep(1)
-        self.element_is_visible(self.Locators.CREATE_BUTTON).click()
-        self.element_is_visible(self.Locators.BUTTON_FILE).click()
+        self.click_to_element(self.Locators.CREATE_BUTTON)
+        self.click_to_element(self.Locators.BUTTON_FILE)
         time.sleep(1)
         try:
             self.remove_class_script()
@@ -422,17 +422,17 @@ class UnformatFilePage(Authorisation, BasePage):
         """download file"""
         """typography"""
         try:
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         except TimeoutException:
             time.sleep(5)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         except ElementClickInterceptedException:
             time.sleep(5)
-            self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+            self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT_ALERT).send_keys(text_area_alert)
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.click_to_element(self.Locators.BUTTON_FINISH)
         try:
             text_check_after_typography = self.element_is_visible(self.Locators.TEXT_CHECK_AFTER_TYPOGRAPHY).text
         except TimeoutException:
@@ -443,7 +443,7 @@ class UnformatFilePage(Authorisation, BasePage):
             self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
         assert button_download_check_after_typography == "Скачать файл"
         """close"""
-        self.element_is_visible(self.Locators.SVG_CLOSE_DOWNLOADED_FILE).click()
+        self.click_to_element(self.Locators.SVG_CLOSE_DOWNLOADED_FILE)
 
     def add_unformat_file_other(self):
         path1 = str(Path(pathlib.Path.cwd(), "files", "pe.pdf"))
@@ -455,8 +455,8 @@ class UnformatFilePage(Authorisation, BasePage):
         path = data_unsupported
         person = generated_person()
         text_area_alert = person.first_name + "-Alert"
-        self.element_is_visible(self.Locators.CREATE_BUTTON).click()
-        self.element_is_visible(self.Locators.BUTTON_FILE).click()
+        self.click_to_element(self.Locators.CREATE_BUTTON)
+        self.click_to_element(self.Locators.BUTTON_FILE)
         """direct folder save"""
         # self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
         try:
@@ -472,11 +472,11 @@ class UnformatFilePage(Authorisation, BasePage):
             self.Locators.BUTTON_DOWNLOAD_CHECK_AFTER_TYPOGRAPHY).text
         assert button_download_check_after_typography == "Скачать файл"
         """typography"""
-        self.element_is_visible(self.Locators.BUTTON_TYPOGRAPHY).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
-        self.element_is_visible(self.Locators.BUTTON_CONTINUE).click()
+        self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
+        self.click_to_element(self.Locators.BUTTON_CONTINUE)
         self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT_ALERT).send_keys(text_area_alert)
-        self.element_is_visible(self.Locators.BUTTON_FINISH).click()
+        self.click_to_element(self.Locators.BUTTON_FINISH)
         """check text alert"""
         try:
             check_text_not_preview_1 = self.element_is_visible(self.Locators.CHECK_TEXT_NOT_PREVIEW_1).text

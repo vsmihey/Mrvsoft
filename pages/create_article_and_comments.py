@@ -1,15 +1,14 @@
 import random
 import time
-
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-
 from pages.creating_panel import CreatingPanel
 from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
 from pages.authorisation_page import Authorisation
 import locators.all_locators as locators
 from pages.CKE_redactor_and_public_wizard import CKERedactor, PublicWizard
 from pages.base_class import MainPage
+from pages.users import ricksanchez
 from pages.data_login_password import url
 from pages.users import minervakms
 
@@ -44,7 +43,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
             file.write(self.get_actual_url() + '\n')
             file.write(self.BASE_ARTICLE_TITLE)
 
-    def creating_base_article(self, user=minervakms):
+    def creating_base_article(self, user=ricksanchez):
         """Создание обычной статьи с наполнением"""
         self.get_authorisation_in_selen(user)
         self.create_button()
@@ -63,14 +62,14 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         """Выбор папки сохранения"""
         self.element_is_visible(locators_topic_database.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
 
-    def minor_edit_base_article(self, url, user=minervakms):
+    def minor_edit_base_article(self, url, user=ricksanchez):
         """Редактирование статьи и минорное сохранение"""
         self.get_authorisation_in_url(url, user)
         self.redaction()
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('HeyHey')
         self.save_minor_edit()
 
-    def major_edit_base_article(self, url, user=minervakms):
+    def major_edit_base_article(self, url, user=ricksanchez):
         """Редактирование статьи и мажорное сохранение"""
         self.get_authorisation_in_url(url, user)
         self.redaction()
@@ -84,7 +83,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         # self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Rick and Morty was here')
         self.save_major_edit(text)
 
-    def delete_base_article(self, url, user=minervakms):
+    def delete_base_article(self, url, user=ricksanchez):
         """Удаление статьи"""
         self.get_authorisation_in_url(url, user)
         self.three_dots_button()
@@ -93,16 +92,16 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.execute_button_click()
         time.sleep(1)
 
-    def restore_base_article(self, url, user=minervakms):
+    def restore_base_article(self, url, user=ricksanchez):
         """Восстановление статьи"""
         self.get_authorisation_in_url(url, user)
         self.restore_button()
         self.save_major_edit('Восстановление')
 
     def check_name_in_article(self):
-        """Проверка двух изображений в статье"""
-        locator = locators.CheckAfterUpdating()
-        self.element_is_displayed(locator.CHECK_NAME_ARTICLE)
+        """Проверка имени в статье"""
+        check_name_article = self.element_is_visible(locators.CheckAfterUpdating.CHECK_NAME_ARTICLE).text
+        assert check_name_article == "Обычная статья"
 
     def check_version(self):
         """Проверка версии статьи после редактирования"""
@@ -120,12 +119,9 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         heading = self.element_is_visible(locator.HEADING).text
         assert heading == "Оглавление"
         self.click_to_element(locator.HEADING)
-        time.sleep(1)
-        element1 = self.element_is_visible_1(locator.HEADING1)
-        time.sleep(1)
+        element1 = self.element_is_visible(locator.HEADING1)
         self.action_move_to_element(element1, driver)
-        time.sleep(1)
-        element2 = self.element_is_visible_1(locator.HEADING2)
+        element2 = self.element_is_visible(locator.HEADING2)
         time.sleep(1)
         self.action_move_to_element(element2, driver)
         self.element_is_displayed(locator.HEADING3)
@@ -147,24 +143,24 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         """Проверка двух изображений в статье"""
         locator = locators.CheckAfterUpdating()
         time.sleep(1)
-        self.element_is_displayed(locator.IMG1_IN_ARTICLE)
-        self.element_is_displayed(locator.IMG2_IN_ARTICLE)
+        assert self.element_is_displayed(locator.IMG1_IN_ARTICLE)
+        assert self.element_is_displayed(locator.IMG2_IN_ARTICLE)
 
     def check_videos_in_article(self):
         """"Проверка двух видео в статье"""
         locator = locators.CheckAfterUpdating()
-        self.element_is_visible(locator.VIDEO1_IN_ARTICLE).is_displayed()
-        self.element_is_visible(locator.VIDEO2_IN_ARTICLE).is_displayed()
+        assert self.element_is_displayed(locator.VIDEO1_IN_ARTICLE)
+        assert self.element_is_displayed(locator.VIDEO2_IN_ARTICLE)
 
     def check_audio_in_article(self):
         """Проверка аудио в статье"""
         locator = locators.CheckAfterUpdating()
-        self.element_is_visible(locator.AUDIO_IN_ARTICLE).is_displayed()
+        assert self.element_is_displayed(locator.AUDIO_IN_ARTICLE)
 
     def check_table_in_article(self):
         """Проверка таблицы в статье"""
         locator = locators.CheckAfterUpdating()
-        self.element_is_visible(locator.TABLE_IN_ARTICLE).is_displayed()
+        assert self.element_is_displayed(locator.TABLE_IN_ARTICLE)
         "Проверка текста в таблице"
         check_text_in_table = self.element_is_visible(locator.CHECK_TEXT_IN_TABLE).text
         assert check_text_in_table == "Строка"
@@ -204,6 +200,10 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         paragraph_color_bg_orange = self.element_is_visible(locator.PARAGRAPH_COLOR_BG_ORANGE).get_attribute("style")
         assert paragraph_color_bg_orange == "background-color: rgb(249, 217, 119);"
 
+    def list_in_article(self):
+        self.element_is_displayed(locators.CheckAfterUpdating.LIST_NUMB)
+        self.element_is_displayed(locators.CheckAfterUpdating.LIST_MARK)
+
     def check_styles_text_in_article(self):
         """Проверка стилей текста в статье"""
         locator = locators.CheckAfterUpdating()
@@ -229,6 +229,10 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
     def check_align_text_in_article(self):
         """Проверка выравнивания текста в статье"""
         locator = locators.CheckAfterUpdating()
+        "Выравнивание по левому краю"
+        check_align_left_text = self.element_is_visible(locator.CHECK_ALIGN_LEFT_TEXT).get_attribute("style")
+        # print("atrribute: " + check_align_left_text)
+        # assert check_align_left_text is None
         "Выравнивание по центру"
         check_align_center_text = self.element_is_visible(locator.CHECK_ALIGN_CENTER_TEXT).get_attribute("style")
         assert check_align_center_text == "text-align: center;"
@@ -239,20 +243,10 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         check_align_center_text = self.element_is_visible(locator.CHECK_ALIGN_JUSTIFY_TEXT).get_attribute("style")
         assert check_align_center_text == "text-align: justify;"
 
-    def check_color_text_in_article(self):
-        """Проверка цвета текста в статье"""
-        locator = locators.CheckAfterUpdating()
-        check_color_text = self.element_is_visible(locator.CHECK_COLOR_TEXT).get_attribute("style")
-        assert check_color_text == "color: rgb(235, 51, 35);"
-        """Проверка выделения цветом текста в статье"""
-        check_highlight_color_text = self.element_is_visible(locator.CHECK_HIGHLIGHT_COLOR_TEXT).get_attribute("style")
-        assert check_highlight_color_text == "background-color: rgb(255, 254, 85);"
-
     def important_block_red(self):
         """Проверка Важное! на красном фоне в статье"""
-        locator = locators.CheckAfterUpdating()
         # check_important_block_red = self.element_is_visible(locator.CHECK_IMPORTANT_BLOCK_RED).get_attribute("style")
-        self.element_is_visible(locator.CHECK_IMPORTANT_BLOCK_RED).is_displayed()
+        self.element_is_displayed(locators.CheckAfterUpdating.CHECK_IMPORTANT_BLOCK_RED)
         # assert check_important_block_red == '--color: #eb3323; --icon: url("/assets/images/icons/important-info.svg"); background-color: rgba(235, 51, 35, 0.15);'
 
     def check_spoiler(self):
@@ -275,11 +269,14 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.status_code200_check(url + "/content/space/54/article/1938#zrjhm")
         link_href_3 = self.element_is_visible(locator.LINK_HREF_PHONE).get_attribute("href")
         assert link_href_3 == "tel:89367776777"
-        # link_href_4 = self.element_is_visible(locator.LINK_HREF_MAIL).get_attribute("href")
-        # assert link_href_4 == "mailto:admin@minervakms.ru?subject=%D0%9F%D0%BE%D0%B4%D1%82%D0%B2%D0%B5%D1%80%D0%B4%D0%B8%D1%82%D0%B5"
+        link_href_4 = self.element_is_visible(locator.LINK_HREF_MAIL).get_attribute("href")
+        result_link_4 = link_href_4.split("?")
+        assert result_link_4[0] == "mailto:admin@minervakms.ru"
 
+
+class ArticleByTemplate(BaseArticleEditor):
     def check_name_article_by_template(self):
-        """Проверка ссылок в статье"""
+        """Проверка имени статьи"""
         locator = locators.CheckAfterUpdating()
         template_text = self.element_is_visible(locator.TEXT_TEMPLATE).text
         assert template_text == "Шаблонная статья"
@@ -289,19 +286,171 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         locator = locators.CheckAfterUpdating()
         time.sleep(1)
         # IMG1_IN_TEMPLATE = (By.XPATH, "// img[@ alt='Germany_Winter_Trains_Brocken_Railway_Rails_Snow_609681_1280x853'])[1]")
-        self.element_is_displayed(locator.IMG1_IN_TEMPLATE)
+        assert self.element_is_displayed(locator.TABS_1_IMG)
 
     def check_video_in_template(self):
         """"Проверка видео в статье по шаблону"""
-        locator = locators.CheckAfterUpdating()
-        self.element_is_displayed(locator.VIDEO_IN_TEMPLATE)
-
+        assert self.element_is_displayed(locators.CheckAfterUpdating.VIDEO_IN_TEMPLATE)
 
     def check_text_links(self):
         """Проверка вкладки с сылками"""
         locator = locators.CheckAfterUpdating()
-        link3 = self.element_is_displayed(locator.LINK3).text
+        link3 = self.element_is_visible(locator.LINK3).text
         assert link3 == "3 Ссылки"
+        self.click_to_element(locator.LINK3)
+        self.element_is_displayed(locator.TEXT_CONTENT_GOOGLE)
+        google_linc_ico = self.element_is_visible(locator.GOOGLE_LINC_ICO).get_attribute("src")
+        assert google_linc_ico == "http://google.com/favicon.ico"
+        self.status_code200_check("http://google.com/favicon.ico")
+
+    def tabs_1(self):
+        """Первая вкладка"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_1)
+
+    def tabs_1_click(self):
+        """Клик Первая вкладка"""
+        self.click_to_element(locators.CheckAfterUpdating.TABS_1)
+
+    def tabs_2_click(self):
+        """Клик Вторая вкладка"""
+        self.click_to_element(locators.CheckAfterUpdating.TABS_2)
+
+    def tabs_3_click(self):
+        """Клик Третья вкладка"""
+        self.click_to_element(locators.CheckAfterUpdating.TABS_3)
+
+    def tabs_4_click(self):
+        """Клик Четвертая вкладка"""
+        self.click_to_element(locators.CheckAfterUpdating.TABS_4)
+
+    def check_text_li_template(self):
+        """Проверка текста в статье по шаблону список
+        текст содержится в самом локаторе"""
+        self.element_is_displayed(locators.CheckAfterUpdating.TABS_1_LI_TEXT)
+
+    def check_text_template(self):
+        """Проверка текста в статье по шаблону
+        текст содержится в самом локаторе"""
+        self.element_is_displayed(locators.CheckAfterUpdating.TABS_1_TEXT)
+
+    def check_number_template(self):
+        """Проверка числовых значений в статье по шаблону
+        текст содержится в самом локаторе"""
+        self.element_is_displayed(locators.CheckAfterUpdating.TABS_1_ONLY_NUMBERS)
+
+    def check_contents_link_template(self):
+        """Проверка ссылки на контент в статье по шаблону"""
+        tabs_1_contents_link = self.element_is_visible(locators.CheckAfterUpdating.TABS_1_CONTENTS_LINK).get_attribute("href")
+        assert tabs_1_contents_link == "https://pantheonteam.atlassian.net/browse/QA-1619"
+
+    def check_color_text_bg_template(self):
+        """Проверка цвета текста в статье по шаблону"""
+        assert self.element_is_visible(locators.CheckAfterUpdating.TABS_1_COLOR).get_attribute("style") == "background-color: rgb(255, 254, 85);"
+
+    def check_smiles_template(self):
+        """Проверка смайлов в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_1_SMILES)
+
+    def check_link_tab2_template(self):
+        """Проверка ссылки на внешний ресурс в статье по шаблону"""
+        tabs_2_link = self.element_is_visible(locators.CheckAfterUpdating.TABS_2_LINK).get_attribute("href")
+        assert tabs_2_link == "https://dev3.minervakms.ru/content/space/54/folder/234"
+
+    def check_table_tab2_in_template(self):
+        """Проверка таблицы в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_2_TABLE_IN_ARTICLE_TEMPLATE)
+
+    def check_audio_tab2_in_template(self):
+        """Проверка аудио в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_2_AUDIO_IN_ARTICLE_TEMPLATE)
+
+    def check_video_tab3_in_template(self):
+        """Проверка видео в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_3_VIDEO_IN_ARTICLE_TEMPLATE)
+
+    def check_file_download_tab3_in_template(self):
+        """Проверка загрузки файлов в статье по шаблону"""
+        tabs_3_file_in_article_template =  self.element_is_visible(locators.CheckAfterUpdating.TABS_3_FILE_IN_ARTICLE_TEMPLATE).get_attribute("href")
+        assert tabs_3_file_in_article_template == url + "/api/storage/space/54/file/4439"
+
+    def check_href_tab4_in_template(self):
+        """Проверка ссылки в статье по шаблону"""
+        tabs_4_href_template = self.element_is_visible(locators.CheckAfterUpdating.TABS_4_HREF_IN_ARTICLE_TEMPLATE).get_attribute("href")
+        print(tabs_4_href_template)
+        assert tabs_4_href_template == "http://google.com/"
+
+    def check_li_tab4_in_template(self):
+        """Проверка списка в статье по шаблону"""
+        assert self.element_is_displayed(locators.CheckAfterUpdating.TABS_4_LI_IN_ARTICLE_TEMPLATE)
+
+
+class ArticleByScript(BaseArticleEditor):
+
+    def check_name_article_by_template(self):
+        """Проверка имени статьи по скрипту"""
+        template_text = self.element_is_visible(locators.CheckAfterUpdating.CHECK_NAME_IN_ARTICLE_SCRIPT).text
+        assert template_text == "Запрос на выпуск кредитной карты (БОТ)"
+
+    def check_script_part1(self):
+        """Текст в первой части скрипта"""
+        assert self.element_is_visible(
+            locators.CheckAfterUpdating.TABS_4_LI_IN_ARTICLE_TEMPLATE).text == "Есть ли у вас постоянное место работы ?"
+
+    def answer_yes_part1(self):
+        """Клик по кнопке Да"""
+        self.click_to_element(locators.CheckAfterUpdating.BUTTON_PART1)
+
+    def answer_no_part2(self):
+        """Клик по кнопке нет"""
+        self.click_to_element(locators.CheckAfterUpdating.BUTTON_PART2)
+
+    def check_script_part2(self):
+        """Проверка текста во 2 скрипте"""
+        assert self.element_is_visible(
+            locators.CheckAfterUpdating.CHECK_TEXT_SCRIPT_PAST2).text == "Меняли ли вы место работы за последние 6 месяцев?"
+
+    def answer_yes_part3(self):
+        """Клик по кнопке Да"""
+        self.click_to_element(locators.CheckAfterUpdating.BUTTON_PART3)
+
+    def check_script_part3(self):
+        """Проверка текста в 3 скрипте"""
+        assert self.element_is_visible(
+            locators.CheckAfterUpdating.CHECK_TEXT_SCRIPT_PAST3).text == "Можете ли вы предоставить банку справку о доходах?"
+
+    def check_script_part4(self):
+        """Проверка текста в 4 скрипте"""
+        check_text_script_past4 = self.element_is_visible(locators.CheckAfterUpdating.CHECK_TEXT_SCRIPT_PAST4).text
+        assert check_text_script_past4 == "Есть ли у вас кредиты в других банках?"
+
+    def answer_no_part4(self):
+        """Клик по кнопке нет"""
+        self.click_to_element(locators.CheckAfterUpdating.BUTTON_PART4)
+
+    def check_script_end(self):
+        """Проверка текста в конце скрипта """
+        assert self.element_is_visible(
+            locators.CheckAfterUpdating.CHECK_TEXT_ANSWER_END).text == "Сценарий завершен"
+
+    def check_script_button_restart(self):
+        """Клик по кнопке начать заново"""
+        self.click_to_element(locators.CheckAfterUpdating.CHECK_TEXT_ANSWER_RESTART)
+
+    def edit_and_public_article(self, text="123"):
+        """Редактирование и публикация статьи"""
+        self.redaction()
+        self.click_to_element(locators.CheckAfterUpdating.PUBLISH_BUTTON)
+        self.notification_text_area(text)
+        self.next_and_finish_button_click()
+
+    def check_version_script(self):
+        """Проверка версии статьи после редактирования"""
+        self.click_to_element(locators.CheckAfterUpdating.VERSION_CHECK)
+        "Проверка что версия статьи заканчивается на '0' "
+        number_version_check = self.element_is_visible(locators.CheckAfterUpdating.NUMBER_VERSION_CHECK_SCRIPT).text
+        number_version = list(number_version_check)
+        assert number_version[-1] == "0"
+        self.click_to_element(locators.CheckAfterUpdating.CLOSE_SVG_WINDOW_VERSION_SCRIPT)
 
 
 class DataParser:
@@ -338,7 +487,7 @@ class Comments(Authorisation):
         self.click_to_element(locators.Comments.EXPERT_QUESTION)
 
     @staticmethod
-    def create_comments(driver, url, user=minervakms):
+    def create_comments(driver, url, user=ricksanchez):
         """Создание тестового набора комментариев в статье по переданной ссылке, с прохождением авторизации"""
         page = Comments(driver)
 
@@ -369,7 +518,7 @@ class Comments(Authorisation):
             page.send_comment()
 
     @staticmethod
-    def close_first_comment(driver, url, user=minervakms):
+    def close_first_comment(driver, url, user=ricksanchez):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
@@ -379,7 +528,7 @@ class Comments(Authorisation):
         page.click_to_element(locators.Comments.CLOSE_COMMENT)
 
     @staticmethod
-    def close_second_comment(driver, url, user=minervakms):
+    def close_second_comment(driver, url, user=ricksanchez):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)
@@ -389,7 +538,7 @@ class Comments(Authorisation):
         page.click_to_element(locators.Comments.CLOSE_COMMENT)
 
     @staticmethod
-    def close_third_comment(driver, url, user=minervakms):
+    def close_third_comment(driver, url, user=ricksanchez):
         """Закрытие первого комментария"""
         page = Comments(driver)
         page.get_authorisation_in_url(url, user)

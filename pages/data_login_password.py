@@ -6,13 +6,13 @@ from pages.users import StableUsers
 # login = 'andrey'
 # password = '004e9f86'
 # password = input("введите пароль (без кавычек): ")  #'e70a8e89'
-# password = 'minervakms'
+# password = 'ricksanchez'
 
 # Учетка Бориса
 # login = 'b.pogodin'
 # password = '68f1d85b'
 login = 'ricksanchez'
-password = 'minervakms'
+password = 'ricksanchez'
 
 # неверные данные
 # login_incorrect = 'm.andreyq'
@@ -63,3 +63,4 @@ password_person2 = "63a45e26"
 
 base_article = url + "/content/space/54/article/1938"
 article_by_template = url + "/content/space/54/article/1942/page/0"
+article_by_script = url + "/content/space/1/folder/89/article/563"
