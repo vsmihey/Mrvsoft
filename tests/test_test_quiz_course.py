@@ -4,7 +4,7 @@ import time
 import allure
 import pytest
 from pages.quiz_course import Exam, Quiz, Course, Task
-from pages.users import admin
+from pages.users import admin, person1
 from pages.person_validation import Person1
 
 user_for_test = admin
@@ -14,7 +14,7 @@ user_for_test = admin
 @pytest.mark.order(9)
 class TestLMS:
     TEST_STRING = ''.join([str(random.randint(1, 9)) for _ in range(1, 515)])
-    TITLE ='123123' # 'Название ' + str(random.randint(999, 9999))
+    TITLE = 'Название ' + str(random.randint(999, 9999))
 
     @allure.title('Создание нового теста')
     def test_create_new_test(self, driver):
@@ -91,6 +91,9 @@ class TestLMS:
         page.clear_course_name()
 
         page.input_course_name(TestLMS.TITLE)
+
+        # TODO Написать проверку черновика
+
         # page.close_window()
         # page.check_modal_window()
         # page.confirm_save_draft_button()
@@ -118,9 +121,21 @@ class TestLMS:
         page.next_button_click()
         page.check_text_modal_window()
         page.accessibly_button_modal_window_click()
-        time.sleep(6)
 
     @allure.title('Проверка назначенных заданий пользователем')
     def test_task_person1(self, driver):
+        time.sleep(60)
         person = Person1(driver)
-
+        person.get_authorisation_in_superbank(person1)
+        person.bell_button_click()
+        person.check_bell_alert_lms(TestLMS.TITLE, 'Прошу пройти тест, хорошего дня и прекрасного настроения!')
+        person.check_bell_alert_lms(TestLMS.TITLE, 'Прошу пройти опрос, хорошего дня и прекрасного настроения!')
+        person.check_bell_alert_lms(TestLMS.TITLE, 'Прошу пройти курс, хорошего дня и прекрасного настроения!')
+        person.close_bell_button()
+        person.learn_button_click()
+        person.passing_test_button_click()
+        person.close_modal_window()
+        person.passing_quiz_button_click()
+        person.close_modal_window()
+        person.passing_course_button_click()
+        person.close_modal_preview_window_click()

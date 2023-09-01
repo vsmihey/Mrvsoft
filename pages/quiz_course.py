@@ -3,7 +3,9 @@ import pathlib
 from pathlib import Path
 from pages.CKE_redactor_and_public_wizard import PublicWizard, CKERedactor
 from pages.creating_panel import CreatingPanel
+from pages.menu_navigation import MenuNavigation
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 import locators.all_locators as locators
 
 
@@ -278,7 +280,7 @@ class Course(Exam):
         time.sleep(1)
 
 
-class Task(CreatingPanel):
+class Task(CreatingPanel, MenuNavigation):
     """Класс по работе с назначением заданий"""
 
     def search_field(self, title):

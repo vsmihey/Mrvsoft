@@ -7,10 +7,9 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
-from locators.all_locators import FormPagesLocators, FilesFormatPageLocators
+from locators.all_locators import FormPagesLocators, FilesFormatPageLocators, CheckAfterUpdating
 from pages import data_login_password
 import pathlib
-
 
 
 class MainPage:
@@ -41,6 +40,7 @@ class MainPage:
         return Wait(self.browser, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     """поиск по тексту в DOM дереве даже если элемент не виден"""
+
     def elements_is_present(self, locator, timeout=10):
         """Поиск элемента даже если он не виден"""
         return Wait(self.browser, timeout).until(EC.presence_of_element_located(locator))
@@ -148,13 +148,12 @@ class MainPage:
         except (ElementClickInterceptedException, TimeoutException):
             time.sleep(3)
 
-
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
         # now_date = datetime.datetime.now(offset)
         # now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
         # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-        name_screenshot = 'screenshot'+'.png'
+        name_screenshot = 'screenshot' + '.png'
         path = pathlib.Path(pathlib.Path.cwd(), 'avatars', name_screenshot)
         path = str(path)
         self.browser.save_screenshot(path)
@@ -181,5 +180,6 @@ class MainPage:
                     print(f"Ошибка: {e}. Количество попыток исчерпано")
                     raise e
 
-
-
+    def close_modal_window(self):
+        """Крестик - закрытие модального окна"""
+        self.click_to_element(CheckAfterUpdating.SVG_VERSION_WINDOW_CLOSE)
