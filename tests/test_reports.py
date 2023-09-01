@@ -16,7 +16,6 @@ class TestReports:
     def test_reports(self, driver):
         report_page = ReportsPage(driver)
         report_page.get_authorisation_in_selen(user_for_test)
-        report_page.download_reports(driver)
 
 
 

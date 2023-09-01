@@ -1401,6 +1401,4 @@ class Course:
 
 class Reports:
     REPORTS_BY_CONTENT_LIST = (By.CSS_SELECTOR, "div[class='folder-list-item folder-list-item--no-children']")
-    DOWNLOAD_REPORTS_BUTTON = (By.XPATH, "//div[@class='vaadin-button-container']")
-    DOWNLOAD_REPORTS_BUTTON_1 = (By.XPATH, "//vaadin-button[@id='buttonExport']")
 
