@@ -148,7 +148,6 @@ class MainPage:
         except (ElementClickInterceptedException, TimeoutException):
             time.sleep(3)
 
-
     def screenshot(self):
         # offset = datetime.timezone(datetime.timedelta(hours=3))  # timezone (+3)
         # now_date = datetime.datetime.now(offset)
@@ -168,7 +167,8 @@ class MainPage:
         return code
 
     def expand_shadow_element(self, element):
-        """Взаимодействие с элементом на странице с теневым DOM"""
+        """Взаимодействие с элементом на странице с теневым DOM
+        element - элемент содержащий теневой DOM"""
         shadow_root = self.browser.execute_script('return arguments[0].shadowRoot', element)
         return shadow_root
 

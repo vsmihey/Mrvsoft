@@ -1403,3 +1403,8 @@ class Reports:
     REPORTS_BY_CONTENT_LIST = (By.CSS_SELECTOR, "div[class='folder-list-item folder-list-item--no-children']")
     DOWNLOAD_REPORTS_BUTTON = (By.XPATH, "//div[@class='vaadin-button-container']")
     DOWNLOAD_REPORTS_BUTTON_1 = (By.XPATH, "//vaadin-button[@id='buttonExport']")
+    SHADOW_1 = (By.TAG_NAME, "vaadin-horizontal-layout")
+    SHADOW_2 = (By.TAG_NAME, "ticket-filters")
+    SHADOW_3 = (By.TAG_NAME, "vaadin-vertical-layout")
+    SHADOW_4 = (By.TAG_NAME, "vaadin-button")
+    TARGET_ELEMENT_SHADOW = (By.TAG_NAME, "iron-icon")

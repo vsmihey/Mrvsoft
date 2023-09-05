@@ -11,11 +11,18 @@ class ReportsPage(Authorisation, MenuNavigation, BasePage):
     def download_reports(self, driver):
         """Клик по кнопке Отчеты"""
         self.reports_click()
-        reports_by_content_list = self.element_is_visible(locators.Reports.REPORTS_BY_CONTENT_LIST)
-        ddwn_rep_btn = self.elements_is_present(locators.Reports.DOWNLOAD_REPORTS_BUTTON_1)
-        time.sleep(10)
-        agree_button = self.expand_shadow_element(ddwn_rep_btn)
-        # time.sleep(10)
-        # agree_button = self.browser.execute_script('return arguments[0].shadowRoot.querySelector("button")', ddwn_rep_btn)
-        # shadow_root = driver.execute_script("return document.querySelector('ddwn_rep_btn').shadowRoot")
-        agree_button.click()
+        root1 = self.element_is_visible(locators.Reports.SHADOW_1)
+        self.expand_shadow_element(root1)
+
+        root2 = self.element_is_visible(locators.Reports.SHADOW_2)
+        self.expand_shadow_element(root2)
+
+        root3 = self.element_is_visible(locators.Reports.SHADOW_3)
+        self.expand_shadow_element(root3)
+
+        root4 = self.element_is_visible(locators.Reports.SHADOW_4)
+        self.expand_shadow_element(root4)
+
+        self.click_to_element(locators.Reports.TARGET_ELEMENT_SHADOW)
+
+

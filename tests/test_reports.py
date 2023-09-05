@@ -20,9 +20,6 @@ class TestReports:
 
 
 
-
-
-
     @allure.suite("Скачивание отчетов в обучении")
     def test_reports_learning(self):
         pass
