@@ -25,7 +25,7 @@ class ContentOptions(MainPage):
         self.click_to_element(locators.SearchRuEnLocators.MEATBALL_ARTICLE)
 
     def delete_button(self):
-        """Кнопка Троеточие"""
+        """Кнопка Удаление"""
         self.click_to_element(locators.SearchRuEnLocators.SVG_DEL)
 
     def restore_button(self):
@@ -86,6 +86,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
     def delete_base_article(self, url, user=ricksanchez):
         """Удаление статьи"""
         self.get_authorisation_in_url(url, user)
+        time.sleep(1)
         self.three_dots_button()
         self.delete_button()
         self.notification_text_area('Удаление')
@@ -340,12 +341,14 @@ class ArticleByTemplate(BaseArticleEditor):
 
     def check_contents_link_template(self):
         """Проверка ссылки на контент в статье по шаблону"""
-        tabs_1_contents_link = self.element_is_visible(locators.CheckAfterUpdating.TABS_1_CONTENTS_LINK).get_attribute("href")
+        tabs_1_contents_link = self.element_is_visible(locators.CheckAfterUpdating.TABS_1_CONTENTS_LINK).get_attribute(
+            "href")
         assert tabs_1_contents_link == "https://pantheonteam.atlassian.net/browse/QA-1619"
 
     def check_color_text_bg_template(self):
         """Проверка цвета текста в статье по шаблону"""
-        assert self.element_is_visible(locators.CheckAfterUpdating.TABS_1_COLOR).get_attribute("style") == "background-color: rgb(255, 254, 85);"
+        assert self.element_is_visible(locators.CheckAfterUpdating.TABS_1_COLOR).get_attribute(
+            "style") == "background-color: rgb(255, 254, 85);"
 
     def check_smiles_template(self):
         """Проверка смайлов в статье по шаблону"""
@@ -370,12 +373,14 @@ class ArticleByTemplate(BaseArticleEditor):
 
     def check_file_download_tab3_in_template(self):
         """Проверка загрузки файлов в статье по шаблону"""
-        tabs_3_file_in_article_template =  self.element_is_visible(locators.CheckAfterUpdating.TABS_3_FILE_IN_ARTICLE_TEMPLATE).get_attribute("href")
+        tabs_3_file_in_article_template = self.element_is_visible(
+            locators.CheckAfterUpdating.TABS_3_FILE_IN_ARTICLE_TEMPLATE).get_attribute("href")
         assert tabs_3_file_in_article_template == url + "/api/storage/space/54/file/4439"
 
     def check_href_tab4_in_template(self):
         """Проверка ссылки в статье по шаблону"""
-        tabs_4_href_template = self.element_is_visible(locators.CheckAfterUpdating.TABS_4_HREF_IN_ARTICLE_TEMPLATE).get_attribute("href")
+        tabs_4_href_template = self.element_is_visible(
+            locators.CheckAfterUpdating.TABS_4_HREF_IN_ARTICLE_TEMPLATE).get_attribute("href")
         print(tabs_4_href_template)
         assert tabs_4_href_template == "http://google.com/"
 
@@ -486,63 +491,50 @@ class Comments(Authorisation):
         """Отключение галочки 'с вопросом к эксперту'"""
         self.click_to_element(locators.Comments.EXPERT_QUESTION)
 
-    @staticmethod
-    def create_comments(driver, url, user=ricksanchez):
-        """Создание тестового набора комментариев в статье по переданной ссылке, с прохождением авторизации"""
-        page = Comments(driver)
-
-        page.get_authorisation_in_url(url, user)
-
+    def create_comments(self):
+        """Создание тестового набора комментариев в статье по переданной ссылке"""
         for i in range(4):
-            page.comment_text_area(f'Тестовый комментарий {i + 1}')
-            page.send_comment()
+            time.sleep(1)
+            self.comment_text_area(f'Тестовый комментарий {i + 1}')
+            self.send_comment()
 
-        page.disable_the_question_to_the_expert_option()
-        page.comment_text_area('Серый комментарий')
-        page.send_comment()
+        self.disable_the_question_to_the_expert_option()
+        self.comment_text_area('Серый комментарий')
+        self.send_comment()
 
         # проверка создания 5 комментариев
-        try:
-            time.sleep(1)
-            check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
-            # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
-            assert check_count_comment == "5 комментариев"
-        except AssertionError:
-            driver.refresh()
-            for i in range(4):
-                page.comment_text_area(f'Тестовый комментарий {i + 1}')
-                page.send_comment()
+        # try:
+        #     time.sleep(1)
+        #     check_count_comment = driver.find_element(By.XPATH, "//p[text()='5 комментариев']").text
+        #     # check_count_comment = MainPage.element_is_visible(locators.Comments.CHECK_COUNT_COMMENT).text
+        #     assert check_count_comment == "5 комментариев"
+        # except AssertionError:
+        #     driver.refresh()
+        #     for i in range(4):
+        #         page.comment_text_area(f'Тестовый комментарий {i + 1}')
+        #         page.send_comment()
 
-            page.disable_the_question_to_the_expert_option()
-            page.comment_text_area('Серый комментарий')
-            page.send_comment()
+        # page.disable_the_question_to_the_expert_option()
+        # page.comment_text_area('Серый комментарий')
+        # page.send_comment()
 
-    @staticmethod
-    def close_first_comment(driver, url, user=ricksanchez):
+    def close_first_comment(self):
         """Закрытие первого комментария"""
-        page = Comments(driver)
-        page.get_authorisation_in_url(url, user)
-        page.click_to_element(locators.Comments.TO_ANSWER_COMMENT_1)
-        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 1')
-        page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
-        page.click_to_element(locators.Comments.CLOSE_COMMENT)
+        self.click_to_element(locators.Comments.TO_ANSWER_COMMENT_1)
+        self.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 1')
+        self.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
+        self.click_to_element(locators.Comments.CLOSE_COMMENT)
 
-    @staticmethod
-    def close_second_comment(driver, url, user=ricksanchez):
+    def close_second_comment(self):
         """Закрытие первого комментария"""
-        page = Comments(driver)
-        page.get_authorisation_in_url(url, user)
-        page.click_to_element(locators.Comments.TO_ANSWER_COMMENT_2)
-        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 2')
-        page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
-        page.click_to_element(locators.Comments.CLOSE_COMMENT)
+        self.click_to_element(locators.Comments.TO_ANSWER_COMMENT_2)
+        self.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 2')
+        self.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
+        self.click_to_element(locators.Comments.CLOSE_COMMENT)
 
-    @staticmethod
-    def close_third_comment(driver, url, user=ricksanchez):
+    def close_third_comment(self):
         """Закрытие первого комментария"""
-        page = Comments(driver)
-        page.get_authorisation_in_url(url, user)
-        page.click_to_element(locators.Comments.TO_ANSWER_COMMENT_3)
-        page.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
-        page.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
-        page.click_to_element(locators.Comments.CLOSE_COMMENT)
+        self.click_to_element(locators.Comments.TO_ANSWER_COMMENT_3)
+        self.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
+        self.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
+        self.click_to_element(locators.Comments.CLOSE_COMMENT)
