@@ -162,6 +162,10 @@ class BellAlert(MainPage):
         """Проверка, что нет записей в истории и уведомлений по конкретной статье по всем статусам"""
         assert self.element_is_invisible(locators.CheckCommentsPersons.RESTORE_ARTICLE_CHECK, timeout=0.2)
 
+    def check_bell_alert_lms(self, title, text):
+        """Проверка колокольчика для курса, теста и опроса. Принимает название и описание колокольчика"""
+        self.element_is_visible((By.XPATH, f"//div[text()='{title}']/../..//div[text()='{text}']"))
+
 
 class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
     """Класс проверки функционала пользователями из эталона"""
@@ -238,9 +242,32 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
         # self.yes_new_notification()
         self.bell_button_click()
 
+    # def switch_to_learning(self, person):
+    #     """Метод переходна на страницу обучения"""
+
+    def close_bell_button(self):
+        """Кнопка 'крестик' в колокольчике"""
+        self.click_to_element(locators.CheckCommentsPersons.CLOSE_BELL_WINDOW)
+
     def get_check_bell(self):
         """Метод проверки уведомлений (колокольчик), у каждого пользователя своя реализация метода"""
         pass
+
+    def passing_test_button_click(self):
+        """Кнопка прохождения теста в разделе 'обучение'"""
+        self.click_to_element(locators.Test.PASSING_TEST)
+
+    def passing_quiz_button_click(self):
+        """Кнопка прохождения опроса в разделе 'обучение'"""
+        self.click_to_element(locators.Quiz.PASSING_QUIZ)
+
+    def passing_course_button_click(self):
+        """Кнопка прохождения курса в разделе 'обучение'"""
+        self.click_to_element(locators.Course.PASSING_COURSE)
+
+    def close_modal_preview_window_click(self):
+        """Закрытие модального превью окна в разделе обучения"""
+        self.click_to_element(locators.Course.PREVIEW_WINDOW_CLOSE_BUTTON)
 
 
 class Person1(PersonValidation):

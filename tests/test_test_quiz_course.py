@@ -1,9 +1,11 @@
+import random
 import time
 
 import allure
 import pytest
-from pages.quiz_course import Exam, Quiz, Course
-from pages.users import admin
+from pages.quiz_course import Exam, Quiz, Course, Task
+from pages.users import admin, person1
+from pages.person_validation import Person1
 
 user_for_test = admin
 
@@ -11,17 +13,20 @@ user_for_test = admin
 @allure.suite('Тесты, опросы, курсы')
 @pytest.mark.order(9)
 class TestLMS:
+    TEST_STRING = ''.join([str(random.randint(1, 9)) for _ in range(1, 515)])
+    TITLE = 'Название ' + str(random.randint(999, 9999))
+
     @allure.title('Создание нового теста')
     def test_create_new_test(self, driver):
         page = Exam(driver)
         page.get_authorisation_in_superbank(user_for_test)
         page.create_button()
         page.create_test_button()
-        page.input_test_name()
-        page.check_test_name_length()
+        page.input_test_name(TestLMS.TEST_STRING)
+        page.check_test_name_length(TestLMS.TEST_STRING)
         page.check_save_button_status_no_active()
-        page.input_test_description()
-        page.check_test_description_length()
+        page.input_test_description(TestLMS.TEST_STRING)
+        page.check_test_description_length(TestLMS.TEST_STRING)
         page.check_save_button_status_no_active()
         page.add_new_question_button()
         page.check_name_modal_window()
@@ -34,9 +39,9 @@ class TestLMS:
         page.check_save_button_status_active()
         page.clear_test_name()
         page.check_save_button_status_no_active()
-        page.input_test_name(page.TITLE)
+        page.input_test_name(TestLMS.TITLE)
         page.save_test()
-        page.check_name_created_test()
+        page.check_name_created_test(TestLMS.TITLE)
 
     @allure.title('Создание нового опроса')
     def test_create_new_quiz(self, driver):
@@ -44,11 +49,11 @@ class TestLMS:
         page.get_authorisation_in_superbank(user_for_test)
         page.create_button()
         page.create_quiz_button()
-        page.input_quiz_name()
-        page.check_quiz_name_length()
+        page.input_quiz_name(TestLMS.TEST_STRING)
+        page.check_quiz_name_length(TestLMS.TEST_STRING)
         page.check_save_button_status_no_active()
-        page.input_quiz_description()
-        page.check_quiz_description_length()
+        page.input_quiz_description(TestLMS.TEST_STRING)
+        page.check_quiz_description_length(TestLMS.TEST_STRING)
         page.check_save_button_status_no_active()
         page.add_new_question_button()
         page.input_text_question()
@@ -58,9 +63,9 @@ class TestLMS:
         page.check_save_button_status_active()
         page.clear_quiz_name()
         page.check_save_button_status_no_active()
-        page.input_quiz_name(page.TITLE)
+        page.input_quiz_name(TestLMS.TITLE)
         page.save_quiz()
-        page.check_name_created_test()
+        page.check_name_created_test(TestLMS.TITLE)
 
     @allure.title('Создание нового курса')
     def test_create_new_course(self, driver):
@@ -73,20 +78,22 @@ class TestLMS:
         page.check_course_name_field_description()
         page.check_course_description_field_description()
 
-
         # TODO Написать проверку текущего активного цвета.
         # TODO Написать метод изменения активного цвета.
         # TODO Написать метод выбора картинки фона.
         # TODO Написать проверку отображения выбранной картинки фона.
 
         page.change_folder()
-        page.input_course_name()
-        page.check_course_name_length()
-        page.input_course_description()
-        page.check_course_description_length()
+        page.input_course_name(TestLMS.TEST_STRING)
+        page.check_course_name_length(TestLMS.TEST_STRING)
+        page.input_course_description(TestLMS.TEST_STRING)
+        page.check_course_description_length(TestLMS.TEST_STRING)
         page.clear_course_name()
 
-        page.input_course_name(page.TITLE)
+        page.input_course_name(TestLMS.TITLE)
+
+        # TODO Написать проверку черновика
+
         # page.close_window()
         # page.check_modal_window()
         # page.confirm_save_draft_button()
@@ -99,3 +106,36 @@ class TestLMS:
         page.check_error_message()
         page.scorm_name()
         page.save_course()
+
+    @allure.title('Назначение заданий')
+    def test_task_assignment(self, driver):
+        page = Task(driver)
+        page.get_authorisation_in_superbank(user_for_test)
+        page.create_button()
+        page.task_button()
+        page.search_field(TestLMS.TITLE)
+        page.select_questions()
+        page.next_button_click()
+        page.select_person()
+        page.next_button_click()
+        page.next_button_click()
+        page.check_text_modal_window()
+        page.accessibly_button_modal_window_click()
+
+    @allure.title('Проверка назначенных заданий пользователем')
+    def test_task_person1(self, driver):
+        time.sleep(60)
+        person = Person1(driver)
+        person.get_authorisation_in_superbank(person1)
+        person.bell_button_click()
+        person.check_bell_alert_lms(TestLMS.TITLE, 'Прошу пройти тест, хорошего дня и прекрасного настроения!')
+        person.check_bell_alert_lms(TestLMS.TITLE, 'Прошу пройти опрос, хорошего дня и прекрасного настроения!')
+        person.check_bell_alert_lms(TestLMS.TITLE, 'Прошу пройти курс, хорошего дня и прекрасного настроения!')
+        person.close_bell_button()
+        person.learn_button_click()
+        person.passing_test_button_click()
+        person.close_modal_window()
+        person.passing_quiz_button_click()
+        person.close_modal_window()
+        person.passing_course_button_click()
+        person.close_modal_preview_window_click()
