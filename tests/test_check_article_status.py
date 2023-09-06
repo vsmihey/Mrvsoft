@@ -23,11 +23,15 @@ class TestCheckNewArticleStatus:
 
         @allure.title('Создание тестового набора комментов')
         def test_create_comments(self, driver):
-            Comments.create_comments(driver, DataParser.get_url_from_data_file(), user_for_test)
+            page = Comments(driver)
+            page.get_authorisation_in_url(DataParser.get_url_from_data_file(), user_for_test)
+            page.create_comments()
 
         @allure.title('Закрытие первого тестового комментария')
         def test_close_first_comment(self, driver):
-            Comments.close_first_comment(driver, DataParser.get_url_from_data_file(), user_for_test)
+            page = Comments(driver)
+            page.get_authorisation_in_url(DataParser.get_url_from_data_file(), user_for_test)
+            page.close_first_comment()
 
         @allure.title('Новая статья. Проверка истории пользователем без доступом к статье')
         def test_new_article_history_person1(self, driver):
@@ -87,7 +91,6 @@ class TestCheckNewArticleStatus:
 
     @allure.feature('Минорное редактирование статьи, проверка в истории и колокольчике')
     class TestMinorArticle:
-
         @allure.title('Минорное редактирование статьи')
         def test_article_minor_edit_base(self, driver):
             page_article_base = PersonValidation(driver)
@@ -95,7 +98,9 @@ class TestCheckNewArticleStatus:
 
         @allure.title('Закрытие второго тестового комментария')
         def test_close_second_comment(self, driver):
-            Comments.close_second_comment(driver, DataParser.get_url_from_data_file(), user_for_test)
+            page = Comments(driver)
+            page.get_authorisation_in_url(DataParser.get_url_from_data_file(), user_for_test)
+            page.close_second_comment()
 
         @allure.title('Минорное редактирование. Проверка истории пользователем без доступом к статье')
         def test_minor_edit_article_history_person1(self, driver):
@@ -149,7 +154,9 @@ class TestCheckNewArticleStatus:
 
         @allure.title('Закрытие третьего тестового комментария')
         def test_close_third_comment(self, driver):
-            Comments.close_third_comment(driver, DataParser.get_url_from_data_file(), user_for_test)
+            page = Comments(driver)
+            page.get_authorisation_in_url(DataParser.get_url_from_data_file(), user_for_test)
+            page.close_third_comment()
 
         @allure.title('Мажорное редактирование. Проверка истории пользователем без доступом к статье')
         def test_major_edit_article_history_person1(self, driver):
