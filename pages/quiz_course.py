@@ -57,6 +57,14 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
         """Выбор вопросов"""
         self.click_to_element(locators.Test.ALL_QUESTIONS_SELECT)
 
+    def select_question(self):
+        """Выбор вопроса"""
+        self.click_to_element(locators.Test.QUESTIONS_SELECT)
+
+    def select_answer(self):
+        """Выбор ответа"""
+        self.click_to_element(locators.Test.ANSWER_SELECT)
+
     def close_modal_window(self):
         """Закрытие модального окна"""
         self.click_to_element(locators.CreateTopicDatabaseLocators.SVG_CLOSE_DELETED_WINDOW)
@@ -76,7 +84,7 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
     def check_one_questions_limit(self):
         """Проверка, что в тесте выбран один вопрос"""
         assert self.element_is_visible(
-            locators.Test.QUESTIONS_LIMIT_STATUS).text == 'В тесте будет 1 случайный вопрос'
+            locators.Test.QUESTIONS_LIMIT_STATUS).text == 'В тесте будет 1 вопрос'
 
     def save_test(self):
         """Сохранение теста"""
@@ -104,9 +112,17 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
         self.browser.refresh()
         self.click_to_element(locators.Test.SEE_COMPLETED)
 
-    def start_passing_button_click(self):
+    def start_stop_passing_button_click(self):
         """Кнопка 'Начать опрос/обучение' в прохождении опроса"""
         self.click_to_element(locators.Test.START_PASSING)
+
+    def passing_test_next_button_click(self):
+        """Нажатие кнопки 'Продолжить' после выбора ответа"""
+        self.click_to_element(locators.Test.NEXT_BUTTON)
+
+    # def finish_test_button(self):
+    #     """Нажатие кнопки 'Завершить опрос' после прохождения опроса"""
+    #     self.click_to_element(locators.Test.FINISH_BUTTON)
 
 
 class Quiz(Exam):
@@ -177,10 +193,6 @@ class Quiz(Exam):
     def passing_quiz_next_button_click(self):
         """Нажатие кнопки 'Продолжить' после выбора ответа"""
         self.click_to_element(locators.Quiz.NEXT_BUTTON)
-
-    def finish_quiz_button(self):
-        """Нажатие кнопки 'Завершить опрос' после прохождения опроса"""
-        self.click_to_element(locators.Quiz.FINISH_BUTTON)
 
 
 class Course(Exam):
@@ -326,10 +338,6 @@ class Course(Exam):
     def finish_course_button_click(self):
         """Кнопка 'Завершить курс' при прохождении курса"""
         self.click_to_element(locators.Course.FINISH_COURSE_BUTTON)
-
-    def confirm_finish_course_button_click(self):
-        """Кнопка 'Завершить курс' после прохождения курса"""
-        self.click_to_element(locators.Course.CONFIRM_FINISH_COURSE_BUTTON)
 
 
 class Task(CreatingPanel, MenuNavigation):
