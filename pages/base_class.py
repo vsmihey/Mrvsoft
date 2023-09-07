@@ -85,6 +85,23 @@ class MainPage:
             print(f'Поймал  {e}')
             return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator)).is_displayed()
 
+    def element_is_visible_all(self, locator, timeout=10):
+        """Отображение элемента возвращение True или False и обработка возможных ошибок"""
+        time.sleep(0.3)
+        try:
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except StaleElementReferenceException:
+            print('Поймал StaleElementReferenceException')
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except TimeoutException:
+            print('Поймал TimeoutException')
+            # self.browser.refresh()
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except Exception as e:
+            print(f'Поймал  {e}')
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+
+
     def remove_class_script(self):
         """Удаление класса элемента, что бы он стал видимым и с ним можно совершить действие"""
         self.browser.execute_script("""document.querySelector("input[type='file']").removeAttribute('class')""")
@@ -101,7 +118,7 @@ class MainPage:
         self.browser.switch_to.frame(frame)
 
     def switch_out_frame(self):
-        """Выход из модального окна, на вход принимает модальное окно (пример: работа с виджетами)"""
+        """Выход из модального окна)"""
         self.browser.switch_to.default_content()
 
     def action_move_to_element(self, element, driver):

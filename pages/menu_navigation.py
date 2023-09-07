@@ -23,4 +23,4 @@ class MenuNavigation(MainPage):
 
     def reports_click(self):
         """Переход в Отчеты"""
-        self.click_to_element(locators.MenuNavigation.REPORTS)
+        self.click_to_element(locators.FormPagesLocators.REPORT_BUTTON)
