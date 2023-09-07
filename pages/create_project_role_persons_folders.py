@@ -19,15 +19,13 @@ class Folders(MainPage):
 
     def confirm_create_folder_button(self):
         """Кнопка подтверждения сохранения статьи"""
-        pass
-
         # self.click_to_element(locators.FormPagesLocators.CREATE_FOLDER_BUTTON)
         # self.element_is_visible(locators.FormPagesLocators.CREATE_FOLDER_BUTTON).click()
 
         # self.element_is_visible(Locators.CONTENT).click()
-        # self.element_is_visible(locators.FormPagesLocators.CREATE_FOLDER_BUTTON).click()
-        # self.element_is_visible(locators.FormPagesLocators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
-        # self.element_is_visible(locators.FormPagesLocators.CREATE_FOLDER_BUTTON).click()
+        self.element_is_visible(locators.FormPagesLocators.CREATE_FOLDER_BUTTON).click()
+        self.element_is_visible(locators.FormPagesLocators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
+        self.element_is_visible(locators.FormPagesLocators.CREATE_FOLDER_BUTTON).click()
 
 
 class NewProject(Authorisation, MenuNavigation, Folders):

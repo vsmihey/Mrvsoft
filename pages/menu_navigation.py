@@ -21,6 +21,6 @@ class MenuNavigation(MainPage):
         """Переход в Контент"""
         self.click_to_element(locators.MenuNavigation.CONTENT)
 
-    def learn_button_click(self):
-        """Переход в обучение"""
-        self.click_to_element(locators.MenuNavigation.LEARN_BUTTON)
+    def reports_click(self):
+        """Переход в Отчеты"""
+        self.click_to_element(locators.FormPagesLocators.REPORT_BUTTON)

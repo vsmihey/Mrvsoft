@@ -7,9 +7,10 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
-from locators.all_locators import FormPagesLocators, FilesFormatPageLocators, CheckAfterUpdating
+from locators.all_locators import FormPagesLocators, FilesFormatPageLocators
 from pages import data_login_password
 import pathlib
+
 
 
 class MainPage:
@@ -40,7 +41,6 @@ class MainPage:
         return Wait(self.browser, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     """поиск по тексту в DOM дереве даже если элемент не виден"""
-
     def elements_is_present(self, locator, timeout=10):
         """Поиск элемента даже если он не виден"""
         return Wait(self.browser, timeout).until(EC.presence_of_element_located(locator))
@@ -85,6 +85,23 @@ class MainPage:
             print(f'Поймал  {e}')
             return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator)).is_displayed()
 
+    def element_is_visible_all(self, locator, timeout=10):
+        """Отображение элемента возвращение True или False и обработка возможных ошибок"""
+        time.sleep(0.3)
+        try:
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except StaleElementReferenceException:
+            print('Поймал StaleElementReferenceException')
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except TimeoutException:
+            print('Поймал TimeoutException')
+            # self.browser.refresh()
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+        except Exception as e:
+            print(f'Поймал  {e}')
+            return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
+
+
     def remove_class_script(self):
         """Удаление класса элемента, что бы он стал видимым и с ним можно совершить действие"""
         self.browser.execute_script("""document.querySelector("input[type='file']").removeAttribute('class')""")
@@ -101,7 +118,7 @@ class MainPage:
         self.browser.switch_to.frame(frame)
 
     def switch_out_frame(self):
-        """Выход из модального окна, на вход принимает модальное окно (пример: работа с виджетами)"""
+        """Выход из модального окна)"""
         self.browser.switch_to.default_content()
 
     def action_move_to_element(self, element, driver):
@@ -153,7 +170,7 @@ class MainPage:
         # now_date = datetime.datetime.now(offset)
         # now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
         # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-        name_screenshot = 'screenshot' + '.png'
+        name_screenshot = 'screenshot'+'.png'
         path = pathlib.Path(pathlib.Path.cwd(), 'avatars', name_screenshot)
         path = str(path)
         self.browser.save_screenshot(path)
@@ -166,20 +183,11 @@ class MainPage:
         assert code == 200
         return code
 
-    def try_except(self, your_action, retries=3):
-        """Функция try except, в your_action передать любое действие
-        если ошибка функция еще раз предпримет попытку"""
-        for attempt in range(retries):
-            try:
-                return your_action
-            except Exception as e:
-                if attempt < retries - 1:
-                    print(f"Ошибка: {e}. Повторная попытка #{attempt + 1}")
-                    continue
-                else:
-                    print(f"Ошибка: {e}. Количество попыток исчерпано")
-                    raise e
+    def expand_shadow_element(self, element):
+        """Взаимодействие с элементом на странице с теневым DOM
+        element - элемент содержащий теневой DOM"""
+        shadow_root = self.browser.execute_script('return arguments[0].shadowRoot', element)
+        return shadow_root
 
-    def close_modal_window(self):
-        """Крестик - закрытие модального окна"""
-        self.click_to_element(CheckAfterUpdating.SVG_VERSION_WINDOW_CLOSE)
+
+

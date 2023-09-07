@@ -1367,6 +1367,7 @@ class Test:
     SEE_COMPLETED = (By.XPATH, "//button[@class='m-ui-button-text']")
     START_PASSING = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']")
 
+
 class Quiz:
     """Локаторы для работы с опросами"""
     CREATING_QUIZ_BUTTON = (By.XPATH, "//div[contains(text(),'Опрос')]")
@@ -1440,3 +1441,19 @@ class Task:
     SELECT_PERSON = (By.XPATH, "//div[@class='m-user-card-info m-lms-pupil-preview m-lms-exercise-wizard__item']")
     ACCESSIBLY_BUTTON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
     MODAL_WINDOW_BODY = (By.XPATH, "//p[@class='m-lms-exercise-are-creating-alert__text']")
+
+class Reports:
+    REPORTS_BY_CONTENT_LIST = (By.CSS_SELECTOR, "div[class='folder-list-item folder-list-item--no-children']")
+    DOWNLOAD_REPORTS_BUTTON = (By.XPATH, "//div[@class='vaadin-button-container']")
+    DOWNLOAD_REPORTS_BUTTON_1 = (By.XPATH, "//vaadin-button[@id='buttonExport']")
+    IFRAME_FOR_SHADOW = (By.XPATH, "//iframe[@title='ticket']")
+    SHADOW_1 = (By.TAG_NAME, "vaadin-horizontal-layout")
+    SHADOW_2 = (By.TAG_NAME, "ticket-filters")
+    SHADOW_3 = (By.TAG_NAME, "vaadin-vertical-layout")
+    SHADOW_4 = (By.TAG_NAME, "div")
+    SHADOW_4_1 = (By.TAG_NAME, "vaadin-button")
+    SHADOW_BUTTON_EXPORT = (By.XPATH, "//vaadin-button[@id='buttonExport']")
+    'Окно отправки отчета на почту'
+    CHECK_TEXT_SEND_REPORT = (By.XPATH, "//h3[contains(text(),'Отправка отчёта')]")
+    CHECK_TEXT_SEND_EMAIL = (By.XPATH, "//div[contains(text(),'Ссылка на скачивание отчёта будет отправлена на em')]")
+    BUTTON_ACCEPT = (By.XPATH, "//p[text()='понятно']")

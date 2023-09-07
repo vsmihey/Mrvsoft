@@ -33,7 +33,3 @@ class CreatingPanel(Authorisation):
     def create_quiz_button(self):
         """Кнопка для создания опроса"""
         self.click_to_element(locators.Quiz.CREATING_QUIZ_BUTTON)
-
-    def task_button(self):
-        """Кнопка для назначения задания"""
-        self.click_to_element(locators.Task.TASK_BUTTON)
