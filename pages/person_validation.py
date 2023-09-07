@@ -1,6 +1,4 @@
-import time
 
-from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from pages.base_class import MainPage
 from pages.users import person1, person2, person3, person4
@@ -164,7 +162,7 @@ class BellAlert(MainPage):
 
     def check_bell_alert_lms(self, title, text):
         """Проверка колокольчика для курса, теста и опроса. Принимает название и описание колокольчика"""
-        self.element_is_visible((By.XPATH, f"//div[text()='{title}']/../..//div[text()='{text}']"))
+        self.element_is_visible((By.XPATH, f"//div[text()='{title}']/../..//div[text()='{text}']"), timeout=90)
 
 
 class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
@@ -252,22 +250,6 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
     def get_check_bell(self):
         """Метод проверки уведомлений (колокольчик), у каждого пользователя своя реализация метода"""
         pass
-
-    def passing_test_button_click(self):
-        """Кнопка прохождения теста в разделе 'обучение'"""
-        self.click_to_element(locators.Test.PASSING_TEST)
-
-    def passing_quiz_button_click(self):
-        """Кнопка прохождения опроса в разделе 'обучение'"""
-        self.click_to_element(locators.Quiz.PASSING_QUIZ)
-
-    def passing_course_button_click(self):
-        """Кнопка прохождения курса в разделе 'обучение'"""
-        self.click_to_element(locators.Course.PASSING_COURSE)
-
-    def close_modal_preview_window_click(self):
-        """Закрытие модального превью окна в разделе обучения"""
-        self.click_to_element(locators.Course.PREVIEW_WINDOW_CLOSE_BUTTON)
 
 
 class Person1(PersonValidation):

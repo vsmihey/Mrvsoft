@@ -120,10 +120,6 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
         """Нажатие кнопки 'Продолжить' после выбора ответа"""
         self.click_to_element(locators.Test.NEXT_BUTTON)
 
-    # def finish_test_button(self):
-    #     """Нажатие кнопки 'Завершить опрос' после прохождения опроса"""
-    #     self.click_to_element(locators.Test.FINISH_BUTTON)
-
 
 class Quiz(Exam):
     """Класс по работе с Опросами"""
