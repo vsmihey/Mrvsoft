@@ -86,12 +86,17 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
     def delete_base_article(self, url, user=ricksanchez):
         """Удаление статьи"""
         self.get_authorisation_in_url(url, user)
-        time.sleep(1)
+        time.sleep(3)
         self.three_dots_button()
-        self.delete_button()
+        try:
+            self.delete_button()
+        except:
+            self.browser.refresh()
+            self.three_dots_button()
+            self.delete_button()
         self.notification_text_area('Удаление')
         self.execute_button_click()
-        time.sleep(1)
+        time.sleep(3)
 
     def restore_base_article(self, url, user=ricksanchez):
         """Восстановление статьи"""
