@@ -26,6 +26,7 @@ class TestCheckNewArticleStatus:
             page = Comments(driver)
             page.get_authorisation_in_url(DataParser.get_url_from_data_file(), user_for_test)
             page.create_comments()
+            page.check_creating_comments()
 
         @allure.title('Закрытие первого тестового комментария')
         def test_close_first_comment(self, driver):
