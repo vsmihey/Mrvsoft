@@ -1,5 +1,4 @@
 import time
-# from undetected_chromedriver import WebElement
 from pages.base_class import *
 from pages.authorisation_page import Authorisation
 import locators.all_locators as locators
