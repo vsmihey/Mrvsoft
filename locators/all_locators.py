@@ -1434,11 +1434,25 @@ class Task:
     ACCESSIBLY_BUTTON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
     MODAL_WINDOW_BODY = (By.XPATH, "//p[@class='m-lms-exercise-are-creating-alert__text']")
 
+
 class Reports:
     REPORTS_BY_CONTENT_LIST = (By.CSS_SELECTOR, "div[class='folder-list-item folder-list-item--no-children']")
     DOWNLOAD_REPORTS_BUTTON = (By.XPATH, "//div[@class='vaadin-button-container']")
     DOWNLOAD_REPORTS_BUTTON_1 = (By.XPATH, "//vaadin-button[@id='buttonExport']")
-    IFRAME_FOR_SHADOW = (By.XPATH, "//iframe[@title='ticket']")
+    "Отчеты по контенту"
+    BUTTON_TICKET = (By.XPATH, "//div[@id='ticket']")
+    BUTTON_SEARCH = (By.XPATH, "//div[@id='search']")
+    BUTTON_USEFUL = (By.XPATH, "//div[@id='useful']")
+    BUTTON_ARTICLE_VIEW = (By.XPATH, "//div[@id='articleView']")
+    BUTTON_NOTIFICATION = (By.XPATH, "//div[@id='notification']")
+    BUTTON_INTEGRATION = (By.XPATH, "//div[@id='integration']")
+    "Фреймы"
+    IFRAME_TICKET = (By.XPATH, "//iframe[@title='ticket']")
+    IFRAME_SEARCH = (By.XPATH, "//iframe[@title='search']")
+    IFRAME_USEFUL = (By.XPATH, "//iframe[@title='useful']")
+    IFRAME_ARTICLE_VIEW = (By.XPATH, "//iframe[@title='articleView']")
+    IFRAME_NOTIFICATION = (By.XPATH, "//iframe[@title='notification']")
+    IFRAME_INTEGRATION = (By.XPATH, "//iframe[@title='integration']")
     SHADOW_1 = (By.TAG_NAME, "vaadin-horizontal-layout")
     SHADOW_2 = (By.TAG_NAME, "ticket-filters")
     SHADOW_3 = (By.TAG_NAME, "vaadin-vertical-layout")

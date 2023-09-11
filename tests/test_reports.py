@@ -18,9 +18,8 @@ class TestReports:
         report_page.get_authorisation_in_selen(user_for_test)
         report_page.reports_click()
         # report_page.download_reports(driver)
-        report_page.list_report_by_content(driver)
-
-
+        report_page.check_iframe_ticket(driver)
+        report_page.check_iframe_search(driver)
 
     @allure.suite("Скачивание отчетов в обучении")
     def test_reports_learning(self):
