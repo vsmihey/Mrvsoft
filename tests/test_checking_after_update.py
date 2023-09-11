@@ -9,7 +9,6 @@ from pages.data_login_password import base_article, article_by_script
 from pages.users import ricksanchez
 from pages.data_login_password import base_article, article_by_template
 from pages.users import minervakms
-from pages.users import andrey
 
 user_for_test = minervakms
 

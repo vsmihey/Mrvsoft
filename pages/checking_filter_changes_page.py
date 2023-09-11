@@ -68,10 +68,10 @@ class AddFilterChanges(Authorisation, BasePage):
         """input name and text an folder direct"""
         self.element_is_visible(Locators.NAME_OF_ARTICLE).send_keys(first_name)
         try:
-            self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE, timeout=2).send_keys("Контент 1")
+            self.element_is_visible_all(Locators.FOLDER_SAVE_ARTICLE, timeout=2).send_keys("Контент 1")
         except ElementNotInteractableException:
             time.sleep(2)
-            self.element_is_visible(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
+            self.element_is_visible_all(Locators.FOLDER_SAVE_ARTICLE).send_keys("Контент 1")
         time.sleep(1)
         try:
             self.element_is_visible(Locators.TEXT_AREA_ARTICLE, timeout=2).send_keys(text)
