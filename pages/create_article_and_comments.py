@@ -525,6 +525,7 @@ class Comments(Authorisation):
 
     def close_first_comment(self):
         """Закрытие первого комментария"""
+        self.browser.refresh()
         self.click_to_element(locators.Comments.TO_ANSWER_COMMENT_1)
         self.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 1')
         self.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
@@ -532,6 +533,7 @@ class Comments(Authorisation):
 
     def close_second_comment(self):
         """Закрытие первого комментария"""
+        self.browser.refresh()
         self.click_to_element(locators.Comments.TO_ANSWER_COMMENT_2)
         self.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 2')
         self.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
@@ -539,6 +541,7 @@ class Comments(Authorisation):
 
     def close_third_comment(self):
         """Закрытие первого комментария"""
+        self.browser.refresh()
         self.click_to_element(locators.Comments.TO_ANSWER_COMMENT_3)
         self.element_is_visible(locators.Comments.COMMENT_BOX).send_keys('Закрытие 3')
         self.click_to_element(locators.Comments.CHECK_BOX_TICK_SOLVED)
