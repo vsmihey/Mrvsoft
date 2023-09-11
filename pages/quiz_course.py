@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 import locators.all_locators as locators
 
 
-class Exam(CreatingPanel, PublicWizard, CKERedactor):
+class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
     """Класс по работе с Тестами"""
 
     def input_test_name(self, test_string):
@@ -53,9 +53,17 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor):
         """Проверка наименования модального окна для добавления вопросов в тест"""
         assert self.element_is_visible(locators.Test.MODAL_WINDOW_NAME).text == 'Выберите вопросы для теста'
 
-    def select_questions(self):
+    def select_all_questions(self):
         """Выбор вопросов"""
         self.click_to_element(locators.Test.ALL_QUESTIONS_SELECT)
+
+    def select_question(self):
+        """Выбор вопроса"""
+        self.click_to_element(locators.Test.QUESTIONS_SELECT)
+
+    def select_answer(self):
+        """Выбор ответа"""
+        self.click_to_element(locators.Test.ANSWER_SELECT)
 
     def close_modal_window(self):
         """Закрытие модального окна"""
@@ -76,7 +84,7 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor):
     def check_one_questions_limit(self):
         """Проверка, что в тесте выбран один вопрос"""
         assert self.element_is_visible(
-            locators.Test.QUESTIONS_LIMIT_STATUS).text == 'В тесте будет 1 случайный вопрос'
+            locators.Test.QUESTIONS_LIMIT_STATUS).text == 'В тесте будет 1 вопрос'
 
     def save_test(self):
         """Сохранение теста"""
@@ -89,6 +97,28 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor):
     def check_name_created_test(self, title):
         """Проверка, карточки созданного теста по совпадению названия теста"""
         assert self.element_is_visible(locators.Test.NAME_CREATED_TEST).text == title
+
+    def passing_button_click(self, title):
+        """Кнопка прохождения в разделе 'обучение'"""
+        self.click_to_element((By.XPATH, f"//div[contains(text(),'{title}')]"), timeout=60)
+
+    def execution_mark(self, title):
+        """Наличие записи о выполнении в разделе 'смотреть выполненные' """
+        self.element_is_visible((By.XPATH, f"//div[contains(text(),'{title}')]"))
+
+    def see_completed_button(self):
+        """Нажатие кнопки 'смотреть выполненные' в разделе обучения"""
+        time.sleep(1)
+        self.browser.refresh()
+        self.click_to_element(locators.Test.SEE_COMPLETED)
+
+    def start_stop_passing_button_click(self):
+        """Кнопка 'Начать опрос/обучение' в прохождении опроса"""
+        self.click_to_element(locators.Test.START_PASSING)
+
+    def passing_test_next_button_click(self):
+        """Нажатие кнопки 'Продолжить' после выбора ответа"""
+        self.click_to_element(locators.Test.NEXT_BUTTON)
 
 
 class Quiz(Exam):
@@ -151,6 +181,14 @@ class Quiz(Exam):
         """Сохранение опроса"""
         self.click_to_element(locators.Quiz.SAVE_BUTTON)
         self.next_and_finish_button_click()
+
+    def select_answer_quiz(self):
+        """Выбор ответа в прохождении опроса"""
+        self.click_to_element(locators.Quiz.SELECT_ANSWER)
+
+    def passing_quiz_next_button_click(self):
+        """Нажатие кнопки 'Продолжить' после выбора ответа"""
+        self.click_to_element(locators.Quiz.NEXT_BUTTON)
 
 
 class Course(Exam):
@@ -256,6 +294,7 @@ class Course(Exam):
         """Наполнение 'Scorm/TinCan'"""
         self.scorm_button()
         self.load_scorm()
+        time.sleep(2)
 
     def check_error_message(self):
         """Проверка сообщения о пустом поле 'Название материала'"""
@@ -278,6 +317,23 @@ class Course(Exam):
             self.next_and_finish_button_click()
 
         time.sleep(1)
+
+    def close_modal_preview_window_click(self):
+        """Закрытие модального превью окна в разделе обучения"""
+        self.click_to_element(locators.Course.PREVIEW_WINDOW_CLOSE_BUTTON)
+
+    def next_button_click(self):
+        """Кнопка 'продолжить' в прохождении курса"""
+        self.click_to_element(locators.Course.NEXT_BUTTON)
+
+    def scorm_next_button_click(self):
+        """Кнопка 'продолжить' в скорме при прохождении курса"""
+        time.sleep(3)
+        self.click_to_element(locators.Course.SCORM_NEXT_BUTTON)
+
+    def finish_course_button_click(self):
+        """Кнопка 'Завершить курс' при прохождении курса"""
+        self.click_to_element(locators.Course.FINISH_COURSE_BUTTON)
 
 
 class Task(CreatingPanel, MenuNavigation):

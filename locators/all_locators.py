@@ -1355,13 +1355,17 @@ class Test:
     NEW_QUESTION_BUTTON = (By.XPATH, "//p[contains(text(),'Добавить вопрос')]")
     MODAL_WINDOW_NAME = (By.XPATH, "//h3[@class='title-block']")
     ALL_QUESTIONS_SELECT = (By.CSS_SELECTOR, ".m-switch-box.lms-questions-lib__header-switch")
+
+    QUESTIONS_SELECT = (By.XPATH, "//span[contains(text(),'5.	Где можно пользоваться бесконтактной картой')]")
+    ANSWER_SELECT = (By.XPATH, "//label[@class='radio-wrapper']")
+    NEXT_BUTTON = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium lms-quiz-process-popup__submit-button']")
+
     QUESTIONS_LIMIT_STATUS = (By.CSS_SELECTOR, ".m-ui-typography.m-ui-typography--16x18.m-ui-slider__text")
     QUESTIONS_LIMIT_VALUE = (By.NAME, "randomQuestionCount")
     COUNT_OF_CORRECT_ANSWERS = (By.CSS_SELECTOR, ".m-ui-select__select")
     NAME_CREATED_TEST = (By.CSS_SELECTOR, ".popup__title.title-block")
-    PASSING_TEST = (
-        By.XPATH,
-        "(//div[@class='lms-exercise-card__quiz lms-exercises__card-container lms-exercise-card__present'])[1]")
+    SEE_COMPLETED = (By.XPATH, "//button[@class='m-ui-button-text']")
+    START_PASSING = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']")
 
 
 class Quiz:
@@ -1376,9 +1380,11 @@ class Quiz:
     ADD_ANSWER_BUTTON = (By.XPATH, "//button[@class='m-button m-button--default m-button--medium']")
     CREATE_QUESTION_BUTTON = (
         By.XPATH, "//button[@class='m-button m-button--success m-button--medium m-lms-question-editor__footer-button']")
-    PASSING_QUIZ = (
+    SELECT_ANSWER = (By.XPATH, "//span[@class='checkbox__label']")
+    NEXT_BUTTON = (
         By.XPATH,
-        "(//div[@class='lms-exercise-card__quiz lms-exercises__card-container lms-exercise-card__present'])[2]")
+        "//button[@class='m-button m-button--success m-button--medium lms-survey-process-popup__submit-button']")
+
 
 
 class Course:
@@ -1411,15 +1417,17 @@ class Course:
     SCORM_NAME = (By.XPATH, "//input[@class='m-ui-text-input__input']")
     LOAD_SCORM_BUTTON = (By.XPATH, "//input[@type='file']")
     ERROR_MESSAGE = (By.XPATH, "//div[@class='m-ui-input-wrapper-2__error-message']")
-    SELECT_FOLDER_CLICK = (By.XPATH,
-                           "//div[@class ='m-ui-paper m-ui-select__paper m-lms-course-cover__folder m-ui-paper--hoverable m-ui-paper--shadowed']")
+    SELECT_FOLDER_CLICK = (
+        By.XPATH, "//div[@class ='m-ui-paper m-ui-select__paper m-lms-course-cover__folder m-ui-paper--hoverable m-ui-paper--shadowed']")
     SELECT_FOLDER_PRODUCT = (By.XPATH, "//option[@label ='Продукты']")
-
     SELECT_SCORM_MATERIAL = (By.XPATH, " //p[contains(text(),'Введите название материала')]")
-    PASSING_COURSE = (
-        By.XPATH,
-        "(//div[@class='lms-exercise-card lms-exercises__card-container lms-exercise-card__present card-photo card-photo--hoverable'])")
     PREVIEW_WINDOW_CLOSE_BUTTON = (By.XPATH, "//*[name()='path' and contains(@d,'M12.6511 1')]")
+    NEXT_BUTTON = (
+        By.XPATH, "//button[@class='m-button m-button--default m-button--medium lms-course-next-material-popper__btn']")
+    SCORM_NEXT_BUTTON = (By.XPATH, "//iframe[@class='lms2-package-material']")
+    FINISH_COURSE_BUTTON = (
+        By.XPATH, "//button[@class='m-button m-button--success m-button--medium m-button--full-width']")
+
 
 
 class Task:
