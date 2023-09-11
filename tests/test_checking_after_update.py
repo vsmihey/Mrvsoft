@@ -8,10 +8,10 @@ from pages.create_article_and_comments import BaseArticleEditor, ArticleByTempla
 from pages.data_login_password import base_article, article_by_script
 from pages.users import ricksanchez
 from pages.data_login_password import base_article, article_by_template
-from pages.users import minervakms
+from pages.users import leela
 from pages.users import andrey
 
-user_for_test = minervakms
+user_for_test = leela
 
 
 @allure.suite("Проверка обычной статьи, статьи по шаблону, пошагового сценария после установки обновления")

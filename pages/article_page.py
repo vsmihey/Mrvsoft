@@ -59,7 +59,7 @@ class ArticlePage(Authorisation, BasePage):
             self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("Контент 1")
             self.click_to_element(Locators.CREATE_FOLDER_BUTTON)
 
-    def add_normal_article(self, driver):
+    def add_normal_article(self):
         # self.get_authorisation_in_selen(driver)
         person = generated_person()
         first_name = person.first_name+str(random.randint(99, 999))

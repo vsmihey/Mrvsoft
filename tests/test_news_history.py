@@ -2,9 +2,9 @@ import time
 import allure
 import pytest
 from pages.news_history_page import CheckNewsHistoryPage
-from pages.users import ricksanchez, person2, person1
+from pages.users import fry, person2, person1
 
-user_for_test = ricksanchez
+user_for_test = fry
 
 
 @pytest.mark.order(6)
