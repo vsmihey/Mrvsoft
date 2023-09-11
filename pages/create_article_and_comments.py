@@ -510,6 +510,7 @@ class Comments(Authorisation):
         try:
             self.check_creating_comments()
         except AssertionError:
+            self.browser.refresh()
             self.create_comments()
 
     def check_creating_comments(self):
