@@ -20,6 +20,10 @@ gary = StableUsers('gary', 'minervakms')  # 5 test_wizard_and_search_ru_en
 ricksanchez = StableUsers('ricksanchez',
                           'minervakms')  # 6 test_news_history, при смене - заменить в data_login_password
 morty = StableUsers('morty', 'minervakms')  # 7 тестовый файл
+fry = StableUsers('fry', 'minervakms')
+bender = StableUsers('bender', 'minervakms')
+leela = StableUsers('leela', 'minervakms')
+
 
 andrey = StableUsers('andrey', '777qwerty')
 person1 = StableUsers('person1', '777qwerty')

@@ -1,6 +1,5 @@
 import allure
 import pytest
-
 from conftest import driver
 from pages.reports_page import ReportsPage
 from pages.users import ricksanchez

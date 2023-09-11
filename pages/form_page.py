@@ -13,10 +13,9 @@ from selenium.webdriver.common.by import By
 from generator.generator import generated_person
 from pages.base_page import BasePage
 from locators.locators_form_pages import FormPagesLocators as Locators
-from pages.data_login_password import *
 from selenium.webdriver.common.alert import Alert
 from pages.authorisation_page import Authorisation
-from pages.users import DataLoginPassword
+from pages.users import minervakms
 
 
 class FormPage(Authorisation, BasePage):
@@ -29,15 +28,12 @@ class FormPage(Authorisation, BasePage):
         name_screenshot = 'screenshot' + now_date + '.png'
         path = Path(pathlib.Path.cwd(), "screenshots", name_screenshot)
         path = str(path)
-        self.driver.save_screenshot(path)
+        self.browser.save_screenshot(path)
 
-    def full_authorization(self, driver):
+    def full_authorization(self):
         """CORRECT DATA"""
-        self.login = login
-        self.password = password
-        form_page = FormPage(driver, url)
-        form_page.open()
-        form_page.authorization(self.login, self.password)
+        self.open()
+        self.authorization(minervakms.login, minervakms.password)
 
     def authorization(self, login, password):
         self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
@@ -49,8 +45,8 @@ class FormPage(Authorisation, BasePage):
     def input_in_my_project(self, driver):
         """INPUT IN MY PROJECT"""
         self.element_is_visible(Locators.TYPE_AUTHOR).send_keys('Встроенный')
-        self.element_is_visible(Locators.LOGIN).send_keys(login)
-        self.element_is_visible(Locators.PASSWORD).send_keys(password)
+        self.element_is_visible(Locators.LOGIN).send_keys(minervakms.login)
+        self.element_is_visible(Locators.PASSWORD).send_keys(minervakms.password)
         self.click_to_element(Locators.INPUT_BUTTON)
         try:
             time.sleep(1)
@@ -116,7 +112,7 @@ class FormPage(Authorisation, BasePage):
 
     def restore_incorrect(self):
         """RESTORE INPUT INCORRECT LOGIN"""
-        login_incorrect, password_incorrect = DataLoginPassword.incorrect_data()
+        login_incorrect, password_incorrect = '123qwe', '321qwe'
         login = login_incorrect
         self.click_to_element(Locators.RESTORE)
         self.element_is_visible(Locators.RESTORE_LOGIN).send_keys(login)
@@ -138,7 +134,7 @@ class FormPage(Authorisation, BasePage):
     def restore_correct(self):
         """RESTORE PASSWORD BY CORRECT LOGIN END PUSH REMEMBER PASSWORD"""
         self.click_to_element(Locators.RESTORE)
-        self.element_is_visible(Locators.RESTORE_LOGIN).send_keys(login)
+        self.element_is_visible(Locators.RESTORE_LOGIN).send_keys(minervakms.login)
         self.click_to_element(Locators.RESTORE_BUTTON)
         time.sleep(1)
         # self.screenshot()
@@ -167,42 +163,42 @@ class FormPage(Authorisation, BasePage):
         self.click_to_element(Locators.TEST_PROJECT)
         time.sleep(1)
 
-    def title_find(self, driver):
+    def title_find(self):
         """TITLE"""
         # driver.title()
-        title = driver.title
+        title = self.browser.title
         # title = driver.execute_script("return document.title;")
         print(title)
 
-    def assert_title(self, driver, name_project='selen', name_='Контент 1'):
+    def assert_title(self, name_project='selen', name_='Контент 1'):
         """ASSERT"""
         time.sleep(1)
-        title = driver.title
+        title = self.browser.title
         time.sleep(1)
         result = f'{name_} / {name_project} — Minervasoft'
         time.sleep(1)
         assert title == result
         # print(result)
 
-    def all_title(self, driver):
+    def all_title(self):
         """CHECK ALL TITLE"""
-        driver.implicitly_wait(10)
+        self.browser.implicitly_wait(10)
         # time.sleep(1)
         # driver.get_screenshot_as_file("scr.png")
-        driver.refresh()
+        self.browser.refresh()
         self.click_to_element(Locators.CONTENT)
         self.click_to_element(Locators.ALL_CONTENT)
         time.sleep(1)
-        self.assert_title(driver, name_project='selen', name_='Весь контент')
+        self.assert_title(self.browser, name_='Весь контент')
         self.click_to_element(Locators.CONTENT1)
         time.sleep(1)
-        self.assert_title(driver, name_project='selen', name_='Контент 1')
+        self.assert_title(self.browser, name_='Контент 1')
         # self.screenshot()
         self.click_to_element(Locators.CREATE_BUTTON)
         self.element_is_visible(Locators.CHOOSE_PROJECT).send_keys("selen")
         time.sleep(1)
         self.click_to_element(Locators.CREATE_ARTICLE)
-        self.assert_title(driver, name_project='selen', name_='Добавить статью')
+        self.assert_title(self.browser, name_='Добавить статью')
         time.sleep(2)
         # self.screenshot()
         try:
@@ -212,7 +208,7 @@ class FormPage(Authorisation, BasePage):
             self.click_to_element(Locators.CLOSE_PAGE_LIST)
         self.click_to_element(Locators.CREATE_STEP_SCRIPT)
         # # time.sleep(5)
-        self.assert_title(driver, name_project='selen', name_='Добавить пошаговый сценарий')
+        self.assert_title(self.browser, name_='Добавить пошаговый сценарий')
         time.sleep(1)
         self.click_to_element(Locators.CLOSE_PAGE_SCRIPT)
         self.click_to_element(Locators.CLOSE_CREATE_WINDOW)
@@ -225,31 +221,31 @@ class FormPage(Authorisation, BasePage):
         self.element_is_visible(Locators.SEARCH_INPUT).send_keys(Keys.RETURN)
         time.sleep(2)
         try:
-            self.assert_title(driver, name_project='selen', name_='название 1')
+            self.assert_title(self.browser, name_='название 1')
         except TimeoutException:
             time.sleep(2)
             self.element_is_visible(Locators.SEARCH_INPUT).send_keys('название 1')
             self.element_is_visible(Locators.SEARCH_INPUT).send_keys(Keys.RETURN)
             time.sleep(2)
-            self.assert_title(driver, name_project='selen', name_='название 1')
+            self.assert_title(self.browser, name_='название 1')
         self.click_to_element(Locators.HISTORY_BUTTON_1)
-        self.assert_title(driver, name_project='selen', name_='История')
+        self.assert_title(self.browser, name_='История')
         self.click_to_element(Locators.LEARNING_BUTTON)
         time.sleep(1)
-        self.assert_title(driver, name_project='selen', name_='Обучение / Мое обучение')
+        self.assert_title(self.browser, name_='Обучение / Мое обучение')
         self.click_to_element(Locators.REPORT_BUTTON)
         time.sleep(1)
-        self.assert_title(driver, name_project='selen', name_='Обратная связь по контенту')
+        self.assert_title(self.browser, name_='Обратная связь по контенту')
         self.click_to_element(Locators.PEOPLE_BUTTON)
         time.sleep(2)
-        self.assert_title(driver, name_project='selen', name_='Все участники')
+        self.assert_title(self.browser, name_='Все участники')
         self.click_to_element(Locators.SETTINGS)
         time.sleep(3)
-        self.assert_title(driver, name_project='selen', name_='Настройки')
+        self.assert_title(self.browser, name_='Настройки')
 
-    def add_new_person(self, driver):
+    def add_new_person(self):
         """ADD NEW PERSON"""
-        driver.implicitly_wait(10)
+        self.browser.implicitly_wait(10)
         person = generated_person()
         last_name = person.last_name
         first_name = person.first_name
@@ -270,13 +266,13 @@ class FormPage(Authorisation, BasePage):
         text_name = self.element_is_visible(Locators.UPLOAD_FILE_NAME)
         text_name_value = text_name.text
         assert text_name_value == 'animal.jpeg'
-        self.button_invisible_check(driver)
+        self.button_invisible_check()
         self.element_is_visible(Locators.LAST_NAME).send_keys(last_name)
-        self.button_invisible_check(driver)
+        self.button_invisible_check()
         self.element_is_visible(Locators.FIRST_NAME).send_keys(first_name)
-        self.button_invisible_check(driver)
-        self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login)
-        self.button_invisible_check(driver)
+        self.button_invisible_check()
+        self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(minervakms.login)
+        self.button_invisible_check()
         self.click_to_element(Locators.SAVE_PERSON)
         check_text_must_be = self.element_is_visible(Locators.CHECK_MUST_BE_ADD)
         check_text_must_be_value = check_text_must_be.text
@@ -290,58 +286,58 @@ class FormPage(Authorisation, BasePage):
         # print(check_text_login_used_value)
         value_random = str(random.randint(999, 9999))
         self.element_is_visible(Locators.LOGIN_NEW_PERSON).clear()
-        self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(login + value_random)
+        self.element_is_visible(Locators.LOGIN_NEW_PERSON).send_keys(minervakms.login + value_random)
         self.click_to_element(Locators.SAVE_PERSON)
         """check result create new person name"""
         name_check = last_name + ' ' + first_name
         time.sleep(1)
-        text_check_created_new_user_name = driver.find_element(By.XPATH, f"//span[text()='{name_check}']")
+        text_check_created_new_user_name = self.browser.find_element(By.XPATH, f"//span[text()='{name_check}']")
         text_check_created_new_user_name_value = text_check_created_new_user_name.text
         assert text_check_created_new_user_name_value == name_check
         # print(text_check_created_new_user_name_value)
-        print(login + value_random)
+        print(minervakms.login + value_random)
         time.sleep(1)
         """check result create new person login"""
-        login_admin = login + value_random + ' (администратор)'
-        text_check_created_new_user_login = driver.find_element(By.XPATH, f"//span[text()='{login_admin}']")
+        login_admin = minervakms.login + value_random + ' (администратор)'
+        text_check_created_new_user_login = self.browser.find_element(By.XPATH, f"//span[text()='{login_admin}']")
         text_check_created_new_user_value = text_check_created_new_user_login.text
         assert text_check_created_new_user_value == login_admin
         # print(text_check_created_new_user_value)
         """check result create new person mail"""
         email_check = email
-        text_check_created_new_user_mail = driver.find_element(By.XPATH, f"//a[text()='{email_check}']")
+        text_check_created_new_user_mail = self.browser.find_element(By.XPATH, f"//a[text()='{email_check}']")
         text_check_created_new_mail_value = text_check_created_new_user_mail.text
         assert text_check_created_new_mail_value == email_check
         # print(text_check_created_new_mail_value)
 
-    def button_invisible_check(self, driver):
+    def button_invisible_check(self):
         """CHECK INVISIBLE BUTTON"""
         try:
             time.sleep(1)
-            save_person = driver.find_element(By.XPATH, "//p[text()='Сохранить пользователя']")
+            save_person = self.browser.find_element(By.XPATH, "//p[text()='Сохранить пользователя']")
             save_person.click()
         except (ElementClickInterceptedException, StaleElementReferenceException):
             print("Кнопка 'Сохранить пользователя' не активна")
 
-    def button_invisible_role_check(self, driver):
+    def button_invisible_role_check(self):
         try:
             self.click_to_element(Locators.CREATE_ROLE)
         except ElementClickInterceptedException:
             print("Кнопка 'Создать роль' не активна")
 
-    def add_new_role(self, driver):
+    def add_new_role(self):
         """ADD NEW ROLE"""
-        driver.implicitly_wait(10)
+        self.browser.implicitly_wait(10)
         self.click_to_element(Locators.PEOPLE_BUTTON)
         try:
-            add_new_role_button = driver.find_element(By.XPATH, "//p[text()='добавить роль']")
+            add_new_role_button = self.browser.find_element(By.XPATH, "//p[text()='добавить роль']")
             add_new_role_button.click()
         except NoSuchElementException:
             self.click_to_element(Locators.ADD_NEW_ROLE)
-        driver.implicitly_wait(10)
+        self.browser.implicitly_wait(10)
         person = generated_person()
         first_name = "role " + person.first_name + str(random.randint(999, 9999))
-        self.button_invisible_role_check(driver)
+        self.button_invisible_role_check()
         self.element_is_visible(Locators.INPUT_NAME_ROLE).send_keys(first_name)
         # push 13 check boxes
         for x in range(1, 14):
@@ -352,13 +348,14 @@ class FormPage(Authorisation, BasePage):
         check_role = first_name
         # print(check_role)
         time.sleep(0.5)
-        text_check_created_new_role = driver.find_element(By.XPATH, f"//span[text()='{check_role}']")
+        text_check_created_new_role = self.browser.find_element(By.XPATH, f"//span[text()='{check_role}']")
         text_check_created_new_role_value = text_check_created_new_role.text
         assert text_check_created_new_role_value == check_role
         # print(text_check_created_new_role_value)
         # self.click_to_element(Locators.EDIT_NEW_ROLE)
         time.sleep(1)
-        edit_new_role = driver.find_element(By.XPATH, f"//span[text()='{first_name}']/..//div[@class='item-role__icon-edit']")
+        edit_new_role = self.browser.find_element(By.XPATH,
+                                                  f"//span[text()='{first_name}']/..//div[@class='item-role__icon-edit']")
         edit_new_role.click()
         self.element_is_clickable(Locators.DEACTIVATE_ROLE)
         for x in range(1, 14):
@@ -367,7 +364,7 @@ class FormPage(Authorisation, BasePage):
         self.click_to_element(Locators.SAVE_CHANGES_ROLE)
         return first_name
 
-    def create_new_folder(self, driver):
+    def create_new_folder(self):
         """CREATE NEW FOLDER"""
         # driver.implicitly_wait(10)
         person = generated_person()
@@ -389,15 +386,15 @@ class FormPage(Authorisation, BasePage):
         time.sleep(1)
         self.click_to_element(Locators.CLOSE_WINDOW_STRUCTURE)
         try:
-            text_all_content_check = driver.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
+            text_all_content_check = self.browser.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
             text_all_content_check_value = text_all_content_check.text
             assert text_all_content_check_value == "Весь контент"
             # print(text_all_content_check_value)
         except NoSuchElementException:
             print('Контента пока нет')
         # time.sleep(1)
-        driver.implicitly_wait(10)
-        check_created_new_folder = driver.find_element(By.XPATH, f"//p[text()='{name_of_new_folder}']")
+        self.browser.implicitly_wait(10)
+        check_created_new_folder = self.browser.find_element(By.XPATH, f"//p[text()='{name_of_new_folder}']")
         check_created_new_folder_value = check_created_new_folder.text
         assert check_created_new_folder_value == name_of_new_folder
         # print(check_created_new_folder_value)
@@ -473,13 +470,13 @@ class FormPage(Authorisation, BasePage):
         except NoSuchElementException:
             print('папок нет больше')
 
-    def create_5_article(self, driver):
+    def create_5_article(self):
         """ARTICLE"""
         n = 0
         x = 0
         name_folder = 'папка1'
         while True:
-            driver.implicitly_wait(10)
+            self.browser.implicitly_wait(10)
             count_folders = n
             person = generated_person()
             name_article = person.first_name
@@ -523,7 +520,7 @@ class FormPage(Authorisation, BasePage):
                     break
         # print("создано по 5 статей")
 
-    def create_del_recovery_folder_content(self, driver):
+    def create_del_recovery_folder_content(self):
         """CREATE DELETE RECOVERY FOLDER"""
         self.click_to_element(Locators.CONTENT)
         """check open text"""
@@ -532,7 +529,7 @@ class FormPage(Authorisation, BasePage):
         assert text_folder_check_value == "Папки"
         # print(text_folder_check_value)
         try:
-            text_all_content_check = driver.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
+            text_all_content_check = self.browser.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
             text_all_content_check_value = text_all_content_check.text
             assert text_all_content_check_value == "Весь контент"
             # print(text_all_content_check_value)
@@ -567,21 +564,21 @@ class FormPage(Authorisation, BasePage):
         time.sleep(1)
         self.click_to_element(Locators.CLOSE_WINDOW_STRUCTURE)
         try:
-            text_all_content_check = driver.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
+            text_all_content_check = self.browser.find_element(By.XPATH, "//h1[contains(text(),'Весь контент')]")
             text_all_content_check_value = text_all_content_check.text
             assert text_all_content_check_value == "Весь контент"
             # print(text_all_content_check_value)
         except NoSuchElementException:
             print('Контента пока нет')
         # time.sleep(1)
-        driver.implicitly_wait(10)
-        check_created_new_folder = driver.find_element(By.XPATH, f"//p[text()='{name_of_new_folder}']")
+        self.browser.implicitly_wait(10)
+        check_created_new_folder = self.browser.find_element(By.XPATH, f"//p[text()='{name_of_new_folder}']")
         check_created_new_folder_value = check_created_new_folder.text
         assert check_created_new_folder_value == name_of_new_folder
         # print(check_created_new_folder_value)
         """del folder"""
         self.click_to_element(Locators.FOLDERS_CHANGE)
-        folder_fol_del_by_name = driver.find_element(By.XPATH, f"//div[contains(text(),'{name_of_new_folder}')]")
+        folder_fol_del_by_name = self.browser.find_element(By.XPATH, f"//div[contains(text(),'{name_of_new_folder}')]")
         folder_fol_del_by_name.click()
         self.click_to_element(Locators.DELETE_FOLDER_BUTTON)
         check_del_text = self.element_is_visible(Locators.DELETE_FOLDER_CONFIRM_TEXT)
@@ -595,7 +592,7 @@ class FormPage(Authorisation, BasePage):
         """recovery folder"""
         self.click_to_element(Locators.SHOW_DELETED_FOLDERS)
         time.sleep(1)
-        recovery_folder_by_name = driver.find_element(By.XPATH, f"//p[normalize-space()='{name_of_new_folder}']")
+        recovery_folder_by_name = self.browser.find_element(By.XPATH, f"//p[normalize-space()='{name_of_new_folder}']")
         recovery_folder_by_name.click()
         time.sleep(1)
         self.click_to_element(Locators.RECOVERY_FOLDER_BUTTON)
@@ -603,10 +600,10 @@ class FormPage(Authorisation, BasePage):
         self.click_to_element(Locators.RECOVERY_FOLDER_BUTTON_CONFIRM)
         # print("папка восстановлена")
 
-        driver.refresh()
+        self.browser.refresh()
         self.click_to_element(Locators.FOLDERS_CHANGE)
         time.sleep(1)
-        folder_fol_del_by_name = driver.find_element(By.XPATH, f"//div[contains(text(),'{name_of_new_folder}')]")
+        folder_fol_del_by_name = self.browser.find_element(By.XPATH, f"//div[contains(text(),'{name_of_new_folder}')]")
         folder_fol_del_by_name.click()
         time.sleep(1)
         # self.screenshot()
@@ -616,7 +613,7 @@ class FormPage(Authorisation, BasePage):
         self.create_5_folder()
         """!!!!!check radiobutton by date!!!!!"""
 
-    def folder1_folder2(self, driver):
+    def folder1_folder2(self):
         """FOLDER 1 AND FOLDER 2"""
         folder1_name = "папка1"
         folder2_name = "папка2"
@@ -636,11 +633,11 @@ class FormPage(Authorisation, BasePage):
         self.click_to_element(Locators.CLOSE_WINDOW_STRUCTURE)
         """create 5 articles"""
         time.sleep(1)
-        self.create_5_article(driver)
+        self.create_5_article()
 
-    def check_folder1_folder2(self, driver):
+    def check_folder1_folder2(self):
         """CHECK FOLDER 1 AND FOLDER 2"""
-        driver.implicitly_wait(10)
+        self.browser.implicitly_wait(10)
         self.click_to_element(Locators.CONTENT)
         self.click_to_element(Locators.FOLDERS_CHANGE)
         self.click_to_element(Locators.FOLDER1)
@@ -665,7 +662,7 @@ class FormPage(Authorisation, BasePage):
         self.click_to_element(Locators.SAVE_CHANGES_FOLDER)
         time.sleep(1)
         # self.click_to_element(Locators.CLOSE_WINDOW_STRUCTURE)
-        driver.back()
+        self.browser.back()
         # time.sleep(1)
         self.click_to_element(Locators.ALL_CONTENT)
         self.click_to_element(Locators.SORT_BY_ALL_CONTENT)
@@ -680,19 +677,19 @@ class FormPage(Authorisation, BasePage):
         self.click_to_element(Locators.SAVE_CHANGES_FOLDER)
         time.sleep(1)
         # self.click_to_element(Locators.CLOSE_WINDOW_STRUCTURE)
-        driver.back()
+        self.browser.back()
         # time.sleep(1)
         self.click_to_element(Locators.ALL_CONTENT)
-        text_sort_by_all_content = driver.find_element(By.XPATH, "//span[contains(text(),'по популярности')]")
+        text_sort_by_all_content = self.browser.find_element(By.XPATH, "//span[contains(text(),'по популярности')]")
         text_sort_by_all_content_value = text_sort_by_all_content.text
         assert text_sort_by_all_content_value == 'по популярности'
         # print("сортировка по популярности сохранена")
 
-    def favourites(self, driver):
+    def favourites(self):
         """FAVOURITES"""
-        driver.implicitly_wait(10)
+        self.browser.implicitly_wait(10)
         "в избранном не должно быть папок"
-        driver.implicitly_wait(10)
+        self.browser.implicitly_wait(10)
         person = generated_person()
         first_name = person.first_name
         self.click_to_element(Locators.CONTENT)
@@ -718,7 +715,7 @@ class FormPage(Authorisation, BasePage):
         assert check_text_structure_value == 'Управление структурой'
         # print("Управление структурой")
         time.sleep(2)
-        edit_new_folder = driver.find_element(By.XPATH, f"//div[text()='{first_name}']")
+        edit_new_folder = self.browser.find_element(By.XPATH, f"//div[text()='{first_name}']")
         edit_new_folder.click()
         edit_name = first_name + '777'
         # self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).clear()
@@ -726,7 +723,7 @@ class FormPage(Authorisation, BasePage):
         self.element_is_visible(Locators.CREATE_NAME_NEW_FOLDER).send_keys("777")
         self.click_to_element(Locators.SAVE_CHANGES_FOLDER)
         time.sleep(2)
-        edit_new_folder = driver.find_element(By.XPATH, f"//div[text()='{edit_name}']")
+        edit_new_folder = self.browser.find_element(By.XPATH, f"//div[text()='{edit_name}']")
         edit_new_folder.click()
         self.click_to_element(Locators.DELETE_FOLDER_BUTTON)
         time.sleep(1)
@@ -746,13 +743,13 @@ class FormPage(Authorisation, BasePage):
         self.click_to_element(Locators.CLOSE_CREATED_ARTICLE)
 
     @allure.title("Добавление контента в Избранное")
-    def add_to_favourites(self, driver):
+    def add_to_favourites(self):
         """ДОЛЖНЫ БЫТЬ СОЗДАНЫ СТАТЬИ"""
         self.click_to_element(Locators.CONTENT)
         self.click_to_element(Locators.FAVOURITES)
         try:
             time.sleep(1)
-            create_folder_button = driver.find_element(By.XPATH, "//p[contains(text(),'Создать папку')]")
+            create_folder_button = self.browser.find_element(By.XPATH, "//p[contains(text(),'Создать папку')]")
             create_folder_button.click()
             # self.click_to_element(Locators.CREATE_FOLDER_BUTTON)
         except NoSuchElementException:
@@ -765,8 +762,8 @@ class FormPage(Authorisation, BasePage):
                     time.sleep(1)
                     try:
                         # self.click_to_element(Locators.FOLDER1_FOR_DEL)
-                        folder1_for_del = driver.find_element(By.XPATH,
-                                                              "//div[@class='m-tree-item__draggable-content']")
+                        folder1_for_del = self.browser.find_element(By.XPATH,
+                                                                    "//div[@class='m-tree-item__draggable-content']")
                         folder1_for_del.click()
                     except NoSuchElementException:
                         break
@@ -851,7 +848,8 @@ class FormPage(Authorisation, BasePage):
                 time.sleep(1)
                 try:
                     # self.click_to_element(Locators.FOLDER1_FOR_DEL)
-                    folder1_for_del = driver.find_element(By.XPATH, "//div[@class='m-tree-item__draggable-content']")
+                    folder1_for_del = self.browser.find_element(By.XPATH,
+                                                                "//div[@class='m-tree-item__draggable-content']")
                     folder1_for_del.click()
                 except NoSuchElementException:
                     break
@@ -866,14 +864,3 @@ class FormPage(Authorisation, BasePage):
                     break
             except TimeoutException:
                 self.click_to_element(Locators.DELETE_FOLDER_BUTTON)
-
-
-
-
-
-
-
-
-
-
-

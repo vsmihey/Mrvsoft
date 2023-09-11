@@ -4,10 +4,10 @@ import time
 import allure
 import pytest
 from pages.quiz_course import Exam, Quiz, Course, Task
-from pages.users import admin, person1
+from pages.users import bender, person1
 from pages.person_validation import Person1
 
-user_for_test = admin
+user_for_test = bender
 user_for_test_2 = person1
 
 
