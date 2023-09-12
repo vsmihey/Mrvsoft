@@ -1297,6 +1297,7 @@ class CheckAfterUpdating:
     TEXT_TEMPLATE = (By.XPATH, "(//span[contains(text(),'Шаблонная статья')])[1]")
     LINK1 = (By.XPATH, "//p[contains(text(),'1 Ссылка')]")
     TASK = (By.XPATH, "//li[@title='Задача']")
+    # TASK = (By.XPATH, "//li[@title='https://pantheonteam.atlassian.net/browse/QA-1619']")
     TASK_INTO = (By.XPATH, "//img[@alt='text']")
     HEADING = (By.XPATH, "//p[contains(text(),'Оглавление')]")
     HEADING1 = (By.XPATH, "//span[text()='Заголовок 1']")

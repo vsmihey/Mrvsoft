@@ -175,7 +175,7 @@ class FormPage(Authorisation, BasePage):
         time.sleep(1)
         title = self.browser.title
         time.sleep(1)
-        result = f'{name_} / {name_project} — Minervasoft'
+        result = f'{name_} / selen — Minervasoft'
         time.sleep(1)
         assert title == result
         # print(result)
