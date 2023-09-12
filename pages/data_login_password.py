@@ -19,7 +19,7 @@ password = 'ricksanchez'
 # password_incorrect = '395a5555'
 # url
 # url = 'https://test6.minervasoft.ru'
-url = 'https://test-auto.minervasoft.ru/'
+url = 'https://test-auto.minervasoft.ru'
 user = StableUsers('boris', '367836')
 
 # url = 'https://test2.minervasoft.ru/login?from=%2F'
