@@ -66,6 +66,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         """Редактирование статьи и минорное сохранение"""
         self.get_authorisation_in_url(url, user)
         self.redaction()
+        self.delete_draft()
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('HeyHey')
         self.save_minor_edit()
 
@@ -73,6 +74,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         """Редактирование статьи и мажорное сохранение"""
         self.get_authorisation_in_url(url, user)
         self.redaction()
+        self.delete_draft()
         self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Rick and Morty was here')
         self.save_major_edit()
 
@@ -496,24 +498,29 @@ class Comments(Authorisation):
         """Отключение галочки 'с вопросом к эксперту'"""
         self.click_to_element(locators.Comments.EXPERT_QUESTION)
 
+    def comments_for_creation(self):
+        """Создание тестового набора комментариев"""
+        for i in range(4):
+            time.sleep(0.3)
+            self.comment_text_area(f'Тестовый комментарий {i + 1}')
+            self.send_comment()
+
+        self.disable_the_question_to_the_expert_option()
+        self.comment_text_area('Серый комментарий')
+        self.send_comment()
+
     def create_comments(self):
         """Создание тестового набора комментариев в статье по переданной ссылке"""
         for i in range(3):
             try:
-                for j in range(4):
-                    time.sleep(0.3)
-                    self.comment_text_area(f'Тестовый комментарий {j + 1}')
-                    self.send_comment()
-
-                self.disable_the_question_to_the_expert_option()
-                self.comment_text_area('Серый комментарий')
-                self.send_comment()
-
+                self.comments_for_creation()
+                self.browser.refresh()
                 self.check_creating_comments('5 комментариев')
                 break
             except AssertionError:
                 print('Поймал AssertionError')
-                self.browser.refresh()
+                if i == 3:
+                    raise AssertionError
 
     def check_creating_comments(self, text):
         """Проверка, создались ли комментарии в статье"""
@@ -532,6 +539,8 @@ class Comments(Authorisation):
             except AssertionError:
                 print('Поймал AssertionError')
                 self.browser.refresh()
+                if i == 3:
+                    raise AssertionError
 
     def close_second_comment(self):
         """Закрытие первого комментария"""
@@ -546,6 +555,8 @@ class Comments(Authorisation):
             except AssertionError:
                 print('Поймал AssertionError')
                 self.browser.refresh()
+                if i == 3:
+                    raise AssertionError
 
     def close_third_comment(self):
         """Закрытие первого комментария"""
@@ -560,3 +571,5 @@ class Comments(Authorisation):
             except AssertionError:
                 print('Поймал AssertionError')
                 self.browser.refresh()
+                if i == 3:
+                    raise AssertionError

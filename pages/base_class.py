@@ -12,7 +12,6 @@ from pages import data_login_password
 import pathlib
 
 
-
 class MainPage:
 
     def __init__(self, browser, url=data_login_password.url):
@@ -41,6 +40,7 @@ class MainPage:
         return Wait(self.browser, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     """поиск по тексту в DOM дереве даже если элемент не виден"""
+
     def elements_is_present(self, locator, timeout=10):
         """Поиск элемента даже если он не виден"""
         return Wait(self.browser, timeout).until(EC.presence_of_element_located(locator))
@@ -100,7 +100,6 @@ class MainPage:
         except Exception as e:
             print(f'Поймал  {e}')
             return Wait(self.browser, timeout).until(EC.visibility_of_element_located(locator))
-
 
     def remove_class_script(self):
         """Удаление класса элемента, что бы он стал видимым и с ним можно совершить действие"""
@@ -170,7 +169,7 @@ class MainPage:
         # now_date = datetime.datetime.now(offset)
         # now_date = now_date.strftime('%Y.%m.%d.%H.%M.%S')
         # now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-        name_screenshot = 'screenshot'+'.png'
+        name_screenshot = 'screenshot' + '.png'
         path = pathlib.Path(pathlib.Path.cwd(), 'avatars', name_screenshot)
         path = str(path)
         self.browser.save_screenshot(path)
@@ -188,6 +187,3 @@ class MainPage:
         element - элемент содержащий теневой DOM"""
         shadow_root = self.browser.execute_script('return arguments[0].shadowRoot', element)
         return shadow_root
-
-
-
