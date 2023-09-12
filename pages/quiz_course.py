@@ -106,6 +106,10 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
         """Наличие записи о выполнении в разделе 'смотреть выполненные' """
         self.element_is_visible((By.XPATH, f"//div[contains(text(),'{title}')]"))
 
+    def invisible_execution_mark(self, title):
+        """Отсутствие записи о выполнении в разделе 'смотреть выполненные' """
+        self.element_is_invisible((By.XPATH, f"//div[contains(text(),'{title}')]"), timeout=0.2)
+
     def see_completed_button(self):
         """Нажатие кнопки 'смотреть выполненные' в разделе обучения"""
         time.sleep(1)

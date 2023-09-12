@@ -129,7 +129,7 @@ class TestLMS:
     @allure.title('Проверка назначенных заданий пользователю')
     def test_task_person1(self, driver):
         person = Person1(driver)
-        person.get_authorisation_in_superbank(user_for_test_2)
+        person.get_authorisation_in_superbank(user_for_test)
         person.bell_button_click()
         person.check_bell_alert_lms(TestLMS.TITLE_TEST, 'Прошу пройти тест, хорошего дня и прекрасного настроения!')
         person.check_bell_alert_lms(TestLMS.TITLE_QUIZ, 'Прошу пройти опрос, хорошего дня и прекрасного настроения!')
@@ -138,7 +138,7 @@ class TestLMS:
     @allure.title('Прохождение опроса')
     def test_passing_quiz(self, driver):
         page = Quiz(driver)
-        page.get_authorisation_in_superbank(user_for_test_2)
+        page.get_authorisation_in_superbank(user_for_test)
         page.learn_button_click()
         page.passing_button_click(TestLMS.TITLE_QUIZ)
         page.start_stop_passing_button_click()
@@ -151,7 +151,7 @@ class TestLMS:
     @allure.title('Прохождение курса')
     def test_passing_course(self, driver):
         page = Course(driver)
-        page.get_authorisation_in_superbank(user_for_test_2)
+        page.get_authorisation_in_superbank(user_for_test)
         page.learn_button_click()
         page.passing_button_click(TestLMS.TITLE_COURSE)
         page.start_stop_passing_button_click()
@@ -161,12 +161,12 @@ class TestLMS:
         page.start_stop_passing_button_click()
         page.start_stop_passing_button_click()
         page.see_completed_button()
-        page.execution_mark(TestLMS.TITLE_COURSE)
+        page.invisible_execution_mark(TestLMS.TITLE_COURSE)
 
     @allure.title('Прохождение теста')
     def test_passing_test(self, driver):
         page = Course(driver)
-        page.get_authorisation_in_superbank(user_for_test_2)
+        page.get_authorisation_in_superbank(user_for_test)
         page.learn_button_click()
         page.passing_button_click(TestLMS.TITLE_TEST)
         page.start_stop_passing_button_click()

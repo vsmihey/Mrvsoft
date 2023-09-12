@@ -1362,7 +1362,8 @@ class Test:
 
     QUESTIONS_SELECT = (By.XPATH, "//span[contains(text(),'5.	Где можно пользоваться бесконтактной картой')]")
     ANSWER_SELECT = (By.XPATH, "//label[@class='radio-wrapper']")
-    NEXT_BUTTON = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium lms-quiz-process-popup__submit-button']")
+    NEXT_BUTTON = (
+    By.XPATH, "//button[@class='m-button m-button--success m-button--medium lms-quiz-process-popup__submit-button']")
 
     QUESTIONS_LIMIT_STATUS = (By.CSS_SELECTOR, ".m-ui-typography.m-ui-typography--16x18.m-ui-slider__text")
     QUESTIONS_LIMIT_VALUE = (By.NAME, "randomQuestionCount")
@@ -1388,7 +1389,6 @@ class Quiz:
     NEXT_BUTTON = (
         By.XPATH,
         "//button[@class='m-button m-button--success m-button--medium lms-survey-process-popup__submit-button']")
-
 
 
 class Course:
@@ -1422,7 +1422,8 @@ class Course:
     LOAD_SCORM_BUTTON = (By.XPATH, "//input[@type='file']")
     ERROR_MESSAGE = (By.XPATH, "//div[@class='m-ui-input-wrapper-2__error-message']")
     SELECT_FOLDER_CLICK = (
-        By.XPATH, "//div[@class ='m-ui-paper m-ui-select__paper m-lms-course-cover__folder m-ui-paper--hoverable m-ui-paper--shadowed']")
+        By.XPATH,
+        "//div[@class ='m-ui-paper m-ui-select__paper m-lms-course-cover__folder m-ui-paper--hoverable m-ui-paper--shadowed']")
     SELECT_FOLDER_PRODUCT = (By.XPATH, "//option[@label ='Продукты']")
     SELECT_SCORM_MATERIAL = (By.XPATH, " //p[contains(text(),'Введите название материала')]")
     PREVIEW_WINDOW_CLOSE_BUTTON = (By.XPATH, "//*[name()='path' and contains(@d,'M12.6511 1')]")
@@ -1431,7 +1432,6 @@ class Course:
     SCORM_NEXT_BUTTON = (By.XPATH, "//iframe[@class='lms2-package-material']")
     FINISH_COURSE_BUTTON = (
         By.XPATH, "//button[@class='m-button m-button--success m-button--medium m-button--full-width']")
-
 
 
 class Task:
