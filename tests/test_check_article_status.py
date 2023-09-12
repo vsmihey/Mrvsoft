@@ -144,6 +144,7 @@ class TestCheckNewArticleStatus:
             # person.bell_second_comment_check()
             person.check_no_article_notifications_and_history_2()
 
+    #
     @allure.feature('Мажорное редактирование статьи, проверка в истории и колокольчике')
     class TestMajorArticle:
 

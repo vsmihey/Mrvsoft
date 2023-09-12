@@ -1093,6 +1093,9 @@ class Comments:
 
     CLOSE_COMMENT = (
         By.CSS_SELECTOR, 'button[class="m-button m-button--default m-button--medium discuss-form__button-send"]')
+    AVAILABLE_COMMENTS_MESSAGE = (
+        By.XPATH,
+        "//p[@class='m-ui-typography m-ui-typography--bold m-ui-typography--18x20 article-modal__footer-title']")
 
 
 class WizardPublic:

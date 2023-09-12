@@ -147,7 +147,7 @@ class TestLMS:
         page.start_stop_passing_button_click()
         page.see_completed_button()
         page.execution_mark(TestLMS.TITLE_QUIZ)
-    #
+
     @allure.title('Прохождение курса')
     def test_passing_course(self, driver):
         page = Course(driver)
@@ -175,4 +175,3 @@ class TestLMS:
         page.start_stop_passing_button_click()
         page.see_completed_button()
         page.execution_mark(TestLMS.TITLE_TEST)
-
