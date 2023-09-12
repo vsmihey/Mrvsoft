@@ -2,12 +2,10 @@ import pathlib
 import random
 import time
 from pathlib import Path
-
 from selenium.common import TimeoutException, StaleElementReferenceException, ElementClickInterceptedException, \
     ElementNotInteractableException, NoSuchElementException, WebDriverException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
-
 from generator.generator import generated_person
 from locators.locators_checking_filter_changes import AddFilterChangesLocators
 from locators.locators_form_pages import FormPagesLocators

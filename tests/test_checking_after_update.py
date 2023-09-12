@@ -6,12 +6,14 @@ import pytest
 from pages.checking_after_update import CheckingArticleAfterUpdatePage
 from pages.create_article_and_comments import BaseArticleEditor, ArticleByTemplate, ArticleByScript
 from pages.data_login_password import base_article, article_by_script
-from pages.users import ricksanchez
+from pages.users import ricksanchez, minervakms
 from pages.data_login_password import base_article, article_by_template
 from pages.users import leela
 from pages.users import andrey
 
-user_for_test = leela
+# user_for_test = leela
+user_for_test = minervakms
+# user_for_test = andrey
 
 
 @allure.suite("Проверка обычной статьи, статьи по шаблону, пошагового сценария после установки обновления")
