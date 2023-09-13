@@ -96,7 +96,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         self.click_to_element(self.Locators.ARTICLE_CHANGE)
         # self.delete_draft()
         try:
-            self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE).clear()
+            self.element_is_visible(self.Locators.ARTICLE_NAME_CHANGE, timeout=3).clear()
         except TimeoutException:
             self.delete_draft()
             # time.sleep(3)

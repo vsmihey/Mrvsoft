@@ -109,7 +109,11 @@ class FilesFormatPage(Authorisation, BasePage):
             except (StaleElementReferenceException, TimeoutException):
                 time.sleep(3)
                 check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
-            check_file_pictures.is_displayed()
+            try:
+                check_file_pictures.is_displayed()
+            except (StaleElementReferenceException, TimeoutException):
+                time.sleep(3)
+                check_file_pictures.is_displayed()
             self.click_to_element(self.Locators.SVG_CLOSE_ARTICLE)
 
     def check_audio_files(self, driver):
