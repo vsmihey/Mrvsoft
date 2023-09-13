@@ -254,6 +254,7 @@ class AddViewContentWizard(Authorisation, BasePage):
         self.click_to_element(self.Locators.GO_TO_CONTENT)
         i = random.randint(0, 20)
         name_request = data_request_sort[i]
+        time.sleep(1)
         search = self.element_is_visible(self.Locators.SEARCH)
         actions.click(search)
         actions.send_keys(name_request)
@@ -263,6 +264,7 @@ class AddViewContentWizard(Authorisation, BasePage):
         check_search_result = self.element_is_visible(self.Locators.CHECK_SEARCH_RESULT).text
         print(check_search_result)
         assert check_search_result == name_content
+        time.sleep(10)
         text_fixing_by_expert = self.element_is_visible(self.Locators.TEXT_FIXING_BY_EXPERT).text
         assert text_fixing_by_expert == "Закреплено экспертом"
 

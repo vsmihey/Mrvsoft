@@ -141,7 +141,8 @@ class TestFormPage:
         article_page.get_authorisation_in_selen(user_for_test)
         article_page.fixing_article(driver)
 
-    @allure.title("Добавление статьи по шаблону")
+    @allure.title("Добавление статьи по шаблону."
+                  "Проверка закрепления контента, при изменении шаблона")
     # @pytest.mark.skip('add_article_by_templates')
     def test_add_article_by_templates(self, driver):
         article_page = ArticlePage(driver)
