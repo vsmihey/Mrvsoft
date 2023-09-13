@@ -50,7 +50,8 @@ class LocatorsCheckNewsHistory:
     BUTTON_HISTORY = (By.XPATH, "//a[@data-tip='История']")
     SVG_CLOSE_WINDOW_CREATED_PERSON = (By.CSS_SELECTOR, "div[role='presentation']")
     """check del article person1"""
-    DEL_ARTICLE_2 = (By.XPATH, "(//header[@class='m-news-item__header'])[1]/../div[text()='deleted 2']")
+    # DEL_ARTICLE_2 = (By.XPATH, "(//header[@class='m-news-item__header'])[1]/../div[text()='deleted 2']")
+    DEL_ARTICLE_2 = (By.XPATH, "//article[@class='m-news-item m-news__group-item'][1]//div[text()='deleted 2']")
     DEL_ARTICLE_2_WARNING = (By.XPATH, "//div[text()='Внимание! Этот контент удален']")
     RESTORED_ARTICLE_1 = (By.XPATH, "(//header[@class='m-news-item__header'])[4]/../div[text()='restored 1']")
     RESTORED_ARTICLE_1_ = (By.XPATH, "//div[normalize-space()='restored 1']")

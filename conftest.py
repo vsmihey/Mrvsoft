@@ -17,9 +17,9 @@ from allure_commons.types import AttachmentType
 
 @pytest.fixture(scope='session')
 def driver():
-    # driver_service = Service(ChromeDriverManager().install())  # вкючить для загрузки новой версии дров
+    # driver_service = Service(ChromeDriverManager().install())  # включить для загрузки новой версии дров
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # запуск в скрытом режиме (без браузера)
+    # chrome_options.add_argument("--headless")  # запуск в скрытом режиме (без браузера)
     # chrome_options.headless = True
     # chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
     # prefs = {"profile.default_content_setting_values.notifications": 1}  # принять уведомление всплывающее
