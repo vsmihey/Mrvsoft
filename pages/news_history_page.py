@@ -19,6 +19,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         """create article"""
         first_name, name_request, text_alert = self.create_article_base()
         changed_name_1 = "_changed name " + str(random.randint(999, 9999))
+        deleted_name_1 = "deleted " + str(random.randint(999, 9999))
         self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         self.click_to_element(self.Locators.BUTTON_SUBMIT)
         self.click_to_element(self.Locators.BUTTON_SUBMIT)
@@ -52,7 +53,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         self.click_to_element(self.Locators.OPEN_ARTICLE_FOR_DEL)
         self.click_to_element(self.Locators.MEATBALL_MENU)
         self.click_to_element(self.Locators.DEL_ARTICLE)
-        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("deleted 1")
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys(deleted_name_1)
         self.click_to_element(self.Locators.BUTTON_CONFIRM_DEL)
         """restored"""
         time.sleep(2)
@@ -78,13 +79,14 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         self.click_to_element(self.Locators.BUTTON_SUBMIT)
         self.click_to_element(self.Locators.SVG_CLOSE_RESTORED_ARTICLE)
         time.sleep(1)
-        return first_name, changed_name_1
+        return first_name, changed_name_1, deleted_name_1
 
     def create_change_del_article(self):
         # self.input_in_my_project(self.driver)
         """create article"""
         first_name_2 = self.create_article_base()
         changed_name_2 = "changed name " + str(random.randint(999, 9999))
+        deleted_name_2 = "deleted " + str(random.randint(999, 9999))
         self.click_to_element(self.Locators.BUTTON_TYPOGRAPHY)
         self.click_to_element(self.Locators.BUTTON_SUBMIT)
         self.click_to_element(self.Locators.BUTTON_SUBMIT)
@@ -119,7 +121,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         time.sleep(1)
         self.click_to_element(self.Locators.DEL_ARTICLE)
         time.sleep(1)
-        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys("deleted 2")
+        self.element_is_visible(self.Locators.INPUT_TEXTAREA_FIELD).send_keys(deleted_name_2)
         time.sleep(1)
         self.click_to_element(self.Locators.BUTTON_CONFIRM_DEL)
         time.sleep(1)
@@ -134,7 +136,7 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         # self.click_to_element(self.Locators.GO_TO_CONTENT)
         # self.click_to_element(self.Locators.AVATAR_MENU)
         # self.click_to_element(self.Locators.EXIT_PERSON)
-        return first_name_2, changed_name_2
+        return first_name_2, changed_name_2, deleted_name_2
 
     def persons_auth(self, login, password):
         # self.input_in_my_project(driver)
@@ -262,24 +264,26 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         print(comment)
         self.click_to_element(self.Locators.SVG_CLOSE_CREATED_ARTICLE)
 
-    def check_del_article_2(self):
-        try:
-            self.click_to_element(self.Locators.DEL_ARTICLE_2)
-        except TimeoutException:
-            time.sleep(3)
-            self.click_to_element(self.Locators.DEL_ARTICLE_2)
+    def check_del_article_2(self, deleted_name_2):
+        time.sleep(1)
+        del_article_2 = self.browser.find_element(By.XPATH, f"//div[normalize-space()='{deleted_name_2}']")
+        del_article_2.click()
+        # self.click_to_element(self.Locators.DEL_ARTICLE_2)
         warning = self.element_is_visible(self.Locators.DEL_ARTICLE_2_WARNING).is_displayed()
         self.click_to_element(self.Locators.SVG_CLOSE_CREATED_ARTICLE)
         print(warning)
 
-    def check_comment_1(self):
+    def check_comment_1(self, deleted_name_2):
         """check comment"""
         with allure.step("Проверка новостей о комментариях в Истории - person1"):
             self.click_to_element(self.Locators.COMMENT_CREATED)
             self.click_to_element(self.Locators.TEXT_COMMENT_CHECK)
             self.click_to_element(self.Locators.SVG_CLOSE_WINDOW_CREATED_PERSON)
             """check del comment"""
-            self.click_to_element(self.Locators.DEL_ARTICLE_2)
+            time.sleep(1)
+            del_article_2 = self.browser.find_element(By.XPATH, f"//div[normalize-space()='{deleted_name_2}']")
+            del_article_2.click()
+            # self.click_to_element(self.Locators.DEL_ARTICLE_2)
             self.element_is_visible(self.Locators.TEXT_CHECK_CANT_COMMENT).is_displayed()
             """выход пользователя"""
             self.click_to_element(self.Locators.GO_TO_CONTENT)
@@ -304,30 +308,39 @@ class CheckNewsHistoryPage(Authorisation, BasePage):
         print(comment)
         self.click_to_element(self.Locators.SVG_CLOSE_CREATED_ARTICLE)
 
-    def check_del_article_2_person2(self):
-        try:
-            self.click_to_element(self.Locators.DEL_ARTICLE_2, timeout=1)
-            warning = True
-        except TimeoutException:
-            warning = False
-            # warning = "Нет удаленной статьи"
-            print("Нет удаленной статьи")
-        assert warning == False
+    def check_del_article_2_person2(self, deleted_name_1):
+        # try:
+        del_article_2 = self.browser.find_element(By.XPATH, f"//div[normalize-space()='{deleted_name_1}']")
+        del_article_2.click()
+        assert self.element_is_visible_all(self.Locators.ALERT_CHECK_DEL_CONTENT).text == "Данный контент удален, у Вас отсутствует доступ к удаленному контенту"
+        self.click_to_element(self.Locators.BUTTON_ACCEPT)
+            # self.click_to_element(self.Locators.DEL_ARTICLE_2, timeout=1)
+        #     warning = True
+        # except TimeoutException:
+        #     warning = False
+        #     # warning = "Нет удаленной статьи"
+        #     print("Нет удаленной статьи")
+        # assert warning == False
 
-    def check_comment_1_person2(self):
+    def check_comment_1_person2(self, deleted_name_1):
         """check comment"""
         with allure.step("Проверка новостей о комментариях в Истории - person2"):
             self.click_to_element(self.Locators.COMMENT_CREATED)
-            self.click_to_element(self.Locators.TEXT_COMMENT_CHECK)
+            self.element_is_visible_all(self.Locators.TEXT_COMMENT_CHECK)
             self.click_to_element(self.Locators.SVG_CLOSE_WINDOW_CREATED_PERSON)
             """check del comment"""
-            try:
-                self.click_to_element(self.Locators.DEL_ARTICLE_2)
-                warning = True
-            except TimeoutException:
-                warning = False
-                print("Нет удаленной статьи для проверки комментария")
-            assert warning == False
+            # try:
+            del_article_2 = self.browser.find_element(By.XPATH, f"//div[normalize-space()='{deleted_name_1}']")
+            del_article_2.click()
+            assert self.element_is_visible_all(
+            self.Locators.ALERT_CHECK_DEL_CONTENT).text == "Данный контент удален, у Вас отсутствует доступ к удаленному контенту"
+            self.click_to_element(self.Locators.BUTTON_ACCEPT)
+            #     # self.click_to_element(self.Locators.DEL_ARTICLE_2)
+            #     warning = True
+            # except TimeoutException:
+            #     warning = False
+            #     print("Нет удаленной статьи для проверки комментария")
+            # assert warning == False
 
     def create_person1_2(self):
         """create person for check  Alert"""

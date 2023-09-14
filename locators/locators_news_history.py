@@ -51,7 +51,9 @@ class LocatorsCheckNewsHistory:
     SVG_CLOSE_WINDOW_CREATED_PERSON = (By.CSS_SELECTOR, "div[role='presentation']")
     """check del article person1"""
     # DEL_ARTICLE_2 = (By.XPATH, "(//header[@class='m-news-item__header'])[1]/../div[text()='deleted 2']")
-    DEL_ARTICLE_2 = (By.XPATH, "//article[@class='m-news-item m-news__group-item'][1]//div[text()='deleted 2']")
+    # DEL_ARTICLE_2 = (By.XPATH, "//article[@class='m-news-item m-news__group-item'][1]//div[text()='deleted 2']")
+    # DEL_ARTICLE_2 = (By.XPATH, "//div[normalize-space()='deleted 2']")
+    DEL_ARTICLE_2 = (By.XPATH, "//div[normalize-space()='deleted 3620']")
     DEL_ARTICLE_2_WARNING = (By.XPATH, "//div[text()='Внимание! Этот контент удален']")
     RESTORED_ARTICLE_1 = (By.XPATH, "(//header[@class='m-news-item__header'])[4]/../div[text()='restored 1']")
     RESTORED_ARTICLE_1_ = (By.XPATH, "//div[normalize-space()='restored 1']")
@@ -59,6 +61,8 @@ class LocatorsCheckNewsHistory:
     RESTORED_ARTICLE_1_CHECK_ADDED_COMMENT = (By.XPATH, "//p[text()='1 комментарий']")
     SVG_CLOSE_CREATED_ARTICLE = (By.XPATH, "//body/div[@class='article-modal__portal']/div[@class='ReactModal__Overlay ReactModal__Overlay--after-open article-modal__overlay']/div[@role='dialog']/article[@class='article-modal']/div[@class='article-modal__main']/div[@class='article-modal__breadcrumbs-wrapper']/div[2]//*[local-name()='svg']")
     """check del article person2"""
+    ALERT_CHECK_DEL_CONTENT = (By.XPATH, "//div[text()='Данный контент удален, у Вас отсутствует доступ к удаленному контенту']")
+    BUTTON_ACCEPT = (By.XPATH, "//p[text()='понятно']")
     RESTORED_ARTICLE_1_CHECK_CHANGE_PERSON2 = (By.CSS_SELECTOR, "div[data-title='Восстановлен контент']")
     LABEL_ADMINISTRATOR_PERSON = (By.CSS_SELECTOR, "article[class='m-ui-avatar-default m-ui-avatar-default--small']")
     LABEL_ADMINISTRATOR_PERSON_OUT = (By.XPATH, "//p[contains(text(),'выйти')]")

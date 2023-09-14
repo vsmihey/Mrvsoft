@@ -11,6 +11,7 @@ user_for_test = beth
 class TestTopicDatabase:
     class TestCreateTopicDatabase:
 
+        # @pytest.mark.xfail
         @allure.title("Добавление темы в Базе вопросов")
         # "!!!!!!!!!!!!!!!!БАГ НЕ УДАЛЯЕТСЯ ТЕМА!!!!!!!!!!!!!!!!!"
         def test_add_topic_database(self, driver):
