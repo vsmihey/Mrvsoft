@@ -61,9 +61,13 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
         """Выбор вопроса"""
         self.click_to_element(locators.Test.QUESTIONS_SELECT)
 
-    def select_answer(self):
-        """Выбор ответа"""
-        self.click_to_element(locators.Test.ANSWER_SELECT)
+    def select_correct_answer(self):
+        """Выбор верного ответа"""
+        self.click_to_element(locators.Test.CORRECT_ANSWER_SELECT)
+
+    def select_incorrect_answer(self):
+        """Выбор неверного ответа"""
+        self.click_to_element(locators.Test.INCORRECT_ANSWER_SELECT)
 
     def close_modal_window(self):
         """Закрытие модального окна"""
@@ -86,10 +90,21 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
         assert self.element_is_visible(
             locators.Test.QUESTIONS_LIMIT_STATUS).text == 'В тесте будет 1 вопрос'
 
-    def save_test(self):
-        """Сохранение теста"""
+    def save_test_show_correct_answer_yes(self):
+        """Сохранение теста с показом правильного варианта ответа"""
         self.click_to_element(locators.Test.SAVE_BUTTON)
         self.element_is_visible(locators.Test.COUNT_OF_CORRECT_ANSWERS).send_keys('1')
+        self.element_is_visible(locators.Test.COUNT_TRY).send_keys('1')
+        self.click_to_element(locators.Test.YES_SHOW_CORRECT_ANSWERS)
+        self.next_and_finish_button_click()
+        self.next_and_finish_button_click()
+        self.next_and_finish_button_click()
+
+    def save_test_show_correct_answer_no(self):
+        """Сохранение теста без показа правильного варианта ответа"""
+        self.click_to_element(locators.Test.SAVE_BUTTON)
+        self.element_is_visible(locators.Test.COUNT_OF_CORRECT_ANSWERS).send_keys('1')
+        self.element_is_visible(locators.Test.COUNT_TRY).send_keys('1')
         self.next_and_finish_button_click()
         self.next_and_finish_button_click()
         self.next_and_finish_button_click()
@@ -98,9 +113,21 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
         """Проверка, карточки созданного теста по совпадению названия теста"""
         assert self.element_is_visible(locators.Test.NAME_CREATED_TEST).text == title
 
+    def check_modal_window_failed_test(self):
+        """Проверка, модального окна проваленного теста"""
+        assert self.element_is_visible(
+            locators.Test.FAILURE_MESSAGE_TOP).text == 'Это провал, попыток больше нет!'
+        assert self.element_is_visible(
+            locators.Test.FAILURE_MESSAGE_BOT).text == 'Вы ответили правильно на 0 из 1 вопроса'
+        assert self.element_is_clickable(locators.Test.TRY_AGAIN_BUTTON)
+
     def passing_button_click(self, title):
         """Кнопка прохождения в разделе 'обучение'"""
         self.click_to_element((By.XPATH, f"//div[contains(text(),'{title}')]"), timeout=60)
+
+    def passing_button(self, title):
+        """Отображения теста в разделе активных"""
+        self.element_is_visible((By.XPATH, f"//div[contains(text(),'{title}')]"), timeout=60)
 
     def execution_mark(self, title):
         """Наличие записи о выполнении в разделе 'смотреть выполненные' """

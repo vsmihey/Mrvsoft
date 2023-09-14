@@ -1361,16 +1361,28 @@ class Test:
     ALL_QUESTIONS_SELECT = (By.CSS_SELECTOR, ".m-switch-box.lms-questions-lib__header-switch")
 
     QUESTIONS_SELECT = (By.XPATH, "//span[contains(text(),'5.	Где можно пользоваться бесконтактной картой')]")
-    ANSWER_SELECT = (By.XPATH, "//label[@class='radio-wrapper']")
+    CORRECT_ANSWER_SELECT = (By.XPATH, "//label[@class='radio-wrapper']")
+    INCORRECT_ANSWER_SELECT = (By.XPATH, "//span[contains(text(),'В любых онлайн магазинах')]")
+
     NEXT_BUTTON = (
-    By.XPATH, "//button[@class='m-button m-button--success m-button--medium lms-quiz-process-popup__submit-button']")
+        By.XPATH,
+        "//button[@class='m-button m-button--success m-button--medium lms-quiz-process-popup__submit-button']")
 
     QUESTIONS_LIMIT_STATUS = (By.CSS_SELECTOR, ".m-ui-typography.m-ui-typography--16x18.m-ui-slider__text")
     QUESTIONS_LIMIT_VALUE = (By.NAME, "randomQuestionCount")
     COUNT_OF_CORRECT_ANSWERS = (By.CSS_SELECTOR, ".m-ui-select__select")
+    COUNT_TRY = (By.NAME, "attemptCount")
+    YES_SHOW_CORRECT_ANSWERS = (By.XPATH, "//span[contains(text(),'Да')]")
     NAME_CREATED_TEST = (By.CSS_SELECTOR, ".popup__title.title-block")
     SEE_COMPLETED = (By.XPATH, "//button[@class='m-ui-button-text']")
     START_PASSING = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']")
+
+    FAILURE_MESSAGE_TOP = (
+        By.XPATH,
+        "//p[@class='m-ui-typography m-ui-typography--bold m-ui-typography--22x26 lms-exercise-screen__title']")
+    FAILURE_MESSAGE_BOT = (
+        By.XPATH, "//p[@class='m-ui-typography m-ui-typography--16x24 lms-exercise-screen__subtitle']")
+    TRY_AGAIN_BUTTON = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']")
 
 
 class Quiz:
