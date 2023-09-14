@@ -879,12 +879,9 @@ class StepByScriptPage(Authorisation, BasePage):
         self.click_to_element(self.Locators.CLOSE_WINDOW_PREVIEW)
         """add step one more"""
         self.click_to_element(self.Locators.PLUS_BUTTON_ADD_STEP)
-
         time.sleep(2)
         self.click_to_element(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP)
         self.add_text_in_textarea(driver)
-
-
         self.click_to_element(self.Locators.INPUT_NAME_FIRST_STEP)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(text_area)
         self.element_is_visible(self.Locators.LIST_DROPDOWN_FIRST_STEP).send_keys("Сценарий завершён")
@@ -1268,7 +1265,7 @@ class FilesPages(Authorisation, BasePage):
         assert check_text_warning == "Ошибка загрузки файлов"
         self.click_to_element(self.Locators.SHOW_BUTTON)
         check_text_big_file_err = self.element_is_visible(self.Locators.CHECK_TEXT_BIG_FILE_ERR).text
-        assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб"
+        assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб", "В тексте всплывающего окна должно быть: 100 Мб!"
         time.sleep(2)
         os.remove(path)
 
@@ -1399,7 +1396,7 @@ class FilesPages(Authorisation, BasePage):
         assert check_text_warning == "Ошибка загрузки файлов"
         self.click_to_element(self.Locators.SHOW_BUTTON)
         check_text_big_file_err = self.element_is_visible(self.Locators.CHECK_TEXT_BIG_FILE_ERR).text
-        assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб"
+        assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб", "В тексте всплывающего окна должно быть: 100 Мб!"
         time.sleep(2)
         os.remove(path)
 
@@ -1464,7 +1461,7 @@ class FilesPages(Authorisation, BasePage):
         assert check_text_warning == "Ошибка загрузки файлов"
         self.click_to_element(self.Locators.SHOW_BUTTON)
         check_text_big_file_err = self.element_is_visible(self.Locators.CHECK_TEXT_BIG_FILE_ERR).text
-        assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб"
+        assert check_text_big_file_err == "Размер файла не должен превышать 100 Мб", "В тексте всплывающего окна должно быть: 100 Мб!"
         time.sleep(2)
         os.remove(path)
 
