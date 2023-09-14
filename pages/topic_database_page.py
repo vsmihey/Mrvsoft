@@ -53,14 +53,15 @@ class CreateTopicDatabase(Authorisation, BasePage):
             try:
                 self.click_to_element(self.Locators.SVG_CLOSE_DELETED_WINDOW, timeout=5)
             except TimeoutException:
-                print("БАГ! НЕ УДАЛЯЕТСЯ ТЕМА! БАГ!")
+                # print("БАГ! НЕ УДАЛЯЕТСЯ ТЕМА! БАГ!")
+                assert 1 == 2, "БАГ НЕ УДАЛЯЕТСЯ ПОСЛЕДНЯЯ ТЕМА"
             self.click_to_element(self.Locators.SVG_CLOSE_DELETED_WINDOW)
         button_add_topic = self.element_is_visible(self.Locators.BUTTON_ADD_TOPIC).text
         assert button_add_topic == 'Создать темы'
         self.click_to_element(self.Locators.BUTTON_ADD_TOPIC)
         """input name topic and check len"""
         try:
-            element = self.element_is_visible(self.Locators.INPUT_NAME_TOPIC)
+            element = self.element_is_visible_all(self.Locators.INPUT_NAME_TOPIC)
         except TimeoutException:
             print("БАГ НЕ УДАЛЯЕТСЯ ТЕМА")
             element = self.element_is_visible(self.Locators.INPUT_NAME_TOPIC)
