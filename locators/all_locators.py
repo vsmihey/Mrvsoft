@@ -1383,6 +1383,10 @@ class Test:
     FAILURE_MESSAGE_BOT = (
         By.XPATH, "//p[@class='m-ui-typography m-ui-typography--16x24 lms-exercise-screen__subtitle']")
     TRY_AGAIN_BUTTON = (By.XPATH, "//button[@class='m-button m-button--success m-button--medium']")
+    SHOW_FAULT_BUTTON = (By.XPATH, "//p[contains(text(),'Смотреть ошибки')]")
+    FAULT_MESS = (
+        By.XPATH, "//div[@class='m-ui-typography m-ui-typography--16x18 lms-quiz-question-answer__error-message']")
+    SHOW_RESULT_BUTTON = (By.XPATH, "//p[contains(text(),'Смотреть результат')]")
 
 
 class Quiz:

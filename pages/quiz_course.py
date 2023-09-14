@@ -121,6 +121,17 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
             locators.Test.FAILURE_MESSAGE_BOT).text == 'Вы ответили правильно на 0 из 1 вопроса'
         assert self.element_is_clickable(locators.Test.TRY_AGAIN_BUTTON)
 
+    def check_modal_window_failed_test_show_fault(self):
+        """Проверка, модального окна проваленного теста"""
+        assert self.element_is_visible(
+            locators.Test.FAULT_MESS).text == 'При ответе на вопрос были допущены ошибки'
+        assert self.element_is_clickable(locators.Test.SHOW_RESULT_BUTTON)
+        assert self.element_is_clickable(locators.Test.TRY_AGAIN_BUTTON)
+
+    def show_fault_click(self):
+        """Кнопка, 'смотреть ошибки'"""
+        self.click_to_element(locators.Test.SHOW_FAULT_BUTTON)
+
     def passing_button_click(self, title):
         """Кнопка прохождения в разделе 'обучение'"""
         self.click_to_element((By.XPATH, f"//div[contains(text(),'{title}')]"), timeout=60)
