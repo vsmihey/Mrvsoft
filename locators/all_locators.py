@@ -1464,6 +1464,10 @@ class Task:
 
 
 class Reports:
+    BUTTON_DOWNLOAD_REPORT = (By.XPATH, "//iron-icon[text()='Скачать отчёт']")
+    CHECK_DATA_DONT_HAVE = (By.XPATH, "//span[text()='Данные отсутствуют']")
+
+
     REPORTS_BY_CONTENT_LIST = (By.CSS_SELECTOR, "div[class='folder-list-item folder-list-item--no-children']")
     DOWNLOAD_REPORTS_BUTTON = (By.XPATH, "//div[@class='vaadin-button-container']")
     DOWNLOAD_REPORTS_BUTTON_1 = (By.XPATH, "//vaadin-button[@id='buttonExport']")

@@ -64,9 +64,16 @@ class ReportsPage(Authorisation, MenuNavigation, BasePage):
         self.click_to_element(locators.Reports.IFRAME_TICKET)
         time.sleep(5)
         self.download_reports(driver, iframe_locator=iframe_ticket)
+        self.browser.refresh()
 
     def check_iframe_search(self, driver):
+        # self.browser.refresh()
         iframe_search = locators.Reports.IFRAME_SEARCH
         self.click_to_element(locators.Reports.BUTTON_SEARCH)
         time.sleep(5)
         self.download_reports(driver, iframe_locator=iframe_search)
+
+    def shadow_element(self):
+        self.click_to_element(locators.Reports.CHECK_DATA_DONT_HAVE)
+
+

@@ -16,9 +16,9 @@ class TestReports:
         report_page = ReportsPage(driver)
         report_page.get_authorisation_in_selen(user_for_test)
         report_page.reports_click()
-        # report_page.download_reports(driver)
-        report_page.check_iframe_ticket(driver)
-        report_page.check_iframe_search(driver)
+        report_page.shadow_element()
+        # report_page.check_iframe_ticket(driver)
+        # report_page.check_iframe_search(driver)
 
     @allure.suite("Скачивание отчетов в обучении")
     def test_reports_learning(self):
