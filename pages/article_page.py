@@ -880,7 +880,10 @@ class StepByScriptPage(Authorisation, BasePage):
         """add step one more"""
         self.click_to_element(self.Locators.PLUS_BUTTON_ADD_STEP)
         time.sleep(2)
-        self.click_to_element(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP)
+        try:
+            self.click_to_element(self.Locators.TEXT_CHECK_INPUT_CONTENT_OF_STEP, timeout=3)
+        except TimeoutException:
+            assert 1 == 2, "БАГ, ВЕЧНЫЙ ЛОАДЕР"
         self.add_text_in_textarea(driver)
         self.click_to_element(self.Locators.INPUT_NAME_FIRST_STEP)
         self.element_is_visible(self.Locators.INPUT_NAME_FIRST_STEP).send_keys(text_area)
