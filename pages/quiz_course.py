@@ -377,6 +377,11 @@ class Course(Exam):
         """Кнопка 'Завершить курс' при прохождении курса"""
         self.click_to_element(locators.Course.FINISH_COURSE_BUTTON)
 
+    def passing_button_click_in_draft(self, title):
+        """Кнопка прохождения в разделе 'обучение'"""
+        self.click_to_element((By.XPATH, f"//span[contains(text(),'{title}')]"))
+
+
 
 class Task(CreatingPanel, MenuNavigation):
     """Класс по работе с назначением заданий"""

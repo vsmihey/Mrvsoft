@@ -358,6 +358,9 @@ class FormPagesLocators:
     MODAL_WINDOW_SCROLLER = (
         By.XPATH,
         "//div[@class='scroller m-modal-templates__scroller']//div[@class='scroller__thumb scroller__thumb--Y']")
+    DRAFT_BUTTON = (By.XPATH,
+                    "//div[@class='m-ui-paper m-cell m-modal-create__cell m-cell--big m-cell--primary m-ui-paper--hoverable m-ui-paper--shadowed']")
+    EDUCATION_BUTTON = (By.XPATH, "//li[2]")
 
 
 class StepByScriptLocators:

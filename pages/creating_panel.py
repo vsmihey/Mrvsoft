@@ -1,5 +1,4 @@
 from pages.authorisation_page import Authorisation
-from locators.locators_form_pages import FormPagesLocators
 import locators.all_locators as locators
 
 
@@ -8,15 +7,15 @@ class CreatingPanel(Authorisation):
 
     def create_button(self):
         """Кнопка для перехода в панель создания статей"""
-        self.click_to_element(FormPagesLocators.CREATE_BUTTON)
+        self.click_to_element(locators.FormPagesLocators.CREATE_BUTTON)
 
     def create_base_article_button(self):
         """Кнопка для создания обычной статьи"""
-        self.click_to_element(FormPagesLocators.CREATE_ARTICLE)
+        self.click_to_element(locators.FormPagesLocators.CREATE_ARTICLE)
 
     def create_sample_article_button(self):
         """Кнопка для создания шаблонной статьи"""
-        self.click_to_element(FormPagesLocators.CREATE_ARTICLE)
+        self.click_to_element(locators.FormPagesLocators.CREATE_ARTICLE)
 
     def create_stepping_article_button(self):
         """Кнопка для создания пошагового сценария"""
@@ -37,3 +36,13 @@ class CreatingPanel(Authorisation):
     def task_button(self):
         """Кнопка для назначения задания"""
         self.click_to_element(locators.Task.TASK_BUTTON)
+
+    def draft_button(self):
+        """Кнопка черновика"""
+        self.click_to_element(locators.FormPagesLocators.DRAFT_BUTTON)
+
+    def education_button_in_draft(self):
+        """Кнопка обучения в черновике"""
+        self.click_to_element(locators.FormPagesLocators.EDUCATION_BUTTON)
+
+
