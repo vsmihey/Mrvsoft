@@ -1467,7 +1467,8 @@ class Task:
 
 
 class Reports:
-    BUTTON_DOWNLOAD_REPORT = (By.XPATH, "//iron-icon[text()='Скачать отчёт']")
+    # BUTTON_DOWNLOAD_REPORT = (By.XPATH, "//iron-icon[text()='Скачать отчёт']")
+    BUTTON_DOWNLOAD_REPORT = (By.XPATH, "//iron-icon[@icon='icons:file-download']")
     CHECK_DATA_DONT_HAVE = (By.XPATH, "//span[text()='Данные отсутствуют']")
 
 
@@ -1488,7 +1489,7 @@ class Reports:
     IFRAME_ARTICLE_VIEW = (By.XPATH, "//iframe[@title='articleView']")
     IFRAME_NOTIFICATION = (By.XPATH, "//iframe[@title='notification']")
     IFRAME_INTEGRATION = (By.XPATH, "//iframe[@title='integration']")
-    SHADOW_1 = (By.TAG_NAME, "vaadin-horizontal-layout")
+    SHADOW_1 = (By.TAG_NAME, "//vaadin-horizontal-layout[@class='around-padding']")
     SHADOW_2 = (By.TAG_NAME, "ticket-filters")
     SHADOW_3 = (By.TAG_NAME, "vaadin-vertical-layout")
     SHADOW_4 = (By.TAG_NAME, "div")

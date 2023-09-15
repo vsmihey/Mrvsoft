@@ -74,6 +74,21 @@ class ReportsPage(Authorisation, MenuNavigation, BasePage):
         self.download_reports(driver, iframe_locator=iframe_search)
 
     def shadow_element(self):
-        self.click_to_element(locators.Reports.CHECK_DATA_DONT_HAVE)
+        iframe_ticket = locators.Reports.IFRAME_TICKET
+        iframe = self.element_is_visible_all(iframe_ticket)
+        self.switch_to_frame(iframe)
+        self.click_to_element(locators.Reports.BUTTON_DOWNLOAD_REPORT)
 
+    def dom_element(self):   # Находим элементы, которые содержат Shadow DOM на каждом уровне
+        iframe_ticket = locators.Reports.IFRAME_TICKET
+        iframe = self.element_is_visible_all(iframe_ticket)
+        self.switch_to_frame(iframe)
+        outer_element_level1 = self.element_is_visible(locators.Reports.SHADOW_1)
+        outer_element_level2 = self.browser.execute_script("return arguments[0].shadowRoot;", outer_element_level1)
+        # outer_element_level3 = self.browser.execute_script("return arguments[0].shadowRoot;", outer_element_level2)
 
+        # Теперь мы можем получить доступ к элементу Shadow DOM на уровне 4
+        # inner_button = driver.execute_script("return arguments[0].shadowRoot.querySelector('#inner-button');", outer_element_level3)
+
+        # Нажимаем на кнопку внутри Shadow DOM на уровне 4
+        outer_element_level2.click()

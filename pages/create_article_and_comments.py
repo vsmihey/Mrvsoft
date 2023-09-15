@@ -1,5 +1,7 @@
 import random
 import time
+
+from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from pages.creating_panel import CreatingPanel
@@ -139,9 +141,18 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         locator = locators.CheckAfterUpdating()
         link1 = self.element_is_visible(locator.LINK1).text
         assert link1 == "1 Ссылка"
-        self.click_to_element(locator.LINK1)
-        task = self.element_is_visible(locator.TASK).text
-        assert task == "Задача"
+        # self.click_to_element(locator.LINK1)
+        for i in range(3):
+            try:
+                self.click_to_element(locator.LINK1)
+                task = self.element_is_visible(locator.TASK).text
+                assert task == "Задача"
+                break
+            except TimeoutException:
+                self.browser.refresh()
+                time.sleep(2)
+                if i == 3:
+                    assert 1 == 2, "Должно быть 'Задача' во вкладке 'Ссылка'"
         task = self.element_is_visible(locator.TASK_INTO).get_attribute("src")
         'Проверка конки'
         assert task == "https://pantheonteam.atlassian.net/favicon.ico"

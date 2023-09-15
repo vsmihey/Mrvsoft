@@ -16,7 +16,7 @@ class TestReports:
         report_page = ReportsPage(driver)
         report_page.get_authorisation_in_selen(user_for_test)
         report_page.reports_click()
-        report_page.shadow_element()
+        report_page.dom_element()
         # report_page.check_iframe_ticket(driver)
         # report_page.check_iframe_search(driver)
 
