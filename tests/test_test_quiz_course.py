@@ -177,14 +177,13 @@ class TestLMS:
         page.input_course_description(TestLMS.TEST_STRING)
         page.check_course_description_length(TestLMS.TEST_STRING)
         page.clear_course_name()
-
         page.input_course_name(TestLMS.TITLE_COURSE)
-
-        # TODO Написать проверку черновика
-
-        # page.close_window()
-        # page.check_modal_window()
-        # page.confirm_save_draft_button()
+        page.close_window()
+        page.check_modal_window()
+        page.confirm_save_draft_button()
+        page.draft_button()
+        page.education_button_in_draft()
+        page.passing_button_click_in_draft(TestLMS.TITLE_COURSE)
         page.add_material_button()
         page.content_creation()
         page.add__another_material_button()
@@ -194,6 +193,7 @@ class TestLMS:
         page.check_error_message()
         page.scorm_name()
         page.save_course()
+
 
     @allure.title('Назначение заданий')
     def test_task_assignment(self, driver):
