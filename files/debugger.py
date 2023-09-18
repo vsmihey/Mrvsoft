@@ -160,6 +160,7 @@ from requests.auth import HTTPBasicAuth
 # path2 = str(Path(pathlib.Path.cwd(), "avi.avi"))
 #
 # print(path1, path2)
+# print(path1, path2)
 
 # text_version = list("Версия 23.0")
 # print(text_version[-1])
