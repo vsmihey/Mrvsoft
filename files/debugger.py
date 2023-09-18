@@ -161,9 +161,23 @@ from requests.auth import HTTPBasicAuth
 #
 # print(path1, path2)
 
-text_version = list("Версия 23.0")
-print(text_version[-1])
+# text_version = list("Версия 23.0")
+# print(text_version[-1])
 
+class MyClass:
+    # s = "bar"
 
+    def function1(self):
+        self.email = "bar"
 
+    def function2(self):
+        # self.x = "no"
+        print(self.email)
+
+    # def function3(self):
+    #     self.function2()
+
+# obj = MyClass()
+# # obj.function1()
+# obj.function2()  # выведет "bar"
 

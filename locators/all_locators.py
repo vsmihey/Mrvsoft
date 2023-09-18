@@ -1470,6 +1470,12 @@ class Reports:
     # BUTTON_DOWNLOAD_REPORT = (By.XPATH, "//iron-icon[text()='Скачать отчёт']")
     BUTTON_DOWNLOAD_REPORT = (By.XPATH, "//iron-icon[@icon='icons:file-download']")
     CHECK_DATA_DONT_HAVE = (By.XPATH, "//span[text()='Данные отсутствуют']")
+    #----------------
+    SHADOW_ROOT1 = (By.XPATH, "//vaadin-horizontal-layout[@class='around-padding']")
+    SHADOW_ROOT1_CHECK = (By.XPATH, "//div[@class='report-layout']")
+    SHADOW_ROOT2 = (By.XPATH, "//vaadin-horizontal-layout[@class='around-padding']//ticket-filters")
+
+
 
 
     REPORTS_BY_CONTENT_LIST = (By.CSS_SELECTOR, "div[class='folder-list-item folder-list-item--no-children']")

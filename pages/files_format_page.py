@@ -76,11 +76,7 @@ class FilesFormatPage(Authorisation, BasePage):
             elif n == path4:
                 i = "gomer"
             """input file"""
-            try:
-                self.click_to_element(self.Locators.CREATE_BUTTON)
-            except StaleElementReferenceException:
-                time.sleep(5)
-                self.click_to_element(self.Locators.CREATE_BUTTON)
+            self.click_to_element(self.Locators.CREATE_BUTTON)
             self.click_to_element(self.Locators.BUTTON_FILE)
             try:
                 self.element_is_visible(self.Locators.DIRECT_FOLDER).send_keys("Контент 1")
@@ -92,6 +88,7 @@ class FilesFormatPage(Authorisation, BasePage):
                 self.remove_class_script()
             except JavascriptException:
                 time.sleep(5)
+                self.remove_class_script()
             self.element_is_visible(self.Locators.INPUT_FIELD_SELECT_FILE).send_keys(n)
             time.sleep(2)
             """check file picture"""
@@ -104,12 +101,14 @@ class FilesFormatPage(Authorisation, BasePage):
             self.element_is_visible(self.Locators.TEXTAREA_INPUT_TEXT).send_keys(text_area_alert)
             self.click_to_element(self.Locators.BUTTON_FINISH)
             """check file picture"""
+            time.sleep(1)
             try:
                 check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
             except (StaleElementReferenceException, TimeoutException):
                 time.sleep(3)
                 check_file_pictures = driver.find_element(By.CSS_SELECTOR, f"img[alt='{i}']")
             try:
+                time.sleep(1)
                 check_file_pictures.is_displayed()
             except (StaleElementReferenceException, TimeoutException):
                 time.sleep(3)

@@ -73,11 +73,14 @@ class ReportsPage(Authorisation, MenuNavigation, BasePage):
         time.sleep(5)
         self.download_reports(driver, iframe_locator=iframe_search)
 
-    def shadow_element(self):
+    def shadow_element(self, driver):
         iframe_ticket = locators.Reports.IFRAME_TICKET
         iframe = self.element_is_visible_all(iframe_ticket)
         self.switch_to_frame(iframe)
-        self.click_to_element(locators.Reports.BUTTON_DOWNLOAD_REPORT)
+        shadow_root = driver.find_element(By.XPATH, "//vaadin-horizontal-layout[@class='around-padding']").shadow_root
+        shadow_text = shadow_root.find_element(By.XPATH, "//div[@class='report-layout']").is_displayed()
+        print(shadow_text)
+
 
     def dom_element(self):   # Находим элементы, которые содержат Shadow DOM на каждом уровне
         iframe_ticket = locators.Reports.IFRAME_TICKET
