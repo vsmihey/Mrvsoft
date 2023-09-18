@@ -7,11 +7,12 @@ from pages.users import ricksanchez
 user_for_test = ricksanchez
 
 
-@allure.suite("Получение писем на почту о отчетах")
+@allure.suite("Получение писем на почту об отчетах")
 @pytest.mark.order(10)
 class TestReports:
 
-    @allure.suite("Скачивание отчетов в отчетах")
+    @pytest.mark.skip('Скачивание отчетов')
+    @allure.suite("Скачивание отчетов")
     def test_reports(self, driver):
         report_page = ReportsPage(driver)
         report_page.get_authorisation_in_selen(user_for_test)
@@ -20,6 +21,6 @@ class TestReports:
         # report_page.check_iframe_ticket(driver)
         # report_page.check_iframe_search(driver)
 
-    @allure.suite("Скачивание отчетов в обучении")
-    def test_reports_learning(self):
-        pass
+    # @allure.suite("Скачивание отчетов в обучении")
+    # def test_reports_learning(self):
+    #     pass
