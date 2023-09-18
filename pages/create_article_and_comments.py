@@ -38,12 +38,7 @@ class ContentOptions(MainPage):
 class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions):
     """Создание и наполнение Базовой статьи"""
     BASE_ARTICLE_TITLE = 'Название статьи ' + str(random.randint(999, 9999))
-
-    def save_data_in_file(self):
-        """Метод сохранения ссылки и названия статьи, данные перезаписываются при каждом вызове"""
-        with open(r'data.txt', 'w', encoding='utf8') as file:
-            file.write(self.get_actual_url() + '\n')
-            file.write(self.BASE_ARTICLE_TITLE)
+    LINK = ''
 
     def creating_base_article(self, user=ricksanchez):
         """Создание обычной статьи с наполнением"""
@@ -54,7 +49,7 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.change_folder()
         self.text_area_article()
         self.save_base_article()
-        self.save_data_in_file()
+        self.LINK = self.get_actual_url()
 
     def title_article(self):
         """Заголовок статьи"""
@@ -476,24 +471,6 @@ class ArticleByScript(BaseArticleEditor):
         self.click_to_element(locators.CheckAfterUpdating.CLOSE_SVG_WINDOW_VERSION_SCRIPT)
 
 
-class DataParser:
-    """Класс получения данных из файла"""
-
-    @staticmethod
-    def get_url_from_data_file():
-        """Метод парсит ссылку на статью из файла"""
-        with open(r'data.txt', 'r', encoding='utf8') as file:
-            url = file.readline()
-        return url
-
-    @staticmethod
-    def get_article_name_from_data_file():
-        """Метод парсит название статьи из файла"""
-        with open(r'data.txt', 'r', encoding='utf8') as file:
-            name = file.readlines()[1]
-        return name
-
-
 class Comments(Authorisation):
     """Добавление комментария в существующую статью"""
 
@@ -554,7 +531,7 @@ class Comments(Authorisation):
                     raise AssertionError
 
     def close_second_comment(self):
-        """Закрытие первого комментария"""
+        """Закрытие второго комментария"""
         for i in range(3):
             try:
                 self.check_creating_comments('4 комментария')
@@ -570,7 +547,7 @@ class Comments(Authorisation):
                     raise AssertionError
 
     def close_third_comment(self):
-        """Закрытие первого комментария"""
+        """Закрытие третьего комментария"""
         for i in range(3):
             try:
                 self.check_creating_comments('3 комментария')

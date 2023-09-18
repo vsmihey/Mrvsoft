@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from pages.base_class import MainPage
 from pages.users import person1, person2, person3, person4
 from pages.menu_navigation import MenuNavigation
-from pages.create_article_and_comments import DataParser
 from pages.create_article_and_comments import BaseArticleEditor
 import locators.all_locators as locators
 
@@ -11,19 +10,19 @@ import locators.all_locators as locators
 class History(MainPage):
     """Класс для проверки истории"""
     COMMENT_1_SOLVE_CHECK = (By.XPATH,
-                             f"//h3[text()='{DataParser.get_article_name_from_data_file()}']/../../div[text()='решено']/../..//pre[text()='Тестовый комментарий 1']")
+                             f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='решено']/../..//pre[text()='Тестовый комментарий 1']")
     COMMENT_2_NO_SOLVE_CHECK = (By.XPATH,
-                                f"//h3[text()='{DataParser.get_article_name_from_data_file()}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 2']")
+                                f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 2']")
     COMMENT_2_SOLVE_CHECK = (By.XPATH,
-                             f"//h3[text()='{DataParser.get_article_name_from_data_file()}']/../../div[text()='решено']/../..//pre[text()='Тестовый комментарий 2']")
+                             f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='решено']/../..//pre[text()='Тестовый комментарий 2']")
 
     COMMENT_3_NO_SOLVE_CHECK = (By.XPATH,
-                                f"//h3[text()='{DataParser.get_article_name_from_data_file()}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 3']")
+                                f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 3']")
     COMMENT_3_SOLVE_CHECK = (By.XPATH,
-                             f"//h3[text()='{DataParser.get_article_name_from_data_file()}']/../../div[text()='решено']/../..//pre[text()='Тестовый комментарий 3']")
+                             f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='решено']/../..//pre[text()='Тестовый комментарий 3']")
 
     COMMENT_4_NO_SOLVE_CHECK = (By.XPATH,
-                                f"//h3[text()='{DataParser.get_article_name_from_data_file()}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 4']")
+                                f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 4']")
     GRAY_COMMENT_CHECK = (By.XPATH, "(//pre[contains(text(),'Серый комментарий')])[1]")
 
     def empty_history(self) -> str:
@@ -81,29 +80,29 @@ class BellAlert(MainPage):
     """Класс для проверки уведомлений (Колокольчик)"""
     BELL_CHECK_TEST_COMMENT_1 = (
         By.XPATH,
-        f"//div[text()='{DataParser.get_article_name_from_data_file()}']/../..//div[text()='Тестовый комментарий 1']")
+        f"//div[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//div[text()='Тестовый комментарий 1']")
     BELL_CHECK_TEST_COMMENT_2 = (
         By.XPATH,
-        f"//div[text()='{DataParser.get_article_name_from_data_file()}']/../..//div[text()='Тестовый комментарий 2']")
+        f"//div[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//div[text()='Тестовый комментарий 2']")
     BELL_CHECK_TEST_COMMENT_3 = (
         By.XPATH,
-        f"//div[text()='{DataParser.get_article_name_from_data_file()}']/../..//div[text()='Тестовый комментарий 3']")
+        f"//div[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//div[text()='Тестовый комментарий 3']")
     BELL_CHECK_TEST_COMMENT_4 = (
         By.XPATH,
-        f"//div[text()='{DataParser.get_article_name_from_data_file()}']/../..//div[text()='Тестовый комментарий 4']")
+        f"//div[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//div[text()='Тестовый комментарий 4']")
     BELL_CHECK_TEST_COMMENT_GRAY = (
         By.XPATH,
-        f"//div[text()='{DataParser.get_article_name_from_data_file()}']/../..//div[text()='Серый комментарий']")
+        f"//div[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//div[text()='Серый комментарий']")
     BELL_CHECK_TEST_CREATE_ARTICLE = (
         By.XPATH,
-        f"//div[text()='{DataParser.get_article_name_from_data_file()}']/../..//div[text()='Создание статьи']")
+        f"//div[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//div[text()='Создание статьи']")
     BELL_CHECK_TEST_MAJOR_EDIT = (
         By.XPATH,
-        f"//div[text()='{DataParser.get_article_name_from_data_file()}']/../..//div[text()='Мажорное редактирование']")
+        f"//div[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//div[text()='Мажорное редактирование']")
     BELL_CHECK_TEST_CLOSE_3 = (By.XPATH, f"//div[text()='{'НАЗВАНИЕ СТАТЬИ'}']/../..//div[text()='Закрытие 3']")
 
     BELL_CREATE_ARTICLE_CONFIRM = (By.XPATH,
-                                   f"//div[text()='подтвердите']/../..//div[text()='{DataParser.get_article_name_from_data_file()}']/../..//div[text()='Создание статьи']")
+                                   f"//div[text()='подтвердите']/../..//div[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//div[text()='Создание статьи']")
 
     def bell_count_notification(self) -> str:
         """Метод для проверки количества непрочитанных уведомлений колокольчика"""
@@ -170,7 +169,7 @@ class PersonValidation(History, BellAlert, MenuNavigation, BaseArticleEditor):
 
     def check_open_valid_article(self):
         """Проверка, что открылась нужная статья"""
-        assert DataParser.get_article_name_from_data_file() == self.element_is_visible(
+        assert BaseArticleEditor.BASE_ARTICLE_TITLE == self.element_is_visible(
             locators.OpenArticle.ARTICLE_TITLE).text
 
     def check_article_bottom_banner(self):
