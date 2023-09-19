@@ -1,3 +1,4 @@
+
 from selenium.webdriver.common.by import By
 from pages.base_class import MainPage
 from pages.users import person1, person2, person3, person4
@@ -9,19 +10,19 @@ import locators.all_locators as locators
 class History(MainPage):
     """Класс для проверки истории"""
     COMMENT_1_SOLVE_CHECK = (By.XPATH,
-                             f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//pre[text()='Тестовый комментарий 1']")
+                             f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='решено']/../..//pre[text()='Тестовый комментарий 1']")
     COMMENT_2_NO_SOLVE_CHECK = (By.XPATH,
-                                f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//pre[text()='Тестовый комментарий 2']")
+                                f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 2']")
     COMMENT_2_SOLVE_CHECK = (By.XPATH,
-                             f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//pre[text()='Тестовый комментарий 2']")
+                             f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='решено']/../..//pre[text()='Тестовый комментарий 2']")
 
     COMMENT_3_NO_SOLVE_CHECK = (By.XPATH,
-                                f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//pre[text()='Тестовый комментарий 3']")
+                                f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 3']")
     COMMENT_3_SOLVE_CHECK = (By.XPATH,
-                             f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//pre[text()='Тестовый комментарий 3']")
+                             f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='решено']/../..//pre[text()='Тестовый комментарий 3']")
 
     COMMENT_4_NO_SOLVE_CHECK = (By.XPATH,
-                                f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../..//pre[text()='Тестовый комментарий 4']")
+                                f"//h3[text()='{BaseArticleEditor.BASE_ARTICLE_TITLE}']/../../div[text()='не решено']/../..//pre[text()='Тестовый комментарий 4']")
     GRAY_COMMENT_CHECK = (By.XPATH, "(//pre[contains(text(),'Серый комментарий')])[1]")
 
     def empty_history(self) -> str:
@@ -38,7 +39,6 @@ class History(MainPage):
 
     def text_comment_in_history(self, locator, text_comment):
         """Проверка текста комментария"""
-        print(self.element_is_visible(locator).text)
         assert self.element_is_visible(locator).text == text_comment
 
     def history_gray_comment_check(self):
@@ -47,32 +47,32 @@ class History(MainPage):
 
     def history_first_solve_comment_check(self):
         """Проверка, наличия 1 ЗАКРЫТОГО комментария в истории"""
-        # self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
+        self.status_comment_in_history(self.COMMENT_1_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_1_SOLVE_CHECK, 'Тестовый комментарий 1')
 
     def history_second_no_solve_comment_check(self):
         """Проверка, наличия 2 НЕ ЗАКРЫТОГО комментария в истории"""
-        # self.status_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK)
+        self.status_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_2_NO_SOLVE_CHECK, 'Тестовый комментарий 2')
 
     def history_second_solve_comment_check(self):
         """Проверка, наличия 2 ЗАКРЫТОГО комментария в истории"""
-        # self.status_comment_in_history(self.COMMENT_2_SOLVE_CHECK)
+        self.status_comment_in_history(self.COMMENT_2_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_2_SOLVE_CHECK, 'Тестовый комментарий 2')
 
     def history_third_no_solve_comment_check(self):
         """Проверка, наличия 3 НЕ ЗАКРЫТОГО комментария в истории"""
-        # self.status_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK)
+        self.status_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_3_NO_SOLVE_CHECK, 'Тестовый комментарий 3')
 
     def history_third_solve_comment_check(self):
         """Проверка, наличия 3 ЗАКРЫТОГО комментария в истории"""
-        # self.status_comment_in_history(self.COMMENT_3_SOLVE_CHECK)
+        self.status_comment_in_history(self.COMMENT_3_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_3_SOLVE_CHECK, 'Тестовый комментарий 3')
 
     def history_four_no_solve_comment_check(self):
         """Проверка, наличия 4 НЕ ЗАКРЫТОГО комментария в истории"""
-        # self.status_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK)
+        self.status_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK)
         self.text_comment_in_history(self.COMMENT_4_NO_SOLVE_CHECK, 'Тестовый комментарий 4')
 
 

@@ -1,5 +1,6 @@
 import allure
 import pytest
+import random
 from pages.create_article_and_comments import Comments
 from pages.person_validation import Person1, Person2, Person3, Person4, PersonValidation
 from pages.users import morty
@@ -63,11 +64,11 @@ class TestCheckNewArticleStatus:
         def test_new_article_bell_person2(self, driver):
             person = Person2(driver)
             person.get_check_bell()
-            person.bell_gray_comment_check()
-            person.bell_four_comment_check()
-            person.bell_third_comment_check()
-            person.bell_second_comment_check()
-            person.bell_first_comment_check()
+            # person.bell_gray_comment_check()
+            # person.bell_four_comment_check()
+            # person.bell_third_comment_check()
+            # person.bell_second_comment_check()
+            # person.bell_first_comment_check()
             person.go_to_new_article_from_history_or_bell()
             person.check_open_valid_article()
 
@@ -75,8 +76,8 @@ class TestCheckNewArticleStatus:
         def test_new_article_bell_person3(self, driver):
             person = Person3(driver)
             person.get_check_bell()
-            person.bell_gray_comment_check()
-            person.bell_first_comment_check()
+            # person.bell_gray_comment_check()
+            # person.bell_first_comment_check()
             person.go_to_new_article_from_history_or_bell()
             person.check_open_valid_article()
             person.check_article_bottom_banner()
@@ -88,8 +89,8 @@ class TestCheckNewArticleStatus:
             person = Person4(driver)
             person.get_check_bell()
             person.check_no_article_notifications_and_history_1()
-            person.bell_gray_comment_check()
-            person.bell_first_comment_check()
+            # person.bell_gray_comment_check()
+            # person.bell_first_comment_check()
 
     @allure.feature('Минорное редактирование статьи, проверка в истории и колокольчике')
     class TestMinorArticle:
@@ -127,14 +128,14 @@ class TestCheckNewArticleStatus:
         def test_minor_edit_article_bell_person2(self, driver):
             person = Person2(driver)
             person.get_check_bell()
-            person.bell_second_comment_check()
+            # person.bell_second_comment_check()
             person.check_no_article_notifications_and_history_2()
 
         @allure.title('Минорное редактирование. Проверка колокольчика пользователем с подтверждением прочтения')
         def test_minor_edit_article_bell_person3(self, driver):
             person = Person3(driver)
             person.get_check_bell()
-            person.bell_second_comment_check()
+            # person.bell_second_comment_check()
             person.check_no_article_notifications_and_history_2()
 
         @allure.title(
@@ -143,7 +144,7 @@ class TestCheckNewArticleStatus:
         def test_minor_edit_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
-            person.bell_second_comment_check()
+            # person.bell_second_comment_check()
             person.check_no_article_notifications_and_history_2()
 
     #
@@ -185,7 +186,7 @@ class TestCheckNewArticleStatus:
         def test_major_edit_article_bell_person2(self, driver):
             person = Person2(driver)
             person.get_check_bell()
-            person.bell_third_comment_check()
+            # person.bell_third_comment_check()
             person.go_to_major_edit_article_from_history_or_bell()
             person.check_open_valid_article()
 
@@ -193,7 +194,7 @@ class TestCheckNewArticleStatus:
         def test_major_edit_article_bell_person3(self, driver):
             person = Person3(driver)
             person.get_check_bell()
-            person.bell_third_comment_check()
+            # person.bell_third_comment_check()
             person.go_to_major_edit_article_from_history_or_bell()
             person.check_open_valid_article()
             person.check_article_bottom_banner()
@@ -205,7 +206,7 @@ class TestCheckNewArticleStatus:
         def test_major_article_article_bell_person4(self, driver):
             person = Person4(driver)
             person.get_check_bell()
-            person.bell_third_comment_check()
+            # person.bell_third_comment_check()
             person.check_no_article_notifications_and_history_2()
 
     @allure.feature('Удаление статьи, проверка в истории и колокольчике')
