@@ -3,7 +3,6 @@ import pathlib
 from pathlib import Path
 from pages.base_class import MainPage
 import locators.all_locators as locators
-from locators.all_locators import CreateTopicDatabaseLocators as locators_topic_database
 
 
 class CKERedactor(MainPage):
@@ -25,7 +24,7 @@ class CKERedactor(MainPage):
 
         self.element_is_visible(locators.CKERedactor.INPUT_INVISIBLE).send_keys(path1)
         self.element_is_visible(locators.CKERedactor.INPUT_INVISIBLE).send_keys(path2)
-        time.sleep(5)
+        time.sleep(3)
 
         checkbox_insert_files = self.elements_are_visible(locators.CKERedactor.CHECKBOX_INSERT_FILES)
 
@@ -35,11 +34,12 @@ class CKERedactor(MainPage):
 
         self.element_is_visible(locators.CKERedactor.INPUT_SELECTED).click()
 
-
     def text_area_article(self):
         """Наполнение тела статьи"""
-        self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('Hello')
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys('Hello')
         self.input_files()
+
+
 
 
 class PublicWizard(MainPage):

@@ -7,7 +7,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
-from locators.all_locators import FormPagesLocators, FilesFormatPageLocators
+import locators.all_locators as locators
 from pages import data_login_password
 import pathlib
 
@@ -142,7 +142,6 @@ class MainPage:
     def scroll_wizard_template(self, name, driver):
         """Скролл визарда шаблонов на величину в пикселях (x, y),
         name - название шаблона, которое ищем"""
-        Locators = FormPagesLocators()
         action = ActionChains(driver)
         n = 0
         while True:
@@ -154,7 +153,8 @@ class MainPage:
                 name_of_templates.click()
                 break
             except (InvalidSelectorException, NoSuchElementException):
-                locator_scroller = self.element_is_visible(Locators.MODAL_WINDOW_SCROLLER, timeout=3)  # ползунок
+                locator_scroller = self.element_is_visible(locators.FormPagesLocators.MODAL_WINDOW_SCROLLER,
+                                                           timeout=3)  # ползунок
                 action.drag_and_drop_by_offset(locator_scroller, "0", "200").perform()
                 action.drag_and_drop_by_offset(locator_scroller, "0", "-20").perform()
                 # action.perform()
@@ -162,10 +162,9 @@ class MainPage:
     def delete_draft(self):
         """Нажимает 'Удалить черновик', если всплывает
         оповещение о наличии черновика """
-        locators = FilesFormatPageLocators
         try:
-            self.element_is_visible(locators.ALERT_FOR_DRAFT).is_displayed()
-            self.click_to_element(locators.DELETE_DRAFT)
+            self.element_is_visible(locators.FilesFormatPageLocators.ALERT_FOR_DRAFT).is_displayed()
+            self.click_to_element(locators.FilesFormatPageLocators.DELETE_DRAFT)
         except (ElementClickInterceptedException, TimeoutException):
             time.sleep(3)
 
@@ -192,3 +191,8 @@ class MainPage:
         element - элемент содержащий теневой DOM"""
         shadow_root = self.browser.execute_script('return arguments[0].shadowRoot', element)
         return shadow_root
+
+    def close_modal_window(self):
+        """Закрытие модального окна"""
+        self.click_to_element(locators.CreateTopicDatabaseLocators.SVG_CLOSE_DELETED_WINDOW)
+        time.sleep(1)

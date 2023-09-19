@@ -69,11 +69,6 @@ class Exam(CreatingPanel, PublicWizard, CKERedactor, MenuNavigation):
         """Выбор неверного ответа"""
         self.click_to_element(locators.Test.INCORRECT_ANSWER_SELECT)
 
-    def close_modal_window(self):
-        """Закрытие модального окна"""
-        self.click_to_element(locators.CreateTopicDatabaseLocators.SVG_CLOSE_DELETED_WINDOW)
-        time.sleep(1)
-
     def check_empty_questions_limit(self):
         """Проверка, что вопросы для теста не выбраны"""
         assert self.element_is_visible(

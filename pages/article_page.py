@@ -20,6 +20,7 @@ from pages.authorisation_page import Authorisation
 from pages.base_page import BasePage
 from locators.locators_form_pages import FormPagesLocators as Locators, StepByScriptLocators, CopyPastePageLocators, \
     CreateDraftLocators, FilesPagesLocators
+import locators.all_locators as locators
 # from locators.form_pages_locators import StepByScriptLocators as Locators
 # from locators.form_pages_locators import FixingArticle as Locators
 from pages.data_login_password import *
@@ -62,9 +63,9 @@ class ArticlePage(Authorisation, BasePage):
     def add_normal_article(self):
         # self.get_authorisation_in_selen(driver)
         person = generated_person()
-        first_name = person.first_name+str(random.randint(99, 999))
+        first_name = person.first_name + str(random.randint(99, 999))
         text = "Hello"
-        text_long = first_name+"name_"+str(random.randint(99, 999))
+        text_long = first_name + "name_" + str(random.randint(99, 999))
         self.click_to_element(Locators.CONTENT)
         time.sleep(2)
         self.click_to_element(Locators.CREATE_BUTTON)
@@ -104,11 +105,11 @@ class ArticlePage(Authorisation, BasePage):
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(text)
         time.sleep(1)
         self.element_is_visible(Locators.TEXT_AREA_ARTICLE).send_keys(Keys.LEFT_CONTROL + 'a')
-        self.click_to_element(Locators.TEXT_BOLD_FORMAT)
+        self.click_to_element(locators.CKERedactor.TEXT_BOLD_FORMAT)
         time.sleep(0.5)
-        self.click_to_element(Locators.TEXT_ITALIC_FORMAT)
+        self.click_to_element(locators.CKERedactor.TEXT_ITALIC_FORMAT)
         time.sleep(0.5)
-        self.click_to_element(Locators.TEXT_UNDERLINE_FORMAT)
+        self.click_to_element(locators.CKERedactor.TEXT_UNDERLINE_FORMAT)
         """typography and check"""
         self.click_to_element(Locators.TYPOGRAPHY_ARTICLE)
         navigation_text_check = self.element_is_visible(Locators.NAVIGATION)
@@ -167,9 +168,9 @@ class ArticlePage(Authorisation, BasePage):
         """FIXING_ARTICLE"""
         driver.implicitly_wait(10)
         person = generated_person()
-        alert_text = 'Alert '+ person.first_name+str(random.randint(1, 9))
-        text_test = person.first_name+str(random.randint(99, 999))
-        text_fixing = "как помыть крота"+str(random.randint(9999, 999999))
+        alert_text = 'Alert ' + person.first_name + str(random.randint(1, 9))
+        text_test = person.first_name + str(random.randint(99, 999))
+        text_fixing = "как помыть крота" + str(random.randint(9999, 999999))
         self.click_to_element(Locators.CONTENT)
         """create test article"""
         text_area = "Hello"
@@ -230,7 +231,8 @@ class ArticlePage(Authorisation, BasePage):
         assert check_name_content_value == "Контент 1"
         # print(check_name_content_value)
         time.sleep(1)
-        check_name_article = driver.find_element(By.XPATH, f"//section[@class='m-content-fix-wizard__link']/./p[text()='{text_test}']")
+        check_name_article = driver.find_element(By.XPATH,
+                                                 f"//section[@class='m-content-fix-wizard__link']/./p[text()='{text_test}']")
         check_name_article_value = check_name_article.text
         assert check_name_article_value == text_test
         # print(check_name_article_value)
@@ -307,7 +309,6 @@ class ArticlePage(Authorisation, BasePage):
         # actions.click(field_input)
         actions.click(field_can_not_del_2)
         actions.perform()
-
 
     def add_article_by_templates(self, driver):
         driver.implicitly_wait(10)
@@ -393,7 +394,7 @@ class ArticlePage(Authorisation, BasePage):
         time.sleep(1)
         check_name_of_templates = driver.find_element(By.XPATH, f"//h1[normalize-space()='{name}']")
         check_name_of_templates.is_displayed()
-        check_name_of_templates.click()       # клик по названию, чтобы выйти из формы
+        check_name_of_templates.click()  # клик по названию, чтобы выйти из формы
         self.element_is_visible(Locators.CHANGE_TEMPLATES_BUTTON).is_displayed()
         # self.screenshot()
         self.click_to_element(Locators.TYPOGRAPHY_TEMPLATE)
@@ -659,12 +660,14 @@ class ArticlePage(Authorisation, BasePage):
         for i in range(1, 6):
             time.sleep(1)
             self.click_to_element(Locators.ADD_FIELD_BUTTON)
-            list_of_fields = driver.find_element(By.XPATH, f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[{i}]")
+            list_of_fields = driver.find_element(By.XPATH,
+                                                 f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[{i}]")
             list_of_fields.click()
-            self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name"+str(random.randint(999, 99999)))
+            self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
             self.click_to_element(Locators.SAVE_TEMPLATES)
         self.click_to_element(Locators.ADD_FIELD_BUTTON)
-        list_of_fields = driver.find_element(By.XPATH, f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[6]")
+        list_of_fields = driver.find_element(By.XPATH,
+                                             f"//div[@class='popuper__dialog m-template-editor__popuper-dialog popuper__dialog--opened']//div[6]")
         list_of_fields.click()
         self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
         self.element_is_visible(Locators.ANSWER).send_keys("answer 1")
@@ -673,9 +676,9 @@ class ArticlePage(Authorisation, BasePage):
         """step 5"""
         self.click_to_element(Locators.ADD_FIELD_BUTTON)
         self.click_to_element(Locators.LIST_OF_FIELDS_2)
-        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name"+str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.INPUT_NAME_OF_FIELD).send_keys("Name" + str(random.randint(999, 99999)))
         self.click_to_element(Locators.CHECKBOX_VALUE)
-        self.element_is_visible(Locators.INPUT_VALUE).send_keys("Name"+str(random.randint(999, 99999)))
+        self.element_is_visible(Locators.INPUT_VALUE).send_keys("Name" + str(random.randint(999, 99999)))
         self.click_to_element(Locators.SAVE_TEMPLATES)
         """step 6"""
         self.element_is_visible(Locators.INPUT_NAME_OF_TEMPLATES).send_keys(name)
@@ -833,7 +836,8 @@ class StepByScriptPage(Authorisation, BasePage):
         text_area = person.last_name + str(random.randint(99, 999))
         """add step"""
         self.click_to_element(self.Locators.ADD_STEP_BUTTON)
-        text_check_name_new_step = self.element_is_visible(self.Locators.TEXT_CHECK_NAME_NEW_STEP).get_attribute("placeholder")
+        text_check_name_new_step = self.element_is_visible(self.Locators.TEXT_CHECK_NAME_NEW_STEP).get_attribute(
+            "placeholder")
         assert text_check_name_new_step == 'Введите название'
         # self.click_to_element(self.Locators.TEXT_AREA)
         # self.element_is_visible(self.Locators.TEXT_AREA).send_keys(text_area)
@@ -970,7 +974,8 @@ class StepByScriptPage(Authorisation, BasePage):
         assert check_text_name_script_value == to_get_name
         self.click_to_element(self.Locators.FINISH_BUTTON_SCRIPT)
         """check text wizard and search"""
-        text_check_window_typography_content = self.element_is_visible(self.Locators.TEXT_CHECK_WINDOW_TYPOGRAPHY_CONTENT).text
+        text_check_window_typography_content = self.element_is_visible(
+            self.Locators.TEXT_CHECK_WINDOW_TYPOGRAPHY_CONTENT).text
         assert text_check_window_typography_content == 'Настройки публикации контента'
         text_check_search = self.element_is_visible(self.Locators.TEXT_CHECK_SEARCH).text
         assert text_check_search == 'поиск'
@@ -1006,7 +1011,7 @@ class StepByScriptPage(Authorisation, BasePage):
 class CopyPastePage(Authorisation, BasePage):
     Locators = CopyPastePageLocators()
 
-    def add_text_in_article(self, driver): # DISABLE
+    def add_text_in_article(self, driver):  # DISABLE
         person = generated_person()
         text_name = person.first_name + str(random.randint(99, 999))
         text_area = person.last_name + str(random.randint(99, 999))
@@ -1038,7 +1043,6 @@ class CopyPastePage(Authorisation, BasePage):
 
 
 class CreateDraftPage(Authorisation, BasePage):
-
     Locators = CreateDraftLocators()
 
     def create_name_article(self):
@@ -1259,8 +1263,10 @@ class FilesPages(Authorisation, BasePage):
         self.elements_is_present(self.Locators.UPLOAD_MEDIA).click()
         self.check_tooltip(driver)
         """input is visible for load files"""
-        self.browser.execute_script("""document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
-        self.browser.execute_script("""document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
+        self.browser.execute_script(
+            """document.querySelector(".popup__footer.file-manager__foot.file-manager--hidden").removeAttribute('class')""")
+        self.browser.execute_script(
+            """document.querySelector("form[enctype='multipart/form-data']").removeAttribute('style')""")
         # self.driver.execute_script("arguments[0].style.visibility = 'visible';", element)
         self.element_is_visible(self.Locators.INPUT_INVISIBLE).send_keys(path)
         self.click_to_element(self.Locators.CLOSE_DOWNLOAD_WINDOW)
@@ -1491,47 +1497,3 @@ class FilesPages(Authorisation, BasePage):
             file_type = Path(pathlib.Path.cwd(), f"{n}")
             path = str(file_type)
             os.remove(path)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
