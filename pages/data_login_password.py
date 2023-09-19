@@ -11,8 +11,8 @@ from pages.users import StableUsers
 # Учетка Бориса
 # login = 'b.pogodin'
 # password = '68f1d85b'
-# login = 'ricksanchez'
-# password = 'ricksanchez'
+login = 'ricksanchez'
+password = 'ricksanchez'
 
 # неверные данные
 # login_incorrect = 'm.andreyq'
@@ -20,7 +20,7 @@ from pages.users import StableUsers
 # url
 # url = 'https://test6.minervasoft.ru'
 url = 'https://test-auto.minervasoft.ru'
-# user = StableUsers('boris', '367836')
+user = StableUsers('boris', '367836')
 
 # url = 'https://test2.minervasoft.ru/login?from=%2F'
 # url = input("введите url адрес (без кавычек): ")
@@ -47,20 +47,20 @@ url = 'https://test-auto.minervasoft.ru'
 #           " Asset Management in Dublin."
 
 # Persons 1
-# """data input person 1"""
-# person_1 = "person1"
-# name_1 = "name1"
-# mail_1 = "testperson0001@mail.ru"
-# login_person1 = "login1111"
-# password_person1 = "97718d75"
-#
-# # Persons 2
-# """data input person 2"""
-# person_2 = "person1"
-# name_2 = "name1"
-# mail_2 = "testperson0001@mail.ru"
-# login_person2 = "login112"
-# password_person2 = "63a45e26"
+"""data input person 1"""
+person_1 = "person1"
+name_1 = "name1"
+mail_1 = "testperson0001@mail.ru"
+login_person1 = "login1111"
+password_person1 = "97718d75"
+
+# Persons 2
+"""data input person 2"""
+person_2 = "person1"
+name_2 = "name1"
+mail_2 = "testperson0001@mail.ru"
+login_person2 = "login112"
+password_person2 = "63a45e26"
 
 base_article = url + "/content/space/54/article/1938"
 article_by_template = url + "/content/space/54/article/1942/page/0"
