@@ -3,7 +3,6 @@ import time
 
 import allure
 import pytest
-from pages.checking_after_update import CheckingArticleAfterUpdatePage
 from pages.create_article_and_comments import BaseArticleEditor, ArticleByTemplate, ArticleByScript
 from pages.data_login_password import base_article, article_by_script
 from pages.users import ricksanchez, minervakms

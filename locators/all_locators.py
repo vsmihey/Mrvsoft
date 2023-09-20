@@ -1130,8 +1130,11 @@ class CKERedactor:
     INPUT_INVISIBLE = (By.XPATH, "//input[@type='file']")
     CHECKBOX_INSERT_FILES = (By.XPATH, "//section[@class='m-file-view__content-block']")
     INPUT_SELECTED = (By.XPATH, "//p[contains(text(),'Вставить выбранные')]")
+    THREE_DOTS_DOP = (By.XPATH, "//span[@class='cke_button_icon cke_button__textpositioner_icon']")
+    THREE_DOTS_INSERT = (By.XPATH, "//span[@class='cke_button_icon cke_button__insertssmall_icon']")
     TEXT_BOLD_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__bold_icon']")
     TEXT_ITALIC_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__italic_icon']")
+    # TEXT_SUPERSCRIPT_FORMAT = (By.XPATH, "//*[@id='cke_1086_label']")
     TEXT_UNDERLINE_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__underline_icon']")
     TEXT_COLOR_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__textcolor_icon']")
     TEXT_OTHER_COLOR_FORMAT = (By.XPATH, "//a[contains(text(),'другие цвета')]")
@@ -1477,13 +1480,10 @@ class Reports:
     # BUTTON_DOWNLOAD_REPORT = (By.XPATH, "//iron-icon[text()='Скачать отчёт']")
     BUTTON_DOWNLOAD_REPORT = (By.XPATH, "//iron-icon[@icon='icons:file-download']")
     CHECK_DATA_DONT_HAVE = (By.XPATH, "//span[text()='Данные отсутствуют']")
-    #----------------
+    # ----------------
     SHADOW_ROOT1 = (By.XPATH, "//vaadin-horizontal-layout[@class='around-padding']")
     SHADOW_ROOT1_CHECK = (By.XPATH, "//div[@class='report-layout']")
     SHADOW_ROOT2 = (By.XPATH, "//vaadin-horizontal-layout[@class='around-padding']//ticket-filters")
-
-
-
 
     REPORTS_BY_CONTENT_LIST = (By.CSS_SELECTOR, "div[class='folder-list-item folder-list-item--no-children']")
     DOWNLOAD_REPORTS_BUTTON = (By.XPATH, "//div[@class='vaadin-button-container']")

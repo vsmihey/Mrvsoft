@@ -3,6 +3,7 @@ import pathlib
 from pathlib import Path
 from pages.base_class import MainPage
 import locators.all_locators as locators
+from selenium.webdriver import Keys, ActionChains
 
 
 class CKERedactor(MainPage):
@@ -36,10 +37,74 @@ class CKERedactor(MainPage):
 
     def text_area_article(self):
         """Наполнение тела статьи"""
-        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys('Hello')
-        self.input_files()
+        self.bold_text('Жирный текст')
+        self.italic_text('Курсивный текст')
+        self.underline_text('Подчеркнутый текст')
+        self.superscript_text('Надстрочный текст')
+        self.cit('23')
 
+        # self.input_files()
+        time.sleep(10)
 
+    def bold_text(self, text):
+        """Текст выделяется жирным"""
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
+        self.click_to_element(locators.CKERedactor.TEXT_BOLD_FORMAT)
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.ARROW_RIGHT)
+        self.click_to_element(locators.CKERedactor.TEXT_BOLD_FORMAT)
+
+    def italic_text(self, text):
+        """Текст выделяется курсивом"""
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
+        self.click_to_element(locators.CKERedactor.TEXT_ITALIC_FORMAT)
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.ARROW_RIGHT)
+        self.click_to_element(locators.CKERedactor.TEXT_ITALIC_FORMAT)
+
+    def underline_text(self, text):
+        """Текст выделяется нижним подчеркиванием"""
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
+        self.click_to_element(locators.CKERedactor.TEXT_UNDERLINE_FORMAT)
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.ARROW_RIGHT)
+        self.click_to_element(locators.CKERedactor.TEXT_UNDERLINE_FORMAT)
+
+    def superscript_text(self, text):
+        """Текст выделяется нижним подчеркиванием"""
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_DOP)
+        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+
+    def cit(self, text):
+        """Текст выделяется нижним подчеркиванием"""
+        # self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
+        # self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+        #     Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_INSERT)
+        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
 
 
 class PublicWizard(MainPage):
