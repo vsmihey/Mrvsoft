@@ -1134,12 +1134,23 @@ class CKERedactor:
     THREE_DOTS_INSERT = (By.XPATH, "//span[@class='cke_button_icon cke_button__insertssmall_icon']")
     TEXT_BOLD_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__bold_icon']")
     TEXT_ITALIC_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__italic_icon']")
-    # TEXT_SUPERSCRIPT_FORMAT = (By.XPATH, "//*[@id='cke_1086_label']")
     TEXT_UNDERLINE_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__underline_icon']")
     TEXT_COLOR_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__textcolor_icon']")
     TEXT_OTHER_COLOR_FORMAT = (By.XPATH, "//a[contains(text(),'другие цвета')]")
     TEXT_COLOR_RED_FORMAT = (By.XPATH, "//span[normalize-space()='dfdf']")
     TEXT_BG_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__bgcolor_icon']")
+    CODE_TYPE = (By.XPATH, "//select[@class='cke_dialog_ui_input_select']")
+    CODE_TEXT_AREA = (By.XPATH, "//textarea[@class='cke_dialog_ui_input_textarea cke_source']")
+    MODAL_SAVE_BUTTON = (By.XPATH, "//a[@class='cke_dialog_ui_button cke_dialog_ui_button_ok']")
+    SPOILER_TITLE = (By.CSS_SELECTOR, ".m-spoiler__header.cke_widget_editable")
+    SPOILER_BODY = (By.CSS_SELECTOR, ".m-spoiler__content.cke_widget_editable")
+    ANCHOR_TITLE = (By.XPATH, "//input[@class='cke_dialog_ui_input_text']")
+    ANCHOR_SAVE_BUTTON = (By.XPATH, "//a[@class='cke_dialog_ui_button cke_dialog_ui_button_ok']")
+
+
+
+
+
 
 
 class AuthorisationPage:

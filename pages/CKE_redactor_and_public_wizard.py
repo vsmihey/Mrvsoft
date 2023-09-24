@@ -37,14 +37,21 @@ class CKERedactor(MainPage):
 
     def text_area_article(self):
         """Наполнение тела статьи"""
-        self.bold_text('Жирный текст')
+        # self.bold_text('Жирный текст')
         self.italic_text('Курсивный текст')
         self.underline_text('Подчеркнутый текст')
         self.superscript_text('Надстрочный текст')
-        self.cit('23')
+        self.interlinear_text('Подстрочный текст')
+        self.crossed_text('Зачеркнутый текст')
+        self.quote_widget('Цитата')
+        self.infoblock_widget('Инфоблок')
+        self.code_widget()
+        self.delimiter_widget()
+        self.spoiler_widget()
+        self.anchor_widget()
 
         # self.input_files()
-        time.sleep(10)
+        time.sleep(5)
 
     def bold_text(self, text):
         """Текст выделяется жирным"""
@@ -77,33 +84,160 @@ class CKERedactor(MainPage):
         self.click_to_element(locators.CKERedactor.TEXT_UNDERLINE_FORMAT)
 
     def superscript_text(self, text):
-        """Текст выделяется нижним подчеркиванием"""
+        """Текст становится надстрочным"""
         self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
         self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
             Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
         self.click_to_element(locators.CKERedactor.THREE_DOTS_DOP)
-        time.sleep(1)
-        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
-        time.sleep(1)
-        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
-        time.sleep(1)
-        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
-        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.ARROW_RIGHT)
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_DOP)
         ActionChains(self.browser).send_keys(Keys.ENTER).perform()
 
-    def cit(self, text):
-        """Текст выделяется нижним подчеркиванием"""
-        # self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
-        # self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
-        #     Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
+    def interlinear_text(self, text):
+        """Текст становится подстрочным"""
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_DOP)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.ARROW_RIGHT)
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_DOP)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+
+    def crossed_text(self, text):
+        """Текст становится зачеркнутым"""
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_DOP)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.ARROW_RIGHT)
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_DOP)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+
+    def quote_widget(self, text):
+        """Виджет 'Цитата' """
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'\n{text}')
         self.click_to_element(locators.CKERedactor.THREE_DOTS_INSERT)
-        time.sleep(1)
-        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
-        time.sleep(1)
-        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
-        time.sleep(1)
-        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
-        time.sleep(1)
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(Keys.ARROW_DOWN)
+
+    def infoblock_widget(self, text):
+        """Виджет 'Инфоблок' """
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(f'{text}')
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_INSERT)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(Keys.ARROW_DOWN)
+
+    def code_widget(self):
+        """Виджет 'Код'"""
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_INSERT)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CKERedactor.CODE_TYPE).send_keys('Python')
+        self.element_is_visible(locators.CKERedactor.CODE_TEXT_AREA).send_keys('print("Hello world")')
+        self.click_to_element(locators.CKERedactor.MODAL_SAVE_BUTTON)
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(Keys.ARROW_DOWN)
+
+    def delimiter_widget(self):
+        """Виджет 'Разделитель' """
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_INSERT)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(Keys.ARROW_DOWN)
+
+    def spoiler_widget(self):
+        """Виджет 'Спойлер' """
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_INSERT)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CKERedactor.SPOILER_TITLE).send_keys(' Новый')
+        self.element_is_visible(locators.CKERedactor.SPOILER_BODY).send_keys('Тело спойлера')
+        self.element_is_visible(locators.CKERedactor.SPOILER_BODY).send_keys(Keys.ENTER)
+        self.element_is_visible(locators.CKERedactor.SPOILER_BODY).send_keys(Keys.ENTER)
+
+    def anchor_widget(self):
+        """Виджет 'Якорь' """
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys('Якорь')
+        self.element_is_visible(locators.CreateTopicDatabaseLocators.TEXT_AREA_ARTICLE).send_keys(
+            Keys.LEFT_CONTROL + Keys.LEFT_SHIFT + Keys.ARROW_UP)
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_INSERT)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CKERedactor.ANCHOR_TITLE).send_keys('Anchor')
+        self.click_to_element(locators.CKERedactor.ANCHOR_SAVE_BUTTON)
         ActionChains(self.browser).send_keys(Keys.ENTER).perform()
 
 
