@@ -35,9 +35,9 @@ class CKERedactor(MainPage):
 
         self.element_is_visible(locators.CKERedactor.INPUT_SELECTED).click()
 
-    def text_area_article(self):
-        """Наполнение тела статьи"""
-        # self.bold_text('Жирный текст')
+    def full_text_area_article(self):
+        """Наполнение тела статьи - полное"""
+        self.bold_text('Жирный текст')
         self.italic_text('Курсивный текст')
         self.underline_text('Подчеркнутый текст')
         self.superscript_text('Надстрочный текст')
@@ -48,10 +48,15 @@ class CKERedactor(MainPage):
         self.code_widget()
         self.delimiter_widget()
         self.spoiler_widget()
-        self.anchor_widget()
+        # self.other_content_widget()
+        self.model_widget()
 
-        # self.input_files()
-        time.sleep(5)
+        self.input_files()
+        time.sleep(20)
+
+    def min_text_area_article(self):
+        """Наполнение тела статьи - минимальное"""
+        self.input_files()
 
     def bold_text(self, text):
         """Текст выделяется жирным"""
@@ -237,7 +242,41 @@ class CKERedactor(MainPage):
         ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
         ActionChains(self.browser).send_keys(Keys.ENTER).perform()
         self.element_is_visible(locators.CKERedactor.ANCHOR_TITLE).send_keys('Anchor')
-        self.click_to_element(locators.CKERedactor.ANCHOR_SAVE_BUTTON)
+        self.click_to_element(locators.CKERedactor.MODAL_SAVE_BUTTON)
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+
+    def other_content_widget(self):
+        """Виджет 'Другой контент' """
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_INSERT)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_DOWN).perform()
+        ActionChains(self.browser).send_keys(Keys.ENTER).perform()
+        self.element_is_visible(locators.CKERedactor.OTHER_CONTENT_SEARCH).send_keys('Другой контент')
+        self.click_to_element(locators.CKERedactor.OTHER_CONTENT_SELECT)
+        self.click_to_element(locators.WizardPublic.BUTTON_EXECUTE)
+        self.click_to_element(locators.WizardPublic.BUTTON_EXECUTE)
+
+    def model_widget(self):
+        """Виджет 'Другой контент' """
+        self.click_to_element(locators.CKERedactor.THREE_DOTS_INSERT)
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
+        time.sleep(0.2)
+        ActionChains(self.browser).send_keys(Keys.ARROW_UP).perform()
         ActionChains(self.browser).send_keys(Keys.ENTER).perform()
 
 

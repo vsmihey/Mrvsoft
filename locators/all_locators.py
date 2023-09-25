@@ -1141,11 +1141,12 @@ class CKERedactor:
     TEXT_BG_FORMAT = (By.XPATH, "//span[@class='cke_button_icon cke_button__bgcolor_icon']")
     CODE_TYPE = (By.XPATH, "//select[@class='cke_dialog_ui_input_select']")
     CODE_TEXT_AREA = (By.XPATH, "//textarea[@class='cke_dialog_ui_input_textarea cke_source']")
-    MODAL_SAVE_BUTTON = (By.XPATH, "//a[@class='cke_dialog_ui_button cke_dialog_ui_button_ok']")
+    MODAL_SAVE_BUTTON = (By.XPATH, "//span[contains(text(),'Сохранить')]")
     SPOILER_TITLE = (By.CSS_SELECTOR, ".m-spoiler__header.cke_widget_editable")
     SPOILER_BODY = (By.CSS_SELECTOR, ".m-spoiler__content.cke_widget_editable")
     ANCHOR_TITLE = (By.XPATH, "//input[@class='cke_dialog_ui_input_text']")
-    ANCHOR_SAVE_BUTTON = (By.XPATH, "//a[@class='cke_dialog_ui_button cke_dialog_ui_button_ok']")
+    OTHER_CONTENT_SEARCH = (By.XPATH, "//input[@class='input-search__input form-input-wrapper__input']")
+    OTHER_CONTENT_SELECT = (By.XPATH, "//span[@class='m-content-fix-wizard__informer label-iconed']")
 
 
 

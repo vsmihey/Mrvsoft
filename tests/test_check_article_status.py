@@ -17,86 +17,91 @@ class TestCheckNewArticleStatus:
 
     @allure.feature('Создание новой статьи, наполнение тестовыми комментами, проверка в истории и колокольчике')
     class TestNewArticle:
+        @allure.title('Создание статьи для виджета "Другой контент"')
+        def test_article_create_base_other_content(self, driver):
+            page_article_base = PersonValidation(driver)
+            page_article_base.creating_base_article_for_other_content(user_for_test)
+
         @allure.title('Создание новой статьи')
         def test_article_create_base(self, driver):
             page_article_base = PersonValidation(driver)
             page_article_base.creating_base_article(user_for_test)
             TestCheckNewArticleStatus.LINK = page_article_base.LINK
-    #
-    #     @allure.title('Создание тестового набора комментов')
-    #     def test_create_comments(self, driver):
-    #         page = Comments(driver)
-    #         page.get_authorisation_in_url(TestCheckNewArticleStatus.LINK, user_for_test)
-    #         page.create_comments()
-    #
-    #     @allure.title('Закрытие первого тестового комментария')
-    #     def test_close_first_comment(self, driver):
-    #         page = Comments(driver)
-    #         page.get_authorisation_in_url(TestCheckNewArticleStatus.LINK, user_for_test)
-    #         page.close_first_comment()
-    #
-    #     @allure.title('Новая статья. Проверка истории пользователем без доступом к статье')
-    #     def test_new_article_history_person1(self, driver):
-    #         person = Person1(driver)
-    #         person.get_check_history()
-    #         person.check_no_article_notifications_and_history_1()
-    #
-    #     @allure.title('Новая статья. Проверка колокольчика пользователем без доступом к статье')
-    #     def test_new_article_bell_person1(self, driver):
-    #         person = Person1(driver)
-    #         person.get_check_bell()
-    #         person.check_no_article_notifications_and_history_2()
-    #
-    #     @allure.title('Новая статья. Проверка истории пользователем с полным доступом к статье')
-    #     def test_new_article_history_person2(self, driver):
-    #         person = Person2(driver)
-    #         person.get_check_history()
-    #         # person.history_gray_comment_check()
-    #         # person.history_four_no_solve_comment_check()
-    #         # person.history_third_no_solve_comment_check()
-    #         # person.history_second_no_solve_comment_check()
-    #         # person.history_first_solve_comment_check()
-    #         person.go_to_new_article_from_history_or_bell()
-    #         person.check_open_valid_article()
-    #
-    #     @allure.title('Новая статья. Проверка колокольчика пользователем с полным доступом к статье')
-    #     def test_new_article_bell_person2(self, driver):
-    #         person = Person2(driver)
-    #         person.get_check_bell()
-    #         # person.bell_gray_comment_check()
-    #         # person.bell_four_comment_check()
-    #         # person.bell_third_comment_check()
-    #         # person.bell_second_comment_check()
-    #         # person.bell_first_comment_check()
-    #         person.go_to_new_article_from_history_or_bell()
-    #         person.check_open_valid_article()
-    #
-    #     @allure.title('Новая статья. Проверка колокольчика пользователем с подтверждением прочтения')
-    #     def test_new_article_bell_person3(self, driver):
-    #         person = Person3(driver)
-    #         person.get_check_bell()
-    #         # person.bell_gray_comment_check()
-    #         # person.bell_first_comment_check()
-    #         person.go_to_new_article_from_history_or_bell()
-    #         person.check_open_valid_article()
-    #         person.check_article_bottom_banner()
-    #         person.bottom_banner_button_click()
-    #
-    #     @allure.title(
-    #         'Новая статья. Проверка колокольчика пользователем с доступом к статье но с выключенными уведомлениями')
-    #     def test_new_article_bell_person4(self, driver):
-    #         person = Person4(driver)
-    #         person.get_check_bell()
-    #         person.check_no_article_notifications_and_history_1()
-    #         # person.bell_gray_comment_check()
-    #         # person.bell_first_comment_check()
-    #
-    # @allure.feature('Минорное редактирование статьи, проверка в истории и колокольчике')
-    # class TestMinorArticle:
-    #     @allure.title('Минорное редактирование статьи')
-    #     def test_article_minor_edit_base(self, driver):
-    #         page_article_base = PersonValidation(driver)
-    #         page_article_base.minor_edit_base_article(TestCheckNewArticleStatus.LINK, user_for_test)
+
+        # @allure.title('Создание тестового набора комментов')
+        # def test_create_comments(self, driver):
+        #     page = Comments(driver)
+        #     page.get_authorisation_in_url(TestCheckNewArticleStatus.LINK, user_for_test)
+        #     page.create_comments()
+        #
+        # @allure.title('Закрытие первого тестового комментария')
+        # def test_close_first_comment(self, driver):
+        #     page = Comments(driver)
+        #     page.get_authorisation_in_url(TestCheckNewArticleStatus.LINK, user_for_test)
+        #     page.close_first_comment()
+        #
+        # @allure.title('Новая статья. Проверка истории пользователем без доступом к статье')
+        # def test_new_article_history_person1(self, driver):
+        #     person = Person1(driver)
+        #     person.get_check_history()
+        #     person.check_no_article_notifications_and_history_1()
+        #
+        # @allure.title('Новая статья. Проверка колокольчика пользователем без доступом к статье')
+        # def test_new_article_bell_person1(self, driver):
+        #     person = Person1(driver)
+        #     person.get_check_bell()
+        #     person.check_no_article_notifications_and_history_2()
+        #
+        # @allure.title('Новая статья. Проверка истории пользователем с полным доступом к статье')
+        # def test_new_article_history_person2(self, driver):
+        #     person = Person2(driver)
+        #     person.get_check_history()
+        #     # person.history_gray_comment_check()
+        #     # person.history_four_no_solve_comment_check()
+        #     # person.history_third_no_solve_comment_check()
+        #     # person.history_second_no_solve_comment_check()
+        #     # person.history_first_solve_comment_check()
+        #     person.go_to_new_article_from_history_or_bell()
+        #     person.check_open_valid_article()
+        #
+        # @allure.title('Новая статья. Проверка колокольчика пользователем с полным доступом к статье')
+        # def test_new_article_bell_person2(self, driver):
+        #     person = Person2(driver)
+        #     person.get_check_bell()
+        #     # person.bell_gray_comment_check()
+        #     # person.bell_four_comment_check()
+        #     # person.bell_third_comment_check()
+        #     # person.bell_second_comment_check()
+        #     # person.bell_first_comment_check()
+        #     person.go_to_new_article_from_history_or_bell()
+        #     person.check_open_valid_article()
+        #
+        # @allure.title('Новая статья. Проверка колокольчика пользователем с подтверждением прочтения')
+        # def test_new_article_bell_person3(self, driver):
+        #     person = Person3(driver)
+        #     person.get_check_bell()
+        #     # person.bell_gray_comment_check()
+        #     # person.bell_first_comment_check()
+        #     person.go_to_new_article_from_history_or_bell()
+        #     person.check_open_valid_article()
+        #     person.check_article_bottom_banner()
+        #     person.bottom_banner_button_click()
+        #
+        # @allure.title(
+        #     'Новая статья. Проверка колокольчика пользователем с доступом к статье но с выключенными уведомлениями')
+        # def test_new_article_bell_person4(self, driver):
+        #     person = Person4(driver)
+        #     person.get_check_bell()
+        #     person.check_no_article_notifications_and_history_1()
+        #     # person.bell_gray_comment_check()
+        #     # person.bell_first_comment_check()
+
+    @allure.feature('Минорное редактирование статьи, проверка в истории и колокольчике')
+    class TestMinorArticle:
+        @allure.title('Минорное редактирование статьи')
+        def test_article_minor_edit_base(self, driver):
+            page_article_base = PersonValidation(driver)
+            page_article_base.minor_edit_base_article(TestCheckNewArticleStatus.LINK, user_for_test)
     #
     #     @allure.title('Закрытие второго тестового комментария')
     #     def test_close_second_comment(self, driver):

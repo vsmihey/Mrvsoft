@@ -47,13 +47,23 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.create_base_article_button()
         self.title_article()
         self.change_folder()
-        self.text_area_article()
+        self.full_text_area_article()
         self.save_base_article()
         self.LINK = self.get_actual_url()
 
-    def title_article(self):
+    def creating_base_article_for_other_content(self, user=ricksanchez):
+        """Создание обычной статьи с наполнением"""
+        self.get_authorisation_in_selen(user)
+        self.create_button()
+        self.create_base_article_button()
+        self.title_article('Другой контент')
+        self.change_folder()
+        self.min_text_area_article()
+        self.save_base_article()
+
+    def title_article(self, title=BASE_ARTICLE_TITLE):
         """Заголовок статьи"""
-        self.element_is_visible(locators_topic_database.NAME_OF_ARTICLE).send_keys(self.BASE_ARTICLE_TITLE)
+        self.element_is_visible(locators_topic_database.NAME_OF_ARTICLE).send_keys(title)
 
     def change_folder(self):
         """Выбор папки сохранения"""
@@ -64,7 +74,8 @@ class BaseArticleEditor(CreatingPanel, CKERedactor, PublicWizard, ContentOptions
         self.get_authorisation_in_url(url, user)
         self.redaction()
         self.delete_draft()
-        self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('HeyHey')
+        self.element_is_visible(locators_topic_database.TEXT_AREA_ARTICLE).send_keys('HeyHey\n')
+        self.anchor_widget()
         self.save_minor_edit()
 
     def major_edit_base_article(self, url, user=ricksanchez):
